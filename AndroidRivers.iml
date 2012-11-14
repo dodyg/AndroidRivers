@@ -39,6 +39,8 @@
     <orderEntry type="jdk" jdkName="Android 2.2 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KotlinRuntime" level="project" />
+    <orderEntry type="library" name="gson-2.2.2" level="project" />
+    <orderEntry type="library" name="roboguice-2.0" level="project" />
   </component>
 </module>
 
