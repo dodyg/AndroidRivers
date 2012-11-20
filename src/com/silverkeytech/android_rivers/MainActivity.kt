@@ -8,6 +8,13 @@ import roboguice.activity.RoboActivity
 import com.github.kevinsawicki.http
 import com.github.kevinsawicki.http.HttpRequest
 import android.util.Log
+import android.widget.Button
+import android.view.View
+import android.view.View.OnClickListener
+import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
+import android.os.AsyncTask
+import android.app.ProgressDialog
+import android.content.Context
 
 public open class MainActivity(): Activity() {
     class object {
@@ -16,14 +23,12 @@ public open class MainActivity(): Activity() {
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.main)
-        load()
-    }
 
-    fun load(){
-        Log.d(TAG, "Starting to load")
-        var req = HttpRequest.get("http://hobieu.apphb.com/api/1/default/riverssubscription")?.body()
-        Log.d(TAG, "Loading content ${req?.length()}")
+        var btn = this.findView<Button>(R.id.main_download_btn)
+        btn.setOnClickListener({
+            v ->
+                var x = DownloadSubscription(this).execute("http://hobieu.apphb.com/api/1/default/riverssubscription")
+        })
     }
 }
