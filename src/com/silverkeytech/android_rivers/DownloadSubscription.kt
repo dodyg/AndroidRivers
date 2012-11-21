@@ -11,8 +11,16 @@ import org.simpleframework.xml.Serializer
 import org.simpleframework.xml.core.Persister
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Body
+import android.widget.Adapter
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.AdapterView
+import android.view.Gravity
+import android.view.View
+import android.widget.Toast
+import android.widget.ArrayAdapter
+import android.widget.ListView
 
-public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, String>(){
+public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Opml>(){
     class object {
         public val TAG: String = javaClass<DownloadSubscription>().getSimpleName()!!
     }
@@ -27,7 +35,7 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, String
         dialog.show()
     }
 
-    protected override fun doInBackground(vararg url : String?): String?{
+    protected override fun doInBackground(vararg url : String?): Opml?{
         var req = HttpRequest.get(url[0])?.body()
         var opml = transformFromXml(req)
 
@@ -49,7 +57,7 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, String
             publishProgress(100)
         }
 
-        return req
+        return opml
     }
 
     fun transformFromXml(xml : String?) : Opml?{
@@ -70,9 +78,36 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, String
         Log.d("DD", "Progressing...${progress[0]}")
     }
 
-    protected override fun onPostExecute(result : String?){
+    protected override fun onPostExecute(result : Opml?){
         dialog.dismiss()
         var msg = context.findView<TextView>(R.id.main_message_tv)
-        msg.setText("${result?.length} of text downloaded ... initial data ${result?.substring(0, 10)}")
+
+        handleRiversListing(result)
     }
+
+    fun handleRiversListing(outlines : Opml?){
+        var list = context.findView<ListView>(R.id.main_rivers_lv)
+
+        var vals = ImmutableArrayListBuilder<String>()
+
+        if (outlines != null){
+            outlines.body?.outline?.forEach {
+                vals.add(it!!.text!!)
+            }
+        }
+
+        var values = vals.build()
+
+        var adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, android.R.id.text1, values)
+        list.setAdapter(adapter)
+
+        list.setOnItemClickListener(object : OnItemClickListener{
+            public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
+                var t = Toast.makeText(context, (p1 as TextView).getText(), 300)
+                t!!.setGravity(Gravity.TOP or Gravity.CENTER, 0, 0 );
+                t!!.show()
+            }
+        })
+    }
+
 }
