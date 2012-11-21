@@ -24,21 +24,43 @@
     </option>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Exception" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="DEBUG" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Dody\Documents\GitHub\AndroidRivers\.idea\libraries\guice_2_0_no_aop.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Dody\Documents\GitHub\AndroidRivers\.idea\libraries\javax_inject.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Dody\Documents\GitHub\AndroidRivers\.idea\libraries\kotlinAndroidLib.xml" afterPath="" />
+    <list default="true" id="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" name="Default" comment="Get threading">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/date4j.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/ormlite-android-4.9.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/simple-xml-2.6.7.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Body.kt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DateHelper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Head.kt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Opml.kt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Outline.kt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/date4j.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/ormlite_android_4_9.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/simple_xml_2_6_7.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kotlin-runtime.jar" afterPath="$PROJECT_DIR$/lib/kotlin-runtime.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidRivers.iml" afterPath="$PROJECT_DIR$/AndroidRivers.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadSubscription.kt" afterPath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadSubscription.kt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/MainActivity.kt" afterPath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/MainActivity.kt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/main.xml" afterPath="$PROJECT_DIR$/res/layout/main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Utils.kt" afterPath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Utils.kt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="AndroidRivers.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353484681074" ignored="false" />
+    <file path="/DownloadSubscription.kt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353495900387" ignored="false" />
+    <file path="/Body.kt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353495445728" ignored="false" />
+    <file path="/Outline.kt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353494982277" ignored="false" />
+    <file path="/Opml.kt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353494182981" ignored="false" />
+    <file path="/Head.kt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353491859702" ignored="false" />
+    <file path="$USER_HOME$/AppData/Local/Temp/android_manifest_copy7609481005891272019tmp/AndroidManifest.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353490979563" ignored="false" />
+    <file path="/Utils.kt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353490840379" ignored="false" />
+    <file path="$USER_HOME$/AppData/Local/Temp/android_manifest_copy425787824002090281tmp/AndroidManifest.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353489706004" ignored="false" />
+    <file path="$USER_HOME$/AppData/Local/Temp/android_manifest_copy7106487610645549036tmp/AndroidManifest.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353489516479" ignored="false" />
+    <file path="/Opml.java" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353489020535" ignored="false" />
+    <file path="/Dummy.txt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353488626530" ignored="false" />
+    <file path="$USER_HOME$/AppData/Local/Temp/android_manifest_copy3038341110938899473tmp/AndroidManifest.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353488262290" ignored="false" />
+    <file path="$USER_HOME$/AppData/Local/Temp/android_manifest_copy4554208286719482067tmp/AndroidManifest.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353485475434" ignored="false" />
     <file path="/MainActivity.kt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353428303710" ignored="false" />
     <file path="$USER_HOME$/AppData/Local/Temp/android_manifest_copy4852511804214139244tmp/AndroidManifest.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353427389943" ignored="false" />
     <file path="$USER_HOME$/AppData/Local/Temp/android_manifest_copy5515490707510538148tmp/AndroidManifest.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353427264887" ignored="false" />
@@ -59,7 +81,6 @@
     <file path="$USER_HOME$/AppData/Local/Temp/android_manifest_copy4894165376912525275tmp/AndroidManifest.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1352902029200" ignored="false" />
     <file path="$USER_HOME$/AppData/Local/Temp/android_manifest_copy6258139637420181605tmp/AndroidManifest.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1352907713391" ignored="false" />
     <file path="$USER_HOME$/AppData/Local/Temp/android_manifest_copy375507807099610360tmp/AndroidManifest.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353428682040" ignored="false" />
-    <file path="/DownloadSubscription.kt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353428799849" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +98,8 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <breakpoint_rules default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -111,8 +134,22 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <breakpoint_rules default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Head.kt" line="9" class="Class at Head.kt:9" package="">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -123,37 +160,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name=".gitignore" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="Head.kt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Head.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="5" selection-start="67" selection-end="67" vertical-scroll-proportion="0.0">
+            <state line="9" column="0" selection-start="318" selection-end="318" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DownloadSubscription.kt" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadSubscription.kt">
+      <file leaf-file-name="DateHelper.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DateHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="10" column="13" selection-start="175" selection-end="175" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.kt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/MainActivity.kt">
+      <file leaf-file-name="DateTime.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/lib/date4j.jar!/hirondelle/date4j/DateTime.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="34" selection-start="1017" selection-end="1017" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="70" selection-start="173" selection-end="173" vertical-scroll-proportion="0.0">
+            <state line="30" column="48" selection-start="1568" selection-end="1568" vertical-scroll-proportion="-8.08">
               <folding />
             </state>
           </provider>
@@ -162,37 +192,52 @@
       <file leaf-file-name="Utils.kt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Utils.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="33" column="1" selection-start="897" selection-end="897" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="KotlinActivity.kt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../kotlinAndroidLib/src/com/vlad/android/kotlin/KotlinActivity.kt">
+      <file leaf-file-name="MainActivity.kt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/MainActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="88" selection-start="86" selection-end="86" vertical-scroll-proportion="0.0">
+            <state line="20" column="4" selection-start="618" selection-end="716" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+      <file leaf-file-name="Opml.kt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Opml.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="11" selection-start="617" selection-end="617" vertical-scroll-proportion="0.0">
+            <state line="9" column="43" selection-start="298" selection-end="298" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
-          <provider editor-type-id="android-designer">
-            <state />
+        </entry>
+      </file>
+      <file leaf-file-name="DownloadSubscription.kt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadSubscription.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="66" column="25" selection-start="2037" selection-end="2037" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <file leaf-file-name="Body.kt" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Body.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="21" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
+            <state line="6" column="19" selection-start="176" selection-end="176" vertical-scroll-proportion="0.22972973">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Outline.kt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Outline.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="13" selection-start="138" selection-end="138" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -216,23 +261,30 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/License.txt" />
-        <option value="$PROJECT_DIR$/README" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Application.kt" />
-        <option value="$PROJECT_DIR$/src/com/github/kevinsawicki.http/HttpRequest.java" />
-        <option value="$PROJECT_DIR$/src/com/github/kevinsawicki.http/HttpRequest.kt" />
         <option value="$PROJECT_DIR$/src/com/github/kevinsawicki/http/HttpRequest.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/../kotlinAndroidLib/src/com/vlad/android/kotlin/KotlinActivity.kt" />
         <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/helper.kt" />
-        <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Utils.kt" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/MainActivity.kt" />
+        <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Head.java" />
+        <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Opml.java" />
+        <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Utils.kt" />
+        <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DateHelper.java" />
+        <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Head.kt" />
+        <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Opml.kt" />
+        <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Outline.kt" />
+        <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Body.kt" />
         <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadSubscription.kt" />
       </list>
     </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState />
+  </component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-1374" />
@@ -266,37 +318,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Default">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Production">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="AndroidRivers">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Tests" />
-        <subPane subId="Changed Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -359,7 +380,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="http" />
+              <option name="myItemId" value="android_rivers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="outlines" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -373,7 +398,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="http" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -389,6 +422,37 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="AndroidRivers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Default">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Production">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="AndroidRivers">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Tests" />
+        <subPane subId="Changed Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -570,7 +634,7 @@
     <task active="true" id="Default" summary="Default task">
       <changelist id="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" name="Default" comment="" />
       <created>1352901158902</created>
-      <timeSpent>19648000</timeSpent>
+      <timeSpent>29898000</timeSpent>
       <updated>1352901158902</updated>
     </task>
     <task id="LOCAL-00001" summary="Add gson and robguice dependencies.">
@@ -585,8 +649,12 @@
       <created>1353427313671</created>
       <updated>1353427313671</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
-    <option name="myTotallyTimeSpent" value="19648000" />
+    <task id="LOCAL-00004" summary="Get threading">
+      <created>1353485064051</created>
+      <updated>1353485064051</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <option name="myTotallyTimeSpent" value="29898000" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -613,18 +681,20 @@
     <frame x="-1374" y="124" width="1382" height="784" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.4969651" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32763532" sideWeight="0.67754173" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.47875568" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32763532" sideWeight="0.39681336" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Kotlin" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.4848255" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32763532" sideWeight="0.32473445" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32763532" sideWeight="0.5978756" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.4969651" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852808" sideWeight="0.67236465" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2837633" sideWeight="0.67236465" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Kotlin" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32763532" sideWeight="0.5834598" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36467236" sideWeight="0.43323216" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36467236" sideWeight="0.38846737" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852808" sideWeight="0.63532764" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852808" sideWeight="0.63532764" order="2" side_tool="false" content_ui="tabs" />
@@ -632,7 +702,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32763532" sideWeight="0.41122913" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -674,7 +743,7 @@
     <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Now it can download a file without any problem." />
+    <option name="LAST_COMMIT_MESSAGE" value="Get threading" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -690,6 +759,7 @@
     <MESSAGE value="Add gson and robguice dependencies." />
     <MESSAGE value="Add HttpRequest and add Internet permission for the application." />
     <MESSAGE value="Now it can download a file without any problem." />
+    <MESSAGE value="Get threading" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -699,35 +769,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="36" selection-start="67" selection-end="67" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/MainActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="4" selection-start="531" selection-end="531" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ant.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/License.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="69" selection-start="759" selection-end="759" vertical-scroll-proportion="0.569378" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="58" selection-start="188" selection-end="188" vertical-scroll-proportion="0.08133971" />
@@ -735,9 +776,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="5" selection-start="67" selection-end="67" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="5" column="5" selection-start="67" selection-end="67" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/github/kevinsawicki/http/HttpRequest.java">
@@ -759,52 +798,90 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="21" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
+        <state line="9" column="21" selection-start="459" selection-end="459" vertical-scroll-proportion="0.3445946">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../kotlinAndroidLib/src/com/vlad/android/kotlin/KotlinActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="88" selection-start="86" selection-end="86" vertical-scroll-proportion="0.0">
+        <state line="4" column="88" selection-start="86" selection-end="86" vertical-scroll-proportion="0.15315315" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="70" selection-start="173" selection-end="173" vertical-scroll-proportion="0.12171838" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="11" selection-start="617" selection-end="617" vertical-scroll-proportion="0.56632656" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/date4j.jar!/hirondelle/date4j/DateTime.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="48" selection-start="1568" selection-end="1568" vertical-scroll-proportion="-8.08">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/MainActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="4" selection-start="618" selection-end="716" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Utils.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="33" column="1" selection-start="897" selection-end="897" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DateHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="70" selection-start="173" selection-end="173" vertical-scroll-proportion="0.0">
+        <state line="10" column="13" selection-start="175" selection-end="175" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Head.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="318" selection-end="318" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Opml.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="11" selection-start="617" selection-end="617" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/MainActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="34" selection-start="1017" selection-end="1017" vertical-scroll-proportion="0.0">
+        <state line="9" column="43" selection-start="298" selection-end="298" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadSubscription.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="66" column="25" selection-start="2037" selection-end="2037" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Outline.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="13" selection-start="138" selection-end="138" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/outlines/Body.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="19" selection-start="176" selection-end="176" vertical-scroll-proportion="0.22972973">
           <folding />
         </state>
       </provider>
