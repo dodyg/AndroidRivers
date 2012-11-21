@@ -16,6 +16,7 @@ import android.os.AsyncTask
 import android.app.ProgressDialog
 import android.content.Context
 
+
 public open class MainActivity(): Activity() {
     class object {
         public val TAG: String = javaClass<MainActivity>().getSimpleName()!!

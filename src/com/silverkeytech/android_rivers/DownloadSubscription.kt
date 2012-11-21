@@ -29,9 +29,9 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, String
         Log.d("DD", "Progressing...")
     }
 
-    protected override fun onPostExecute(res : String?){
+    protected override fun onPostExecute(result : String?){
         dialog.dismiss()
         var msg = context.findView<TextView>(R.id.main_message_tv)
-        msg.setText("${res?.length} of text downloaded ... initial data ${res?.substring(0, 10)}")
+        msg.setText("${result?.length} of text downloaded ... initial data ${result?.substring(0, 10)}")
     }
 }
