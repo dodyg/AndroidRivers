@@ -10,6 +10,7 @@ import android.widget.TextView
 import org.simpleframework.xml.Serializer
 import org.simpleframework.xml.core.Persister
 import com.silverkeytech.android_rivers.outlines.Opml
+import com.silverkeytech.android_rivers.outlines.Body
 
 public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, String>(){
     class object {
@@ -33,17 +34,17 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, String
         if(opml != null){
             var ct = opml?.body?.outline?.count()
 
-            if (ct != null){
-                var cnt = 0;
+            if (ct != null && ct!! > 0){
+                var cnt : Float = 1.toFloat();
+                var divisor = ct!!.toFloat()
 
                 while(cnt < ct!!){
-                    var progress = 100 / (cnt / ct!!.toInt())
-                    cnt++
+                    var progress  = Math.round((cnt / divisor) * 100.toFloat());
                     publishProgress(progress);
                     Thread.sleep(200)
+                    cnt++
                 }
             }
-
         }else{
             publishProgress(100)
         }
