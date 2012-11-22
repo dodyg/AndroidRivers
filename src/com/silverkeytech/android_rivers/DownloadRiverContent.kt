@@ -23,8 +23,11 @@ import com.silverkeytech.android_rivers.outlines.Outline
 import android.content.Intent
 import com.google.gson.Gson
 import com.silverkeytech.android_rivers.riverjs.FeedsRiver
+import android.app.LauncherActivity.ListItem
+import com.silverkeytech.android_rivers.riverjs.FeedItem
+import com.silverkeytech.android_rivers.riverjs.FeedSite
 
-public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, String>(){
+public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, FeedsRiver>(){
     class object {
         public val TAG: String = javaClass<DownloadRiverContent>().getSimpleName()!!
     }
@@ -40,7 +43,7 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, String
         dialog.show()
     }
 
-    protected override fun doInBackground(vararg p0: String?): String? {
+    protected override fun doInBackground(vararg p0: String?): FeedsRiver? {
         var req = HttpRequest.get(p0[0])?.body()
 
         var gson = Gson()
@@ -51,17 +54,38 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, String
 
             this.publishProgress(100);
 
-            var info = "gson elements count ${feeds.updatedFeeds?.updatedFeed?.count()}"
-            return info
+            return feeds
         }
         catch(e : Exception)
                 {
-                    return e.getMessage()
+                    return null
                 }
     }
 
-    protected override fun onPostExecute(result: String?) {
+    protected override fun onPostExecute(result: FeedsRiver?) {
         dialog.dismiss();
-        context.toastee("This is result of download $result")
+        if (result == null)
+            context.toastee("Sorry, we cannot process this feed")
+
+        handleNewsListing(result!!)
     }
+
+    fun handleNewsListing(river : FeedsRiver){
+
+        var vals = ImmutableArrayListBuilder<FeedItem>()
+
+        for(var f : FeedSite? in river.updatedFeeds?.updatedFeed?.iterator()){
+            if (f != null){
+                f!!.item?.forEach {
+                   if (it != null)
+                       vals.add(it)
+                }
+            }
+        }
+
+        var list = context.findView<ListView>(android.R.id.list)
+        var adapter = ArrayAdapter<FeedItem>(context, android.R.layout.simple_list_item_1, android.R.id.text1, vals.build())
+        list.setAdapter(adapter)
+    }
+
 }

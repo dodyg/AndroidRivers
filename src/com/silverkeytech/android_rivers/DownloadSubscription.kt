@@ -84,18 +84,19 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Opml>(
         dialog.dismiss()
         var msg = context.findView<TextView>(R.id.main_message_tv)
 
-        handleRiversListing(result)
+        if (result == null)
+            context.toastee("Sorry, we cannot handle this subscription download")
+        else
+            handleRiversListing(result)
     }
 
-    fun handleRiversListing(outlines : Opml?){
+    fun handleRiversListing(outlines : Opml){
         var list = context.findView<ListView>(R.id.main_rivers_lv)
 
         var vals = ImmutableArrayListBuilder<Outline>()
 
-        if (outlines != null){
-            outlines.body?.outline?.forEach {
-                vals.add(it!!)
-            }
+        outlines.body?.outline?.forEach {
+            vals.add(it!!)
         }
 
         var values = vals.build()

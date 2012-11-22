@@ -11,4 +11,12 @@ public class FeedItem {
     public String link;
     public String comments;
     public ArrayList<FeedImage> thumbnail;
+
+    @Override
+    public String toString() {
+        if (title != null)
+            return title;
+        else
+            return body;
+    }
 }
