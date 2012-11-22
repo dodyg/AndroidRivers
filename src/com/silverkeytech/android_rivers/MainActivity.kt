@@ -22,6 +22,7 @@ import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.Toast
 import android.view.Gravity
+import android.content.Intent
 
 
 public open class MainActivity(): Activity() {
@@ -34,6 +35,7 @@ public open class MainActivity(): Activity() {
         setContentView(R.layout.main)
 
         handleDownloadBtn()
+        handleTestBtn()
     }
 
 
@@ -43,5 +45,18 @@ public open class MainActivity(): Activity() {
             v ->
             var x = DownloadSubscription(this).execute("http://hobieu.apphb.com/api/1/default/riverssubscription")
         })
+    }
+
+    fun handleTestBtn(){
+        var btn = this.findView<Button>(R.id.main_test_btn)
+
+        btn.setOnClickListener {
+        v ->
+            var i = Intent(this, javaClass<RiverActivity>())
+            i.putExtra(Params.RIVER_URL, "http://static.scripting.com/houston/rivers/apple/River3.js")
+            i.putExtra(Params.RIVER_NAME, "Apple River")
+
+            startActivity(i);
+        }
     }
 }

@@ -20,4 +20,9 @@ public class Outline {
     public String xmlUrl;
     @Attribute(required = false)
     public String language;
+
+    @Override
+    public String toString() {
+        return text;
+    }
 }

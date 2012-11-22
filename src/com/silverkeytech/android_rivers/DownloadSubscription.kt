@@ -19,6 +19,8 @@ import android.view.View
 import android.widget.Toast
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import com.silverkeytech.android_rivers.outlines.Outline
+import android.content.Intent
 
 public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Opml>(){
     class object {
@@ -88,24 +90,35 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Opml>(
     fun handleRiversListing(outlines : Opml?){
         var list = context.findView<ListView>(R.id.main_rivers_lv)
 
-        var vals = ImmutableArrayListBuilder<String>()
+        var vals = ImmutableArrayListBuilder<Outline>()
 
         if (outlines != null){
             outlines.body?.outline?.forEach {
-                vals.add(it!!.text!!)
+                vals.add(it!!)
             }
         }
 
         var values = vals.build()
 
-        var adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, android.R.id.text1, values)
+        var adapter = ArrayAdapter<Outline>(context, android.R.layout.simple_list_item_1, android.R.id.text1, values)
         list.setAdapter(adapter)
 
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
-                var t = Toast.makeText(context, (p1 as TextView).getText(), 300)
+                var currentOutline = values.get(p2)
+                var textToBeDisplayed = currentOutline.url
+
+                var i = Intent(context, javaClass<RiverActivity>())
+                i.putExtra(Params.RIVER_URL, currentOutline.url)
+                i.putExtra(Params.RIVER_NAME, currentOutline.text)
+
+                context.startActivity(i);
+
+                /*
+                var t = Toast.makeText(context, textToBeDisplayed, 300)
                 t!!.setGravity(Gravity.TOP or Gravity.CENTER, 0, 0 );
                 t!!.show()
+                */
             }
         })
     }
