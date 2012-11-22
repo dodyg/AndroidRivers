@@ -6,3 +6,7 @@ fun scrubJsonP(text : String) : String{
     rep = rep.trimTrailing(")")
     return rep
 }
+
+fun scrubHtml(text : String) : String{
+    return android.text.Html.fromHtml(text).toString()
+}

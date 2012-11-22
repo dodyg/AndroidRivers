@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.os.Bundle
 import android.app.ListActivity
 import android.widget.TextView
+import android.util.Log
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity() : ListActivity()
@@ -25,10 +26,12 @@ public class RiverActivity() : ListActivity()
         riverUrl = i.getStringExtra(Params.RIVER_URL)!!
         riverName = i.getStringExtra(Params.RIVER_NAME)!!
 
-        var msg = findView<TextView>(R.id.river_message_tv)
-
-        msg.setText("River $riverName with url $riverUrl")
-
+        setTitle(riverName)
         DownloadRiverContent(this).execute(riverUrl)
+    }
+
+    public override fun onBackPressed() {
+        Log.d(TAG, "Exit River News Listing")
+        finish()
     }
 }

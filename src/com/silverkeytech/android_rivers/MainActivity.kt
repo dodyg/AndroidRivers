@@ -34,11 +34,13 @@ public open class MainActivity(): Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
 
-        handleDownloadBtn()
-        handleTestBtn()
+        DownloadSubscription(this).execute("http://hobieu.apphb.com/api/1/default/riverssubscription")
+
+        //handleDownloadBtn()
+        //handleTestBtn()
     }
 
-
+    /*
     fun handleDownloadBtn(){
         var btn = this.findView<Button>(R.id.main_download_btn)
         btn.setOnClickListener({
@@ -59,4 +61,5 @@ public open class MainActivity(): Activity() {
             startActivity(i);
         }
     }
+    */
 }

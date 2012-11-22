@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import com.silverkeytech.android_rivers.outlines.Outline
 import android.content.Intent
+import java.util.ArrayList
 
 public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Opml>(){
     class object {
@@ -31,7 +32,7 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Opml>(
     var context : Activity = it!! as Activity
 
     protected override fun onPreExecute(){
-        dialog.setMessage(context.getString(R.string.please_wait_while_loading))
+        dialog.setMessage(context.getString(R.string.please_wait_while_downloading_news_rivers_list))
         dialog.setIndeterminate(true)
         dialog.setCancelable(false)
         dialog.show()
@@ -93,13 +94,13 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Opml>(
     fun handleRiversListing(outlines : Opml){
         var list = context.findView<ListView>(R.id.main_rivers_lv)
 
-        var vals = ImmutableArrayListBuilder<Outline>()
+        var vals = ArrayList<Outline>()
 
         outlines.body?.outline?.forEach {
             vals.add(it!!)
         }
 
-        var values = vals.build()
+        var values = vals
 
         var adapter = ArrayAdapter<Outline>(context, android.R.layout.simple_list_item_1, android.R.id.text1, values)
         list.setAdapter(adapter)

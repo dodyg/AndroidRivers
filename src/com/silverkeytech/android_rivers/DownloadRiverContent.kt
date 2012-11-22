@@ -26,6 +26,9 @@ import com.silverkeytech.android_rivers.riverjs.FeedsRiver
 import android.app.LauncherActivity.ListItem
 import com.silverkeytech.android_rivers.riverjs.FeedItem
 import com.silverkeytech.android_rivers.riverjs.FeedSite
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.net.Uri
 
 public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, FeedsRiver>(){
     class object {
@@ -84,7 +87,46 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, FeedsR
         }
 
         var list = context.findView<ListView>(android.R.id.list)
-        var adapter = ArrayAdapter<FeedItem>(context, android.R.layout.simple_list_item_1, android.R.id.text1, vals.build())
+        var newsItems = vals.build()
+        var adapter = ArrayAdapter<FeedItem>(context, android.R.layout.simple_list_item_1, android.R.id.text1, newsItems)
+
+
+        list.setOnItemClickListener(object : OnItemClickListener{
+            public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
+                (p1 as TextView).setTextColor(android.graphics.Color.rgb(204,255,153))
+
+                var currentNews = newsItems.get(p2);
+
+                var dialog = AlertDialog.Builder(context)
+                dialog.setMessage(scrubHtml(currentNews.body!!))
+
+
+                dialog.setPositiveButton(android.R.string.ok, object : DialogInterface.OnClickListener{
+                    public override fun onClick(p0: DialogInterface?, p1: Int) {
+                        p0?.dismiss()
+                    }
+                })
+
+                if (currentNews.link != "" && currentNews.link?.indexOf("http") !!> -1){
+                    Log.d(TAG, "There's a link ${currentNews.link}")
+                    dialog.setNeutralButton("Go", object : DialogInterface.OnClickListener{
+
+                        public override fun onClick(p0: DialogInterface?, p1: Int) {
+                            var i = Intent("android.intent.action.VIEW", Uri.parse(currentNews.link))
+                            context.startActivity(i)
+
+                            p0?.dismiss()
+                        }
+                    })
+                }else{
+                    Log.d(TAG, "There is no link for ${currentNews.title}")
+                }
+
+                dialog.create()!!.show()
+
+            }
+        })
+
         list.setAdapter(adapter)
     }
 
