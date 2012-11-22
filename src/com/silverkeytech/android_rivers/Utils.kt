@@ -4,6 +4,8 @@ import android.app.Activity
 import android.view.View
 import android.view.View.OnClickListener
 import java.text.SimpleDateFormat
+import android.view.Gravity
+import android.widget.Toast
 
 
 public fun Activity.findView<T : View>(id : Int) : T{
@@ -22,7 +24,7 @@ public fun View.setOnClickListener(action: (View?) -> Unit): Unit {
     setOnClickListener(OnClickListener(action))
 }
 
-public fun ParseRFC3339DateFormat(dt : String) : java.util.Date? {
+public fun parseRFC3339DateFormat(dt : String) : java.util.Date? {
     try{
         var formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
         var dts = dt.replaceAll("([\\+\\-]\\d\\d):(\\d\\d)","$1$2")
@@ -32,3 +34,8 @@ public fun ParseRFC3339DateFormat(dt : String) : java.util.Date? {
     }
 }
 
+public fun Activity.toastee(text : String, duration : Int = 300, grav : Int = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL){
+    var t = Toast.makeText(this, text, duration)
+    t!!.setGravity(grav, 0, 0 );
+    t!!.show()
+}

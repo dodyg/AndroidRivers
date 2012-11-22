@@ -106,7 +106,6 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Opml>(
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 var currentOutline = values.get(p2)
-                var textToBeDisplayed = currentOutline.url
 
                 var i = Intent(context, javaClass<RiverActivity>())
                 i.putExtra(Params.RIVER_URL, currentOutline.url)

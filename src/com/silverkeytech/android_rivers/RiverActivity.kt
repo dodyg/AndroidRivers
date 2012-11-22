@@ -28,5 +28,7 @@ public class RiverActivity() : ListActivity()
         var msg = findView<TextView>(R.id.river_message_tv)
 
         msg.setText("River $riverName with url $riverUrl")
+
+        DownloadRiverContent(this).execute(riverUrl)
     }
 }
