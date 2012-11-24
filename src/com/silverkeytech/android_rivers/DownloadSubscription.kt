@@ -48,13 +48,13 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result
        }
        catch(e : HttpRequestException){
            var ex = e.getCause()
-           return Result.wrong<Opml>(ex)
+           return Result.wrong(ex)
        }
 
         var opml = transformFromXml(req)
 
-        if(opml != null){
-            var ct = opml?.body?.outline?.count()
+        if(opml.isTrue()){
+            var ct = opml.value?.body?.outline?.count()
 
             if (ct != null && ct!! > 0){
                 var cnt : Float = 1.toFloat();
@@ -67,24 +67,21 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result
                     cnt++
                 }
             }
-        }else{
-            publishProgress(100)
         }
-
-        return Result.right<Opml>(opml)
+        return opml
     }
 
-    fun transformFromXml(xml : String?) : Opml?{
+    fun transformFromXml(xml : String?) : Result<Opml>{
         var serial : Serializer = Persister()
 
         try{
             val opml : Opml? = serial.read(javaClass<Opml>(),xml)
             Log.d(TAG, "OPML ${opml?.head?.title} created on ${opml?.head?.getDateCreated()} and modified on ${opml?.head?.getDateModified()}")
-            return opml
+            return Result.right(opml)
         }
         catch (e: Exception){
             Log.d(TAG, "Exception ${e.getMessage()}")
-            return null
+            return Result.wrong(e)
         }
     }
 

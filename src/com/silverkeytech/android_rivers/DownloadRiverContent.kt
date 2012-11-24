@@ -31,9 +31,11 @@ import android.content.DialogInterface
 import android.net.Uri
 import java.util.ArrayList
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
+import org.apache.http.conn.ConnectTimeoutException
+import java.net.UnknownHostException
 
 //Responsible for handling a river js downloading and display in asynchronous way
-public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, FeedsRiver>(){
+public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result<FeedsRiver>>(){
     class object {
         public val TAG: String = javaClass<DownloadRiverContent>().getSimpleName()!!
     }
@@ -49,14 +51,14 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, FeedsR
         dialog.show()
     }
 
-    protected override fun doInBackground(vararg p0: String?): FeedsRiver? {
+    protected override fun doInBackground(vararg p0: String?): Result<FeedsRiver>? {
         var req :String?
         try{
             req = HttpRequest.get(p0[0])?.body()
         }
         catch(e : HttpRequestException){
-            this.cancel(true)
-            return null
+            var ex = e.getCause()
+            return Result.wrong(ex)
         }
 
         var gson = Gson()
@@ -67,20 +69,31 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, FeedsR
 
             this.publishProgress(100);
 
-            return feeds
+            return Result.right(feeds)
         }
         catch(e : Exception)
-                {
-                    return null
-                }
+        {
+            return Result.wrong(e)
+        }
     }
 
-    protected override fun onPostExecute(result: FeedsRiver?) {
+    protected override fun onPostExecute(result: Result<FeedsRiver>?) {
         dialog.dismiss();
         if (result == null)
-            context.toastee("Sorry, we cannot process this feed")
+            context.toastee("Sorry, we cannot process this feed because the operation is cancelled", Duration.AVERAGE)
         else
-            handleNewsListing(result)
+            {
+                if (result.isFalse()){
+                    if (result.exception is ConnectTimeoutException)
+                        context.toastee("Sorry, we cannot download this feed. The feed site might be down", Duration.AVERAGE)
+                    else if (result.exception is UnknownHostException)
+                        context.toastee("Sorry, we cannot download this feed. Please check your Internet connection, it might be down", Duration.AVERAGE)
+                    else
+                        context.toastee("Sorry, we cannot download this feed for the following technical reason : ${result.exception.toString()}", Duration.AVERAGE)
+                }else{
+                    handleNewsListing(result.value!!)
+                }
+            }
     }
 
     fun handleNewsListing(river : FeedsRiver){
