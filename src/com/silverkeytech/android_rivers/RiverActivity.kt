@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.app.ListActivity
 import android.widget.TextView
 import android.util.Log
+import android.content.res.Configuration
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity() : ListActivity()
@@ -34,4 +35,5 @@ public class RiverActivity() : ListActivity()
         Log.d(TAG, "Exit River News Listing")
         finish()
     }
+
 }

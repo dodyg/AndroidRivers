@@ -10,3 +10,8 @@ fun scrubJsonP(text : String) : String{
 fun scrubHtml(text : String) : String{
     return android.text.Html.fromHtml(text).toString()
 }
+
+fun String?.IsNullOrEmptyOrWhitespace() : Boolean{
+    var res = this != null && !this.trim().isEmpty()
+    return res
+}

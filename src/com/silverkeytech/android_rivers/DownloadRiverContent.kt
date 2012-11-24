@@ -119,6 +119,7 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, FeedsR
                 var currentNews = sortedNewsItems.get(p2);
 
                 var dialog = AlertDialog.Builder(context)
+
                 dialog.setMessage(scrubHtml(currentNews.body!!))
 
 

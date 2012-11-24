@@ -23,6 +23,7 @@ import android.widget.AdapterView
 import android.widget.Toast
 import android.view.Gravity
 import android.content.Intent
+import android.content.res.Configuration
 
 
 public open class MainActivity(): Activity() {
@@ -62,4 +63,6 @@ public open class MainActivity(): Activity() {
         }
     }
     */
+
+
 }
