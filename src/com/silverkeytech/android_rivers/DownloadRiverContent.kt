@@ -30,6 +30,7 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.net.Uri
 import java.util.ArrayList
+import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 
 //Responsible for handling a river js downloading and display in asynchronous way
 public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, FeedsRiver>(){
@@ -49,7 +50,14 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, FeedsR
     }
 
     protected override fun doInBackground(vararg p0: String?): FeedsRiver? {
-        var req = HttpRequest.get(p0[0])?.body()
+        var req :String?
+        try{
+            req = HttpRequest.get(p0[0])?.body()
+        }
+        catch(e : HttpRequestException){
+            this.cancel(true)
+            return null
+        }
 
         var gson = Gson()
         try{
@@ -71,8 +79,8 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, FeedsR
         dialog.dismiss();
         if (result == null)
             context.toastee("Sorry, we cannot process this feed")
-
-        handleNewsListing(result!!)
+        else
+            handleNewsListing(result)
     }
 
     fun handleNewsListing(river : FeedsRiver){

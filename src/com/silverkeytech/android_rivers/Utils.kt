@@ -34,8 +34,25 @@ public fun parseRFC3339DateFormat(dt : String) : java.util.Date? {
     }
 }
 
-public fun Activity.toastee(text : String, duration : Int = 300, grav : Int = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL){
-    var t = Toast.makeText(this, text, duration)
+public fun Activity.toastee(text : String, duration : Duration = Duration.QUICK, grav : Int = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL){
+
+    var t = Toast.makeText(this, text, duration.toInt())
     t!!.setGravity(grav, 0, 0 );
     t!!.show()
+}
+
+public enum class Duration {
+    QUICK
+    AVERAGE
+    LONG
+    public fun toInt(): Int{
+        if (this == Duration.QUICK)
+            return 3000
+        else if (this == Duration.AVERAGE)
+            return 10000
+        else if (this == Duration.LONG)
+            return 20000
+        else
+            return 5000
+    }
 }

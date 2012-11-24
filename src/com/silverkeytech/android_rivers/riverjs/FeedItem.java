@@ -32,7 +32,7 @@ public class FeedItem {
 
     @Override
     public String toString() {
-        if (title != null)
+        if (title != null && title != "")
             return title;
         else
             return body;

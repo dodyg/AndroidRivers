@@ -22,8 +22,11 @@ import android.widget.ListView
 import com.silverkeytech.android_rivers.outlines.Outline
 import android.content.Intent
 import java.util.ArrayList
+import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
+import org.apache.http.conn.ConnectTimeoutException
+import java.net.UnknownHostException
 
-public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Opml>(){
+public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result<Opml>>(){
     class object {
         public val TAG: String = javaClass<DownloadSubscription>().getSimpleName()!!
     }
@@ -38,8 +41,16 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Opml>(
         dialog.show()
     }
 
-    protected override fun doInBackground(vararg url : String?): Opml?{
-        var req = HttpRequest.get(url[0])?.body()
+    protected override fun doInBackground(vararg url : String?): Result<Opml>?{
+        var req : String? = null
+        try{
+           req = HttpRequest.get(url[0])?.body()
+       }
+       catch(e : HttpRequestException){
+           var ex = e.getCause()
+           return Result.wrong<Opml>(ex)
+       }
+
         var opml = transformFromXml(req)
 
         if(opml != null){
@@ -60,7 +71,7 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Opml>(
             publishProgress(100)
         }
 
-        return opml
+        return Result.right<Opml>(opml)
     }
 
     fun transformFromXml(xml : String?) : Opml?{
@@ -81,14 +92,25 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Opml>(
         Log.d("DD", "Progressing...${progress[0]}")
     }
 
-    protected override fun onPostExecute(result : Opml?){
+    protected override fun onPostExecute(result : Result<Opml>?){
         dialog.dismiss()
-        var msg = context.findView<TextView>(R.id.main_message_tv)
 
-        if (result == null)
-            context.toastee("Sorry, we cannot handle this subscription download")
-        else
-            handleRiversListing(result)
+        if (result == null){
+            context.toastee("Sorry, we cannot handle this subscription download because operation is cancelled", Duration.AVERAGE)
+        }
+        else{
+            if (result.isFalse()){
+                if (result.exception is ConnectTimeoutException)
+                    context.toastee("Sorry, we cannot download this subscription list. The subscription site might be down", Duration.AVERAGE)
+                else if (result.exception is UnknownHostException)
+                    context.toastee("Sorry, we cannot download this subscription list. Please check your Internet connection, it might be down", Duration.AVERAGE)
+                else
+                    context.toastee("Sorry, we cannot download this subscription list for the following technical reason : ${result.exception.toString()}", Duration.AVERAGE)
+            } else {
+                var msg = context.findView<TextView>(R.id.main_message_tv)
+                handleRiversListing(result.value!!)
+            }
+        }
     }
 
     fun handleRiversListing(outlines : Opml){
