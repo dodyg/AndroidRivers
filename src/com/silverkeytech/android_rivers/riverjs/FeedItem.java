@@ -1,5 +1,6 @@
 package com.silverkeytech.android_rivers.riverjs;
 
+import android.text.TextUtils;
 import com.silverkeytech.android_rivers.DateHelper;
 
 import java.text.ParseException;
@@ -32,9 +33,9 @@ public class FeedItem {
 
     @Override
     public String toString() {
-        if (title != null && title != "")
-            return title;
+        if (title != null && title.length() > 0)
+            return android.text.Html.fromHtml(title).toString();
         else
-            return body;
+            return android.text.Html.fromHtml(body).toString();
     }
 }

@@ -61,8 +61,8 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
             return Result.wrong(ex)
         }
 
-        var gson = Gson()
         try{
+            var gson = Gson()
             var scrubbed = scrubJsonP(req!!)
 
             var feeds = gson.fromJson(scrubbed, javaClass<FeedsRiver>())!!
