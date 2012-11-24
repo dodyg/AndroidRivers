@@ -29,7 +29,9 @@ import com.silverkeytech.android_rivers.riverjs.FeedSite
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.net.Uri
+import java.util.ArrayList
 
+//Responsible for handling a river js downloading and display in asynchronous way
 public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, FeedsRiver>(){
     class object {
         public val TAG: String = javaClass<DownloadRiverContent>().getSimpleName()!!
@@ -74,28 +76,47 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, FeedsR
     }
 
     fun handleNewsListing(river : FeedsRiver){
-
-        var vals = ImmutableArrayListBuilder<FeedItem>()
+        var newsItems = ArrayList<FeedItem>()
 
         for(var f : FeedSite? in river.updatedFeeds?.updatedFeed?.iterator()){
             if (f != null){
                 f!!.item?.forEach {
                    if (it != null)
-                       vals.add(it)
+                       newsItems.add(it)
                 }
             }
         }
 
-        var list = context.findView<ListView>(android.R.id.list)
-        var newsItems = vals.build()
-        var adapter = ArrayAdapter<FeedItem>(context, android.R.layout.simple_list_item_1, android.R.id.text1, newsItems)
+        //now sort it so people always have the latest news first
 
+        var sortedNewsItems = newsItems.filter { x -> x.isPublicationDate()!! }.sort(comparator { (p1, p2) ->
+            var date1 = p1.getPublicationDate()
+            var date2 = p2.getPublicationDate()
+            //reverse. The latest date comes first
+            var result : Int
+            if (date1 != null && date2 != null){
+                if (date1!! > date2)
+                    result = -1
+                else if(date1 == date2)
+                    result = 0
+                else
+                    result = 1
+            }   else
+                {
+                    result = -1
+                }
+
+            result
+        })
+
+        var list = context.findView<ListView>(android.R.id.list)
+        var adapter = ArrayAdapter<FeedItem>(context, android.R.layout.simple_list_item_1, sortedNewsItems)
 
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
-                (p1 as TextView).setTextColor(android.graphics.Color.rgb(204,255,153))
+                //(p1 as TextView).setTextColor(android.graphics.Color.rgb(204,255,153))
 
-                var currentNews = newsItems.get(p2);
+                var currentNews = sortedNewsItems.get(p2);
 
                 var dialog = AlertDialog.Builder(context)
                 dialog.setMessage(scrubHtml(currentNews.body!!))
