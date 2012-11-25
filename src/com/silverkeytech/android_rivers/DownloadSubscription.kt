@@ -25,6 +25,7 @@ import java.util.ArrayList
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import org.apache.http.conn.ConnectTimeoutException
 import java.net.UnknownHostException
+import java.net.SocketException
 
 public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result<Opml>>(){
     class object {
@@ -99,7 +100,7 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result
             if (result.isFalse()){
                 if (result.exception is ConnectTimeoutException)
                     context.toastee("Sorry, we cannot download this subscription list. The subscription site might be down", Duration.AVERAGE)
-                else if (result.exception is UnknownHostException)
+                else if (result.exception is UnknownHostException || result.exception is SocketException)
                     context.toastee("Sorry, we cannot download this subscription list. Please check your Internet connection, it might be down", Duration.AVERAGE)
                 else
                     context.toastee("Sorry, we cannot download this subscription list for the following technical reason : ${result.exception.toString()}", Duration.AVERAGE)
@@ -142,5 +143,6 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result
             }
         })
     }
+
 
 }

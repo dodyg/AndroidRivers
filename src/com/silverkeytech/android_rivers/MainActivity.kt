@@ -24,6 +24,8 @@ import android.widget.Toast
 import android.view.Gravity
 import android.content.Intent
 import android.content.res.Configuration
+import android.view.Menu
+import android.view.MenuItem
 
 
 public open class MainActivity(): Activity() {
@@ -31,15 +33,36 @@ public open class MainActivity(): Activity() {
         public val TAG: String = javaClass<MainActivity>().getSimpleName()!!
     }
 
+    val DEFAULT_SUBSCRIPTION_LIST = "http://hobieu.apphb.com/api/1/default/riverssubscription"
+
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
 
-        DownloadSubscription(this).execute("http://hobieu.apphb.com/api/1/default/riverssubscription")
+        DownloadSubscription(this).execute(DEFAULT_SUBSCRIPTION_LIST)
 
         //handleDownloadBtn()
         //handleTestBtn()
     }
+
+    public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        var inflater = getMenuInflater()!!
+        inflater.inflate(R.menu.subscription_menu, menu)
+        return true
+    }
+
+    public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.getItemId()){
+            R.id.subscription_menu_refresh -> {
+                DownloadSubscription(this).execute(DEFAULT_SUBSCRIPTION_LIST)
+                return true
+            }
+            else ->
+                return super.onOptionsItemSelected(item)
+        }
+    }
+
+
 
     /*
     fun handleDownloadBtn(){

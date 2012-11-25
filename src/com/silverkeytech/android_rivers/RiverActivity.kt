@@ -8,6 +8,8 @@ import android.app.ListActivity
 import android.widget.TextView
 import android.util.Log
 import android.content.res.Configuration
+import android.view.MenuItem
+import android.view.Menu
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity() : ListActivity()
@@ -34,6 +36,23 @@ public class RiverActivity() : ListActivity()
     public override fun onBackPressed() {
         Log.d(TAG, "Exit River News Listing")
         finish()
+    }
+
+    public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        var inflater = getMenuInflater()!!
+        inflater.inflate(R.menu.river_menu, menu)
+        return true
+    }
+
+    public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.getItemId()){
+            R.id.river_menu_refresh -> {
+                DownloadRiverContent(this).execute(riverUrl)
+                return true
+            }
+            else ->
+                return super.onOptionsItemSelected(item)
+        }
     }
 
 }
