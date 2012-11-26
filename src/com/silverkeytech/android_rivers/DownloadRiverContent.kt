@@ -100,6 +100,8 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
             }
     }
 
+    public data class ViewHolder (var news : TextView)
+
     fun handleNewsListing(river : FeedsRiver){
         var newsItems = ArrayList<FeedItem>()
 
@@ -139,18 +141,18 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
 
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 var vw  = convertView
+                var holder : ViewHolder?
 
                 if (vw == null){
                     var inflater : LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
                     vw = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
 
-
-                    var tx = vw!!.findViewById(android.R.id.text1) as TextView
-                    tx.setText(sortedNewsItems[position].toString())
-                    vw!!.setTag(tx)
+                    holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
+                    holder!!.news.setText(sortedNewsItems[position].toString())
+                    vw!!.setTag(holder)
                 }else{
-                    var tx = vw!!.getTag() as TextView
-                    tx.setText(sortedNewsItems[position].toString())
+                    holder = vw!!.getTag() as ViewHolder
+                    holder!!.news.setText(sortedNewsItems[position].toString())
                     Log.d(TAG, "List View reused")
                 }
 

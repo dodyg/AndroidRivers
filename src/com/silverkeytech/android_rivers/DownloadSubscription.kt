@@ -113,6 +113,8 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result
         }
     }
 
+    public data class ViewHolder (var riverName: TextView)
+
     fun handleRiversListing(outlines : Opml){
         var list = context.findView<ListView>(R.id.main_rivers_lv)
 
@@ -127,18 +129,18 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result
         var adapter = object : ArrayAdapter<Outline>(context, android.R.layout.simple_list_item_1, android.R.id.text1, values){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 var vw  = convertView
+                var holder : ViewHolder?
 
                 if (vw == null){
                     var inflater : LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
                     vw = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
 
-
-                    var tx = vw!!.findViewById(android.R.id.text1) as TextView
-                    tx.setText(vals[position].toString())
-                    vw!!.setTag(tx)
+                    holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
+                    holder!!.riverName.setText(vals[position].toString())
+                    vw!!.setTag(holder)
                 }else{
-                    var tx = vw!!.getTag() as TextView
-                    tx.setText(vals[position].toString())
+                    holder = vw!!.getTag() as ViewHolder
+                    holder!!.riverName.setText(vals[position].toString())
                     Log.d(TAG, "List View reused")
                 }
 
