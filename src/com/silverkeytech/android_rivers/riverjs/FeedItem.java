@@ -1,6 +1,5 @@
 package com.silverkeytech.android_rivers.riverjs;
 
-import android.text.TextUtils;
 import com.silverkeytech.android_rivers.DateHelper;
 
 import java.text.ParseException;

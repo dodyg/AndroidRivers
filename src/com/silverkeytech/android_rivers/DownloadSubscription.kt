@@ -1,33 +1,30 @@
 package com.silverkeytech.android_rivers
 
-import android.content.Context
-import android.app.ProgressDialog
 import android.app.Activity
+import android.app.ProgressDialog
+import android.content.Context
+import android.content.Intent
 import android.os.AsyncTask
-import com.github.kevinsawicki.http.HttpRequest
 import android.util.Log
-import android.widget.TextView
-import org.simpleframework.xml.Serializer
-import org.simpleframework.xml.core.Persister
-import com.silverkeytech.android_rivers.outlines.Opml
-import com.silverkeytech.android_rivers.outlines.Body
-import android.widget.Adapter
-import android.widget.AdapterView.OnItemClickListener
-import android.widget.AdapterView
-import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
+import android.view.ViewGroup
+import android.widget.Adapter
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import com.silverkeytech.android_rivers.outlines.Outline
-import android.content.Intent
-import java.util.ArrayList
+import android.widget.TextView
+import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
-import org.apache.http.conn.ConnectTimeoutException
-import java.net.UnknownHostException
+import com.silverkeytech.android_rivers.outlines.Opml
+import com.silverkeytech.android_rivers.outlines.Outline
 import java.net.SocketException
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import java.net.UnknownHostException
+import java.util.ArrayList
+import org.apache.http.conn.ConnectTimeoutException
+import org.simpleframework.xml.Serializer
+import org.simpleframework.xml.core.Persister
 
 public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result<Opml>>(){
     class object {

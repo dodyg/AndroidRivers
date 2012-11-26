@@ -2,29 +2,8 @@ package com.silverkeytech.android_rivers
 
 import android.app.Activity
 import android.os.Bundle
-import android.widget.TextView
-import com.github.kevinsawicki.http
-import com.github.kevinsawicki.http.HttpRequest
-import android.util.Log
-import android.widget.Button
-import android.view.View
-import android.view.View.OnClickListener
-import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
-import android.os.AsyncTask
-import android.app.ProgressDialog
-import android.content.Context
-import android.widget.ListView
-import android.widget.ArrayAdapter
-import android.widget.AdapterView.OnItemClickListener
-import android.widget.Adapter
-import android.widget.AdapterView
-import android.widget.Toast
-import android.view.Gravity
-import android.content.Intent
-import android.content.res.Configuration
 import android.view.Menu
 import android.view.MenuItem
-
 
 public open class MainActivity(): Activity() {
     class object {

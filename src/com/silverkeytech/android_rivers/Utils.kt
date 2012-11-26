@@ -1,12 +1,11 @@
 package com.silverkeytech.android_rivers
 
 import android.app.Activity
+import android.view.Gravity
 import android.view.View
 import android.view.View.OnClickListener
-import java.text.SimpleDateFormat
-import android.view.Gravity
 import android.widget.Toast
-
+import java.text.SimpleDateFormat
 
 public fun Activity.findView<T : View>(id : Int) : T{
     return (this.findViewById(id) as T)

@@ -30,11 +30,14 @@
     <list default="true" id="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadRiverContent.kt" afterPath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadRiverContent.kt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadSubscription.kt" afterPath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadSubscription.kt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Texts.kt" afterPath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Texts.kt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/riverjs/FeedItem.java" afterPath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/riverjs/FeedItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/MainActivity.kt" afterPath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/MainActivity.kt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/RiverActivity.kt" afterPath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/RiverActivity.kt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Utils.kt" afterPath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Utils.kt" />
     </list>
     <ignored path="AndroidRivers.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/DownloadRiverContent.kt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353893592449" ignored="false" />
+    <file path="/DownloadRiverContent.kt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353893791434" ignored="false" />
     <file path="/DownloadSubscription.kt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353890347483" ignored="false" />
     <file path="$USER_HOME$/AppData/Local/Temp/android_manifest_copy4177923617228851395tmp/AndroidManifest.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353594295072" ignored="false" />
     <file path="/fragment.java" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353888725488" ignored="false" />
@@ -156,22 +159,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/RiverActivity.kt" line="3" class="Class at RiverActivity.kt:3" package="">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
@@ -187,7 +175,7 @@
       <file leaf-file-name="DownloadRiverContent.kt" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadRiverContent.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="178" column="84" selection-start="6640" selection-end="6640" vertical-scroll-proportion="0.9485628">
+            <state line="141" column="32" selection-start="5092" selection-end="5092" vertical-scroll-proportion="0.3673966">
               <folding />
             </state>
           </provider>
@@ -241,7 +229,7 @@
       <file leaf-file-name="MainActivity.kt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/MainActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="24" selection-start="1032" selection-end="1032" vertical-scroll-proportion="0.0">
+            <state line="12" column="24" selection-start="324" selection-end="324" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -250,7 +238,7 @@
       <file leaf-file-name="DownloadSubscription.kt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadSubscription.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="161" column="0" selection-start="6179" selection-end="6179" vertical-scroll-proportion="0.0">
+            <state line="158" column="0" selection-start="6069" selection-end="6069" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -678,7 +666,7 @@
     <task active="true" id="Default" summary="Default task">
       <changelist id="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" name="Default" comment="" />
       <created>1352901158902</created>
-      <timeSpent>71581000</timeSpent>
+      <timeSpent>71749000</timeSpent>
       <updated>1352901158902</updated>
     </task>
     <task id="LOCAL-00001" summary="Add gson and robguice dependencies.">
@@ -730,7 +718,7 @@
       <updated>1353578014425</updated>
     </task>
     <option name="localTasksCounter" value="13" />
-    <option name="myTotallyTimeSpent" value="71581000" />
+    <option name="myTotallyTimeSpent" value="71749000" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -770,9 +758,9 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.4969651" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852808" sideWeight="0.67236465" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19271624" sideWeight="0.6011396" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19271624" sideWeight="0.64387465" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3988604" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35612535" sideWeight="0.31790593" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35612535" sideWeight="0.31790593" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852808" sideWeight="0.67236465" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="1372" y="92" width="1182" height="584" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -919,7 +907,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/MainActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="24" selection-start="1032" selection-end="1032" vertical-scroll-proportion="0.0">
+        <state line="12" column="24" selection-start="324" selection-end="324" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -957,14 +945,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadSubscription.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="161" column="0" selection-start="6179" selection-end="6179" vertical-scroll-proportion="0.0">
+        <state line="158" column="0" selection-start="6069" selection-end="6069" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadRiverContent.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="178" column="84" selection-start="6640" selection-end="6640" vertical-scroll-proportion="0.9485628">
+        <state line="141" column="32" selection-start="5092" selection-end="5092" vertical-scroll-proportion="0.3673966">
           <folding />
         </state>
       </provider>

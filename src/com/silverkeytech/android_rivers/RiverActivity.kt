@@ -1,15 +1,10 @@
 package com.silverkeytech.android_rivers
 
-import android.app.Activity
-import android.view.View
-import android.view.ViewGroup
-import android.os.Bundle
 import android.app.ListActivity
-import android.widget.TextView
+import android.os.Bundle
 import android.util.Log
-import android.content.res.Configuration
-import android.view.MenuItem
 import android.view.Menu
+import android.view.MenuItem
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity() : ListActivity()
