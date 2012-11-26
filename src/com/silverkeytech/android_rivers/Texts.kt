@@ -11,7 +11,7 @@ fun scrubHtml(text : String) : String{
     return android.text.Html.fromHtml(text).toString()
 }
 
-fun String?.IsNullOrEmptyOrWhitespace() : Boolean{
-    var res = this != null && !this.trim().isEmpty()
+fun String?.isNullOrEmpty() : Boolean{
+    var res = this == null || this.trim().length() == 0
     return res
 }

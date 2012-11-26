@@ -24,18 +24,17 @@
     </option>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="DEBUG" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Dody\Documents\GitHub\AndroidRivers\.idea\workspace.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadRiverContent.kt" afterPath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadRiverContent.kt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadSubscription.kt" afterPath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadSubscription.kt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Texts.kt" afterPath="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Texts.kt" />
     </list>
     <ignored path="AndroidRivers.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/DownloadRiverContent.kt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353890540921" ignored="false" />
+    <file path="/DownloadRiverContent.kt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353893592449" ignored="false" />
     <file path="/DownloadSubscription.kt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353890347483" ignored="false" />
     <file path="$USER_HOME$/AppData/Local/Temp/android_manifest_copy4177923617228851395tmp/AndroidManifest.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353594295072" ignored="false" />
     <file path="/fragment.java" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353888725488" ignored="false" />
@@ -43,7 +42,7 @@
     <file path="/main.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353594073077" ignored="false" />
     <file path="/strings.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353833160590" ignored="false" />
     <file path="/RiverActivity.kt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353834524093" ignored="false" />
-    <file path="/Texts.kt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353590999362" ignored="false" />
+    <file path="/Texts.kt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353892686366" ignored="false" />
     <file path="/Dummy.txt" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353889977204" ignored="false" />
     <file path="$USER_HOME$/AppData/Local/Temp/android_manifest_copy5549088782014150675tmp/AndroidManifest.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353562354183" ignored="false" />
     <file path="$USER_HOME$/AppData/Local/Temp/android_manifest_copy4158012477807008621tmp/AndroidManifest.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353562203672" ignored="false" />
@@ -105,6 +104,7 @@
     <file path="$USER_HOME$/AppData/Local/Temp/android_manifest_copy3076214695247415156tmp/AndroidManifest.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353858239845" ignored="false" />
     <file path="$USER_HOME$/AppData/Local/Temp/android_manifest_copy7877660912901984945tmp/AndroidManifest.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353858319480" ignored="false" />
     <file path="$USER_HOME$/AppData/Local/Temp/android_manifest_copy3768145529653317816tmp/AndroidManifest.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353886565600" ignored="false" />
+    <file path="$USER_HOME$/AppData/Local/Temp/android_manifest_copy7901627486726001028tmp/AndroidManifest.xml" changelist="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" time="1353892164566" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,7 +187,7 @@
       <file leaf-file-name="DownloadRiverContent.kt" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadRiverContent.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="150" column="48" selection-start="5701" selection-end="5701" vertical-scroll-proportion="0.38929442">
+            <state line="178" column="84" selection-start="6640" selection-end="6640" vertical-scroll-proportion="0.9485628">
               <folding />
             </state>
           </provider>
@@ -196,7 +196,16 @@
       <file leaf-file-name="Utils.kt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Utils.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="16" selection-start="515" selection-end="515" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Texts.kt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Texts.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="53" selection-start="374" selection-end="374" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -241,7 +250,7 @@
       <file leaf-file-name="DownloadSubscription.kt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadSubscription.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="111" column="12" selection-start="4286" selection-end="4286" vertical-scroll-proportion="0.0">
+            <state line="161" column="0" selection-start="6179" selection-end="6179" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -263,6 +272,10 @@
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
   </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="KEY_STORE_PATH" value="C:\Users\Dody\Desktop\silverkey-certificate" />
+    <option name="KEY_ALIAS" value="SilverKey" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -279,7 +292,6 @@
         <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/riverjs/FeedSite.java" />
         <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/riverjs/FeedsCollection.java" />
         <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/riverjs/FeedItem.java" />
-        <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Texts.kt" />
         <option value="$PROJECT_DIR$/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/res/layout/subscription_menu.xml" />
@@ -288,6 +300,7 @@
         <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/RiverActivity.kt" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/MainActivity.kt" />
+        <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Texts.kt" />
         <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadSubscription.kt" />
         <option value="$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadRiverContent.kt" />
       </list>
@@ -488,14 +501,17 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="ExportedApkPath" value="C:\Users\Dody\Documents\GitHub\AndroidRivers\AndroidRivers-1.apk" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="appearance" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="ExportedModule" value="AndroidRivers" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/silverkey-certificate" />
     <property name="AndroidLayoutSelectedEditor" value="text-editor" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="AndroidRunProguardForReleaseBuild" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="Repository.Attach.Sources" value="false" />
@@ -662,7 +678,7 @@
     <task active="true" id="Default" summary="Default task">
       <changelist id="ed95f42c-f279-4b0b-88e7-d4d15c9a8c69" name="Default" comment="" />
       <created>1352901158902</created>
-      <timeSpent>68561000</timeSpent>
+      <timeSpent>71581000</timeSpent>
       <updated>1352901158902</updated>
     </task>
     <task id="LOCAL-00001" summary="Add gson and robguice dependencies.">
@@ -714,7 +730,7 @@
       <updated>1353578014425</updated>
     </task>
     <option name="localTasksCounter" value="13" />
-    <option name="myTotallyTimeSpent" value="68561000" />
+    <option name="myTotallyTimeSpent" value="71581000" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -743,6 +759,7 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.4666161" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35897437" sideWeight="0.676783" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -753,8 +770,9 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.4969651" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852808" sideWeight="0.67236465" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19271624" sideWeight="0.64387465" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35612535" sideWeight="0.31790593" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19271624" sideWeight="0.6011396" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3988604" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35612535" sideWeight="0.31790593" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852808" sideWeight="0.67236465" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="1372" y="92" width="1182" height="584" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -763,9 +781,7 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852808" sideWeight="0.67236465" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953683" sideWeight="0.67236465" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -853,13 +869,6 @@
         <state line="10" column="30" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Texts.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="54" selection-start="280" selection-end="280" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/river.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -922,13 +931,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Utils.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="16" selection-start="515" selection-end="515" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/menu/subscription_menu.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -939,16 +941,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Utils.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/Texts.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="53" selection-start="374" selection-end="374" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadSubscription.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="12" selection-start="4286" selection-end="4286" vertical-scroll-proportion="0.0">
+        <state line="161" column="0" selection-start="6179" selection-end="6179" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/silverkeytech/android_rivers/DownloadRiverContent.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="150" column="48" selection-start="5701" selection-end="5701" vertical-scroll-proportion="0.38929442">
+        <state line="178" column="84" selection-start="6640" selection-end="6640" vertical-scroll-proportion="0.9485628">
           <folding />
         </state>
       </provider>

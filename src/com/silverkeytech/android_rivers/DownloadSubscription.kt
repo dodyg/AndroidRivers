@@ -159,12 +159,6 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result
                 i.putExtra(Params.RIVER_NAME, currentOutline.text)
 
                 context.startActivity(i);
-
-                /*
-                var t = Toast.makeText(context, textToBeDisplayed, 300)
-                t!!.setGravity(Gravity.TOP or Gravity.CENTER, 0, 0 );
-                t!!.show()
-                */
             }
         })
     }

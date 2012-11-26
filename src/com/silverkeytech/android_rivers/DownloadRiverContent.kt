@@ -143,17 +143,28 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
                 var vw  = convertView
                 var holder : ViewHolder?
 
+                var news = sortedNewsItems[position].toString()?.trim()
+
+                if (news == null)
+                    news = ""
+
                 if (vw == null){
                     var inflater : LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
                     vw = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
 
                     holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
-                    holder!!.news.setText(sortedNewsItems[position].toString())
+                    holder!!.news.setText(news)
                     vw!!.setTag(holder)
                 }else{
                     holder = vw!!.getTag() as ViewHolder
-                    holder!!.news.setText(sortedNewsItems[position].toString())
+                    holder!!.news.setText(news)
                     Log.d(TAG, "List View reused")
+                }
+
+                if (news.isNullOrEmpty()){
+                    vw?.setVisibility(View.GONE)
+                }   else{
+                    vw?.setVisibility(View.VISIBLE)
                 }
 
                 return vw
@@ -168,7 +179,10 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
 
                 var dialog = AlertDialog.Builder(context)
 
-                dialog.setMessage(scrubHtml(currentNews.body!!))
+                if (currentNews.body.isNullOrEmpty() && !currentNews.title.isNullOrEmpty())
+                    dialog.setMessage(scrubHtml(currentNews.title!!))
+                else
+                    dialog.setMessage(scrubHtml(currentNews.body!!))
 
 
                 dialog.setPositiveButton(android.R.string.ok, object : DialogInterface.OnClickListener{
@@ -177,7 +191,7 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
                     }
                 })
 
-                if (currentNews.link != "" && currentNews.link?.indexOf("http") !!> -1){
+                if (!currentNews.link.isNullOrEmpty() && currentNews.link!!.indexOf("http") > -1){
                     Log.d(TAG, "There's a link ${currentNews.link}")
                     dialog.setNeutralButton("Go", object : DialogInterface.OnClickListener{
 
