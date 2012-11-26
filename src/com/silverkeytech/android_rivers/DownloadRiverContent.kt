@@ -28,6 +28,7 @@ import java.net.SocketException
 import java.net.UnknownHostException
 import java.util.ArrayList
 import org.apache.http.conn.ConnectTimeoutException
+import com.silverkeytech.android_rivers.riverjs.FeedEnclosure
 
 //Responsible for handling a river js downloading and display in asynchronous way
 public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result<FeedsRiver>>(){
@@ -176,12 +177,14 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
                     dialog.setMessage(scrubHtml(currentNews.body!!))
 
 
+                //Check dismiss button
                 dialog.setPositiveButton(android.R.string.ok, object : DialogInterface.OnClickListener{
                     public override fun onClick(p0: DialogInterface?, p1: Int) {
                         p0?.dismiss()
                     }
                 })
 
+                //check for go link
                 if (!currentNews.link.isNullOrEmpty() && currentNews.link!!.indexOf("http") > -1){
                     Log.d(TAG, "There's a link ${currentNews.link}")
                     dialog.setNeutralButton("Go", object : DialogInterface.OnClickListener{
@@ -195,6 +198,19 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
                     })
                 }else{
                     Log.d(TAG, "There is no link for ${currentNews.title}")
+                }
+
+
+                //check for download link
+                if (currentNews.containsEnclosure()!!){
+                    dialog.setNegativeButton("Download", object : DialogInterface.OnClickListener{
+                        public override fun onClick(p0: DialogInterface?, p1: Int) {
+                            var nm = currentNews.enclosure!!.get(0)!!.`type`
+
+                            context.toastee("I am downloading a $nm")
+
+                        }
+                   })
                 }
 
                 dialog.create()!!.show()

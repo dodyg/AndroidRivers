@@ -15,6 +15,7 @@ public class FeedItem {
     public String link;
     public String comments;
     public ArrayList<FeedImage> thumbnail;
+    public ArrayList<FeedEnclosure> enclosure;
 
     public Boolean isPublicationDate (){
         return pubDate != null && pubDate != "";
@@ -28,6 +29,10 @@ public class FeedItem {
         catch (ParseException e){
             return null;
         }
+    }
+
+    public Boolean containsEnclosure(){
+        return enclosure != null && !enclosure.isEmpty();
     }
 
     @Override
