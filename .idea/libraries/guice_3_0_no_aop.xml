@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="guice-3.0-no_aop">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/guice-3.0-no_aop.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

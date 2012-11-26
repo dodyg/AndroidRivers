@@ -3,8 +3,6 @@ package com.silverkeytech.android_rivers
 import android.app.Activity
 import android.os.Bundle
 import android.widget.TextView
-import roboguice.inject.InjectView
-import roboguice.activity.RoboActivity
 import com.github.kevinsawicki.http
 import com.github.kevinsawicki.http.HttpRequest
 import android.util.Log

@@ -34,6 +34,9 @@ import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import org.apache.http.conn.ConnectTimeoutException
 import java.net.UnknownHostException
 import java.net.SocketException
+import android.view.ViewGroup
+import java.util.zip.Inflater
+import android.view.LayoutInflater
 
 //Responsible for handling a river js downloading and display in asynchronous way
 public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result<FeedsRiver>>(){
@@ -132,7 +135,28 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
         })
 
         var list = context.findView<ListView>(android.R.id.list)
-        var adapter = ArrayAdapter<FeedItem>(context, android.R.layout.simple_list_item_1, sortedNewsItems)
+        var adapter = object : ArrayAdapter<FeedItem>(context, android.R.layout.simple_list_item_1, sortedNewsItems) {
+
+            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
+                var vw  = convertView
+
+                if (vw == null){
+                    var inflater : LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                    vw = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
+
+
+                    var tx = vw!!.findViewById(android.R.id.text1) as TextView
+                    tx.setText(sortedNewsItems[position].toString())
+                    vw!!.setTag(tx)
+                }else{
+                    var tx = vw!!.getTag() as TextView
+                    tx.setText(sortedNewsItems[position].toString())
+                    Log.d(TAG, "List View reused")
+                }
+
+                return vw
+            }
+        }
 
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {

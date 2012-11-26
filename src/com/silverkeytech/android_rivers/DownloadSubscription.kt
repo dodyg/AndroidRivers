@@ -26,6 +26,8 @@ import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import org.apache.http.conn.ConnectTimeoutException
 import java.net.UnknownHostException
 import java.net.SocketException
+import android.view.LayoutInflater
+import android.view.ViewGroup
 
 public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result<Opml>>(){
     class object {
@@ -122,7 +124,28 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result
 
         var values = vals
 
-        var adapter = ArrayAdapter<Outline>(context, android.R.layout.simple_list_item_1, android.R.id.text1, values)
+        var adapter = object : ArrayAdapter<Outline>(context, android.R.layout.simple_list_item_1, android.R.id.text1, values){
+            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
+                var vw  = convertView
+
+                if (vw == null){
+                    var inflater : LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                    vw = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
+
+
+                    var tx = vw!!.findViewById(android.R.id.text1) as TextView
+                    tx.setText(vals[position].toString())
+                    vw!!.setTag(tx)
+                }else{
+                    var tx = vw!!.getTag() as TextView
+                    tx.setText(vals[position].toString())
+                    Log.d(TAG, "List View reused")
+                }
+
+                return vw
+            }
+        }
+
         list.setAdapter(adapter)
 
         list.setOnItemClickListener(object : OnItemClickListener{
