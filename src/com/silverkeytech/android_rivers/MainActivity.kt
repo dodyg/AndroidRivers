@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.content.Intent
 
 public open class MainActivity(): Activity() {
     class object {
@@ -17,9 +18,6 @@ public open class MainActivity(): Activity() {
         setContentView(R.layout.main)
 
         DownloadSubscription(this).execute(DEFAULT_SUBSCRIPTION_LIST)
-
-        //handleDownloadBtn()
-        //handleTestBtn()
     }
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -34,35 +32,13 @@ public open class MainActivity(): Activity() {
                 DownloadSubscription(this).execute(DEFAULT_SUBSCRIPTION_LIST)
                 return true
             }
+            R.id.river_menu_tryout -> {
+                var i = Intent(this, javaClass<TryOutActivity>())
+                startActivity(i)
+                return true
+            }
             else ->
                 return super.onOptionsItemSelected(item)
         }
     }
-
-
-
-    /*
-    fun handleDownloadBtn(){
-        var btn = this.findView<Button>(R.id.main_download_btn)
-        btn.setOnClickListener({
-            v ->
-            var x = DownloadSubscription(this).execute("http://hobieu.apphb.com/api/1/default/riverssubscription")
-        })
-    }
-
-    fun handleTestBtn(){
-        var btn = this.findView<Button>(R.id.main_test_btn)
-
-        btn.setOnClickListener {
-        v ->
-            var i = Intent(this, javaClass<RiverActivity>())
-            i.putExtra(Params.RIVER_URL, "http://static.scripting.com/houston/rivers/apple/River3.js")
-            i.putExtra(Params.RIVER_NAME, "Apple River")
-
-            startActivity(i);
-        }
-    }
-    */
-
-
 }

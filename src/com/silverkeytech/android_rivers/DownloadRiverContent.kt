@@ -205,10 +205,17 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
                 if (currentNews.containsEnclosure()!!){
                     dialog.setNegativeButton("Download", object : DialogInterface.OnClickListener{
                         public override fun onClick(p0: DialogInterface?, p1: Int) {
-                            var nm = currentNews.enclosure!!.get(0)!!.`type`
+                            var enclosure = currentNews.enclosure!!.get(0)!!
+                            Log.d(TAG, "I am downloading a ${enclosure.url} with type ${enclosure.`type`}")
 
-                            context.toastee("I am downloading a $nm")
+                            var service = DownloadService()
 
+                            var intent = Intent(context, javaClass<DownloadService>())
+                            intent.putExtra("downloadUrl", enclosure.url)
+                            intent.putExtra("filename", "first.mp3")
+                            intent.putExtra("contentLength", enclosure.length!!.toInt())
+
+                            context.startService(intent)
                         }
                    })
                 }
