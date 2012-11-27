@@ -71,3 +71,24 @@ public enum class Duration {
     }
 }
 
+
+fun imageMimeTypeToFileExtension (mimeType : String) : String{
+    return when(mimeType){
+        "image/gif" -> ".gif"
+        "image/jpeg" -> ".jpg"
+        "image/pjpeg" -> ".jpg"
+        "image/png" -> ".png"
+        "image/tiff" -> ".tiff"
+        else -> ""
+    }
+}
+
+fun isSupportedImageMime(val mimeType : String) : Boolean{
+    return when (mimeType){
+        "image/gif" -> true
+        "image/jpeg" -> true
+        "image/pjpeg" -> true
+        "image/png" -> true
+        else -> false
+    }
+}

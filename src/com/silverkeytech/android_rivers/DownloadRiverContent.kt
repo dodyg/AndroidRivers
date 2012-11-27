@@ -203,13 +203,20 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
                 }
 
 
-                //check for download link
-                if (currentNews.containsEnclosure()!!){
-                    dialog.setNegativeButton("Download", object : DialogInterface.OnClickListener{
-                        public override fun onClick(p0: DialogInterface?, p1: Int) {
-                            var enclosure = currentNews.enclosure!!.get(0)!!
-                            Log.d(TAG, "I am downloading a ${enclosure.url} with type ${enclosure.`type`}")
+                //check for image enclsoure
+                if (currentNews.containsEnclosure()!! ){
+                    var enclosure = currentNews.enclosure!!.get(0)!!
+                    if (isSupportedImageMime(enclosure.`type`!!)){
+                        dialog.setNegativeButton("Image", object : DialogInterface.OnClickListener{
+                            public override fun onClick(p0: DialogInterface?, p1: Int) {
+                                Log.d(TAG, "I am downloading a ${enclosure.url} with type ${enclosure.`type`}")
+                                DownloadImage(context).execute(enclosure.url)
+                            }
+                        })
+                    }
+                }
 
+                /*
                             var service = DownloadService()
 
                             var intent = Intent(context, javaClass<DownloadService>())
@@ -218,9 +225,7 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
                             intent.putExtra("contentLength", enclosure.length!!.toInt())
 
                             context.startService(intent)
-                        }
-                   })
-                }
+                            */
 
                 dialog.create()!!.show()
 

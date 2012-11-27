@@ -19,16 +19,6 @@ import java.util.UUID
 
 public data class DownloadedFile(val contentType : String, val filePath : String)
 
-fun imageMimeTypeToFileExtension (mimeType : String) : String{
-    return when(mimeType){
-        "image/gif" -> ".gif"
-        "image/jpeg" -> ".jpg"
-        "image/pjpeg" -> ".jpg"
-        "image/png" -> ".png"
-        "image/tiff" -> ".tiff"
-        else -> ""
-    }
-}
 
 public class DownloadImage(it : Context?) : AsyncTask<String, Int, Result<DownloadedFile>>(){
 
