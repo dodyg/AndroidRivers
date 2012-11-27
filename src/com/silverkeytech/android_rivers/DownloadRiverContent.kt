@@ -39,7 +39,6 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
     var dialog : ProgressDialog = ProgressDialog(it)
     var context : Activity = it!! as Activity
 
-
     protected override fun onPreExecute() {
         dialog.setMessage(context.getString(R.string.please_wait_while_loading))
         dialog.setIndeterminate(true)

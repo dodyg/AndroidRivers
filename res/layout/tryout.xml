@@ -5,4 +5,16 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent">
 
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Download File"
+            android:id="@+id/tryout_download_file_btn"/>
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Download Image"
+            android:id="@+id/tryout_download_image_btn"/>
+    <Button android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Download Large Image"
+            android:id="@+id/tryout_download_large_image_btn" android:layout_gravity="center"/>
 </LinearLayout>
