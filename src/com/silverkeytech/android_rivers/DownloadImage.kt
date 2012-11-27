@@ -96,7 +96,12 @@ public class DownloadImage(it : Context?) : AsyncTask<String, Int, Result<String
                 dialog.show()
 
             } else if (result.isFalse()){
-                context.toastee("Download is wrong ${result.exception!!.getMessage()}", Duration.LONG)
+                var error = ConnectivityErrorMessage(
+                        timeoutException = "Sorry, we cannot download this image. The feed site might be down.",
+                        socketException = "Sorry, we cannot download this image. Please check your Internet connection, it might be down.",
+                        otherException = "Sorry, we cannot download this image for the following technical reason : ${result.exception.toString()}"
+                )
+                context.handleConnectivityError(result.exception, error)
             }
         }
     }

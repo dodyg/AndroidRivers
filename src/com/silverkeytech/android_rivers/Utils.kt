@@ -6,6 +6,9 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Toast
 import java.text.SimpleDateFormat
+import org.apache.http.conn.ConnectTimeoutException
+import java.net.UnknownHostException
+import java.net.SocketException
 
 public fun Activity.findView<T : View>(id : Int) : T{
     return (this.findViewById(id) as T)
@@ -40,6 +43,18 @@ public fun Activity.toastee(text : String, duration : Duration = Duration.QUICK,
     t!!.show()
 }
 
+public data class ConnectivityErrorMessage(val timeoutException :String, val socketException : String, val otherException : String)
+
+public fun Activity.handleConnectivityError(e: Exception?, message : ConnectivityErrorMessage){
+    if (e is ConnectTimeoutException)
+        this.toastee(message.timeoutException, Duration.AVERAGE)
+    else if (e is UnknownHostException || e is SocketException)
+        this.toastee(message.socketException, Duration.AVERAGE)
+    else
+        this.toastee(message.otherException, Duration.AVERAGE)
+
+}
+
 public enum class Duration {
     QUICK
     AVERAGE
@@ -55,3 +70,4 @@ public enum class Duration {
             return 5000
     }
 }
+

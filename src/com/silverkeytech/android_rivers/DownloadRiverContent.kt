@@ -78,13 +78,16 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
             context.toastee("Sorry, we cannot process this feed because the operation is cancelled", Duration.AVERAGE)
         else
             {
+
                 if (result.isFalse()){
-                    if (result.exception is ConnectTimeoutException)
-                        context.toastee("Sorry, we cannot download this feed. The feed site might be down", Duration.AVERAGE)
-                    else if (result.exception is UnknownHostException || result.exception is SocketException)
-                        context.toastee("Sorry, we cannot download this feed. Please check your Internet connection, it might be down", Duration.AVERAGE)
-                    else
-                        context.toastee("Sorry, we cannot download this feed for the following technical reason : ${result.exception.toString()}", Duration.AVERAGE)
+
+                    var error = ConnectivityErrorMessage(
+                            timeoutException = "Sorry, we cannot download this feed. The feed site might be down.",
+                            socketException = "Sorry, we cannot download this feed. Please check your Internet connection, it might be down.",
+                            otherException = "Sorry, we cannot download this feed for the following technical reason : ${result.exception.toString()}"
+                    )
+
+                    context.handleConnectivityError(result.exception, error)
                 }else{
                     handleNewsListing(result.value!!)
                 }
