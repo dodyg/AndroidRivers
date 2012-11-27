@@ -14,24 +14,33 @@ public class TryOutActivity() : Activity()
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tryout)
-        handleDownloadImage()
+        handleDownloadGifImage()
         handleDownloadFile()
-        handleDownloadLargeImage()
+        handleDownloadJpgImage()
+        handleDownloadPngImage()
     }
 
-    fun handleDownloadImage(){
-        var btn = findView<Button>(R.id.tryout_download_image_btn)
+    fun handleDownloadGifImage(){
+        var btn = findView<Button>(R.id.tryout_download_gif_image_btn)
         btn.setOnClickListener {
-            Log.d(TAG, "Start downloading image")
-            DownloadImage(this).execute("http://www.hdwallpapersarena.com/wp-content/uploads/2012/11/puppy3-150x150.jpg")
+            Log.d(TAG, "Start downloading gif image")
+            DownloadImage(this).execute("http://www.science.mcmaster.ca/brainbee/images/stories/announcements/brainbee-logo-small.gif")
         }
     }
 
-    fun handleDownloadLargeImage(){
-        var btn = findView<Button>(R.id.tryout_download_large_image_btn)
+    fun handleDownloadJpgImage(){
+        var btn = findView<Button>(R.id.tryout_download_jpg_image_btn)
         btn.setOnClickListener {
-            Log.d(TAG, "Start downloading image")
+            Log.d(TAG, "Start downloading jpeg image")
             DownloadImage(this).execute("http://www.fantom-xp.com/wallpapers/42/Iceberg_Very_Large.jpg")
+        }
+    }
+
+    fun handleDownloadPngImage(){
+        var btn = findView<Button>(R.id.tryout_download_png_image_btn)
+        btn.setOnClickListener {
+            Log.d(TAG, "Start downloading png image")
+            DownloadImage(this).execute("http://bartelme.at/material/news/NetNewsWire256.png")
         }
     }
 

@@ -14,8 +14,23 @@ import android.content.DialogInterface
 import android.widget.ImageView
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
+import java.util.UUID
 
-public class DownloadImage(it : Context?) : AsyncTask<String, Int, Result<String>>(){
+
+public data class DownloadedFile(val contentType : String, val filePath : String)
+
+fun imageMimeTypeToFileExtension (mimeType : String) : String{
+    return when(mimeType){
+        "image/gif" -> ".gif"
+        "image/jpeg" -> ".jpg"
+        "image/pjpeg" -> ".jpg"
+        "image/png" -> ".png"
+        "image/tiff" -> ".tiff"
+        else -> ""
+    }
+}
+
+public class DownloadImage(it : Context?) : AsyncTask<String, Int, Result<DownloadedFile>>(){
 
     class object {
         public val TAG: String = javaClass<DownloadImage>().getSimpleName()!!
@@ -33,22 +48,32 @@ public class DownloadImage(it : Context?) : AsyncTask<String, Int, Result<String
         dialog.show()
     }
 
-    protected override fun doInBackground(p0: Array<String?>): Result<String>? {
+    fun generateThrowawayName() : String{
+        var name = UUID.randomUUID().toString()
+        return name.substring(0, 6)
+    }
+
+    protected override fun doInBackground(p0: Array<String?>): Result<DownloadedFile>? {
         try{
 
+            var req = HttpRequest.get(p0[0])
+            var mimeType = req?.contentType()
+
             var dir = context.getCacheDir()!!.getPath()
-            var fileName = dir + "/" + "awesome.jpg"
+
+            var fileName = dir + "/" + generateThrowawayName() + imageMimeTypeToFileExtension(mimeType!!)
             Log.d(TAG, "File to be saved at ${fileName}")
             var output = File(fileName)
-            HttpRequest.get(p0[0])!!.receive(output)
 
-            return Result.right(fileName)
+            req!!.receive(output)
+
+            return Result.right(DownloadedFile(mimeType!!, fileName))
         }catch(e : HttpRequestException){
             return Result.wrong(e)
         }
     }
 
-    protected override fun onPostExecute(result: Result<String>?) {
+    protected override fun onPostExecute(result: Result<DownloadedFile>?) {
         super<AsyncTask>.onPostExecute(result)
 
         dialog.dismiss()
@@ -58,13 +83,13 @@ public class DownloadImage(it : Context?) : AsyncTask<String, Int, Result<String
         }
         else{
             if (result.isTrue()){
-                context.toastee("The file is ready for download ${result.value}", Duration.LONG)
+                context.toastee("The file is ready for download ${result.value!!.filePath}", Duration.LONG)
 
                 var dialog = AlertDialog.Builder(context)
                 var inflater = context.getLayoutInflater()!!
                 var vw = inflater.inflate(R.layout.image_view, null)!!
 
-                var img : File = File(result.value!!)
+                var img : File = File(result.value!!.filePath)
 
                 if (!img.exists()){
                     context.toastee("Sorry, the image ${result.value} does not exist", Duration.AVERAGE)

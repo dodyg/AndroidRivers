@@ -13,8 +13,13 @@
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Download Image"
-            android:id="@+id/tryout_download_image_btn"/>
-    <Button android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Download Large Image"
-            android:id="@+id/tryout_download_large_image_btn" android:layout_gravity="center"/>
+            android:text="Download GIF Image"
+            android:id="@+id/tryout_download_gif_image_btn"/>
+    <Button android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Download JPG Image"
+            android:id="@+id/tryout_download_jpg_image_btn" android:layout_gravity="center"/>
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Download PNG Image"
+            android:id="@+id/tryout_download_png_image_btn"/>
 </LinearLayout>
