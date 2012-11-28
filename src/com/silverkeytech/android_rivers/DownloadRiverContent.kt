@@ -29,6 +29,9 @@ import java.net.UnknownHostException
 import java.util.ArrayList
 import org.apache.http.conn.ConnectTimeoutException
 import com.silverkeytech.android_rivers.riverjs.FeedEnclosure
+import android.os.Messenger
+import android.os.Handler
+import android.os.Message
 
 //Responsible for handling a river js downloading and display in asynchronous way
 public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result<FeedsRiver>>(){
@@ -214,18 +217,32 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
                             }
                         })
                     }
+                        //assume podcast
+                    else {
+                        dialog.setNegativeButton("Podcast", object : DialogInterface.OnClickListener{
+                            public override fun onClick(p0: DialogInterface?, p1: Int) {
+                                var messenger = Messenger(object : Handler(){
+                                    public override fun handleMessage(msg: Message?) {
+                                        var path = msg!!.obj as String
+
+                                        if (msg.arg1 == Activity.RESULT_OK && !path.isNullOrEmpty()){
+                                            context.toastee("File is successfully downloaded at $path", Duration.LONG)
+                                            MediaScannerWrapper.scanPodcasts(context, path)
+                                        }else{
+                                            context.toastee("Download failed", Duration.LONG)
+                                        }
+                                    }
+                                })
+
+                                var intent = Intent(context, javaClass<DownloadService>())
+                                intent.putExtra(DownloadService.PARAM_DOWNLOAD_URL, enclosure.url)
+                                intent.putExtra(Params.MESSENGER, messenger)
+                                context.startService(intent)
+                            }
+                        })
+
+                    }
                 }
-
-                /*
-                            var service = DownloadService()
-
-                            var intent = Intent(context, javaClass<DownloadService>())
-                            intent.putExtra("downloadUrl", enclosure.url)
-                            intent.putExtra("filename", "first.mp3")
-                            intent.putExtra("contentLength", enclosure.length!!.toInt())
-
-                            context.startService(intent)
-                            */
 
                 dialog.create()!!.show()
 

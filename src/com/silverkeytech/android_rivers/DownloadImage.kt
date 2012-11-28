@@ -38,11 +38,6 @@ public class DownloadImage(it : Context?) : AsyncTask<String, Int, Result<Downlo
         dialog.show()
     }
 
-    fun generateThrowawayName() : String{
-        var name = UUID.randomUUID().toString()
-        return name.substring(0, 6)
-    }
-
     protected override fun doInBackground(p0: Array<String?>): Result<DownloadedFile>? {
         try{
 

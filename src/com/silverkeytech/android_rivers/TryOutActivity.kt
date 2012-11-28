@@ -4,6 +4,10 @@ import android.app.Activity
 import android.os.Bundle
 import android.widget.Button
 import android.util.Log
+import android.content.Intent
+import android.os.Messenger
+import android.os.Handler
+import android.os.Message
 
 public class TryOutActivity() : Activity()
 {
@@ -48,6 +52,23 @@ public class TryOutActivity() : Activity()
         var btn = findView<Button>(R.id.tryout_download_file_btn)
         btn.setOnClickListener {
             Log.d(TAG, "Start downloading file")
+
+            var messenger = Messenger(object : Handler(){
+                public override fun handleMessage(msg: Message?) {
+                    var path = msg!!.obj as String
+
+                    if (msg.arg1 == Activity.RESULT_OK && !path.isNullOrEmpty()){
+                        toastee("File is successfully downloaded at $path")
+                    }else{
+                        toastee("Download failed")
+                    }
+                }
+            })
+
+            var intent = Intent(this, javaClass<DownloadService>())
+            intent.putExtra(DownloadService.PARAM_DOWNLOAD_URL, "http://podcastdownload.npr.org/anon.npr-podcasts/podcast/13/166038315/npr_166038315.mp3")
+            intent.putExtra(Params.MESSENGER, messenger)
+            this.startService(intent)
         }
     }
 
