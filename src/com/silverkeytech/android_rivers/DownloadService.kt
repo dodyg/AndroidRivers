@@ -18,6 +18,9 @@ import android.content.Context
 import android.app.NotificationManager
 import android.app.Notification
 import java.util.Random
+import java.net.URL
+import java.io.BufferedInputStream
+import java.io.FileOutputStream
 
 
 public class DownloadService() : IntentService("DownloadService"){
@@ -46,7 +49,7 @@ public class DownloadService() : IntentService("DownloadService"){
         notification!!.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.download_progress)
 
         notification!!.contentView!!.setImageViewResource(R.id.download_progress_status_icon, android.R.drawable.btn_star);
-        notification!!.contentView!!.setProgressBar(R.id.download_progress_status_progress, 100, 10, false)
+        notification!!.contentView!!.setProgressBar(R.id.download_progress_status_progress, 100, 0, false)
         notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "Downloading $targetTitle")
 
         return notification!!
@@ -69,7 +72,15 @@ public class DownloadService() : IntentService("DownloadService"){
         var notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         try{
-            var req = HttpRequest.get(targetUrl)
+            //var req = HttpRequest.get(targetUrl)
+
+            var url = URL(targetUrl)
+            var connection = url.openConnection()!!
+            connection.connect()
+
+            var fileLength : Int = connection.getContentLength()
+
+            Log.d(TAG, "File length $fileLength")
 
             if (inferredName == null)
                 inferredName = generateThrowawayName() + ".mp3"
@@ -83,8 +94,40 @@ public class DownloadService() : IntentService("DownloadService"){
 
             notificationManager.notify(notificationId, notification)
 
-            var output = File(filename)
-            req!!.receive(output)
+            //var output = File(filename)
+            //req!!.receive(output)
+
+            var input = BufferedInputStream(url.openStream()!!)
+            var output = FileOutputStream(filename)
+
+            var data =  ByteArray(1024)
+            Log.d(TAG, "Length of byte array ${data.size}")
+            var total : Long = 0
+            var progress : Int = 0
+
+            var count : Int = input.read(data)
+
+            var oldProgress = 0
+
+            while (count != -1){
+                total += count
+                oldProgress = progress
+                progress = (total.toInt() * 100) div fileLength
+                Log.d(TAG, "Download progress ($total * 100) / $fileLength $progress")
+
+                if (progress != oldProgress){
+                    notification!!.contentView!!.setProgressBar(R.id.download_progress_status_progress, 100, progress, false)
+                    notificationManager.notify(notificationId, notification)
+                }
+
+                output.write(data, 0, count)
+
+                count = input.read(data)
+            }
+
+            output.flush()
+            output.close()
+            input.close()
 
             notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "File successfully download to $filename")
             notificationManager.notify(notificationId, notification)
