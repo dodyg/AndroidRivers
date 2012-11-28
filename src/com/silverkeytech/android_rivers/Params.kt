@@ -4,5 +4,6 @@ public class Params(){
     class object {
         val RIVER_URL = "RIVER_URL"
         val RIVER_NAME = "RIVER_NAME"
+        var MESSENGER = "MESSENGER"
     }
 }
