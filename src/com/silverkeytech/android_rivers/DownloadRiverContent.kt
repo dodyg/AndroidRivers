@@ -32,6 +32,10 @@ import com.silverkeytech.android_rivers.riverjs.FeedEnclosure
 import android.os.Messenger
 import android.os.Handler
 import android.os.Message
+import android.app.Notification
+import android.content.ContentProviderOperation.Builder
+import android.app.NotificationManager
+import android.support.v4.app.NotificationCompat
 
 //Responsible for handling a river js downloading and display in asynchronous way
 public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result<FeedsRiver>>(){
@@ -236,8 +240,10 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
 
                                 var intent = Intent(context, javaClass<DownloadService>())
                                 intent.putExtra(DownloadService.PARAM_DOWNLOAD_URL, enclosure.url)
+                                intent.putExtra(DownloadService.PARAM_DOWNLOAD_TITLE, currentNews.title)
                                 intent.putExtra(Params.MESSENGER, messenger)
                                 context.startService(intent)
+
                             }
                         })
 

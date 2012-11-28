@@ -43,6 +43,7 @@
     <orderEntry type="library" name="simple-xml-2.6.7" level="project" />
     <orderEntry type="library" name="ormlite-android-4.9" level="project" />
     <orderEntry type="library" name="date4j" level="project" />
+    <orderEntry type="library" name="android-support-v13" level="project" />
   </component>
 </module>
 

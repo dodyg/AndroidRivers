@@ -8,6 +8,11 @@ import android.content.Intent
 import android.os.Messenger
 import android.os.Handler
 import android.os.Message
+import android.support.v4.app.NotificationCompat
+import android.content.Context
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.widget.RemoteViews
 
 public class TryOutActivity() : Activity()
 {
@@ -22,6 +27,7 @@ public class TryOutActivity() : Activity()
         handleDownloadFile()
         handleDownloadJpgImage()
         handleDownloadPngImage()
+        handleHandleNotification()
     }
 
     fun handleDownloadGifImage(){
@@ -69,6 +75,57 @@ public class TryOutActivity() : Activity()
             intent.putExtra(DownloadService.PARAM_DOWNLOAD_URL, "http://podcastdownload.npr.org/anon.npr-podcasts/podcast/13/166038315/npr_166038315.mp3")
             intent.putExtra(Params.MESSENGER, messenger)
             this.startService(intent)
+        }
+    }
+
+    var counter : Int = 1
+
+    fun handleHandleNotification(){
+        var btn = findView<Button>(R.id.tryout_show_notification_btn)
+        btn.setOnClickListener {
+
+            var notificationIntent = Intent(this, javaClass<TryOutActivity>())
+            var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT)
+
+            counter++
+
+            var notification = NotificationCompat.Builder(this)
+                    //.setContent()
+                    .setTicker("This is the ticker")
+                    ?.setContentTitle("Android Rivers")
+                    ?.setContentText("Downloading a file")
+                    ?.setSmallIcon(android.R.drawable.gallery_thumb)
+                    ?.setProgress(100,10, true)
+                    ?.setWhen(System.currentTimeMillis())
+                    ?.setContentIntent(contentIntent)
+                    ?.build()
+
+            notification!!.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.download_progress)
+
+            notification!!.contentView!!.setImageViewResource(R.id.download_progress_status_icon, android.R.drawable.btn_star);
+            notification!!.contentView!!.setProgressBar(R.id.download_progress_status_progress, 100, 10, false)
+            notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "Download in progress")
+
+            var nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            nm.notify(counter, notification)
+
+            var thread = Thread(runnable{
+                for(i in 11..100){
+                    notification!!.contentView!!.setProgressBar(R.id.download_progress_status_progress, 100, i, false)
+                    nm.notify(counter, notification)
+
+                    Log.d(TAG, "We are progressing $i / 100")
+                    try{
+                        Thread.sleep(100)
+                    }
+                    catch( e : InterruptedException){
+                         Log.d(TAG, "Exception ${e.getMessage()}")
+                    }
+                }
+                nm.cancel(counter);
+            })
+
+            thread.run()
         }
     }
 
