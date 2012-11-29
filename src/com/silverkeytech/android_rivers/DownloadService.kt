@@ -35,7 +35,7 @@ public class DownloadService() : IntentService("DownloadService"){
     var targetUrl : String? = null
     var targetTitle : String? = null
 
-    fun prepareNotification(inferredName : String, filePath : String) : Notification{
+    fun prepareNotification(inferredName : String, title : String, filePath : String) : Notification{
         var notificationIntent = Intent(Intent.ACTION_MAIN)
         notificationIntent.setClass(getApplicationContext(), javaClass<MainActivity>())
 
@@ -44,7 +44,7 @@ public class DownloadService() : IntentService("DownloadService"){
         var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
         var notification = NotificationCompat.Builder(this)
-                .setTicker("Start downloading Podcast")
+                .setTicker("Start downloading $title")
         ?.setWhen(System.currentTimeMillis())
         ?.setContentIntent(contentIntent)
         ?.build()
@@ -91,7 +91,7 @@ public class DownloadService() : IntentService("DownloadService"){
             var directory = Environment.getExternalStorageDirectory()!!.getPath() + "/" + Environment.DIRECTORY_PODCASTS
             filename  = directory + "/" + inferredName
 
-            notification = prepareNotification(inferredName!!, filename)
+            notification = prepareNotification(inferredName!!, targetTitle!!, filename)
 
             Log.d(TAG, "Podcast to be stored at ${filename}")
 
