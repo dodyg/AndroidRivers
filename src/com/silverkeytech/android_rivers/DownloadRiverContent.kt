@@ -36,6 +36,7 @@ import android.app.Notification
 import android.content.ContentProviderOperation.Builder
 import android.app.NotificationManager
 import android.support.v4.app.NotificationCompat
+import android.util.TypedValue
 
 //Responsible for handling a river js downloading and display in asynchronous way
 public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result<FeedsRiver>>(){
@@ -184,6 +185,7 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
                             vw!!.findViewById(R.id.news_item_indicator_tv) as TextView)
 
                     holder!!.news.setText(news)
+                    holder!!.news.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24.toFloat())
                     showIndicator()
 
                     vw!!.setTag(holder)
