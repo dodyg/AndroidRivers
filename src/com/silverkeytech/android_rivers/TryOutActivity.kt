@@ -84,8 +84,11 @@ public class TryOutActivity() : Activity()
         var btn = findView<Button>(R.id.tryout_show_notification_btn)
         btn.setOnClickListener {
 
-            var notificationIntent = Intent(this, javaClass<TryOutActivity>())
-            var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT)
+            var notificationIntent = Intent(Intent.ACTION_MAIN)
+            notificationIntent.setClass(getApplicationContext(), javaClass<MainActivity>())
+            notificationIntent.putExtra(DownloadService.PARAM_DOWNLOAD_LOCATION_PATH, "Location PATH")
+
+            var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_ONE_SHOT)
 
             counter++
 
@@ -116,13 +119,13 @@ public class TryOutActivity() : Activity()
 
                     Log.d(TAG, "We are progressing $i / 100")
                     try{
-                        Thread.sleep(100)
+                        Thread.sleep(50)
                     }
                     catch( e : InterruptedException){
                          Log.d(TAG, "Exception ${e.getMessage()}")
                     }
                 }
-                nm.cancel(counter);
+                //nm.cancel(counter);
             })
 
             thread.run()

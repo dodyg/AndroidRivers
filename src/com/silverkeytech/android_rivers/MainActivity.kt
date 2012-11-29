@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.content.Intent
+import android.net.Uri
+import java.io.File
 
 public open class MainActivity(): Activity() {
     class object {
@@ -16,6 +18,23 @@ public open class MainActivity(): Activity() {
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
+
+        var intent = getIntent()
+        if(intent != null){
+            var locationPath = intent!!.getStringExtra(DownloadService.PARAM_DOWNLOAD_LOCATION_PATH)
+            if (!locationPath.isNullOrEmpty()){
+                try{
+                    var playIntent = Intent()
+                    playIntent.setAction(android.content.Intent.ACTION_VIEW);
+                    var file = File(locationPath!!);
+                    playIntent.setDataAndType(Uri.fromFile(file), "audio/*");
+                    startActivity(playIntent)
+                }
+                catch(e : Exception){
+                    toastee("Sorry, I cannot play the file $locationPath. Please click Refresh on the menu option to download the news list again.", Duration.LONG)
+                }
+            }
+        }
 
         DownloadSubscription(this).execute(DEFAULT_SUBSCRIPTION_LIST)
     }

@@ -20,7 +20,17 @@
 
             </intent-filter>
         </activity>
-        <activity android:name="TryOutActivity" android:configChanges="keyboardHidden|orientation">
+        <activity android:name="TryOutActivity" android:configChanges="keyboardHidden|orientation" android:launchMode="singleTop">
+            <intent-filter>
+
+            </intent-filter>
+        </activity>
+
+        <activity android:name="PlayPodcastActivity" android:configChanges="keyboardHidden|orientation"
+                android:taskAffinity=""
+                android:excludeFromRecents="true"
+                android:launchMode="singleTask"
+                >
             <intent-filter>
 
             </intent-filter>

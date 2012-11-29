@@ -27,6 +27,7 @@ public class DownloadService() : IntentService("DownloadService"){
     class object{
         public val PARAM_DOWNLOAD_URL : String= "downloadUrl"
         public val PARAM_DOWNLOAD_TITLE : String = "downloadTitle"
+        public val PARAM_DOWNLOAD_LOCATION_PATH : String = "downloadLocationPath"
 
         public val TAG: String = javaClass<DownloadService>().getSimpleName()!!
     }
@@ -34,8 +35,12 @@ public class DownloadService() : IntentService("DownloadService"){
     var targetUrl : String? = null
     var targetTitle : String? = null
 
-    fun prepareNotification(inferredName : String) : Notification{
-        var notificationIntent = Intent(this, javaClass<TryOutActivity>())
+    fun prepareNotification(inferredName : String, filePath : String) : Notification{
+        var notificationIntent = Intent(Intent.ACTION_MAIN)
+        notificationIntent.setClass(getApplicationContext(), javaClass<MainActivity>())
+
+        notificationIntent.putExtra(PARAM_DOWNLOAD_LOCATION_PATH, filePath)
+
         var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
         var notification = NotificationCompat.Builder(this)
@@ -45,6 +50,8 @@ public class DownloadService() : IntentService("DownloadService"){
         ?.setWhen(System.currentTimeMillis())
         ?.setContentIntent(contentIntent)
         ?.build()
+
+        notification!!.icon = android.R.drawable.star_big_on
 
         notification!!.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.download_progress)
 
@@ -83,10 +90,10 @@ public class DownloadService() : IntentService("DownloadService"){
             if (inferredName == null)
                 inferredName = generateThrowawayName() + ".mp3"
 
-            notification = prepareNotification(inferredName!!)
-
             var directory = Environment.getExternalStorageDirectory()!!.getPath() + "/" + Environment.DIRECTORY_PODCASTS
             filename  = directory + "/" + inferredName
+
+            notification = prepareNotification(inferredName!!, filename)
 
             Log.d(TAG, "Podcast to be stored at ${filename}")
 
