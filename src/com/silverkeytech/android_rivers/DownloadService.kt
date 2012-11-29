@@ -44,9 +44,7 @@ public class DownloadService() : IntentService("DownloadService"){
         var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
         var notification = NotificationCompat.Builder(this)
-                .setTicker("Podcast starts downloading")
-        ?.setSmallIcon(android.R.drawable.gallery_thumb)
-        ?.setProgress(100,10, true)
+                .setTicker("Start downloading Podcast")
         ?.setWhen(System.currentTimeMillis())
         ?.setContentIntent(contentIntent)
         ?.build()
