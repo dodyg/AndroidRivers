@@ -72,8 +72,6 @@ public class DownloadService() : IntentService("DownloadService"){
         var notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         try{
-            //var req = HttpRequest.get(targetUrl)
-
             var url = URL(targetUrl)
             var connection = url.openConnection()!!
             connection.connect()
@@ -93,9 +91,6 @@ public class DownloadService() : IntentService("DownloadService"){
             Log.d(TAG, "Podcast to be stored at ${filename}")
 
             notificationManager.notify(notificationId, notification)
-
-            //var output = File(filename)
-            //req!!.receive(output)
 
             var input = BufferedInputStream(url.openStream()!!)
             var output = FileOutputStream(filename)

@@ -25,6 +25,7 @@ import java.util.ArrayList
 import org.apache.http.conn.ConnectTimeoutException
 import org.simpleframework.xml.Serializer
 import org.simpleframework.xml.core.Persister
+import android.content.DialogInterface
 
 public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result<Opml>>(){
     class object {
@@ -38,6 +39,13 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result
         dialog.setMessage(context.getString(R.string.please_wait_while_downloading_news_rivers_list))
         dialog.setIndeterminate(true)
         dialog.setCancelable(false)
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", object : DialogInterface.OnClickListener{
+
+            public override fun onClick(p0: DialogInterface?, p1: Int) {
+                p0!!.dismiss()
+                this@DownloadSubscription.cancel(true)
+            }
+        })
         dialog.show()
     }
 

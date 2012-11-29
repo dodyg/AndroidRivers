@@ -46,10 +46,22 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
     var dialog : ProgressDialog = ProgressDialog(it)
     var context : Activity = it!! as Activity
 
+    val STANDARD_NEWS_COLOR  = android.graphics.Color.GRAY
+    val STANDARD_NEWS_IMAGE = android.graphics.Color.CYAN
+    val STANDARD_NEWS_PODCAST = android.graphics.Color.MAGENTA
+
     protected override fun onPreExecute() {
         dialog.setMessage(context.getString(R.string.please_wait_while_loading))
         dialog.setIndeterminate(true)
         dialog.setCancelable(false)
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", object : DialogInterface.OnClickListener{
+
+            public override fun onClick(p0: DialogInterface?, p1: Int) {
+                p0!!.dismiss()
+                this@DownloadRiverContent.cancel(true)
+            }
+        })
+
         dialog.show()
     }
 
@@ -101,7 +113,7 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
             }
     }
 
-    public data class ViewHolder (var news : TextView)
+    public data class ViewHolder (var news : TextView, val indicator : TextView)
 
     fun handleNewsListing(river : FeedsRiver){
         var newsItems = ArrayList<FeedItem>()
@@ -138,27 +150,48 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
         })
 
         var list = context.findView<ListView>(android.R.id.list)
-        var adapter = object : ArrayAdapter<FeedItem>(context, android.R.layout.simple_list_item_1, sortedNewsItems) {
+        var adapter = object : ArrayAdapter<FeedItem>(context, R.layout.news_item , sortedNewsItems) {
 
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 var vw  = convertView
                 var holder : ViewHolder?
 
-                var news = sortedNewsItems[position].toString()?.trim()
+                var currentNewsItem = sortedNewsItems[position]
+                var news = currentNewsItem.toString()?.trim()
 
                 if (news == null)
                     news = ""
 
+                fun showIndicator(){
+                    if (currentNewsItem.containsEnclosure()!!){
+                        var enclosure = currentNewsItem.enclosure!!.get(0)!!
+                        if (isSupportedImageMime(enclosure.`type`!!)){
+                            holder!!.indicator.setBackgroundColor(STANDARD_NEWS_IMAGE)
+                        }
+                        else{
+                            holder!!.indicator.setBackgroundColor(STANDARD_NEWS_PODCAST)
+                        }
+                    }else{
+                        holder!!.indicator.setBackgroundColor(STANDARD_NEWS_COLOR)
+                    }
+                }
+
                 if (vw == null){
                     var inflater : LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-                    vw = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
+                    vw = inflater.inflate(R.layout.news_item, parent, false)
 
-                    holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
+                    holder = ViewHolder(vw!!.findViewById(R.id.news_item_text_tv) as TextView,
+                            vw!!.findViewById(R.id.news_item_indicator_tv) as TextView)
+
                     holder!!.news.setText(news)
+                    showIndicator()
+
                     vw!!.setTag(holder)
                 }else{
                     holder = vw!!.getTag() as ViewHolder
                     holder!!.news.setText(news)
+                    holder!!.indicator.setBackgroundColor(android.graphics.Color.RED)
+                    showIndicator()
                     Log.d(TAG, "List View reused")
                 }
 
