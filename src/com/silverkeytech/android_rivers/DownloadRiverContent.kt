@@ -130,25 +130,7 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
 
         //now sort it so people always have the latest news first
 
-        var sortedNewsItems = newsItems.filter { x -> x.isPublicationDate()!! }.sort(comparator { (p1, p2) ->
-            var date1 = p1.getPublicationDate()
-            var date2 = p2.getPublicationDate()
-            //reverse. The latest date comes first
-            var result : Int
-            if (date1 != null && date2 != null){
-                if (date1!! > date2)
-                    result = -1
-                else if(date1 == date2)
-                    result = 0
-                else
-                    result = 1
-            }   else
-                {
-                    result = -1
-                }
-
-            result
-        })
+        var sortedNewsItems = newsItems.filter { x -> x.isPublicationDate()!! }.sortBy { x -> x.getPublicationDate()!! }.reverse()
 
         var list = context.findView<ListView>(android.R.id.list)
         var adapter = object : ArrayAdapter<FeedItem>(context, R.layout.news_item , sortedNewsItems) {

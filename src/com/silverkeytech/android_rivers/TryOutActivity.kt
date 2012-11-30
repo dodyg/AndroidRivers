@@ -13,6 +13,16 @@ import android.content.Context
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.widget.RemoteViews
+import com.j256.ormlite.android.AndroidConnectionSource
+import java.sql.SQLException
+import android.database.sqlite.SQLiteOpenHelper
+import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper
+import com.j256.ormlite.android.apptools.OpenHelperManager
+import com.j256.ormlite.support.ConnectionSource
+import com.j256.ormlite.table.TableUtils
+import com.silverkeytech.android_rivers.db.Bookmark
+import android.view.View.OnClickListener
+import android.view.View
 
 public class TryOutActivity() : Activity()
 {
@@ -28,6 +38,8 @@ public class TryOutActivity() : Activity()
         handleDownloadJpgImage()
         handleDownloadPngImage()
         handleHandleNotification()
+        handleCreateBookmarkTable()
+        handleInsertToBookmarkTable()
     }
 
     fun handleDownloadGifImage(){
@@ -76,6 +88,52 @@ public class TryOutActivity() : Activity()
             intent.putExtra(Params.MESSENGER, messenger)
             this.startService(intent)
         }
+    }
+
+    fun handleCreateBookmarkTable(){
+        var btn = findView<Button>(R.id.tryout_setup_bookmark_table_btn)
+
+        btn.setOnClickListener(object : OnClickListener{
+            public override fun onClick(p0: View?) {
+                var connection : ConnectionSource? = null
+
+                try{
+                    connection = AndroidConnectionSource(OpenHelperManager.getHelper(this@TryOutActivity))
+
+                    TableUtils.createTable(connection, javaClass<Bookmark>())
+                    Log.d(TAG, "Table bookmarks created")
+                }
+                catch(e : SQLException){
+                    Log.d(TAG, "Exception when trying to create a Bookmark table ${e.getMessage()}")
+                }
+                finally{
+                    connection?.close()
+                }
+            }
+        })
+    }
+
+    fun handleInsertToBookmarkTable(){
+        var btn = findView<Button>(R.id.tryout_insert_data_bookmark_table_btn)
+
+        btn.setOnClickListener {
+            var connection : ConnectionSource? = null
+
+            try{
+                connection = AndroidConnectionSource(OpenHelperManager.getHelper(this@TryOutActivity))
+
+                TableUtils.createTable(connection, javaClass<Bookmark>())
+                Log.d(TAG, "Table bookmarks created")
+            }
+            catch(e : SQLException){
+                Log.d(TAG, "Exception when trying to create a Bookmark table ${e.getMessage()}")
+            }
+            finally{
+                connection!!.close()
+            }
+            0
+        }
+
     }
 
     var counter : Int = 1

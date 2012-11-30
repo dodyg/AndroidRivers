@@ -27,4 +27,17 @@
             android:layout_height="wrap_content"
             android:text="Show Notification"
             android:id="@+id/tryout_show_notification_btn" android:layout_gravity="center"/>
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Setup Bookmark Table"
+            android:id="@+id/tryout_setup_bookmark_table_btn" android:layout_gravity="center"/>
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Insert Data to Bookmark"
+            android:id="@+id/tryout_insert_data_bookmark_table_btn" android:layout_gravity="center"/>
+
 </LinearLayout>
