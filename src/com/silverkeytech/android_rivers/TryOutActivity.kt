@@ -18,11 +18,10 @@ import java.sql.SQLException
 import android.database.sqlite.SQLiteOpenHelper
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper
 import com.j256.ormlite.android.apptools.OpenHelperManager
-import com.j256.ormlite.support.ConnectionSource
-import com.j256.ormlite.table.TableUtils
 import com.silverkeytech.android_rivers.db.Bookmark
 import android.view.View.OnClickListener
 import android.view.View
+import com.j256.ormlite.android.DatabaseTableConfigUtil
 
 public class TryOutActivity() : Activity()
 {
@@ -90,17 +89,18 @@ public class TryOutActivity() : Activity()
         }
     }
 
-    fun handleCreateBookmarkTable(){
+    fun  handleCreateBookmarkTable(){
         var btn = findView<Button>(R.id.tryout_setup_bookmark_table_btn)
 
         btn.setOnClickListener(object : OnClickListener{
             public override fun onClick(p0: View?) {
-                var connection : ConnectionSource? = null
+                var connection : AndroidConnectionSource? = null
 
                 try{
-                    connection = AndroidConnectionSource(OpenHelperManager.getHelper(this@TryOutActivity))
+                    connection = AndroidConnectionSource(OpenHelperManager.getHelper(this@TryOutActivity, javaClass<OrmLiteSqliteOpenHelper>()))
 
-                    TableUtils.createTable(connection, javaClass<Bookmark>())
+                    DatabaseTableConfigUtil.fromClass(connection, javaClass<Bookmark>())
+
                     Log.d(TAG, "Table bookmarks created")
                 }
                 catch(e : SQLException){
@@ -108,6 +108,7 @@ public class TryOutActivity() : Activity()
                 }
                 finally{
                     connection?.close()
+                    OpenHelperManager.release()
                 }
             }
         })
@@ -117,12 +118,11 @@ public class TryOutActivity() : Activity()
         var btn = findView<Button>(R.id.tryout_insert_data_bookmark_table_btn)
 
         btn.setOnClickListener {
-            var connection : ConnectionSource? = null
+            var connection : AndroidConnectionSource? = null
 
             try{
-                connection = AndroidConnectionSource(OpenHelperManager.getHelper(this@TryOutActivity))
+                connection = AndroidConnectionSource(OpenHelperManager.getHelper(this@TryOutActivity, javaClass<OrmLiteSqliteOpenHelper>()))
 
-                TableUtils.createTable(connection, javaClass<Bookmark>())
                 Log.d(TAG, "Table bookmarks created")
             }
             catch(e : SQLException){
@@ -130,6 +130,7 @@ public class TryOutActivity() : Activity()
             }
             finally{
                 connection!!.close()
+                OpenHelperManager.releaseHelper()
             }
             0
         }

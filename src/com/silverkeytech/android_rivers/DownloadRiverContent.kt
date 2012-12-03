@@ -156,6 +156,7 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
                         }
                     }else{
                         holder!!.indicator.setBackgroundColor(STANDARD_NEWS_COLOR)
+
                     }
                 }
 
@@ -210,8 +211,10 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
                     }
                 })
 
+                fun linkAvailable() : Boolean = !currentNews.link.isNullOrEmpty() && currentNews.link!!.indexOf("http") > -1
+
                 //check for go link
-                if (!currentNews.link.isNullOrEmpty() && currentNews.link!!.indexOf("http") > -1){
+                if (linkAvailable()){
                     Log.d(TAG, "There's a link ${currentNews.link}")
                     dialog.setNeutralButton("Go", object : DialogInterface.OnClickListener{
 
@@ -222,8 +225,6 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
                             p0?.dismiss()
                         }
                     })
-                }else{
-                    Log.d(TAG, "There is no link for ${currentNews.title}")
                 }
 
 
@@ -264,6 +265,17 @@ public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result
                             }
                         })
 
+                    }
+                }else{
+                    if (linkAvailable()) {
+                        dialog.setNegativeButton("Share", object : DialogInterface.OnClickListener{
+                            public override fun onClick(p0: DialogInterface?, p1: Int) {
+                                var intent = Intent(Intent.ACTION_SEND)
+                                intent.setType("text/plain")
+                                intent.putExtra(Intent.EXTRA_TEXT, currentNews.link!!)
+                                context.startActivity(Intent.createChooser(intent, "Share page"))
+                            }
+                        })
                     }
                 }
 
