@@ -29,7 +29,7 @@ public class DownloadService() : IntentService("DownloadService"){
         public val PARAM_DOWNLOAD_TITLE : String = "downloadTitle"
         public val PARAM_DOWNLOAD_LOCATION_PATH : String = "downloadLocationPath"
 
-        public val TAG: String = javaClass<DownloadService>().getSimpleName()!!
+        public val TAG: String = javaClass<DownloadService>().getSimpleName()
     }
 
     var targetUrl : String? = null
@@ -61,8 +61,8 @@ public class DownloadService() : IntentService("DownloadService"){
     }
 
     protected override fun onHandleIntent(p0: Intent?) {
-        targetUrl = p0!!.getStringExtra(PARAM_DOWNLOAD_URL)
-        targetTitle = p0!!.getStringExtra(PARAM_DOWNLOAD_TITLE)
+        targetUrl = p0?.getStringExtra(PARAM_DOWNLOAD_URL)
+        targetTitle = p0?.getStringExtra(PARAM_DOWNLOAD_TITLE)
 
         Log.d(TAG, "onHandleIntent with ${targetUrl}")
 
@@ -107,7 +107,7 @@ public class DownloadService() : IntentService("DownloadService"){
 
             var count : Int = input.read(data)
 
-            var oldProgress = 0
+            var oldProgress : Int
 
             while (count != -1){
                 total += count
@@ -121,7 +121,6 @@ public class DownloadService() : IntentService("DownloadService"){
                 }
 
                 output.write(data, 0, count)
-
                 count = input.read(data)
             }
 
@@ -140,7 +139,7 @@ public class DownloadService() : IntentService("DownloadService"){
             notificationManager.notify(notificationId, notification)
         }
 
-        var extras = p0.getExtras()
+        var extras = p0?.getExtras()
         if (extras != null){
             var messenger = extras!!.get(Params.MESSENGER) as android.os.Messenger
             var msg = Message.obtain()!!

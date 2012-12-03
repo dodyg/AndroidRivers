@@ -1,16 +1,16 @@
 package com.silverkeytech.android_rivers
 
-import android.app.ListActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.actionbarsherlock.app.SherlockListActivity
 
 //Responsible of downloading, caching and viewing a news river content
-public class RiverActivity() : ListActivity()
+public class RiverActivity() : SherlockListActivity()
 {
     class object {
-        public val TAG: String = javaClass<RiverActivity>().getSimpleName()!!
+        public val TAG: String = javaClass<RiverActivity>().getSimpleName()
     }
 
     var riverUrl : String = ""
@@ -33,6 +33,7 @@ public class RiverActivity() : ListActivity()
         finish()
     }
 
+    /*
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         var inflater = getMenuInflater()!!
         inflater.inflate(R.menu.river_menu, menu)
@@ -49,5 +50,5 @@ public class RiverActivity() : ListActivity()
                 return super.onOptionsItemSelected(item)
         }
     }
-
+      */
 }

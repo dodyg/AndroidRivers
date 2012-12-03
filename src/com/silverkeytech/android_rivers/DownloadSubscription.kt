@@ -29,7 +29,7 @@ import android.content.DialogInterface
 
 public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result<Opml>>(){
     class object {
-        public val TAG: String = javaClass<DownloadSubscription>().getSimpleName()!!
+        public val TAG: String = javaClass<DownloadSubscription>().getSimpleName()
     }
 
     var dialog : ProgressDialog = ProgressDialog(it)
@@ -50,7 +50,7 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result
     }
 
     protected override fun doInBackground(vararg url : String?): Result<Opml>?{
-        var req : String? = null
+        var req : String?
         try{
            req = HttpRequest.get(url[0])?.body()
        }
@@ -114,7 +114,6 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result
                 context.handleConnectivityError(result.exception, error)
 
             } else {
-                var msg = context.findView<TextView>(R.id.main_message_tv)
                 handleRiversListing(result.value!!)
             }
         }

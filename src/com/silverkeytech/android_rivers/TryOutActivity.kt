@@ -26,7 +26,7 @@ import com.j256.ormlite.android.DatabaseTableConfigUtil
 public class TryOutActivity() : Activity()
 {
     class object {
-        public val TAG: String = javaClass<TryOutActivity>().getSimpleName()!!
+        public val TAG: String = javaClass<TryOutActivity>().getSimpleName()
     }
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {

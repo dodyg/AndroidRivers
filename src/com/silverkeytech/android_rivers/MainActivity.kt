@@ -10,7 +10,7 @@ import com.actionbarsherlock.app.SherlockActivity
 
 public open class MainActivity(): SherlockActivity() {
     class object {
-        public val TAG: String = javaClass<MainActivity>().getSimpleName()!!
+        public val TAG: String = javaClass<MainActivity>().getSimpleName()
     }
 
     val DEFAULT_SUBSCRIPTION_LIST = "http://hobieu.apphb.com/api/1/default/riverssubscription"

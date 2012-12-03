@@ -10,7 +10,7 @@ public class MediaScannerWrapper (val context : Context, val filePath : String, 
     : MediaScannerConnection.MediaScannerConnectionClient{
 
     class object {
-        public val TAG: String = javaClass<MediaScannerWrapper>().getSimpleName()!!
+        public val TAG: String = javaClass<MediaScannerWrapper>().getSimpleName()
 
         fun scanPodcasts(context :Context, filePath : String){
             var scanner = MediaScannerWrapper(context, filePath, "audio/mpeg" )

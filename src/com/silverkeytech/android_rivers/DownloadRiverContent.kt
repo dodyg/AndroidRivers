@@ -41,7 +41,7 @@ import android.util.TypedValue
 //Responsible for handling a river js downloading and display in asynchronous way
 public class DownloadRiverContent(it : Context?) : AsyncTask<String, Int, Result<FeedsRiver>>(){
     class object {
-        public val TAG: String = javaClass<DownloadRiverContent>().getSimpleName()!!
+        public val TAG: String = javaClass<DownloadRiverContent>().getSimpleName()
     }
 
     var dialog : ProgressDialog = ProgressDialog(it)

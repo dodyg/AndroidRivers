@@ -16,7 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="RiverActivity" android:configChanges="keyboardHidden|orientation">
+        <activity android:name="RiverActivity" android:configChanges="keyboardHidden|orientation"
+                  android:theme="@style/Theme.Sherlock.Light.DarkActionBar"
+                >
             <intent-filter>
 
             </intent-filter>
