@@ -36,7 +36,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Android 4.0.3 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KotlinRuntime" level="project" />
     <orderEntry type="library" name="gson-2.2.2" level="project" />
@@ -45,6 +45,7 @@
     <orderEntry type="library" name="android-support-v13" level="project" />
     <orderEntry type="library" name="ormlite-android-4.42" level="project" />
     <orderEntry type="library" name="ormlite-core-4.42" level="project" />
+    <orderEntry type="module" module-name="ActionBarSherlock" />
   </component>
 </module>
 

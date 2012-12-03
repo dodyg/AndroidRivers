@@ -1,14 +1,14 @@
 package com.silverkeytech.android_rivers
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.content.Intent
 import android.net.Uri
 import java.io.File
+import com.actionbarsherlock.app.SherlockActivity
 
-public open class MainActivity(): Activity() {
+public open class MainActivity(): SherlockActivity() {
     class object {
         public val TAG: String = javaClass<MainActivity>().getSimpleName()!!
     }
@@ -39,6 +39,7 @@ public open class MainActivity(): Activity() {
         DownloadSubscription(this).execute(DEFAULT_SUBSCRIPTION_LIST)
     }
 
+    /*
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         var inflater = getMenuInflater()!!
         inflater.inflate(R.menu.subscription_menu, menu)
@@ -60,4 +61,5 @@ public open class MainActivity(): Activity() {
                 return super.onOptionsItemSelected(item)
         }
     }
+    */
 }
