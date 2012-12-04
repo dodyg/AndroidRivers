@@ -37,7 +37,7 @@ public open class MainActivity(): SherlockActivity() {
             }
         }
 
-        DownloadSubscription(this).execute(DEFAULT_SUBSCRIPTION_LIST)
+        DownloadSubscription(this, false).execute(DEFAULT_SUBSCRIPTION_LIST)
     }
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -50,7 +50,7 @@ public open class MainActivity(): SherlockActivity() {
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
             R.id.subscription_menu_refresh -> {
-                DownloadSubscription(this).execute(DEFAULT_SUBSCRIPTION_LIST)
+                DownloadSubscription(this, true).execute(DEFAULT_SUBSCRIPTION_LIST)
                 return true
             }
             R.id.river_menu_tryout -> {

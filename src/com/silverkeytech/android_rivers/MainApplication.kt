@@ -3,6 +3,8 @@ package com.silverkeytech.android_rivers
 import android.app.Application
 import android.support.v4.util.LruCache
 import com.silverkeytech.android_rivers.riverjs.FeedsRiver
+import com.silverkeytech.android_rivers.outlines.Opml
+import android.util.Log
 
 fun Application?.getMain() : MainApplication{
     return this!! as MainApplication
@@ -10,10 +12,34 @@ fun Application?.getMain() : MainApplication{
 
 public class MainApplication() : Application()
 {
+    class object {
+        public val TAG: String = javaClass<MainApplication>().getSimpleName()
+    }
+
     var riverCache : LruCache<String, CacheItem<FeedsRiver>>  = LruCache<String, CacheItem<FeedsRiver>>(inMegaByte(4))
+    var subscriptionCache : CacheItem<Opml>? = null
 
     public override fun onCreate() {
+        Log.d(TAG, "Main Application is started")
         super<Application>.onCreate()
+    }
+
+    public fun getSubscriptionListCache() : Opml? {
+        if (subscriptionCache == null)
+            return null
+        else{
+            if (subscriptionCache!!.isExpired){
+                subscriptionCache = null
+                return null
+            } else {
+                return subscriptionCache?.item
+            }
+        }
+    }
+
+    public fun setSubscriptionListCache(opml : Opml){
+        subscriptionCache = CacheItem(opml)
+        subscriptionCache?.setExpireInMinutesFromNow(600)
     }
 
     public fun getRiverCache (uri : String) : FeedsRiver? {
@@ -33,7 +59,7 @@ public class MainApplication() : Application()
 
     public fun setRiverCache(uri : String, river : FeedsRiver){
         var item = CacheItem(river)
-        item.setExpireInSecondsFromNow(15)
+        item.setExpireInMinutesFromNow(15)
         riverCache.put(uri, item)
     }
 

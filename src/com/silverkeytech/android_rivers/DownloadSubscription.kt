@@ -24,15 +24,16 @@ import java.util.ArrayList
 import org.simpleframework.xml.Serializer
 import org.simpleframework.xml.core.Persister
 
-public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result<Opml>>(){
+public class DownloadSubscription(it: Context?, ignoreCache : Boolean): AsyncTask<String, Int, Result<Opml>>(){
     class object {
         public val TAG: String = javaClass<DownloadSubscription>().getSimpleName()
     }
 
-    var dialog : ProgressDialog = ProgressDialog(it)
-    var context : Activity = it!! as Activity
+    var dialog: ProgressDialog = ProgressDialog(it)
+    var context: Activity = it!! as Activity
+    val ignoreCache : Boolean = ignoreCache
 
-    protected override fun onPreExecute(){
+    protected override fun onPreExecute() {
         dialog.setMessage(context.getString(R.string.please_wait_while_downloading_news_rivers_list))
         dialog.setIndeterminate(true)
         dialog.setCancelable(false)
@@ -46,41 +47,57 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result
         dialog.show()
     }
 
-    protected override fun doInBackground(vararg url : String?): Result<Opml>?{
-        var req : String?
+    protected override fun doInBackground(vararg url: String?): Result<Opml>? {
         try{
-           req = HttpRequest.get(url[0])?.body()
-       }
-       catch(e : HttpRequestException){
-           var ex = e.getCause()
-           return Result.wrong(ex)
-       }
+            var cache = context.getApplication().getMain().getSubscriptionListCache()
 
-        var opml = transformFromXml(req)
-
-        if(opml.isTrue()){
-            var ct = opml.value?.body?.outline?.count()
-
-            if (ct != null && ct!! > 0){
-                var cnt : Float = 1.toFloat();
-                var divisor = ct!!.toFloat()
-
-                while(cnt < ct!!){
-                    var progress  = Math.round((cnt / divisor) * 100.toFloat());
-                    publishProgress(progress);
-                    Thread.sleep(200)
-                    cnt++
-                }
+            if (cache != null && !ignoreCache){
+                Log.d(TAG, "Cache is hit for subscription list")
+                return Result.right(cache!!)
             }
+            else {
+                Log.d(TAG, "Cache is missed for subscription list")
+
+                var req: String?
+                try{
+                    req = HttpRequest.get(url[0])?.body()
+                }
+                catch(e: HttpRequestException){
+                    var ex = e.getCause()
+                    return Result.wrong(ex)
+                }
+
+                var opml = transformFromXml(req)
+
+                if(opml.isTrue()){
+                    var ct = opml.value?.body?.outline?.count()
+
+                    if (ct != null && ct!! > 0){
+                        var cnt: Float = 1.toFloat();
+                        var divisor = ct!!.toFloat()
+
+                        while(cnt < ct!!){
+                            var progress = Math.round((cnt / divisor) * 100.toFloat());
+                            publishProgress(progress);
+                            Thread.sleep(200)
+                            cnt++
+                        }
+                    }
+
+                    context.getApplication().getMain().setSubscriptionListCache(opml.value!!)
+                }
+                return opml
+            }
+        } catch(e: Exception){
+            return Result.wrong(e)
         }
-        return opml
     }
 
-    fun transformFromXml(xml : String?) : Result<Opml>{
-        var serial : Serializer = Persister()
+    fun transformFromXml(xml: String?): Result<Opml> {
+        var serial: Serializer = Persister()
 
         try{
-            val opml : Opml? = serial.read(javaClass<Opml>(),xml)
+            val opml: Opml? = serial.read(javaClass<Opml>(), xml)
             Log.d(TAG, "OPML ${opml?.head?.title} created on ${opml?.head?.getDateCreated()} and modified on ${opml?.head?.getDateModified()}")
             return Result.right(opml)
         }
@@ -90,11 +107,11 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result
         }
     }
 
-    protected override fun onProgressUpdate(vararg progress : Int?){
+    protected override fun onProgressUpdate(vararg progress: Int?) {
         Log.d("DD", "Progressing...${progress[0]}")
     }
 
-    protected override fun onPostExecute(result : Result<Opml>?){
+    protected override fun onPostExecute(result: Result<Opml>?) {
         dialog.dismiss()
 
         if (result == null){
@@ -106,7 +123,7 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result
                         timeoutException = "Sorry, we cannot download this subscription list. The subscription site might be down",
                         socketException = "Sorry, we cannot download this subscription list. Please check your Internet connection, it might be down",
                         otherException = "Sorry, we cannot download this subscription list for the following technical reason : ${result.exception.toString()}"
-                        )
+                )
 
                 context.handleConnectivityError(result.exception, error)
 
@@ -118,7 +135,7 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result
 
     public data class ViewHolder (var riverName: TextView)
 
-    fun handleRiversListing(outlines : Opml){
+    fun handleRiversListing(outlines: Opml) {
         var list = context.findView<ListView>(R.id.main_rivers_lv)
 
         var vals = ArrayList<Outline>()
@@ -131,11 +148,11 @@ public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result
 
         var adapter = object : ArrayAdapter<Outline>(context, android.R.layout.simple_list_item_1, android.R.id.text1, values){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-                var vw  = convertView
-                var holder : ViewHolder?
+                var vw = convertView
+                var holder: ViewHolder?
 
                 if (vw == null){
-                    var inflater : LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                    var inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
                     vw = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
 
                     holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
