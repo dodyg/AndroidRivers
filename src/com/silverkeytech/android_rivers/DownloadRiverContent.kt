@@ -25,11 +25,10 @@ import android.widget.TextView
 import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.google.gson.Gson
-import com.silverkeytech.android_rivers.riverjs.FeedItem
+import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
 import com.silverkeytech.android_rivers.riverjs.FeedSite
 import com.silverkeytech.android_rivers.riverjs.FeedsRiver
 import java.util.ArrayList
-import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
 
 //Responsible for handling a river js downloading and display in asynchronous way
 public class DownloadRiverContent(it: Context?): AsyncTask<String, Int, Result<FeedsRiver>>(){

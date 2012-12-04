@@ -2,7 +2,6 @@ package com.silverkeytech.android_rivers
 
 import java.util.UUID
 
-
 fun scrubJsonP(text : String) : String{
     var rep = text.replace("onGetRiverStream (","")
     rep = rep.trimTrailing(")")

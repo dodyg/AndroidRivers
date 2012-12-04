@@ -1,12 +1,12 @@
 package com.silverkeytech.android_rivers
 
-import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.content.Intent
 import android.net.Uri
-import java.io.File
+import android.os.Bundle
 import com.actionbarsherlock.app.SherlockActivity
+import com.actionbarsherlock.view.Menu
+import com.actionbarsherlock.view.MenuItem
+import java.io.File
 
 public open class MainActivity(): SherlockActivity() {
     class object {
@@ -18,6 +18,7 @@ public open class MainActivity(): SherlockActivity() {
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
+
 
         var intent = getIntent()
         if(intent != null){
@@ -39,12 +40,10 @@ public open class MainActivity(): SherlockActivity() {
         DownloadSubscription(this).execute(DEFAULT_SUBSCRIPTION_LIST)
     }
 
-
-
-    /*
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        var inflater = getMenuInflater()!!
+        var inflater = getSupportMenuInflater()!!
         inflater.inflate(R.menu.subscription_menu, menu)
+
         return true
     }
 
@@ -63,5 +62,4 @@ public open class MainActivity(): SherlockActivity() {
                 return super.onOptionsItemSelected(item)
         }
     }
-    */
 }

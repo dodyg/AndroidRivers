@@ -3,6 +3,7 @@ package com.silverkeytech.android_rivers
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.AsyncTask
 import android.util.Log
@@ -19,13 +20,9 @@ import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
-import java.net.SocketException
-import java.net.UnknownHostException
 import java.util.ArrayList
-import org.apache.http.conn.ConnectTimeoutException
 import org.simpleframework.xml.Serializer
 import org.simpleframework.xml.core.Persister
-import android.content.DialogInterface
 
 public class DownloadSubscription(it : Context?) : AsyncTask<String, Int, Result<Opml>>(){
     class object {

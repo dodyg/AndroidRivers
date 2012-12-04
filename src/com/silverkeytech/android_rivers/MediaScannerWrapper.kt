@@ -1,10 +1,9 @@
 package com.silverkeytech.android_rivers
 
+import android.content.Context
 import android.media.MediaScannerConnection
 import android.net.Uri
-import android.content.Context
 import android.util.Log
-import android.os.Environment
 
 public class MediaScannerWrapper (val context : Context, val filePath : String, val mimeType : String )
     : MediaScannerConnection.MediaScannerConnectionClient{

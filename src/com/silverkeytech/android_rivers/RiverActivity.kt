@@ -5,7 +5,6 @@ import android.util.Log
 import com.actionbarsherlock.app.SherlockListActivity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity() : SherlockListActivity()
@@ -22,7 +21,7 @@ public class RiverActivity() : SherlockListActivity()
         setContentView(R.layout.river)
 
         var actionBar = getSupportActionBar()!!
-        actionBar.setDisplayHomeAsUpEnabled(true)
+        actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
 
         var i = getIntent()!!
         riverUrl = i.getStringExtra(Params.RIVER_URL)!!
@@ -41,7 +40,7 @@ public class RiverActivity() : SherlockListActivity()
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menu?.add(0, REFRESH, 0, "Refresh")
-        ?.setIcon(android.R.drawable.ic_menu_rotate)
+        ?.setIcon(R.drawable.ic_menu_refresh)
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
 
         var inflater = getSupportMenuInflater()!!
@@ -56,10 +55,8 @@ public class RiverActivity() : SherlockListActivity()
                 DownloadRiverContent(this).execute(riverUrl)
                 return true
             }
-            else ->{ //this is a hack to handle home button but android.R.id.home throws java.lang.NoSuchFieldError: android.R$id.home
-                finish()
-                return true
-            }
+            else ->
+                return super.onOptionsItemSelected(item)
         }
     }
 }

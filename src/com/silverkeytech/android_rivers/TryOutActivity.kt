@@ -1,27 +1,26 @@
 package com.silverkeytech.android_rivers
 
 import android.app.Activity
-import android.os.Bundle
-import android.widget.Button
-import android.util.Log
-import android.content.Intent
-import android.os.Messenger
-import android.os.Handler
-import android.os.Message
-import android.support.v4.app.NotificationCompat
-import android.content.Context
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.os.Handler
+import android.os.Message
+import android.os.Messenger
+import android.support.v4.app.NotificationCompat
+import android.util.Log
+import android.view.View
+import android.view.View.OnClickListener
+import android.widget.Button
 import android.widget.RemoteViews
 import com.j256.ormlite.android.AndroidConnectionSource
-import java.sql.SQLException
-import android.database.sqlite.SQLiteOpenHelper
-import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper
-import com.j256.ormlite.android.apptools.OpenHelperManager
-import com.silverkeytech.android_rivers.db.Bookmark
-import android.view.View.OnClickListener
-import android.view.View
 import com.j256.ormlite.android.DatabaseTableConfigUtil
+import com.j256.ormlite.android.apptools.OpenHelperManager
+import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper
+import com.silverkeytech.android_rivers.db.Bookmark
+import java.sql.SQLException
 
 public class TryOutActivity() : Activity()
 {

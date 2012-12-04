@@ -5,10 +5,10 @@ import android.view.Gravity
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Toast
+import java.net.SocketException
+import java.net.UnknownHostException
 import java.text.SimpleDateFormat
 import org.apache.http.conn.ConnectTimeoutException
-import java.net.UnknownHostException
-import java.net.SocketException
 
 public fun Activity.findView<T : View>(id : Int) : T{
     return (this.findViewById(id) as T)

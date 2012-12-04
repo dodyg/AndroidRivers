@@ -1,27 +1,23 @@
 package com.silverkeytech.android_rivers
 
-import android.app.IntentService
-import android.content.Intent
-import android.util.Log
-import com.github.kevinsawicki.http.HttpRequest
-import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
-import android.os.Environment
-import java.io.File
 import android.app.Activity
-import android.os.Messenger
+import android.app.IntentService
+import android.app.Notification
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.os.Environment
 import android.os.Message
 import android.os.RemoteException
 import android.support.v4.app.NotificationCompat
-import android.app.PendingIntent
+import android.util.Log
 import android.widget.RemoteViews
-import android.content.Context
-import android.app.NotificationManager
-import android.app.Notification
-import java.util.Random
-import java.net.URL
+import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import java.io.BufferedInputStream
 import java.io.FileOutputStream
-
+import java.net.URL
+import java.util.Random
 
 public class DownloadService() : IntentService("DownloadService"){
     class object{

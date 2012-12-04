@@ -1,21 +1,18 @@
 package com.silverkeytech.android_rivers
 
-import android.os.AsyncTask
-import android.content.Context
-import android.app.ProgressDialog
 import android.app.Activity
-import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
-import android.os.Environment
-import com.github.kevinsawicki.http.HttpRequest
-import java.io.File
-import android.util.Log
 import android.app.AlertDialog
+import android.app.ProgressDialog
+import android.content.Context
 import android.content.DialogInterface
-import android.widget.ImageView
-import android.graphics.BitmapFactory
 import android.graphics.Bitmap
-import java.util.UUID
-
+import android.graphics.BitmapFactory
+import android.os.AsyncTask
+import android.util.Log
+import android.widget.ImageView
+import com.github.kevinsawicki.http.HttpRequest
+import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
+import java.io.File
 
 public data class DownloadedFile(val contentType : String, val filePath : String)
 
