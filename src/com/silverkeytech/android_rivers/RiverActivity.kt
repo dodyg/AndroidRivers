@@ -2,9 +2,10 @@ package com.silverkeytech.android_rivers
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import com.actionbarsherlock.app.SherlockListActivity
+import com.actionbarsherlock.view.Menu
+import com.actionbarsherlock.view.MenuItem
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity() : SherlockListActivity()
@@ -20,6 +21,9 @@ public class RiverActivity() : SherlockListActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.river)
 
+        var actionBar = getSupportActionBar()!!
+        actionBar.setDisplayHomeAsUpEnabled(true)
+
         var i = getIntent()!!
         riverUrl = i.getStringExtra(Params.RIVER_URL)!!
         riverName = i.getStringExtra(Params.RIVER_NAME)!!
@@ -33,10 +37,23 @@ public class RiverActivity() : SherlockListActivity()
         finish()
     }
 
-    /*
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        var inflater = getMenuInflater()!!
-        inflater.inflate(R.menu.river_menu, menu)
+        //var inflater = getSupportMenuInflater()!!
+
+        //inflater.inflate(R.menu.river_menu, menu)
+
+        menu?.add("Refresh")
+        ?.setOnMenuItemClickListener(object: OnMenuItemClickListener{
+            public override fun onMenuItemClick(item: MenuItem?): Boolean {
+                DownloadRiverContent(this@RiverActivity).execute(riverUrl)
+                return true
+            }
+        })
+        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+
+        //menu?.add("Tryout")
+        //    ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM or android.view.MenuItem.SHOW_AS_ACTION_WITH_TEXT)
+
         return true
     }
 
@@ -50,5 +67,4 @@ public class RiverActivity() : SherlockListActivity()
                 return super.onOptionsItemSelected(item)
         }
     }
-      */
 }

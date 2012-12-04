@@ -39,6 +39,8 @@ public open class MainActivity(): SherlockActivity() {
         DownloadSubscription(this).execute(DEFAULT_SUBSCRIPTION_LIST)
     }
 
+
+
     /*
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         var inflater = getMenuInflater()!!
