@@ -96,7 +96,20 @@ public class DownloadRiverContent(it: Context?, ignoreCache: Boolean): AsyncTask
                     }
                 }
 
-                var sortedNewsItems = newsItems.filter { x -> x.item.isPublicationDate()!! }.sortBy { x -> x.item.getPublicationDate()!! }.reverse()
+                var sortedNewsItems = newsItems.filter { x -> x.item.isPublicationDate()!! }.sort(comparator { (p1, p2) ->
+                    val date1 = p1.item.getPublicationDate()
+                    val date2 = p2.item.getPublicationDate()
+
+                    if (date1 != null && date2 != null) {
+                        date1.compareTo(date2) * -1
+                    } else if (date1 == null && date2 == null) {
+                        0
+                    } else if (date1 == null) {
+                        -1
+                    } else {
+                        1
+                    }
+                })
 
                 context.getApplication().getMain().setRiverCache(url, sortedNewsItems)
 
