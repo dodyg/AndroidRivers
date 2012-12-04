@@ -37,34 +37,29 @@ public class RiverActivity() : SherlockListActivity()
         finish()
     }
 
+    val REFRESH : Int = 1
+
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        //var inflater = getSupportMenuInflater()!!
-
-        //inflater.inflate(R.menu.river_menu, menu)
-
-        menu?.add("Refresh")
-        ?.setOnMenuItemClickListener(object: OnMenuItemClickListener{
-            public override fun onMenuItemClick(item: MenuItem?): Boolean {
-                DownloadRiverContent(this@RiverActivity).execute(riverUrl)
-                return true
-            }
-        })
+        menu?.add(0, REFRESH, 0, "Refresh")
+        ?.setIcon(android.R.drawable.ic_menu_rotate)
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
 
-        //menu?.add("Tryout")
-        //    ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM or android.view.MenuItem.SHOW_AS_ACTION_WITH_TEXT)
+        var inflater = getSupportMenuInflater()!!
+        inflater.inflate(R.menu.river_menu, menu)
 
         return true
     }
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
-            R.id.river_menu_refresh -> {
+            R.id.river_menu_refresh, REFRESH -> {
                 DownloadRiverContent(this).execute(riverUrl)
                 return true
             }
-            else ->
-                return super.onOptionsItemSelected(item)
+            else ->{ //this is a hack to handle home button but android.R.id.home throws java.lang.NoSuchFieldError: android.R$id.home
+                finish()
+                return true
+            }
         }
     }
 }

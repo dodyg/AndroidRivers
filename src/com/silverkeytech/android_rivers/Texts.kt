@@ -9,8 +9,11 @@ fun scrubJsonP(text : String) : String{
     return rep
 }
 
-fun scrubHtml(text : String) : String{
-    return android.text.Html.fromHtml(text).toString()
+fun scrubHtml(text : String?) : String{
+    if (text.isNullOrEmpty())
+        return ""
+    else
+        return android.text.Html.fromHtml(text!!).toString()
 }
 
 fun String?.isNullOrEmpty() : Boolean{
