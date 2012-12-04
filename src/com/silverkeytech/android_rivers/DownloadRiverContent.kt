@@ -10,6 +10,9 @@ import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.google.gson.Gson
 import com.silverkeytech.android_rivers.riverjs.FeedsRiver
+import java.util.ArrayList
+import com.silverkeytech.android_rivers.riverjs.FeedSite
+import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
 
 //Responsible for handling a river js downloading and display in asynchronous way
 public class DownloadRiverContent(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<FeedsRiver>>(){
@@ -36,47 +39,30 @@ public class DownloadRiverContent(it: Context?, ignoreCache: Boolean): AsyncTask
         dialog.show()
     }
 
+    var url : String = ""
+
     //Download river data in a thread
     protected override fun doInBackground(vararg p0: String?): Result<FeedsRiver>? {
+        url = p0.get(0)!!
+        Log.d(TAG, "Cache is missed for url $url")
+
+        var req: String?
         try{
-            var url = p0.get(0)!!
-            var before = System.currentTimeMillis()
-            var cache = context.getApplication().getMain().getRiverCache(url)
+            req = HttpRequest.get(url)?.body()
+        }
+        catch(e: HttpRequestException){
+            var ex = e.getCause()
+            return Result.wrong(ex)
+        }
 
-            var now = System.currentTimeMillis()
+        try{
+            var gson = Gson()
+            var scrubbed = scrubJsonP(req!!)
+            var feeds = gson.fromJson(scrubbed, javaClass<FeedsRiver>())!!
 
-            Log.d(TAG, "Cache retrieval took ${now - before} ms")
-
-            if (cache != null && !ignoreCache){
-                Log.d(TAG, "Cache is hit for url $url")
-                return Result.right(cache!!)
-            }
-            else {
-                Log.d(TAG, "Cache is missed for url $url")
-
-                var req: String?
-                try{
-                    req = HttpRequest.get(url)?.body()
-                }
-                catch(e: HttpRequestException){
-                    var ex = e.getCause()
-                    return Result.wrong(ex)
-                }
-
-                try{
-                    var gson = Gson()
-                    var scrubbed = scrubJsonP(req!!)
-                    var feeds = gson.fromJson(scrubbed, javaClass<FeedsRiver>())!!
-                    context.getApplication().getMain().setRiverCache(url, feeds)
-
-                    return Result.right(feeds)
-                }
-                catch(e: Exception)
-                {
-                    return Result.wrong(e)
-                }
-            }
-        } catch(e: Exception)
+            return Result.right(feeds)
+        }
+        catch(e: Exception)
         {
             return Result.wrong(e)
         }
@@ -96,7 +82,25 @@ public class DownloadRiverContent(it: Context?, ignoreCache: Boolean): AsyncTask
                 )
                 context.handleConnectivityError(result.exception, error)
             }else{
-                RiverContentRenderer(context).handleNewsListing(result.value!!)
+                var newsItems = ArrayList<FeedItemMeta>()
+                var river = result.value!!
+
+                //Take all the news items from several different feeds and combine them into one.
+                for(var f : FeedSite? in river.updatedFeeds?.updatedFeed?.iterator()){
+                    if (f != null){
+                        for(var fi in f?.item?.iterator()){
+                            if (fi != null) {
+                                newsItems.add(FeedItemMeta(fi!!, f?.feedTitle, f?.feedUrl))
+                            }
+                        }
+                    }
+                }
+
+                var sortedNewsItems = newsItems.filter { x -> x.item.isPublicationDate()!! }.sortBy { x -> x.item.getPublicationDate()!! }.reverse()
+
+                context.getApplication().getMain().setRiverCache(url, sortedNewsItems)
+
+                RiverContentRenderer(context).handleNewsListing(sortedNewsItems)
             }
         }
     }

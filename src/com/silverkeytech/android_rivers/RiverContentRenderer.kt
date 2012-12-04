@@ -30,28 +30,17 @@ public class RiverContentRenderer(val context: Activity){
         val STANDARD_NEWS_COLOR = android.graphics.Color.GRAY
         val STANDARD_NEWS_IMAGE = android.graphics.Color.CYAN
         val STANDARD_NEWS_PODCAST = android.graphics.Color.MAGENTA
+
+        public val TAG: String = javaClass<RiverContentRenderer>().getSimpleName()
     }
 
     //hold the view data for the list
     public data class ViewHolder (var news: TextView, val indicator: TextView)
 
     //show and prepare the interaction for each individual news item
-    fun handleNewsListing(river: FeedsRiver) {
-        var newsItems = ArrayList<FeedItemMeta>()
-
-        //Take all the news items from several different feeds and combine them into one.
-        for(var f : FeedSite? in river.updatedFeeds?.updatedFeed?.iterator()){
-            if (f != null){
-                for(var fi in f?.item?.iterator()){
-                    if (fi != null) {
-                        newsItems.add(FeedItemMeta(fi!!, f?.feedTitle, f?.feedUrl))
-                    }
-                }
-            }
-        }
+    fun handleNewsListing(sortedNewsItems : List<FeedItemMeta>) {
 
         //now sort it so people always have the latest news first
-        var sortedNewsItems = newsItems.filter { x -> x.item.isPublicationDate()!! }.sortBy { x -> x.item.getPublicationDate()!! }.reverse()
 
         var list = context.findView<ListView>(android.R.id.list)
 
@@ -91,7 +80,7 @@ public class RiverContentRenderer(val context: Activity){
                     currentView!!.setTag(holder)
                 }else{
                     holder = currentView?.getTag() as ViewHolder
-                    Log.d(DownloadRiverContent.TAG, "List View reused")
+                    Log.d(TAG, "List View reused")
                 }
 
                 holder?.news?.setText(news)
@@ -143,7 +132,7 @@ public class RiverContentRenderer(val context: Activity){
                     if (isSupportedImageMime(enclosure.`type`!!)){
                         dialog.setNegativeButton("Image", object : DialogInterface.OnClickListener{
                             public override fun onClick(p0: DialogInterface?, p1: Int) {
-                                Log.d(DownloadRiverContent.TAG, "I am downloading a ${enclosure.url} with type ${enclosure.`type`}")
+                                Log.d(TAG, "I am downloading a ${enclosure.url} with type ${enclosure.`type`}")
                                 DownloadImage(context).execute(enclosure.url)
                             }
                         })
@@ -164,7 +153,7 @@ public class RiverContentRenderer(val context: Activity){
                                                 context.toastee("Download failed", Duration.LONG)
                                             }
                                         }else{
-                                            Log.d(DownloadRiverContent.TAG, "handleMessage returns null, which is very weird")
+                                            Log.d(TAG, "handleMessage returns null, which is very weird")
                                         }
                                     }
                                 })

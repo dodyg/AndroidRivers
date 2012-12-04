@@ -28,7 +28,22 @@ public class RiverActivity() : SherlockListActivity()
         riverName = i.getStringExtra(Params.RIVER_NAME)!!
 
         setTitle(riverName)
-        DownloadRiverContent(this, false).execute(riverUrl)
+
+        downloadContent(riverUrl, false)
+    }
+
+    fun downloadContent(riverUrl : String, ignoreCache : Boolean){
+        var cache = getApplication().getMain().getRiverCache(riverUrl)
+
+        if (cache != null && !ignoreCache){
+            Log.d(TAG, "Cache is hit for url $riverUrl")
+            var now = System.currentTimeMillis()
+            RiverContentRenderer(this).handleNewsListing(cache!!)
+            var after = System.currentTimeMillis()
+            Log.d(TAG, "Cache display takes ${after - now} ms")
+        }
+        else
+            DownloadRiverContent(this, false).execute(riverUrl)
     }
 
     public override fun onBackPressed() {
@@ -52,7 +67,7 @@ public class RiverActivity() : SherlockListActivity()
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
             R.id.river_menu_refresh, REFRESH -> {
-                DownloadRiverContent(this, true).execute(riverUrl)
+                downloadContent(riverUrl, true)
                 return true
             }
             else ->
