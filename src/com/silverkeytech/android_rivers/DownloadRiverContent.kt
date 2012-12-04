@@ -31,13 +31,14 @@ import com.silverkeytech.android_rivers.riverjs.FeedsRiver
 import java.util.ArrayList
 
 //Responsible for handling a river js downloading and display in asynchronous way
-public class DownloadRiverContent(it: Context?): AsyncTask<String, Int, Result<FeedsRiver>>(){
+public class DownloadRiverContent(it: Context?, ignoreCache : Boolean): AsyncTask<String, Int, Result<FeedsRiver>>(){
     class object {
         public val TAG: String = javaClass<DownloadRiverContent>().getSimpleName()
     }
 
     var dialog: ProgressDialog = ProgressDialog(it)
     var context: Activity = it!! as Activity
+    val ignoreCache : Boolean = ignoreCache
 
     val STANDARD_NEWS_COLOR = android.graphics.Color.GRAY
     val STANDARD_NEWS_IMAGE = android.graphics.Color.CYAN
@@ -60,23 +61,41 @@ public class DownloadRiverContent(it: Context?): AsyncTask<String, Int, Result<F
 
     //Download river data in a thread
     protected override fun doInBackground(vararg p0: String?): Result<FeedsRiver>? {
-        var req: String?
         try{
-            req = HttpRequest.get(p0[0])?.body()
-        }
-        catch(e: HttpRequestException){
-            var ex = e.getCause()
-            return Result.wrong(ex)
-        }
+            var url = p0.get(0)!!
+            var cache = context.getApplication().getMain().getRiverCache(url)
 
-        try{
-            var gson = Gson()
-            var scrubbed = scrubJsonP(req!!)
-            var feeds = gson.fromJson(scrubbed, javaClass<FeedsRiver>())!!
+            if (cache != null && !ignoreCache){
+                Log.d(TAG, "Cache is hit for url $url")
+                return Result.right(cache!!)
+            }
+            else {
+                Log.d(TAG, "Cache is missed for url $url")
 
-            return Result.right(feeds)
-        }
-        catch(e: Exception)
+                var req: String?
+                try{
+                    req = HttpRequest.get(url)?.body()
+                }
+                catch(e: HttpRequestException){
+                    var ex = e.getCause()
+                    return Result.wrong(ex)
+                }
+
+                try{
+                    var gson = Gson()
+                    var scrubbed = scrubJsonP(req!!)
+                    var feeds = gson.fromJson(scrubbed, javaClass<FeedsRiver>())!!
+
+                    context.getApplication().getMain().setRiverCache(url, feeds)
+
+                    return Result.right(feeds)
+                }
+                catch(e: Exception)
+                {
+                    return Result.wrong(e)
+                }
+            }
+        } catch(e: Exception)
         {
             return Result.wrong(e)
         }

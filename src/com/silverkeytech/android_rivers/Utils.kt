@@ -92,3 +92,7 @@ fun isSupportedImageMime(val mimeType : String) : Boolean{
         else -> false
     }
 }
+
+fun inMegaByte(mb : Int) : Int{
+    return mb * 1024 * 1024
+}

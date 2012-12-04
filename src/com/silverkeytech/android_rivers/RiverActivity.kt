@@ -28,7 +28,7 @@ public class RiverActivity() : SherlockListActivity()
         riverName = i.getStringExtra(Params.RIVER_NAME)!!
 
         setTitle(riverName)
-        DownloadRiverContent(this).execute(riverUrl)
+        DownloadRiverContent(this, false).execute(riverUrl)
     }
 
     public override fun onBackPressed() {
@@ -52,7 +52,7 @@ public class RiverActivity() : SherlockListActivity()
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
             R.id.river_menu_refresh, REFRESH -> {
-                DownloadRiverContent(this).execute(riverUrl)
+                DownloadRiverContent(this, true).execute(riverUrl)
                 return true
             }
             else ->
