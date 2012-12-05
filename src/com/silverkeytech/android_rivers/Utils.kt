@@ -59,7 +59,7 @@ public enum class Duration {
     QUICK
     AVERAGE
     LONG
-    public fun toInt() = when(this) {
+    public fun toInt() : Int = when(this) {
         QUICK -> 3000
         AVERAGE -> 10000
         LONG -> 20000
