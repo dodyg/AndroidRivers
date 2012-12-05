@@ -59,15 +59,10 @@ public enum class Duration {
     QUICK
     AVERAGE
     LONG
-    public fun toInt(): Int{
-        if (this == Duration.QUICK)
-            return 3000
-        else if (this == Duration.AVERAGE)
-            return 10000
-        else if (this == Duration.LONG)
-            return 20000
-        else
-            return 5000
+    public fun toInt() = when(this) {
+        QUICK -> 3000
+        AVERAGE -> 10000
+        LONG -> 20000
     }
 }
 
