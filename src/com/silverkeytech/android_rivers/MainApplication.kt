@@ -59,7 +59,7 @@ public class MainApplication(): Application()
 
     public fun setRiverCache(uri: String, river: List<FeedItemMeta>) {
         var item = CacheItem(river)
-        item.setExpireInMinutesFromNow(15)
+        item.setExpireInMinutesFromNow(60)
         riverCache.put(uri, item)
     }
 

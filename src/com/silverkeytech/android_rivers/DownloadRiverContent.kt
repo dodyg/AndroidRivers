@@ -86,11 +86,12 @@ public class DownloadRiverContent(it: Context?, ignoreCache: Boolean): AsyncTask
                 var river = result.value!!
 
                 //Take all the news items from several different feeds and combine them into one.
-                for(var f : FeedSite? in river.updatedFeeds?.updatedFeed?.iterator()){
+
+                for(val f : FeedSite? in river.updatedFeeds?.updatedFeed?.iterator()){
                     if (f != null){
-                        for(var fi in f?.item?.iterator()){
-                            if (fi != null) {
-                                newsItems.add(FeedItemMeta(fi!!, f?.feedTitle, f?.feedUrl))
+                        f.item?.forEach{
+                            if (it != null) {
+                                newsItems.add(FeedItemMeta(it, f.feedTitle, f.feedUrl))
                             }
                         }
                     }
