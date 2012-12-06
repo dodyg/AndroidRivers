@@ -37,9 +37,7 @@ public class RiverContentRenderer(val context: Activity){
 
     //show and prepare the interaction for each individual news item
     fun handleNewsListing(sortedNewsItems: List<FeedItemMeta>) {
-
-
-        var textSize = context.getVisualPref().getListTextSize()
+        val textSize = context.getVisualPref().getListTextSize()
 
         //now sort it so people always have the latest news first
 
@@ -98,7 +96,7 @@ public class RiverContentRenderer(val context: Activity){
 
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
-                var currentNews = sortedNewsItems.get(p2);
+                val currentNews = sortedNewsItems.get(p2);
 
                 var dialog = AlertDialog.Builder(context)
 
@@ -114,7 +112,7 @@ public class RiverContentRenderer(val context: Activity){
                     }
                 })
 
-                var currentLink = currentNews.item.link
+                val currentLink = currentNews.item.link
                 val currentNewsLinkAvailable: Boolean = !currentLink.isNullOrEmpty() && currentLink!!.trim().indexOf("http") == 0
 
                 //check for go link
@@ -146,7 +144,7 @@ public class RiverContentRenderer(val context: Activity){
                                 var messenger = Messenger(object : Handler(){
                                     public override fun handleMessage(msg: Message?) {
                                         if (msg != null){
-                                            var path = msg.obj as String
+                                            val path = msg.obj as String
 
                                             if (msg.arg1 == Activity.RESULT_OK && !path.isNullOrEmpty()){
                                                 context.toastee("File is successfully downloaded at $path", Duration.LONG)

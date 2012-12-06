@@ -40,9 +40,9 @@ public class RiverActivity(): SherlockListActivity()
 
         if (cache != null && !ignoreCache){
             Log.d(TAG, "Cache is hit for url $riverUrl")
-            var now = System.currentTimeMillis()
+            val now = System.currentTimeMillis()
             RiverContentRenderer(this).handleNewsListing(cache!!)
-            var after = System.currentTimeMillis()
+            val after = System.currentTimeMillis()
             Log.d(TAG, "Cache display takes ${after - now} ms")
         }
         else
@@ -158,7 +158,7 @@ public class ResizeTextActionMode (private var context: RiverActivity, private v
         ?.setIcon(android.R.drawable.btn_plus)
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
-        var switchText = when(context.getVisualPref().getTheme()){
+        val switchText = when(context.getVisualPref().getTheme()){
             R.style.Theme_Sherlock -> "Light Theme"
             R.style.Theme_Sherlock_Light_DarkActionBar -> "Dark Theme"
             else -> ""

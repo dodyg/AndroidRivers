@@ -49,11 +49,11 @@ public class DownloadSubscription(it: Context?, ignoreCache: Boolean): AsyncTask
 
     protected override fun doInBackground(vararg url: String?): Result<Opml>? {
         try{
-            var cache = context.getApplication().getMain().getSubscriptionListCache()
+            val cache = context.getApplication().getMain().getSubscriptionListCache()
 
             if (cache != null && !ignoreCache){
                 Log.d(TAG, "Cache is hit for subscription list")
-                return Result.right(cache!!)
+                return Result.right(cache)
             }
             else {
                 Log.d(TAG, "Cache is missed for subscription list")
@@ -67,16 +67,16 @@ public class DownloadSubscription(it: Context?, ignoreCache: Boolean): AsyncTask
                     return Result.wrong(ex)
                 }
 
-                var opml = transformFromXml(req)
+                val opml = transformFromXml(req)
 
                 if(opml.isTrue()){
-                    var ct = opml.value?.body?.outline?.count()
+                    val ct = opml.value?.body?.outline?.count()
 
-                    if (ct != null && ct!! > 0){
+                    if (ct != null && ct > 0){
                         var cnt: Float = 1.toFloat();
-                        var divisor = ct!!.toFloat()
+                        var divisor = ct.toFloat()
 
-                        while(cnt < ct!!){
+                        while(cnt < ct){
                             var progress = Math.round((cnt / divisor) * 100.toFloat());
                             publishProgress(progress);
                             Thread.sleep(200)
@@ -119,7 +119,7 @@ public class DownloadSubscription(it: Context?, ignoreCache: Boolean): AsyncTask
         }
         else{
             if (result.isFalse()){
-                var error = ConnectivityErrorMessage(
+                val error = ConnectivityErrorMessage(
                         timeoutException = "Sorry, we cannot download this subscription list. The subscription site might be down",
                         socketException = "Sorry, we cannot download this subscription list. Please check your Internet connection, it might be down",
                         otherException = "Sorry, we cannot download this subscription list for the following technical reason : ${result.exception.toString()}"
@@ -172,7 +172,7 @@ public class DownloadSubscription(it: Context?, ignoreCache: Boolean): AsyncTask
 
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
-                var currentOutline = values.get(p2)
+                val currentOutline = values.get(p2)
 
                 var i = Intent(context, javaClass<RiverActivity>())
                 i.putExtra(Params.RIVER_URL, currentOutline.url)
@@ -182,6 +182,4 @@ public class DownloadSubscription(it: Context?, ignoreCache: Boolean): AsyncTask
             }
         })
     }
-
-
 }

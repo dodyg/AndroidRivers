@@ -34,7 +34,6 @@ public class DownloadService(): IntentService("DownloadService"){
     fun prepareNotification(inferredName: String, title: String, filePath: String): Notification {
         var notificationIntent = Intent(Intent.ACTION_MAIN)
         notificationIntent.setClass(getApplicationContext(), javaClass<MainActivity>())
-
         notificationIntent.putExtra(PARAM_DOWNLOAD_LOCATION_PATH, filePath)
 
         var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT)
@@ -69,11 +68,11 @@ public class DownloadService(): IntentService("DownloadService"){
 
         var notification: Notification? = null
 
-        var notificationId = Random().nextLong().toInt()
+        val notificationId = Random().nextLong().toInt()
         var notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         try{
-            var url = URL(targetUrl)
+            val url = URL(targetUrl)
             var connection = url.openConnection()!!
             connection.connect()
 

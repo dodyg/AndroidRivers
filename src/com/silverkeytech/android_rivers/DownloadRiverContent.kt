@@ -51,14 +51,14 @@ public class DownloadRiverContent(it: Context?, ignoreCache: Boolean): AsyncTask
             req = HttpRequest.get(url)?.body()
         }
         catch(e: HttpRequestException){
-            var ex = e.getCause()
+            val ex = e.getCause()
             return Result.wrong(ex)
         }
 
         try{
-            var gson = Gson()
-            var scrubbed = scrubJsonP(req!!)
-            var feeds = gson.fromJson(scrubbed, javaClass<FeedsRiver>())!!
+            val gson = Gson()
+            val scrubbed = scrubJsonP(req!!)
+            val feeds = gson.fromJson(scrubbed, javaClass<FeedsRiver>())!!
 
             return Result.right(feeds)
         }
@@ -113,7 +113,6 @@ public class DownloadRiverContent(it: Context?, ignoreCache: Boolean): AsyncTask
                 })
 
                 context.getApplication().getMain().setRiverCache(url, sortedNewsItems)
-
                 RiverContentRenderer(context).handleNewsListing(sortedNewsItems)
             }
         }
