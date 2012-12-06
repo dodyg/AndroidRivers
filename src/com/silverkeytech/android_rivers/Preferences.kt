@@ -35,8 +35,9 @@ public class VisualPreference (public val pref: SharedPreferences){
     }
 
     public fun getTheme(): Int = pref.getInt(Preferences.VISUAL_THEME, PreferenceDefaults.VISUAL_THEME)
+
     public fun switchTheme() {
-        var currentTheme = getTheme()
+        val currentTheme = getTheme()
 
         var newTheme = when(currentTheme){
             R.style.Theme_Sherlock -> R.style.Theme_Sherlock_Light_DarkActionBar

@@ -75,7 +75,7 @@ public class DownloadRiverContent(it: Context?, ignoreCache: Boolean): AsyncTask
             context.toastee("Sorry, we cannot process this feed because the operation is cancelled", Duration.AVERAGE)
         else {
             if (result.isFalse()){
-                var error = ConnectivityErrorMessage(
+                val error = ConnectivityErrorMessage(
                         timeoutException = "Sorry, we cannot download this feed. The feed site might be down.",
                         socketException = "Sorry, we cannot download this feed. Please check your Internet connection, it might be down.",
                         otherException = "Sorry, we cannot download this feed for the following technical reason : ${result.exception.toString()}"

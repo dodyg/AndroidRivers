@@ -13,8 +13,8 @@ public data class Result<T: Any>(p1: T?, p2: Exception? = null){
         }
     }
 
-    public var value: T? = p1
-    public var exception: Exception? = p2
+    public val value: T? = p1
+    public val exception: Exception? = p2
 
     public fun isTrue(): Boolean {
         return exception == null

@@ -43,16 +43,16 @@ public class MainApplication(): Application()
     }
 
     public fun getRiverCache (uri: String): List<FeedItemMeta>? {
-        var content = riverCache.get(uri)
+        val content = riverCache.get(uri)
 
         if (content == null)
             return null
         else{
-            if (content!!.isExpired){
+            if (content.isExpired){
                 riverCache.remove(uri)
                 return null
             }else{
-                return content?.item
+                return content.item
             }
         }
     }

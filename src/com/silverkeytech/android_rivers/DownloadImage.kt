@@ -37,19 +37,17 @@ public class DownloadImage(it: Context?): AsyncTask<String, Int, Result<Download
 
     protected override fun doInBackground(p0: Array<String?>): Result<DownloadedFile>? {
         try{
+            val req = HttpRequest.get(p0[0])
+            val mimeType = req?.contentType()
+            val dir = context.getCacheDir()!!.getPath()
+            val fileName = dir + "/" + generateThrowawayName() + imageMimeTypeToFileExtension(mimeType!!)
 
-            var req = HttpRequest.get(p0[0])
-            var mimeType = req?.contentType()
-
-            var dir = context.getCacheDir()!!.getPath()
-
-            var fileName = dir + "/" + generateThrowawayName() + imageMimeTypeToFileExtension(mimeType!!)
             Log.d(TAG, "File to be saved at ${fileName}")
-            var output = File(fileName)
 
+            var output = File(fileName)
             req!!.receive(output)
 
-            return Result.right(DownloadedFile(mimeType!!, fileName))
+            return Result.right(DownloadedFile(mimeType, fileName))
         }catch(e: HttpRequestException){
             return Result.wrong(e)
         }
@@ -103,7 +101,7 @@ public class DownloadImage(it: Context?): AsyncTask<String, Int, Result<Download
                 dialog.show()
 
             } else if (result.isFalse()){
-                var error = ConnectivityErrorMessage(
+                val error = ConnectivityErrorMessage(
                         timeoutException = "Sorry, we cannot download this image. The feed site might be down.",
                         socketException = "Sorry, we cannot download this image. Please check your Internet connection, it might be down.",
                         otherException = "Sorry, we cannot download this image for the following technical reason : ${result.exception.toString()}"

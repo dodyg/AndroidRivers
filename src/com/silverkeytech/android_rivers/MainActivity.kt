@@ -21,7 +21,7 @@ public open class MainActivity(): SherlockActivity() {
         setContentView(R.layout.main)
         var intent = getIntent()
         if(intent != null){
-            var locationPath = intent!!.getStringExtra(DownloadService.PARAM_DOWNLOAD_LOCATION_PATH)
+            val locationPath = intent!!.getStringExtra(DownloadService.PARAM_DOWNLOAD_LOCATION_PATH)
             if (!locationPath.isNullOrEmpty()){
                 try{
                     var playIntent = Intent()
