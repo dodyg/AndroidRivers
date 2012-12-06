@@ -3,11 +3,9 @@ package com.silverkeytech.android_rivers
 import android.os.Bundle
 import android.util.Log
 import com.actionbarsherlock.app.SherlockListActivity
+import com.actionbarsherlock.view.ActionMode
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
-import com.actionbarsherlock.view.ActionMode
-import android.app.Activity
-import android.content.Context
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity() : SherlockListActivity()
@@ -151,9 +149,6 @@ public class ResizeTextActionMode (private var context : RiverActivity, private 
     }
 
     public override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-        menu?.add(0, SWITCH_THEME, 0 , "Switch Theme")
-        ?.setIcon(R.drawable.monitor)
-        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
         menu?.add(0, DECREASE_SIZE, 0, "Decrease Text Size")
             ?.setIcon(android.R.drawable.btn_minus)
@@ -162,6 +157,15 @@ public class ResizeTextActionMode (private var context : RiverActivity, private 
         menu?.add(0, INCREASE_SIZE, 0, "Increase Text Size")
             ?.setIcon(android.R.drawable.btn_plus)
             ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+
+        var switchText = when(context.getVisualPref().getTheme()){
+            R.style.Theme_Sherlock -> "Light Theme"
+            R.style.Theme_Sherlock_Light_DarkActionBar -> "Dark Theme"
+            else -> ""
+        }
+
+        menu?.add(0, SWITCH_THEME, 0 , switchText)
+        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
 
         return true
     }

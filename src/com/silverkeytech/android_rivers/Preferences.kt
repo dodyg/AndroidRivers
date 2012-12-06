@@ -1,10 +1,8 @@
 package com.silverkeytech.android_rivers
 
-
 import android.app.Activity
-import android.content.SharedPreferences
 import android.content.Context
-
+import android.content.SharedPreferences
 
 public class Preferences{
     class object{
