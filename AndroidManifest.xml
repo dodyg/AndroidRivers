@@ -18,6 +18,7 @@
         </activity>
         <activity android:name="RiverActivity" android:configChanges="keyboardHidden|orientation"
                   android:theme="@style/Theme.Sherlock.Light.DarkActionBar"
+
                 >
             <intent-filter>
 

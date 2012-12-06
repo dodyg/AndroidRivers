@@ -7,6 +7,7 @@ import com.silverkeytech.android_rivers.outlines.Opml
 import android.util.Log
 import java.util.ArrayList
 import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
+import android.content.Context
 
 fun Application?.getMain() : MainApplication{
     return this!! as MainApplication

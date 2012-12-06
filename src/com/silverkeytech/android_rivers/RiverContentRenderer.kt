@@ -37,8 +37,11 @@ public class RiverContentRenderer(val context: Activity){
     //hold the view data for the list
     public data class ViewHolder (var news: TextView, val indicator: TextView)
 
+
     //show and prepare the interaction for each individual news item
     fun handleNewsListing(sortedNewsItems : List<FeedItemMeta>) {
+
+        var textSize = context.getVisualPref().getListTextSize()
 
         //now sort it so people always have the latest news first
 
@@ -76,7 +79,7 @@ public class RiverContentRenderer(val context: Activity){
                     holder = ViewHolder(currentView!!.findViewById(R.id.news_item_text_tv) as TextView,
                             currentView!!.findViewById(R.id.news_item_indicator_tv) as TextView)
 
-                    holder?.news?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24.toFloat())
+                    holder?.news?.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize.toFloat())
                     currentView!!.setTag(holder)
                 }else{
                     holder = currentView?.getTag() as ViewHolder

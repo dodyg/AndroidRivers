@@ -5,6 +5,9 @@ import android.util.Log
 import com.actionbarsherlock.app.SherlockListActivity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
+import com.actionbarsherlock.view.ActionMode
+import android.app.Activity
+import android.content.Context
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity() : SherlockListActivity()
@@ -15,6 +18,7 @@ public class RiverActivity() : SherlockListActivity()
 
     var riverUrl : String = ""
     var riverName : String = ""
+    var mode : ActionMode? = null
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         super.onCreate(savedInstanceState)
@@ -53,7 +57,13 @@ public class RiverActivity() : SherlockListActivity()
 
     val REFRESH : Int = 1
 
+    val RESIZE_TEXT : Int = 2
+
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menu?.add(0, RESIZE_TEXT, 0, "Resize Text")
+        ?.setIcon(android.R.drawable.ic_menu_preferences)
+        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+
         menu?.add(0, REFRESH, 0, "Refresh")
         ?.setIcon(R.drawable.ic_menu_refresh)
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
@@ -64,14 +74,83 @@ public class RiverActivity() : SherlockListActivity()
         return true
     }
 
+    internal fun refreshContent(){
+        downloadContent(riverUrl, false)
+    }
+
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
             R.id.river_menu_refresh, REFRESH -> {
                 downloadContent(riverUrl, true)
                 return true
             }
+            RESIZE_TEXT -> {
+                mode = startActionMode(ResizeTextActionMode(this, mode))
+                return true
+            }
             else ->
                 return super.onOptionsItemSelected(item)
         }
+    }
+}
+
+public class ResizeTextActionMode (private var context : RiverActivity, private var mode : ActionMode?) : ActionMode.Callback{
+
+    val INCREASE_SIZE = 1
+    val DECREASE_SIZE = 2
+
+
+    //Get the display text size from preference
+    fun increaseTextSize(){
+        var pref = context.getVisualPref()
+        var textSize = pref.getListTextSize()
+        textSize += 2
+        pref.setListTextSize(textSize)
+    }
+
+    fun decreaseTextSize(){
+        var pref = context.getVisualPref()
+        var textSize = pref.getListTextSize()
+        textSize -= 2
+        pref.setListTextSize(textSize)
+    }
+
+    public override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+        when(item!!.getItemId()){
+            INCREASE_SIZE -> {
+                increaseTextSize()
+                context.refreshContent()
+            }
+            DECREASE_SIZE -> {
+                decreaseTextSize()
+                context.refreshContent()
+            }
+            else -> {
+                if (mode != null)
+                    mode.finish()
+            }
+        }
+
+        return true
+    }
+
+    public override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+        return false
+    }
+
+    public override fun onDestroyActionMode(mode: ActionMode?) {
+
+    }
+
+    public override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+        menu?.add(0, DECREASE_SIZE, 0, "Minus")
+            ?.setIcon(android.R.drawable.btn_minus)
+            ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+
+        menu?.add(0, INCREASE_SIZE, 0, "Plus")
+            ?.setIcon(android.R.drawable.btn_plus)
+            ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+
+        return true
     }
 }
