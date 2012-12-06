@@ -41,6 +41,7 @@ public class RiverContentRenderer(val context: Activity){
     //show and prepare the interaction for each individual news item
     fun handleNewsListing(sortedNewsItems : List<FeedItemMeta>) {
 
+
         var textSize = context.getVisualPref().getListTextSize()
 
         //now sort it so people always have the latest news first

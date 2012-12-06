@@ -16,10 +16,9 @@ public open class MainActivity(): SherlockActivity() {
     val DEFAULT_SUBSCRIPTION_LIST = "http://hobieu.apphb.com/api/1/default/riverssubscription"
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
+        setTheme(this.getVisualPref().getTheme())
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
-
-
         var intent = getIntent()
         if(intent != null){
             var locationPath = intent!!.getStringExtra(DownloadService.PARAM_DOWNLOAD_LOCATION_PATH)
@@ -43,7 +42,6 @@ public open class MainActivity(): SherlockActivity() {
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         var inflater = getSupportMenuInflater()!!
         inflater.inflate(R.menu.subscription_menu, menu)
-
         return true
     }
 

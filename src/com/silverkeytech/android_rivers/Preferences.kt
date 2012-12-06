@@ -17,7 +17,7 @@ public class Preferences{
 public class PreferenceDefaults{
     class object {
         public val VISUAL_LIST_TEXT_SIZE: Int = 24
-        public val VISUAL_THEME : String = "LIGHT"
+        public val VISUAL_THEME : Int = R.style.Theme_Sherlock_Light_DarkActionBar
     }
 }
 
@@ -33,6 +33,21 @@ public class VisualPreference (public val pref : SharedPreferences){
 
         var edit = pref.edit()!!
         edit.putInt(Preferences.VISUAL_LIST_TEXT_SIZE, size)
+        edit.commit()
+    }
+
+    public fun getTheme() : Int = pref.getInt(Preferences.VISUAL_THEME, PreferenceDefaults.VISUAL_THEME)
+    public fun switchTheme(){
+        var currentTheme = getTheme()
+
+        var newTheme = when(currentTheme){
+            R.style.Theme_Sherlock -> R.style.Theme_Sherlock_Light_DarkActionBar
+            R.style.Theme_Sherlock_Light_DarkActionBar -> R.style.Theme_Sherlock
+            else -> R.style.Theme_Sherlock
+        }
+
+        var edit = pref.edit()!!
+        edit.putInt(Preferences.VISUAL_THEME, newTheme)
         edit.commit()
     }
 }

@@ -21,6 +21,7 @@ public class RiverActivity() : SherlockListActivity()
     var mode : ActionMode? = null
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
+        setTheme(this.getVisualPref().getTheme())
         super.onCreate(savedInstanceState)
         setContentView(R.layout.river)
 
@@ -60,6 +61,7 @@ public class RiverActivity() : SherlockListActivity()
     val RESIZE_TEXT : Int = 2
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
         menu?.add(0, RESIZE_TEXT, 0, "Resize Text")
         ?.setIcon(android.R.drawable.ic_menu_preferences)
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
@@ -95,10 +97,9 @@ public class RiverActivity() : SherlockListActivity()
 }
 
 public class ResizeTextActionMode (private var context : RiverActivity, private var mode : ActionMode?) : ActionMode.Callback{
-
     val INCREASE_SIZE = 1
     val DECREASE_SIZE = 2
-
+    val SWITCH_THEME : Int = 3
 
     //Get the display text size from preference
     fun increaseTextSize(){
@@ -125,6 +126,13 @@ public class ResizeTextActionMode (private var context : RiverActivity, private 
                 decreaseTextSize()
                 context.refreshContent()
             }
+            SWITCH_THEME -> {
+                context.getVisualPref().switchTheme()
+                var intent = context.getIntent()
+                context.finish()
+                context.startActivity(intent)
+                return true
+            }
             else -> {
                 if (mode != null)
                     mode.finish()
@@ -143,13 +151,17 @@ public class ResizeTextActionMode (private var context : RiverActivity, private 
     }
 
     public override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+        menu?.add(0, SWITCH_THEME, 0 , "Switch Theme")
+        ?.setIcon(R.drawable.monitor)
+        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+
         menu?.add(0, DECREASE_SIZE, 0, "Minus")
             ?.setIcon(android.R.drawable.btn_minus)
-            ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+            ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
         menu?.add(0, INCREASE_SIZE, 0, "Plus")
             ?.setIcon(android.R.drawable.btn_plus)
-            ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+            ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
         return true
     }
