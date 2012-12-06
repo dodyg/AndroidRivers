@@ -155,11 +155,11 @@ public class ResizeTextActionMode (private var context : RiverActivity, private 
         ?.setIcon(R.drawable.monitor)
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
-        menu?.add(0, DECREASE_SIZE, 0, "Minus")
+        menu?.add(0, DECREASE_SIZE, 0, "Decrease Text Size")
             ?.setIcon(android.R.drawable.btn_minus)
             ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
-        menu?.add(0, INCREASE_SIZE, 0, "Plus")
+        menu?.add(0, INCREASE_SIZE, 0, "Increase Text Size")
             ?.setIcon(android.R.drawable.btn_plus)
             ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
