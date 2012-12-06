@@ -9,10 +9,10 @@ import android.util.Log
 import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.google.gson.Gson
+import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
+import com.silverkeytech.android_rivers.riverjs.FeedSite
 import com.silverkeytech.android_rivers.riverjs.FeedsRiver
 import java.util.ArrayList
-import com.silverkeytech.android_rivers.riverjs.FeedSite
-import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
 
 //Responsible for handling a river js downloading and display in asynchronous way
 public class DownloadRiverContent(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<FeedsRiver>>(){
@@ -39,7 +39,7 @@ public class DownloadRiverContent(it: Context?, ignoreCache: Boolean): AsyncTask
         dialog.show()
     }
 
-    var url : String = ""
+    var url: String = ""
 
     //Download river data in a thread
     protected override fun doInBackground(vararg p0: String?): Result<FeedsRiver>? {
@@ -96,7 +96,7 @@ public class DownloadRiverContent(it: Context?, ignoreCache: Boolean): AsyncTask
                     }
                 }
 
-                var sortedNewsItems = newsItems.filter { x -> x.item.isPublicationDate()!! }.sort(comparator { (p1, p2) ->
+                var sortedNewsItems = newsItems.filter { x -> x.item.isPublicationDate()!! }.sort(comparator {(p1, p2) ->
                     val date1 = p1.item.getPublicationDate()
                     val date2 = p2.item.getPublicationDate()
 

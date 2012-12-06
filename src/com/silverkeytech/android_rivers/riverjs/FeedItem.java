@@ -17,21 +17,19 @@ public class FeedItem {
     public ArrayList<FeedImage> thumbnail;
     public ArrayList<FeedEnclosure> enclosure;
 
-    public Boolean isPublicationDate (){
+    public Boolean isPublicationDate() {
         return pubDate != null && pubDate != "";
     }
 
-    public Date getPublicationDate(){
-        try
-        {
+    public Date getPublicationDate() {
+        try {
             return DateHelper.parseRFC822(pubDate);
-        }
-        catch (ParseException e){
+        } catch (ParseException e) {
             return null;
         }
     }
 
-    public Boolean containsEnclosure(){
+    public Boolean containsEnclosure() {
         return enclosure != null && !enclosure.isEmpty();
     }
 

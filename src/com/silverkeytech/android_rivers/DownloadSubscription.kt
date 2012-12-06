@@ -24,14 +24,14 @@ import java.util.ArrayList
 import org.simpleframework.xml.Serializer
 import org.simpleframework.xml.core.Persister
 
-public class DownloadSubscription(it: Context?, ignoreCache : Boolean): AsyncTask<String, Int, Result<Opml>>(){
+public class DownloadSubscription(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<Opml>>(){
     class object {
         public val TAG: String = javaClass<DownloadSubscription>().getSimpleName()
     }
 
     var dialog: ProgressDialog = ProgressDialog(it)
     var context: Activity = it!! as Activity
-    val ignoreCache : Boolean = ignoreCache
+    val ignoreCache: Boolean = ignoreCache
 
     protected override fun onPreExecute() {
         dialog.setMessage(context.getString(R.string.please_wait_while_downloading_news_rivers_list))

@@ -5,24 +5,24 @@ import android.media.MediaScannerConnection
 import android.net.Uri
 import android.util.Log
 
-public class MediaScannerWrapper (val context : Context, val filePath : String, val mimeType : String )
-    : MediaScannerConnection.MediaScannerConnectionClient{
+public class MediaScannerWrapper (val context: Context, val filePath: String, val mimeType: String)
+: MediaScannerConnection.MediaScannerConnectionClient{
 
     class object {
         public val TAG: String = javaClass<MediaScannerWrapper>().getSimpleName()
 
-        fun scanPodcasts(context :Context, filePath : String){
-            var scanner = MediaScannerWrapper(context, filePath, "audio/mpeg" )
+        fun scanPodcasts(context: Context, filePath: String) {
+            var scanner = MediaScannerWrapper(context, filePath, "audio/mpeg")
             scanner.scan()
         }
     }
 
-    var connection : MediaScannerConnection
+    var connection: MediaScannerConnection
     {
         connection = MediaScannerConnection(context, this)
     }
 
-    public fun scan(){
+    public fun scan() {
         connection.connect()
     }
 

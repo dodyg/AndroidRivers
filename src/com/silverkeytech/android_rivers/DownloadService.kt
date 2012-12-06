@@ -19,19 +19,19 @@ import java.io.FileOutputStream
 import java.net.URL
 import java.util.Random
 
-public class DownloadService() : IntentService("DownloadService"){
+public class DownloadService(): IntentService("DownloadService"){
     class object{
-        public val PARAM_DOWNLOAD_URL : String= "downloadUrl"
-        public val PARAM_DOWNLOAD_TITLE : String = "downloadTitle"
-        public val PARAM_DOWNLOAD_LOCATION_PATH : String = "downloadLocationPath"
+        public val PARAM_DOWNLOAD_URL: String = "downloadUrl"
+        public val PARAM_DOWNLOAD_TITLE: String = "downloadTitle"
+        public val PARAM_DOWNLOAD_LOCATION_PATH: String = "downloadLocationPath"
 
         public val TAG: String = javaClass<DownloadService>().getSimpleName()
     }
 
-    var targetUrl : String? = null
-    var targetTitle : String? = null
+    var targetUrl: String? = null
+    var targetTitle: String? = null
 
-    fun prepareNotification(inferredName : String, title : String, filePath : String) : Notification{
+    fun prepareNotification(inferredName: String, title: String, filePath: String): Notification {
         var notificationIntent = Intent(Intent.ACTION_MAIN)
         notificationIntent.setClass(getApplicationContext(), javaClass<MainActivity>())
 
@@ -65,9 +65,9 @@ public class DownloadService() : IntentService("DownloadService"){
         var inferredName = getFileNameFromUri(targetUrl!!)
 
         var result = Activity.RESULT_CANCELED
-        var filename : String = ""
+        var filename: String = ""
 
-        var notification : Notification? = null
+        var notification: Notification? = null
 
         var notificationId = Random().nextLong().toInt()
         var notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -77,7 +77,7 @@ public class DownloadService() : IntentService("DownloadService"){
             var connection = url.openConnection()!!
             connection.connect()
 
-            var fileLength : Int = connection.getContentLength()
+            var fileLength: Int = connection.getContentLength()
 
             Log.d(TAG, "File length $fileLength")
 
@@ -85,7 +85,7 @@ public class DownloadService() : IntentService("DownloadService"){
                 inferredName = generateThrowawayName() + ".mp3"
 
             var directory = Environment.getExternalStorageDirectory()!!.getPath() + "/" + Environment.DIRECTORY_PODCASTS
-            filename  = directory + "/" + inferredName
+            filename = directory + "/" + inferredName
 
             notification = prepareNotification(inferredName!!, targetTitle!!, filename)
 
@@ -96,14 +96,14 @@ public class DownloadService() : IntentService("DownloadService"){
             var input = BufferedInputStream(url.openStream()!!)
             var output = FileOutputStream(filename)
 
-            var data =  ByteArray(1024)
+            var data = ByteArray(1024)
             Log.d(TAG, "Length of byte array ${data.size}")
-            var total : Long = 0
-            var progress : Int = 0
+            var total: Long = 0
+            var progress: Int = 0
 
-            var count : Int = input.read(data)
+            var count: Int = input.read(data)
 
-            var oldProgress : Int
+            var oldProgress: Int
 
             while (count != -1){
                 total += count
@@ -129,7 +129,7 @@ public class DownloadService() : IntentService("DownloadService"){
 
             result = Activity.RESULT_OK
         }
-        catch(e : HttpRequestException){
+        catch(e: HttpRequestException){
             Log.d(TAG, "Exception happend at attempt to download ${e.getMessage()}")
             notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "File $inferredName download cancelled")
             notificationManager.notify(notificationId, notification)
@@ -144,7 +144,7 @@ public class DownloadService() : IntentService("DownloadService"){
             try{
                 messenger.send(msg)
             }
-            catch(e : RemoteException){
+            catch(e: RemoteException){
                 Log.d(TAG, "Have problem when try to send a message ")
             }
         }

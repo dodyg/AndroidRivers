@@ -21,9 +21,6 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
 import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
-import com.silverkeytech.android_rivers.riverjs.FeedSite
-import com.silverkeytech.android_rivers.riverjs.FeedsRiver
-import java.util.ArrayList
 
 public class RiverContentRenderer(val context: Activity){
     class object {
@@ -39,7 +36,7 @@ public class RiverContentRenderer(val context: Activity){
 
 
     //show and prepare the interaction for each individual news item
-    fun handleNewsListing(sortedNewsItems : List<FeedItemMeta>) {
+    fun handleNewsListing(sortedNewsItems: List<FeedItemMeta>) {
 
 
         var textSize = context.getVisualPref().getListTextSize()
@@ -117,10 +114,11 @@ public class RiverContentRenderer(val context: Activity){
                     }
                 })
 
-                val newItemLinkAvailable: Boolean = !currentNews.item.link.isNullOrEmpty() && currentNews.item.link!!.indexOf("http") > -1
+                var currentLink = currentNews.item.link
+                val currentNewsLinkAvailable: Boolean = !currentLink.isNullOrEmpty() && currentLink!!.trim().indexOf("http") == 0
 
                 //check for go link
-                if (newItemLinkAvailable){
+                if (currentNewsLinkAvailable){
                     dialog.setNeutralButton("Go", object : DialogInterface.OnClickListener{
                         public override fun onClick(p0: DialogInterface?, p1: Int) {
                             var i = Intent("android.intent.action.VIEW", Uri.parse(currentNews.item.link))
@@ -172,7 +170,7 @@ public class RiverContentRenderer(val context: Activity){
                     }
                 }else{
                     //there is not enclosure detected, so enable sharing
-                    if (newItemLinkAvailable) {
+                    if (currentNewsLinkAvailable) {
                         dialog.setNegativeButton("Share", object : DialogInterface.OnClickListener{
                             public override fun onClick(p0: DialogInterface?, p1: Int) {
                                 var intent = Intent(Intent.ACTION_SEND)

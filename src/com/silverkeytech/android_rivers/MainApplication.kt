@@ -2,32 +2,29 @@ package com.silverkeytech.android_rivers
 
 import android.app.Application
 import android.support.v4.util.LruCache
-import com.silverkeytech.android_rivers.riverjs.FeedsRiver
-import com.silverkeytech.android_rivers.outlines.Opml
 import android.util.Log
-import java.util.ArrayList
+import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
-import android.content.Context
 
-fun Application?.getMain() : MainApplication{
+fun Application?.getMain(): MainApplication {
     return this!! as MainApplication
 }
 
-public class MainApplication() : Application()
+public class MainApplication(): Application()
 {
     class object {
         public val TAG: String = javaClass<MainApplication>().getSimpleName()
     }
 
-    var riverCache : LruCache<String, CacheItem<List<FeedItemMeta>>>  = LruCache<String, CacheItem<List<FeedItemMeta>>>(inMegaByte(4))
-    var subscriptionCache : CacheItem<Opml>? = null
+    var riverCache: LruCache<String, CacheItem<List<FeedItemMeta>>> = LruCache<String, CacheItem<List<FeedItemMeta>>>(inMegaByte(4))
+    var subscriptionCache: CacheItem<Opml>? = null
 
     public override fun onCreate() {
         Log.d(TAG, "Main Application is started")
         super<Application>.onCreate()
     }
 
-    public fun getSubscriptionListCache() : Opml? {
+    public fun getSubscriptionListCache(): Opml? {
         if (subscriptionCache == null)
             return null
         else{
@@ -40,12 +37,12 @@ public class MainApplication() : Application()
         }
     }
 
-    public fun setSubscriptionListCache(opml : Opml){
+    public fun setSubscriptionListCache(opml: Opml) {
         subscriptionCache = CacheItem(opml)
         subscriptionCache?.setExpireInMinutesFromNow(600)
     }
 
-    public fun getRiverCache (uri : String) : List<FeedItemMeta>? {
+    public fun getRiverCache (uri: String): List<FeedItemMeta>? {
         var content = riverCache.get(uri)
 
         if (content == null)
@@ -60,7 +57,7 @@ public class MainApplication() : Application()
         }
     }
 
-    public fun setRiverCache(uri : String, river : List<FeedItemMeta>){
+    public fun setRiverCache(uri: String, river: List<FeedItemMeta>) {
         var item = CacheItem(river)
         item.setExpireInMinutesFromNow(15)
         riverCache.put(uri, item)

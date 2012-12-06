@@ -22,7 +22,7 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper
 import com.silverkeytech.android_rivers.db.Bookmark
 import java.sql.SQLException
 
-public class TryOutActivity() : Activity()
+public class TryOutActivity(): Activity()
 {
     class object {
         public val TAG: String = javaClass<TryOutActivity>().getSimpleName()
@@ -40,7 +40,7 @@ public class TryOutActivity() : Activity()
         handleInsertToBookmarkTable()
     }
 
-    fun handleDownloadGifImage(){
+    fun handleDownloadGifImage() {
         var btn = findView<Button>(R.id.tryout_download_gif_image_btn)
         btn.setOnClickListener {
             Log.d(TAG, "Start downloading gif image")
@@ -48,7 +48,7 @@ public class TryOutActivity() : Activity()
         }
     }
 
-    fun handleDownloadJpgImage(){
+    fun handleDownloadJpgImage() {
         var btn = findView<Button>(R.id.tryout_download_jpg_image_btn)
         btn.setOnClickListener {
             Log.d(TAG, "Start downloading jpeg image")
@@ -56,7 +56,7 @@ public class TryOutActivity() : Activity()
         }
     }
 
-    fun handleDownloadPngImage(){
+    fun handleDownloadPngImage() {
         var btn = findView<Button>(R.id.tryout_download_png_image_btn)
         btn.setOnClickListener {
             Log.d(TAG, "Start downloading png image")
@@ -64,7 +64,7 @@ public class TryOutActivity() : Activity()
         }
     }
 
-    fun handleDownloadFile(){
+    fun handleDownloadFile() {
         var btn = findView<Button>(R.id.tryout_download_file_btn)
         btn.setOnClickListener {
             Log.d(TAG, "Start downloading file")
@@ -88,12 +88,12 @@ public class TryOutActivity() : Activity()
         }
     }
 
-    fun  handleCreateBookmarkTable(){
+    fun  handleCreateBookmarkTable() {
         var btn = findView<Button>(R.id.tryout_setup_bookmark_table_btn)
 
         btn.setOnClickListener(object : OnClickListener{
             public override fun onClick(p0: View?) {
-                var connection : AndroidConnectionSource? = null
+                var connection: AndroidConnectionSource? = null
 
                 try{
                     connection = AndroidConnectionSource(OpenHelperManager.getHelper(this@TryOutActivity, javaClass<OrmLiteSqliteOpenHelper>()))
@@ -102,7 +102,7 @@ public class TryOutActivity() : Activity()
 
                     Log.d(TAG, "Table bookmarks created")
                 }
-                catch(e : SQLException){
+                catch(e: SQLException){
                     Log.d(TAG, "Exception when trying to create a Bookmark table ${e.getMessage()}")
                 }
                 finally{
@@ -113,18 +113,18 @@ public class TryOutActivity() : Activity()
         })
     }
 
-    fun handleInsertToBookmarkTable(){
+    fun handleInsertToBookmarkTable() {
         var btn = findView<Button>(R.id.tryout_insert_data_bookmark_table_btn)
 
         btn.setOnClickListener {
-            var connection : AndroidConnectionSource? = null
+            var connection: AndroidConnectionSource? = null
 
             try{
                 connection = AndroidConnectionSource(OpenHelperManager.getHelper(this@TryOutActivity, javaClass<OrmLiteSqliteOpenHelper>()))
 
                 Log.d(TAG, "Table bookmarks created")
             }
-            catch(e : SQLException){
+            catch(e: SQLException){
                 Log.d(TAG, "Exception when trying to create a Bookmark table ${e.getMessage()}")
             }
             finally{
@@ -136,9 +136,9 @@ public class TryOutActivity() : Activity()
 
     }
 
-    var counter : Int = 1
+    var counter: Int = 1
 
-    fun handleHandleNotification(){
+    fun handleHandleNotification() {
         var btn = findView<Button>(R.id.tryout_show_notification_btn)
         btn.setOnClickListener {
 
@@ -153,13 +153,13 @@ public class TryOutActivity() : Activity()
             var notification = NotificationCompat.Builder(this)
                     //.setContent()
                     .setTicker("This is the ticker")
-                    ?.setContentTitle("Android Rivers")
-                    ?.setContentText("Downloading a file")
-                    ?.setSmallIcon(android.R.drawable.gallery_thumb)
-                    ?.setProgress(100,10, true)
-                    ?.setWhen(System.currentTimeMillis())
-                    ?.setContentIntent(contentIntent)
-                    ?.build()
+            ?.setContentTitle("Android Rivers")
+            ?.setContentText("Downloading a file")
+            ?.setSmallIcon(android.R.drawable.gallery_thumb)
+            ?.setProgress(100, 10, true)
+            ?.setWhen(System.currentTimeMillis())
+            ?.setContentIntent(contentIntent)
+            ?.build()
 
             notification!!.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.download_progress)
 
@@ -179,8 +179,8 @@ public class TryOutActivity() : Activity()
                     try{
                         Thread.sleep(50)
                     }
-                    catch( e : InterruptedException){
-                         Log.d(TAG, "Exception ${e.getMessage()}")
+                    catch(e: InterruptedException){
+                        Log.d(TAG, "Exception ${e.getMessage()}")
                     }
                 }
                 //nm.cancel(counter);

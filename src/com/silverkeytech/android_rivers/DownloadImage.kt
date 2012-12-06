@@ -14,17 +14,17 @@ import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import java.io.File
 
-public data class DownloadedFile(val contentType : String, val filePath : String)
+public data class DownloadedFile(val contentType: String, val filePath: String)
 
 
-public class DownloadImage(it : Context?) : AsyncTask<String, Int, Result<DownloadedFile>>(){
+public class DownloadImage(it: Context?): AsyncTask<String, Int, Result<DownloadedFile>>(){
 
     class object {
         public val TAG: String = javaClass<DownloadImage>().getSimpleName()
     }
 
-    var dialog : ProgressDialog = ProgressDialog(it)
-    var context : Activity = it!! as Activity
+    var dialog: ProgressDialog = ProgressDialog(it)
+    var context: Activity = it!! as Activity
 
     protected override fun onPreExecute() {
         super<AsyncTask>.onPreExecute()
@@ -50,7 +50,7 @@ public class DownloadImage(it : Context?) : AsyncTask<String, Int, Result<Downlo
             req!!.receive(output)
 
             return Result.right(DownloadedFile(mimeType!!, fileName))
-        }catch(e : HttpRequestException){
+        }catch(e: HttpRequestException){
             return Result.wrong(e)
         }
     }
@@ -71,7 +71,7 @@ public class DownloadImage(it : Context?) : AsyncTask<String, Int, Result<Downlo
                 var inflater = context.getLayoutInflater()!!
                 var vw = inflater.inflate(R.layout.image_view, null)!!
 
-                var img : File = File(result.value!!.filePath)
+                var img: File = File(result.value!!.filePath)
 
                 if (!img.exists()){
                     context.toastee("Sorry, the image ${result.value} does not exist", Duration.AVERAGE)
@@ -80,12 +80,12 @@ public class DownloadImage(it : Context?) : AsyncTask<String, Int, Result<Downlo
 
                 var image = vw.findViewById(R.id.image_view_main_iv) as ImageView
 
-                var bmp : Bitmap?
+                var bmp: Bitmap?
                 try{
                     bmp = BitmapFactory.decodeFile(img.getAbsolutePath())
                     image.setImageBitmap(bmp)
                 }
-                catch(e : Exception){
+                catch(e: Exception){
                     context.toastee("Sorry, I have problem in loading image ${result.value}", Duration.LONG)
                     return
                 }

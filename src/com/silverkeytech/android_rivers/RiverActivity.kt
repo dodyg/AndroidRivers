@@ -8,15 +8,15 @@ import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 
 //Responsible of downloading, caching and viewing a news river content
-public class RiverActivity() : SherlockListActivity()
+public class RiverActivity(): SherlockListActivity()
 {
     class object {
         public val TAG: String = javaClass<RiverActivity>().getSimpleName()
     }
 
-    var riverUrl : String = ""
-    var riverName : String = ""
-    var mode : ActionMode? = null
+    var riverUrl: String = ""
+    var riverName: String = ""
+    var mode: ActionMode? = null
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
@@ -35,7 +35,7 @@ public class RiverActivity() : SherlockListActivity()
         downloadContent(riverUrl, false)
     }
 
-    fun downloadContent(riverUrl : String, ignoreCache : Boolean){
+    fun downloadContent(riverUrl: String, ignoreCache: Boolean) {
         var cache = getApplication().getMain().getRiverCache(riverUrl)
 
         if (cache != null && !ignoreCache){
@@ -54,9 +54,9 @@ public class RiverActivity() : SherlockListActivity()
         finish()
     }
 
-    val REFRESH : Int = 1
+    val REFRESH: Int = 1
 
-    val RESIZE_TEXT : Int = 2
+    val RESIZE_TEXT: Int = 2
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
@@ -74,7 +74,7 @@ public class RiverActivity() : SherlockListActivity()
         return true
     }
 
-    internal fun refreshContent(){
+    internal fun refreshContent() {
         downloadContent(riverUrl, false)
     }
 
@@ -94,20 +94,20 @@ public class RiverActivity() : SherlockListActivity()
     }
 }
 
-public class ResizeTextActionMode (private var context : RiverActivity, private var mode : ActionMode?) : ActionMode.Callback{
+public class ResizeTextActionMode (private var context: RiverActivity, private var mode: ActionMode?): ActionMode.Callback{
     val INCREASE_SIZE = 1
     val DECREASE_SIZE = 2
-    val SWITCH_THEME : Int = 3
+    val SWITCH_THEME: Int = 3
 
     //Get the display text size from preference
-    fun increaseTextSize(){
+    fun increaseTextSize() {
         var pref = context.getVisualPref()
         var textSize = pref.getListTextSize()
         textSize += 2
         pref.setListTextSize(textSize)
     }
 
-    fun decreaseTextSize(){
+    fun decreaseTextSize() {
         var pref = context.getVisualPref()
         var textSize = pref.getListTextSize()
         textSize -= 2
@@ -151,12 +151,12 @@ public class ResizeTextActionMode (private var context : RiverActivity, private 
     public override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
 
         menu?.add(0, DECREASE_SIZE, 0, "Decrease Text Size")
-            ?.setIcon(android.R.drawable.btn_minus)
-            ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+        ?.setIcon(android.R.drawable.btn_minus)
+        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
         menu?.add(0, INCREASE_SIZE, 0, "Increase Text Size")
-            ?.setIcon(android.R.drawable.btn_plus)
-            ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+        ?.setIcon(android.R.drawable.btn_plus)
+        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
         var switchText = when(context.getVisualPref().getTheme()){
             R.style.Theme_Sherlock -> "Light Theme"
@@ -164,7 +164,7 @@ public class ResizeTextActionMode (private var context : RiverActivity, private 
             else -> ""
         }
 
-        menu?.add(0, SWITCH_THEME, 0 , switchText)
+        menu?.add(0, SWITCH_THEME, 0, switchText)
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
 
         return true

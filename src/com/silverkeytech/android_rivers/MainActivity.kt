@@ -30,7 +30,7 @@ public open class MainActivity(): SherlockActivity() {
                     playIntent.setDataAndType(Uri.fromFile(file), "audio/*");
                     startActivity(playIntent)
                 }
-                catch(e : Exception){
+                catch(e: Exception){
                     toastee("Sorry, I cannot play the file $locationPath. Please click Refresh on the menu option to download the news list again.", Duration.LONG)
                 }
             }

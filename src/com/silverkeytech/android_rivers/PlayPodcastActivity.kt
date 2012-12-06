@@ -10,7 +10,7 @@ import android.widget.TextView
  * Time: 13:34
  * To change this template use File | Settings | File Templates.
  */
-public class PlayPodcastActivity : MainActivity(){
+public class PlayPodcastActivity: MainActivity(){
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

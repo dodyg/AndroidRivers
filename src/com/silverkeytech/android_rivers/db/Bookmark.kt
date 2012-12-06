@@ -7,11 +7,11 @@ import com.j256.ormlite.table.DatabaseTable
 public class Bookmark(){
 
     [DatabaseField(generatedId = true)]
-    public var id : Int = 0
+    public var id: Int = 0
 
     [DatabaseField(canBeNull = false)]
-    public var title : String = ""
+    public var title: String = ""
 
     [DatabaseField(canBeNull = false)]
-    public var url : String = ""
+    public var url: String = ""
 }
