@@ -182,7 +182,8 @@ public class RiverContentRenderer(val context: Activity){
                     }
                 }
 
-                dialog.create()!!.show()
+                var createdDialog = dialog.create()!!
+                createdDialog.show()
             }
         })
 

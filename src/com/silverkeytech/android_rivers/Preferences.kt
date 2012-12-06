@@ -26,7 +26,7 @@ fun Activity.getVisualPref(): VisualPreference {
 public class VisualPreference (public val pref: SharedPreferences){
     public fun getListTextSize(): Int = pref.getInt(Preferences.VISUAL_LIST_TEXT_SIZE, PreferenceDefaults.VISUAL_LIST_TEXT_SIZE)
     public fun setListTextSize(size: Int) {
-        if (size < 8 && size > 40) //you can see less or more than this size
+        if (size < 12 || size > 30) //http://developer.android.com/design/style/typography.html
             return
 
         var edit = pref.edit()!!
