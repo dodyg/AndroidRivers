@@ -22,6 +22,7 @@ import android.widget.ListView
 import android.widget.TextView
 import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
 
+//Manage the rendering of each news item in the river list
 public class RiverContentRenderer(val context: Activity){
     class object {
         val STANDARD_NEWS_COLOR = android.graphics.Color.GRAY
@@ -42,6 +43,8 @@ public class RiverContentRenderer(val context: Activity){
         //now sort it so people always have the latest news first
 
         var list = context.findView<ListView>(android.R.id.list)
+
+        var inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         var adapter = object : ArrayAdapter<FeedItemMeta>(context, R.layout.news_item, sortedNewsItems) {
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
@@ -69,7 +72,6 @@ public class RiverContentRenderer(val context: Activity){
                 }
 
                 if (currentView == null){
-                    var inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
                     currentView = inflater.inflate(R.layout.news_item, parent, false)
 
                     holder = ViewHolder(currentView!!.findViewById(R.id.news_item_text_tv) as TextView,
@@ -100,17 +102,25 @@ public class RiverContentRenderer(val context: Activity){
 
                 var dialog = AlertDialog.Builder(context)
 
-                if (currentNews.item.body.isNullOrEmpty() && !currentNews.item.title.isNullOrEmpty())
-                    dialog.setMessage(scrubHtml(currentNews.item.title))
-                else
-                    dialog.setMessage(scrubHtml(currentNews.item.body))
 
-                //Check dismiss button
-                dialog.setPositiveButton(android.R.string.ok, object : DialogInterface.OnClickListener{
-                    public override fun onClick(p0: DialogInterface?, p1: Int) {
-                        p0?.dismiss()
-                    }
-                })
+                var dlg : View = inflater.inflate(R.layout.news_details, null)!!
+                var msg : String
+
+                if (currentNews.item.body.isNullOrEmpty() && !currentNews.item.title.isNullOrEmpty())
+                    msg = scrubHtml(currentNews.item.title)
+                else
+                    msg = scrubHtml(currentNews.item.body)
+
+                var body = dlg.findViewById(R.id.news_details_text_tv)!! as TextView
+                body.setText(msg)
+                body.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize.toFloat())
+
+                var source = dlg.findViewById(R.id.news_details_source_tv)!! as TextView
+                source.setText(scrubHtml(currentNews.feedSourceTitle))
+                source.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11.toFloat())
+
+                dialog.setView(dlg)
+
 
                 val currentLink = currentNews.item.link
                 val currentNewsLinkAvailable: Boolean = !currentLink.isNullOrEmpty() && currentLink!!.trim().indexOf("http") == 0
@@ -181,6 +191,11 @@ public class RiverContentRenderer(val context: Activity){
                 }
 
                 var createdDialog = dialog.create()!!
+                createdDialog.setCanceledOnTouchOutside(true)
+                dlg.setOnClickListener {
+                    createdDialog.dismiss()
+                }
+
                 createdDialog.show()
             }
         })
