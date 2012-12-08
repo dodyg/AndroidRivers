@@ -15,23 +15,21 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity android:name="RiverActivity" android:configChanges="keyboardHidden|orientation"
                 >
             <intent-filter>
 
             </intent-filter>
         </activity>
+
         <activity android:name="TryOutActivity" android:configChanges="keyboardHidden|orientation" android:launchMode="singleTop">
             <intent-filter>
 
             </intent-filter>
         </activity>
 
-        <activity android:name="PlayPodcastActivity" android:configChanges="keyboardHidden|orientation"
-                android:taskAffinity=""
-                android:excludeFromRecents="true"
-                android:launchMode="singleTask"
-                >
+        <activity android:name="OutlinerActivity" android:configChanges="keyboardHidden|orientation" android:launchMode="singleTop">
             <intent-filter>
 
             </intent-filter>

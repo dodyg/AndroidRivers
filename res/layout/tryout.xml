@@ -40,4 +40,10 @@
             android:text="Insert Data to Bookmark"
             android:id="@+id/tryout_insert_data_bookmark_table_btn" android:layout_gravity="center"/>
 
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Show an outline"
+            android:id="@+id/tryout_show_outline_btn" android:layout_gravity="center"/>
+
 </LinearLayout>

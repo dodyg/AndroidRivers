@@ -29,6 +29,8 @@ public class TryOutActivity(): Activity()
     }
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
+        setTheme(this.getVisualPref().getTheme())
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tryout)
         handleDownloadGifImage()
@@ -38,6 +40,7 @@ public class TryOutActivity(): Activity()
         handleHandleNotification()
         handleCreateBookmarkTable()
         handleInsertToBookmarkTable()
+        handleOutliner()
     }
 
     fun handleDownloadGifImage() {
@@ -187,6 +190,15 @@ public class TryOutActivity(): Activity()
             })
 
             thread.run()
+        }
+    }
+
+    public fun handleOutliner(){
+        var btn = findView<Button>(R.id.tryout_show_outline_btn)
+        btn.setOnClickListener {
+            var intent = Intent(Intent.ACTION_MAIN)
+            intent.setClass(getApplicationContext(), javaClass<OutlinerActivity>())
+            startActivity(intent)
         }
     }
 
