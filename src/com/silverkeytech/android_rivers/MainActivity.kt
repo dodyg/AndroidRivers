@@ -61,7 +61,7 @@ public open class MainActivity(): SherlockActivity() {
 
                 if (subscriptionList != null){
                     var intent = Intent(this, javaClass<DownloadAllRiversService>())
-                    var titleList = subscriptionList.body?.outline?.iterator()?.map { it?.name }?.toArrayList()
+                    var titleList = subscriptionList.body?.outline?.iterator()?.map { it?.text }?.toArrayList()
                     var urlList = subscriptionList.body?.outline?.iterator()?.map { it?.url }?.toArrayList()
 
                     intent.putStringArrayListExtra(DownloadAllRiversService.TITLES, titleList)
@@ -70,8 +70,10 @@ public open class MainActivity(): SherlockActivity() {
                     startService(intent)
                     return true
                 }
-                else
+                else {
+                    toastee("Sorry, there's nothing to download.", Duration.AVERAGE)
                     return false
+                }
             }
             else ->
                 return super.onOptionsItemSelected(item)

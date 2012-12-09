@@ -31,7 +31,7 @@ public class DownloadService(): IntentService("DownloadService"){
     var targetUrl: String? = null
     var targetTitle: String? = null
 
-    fun prepareNotification(inferredName: String, title: String, filePath: String): Notification {
+    fun prepareNotification(title: String, filePath: String): Notification {
         var notificationIntent = Intent(Intent.ACTION_MAIN)
         notificationIntent.setClass(getApplicationContext(), javaClass<MainActivity>())
         notificationIntent.putExtra(PARAM_DOWNLOAD_LOCATION_PATH, filePath)
@@ -86,7 +86,7 @@ public class DownloadService(): IntentService("DownloadService"){
             var directory = Environment.getExternalStorageDirectory()!!.getPath() + "/" + Environment.DIRECTORY_PODCASTS
             filename = directory + "/" + inferredName
 
-            notification = prepareNotification(inferredName!!, targetTitle!!, filename)
+            notification = prepareNotification(targetTitle!!, filename)
 
             Log.d(TAG, "Podcast to be stored at ${filename}")
 
