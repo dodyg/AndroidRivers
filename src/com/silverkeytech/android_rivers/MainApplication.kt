@@ -39,7 +39,7 @@ public class MainApplication(): Application()
 
     public fun setSubscriptionListCache(opml: Opml) {
         subscriptionCache = CacheItem(opml)
-        subscriptionCache?.setExpireInMinutesFromNow(600)
+        subscriptionCache?.setExpireInMinutesFromNow(10.toHoursInMinutes())
     }
 
     public fun getRiverCache (uri: String): List<FeedItemMeta>? {
@@ -57,9 +57,9 @@ public class MainApplication(): Application()
         }
     }
 
-    public fun setRiverCache(uri: String, river: List<FeedItemMeta>) {
+    public fun setRiverCache(uri: String, river: List<FeedItemMeta>, expirationInMinutes : Int =  30) {
         var item = CacheItem(river)
-        item.setExpireInMinutesFromNow(60)
+        item.setExpireInMinutesFromNow(expirationInMinutes)
         riverCache.put(uri, item)
     }
 

@@ -105,7 +105,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
 
                         var sortedNewsItems = feeds.getSortedNewsItems()
 
-                        getApplication().getMain().setRiverCache(url, sortedNewsItems)
+                        getApplication().getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes() )
                         Log.d(TAG, "Download for $url is successful")
                     }
                     catch(e: Exception)
