@@ -36,5 +36,6 @@
         </activity>
 
         <service android:enabled="true" android:name=".DownloadService" />
+        <service android:enabled="true" android:name=".DownloadAllRiversService" />
     </application>
 </manifest>

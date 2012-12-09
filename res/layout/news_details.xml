@@ -3,13 +3,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="fill_parent"
-              android:layout_height="fill_parent">
+              android:layout_height="fill_parent"
+              android:padding="5dp">
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/news_details_text_tv" android:layout_gravity="center" android:phoneNumber="false"
-            android:password="false"/>
+            android:id="@+id/news_details_text_tv" android:layout_gravity="center"/>
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

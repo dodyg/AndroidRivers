@@ -56,6 +56,23 @@ public open class MainActivity(): SherlockActivity() {
                 startActivity(i)
                 return true
             }
+            R.id.subscription_menu_download_all -> {
+                val subscriptionList = getApplication().getMain().getSubscriptionListCache()
+
+                if (subscriptionList != null){
+                    var intent = Intent(this, javaClass<DownloadAllRiversService>())
+                    var titleList = subscriptionList.body?.outline?.iterator()?.map { it?.name }?.toArrayList()
+                    var urlList = subscriptionList.body?.outline?.iterator()?.map { it?.url }?.toArrayList()
+
+                    intent.putStringArrayListExtra(DownloadAllRiversService.TITLES, titleList)
+                    intent.putStringArrayListExtra(DownloadAllRiversService.URLS, urlList)
+
+                    startService(intent)
+                    return true
+                }
+                else
+                    return false
+            }
             else ->
                 return super.onOptionsItemSelected(item)
         }
