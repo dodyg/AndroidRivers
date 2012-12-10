@@ -14,7 +14,7 @@ public class Head {
     public String dateCreated;       //RFC822 time
     @Element
     public String dateModified;      //RFC822 time
-    @Element
+    @Element(required = false)
     public String ownerName;
 
     public Date getDateCreated() {

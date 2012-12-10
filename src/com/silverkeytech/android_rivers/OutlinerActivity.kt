@@ -60,8 +60,8 @@ public class OutlinerActivity() : SherlockActivity()
 
     fun generateData() : List<Pair<Int, String>>{
         var req: String? = ""
-        val url = "http://opmlviewer.com/Content/Directories.opml"
-
+        //val url = "http://opmlviewer.com/Content/Directories.opml"
+        val url = "http://static.scripting.com/denver/wo/dave/2012/11/22/archive018.opml"
         try{
             req = HttpRequest.get(url)?.body()
         }
