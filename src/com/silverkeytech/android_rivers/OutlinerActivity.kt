@@ -28,19 +28,19 @@ public class OutlinerActivity() : SherlockActivity()
         setTheme(this.getVisualPref().getTheme())
         super.onCreate(savedInstanceState)
 
-        var manager = InMemoryTreeStateManager<String?>()
+        var manager = InMemoryTreeStateManager<Long?>()
         var treeBuilder = TreeBuilder(manager)
 
         var counter = 0
-        for(val e in generateData()){
-            Log.d(TAG, "${e.first} - ${e.second}")
-            treeBuilder.sequentiallyAddNextNode(e.second + " $counter", e.first)
+        var outlines = generateData()
+        for(val e in outlines){
+            treeBuilder.sequentiallyAddNextNode(counter.toLong(), e.first)
             counter++
         }
 
         setContentView(R.layout.outliner)
         treeView = findView<TreeViewList>(R.id.outliner_main_tree)
-        simpleAdapter = SimpleStandardAdapter(this, manager, LEVEL_NUMBER)
+        simpleAdapter = SimpleStandardAdapter(this, manager, LEVEL_NUMBER, outlines)
         treeView!!.setAdapter(simpleAdapter)
     }
 
