@@ -7,7 +7,7 @@
               android:layout_height="fill_parent">
 
     <com.pl.polidea.treeview.TreeViewList
-            android:id="@+id/mainTreeView" android:layout_width="fill_parent"
+            android:id="@+id/outliner_main_tree" android:layout_width="fill_parent"
             android:layout_height="fill_parent" treeView:indicator_gravity="right|center_vertical"
             android:scrollbars="vertical" android:smoothScrollbar="true"/>
 </LinearLayout>
