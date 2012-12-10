@@ -67,7 +67,7 @@ public class OutlinerActivity() : SherlockActivity()
         val opml = transformXmlToOpml(req?.replace("<?xml version=\"1.0\" encoding=\"utf-8\" ?>",""))
 
         if(opml.isTrue()){
-            val sorted = opml.value!!.traverse()
+            val sorted = opml.value!!.traverse({ it.text != "<rules>" })
             return sorted
         }   else{
             Log.d(TAG, "Error in parsing opml  ${opml.exception?.getMessage()}")
