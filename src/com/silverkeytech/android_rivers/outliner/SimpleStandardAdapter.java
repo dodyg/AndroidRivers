@@ -32,7 +32,8 @@ public class SimpleStandardAdapter extends AbstractTreeViewAdapter<String> {
 
     private String getDescription(final String id) {
         final Integer[] hierarchy = getManager().getHierarchyDescription(id);
-        return "Node " + id + Arrays.asList(hierarchy);
+        //return "-> " + id + Arrays.asList(hierarchy);
+        return id;
     }
 
     @Override
@@ -51,7 +52,7 @@ public class SimpleStandardAdapter extends AbstractTreeViewAdapter<String> {
         final TextView levelView = (TextView) viewLayout
                 .findViewById(R.id.outliner_list_item_level);
         descriptionView.setText(getDescription(treeNodeInfo.getId()));
-        levelView.setText(Integer.toString(treeNodeInfo.getLevel()));
+        //levelView.setText(Integer.toString(treeNodeInfo.getLevel()));
         return viewLayout;
     }
 

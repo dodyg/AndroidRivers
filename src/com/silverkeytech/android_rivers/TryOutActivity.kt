@@ -21,6 +21,13 @@ import com.j256.ormlite.android.apptools.OpenHelperManager
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper
 import com.silverkeytech.android_rivers.db.Bookmark
 import java.sql.SQLException
+import org.simpleframework.xml.core.Persister
+import org.simpleframework.xml.Serializer
+import com.silverkeytech.android_rivers.outlines.Opml
+import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
+import com.github.kevinsawicki.http.HttpRequest
+import com.silverkeytech.android_rivers.outlines.Outline
+import java.util.ArrayList
 
 public class TryOutActivity(): Activity()
 {
@@ -41,6 +48,7 @@ public class TryOutActivity(): Activity()
         handleCreateBookmarkTable()
         handleInsertToBookmarkTable()
         handleOutliner()
+        handleDownloadRecursiveOpml()
     }
 
     fun handleDownloadGifImage() {
@@ -202,8 +210,82 @@ public class TryOutActivity(): Activity()
         }
     }
 
+    public fun handleDownloadRecursiveOpml(){
+        var btn = findView<Button>(R.id.tryout_download_recursive_opml_btn)
+
+        btn.setOnClickListener(object: OnClickListener{
+            public override fun onClick(p0: View?) {
+                var req: String? = ""
+                val url = "http://opmlviewer.com/Content/Directories.opml"
+
+                try{
+                    req = HttpRequest.get(url)?.body()
+                }
+                catch(e: HttpRequestException){
+                    var ex = e.getCause()
+                    Log.d(TAG, "Error in downloading OPML $url")
+                    toastee("Error in downloading OPML from $url")
+                }
+
+                Log.d(TAG, "Text : $req")
+
+                val opml = transformFromXml(req?.replace("<?xml version=\"1.0\" encoding=\"utf-8\" ?>",""))
+
+                if(opml.isTrue()){
+       //             var message = opml.value?.body?.outline?.get(0)?.outline?.get(0)?.text
+
+                    val sorted = traverse(opml.value!!)
+                    toastee("Opml parsing is Great ${sorted.count()}")
+                }   else{
+                    Log.d(TAG, "Error in parsing opml  ${opml.exception?.getMessage()}")
+                    toastee("Error in parsing opml ${opml.exception?.getMessage()}")
+                }
+            }
+        })
+    }
+
+    fun traverse (opml : Opml) : ArrayList<Pair<Int, String>>{
+        var list = ArrayList<Pair<Int,String>>()
+
+       var level = 0
+       for (val o in opml.body?.outline?.iterator())    {
+           traverseOutline(level, o, list)
+       }
+       return list
+    }
+
+    fun traverseOutline(level : Int, outline : Outline?, list : ArrayList<Pair<Int, String>>){
+        if (outline != null){
+            list.add(Pair(level, outline.text!!))
+
+            var lvl = level
+            lvl++
+
+            for(val o in outline.outline?.iterator()){
+                traverseOutline(lvl, o, list)
+            }
+        }
+    }
+
+
+    fun transformFromXml(xml: String?): Result<Opml> {
+        var serial: Serializer = Persister()
+
+        try{
+            val opml: Opml? = serial.read(javaClass<Opml>(), xml, false)
+            Log.d(TAG, "OPML ${opml?.head?.title} created on ${opml?.head?.getDateCreated()} and modified on ${opml?.head?.getDateModified()}")
+            return Result.right(opml)
+        }
+        catch (e: Exception){
+            Log.d(TAG, "Exception ${e.getMessage()}")
+            return Result.wrong(e)
+        }
+    }
+
+
     public override fun onBackPressed() {
         super<Activity>.onBackPressed()
         finish()
     }
 }
+
