@@ -32,7 +32,7 @@ public class OutlinerActivity() : SherlockActivity()
         var treeBuilder = TreeBuilder(manager)
 
         var counter = 0
-        var outlines = generateData()
+        var outlines = generateOutlines()
         for(val e in outlines){
             treeBuilder.sequentiallyAddNextNode(counter.toLong(), e.first)
             counter++
@@ -49,7 +49,7 @@ public class OutlinerActivity() : SherlockActivity()
         finish()
     }
 
-    fun generateData() : List<Pair<Int, String>>{
+    fun generateOutlines() : List<Pair<Int, String>>{
         var req: String? = ""
         //val url = "http://opmlviewer.com/Content/Directories.opml"
         val url = "http://static.scripting.com/denver/wo/dave/2012/11/22/archive018.opml"

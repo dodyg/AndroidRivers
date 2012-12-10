@@ -18,7 +18,7 @@ public open class SimpleStandardAdapter(context: OutlinerActivity?, treeStateMan
     }
 
     public override fun getNewChildView(treeNodeInfo: TreeNodeInfo<Long?>?): View? {
-        val viewLayout: LinearLayout? = (getActivity()?.getLayoutInflater()?.inflate(R.layout.outliner_list_item, null) as LinearLayout?)
+        val viewLayout: LinearLayout? = getActivity()?.getLayoutInflater()?.inflate(R.layout.outliner_list_item, null) as LinearLayout?
         return updateView(viewLayout, treeNodeInfo)
     }
 

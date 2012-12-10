@@ -8,7 +8,7 @@ import org.simpleframework.xml.core.Persister
 import org.simpleframework.xml.Serializer
 import android.util.Log
 
-
+//do an in order traversal so we can flatten it up to be used by outliner
 fun Opml.traverse () : ArrayList<Pair<Int, String>>{
     var list = ArrayList<Pair<Int,String>>()
 
@@ -31,7 +31,6 @@ private fun traverseOutline(level : Int, outline : Outline?, list : ArrayList<Pa
         }
     }
 }
-
 
 fun transformXmlToOpml(xml: String?): Result<Opml> {
     var serial: Serializer = Persister()
