@@ -26,8 +26,8 @@ import com.silverkeytech.android_rivers.R;
  * </pre>
  */
 public class TreeViewList extends ListView {
-    private static final int DEFAULT_COLLAPSED_RESOURCE = R.drawable.treeview_collapsed;
-    private static final int DEFAULT_EXPANDED_RESOURCE = R.drawable.treeview_expanded;
+    private static final int DEFAULT_COLLAPSED_RESOURCE = R.drawable.treeview2_collapsed;
+    private static final int DEFAULT_EXPANDED_RESOURCE = R.drawable.treeview2_expanded;
     private static final int DEFAULT_INDENT = 0;
     private static final int DEFAULT_GRAVITY = Gravity.LEFT
             | Gravity.CENTER_VERTICAL;

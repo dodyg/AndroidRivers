@@ -8,6 +8,7 @@ import android.R.layout
 import com.pl.polidea.treeview.TreeViewList
 import com.silverkeytech.android_rivers.outliner.SimpleStandardAdapter
 import java.util.HashSet
+import com.silverkeytech.android_rivers.outliner.FancyAdapter
 
 public class OutlinerActivity() : SherlockActivity()
 {
