@@ -28,6 +28,8 @@ import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.github.kevinsawicki.http.HttpRequest
 import com.silverkeytech.android_rivers.outlines.Outline
 import java.util.ArrayList
+import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
+import com.silverkeytech.android_rivers.outliner.traverse
 
 public class TryOutActivity(): Activity()
 {
@@ -229,12 +231,10 @@ public class TryOutActivity(): Activity()
 
                 Log.d(TAG, "Text : $req")
 
-                val opml = transformFromXml(req?.replace("<?xml version=\"1.0\" encoding=\"utf-8\" ?>",""))
+                val opml = transformXmlToOpml(req?.replace("<?xml version=\"1.0\" encoding=\"utf-8\" ?>",""))
 
                 if(opml.isTrue()){
-       //             var message = opml.value?.body?.outline?.get(0)?.outline?.get(0)?.text
-
-                    val sorted = traverse(opml.value!!)
+                    val sorted = opml.value!!.traverse()
                     toastee("Opml parsing is Great ${sorted.count()}")
                 }   else{
                     Log.d(TAG, "Error in parsing opml  ${opml.exception?.getMessage()}")
@@ -243,45 +243,6 @@ public class TryOutActivity(): Activity()
             }
         })
     }
-
-    fun traverse (opml : Opml) : ArrayList<Pair<Int, String>>{
-        var list = ArrayList<Pair<Int,String>>()
-
-       var level = 0
-       for (val o in opml.body?.outline?.iterator())    {
-           traverseOutline(level, o, list)
-       }
-       return list
-    }
-
-    fun traverseOutline(level : Int, outline : Outline?, list : ArrayList<Pair<Int, String>>){
-        if (outline != null){
-            list.add(Pair(level, outline.text!!))
-
-            var lvl = level
-            lvl++
-
-            for(val o in outline.outline?.iterator()){
-                traverseOutline(lvl, o, list)
-            }
-        }
-    }
-
-
-    fun transformFromXml(xml: String?): Result<Opml> {
-        var serial: Serializer = Persister()
-
-        try{
-            val opml: Opml? = serial.read(javaClass<Opml>(), xml, false)
-            Log.d(TAG, "OPML ${opml?.head?.title} created on ${opml?.head?.getDateCreated()} and modified on ${opml?.head?.getDateModified()}")
-            return Result.right(opml)
-        }
-        catch (e: Exception){
-            Log.d(TAG, "Exception ${e.getMessage()}")
-            return Result.wrong(e)
-        }
-    }
-
 
     public override fun onBackPressed() {
         super<Activity>.onBackPressed()
