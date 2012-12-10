@@ -7,9 +7,4 @@
     <TextView android:text="Text" android:padding="4dip" android:layout_width="fill_parent" android:layout_height="wrap_content"
               android:id="@+id/outliner_list_item_description" android:textSize="24dp" android:layout_weight="1" >
     </TextView>
-
-    <CheckBox android:text="" android:id="@+id/outliner_list_checkbox" android:layout_width="wrap_content"
-              android:layout_height="wrap_content" android:checked="false" android:layout_weight="0" android:padding="0dip"
-              android:focusable="false" android:soundEffectsEnabled="true" android:focusableInTouchMode="true"></CheckBox>
-
 </LinearLayout>

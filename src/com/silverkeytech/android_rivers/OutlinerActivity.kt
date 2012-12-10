@@ -8,7 +8,6 @@ import android.R.layout
 import com.pl.polidea.treeview.TreeViewList
 import com.silverkeytech.android_rivers.outliner.SimpleStandardAdapter
 import java.util.HashSet
-import com.silverkeytech.android_rivers.outliner.FancyAdapter
 
 public class OutlinerActivity() : SherlockActivity()
 {
@@ -21,24 +20,23 @@ public class OutlinerActivity() : SherlockActivity()
 
     var treeView : TreeViewList? = null
     var simpleAdapter : SimpleStandardAdapter ? = null
-    var selected : Set<Long> = HashSet<Long>()
     val LEVEL_NUMBER : Int = 4
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
         super.onCreate(savedInstanceState)
 
-        var manager = InMemoryTreeStateManager<Long?>()
+        var manager = InMemoryTreeStateManager<String?>()
         var treeBuilder = TreeBuilder(manager)
 
         val nodesLength = DEMO_NODES.size - 1
         for(val i in 0..nodesLength){
-            treeBuilder.sequentiallyAddNextNode(i.toLong(), DEMO_NODES[i])
+            treeBuilder.sequentiallyAddNextNode("Hello good morning and this can be done in multiple levels $i", DEMO_NODES[i])
         }
 
         setContentView(R.layout.outliner)
         treeView = findView<TreeViewList>(R.id.outliner_main_tree)
-        simpleAdapter = SimpleStandardAdapter(this, selected, manager, LEVEL_NUMBER)
+        simpleAdapter = SimpleStandardAdapter(this, manager, LEVEL_NUMBER)
         treeView!!.setAdapter(simpleAdapter)
     }
 
