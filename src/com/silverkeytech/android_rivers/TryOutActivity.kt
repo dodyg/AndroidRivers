@@ -30,6 +30,8 @@ import com.silverkeytech.android_rivers.outlines.Outline
 import java.util.ArrayList
 import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
+import com.google.gson.Gson
+import com.silverkeytech.android_rivers.riverjs.FeedsRiver
 
 public class TryOutActivity(): Activity()
 {
@@ -51,6 +53,7 @@ public class TryOutActivity(): Activity()
         handleInsertToBookmarkTable()
         handleOutliner()
         handleDownloadRecursiveOpml()
+        handleRiverJsWithOpmlSource()
     }
 
     fun handleDownloadGifImage() {
@@ -210,6 +213,44 @@ public class TryOutActivity(): Activity()
             intent.setClass(getApplicationContext(), javaClass<OutlinerActivity>())
             startActivity(intent)
         }
+    }
+
+    public fun handleRiverJsWithOpmlSource(){
+        var btn = findView<Button>(R.id.tryout_download_riverjs_with_opml_btn)
+
+        btn.setOnClickListener(object: OnClickListener{
+            public override fun onClick(p0: View?) {
+                var req: String? = ""
+                val url = "http://hobieu.apphb.com/api/1/samples/riverjswithopml"
+
+                try{
+                    req = HttpRequest.get(url)?.body()
+                }
+                catch(e: HttpRequestException){
+                    var ex = e.getCause()
+                    Log.d(TAG, "Error in downloading OPML $url")
+                    toastee("Error in downloading OPML from $url")
+                }
+
+                try{
+                    val gson = Gson()
+                    val scrubbed = scrubJsonP(req!!)
+                    val feeds = gson.fromJson(scrubbed, javaClass<FeedsRiver>())!!
+
+                    var msg = ""
+                    var sortedNewsWithOpml = feeds.getSortedNewsItems().filter { it.item.source != null && (it.item.source!!.count() > 0) }
+
+                    if (sortedNewsWithOpml.count() > 0)
+                        toastee("Has opml ${sortedNewsWithOpml.get(0).item.source?.get(0)?.opml?.head?.title}")
+                    else
+                        toastee("No OPML but Successful in parsing $url")
+                }
+                catch(e: Exception)
+                {
+                    Log.d(TAG, "Error in parsing river ${e.getMessage()}")
+                }
+            }
+        })
     }
 
     public fun handleDownloadRecursiveOpml(){

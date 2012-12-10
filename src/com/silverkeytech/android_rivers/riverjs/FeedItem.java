@@ -16,6 +16,7 @@ public class FeedItem {
     public String comments;
     public ArrayList<FeedImage> thumbnail;
     public ArrayList<FeedEnclosure> enclosure;
+    public ArrayList<FeedSource> source;
 
     public Boolean isPublicationDate() {
         return pubDate != null && pubDate != "";

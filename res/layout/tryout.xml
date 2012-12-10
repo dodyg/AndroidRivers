@@ -52,4 +52,11 @@
             android:text="Show an outline"
             android:id="@+id/tryout_show_outline_btn" android:layout_gravity="center"/>
 
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Download RiverJs with Opml Source"
+            android:id="@+id/tryout_download_riverjs_with_opml_btn" android:layout_gravity="center"/>
+
 </LinearLayout>
