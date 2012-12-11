@@ -32,6 +32,10 @@ private fun traverseOutline(level : Int, outline : Outline?, list : ArrayList<Ou
                 o.putAttribute("type", "include")
                 o.putAttribute("url", outline.url!!)
             }
+            else if (outline.outlineType == "link" && !outline.url.isNullOrEmpty()){
+                o.putAttribute("type", "link")
+                o.putAttribute("url", outline.url!!)
+            }
 
             list.add(o)
 

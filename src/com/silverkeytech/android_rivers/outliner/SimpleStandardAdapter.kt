@@ -19,6 +19,7 @@ import java.util.ArrayList
 import android.util.Log
 import com.silverkeytech.android_rivers.DownloadOpml
 import com.silverkeytech.android_rivers.getMain
+import android.net.Uri
 
 public open class SimpleStandardAdapter(private var context: OutlinerActivity,
                                         treeStateManager: TreeStateManager<Long?>,
@@ -34,8 +35,10 @@ public open class SimpleStandardAdapter(private var context: OutlinerActivity,
     private open fun getDescription(id: Long?): String? {
         //val hierarchy: Array<Int?>? = getManager()?.getHierarchyDescription(id)
         var currentOutline = outlines.get(id!!.toInt())
-        if (currentOutline.containsKey("type") && currentOutline.getAttribute("type") as String == "include")
+        if (currentOutline.getType() == OutlineType.INCLUDE)
             return currentOutline.text + " #"
+        else if (currentOutline.getType() == OutlineType.LINK)
+            return currentOutline.text + " ->"
         else
             return currentOutline.text
     }
@@ -70,9 +73,9 @@ public open class SimpleStandardAdapter(private var context: OutlinerActivity,
                 var currentPosition = treeNodeInfo!!.getId()!!.toInt()
                 var currentOutline = outlines.get(currentPosition)
 
-                if (currentOutline.containsKey("type") && currentOutline.getAttribute("type") as String == "include"){
+                if (currentOutline.getType() == OutlineType.INCLUDE){
 
-                    val url = currentOutline.getAttribute("url")!!  as String
+                    val url = currentOutline.getAttribute("url")!!
 
                     val cache = context.getApplication().getMain().getOpmlCache(url)
 
@@ -107,7 +110,20 @@ public open class SimpleStandardAdapter(private var context: OutlinerActivity,
                     }
 
                     return true
-                } else {
+                }
+                else if (currentOutline.getType() == OutlineType.LINK){
+                    var url = currentOutline.getAttribute("url")
+                    try{
+                        var i = Intent("android.intent.action.VIEW", Uri.parse(url))
+                        context.startActivity(i)
+                        return true
+                    }
+                    catch(e : Exception){
+                        context.toastee("Error in trying to launch ${url}")
+                        return false
+                    }
+                }
+                else {
                     var idx = currentPosition + 1
 
                     var level = 0
@@ -130,7 +146,6 @@ public open class SimpleStandardAdapter(private var context: OutlinerActivity,
                         return true
 
                     launchAnotherOutline(childList)
-                    //context.toastee("Size of child list is ${childList.size}", Duration.LONG)
                     return true
                 }
             }
