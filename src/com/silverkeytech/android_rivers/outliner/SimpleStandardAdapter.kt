@@ -18,6 +18,7 @@ import android.content.Intent
 import java.util.ArrayList
 import android.util.Log
 import com.silverkeytech.android_rivers.DownloadOpml
+import com.silverkeytech.android_rivers.getMain
 
 public open class SimpleStandardAdapter(private var context: OutlinerActivity,
                                         treeStateManager: TreeStateManager<Long?>,
@@ -73,22 +74,37 @@ public open class SimpleStandardAdapter(private var context: OutlinerActivity,
 
                     val url = currentOutline.getAttribute("url")!!  as String
 
-                    var opml = DownloadOpml(context)
-                    opml.setProcessedCompletedCallback( {
-                        res ->
-                        if (res.isTrue()){
-                            var intent = Intent(Intent.ACTION_MAIN)
-                            intent.setClass(context, javaClass<OutlinerActivity>())
-                            intent.putExtra(OutlinerActivity.OUTLINES_DATA, res.value!!)
+                    val cache = context.getApplication().getMain().getOpmlCache(url)
 
-                            context.startActivity(intent)
-                        }
-                        else{
-                            context.toastee("Downloading url fails becaue of ${res.exception?.getMessage()}" , Duration.LONG)
-                        }
-                    }, { outline -> outline.text != "<rules>" })
+                    if (cache != null){
+                        var intent = Intent(Intent.ACTION_MAIN)
+                        intent.setClass(context, javaClass<OutlinerActivity>())
+                        var outlines = cache
+                        intent.putExtra(OutlinerActivity.OUTLINES_DATA, outlines)
 
-                    opml.execute(url)
+                        context.startActivity(intent)
+                    }
+                    else {
+
+                        var opml = DownloadOpml(context)
+                        opml.setProcessedCompletedCallback( {
+                            res ->
+                            if (res.isTrue()){
+                                var intent = Intent(Intent.ACTION_MAIN)
+                                intent.setClass(context, javaClass<OutlinerActivity>())
+                                var outlines = res.value!!
+                                intent.putExtra(OutlinerActivity.OUTLINES_DATA, outlines)
+
+                                context.getApplication().getMain().setOpmlCache(url, outlines)
+
+                                context.startActivity(intent)
+                            }
+                            else{
+                                context.toastee("Downloading url fails becaue of ${res.exception?.getMessage()}" , Duration.LONG)
+                            }
+                        }, { outline -> outline.text != "<rules>" })
+                        opml.execute(url)
+                    }
 
                     return true
                 } else {

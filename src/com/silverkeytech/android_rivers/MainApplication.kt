@@ -5,6 +5,8 @@ import android.support.v4.util.LruCache
 import android.util.Log
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
+import com.silverkeytech.android_rivers.outliner.OutlineContent
+import java.util.ArrayList
 
 fun Application?.getMain(): MainApplication {
     return this!! as MainApplication
@@ -16,7 +18,8 @@ public class MainApplication(): Application()
         public val TAG: String = javaClass<MainApplication>().getSimpleName()
     }
 
-    var riverCache: LruCache<String, CacheItem<List<FeedItemMeta>>> = LruCache<String, CacheItem<List<FeedItemMeta>>>(inMegaByte(4))
+    var riverCache = LruCache<String, CacheItem<List<FeedItemMeta>>>(inMegaByte(4))
+    var opmlCache =  LruCache<String, CacheItem<ArrayList<OutlineContent>>>(inMegaByte(4))
     var subscriptionCache: CacheItem<Opml>? = null
 
     public override fun onCreate() {
@@ -40,6 +43,27 @@ public class MainApplication(): Application()
     public fun setSubscriptionListCache(opml: Opml) {
         subscriptionCache = CacheItem(opml)
         subscriptionCache?.setExpireInMinutesFromNow(10.toHoursInMinutes())
+    }
+
+    public fun getOpmlCache(uri: String): ArrayList<OutlineContent>?{
+        val content = opmlCache.get(uri)
+
+        if (content == null)
+            return null
+        else{
+            if (content.isExpired){
+                opmlCache.remove(uri)
+                return null
+            }else{
+                return content.item
+            }
+        }
+    }
+
+    public fun setOpmlCache(uri: String, opml: ArrayList<OutlineContent>, expirationInMinutes : Int =  30) {
+        var item = CacheItem(opml)
+        item.setExpireInMinutesFromNow(expirationInMinutes)
+        opmlCache.put(uri, item)
     }
 
     public fun getRiverCache (uri: String): List<FeedItemMeta>? {
