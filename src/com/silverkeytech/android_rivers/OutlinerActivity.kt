@@ -12,36 +12,42 @@ import com.silverkeytech.android_rivers.outliner.SimpleStandardAdapter
 import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
 import java.util.ArrayList
+import com.silverkeytech.android_rivers.outliner.OutlineContent
 
-public class OutlinerActivity() : SherlockActivity()
+public class OutlinerActivity(): SherlockActivity()
 {
     class object {
         public val TAG: String = javaClass<OutlinerActivity>().getSimpleName()
+        public val OUTLINES_DATA : String = "OUTLINES_DATA"
     }
 
-    var treeView : TreeViewList? = null
-    var simpleAdapter : SimpleStandardAdapter ? = null
-    val LEVEL_NUMBER : Int = 6
-
+    val LEVEL_NUMBER: Int = 6
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
         super.onCreate(savedInstanceState)
 
-        var manager = InMemoryTreeStateManager<Long?>()
-        var treeBuilder = TreeBuilder(manager)
+        val extras = getIntent()?.getExtras()
 
-        var counter = 0
-        var outlines = generateOutlines()
-        for(val e in outlines){
-            treeBuilder.sequentiallyAddNextNode(counter.toLong(), e.first)
-            counter++
+        if (extras != null){
+            val outlines = extras.getSerializable(OUTLINES_DATA)!! as List<OutlineContent>
+
+            var manager = InMemoryTreeStateManager<Long?>()
+            var treeBuilder = TreeBuilder(manager)
+
+            var counter = 0
+            for(val e in outlines){
+                treeBuilder.sequentiallyAddNextNode(counter.toLong(), e.level)
+                counter++
+            }
+
+            setContentView(R.layout.outliner)
+            var treeView = findView<TreeViewList>(R.id.outliner_main_tree)
+            var simpleAdapter = SimpleStandardAdapter(this, manager, LEVEL_NUMBER, outlines)
+            treeView.setAdapter(simpleAdapter)
         }
-
-        setContentView(R.layout.outliner)
-        treeView = findView<TreeViewList>(R.id.outliner_main_tree)
-        simpleAdapter = SimpleStandardAdapter(this, manager, LEVEL_NUMBER, outlines)
-        treeView!!.setAdapter(simpleAdapter)
+        else
+            toastee("There is no data to be displayed in outline mode ", Duration.LONG)
     }
 
     public override fun onBackPressed() {
@@ -49,30 +55,4 @@ public class OutlinerActivity() : SherlockActivity()
         finish()
     }
 
-    fun generateOutlines() : List<Pair<Int, String>>{
-        var req: String? = ""
-        //val url = "http://opmlviewer.com/Content/Directories.opml"
-        val url = "http://static.scripting.com/denver/wo/dave/2012/11/22/archive018.opml"
-        try{
-            req = HttpRequest.get(url)?.body()
-        }
-        catch(e: HttpRequestException){
-            var ex = e.getCause()
-            Log.d(TAG, "Error in downloading OPML $url")
-            toastee("Error in downloading OPML from $url")
-        }
-
-        Log.d(TAG, "Text : $req")
-
-        val opml = transformXmlToOpml(req?.replace("<?xml version=\"1.0\" encoding=\"utf-8\" ?>",""))
-
-        if(opml.isTrue()){
-            val sorted = opml.value!!.traverse({ it.text != "<rules>" })
-            return sorted
-        }   else{
-            Log.d(TAG, "Error in parsing opml  ${opml.exception?.getMessage()}")
-            toastee("Error in parsing opml ${opml.exception?.getMessage()}")
-            return ArrayList<Pair<Int,String>>()
-        }
-    }
 }

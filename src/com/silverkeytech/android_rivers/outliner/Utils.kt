@@ -9,8 +9,8 @@ import org.simpleframework.xml.Serializer
 import android.util.Log
 
 //do an in order traversal so we can flatten it up to be used by outliner
-fun Opml.traverse (filter : ((Outline) -> Boolean)? = null) : ArrayList<Pair<Int, String>>{
-    var list = ArrayList<Pair<Int,String>>()
+fun Opml.traverse (filter : ((Outline) -> Boolean)? = null) : ArrayList<OutlineContent>{
+    var list = ArrayList<OutlineContent>()
 
     var level = 0
     for (val o in this.body?.outline?.iterator())    {
@@ -19,12 +19,12 @@ fun Opml.traverse (filter : ((Outline) -> Boolean)? = null) : ArrayList<Pair<Int
     return list
 }
 
-private fun traverseOutline(level : Int, outline : Outline?, list : ArrayList<Pair<Int, String>>, filter : ((Outline) -> Boolean)?){
+private fun traverseOutline(level : Int, outline : Outline?, list : ArrayList<OutlineContent>, filter : ((Outline) -> Boolean)?){
     if (outline != null){
         val proceed = filter != null && filter(outline)
 
         if (proceed){
-            list.add(Pair(level, outline.text!!))
+            list.add(OutlineContent(level, outline.text!!))
 
             var lvl = level
             lvl++

@@ -93,6 +93,7 @@ public class DownloadRiverContent(it: Context?, ignoreCache: Boolean): AsyncTask
 }
 
 
+
 //Take all the news items from several different feeds and combine them into one.
 fun FeedsRiver.getSortedNewsItems(): List<FeedItemMeta>{
     var newsItems = ArrayList<FeedItemMeta>()

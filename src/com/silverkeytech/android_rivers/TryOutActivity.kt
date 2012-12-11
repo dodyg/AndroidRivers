@@ -32,6 +32,7 @@ import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
 import com.google.gson.Gson
 import com.silverkeytech.android_rivers.riverjs.FeedsRiver
+import com.silverkeytech.android_rivers.outliner.OutlineContent
 
 public class TryOutActivity(): Activity()
 {
@@ -209,9 +210,40 @@ public class TryOutActivity(): Activity()
     public fun handleOutliner(){
         var btn = findView<Button>(R.id.tryout_show_outline_btn)
         btn.setOnClickListener {
+            var outlines = generateOutlines()
             var intent = Intent(Intent.ACTION_MAIN)
             intent.setClass(getApplicationContext(), javaClass<OutlinerActivity>())
+            intent.putExtra(OutlinerActivity.OUTLINES_DATA, outlines)
+
             startActivity(intent)
+        }
+    }
+
+
+    fun generateOutlines(): ArrayList<OutlineContent> {
+        var req: String? = ""
+        //val url = "http://opmlviewer.com/Content/Directories.opml"
+        val url = "http://static.scripting.com/denver/wo/dave/2012/11/22/archive018.opml"
+        try{
+            req = HttpRequest.get(url)?.body()
+        }
+        catch(e: HttpRequestException){
+            var ex = e.getCause()
+            Log.d(TAG, "Error in downloading OPML $url")
+            toastee("Error in downloading OPML from $url")
+        }
+
+        Log.d(TAG, "Text : $req")
+
+        val opml = transformXmlToOpml(req?.replace("<?xml version=\"1.0\" encoding=\"utf-8\" ?>", ""))
+
+        if(opml.isTrue()){
+            val sorted = opml.value!!.traverse({ it.text != "<rules>" })
+            return sorted
+        } else{
+            Log.d(TAG, "Error in parsing opml  ${opml.exception?.getMessage()}")
+            toastee("Error in parsing opml ${opml.exception?.getMessage()}")
+            return ArrayList<OutlineContent>()
         }
     }
 

@@ -9,12 +9,12 @@ import com.pl.polidea.treeview.TreeStateManager
 import com.silverkeytech.android_rivers.OutlinerActivity
 import com.silverkeytech.android_rivers.R
 
-public open class SimpleStandardAdapter(context: OutlinerActivity?, treeStateManager: TreeStateManager<Long?>?, numberOfLevels: Int, val outlines : List<Pair<Int, String>>):
+public open class SimpleStandardAdapter(context: OutlinerActivity?, treeStateManager: TreeStateManager<Long?>?, numberOfLevels: Int, val outlines : List<OutlineContent>):
     AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
 
     private open fun getDescription(id: Long?): String? {
         //val hierarchy: Array<Int?>? = getManager()?.getHierarchyDescription(id)
-        return outlines.get(id!!.toInt()).second
+        return outlines.get(id!!.toInt()).text
     }
 
     public override fun getNewChildView(treeNodeInfo: TreeNodeInfo<Long?>?): View? {
