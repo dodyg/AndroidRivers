@@ -6,6 +6,13 @@
         <item android:id="@+id/subscription_menu_download_all"
               android:title="Download All" />
 
-        <item android:id="@+id/river_menu_tryout"
+
+        <item android:id="@+id/subscription_menu_scripting_com_all"
+              android:title="scripting.com" />
+
+        <item android:id="@+id/subscription_menu_curry_com_all"
+              android:title="blog.curry.com" />
+
+    <item android:id="@+id/river_menu_tryout"
             android:title="Tryout" />
 </menu>

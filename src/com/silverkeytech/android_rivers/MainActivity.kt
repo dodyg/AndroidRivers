@@ -75,8 +75,35 @@ public open class MainActivity(): SherlockActivity() {
                     return false
                 }
             }
+            R.id.subscription_menu_scripting_com_all -> {
+                downloadOpml("http://scripting.com/toc.opml")
+                return false
+            }
+            R.id.subscription_menu_curry_com_all -> {
+                downloadOpml("http://blog.curry.com/toc.opml")
+                return false
+            }
             else ->
                 return super.onOptionsItemSelected(item)
         }
+    }
+
+    fun downloadOpml(url : String){
+        var opml = DownloadOpml(this)
+        opml.setProcessedCompletedCallback( {
+            res ->
+            if (res.isTrue()){
+                var intent = Intent(Intent.ACTION_MAIN)
+                intent.setClass(getApplicationContext(), javaClass<OutlinerActivity>())
+                intent.putExtra(OutlinerActivity.OUTLINES_DATA, res.value!!)
+
+                startActivity(intent)
+            }
+            else{
+                toastee("Downloading url fails becaue of ${res.exception?.getMessage()}" , Duration.LONG)
+            }
+        }, { outline -> outline.text != "<rules>" })
+
+        opml.execute(url)
     }
 }
