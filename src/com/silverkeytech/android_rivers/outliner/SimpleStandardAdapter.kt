@@ -139,6 +139,8 @@ public open class SimpleStandardAdapter(private var context: OutlinerActivity,
                             break
 
                         val newOutline = OutlineContent(outline.level - currentOutline.level, outline.text)
+                        newOutline.copyAttributes(outline)
+
                         childList.add(newOutline)
                         idx++
                     }

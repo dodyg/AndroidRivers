@@ -24,6 +24,10 @@ public data class OutlineContent (var level : Int, var text : String) : Serializ
         return bag.containsKey(key)
     }
 
+    public fun copyAttributes(outline : OutlineContent){
+        bag = outline.bag
+    }
+
     public fun getType() : OutlineType{
         if (containsKey("type")){
             val tp = getAttribute("type")
