@@ -70,7 +70,7 @@ public open class SimpleStandardAdapter(private var context: OutlinerActivity,
 
                 //root level
                 childList.add(OutlineContent(0, currentOutline.text))
-                do{
+                while (idx < outlines.size){
                     val outline = outlines.get(idx)
                     if ((outline.level - currentOutline.level) < 1)
                         break
@@ -78,7 +78,11 @@ public open class SimpleStandardAdapter(private var context: OutlinerActivity,
                     val newOutline = OutlineContent(outline.level - currentOutline.level, outline.text)
                     childList.add(newOutline)
                     idx++
-                }while(idx < outlines.size)
+                }
+
+                //do not launch another activity. It's already alone
+                if (outlines.size == childList.size)
+                    return true
 
                 launchAnotherOutline(childList)
                 //context.toastee("Size of child list is ${childList.size}", Duration.LONG)

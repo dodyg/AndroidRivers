@@ -7,6 +7,7 @@ import com.silverkeytech.android_rivers.Result
 import org.simpleframework.xml.core.Persister
 import org.simpleframework.xml.Serializer
 import android.util.Log
+import com.silverkeytech.android_rivers.scrubHtml
 
 //do an in order traversal so we can flatten it up to be used by outliner
 fun Opml.traverse (filter : ((Outline) -> Boolean)? = null, depthLimit : Int = 12) : ArrayList<OutlineContent>{
@@ -24,7 +25,7 @@ private fun traverseOutline(level : Int, outline : Outline?, list : ArrayList<Ou
         val proceed = level < depthLimit && (filter == null || filter(outline))
 
         if (proceed){
-            list.add(OutlineContent(level, outline.text!!))
+            list.add(OutlineContent(level, scrubHtml(outline.text!!)))
 
             var lvl = level
             lvl++
