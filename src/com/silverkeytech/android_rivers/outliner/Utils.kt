@@ -8,6 +8,7 @@ import org.simpleframework.xml.core.Persister
 import org.simpleframework.xml.Serializer
 import android.util.Log
 import com.silverkeytech.android_rivers.scrubHtml
+import com.silverkeytech.android_rivers.isNullOrEmpty
 
 //do an in order traversal so we can flatten it up to be used by outliner
 fun Opml.traverse (filter : ((Outline) -> Boolean)? = null, depthLimit : Int = 12) : ArrayList<OutlineContent>{
@@ -25,7 +26,14 @@ private fun traverseOutline(level : Int, outline : Outline?, list : ArrayList<Ou
         val proceed = level < depthLimit && (filter == null || filter(outline))
 
         if (proceed){
-            list.add(OutlineContent(level, scrubHtml(outline.text!!)))
+
+            var o = OutlineContent(level, scrubHtml(outline.text!!))
+            if (outline.outlineType == "include" && !outline.url.isNullOrEmpty()){
+                o.putAttribute("type", "include")
+                o.putAttribute("url", outline.url!!)
+            }
+
+            list.add(o)
 
             var lvl = level
             lvl++

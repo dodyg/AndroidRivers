@@ -17,6 +17,7 @@ import com.pl.polidea.treeview.TreeViewList
 import android.content.Intent
 import java.util.ArrayList
 import android.util.Log
+import com.silverkeytech.android_rivers.DownloadOpml
 
 public open class SimpleStandardAdapter(private var context: OutlinerActivity,
                                         treeStateManager: TreeStateManager<Long?>,
@@ -31,7 +32,11 @@ public open class SimpleStandardAdapter(private var context: OutlinerActivity,
 
     private open fun getDescription(id: Long?): String? {
         //val hierarchy: Array<Int?>? = getManager()?.getHierarchyDescription(id)
-        return outlines.get(id!!.toInt()).text
+        var currentOutline = outlines.get(id!!.toInt())
+        if (currentOutline.containsKey("type") && currentOutline.getAttribute("type") as String == "include")
+            return currentOutline.text + " #"
+        else
+            return currentOutline.text
     }
 
     public override fun getNewChildView(treeNodeInfo: TreeNodeInfo<Long?>?): View? {
@@ -63,30 +68,55 @@ public open class SimpleStandardAdapter(private var context: OutlinerActivity,
 
                 var currentPosition = treeNodeInfo!!.getId()!!.toInt()
                 var currentOutline = outlines.get(currentPosition)
-                var idx = currentPosition + 1
 
-                var level = 0
-                var childList = ArrayList<OutlineContent>()
+                if (currentOutline.containsKey("type") && currentOutline.getAttribute("type") as String == "include"){
 
-                //root level
-                childList.add(OutlineContent(0, currentOutline.text))
-                while (idx < outlines.size){
-                    val outline = outlines.get(idx)
-                    if ((outline.level - currentOutline.level) < 1)
-                        break
+                    val url = currentOutline.getAttribute("url")!!  as String
 
-                    val newOutline = OutlineContent(outline.level - currentOutline.level, outline.text)
-                    childList.add(newOutline)
-                    idx++
-                }
+                    var opml = DownloadOpml(context)
+                    opml.setProcessedCompletedCallback( {
+                        res ->
+                        if (res.isTrue()){
+                            var intent = Intent(Intent.ACTION_MAIN)
+                            intent.setClass(context, javaClass<OutlinerActivity>())
+                            intent.putExtra(OutlinerActivity.OUTLINES_DATA, res.value!!)
 
-                //do not launch another activity. It's already alone
-                if (outlines.size == childList.size)
+                            context.startActivity(intent)
+                        }
+                        else{
+                            context.toastee("Downloading url fails becaue of ${res.exception?.getMessage()}" , Duration.LONG)
+                        }
+                    }, { outline -> outline.text != "<rules>" })
+
+                    opml.execute(url)
+
                     return true
+                } else {
+                    var idx = currentPosition + 1
 
-                launchAnotherOutline(childList)
-                //context.toastee("Size of child list is ${childList.size}", Duration.LONG)
-                return true
+                    var level = 0
+                    var childList = ArrayList<OutlineContent>()
+
+                    //root level
+                    childList.add(OutlineContent(0, currentOutline.text))
+                    while (idx < outlines.size){
+                        val outline = outlines.get(idx)
+                        if ((outline.level - currentOutline.level) < 1)
+                            break
+
+                        val newOutline = OutlineContent(outline.level - currentOutline.level, outline.text)
+                        childList.add(newOutline)
+                        idx++
+                    }
+
+                    //do not launch another activity. It's already alone
+                    if (outlines.size == childList.size)
+                        return true
+
+                    launchAnotherOutline(childList)
+                    //context.toastee("Size of child list is ${childList.size}", Duration.LONG)
+                    return true
+                }
             }
         })
 
