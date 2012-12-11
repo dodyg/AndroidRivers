@@ -8,8 +8,13 @@ import com.pl.polidea.treeview.TreeNodeInfo
 import com.pl.polidea.treeview.TreeStateManager
 import com.silverkeytech.android_rivers.OutlinerActivity
 import com.silverkeytech.android_rivers.R
+import android.util.TypedValue
 
-public open class SimpleStandardAdapter(context: OutlinerActivity?, treeStateManager: TreeStateManager<Long?>?, numberOfLevels: Int, val outlines : List<OutlineContent>):
+public open class SimpleStandardAdapter(context: OutlinerActivity?,
+                                        treeStateManager: TreeStateManager<Long?>?,
+                                        numberOfLevels: Int,
+                                        val outlines : List<OutlineContent>,
+                                        val textSize : Int):
     AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
 
     private open fun getDescription(id: Long?): String? {
@@ -27,6 +32,8 @@ public open class SimpleStandardAdapter(context: OutlinerActivity?, treeStateMan
         val descriptionView: TextView? = viewLayout?.findViewById(R.id.outliner_list_item_description) as TextView?
         val levelView: TextView? = viewLayout?.findViewById(R.id.outliner_list_item_level) as TextView?
         descriptionView?.setText(getDescription(treeNodeInfo?.getId()))
+        descriptionView?.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize.toFloat())
+
         return viewLayout
     }
 

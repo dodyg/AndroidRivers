@@ -21,7 +21,7 @@ public class OutlinerActivity(): SherlockActivity()
         public val OUTLINES_DATA : String = "OUTLINES_DATA"
     }
 
-    val LEVEL_NUMBER: Int = 6
+    val LEVEL_NUMBER: Int = 12
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
@@ -45,7 +45,10 @@ public class OutlinerActivity(): SherlockActivity()
 
             setContentView(R.layout.outliner)
             var treeView = findView<TreeViewList>(R.id.outliner_main_tree)
-            var simpleAdapter = SimpleStandardAdapter(this, manager, LEVEL_NUMBER, outlines)
+
+            val textSize = getVisualPref().getListTextSize()
+
+            var simpleAdapter = SimpleStandardAdapter(this, manager, LEVEL_NUMBER, outlines, textSize)
             treeView.setAdapter(simpleAdapter)
         }
         else
