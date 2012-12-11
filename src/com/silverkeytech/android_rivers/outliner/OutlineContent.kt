@@ -7,6 +7,7 @@ public enum class OutlineType{
     NONE
     INCLUDE
     LINK
+    BLOGPOST
 }
 
 public data class OutlineContent (var level : Int, var text : String) : Serializable
@@ -29,6 +30,7 @@ public data class OutlineContent (var level : Int, var text : String) : Serializ
             return when(tp){
                 "include" -> OutlineType.INCLUDE
                 "link" -> OutlineType.LINK
+                "blogpost" -> OutlineType.BLOGPOST
                 else -> OutlineType.NONE
             }
         }

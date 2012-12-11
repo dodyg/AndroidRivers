@@ -39,6 +39,8 @@ public open class SimpleStandardAdapter(private var context: OutlinerActivity,
             return currentOutline.text + " #"
         else if (currentOutline.getType() == OutlineType.LINK)
             return currentOutline.text + " ->"
+        else if (currentOutline.getType() == OutlineType.BLOGPOST)
+            return currentOutline.text + " +"
         else
             return currentOutline.text
     }
@@ -73,7 +75,7 @@ public open class SimpleStandardAdapter(private var context: OutlinerActivity,
                 var currentPosition = treeNodeInfo!!.getId()!!.toInt()
                 var currentOutline = outlines.get(currentPosition)
 
-                if (currentOutline.getType() == OutlineType.INCLUDE){
+                if (currentOutline.getType() == OutlineType.INCLUDE || currentOutline.getType() == OutlineType.BLOGPOST){
 
                     val url = currentOutline.getAttribute("url")!!
 
