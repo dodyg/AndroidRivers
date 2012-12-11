@@ -21,7 +21,7 @@ fun Opml.traverse (filter : ((Outline) -> Boolean)? = null) : ArrayList<OutlineC
 
 private fun traverseOutline(level : Int, outline : Outline?, list : ArrayList<OutlineContent>, filter : ((Outline) -> Boolean)?){
     if (outline != null){
-        val proceed = filter != null && filter(outline)
+        val proceed = filter == null || filter(outline)
 
         if (proceed){
             list.add(OutlineContent(level, outline.text!!))

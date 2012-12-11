@@ -30,7 +30,9 @@ public class OutlinerActivity(): SherlockActivity()
         val extras = getIntent()?.getExtras()
 
         if (extras != null){
-            val outlines = extras.getSerializable(OUTLINES_DATA)!! as List<OutlineContent>
+            val outlines = extras.getSerializable(OUTLINES_DATA)!! as ArrayList<OutlineContent>
+
+            Log.d(TAG, "Length of outlines ${outlines.size}")
 
             var manager = InMemoryTreeStateManager<Long?>()
             var treeBuilder = TreeBuilder(manager)

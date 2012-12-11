@@ -18,11 +18,10 @@ import android.widget.ListView
 import android.widget.TextView
 import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
+import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 import java.util.ArrayList
-import org.simpleframework.xml.Serializer
-import org.simpleframework.xml.core.Persister
 
 public class DownloadSubscription(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<Opml>>(){
     class object {
@@ -67,48 +66,17 @@ public class DownloadSubscription(it: Context?, ignoreCache: Boolean): AsyncTask
                     return Result.wrong(ex)
                 }
 
-                val opml = transformFromXml(req)
+                val opml = transformXmlToOpml(req)
 
                 if(opml.isTrue()){
-                    val ct = opml.value?.body?.outline?.count()
-
-                    if (ct != null && ct > 0){
-                        var cnt: Float = 1.toFloat();
-                        var divisor = ct.toFloat()
-
-                        while(cnt < ct){
-                            var progress = Math.round((cnt / divisor) * 100.toFloat());
-                            publishProgress(progress);
-                            Thread.sleep(200)
-                            cnt++
-                        }
-                    }
-
                     context.getApplication().getMain().setSubscriptionListCache(opml.value!!)
                 }
+
                 return opml
             }
         } catch(e: Exception){
             return Result.wrong(e)
         }
-    }
-
-    fun transformFromXml(xml: String?): Result<Opml> {
-        var serial: Serializer = Persister()
-
-        try{
-            val opml: Opml? = serial.read(javaClass<Opml>(), xml)
-            Log.d(TAG, "OPML ${opml?.head?.title} created on ${opml?.head?.getDateCreated()} and modified on ${opml?.head?.getDateModified()}")
-            return Result.right(opml)
-        }
-        catch (e: Exception){
-            Log.d(TAG, "Exception ${e.getMessage()}")
-            return Result.wrong(e)
-        }
-    }
-
-    protected override fun onProgressUpdate(vararg progress: Int?) {
-        Log.d("DD", "Progressing...${progress[0]}")
     }
 
     protected override fun onPostExecute(result: Result<Opml>?) {
