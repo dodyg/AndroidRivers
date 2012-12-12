@@ -66,10 +66,6 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         return updateView(viewLayout, treeNodeInfo)
     }
 
-    fun launchAnotherOutline(outl: ArrayList<OutlineContent>, title : String) {
-        Log.d(TAG, "Launch another outline ${outl.size}")
-        startOutlinerActivity(context, outl, title, null)
-    }
 
     public override fun updateView(view: View?, treeNodeInfo: TreeNodeInfo<Long?>?): LinearLayout? {
         val viewLayout: LinearLayout? = view as LinearLayout?
@@ -85,7 +81,8 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
                 var currentOutline = outlines.get(currentPosition)
 
                 return when(currentOutline.getType()){
-                    OutlineType.INCLUDE, OutlineType.BLOGPOST -> handleOpmlInclude(currentOutline)
+                    OutlineType.INCLUDE ->  handleOpmlInclude(currentOutline, false)
+                    OutlineType.BLOGPOST -> handleOpmlInclude(currentOutline, true)
                     OutlineType.LINK -> handleLink(currentOutline)
                     OutlineType.RIVER -> {
                         handleRiver(currentOutline)
@@ -136,7 +133,8 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         if (outlines.size == childList.size)
             return true
 
-        launchAnotherOutline(childList, currentOutline.text)
+        startOutlinerActivity(context, childList, currentOutline.text, null, true)
+
         return true
     }
 
@@ -153,13 +151,13 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         }
     }
 
-    fun handleOpmlInclude(currentOutline: OutlineContent): Boolean {
+    fun handleOpmlInclude(currentOutline: OutlineContent, expandAll : Boolean): Boolean {
         val url = currentOutline.getAttribute("url")!!
 
         val cache = context.getApplication().getMain().getOpmlCache(url)
 
         if (cache != null){
-            startOutlinerActivity(context, cache, currentOutline.text, url)
+            startOutlinerActivity(context, cache, currentOutline.text, url, expandAll)
         }
         else {
             var opml = DownloadOpml(context)
@@ -168,7 +166,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
                 if (res.isTrue()){
                     var outlines = res.value!!
                     context.getApplication().getMain().setOpmlCache(url, outlines)
-                    startOutlinerActivity(context, outlines, currentOutline.text, url)
+                    startOutlinerActivity(context, outlines, currentOutline.text, url, expandAll)
                 }
                 else{
                     context.toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)

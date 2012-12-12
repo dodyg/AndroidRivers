@@ -116,14 +116,14 @@ public open class MainActivity(): SherlockActivity() {
         val cache = getApplication().getMain().getOpmlCache(url)
 
         if (cache != null){
-            startOutlinerActivity(this, cache, title, url)
+            startOutlinerActivity(this, cache, title, url, false)
         }
         else{
             var opml = DownloadOpml(this)
             opml.setProcessedCompletedCallback({
                 res ->
                 if (res.isTrue()){
-                    startOutlinerActivity(this, res.value!!, title, url)
+                    startOutlinerActivity(this, res.value!!, title, url, false)
                 }
                 else{
                     toastee("Downloading url fails becaue of ${res.exception?.getMessage()}", Duration.LONG)

@@ -38,11 +38,13 @@ public class OutlinerActivity(): SherlockActivity()
         public val OUTLINES_DATA: String = "OUTLINES_DATA"
         public val OUTLINES_TITLE: String = "OUTLINES_TITLE"
         public val OUTLINES_URL: String = "OUTLINES_URL"
+        public val OUTLINES_EXPAND_ALL : String = "OUTLINES_EXPAND_ALL"
     }
 
     val LEVEL_NUMBER: Int = 12
 
     var outlinesUrl : String? = null
+    var expandAll : Boolean = false
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
@@ -63,16 +65,20 @@ public class OutlinerActivity(): SherlockActivity()
             if (url != null)
                 outlinesUrl = url
 
+            expandAll = extras.getBoolean(OUTLINES_EXPAND_ALL)
+
+
             val outlines = extras.getSerializable(OUTLINES_DATA)!! as ArrayList<OutlineContent>
 
-            displayOutlines(outlines)
+            displayOutlines(outlines, expandAll)
         }
         else
             toastee("There is no data to be displayed in outline mode ", Duration.LONG)
     }
 
-    fun displayOutlines(outlines : ArrayList<OutlineContent>){
+    fun displayOutlines(outlines : ArrayList<OutlineContent>, expandAll : Boolean){
         var manager = InMemoryTreeStateManager<Long?>()
+        manager.setVisibleByDefault(expandAll)
         var treeBuilder = TreeBuilder(manager)
 
         var counter = 0
@@ -107,7 +113,7 @@ public class OutlinerActivity(): SherlockActivity()
         opml.setProcessedCompletedCallback({
             res ->
             if (res.isTrue()){
-                displayOutlines(res.value!!)
+                displayOutlines(res.value!!, expandAll)
                 this.getApplication().getMain().setOpmlCache(url, res.value!!)
             }
             else{
