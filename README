@@ -4,9 +4,10 @@ The latest build of this app is available at http://goo.gl/dxK5w.
 
 This code is licensed under GPL version 3. Please read license.txt.
 
-Other libraries:
 
-ActionBarSherlock is included in source form only because of the limitation of Android platform that does not allow
-style to be available in jar file. So the license for that source code follows whatever http://actionbarsherlock.com/ dictates it to be.
-
-Tree-view-list-android's license can be found here http://code.google.com/p/tree-view-list-android/
+Open Source Library used:
+* [ActionBar Sherlock])(http://actionbarsherlock.com/) [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
+* [Tree-view-list-android](http://code.google.com/p/tree-view-list-android/)
+* [google-gson](http://code.google.com/p/google-gson/) [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
+* [http-request](https://github.com/kevinsawicki/http-request)
+* [Simple XML](http://simple.sourceforge.net/)
