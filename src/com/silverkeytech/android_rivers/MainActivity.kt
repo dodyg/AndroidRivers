@@ -120,22 +120,32 @@ public open class MainActivity(): SherlockActivity() {
     }
 
     fun downloadOpml(url: String, title : String) {
-        var opml = DownloadOpml(this)
-        opml.setProcessedCompletedCallback({
-            res ->
-            if (res.isTrue()){
-                var intent = Intent(Intent.ACTION_MAIN)
-                intent.setClass(getApplicationContext(), javaClass<OutlinerActivity>())
-                intent.putExtra(OutlinerActivity.OUTLINES_DATA, res.value!!)
-                intent.putExtra(OutlinerActivity.OUTLINES_TITLE, title)
+        var cache = getApplication().getMain().getOpmlCache(url)
 
-                startActivity(intent)
-            }
-            else{
-                toastee("Downloading url fails becaue of ${res.exception?.getMessage()}", Duration.LONG)
-            }
-        }, { outline -> outline.text != "<rules>" })
+        if (cache != null){
+            var intent = Intent(Intent.ACTION_MAIN)
+            intent.setClass(getApplicationContext(), javaClass<OutlinerActivity>())
+            intent.putExtra(OutlinerActivity.OUTLINES_DATA, cache)
+            intent.putExtra(OutlinerActivity.OUTLINES_TITLE, title)
+            startActivity(intent)
+        }
+        else{
+            var opml = DownloadOpml(this)
+            opml.setProcessedCompletedCallback({
+                res ->
+                if (res.isTrue()){
+                    var intent = Intent(Intent.ACTION_MAIN)
+                    intent.setClass(getApplicationContext(), javaClass<OutlinerActivity>())
+                    intent.putExtra(OutlinerActivity.OUTLINES_DATA, res.value!!)
+                    intent.putExtra(OutlinerActivity.OUTLINES_TITLE, title)
+                    startActivity(intent)
+                }
+                else{
+                    toastee("Downloading url fails becaue of ${res.exception?.getMessage()}", Duration.LONG)
+                }
+            }, { outline -> outline.text != "<rules>" })
 
-        opml.execute(url)
+            opml.execute(url)
+        }
     }
 }

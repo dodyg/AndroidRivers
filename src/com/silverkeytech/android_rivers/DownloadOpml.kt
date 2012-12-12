@@ -33,7 +33,7 @@ import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 import java.util.ArrayList
 
-public class DownloadOpml(it: Context?): AsyncTask<String, Int, Result<Opml>>(){
+public class DownloadOpml(it: Context?): AsyncTask<String, Int, Pair<String, Result<Opml>>>(){
     class object {
         public val TAG: String = javaClass<DownloadOpml>().getSimpleName()
     }
@@ -55,17 +55,18 @@ public class DownloadOpml(it: Context?): AsyncTask<String, Int, Result<Opml>>(){
         dialog.show()
     }
 
-    protected override fun doInBackground(vararg url: String?): Result<Opml>? {
+    protected override fun doInBackground(vararg url: String?): Pair<String, Result<Opml>>? {
+        var link = url[0]!!
         var req: String?
         try{
-            req = HttpRequest.get(url[0])?.body()
+            req = HttpRequest.get(link)?.body()
 
             val opml = transformXmlToOpml(req?.replace("<?xml version=\"1.0\" encoding=\"utf-8\" ?>", ""))
-            return opml
+            return Pair(link, opml)
         }
         catch(e: HttpRequestException){
             var ex = e.getCause()
-            return Result.wrong(ex)
+            return Pair(link, Result.wrong(ex))
         }
     }
 
@@ -73,19 +74,21 @@ public class DownloadOpml(it: Context?): AsyncTask<String, Int, Result<Opml>>(){
     var processedCallBack: ((Result<ArrayList<OutlineContent>>) -> Unit)? = null
     var processingFilter: ((Outline) -> Boolean)? = null
 
-    protected override fun onPostExecute(result: Result<Opml>?) {
+    protected override fun onPostExecute(result: Pair<String, Result<Opml>>?) {
         dialog.dismiss()
 
         if (result != null){
             if (rawCallback != null)
-                rawCallback!!(result)
+                rawCallback!!(result.second)
 
             if (processedCallBack != null){
-                if (result.isTrue()){
+                if (result.second.isTrue()){
                     try{
-                        val opml = result.value!!
+                        val opml = result.second.value!!
                         val processed = opml.traverse(processingFilter)
                         Log.d(TAG, "Length of opml outlines ${opml.body?.outline?.get(0)?.outline?.size} compared to processed outlines ${processed.size}")
+
+                        context.getApplication().getMain().setOpmlCache(result.first, processed)
                         val res = Result.right(processed)
                         processedCallBack!!(res)
                     }catch (e: Exception){
@@ -93,7 +96,7 @@ public class DownloadOpml(it: Context?): AsyncTask<String, Int, Result<Opml>>(){
                         processedCallBack!!(res)
                     }
                 }else
-                    processedCallBack!!(Result.wrong<ArrayList<OutlineContent>>(result.exception))
+                    processedCallBack!!(Result.wrong<ArrayList<OutlineContent>>(result.second.exception))
             }
         }
     }

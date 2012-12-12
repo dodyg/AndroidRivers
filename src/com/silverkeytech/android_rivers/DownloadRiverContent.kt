@@ -33,14 +33,13 @@ import com.silverkeytech.android_rivers.riverjs.FeedsRiver
 import java.util.ArrayList
 
 //Responsible for handling a river js downloading and display in asynchronous way
-public class DownloadRiverContent(it: Context?, ignoreCache: Boolean, val language: String): AsyncTask<String, Int, Result<FeedsRiver>>(){
+public class DownloadRiverContent(it: Context?, val language: String): AsyncTask<String, Int, Result<FeedsRiver>>(){
     class object {
         public val TAG: String = javaClass<DownloadRiverContent>().getSimpleName()
     }
 
     var dialog: ProgressDialog = ProgressDialog(it)
     var context: Activity = it!! as Activity
-    val ignoreCache: Boolean = ignoreCache
 
     //Prepare stuff before execution
     protected override fun onPreExecute() {

@@ -60,13 +60,10 @@ public class RiverActivity(): SherlockListActivity()
 
         if (cache != null && !ignoreCache){
             Log.d(TAG, "Cache is hit for url $riverUrl")
-            val now = System.currentTimeMillis()
             RiverContentRenderer(this, riverLanguage).handleNewsListing(cache!!)
-            val after = System.currentTimeMillis()
-            Log.d(TAG, "Cache display takes ${after - now} ms")
         }
         else
-            DownloadRiverContent(this, false, riverLanguage).execute(riverUrl)
+            DownloadRiverContent(this, riverLanguage).execute(riverUrl)
     }
 
     public override fun onBackPressed() {
