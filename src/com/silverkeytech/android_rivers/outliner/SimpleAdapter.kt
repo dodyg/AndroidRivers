@@ -108,10 +108,12 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
     fun handleRiver(currentOutline : OutlineContent) {
         var url = currentOutline.getAttribute("url")
         var text = currentOutline.text
+        var lang = currentOutline.getAttribute("language")
 
         var i = Intent(context, javaClass<RiverActivity>())
         i.putExtra(Params.RIVER_URL, url)
         i.putExtra(Params.RIVER_NAME, text)
+        i.putExtra(Params.RIVER_LANGUAGE, lang)
 
         context.startActivity(i);
     }

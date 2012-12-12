@@ -165,6 +165,11 @@ public class DownloadSubscription(it: Context?, ignoreCache: Boolean): AsyncTask
                 i.putExtra(Params.RIVER_URL, currentOutline.url)
                 i.putExtra(Params.RIVER_NAME, currentOutline.text)
 
+                if (!currentOutline.language.isNullOrEmpty())
+                    i.putExtra(Params.RIVER_LANGUAGE, currentOutline.text)
+                else
+                    i.putExtra(Params.RIVER_LANGUAGE, "en")
+
                 context.startActivity(i);
             }
         })

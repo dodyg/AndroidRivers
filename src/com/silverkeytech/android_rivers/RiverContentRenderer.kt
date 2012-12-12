@@ -39,9 +39,12 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
 import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
+import android.graphics.Typeface
+import go.goyalla.dict.arabicDictionary.file.ArabicReshape
+import android.view.Gravity
 
 //Manage the rendering of each news item in the river list
-public class RiverContentRenderer(val context: Activity){
+public class RiverContentRenderer(val context: Activity, val language : String){
     class object {
         val STANDARD_NEWS_COLOR = android.graphics.Color.GRAY
         val STANDARD_NEWS_IMAGE = android.graphics.Color.CYAN
@@ -102,7 +105,9 @@ public class RiverContentRenderer(val context: Activity){
                     Log.d(TAG, "List View reused")
                 }
 
-                holder?.news?.setText(news)
+                handleForeignLanguage(holder!!.news, news!!)
+
+
                 showIndicator()
 
                 if (news.isNullOrEmpty()){
@@ -130,12 +135,12 @@ public class RiverContentRenderer(val context: Activity){
                     msg = scrubHtml(currentNews.item.body)
 
                 var body = dlg.findViewById(R.id.news_details_text_tv)!! as TextView
-                body.setText(msg)
                 body.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize.toFloat())
+                handleForeignLanguage(body, msg)
 
                 var source = dlg.findViewById(R.id.news_details_source_tv)!! as TextView
-                source.setText(scrubHtml(currentNews.feedSourceTitle))
                 source.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11.toFloat())
+                handleForeignLanguage(body, scrubHtml(currentNews.feedSourceTitle))
 
                 dialog.setView(dlg)
 
@@ -219,5 +224,22 @@ public class RiverContentRenderer(val context: Activity){
         })
 
         list.setAdapter(adapter)
+    }
+
+    val arabicFont = Typeface.createFromAsset(context.getAssets(), "DroidKufi-Regular.ttf")
+
+
+    fun handleForeignLanguage(text : TextView, content : String){
+        when(language){
+            "ar" -> {
+                Log.d(TAG, "Switching to Arabic Font")
+                text.setTypeface(arabicFont)
+                text.setText(ArabicReshape.reshape(content))
+                text.setGravity(Gravity.RIGHT)
+            }
+            else -> {
+                text.setText(content);
+            }
+        }
     }
 }

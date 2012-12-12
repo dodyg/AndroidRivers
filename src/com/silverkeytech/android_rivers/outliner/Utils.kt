@@ -27,6 +27,7 @@ import org.simpleframework.xml.Serializer
 import android.util.Log
 import com.silverkeytech.android_rivers.scrubHtml
 import com.silverkeytech.android_rivers.isNullOrEmpty
+import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 
 //do an in order traversal so we can flatten it up to be used by outliner
 fun Opml.traverse (filter : ((Outline) -> Boolean)? = null, depthLimit : Int = 12) : ArrayList<OutlineContent>{
@@ -51,6 +52,18 @@ private fun traverseOutline(level : Int, outline : Outline?, list : ArrayList<Ou
                 o.putAttribute("url", outline.url!!)
             }
 
+            if (!outline.language.isNullOrEmpty()){
+                o.putAttribute("language", outline.language!!)
+
+                if (isLanguageRTL(outline.language!!))                {
+                    Log.d("traverseOutline", "Reshaping Arabic")
+                    o.text = "\u200F" + ArabicReshape.reshape(o.text) //at RTL marker
+                }
+
+            } else {
+                o.putAttribute("language", "en")
+            }
+
             list.add(o)
 
             var lvl = level
@@ -60,6 +73,13 @@ private fun traverseOutline(level : Int, outline : Outline?, list : ArrayList<Ou
                 traverseOutline(lvl, o, list, filter, depthLimit)
             }
         }
+    }
+}
+
+fun isLanguageRTL(language : String) : Boolean{
+    return when(language){
+        "ar" -> true
+        else -> false
     }
 }
 

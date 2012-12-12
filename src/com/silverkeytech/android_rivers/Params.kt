@@ -23,6 +23,7 @@ public class Params(){
     class object {
         val RIVER_URL = "RIVER_URL"
         val RIVER_NAME = "RIVER_NAME"
+        val RIVER_LANGUAGE = "RIVER_LANGUAGE"
         var MESSENGER = "MESSENGER"
     }
 }

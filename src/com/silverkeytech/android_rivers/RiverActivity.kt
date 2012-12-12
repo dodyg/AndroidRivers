@@ -34,6 +34,7 @@ public class RiverActivity(): SherlockListActivity()
 
     var riverUrl: String = ""
     var riverName: String = ""
+    var riverLanguage: String = ""
     var mode: ActionMode? = null
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
@@ -47,6 +48,7 @@ public class RiverActivity(): SherlockListActivity()
         var i = getIntent()!!
         riverUrl = i.getStringExtra(Params.RIVER_URL)!!
         riverName = i.getStringExtra(Params.RIVER_NAME)!!
+        riverLanguage = i.getStringExtra(Params.RIVER_LANGUAGE)!!
 
         setTitle(riverName)
 
@@ -59,12 +61,12 @@ public class RiverActivity(): SherlockListActivity()
         if (cache != null && !ignoreCache){
             Log.d(TAG, "Cache is hit for url $riverUrl")
             val now = System.currentTimeMillis()
-            RiverContentRenderer(this).handleNewsListing(cache!!)
+            RiverContentRenderer(this, riverLanguage).handleNewsListing(cache!!)
             val after = System.currentTimeMillis()
             Log.d(TAG, "Cache display takes ${after - now} ms")
         }
         else
-            DownloadRiverContent(this, false).execute(riverUrl)
+            DownloadRiverContent(this, false, riverLanguage).execute(riverUrl)
     }
 
     public override fun onBackPressed() {
