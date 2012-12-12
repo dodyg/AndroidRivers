@@ -25,6 +25,7 @@ import com.actionbarsherlock.app.SherlockActivity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 import java.io.File
+import com.silverkeytech.android_rivers.outliner.startOutlinerActivity
 
 public open class MainActivity(): SherlockActivity() {
     class object {
@@ -120,25 +121,17 @@ public open class MainActivity(): SherlockActivity() {
     }
 
     fun downloadOpml(url: String, title : String) {
-        var cache = getApplication().getMain().getOpmlCache(url)
+        val cache = getApplication().getMain().getOpmlCache(url)
 
         if (cache != null){
-            var intent = Intent(Intent.ACTION_MAIN)
-            intent.setClass(getApplicationContext(), javaClass<OutlinerActivity>())
-            intent.putExtra(OutlinerActivity.OUTLINES_DATA, cache)
-            intent.putExtra(OutlinerActivity.OUTLINES_TITLE, title)
-            startActivity(intent)
+            startOutlinerActivity(this, cache, title)
         }
         else{
             var opml = DownloadOpml(this)
             opml.setProcessedCompletedCallback({
                 res ->
                 if (res.isTrue()){
-                    var intent = Intent(Intent.ACTION_MAIN)
-                    intent.setClass(getApplicationContext(), javaClass<OutlinerActivity>())
-                    intent.putExtra(OutlinerActivity.OUTLINES_DATA, res.value!!)
-                    intent.putExtra(OutlinerActivity.OUTLINES_TITLE, title)
-                    startActivity(intent)
+                    startOutlinerActivity(this, res.value!!, title)
                 }
                 else{
                     toastee("Downloading url fails becaue of ${res.exception?.getMessage()}", Duration.LONG)

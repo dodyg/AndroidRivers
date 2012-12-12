@@ -166,28 +166,16 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         val cache = context.getApplication().getMain().getOpmlCache(url)
 
         if (cache != null){
-            var intent = Intent(Intent.ACTION_MAIN)
-            intent.setClass(context, javaClass<OutlinerActivity>())
-            var outlines = cache
-            intent.putExtra(OutlinerActivity.OUTLINES_DATA, outlines)
-            intent.putExtra(OutlinerActivity.OUTLINES_TITLE, currentOutline.text)
-
-            context.startActivity(intent)
+            startOutlinerActivity(context, cache, currentOutline.text)
         }
         else {
             var opml = DownloadOpml(context)
             opml.setProcessedCompletedCallback({
                 res ->
                 if (res.isTrue()){
-                    var intent = Intent(Intent.ACTION_MAIN)
-                    intent.setClass(context, javaClass<OutlinerActivity>())
                     var outlines = res.value!!
-                    intent.putExtra(OutlinerActivity.OUTLINES_DATA, outlines)
-                    intent.putExtra(OutlinerActivity.OUTLINES_TITLE, currentOutline.text)
-
                     context.getApplication().getMain().setOpmlCache(url, outlines)
-
-                    context.startActivity(intent)
+                    startOutlinerActivity(context, outlines, currentOutline.text)
                 }
                 else{
                     context.toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)

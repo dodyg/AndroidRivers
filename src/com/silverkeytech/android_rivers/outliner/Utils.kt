@@ -28,6 +28,9 @@ import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 import java.util.ArrayList
 import org.simpleframework.xml.Serializer
 import org.simpleframework.xml.core.Persister
+import android.content.Context
+import android.content.Intent
+import com.silverkeytech.android_rivers.OutlinerActivity
 
 //do an in order traversal so we can flatten it up to be used by outliner
 fun Opml.traverse (filter: ((Outline) -> Boolean)? = null, depthLimit: Int = 12): ArrayList<OutlineContent> {
@@ -95,4 +98,12 @@ fun transformXmlToOpml(xml: String?): Result<Opml> {
         Log.d("OPML Transform", "Exception ${e.getMessage()}")
         return Result.wrong(e)
     }
+}
+
+fun startOutlinerActivity(context : Context, outlines : ArrayList<OutlineContent>, title : String) {
+    var intent = Intent(Intent.ACTION_MAIN)
+    intent.setClass(context, javaClass<OutlinerActivity>())
+    intent.putExtra(OutlinerActivity.OUTLINES_DATA, outlines)
+    intent.putExtra(OutlinerActivity.OUTLINES_TITLE, title)
+    context.startActivity(intent)
 }
