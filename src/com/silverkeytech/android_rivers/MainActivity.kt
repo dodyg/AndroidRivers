@@ -57,9 +57,18 @@ public open class MainActivity(): SherlockActivity() {
         DownloadSubscription(this, false).execute(DEFAULT_SUBSCRIPTION_LIST)
     }
 
+
+    val EXPLORE: Int = 1
+
+
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         var inflater = getSupportMenuInflater()!!
         inflater.inflate(R.menu.subscription_menu, menu)
+
+        //top menu
+        menu?.add(0, EXPLORE, 0, "MORE NEWS")
+        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+
         return true
     }
 
@@ -99,6 +108,10 @@ public open class MainActivity(): SherlockActivity() {
             }
             R.id.subscription_menu_curry_com_all -> {
                 downloadOpml("http://blog.curry.com/toc.opml")
+                return false
+            }
+            EXPLORE -> {
+                downloadOpml("http://hobieu.apphb.com/api/1/opml/root")
                 return false
             }
             else ->

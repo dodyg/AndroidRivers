@@ -46,16 +46,8 @@ private fun traverseOutline(level : Int, outline : Outline?, list : ArrayList<Ou
         if (proceed){
 
             var o = OutlineContent(level, scrubHtml(outline.text!!))
-            if (outline.outlineType == "include" && !outline.url.isNullOrEmpty()){
-                o.putAttribute("type", "include")
-                o.putAttribute("url", outline.url!!)
-            }
-            else if (outline.outlineType == "link" && !outline.url.isNullOrEmpty()){
-                o.putAttribute("type", "link")
-                o.putAttribute("url", outline.url!!)
-            }
-            else if (outline.outlineType == "blogpost" && !outline.url.isNullOrEmpty()){
-                o.putAttribute("type", "blogpost")
+            if (!outline.outlineType.isNullOrEmpty() && !outline.url.isNullOrEmpty()){
+                o.putAttribute("type", outline.outlineType!!)
                 o.putAttribute("url", outline.url!!)
             }
 

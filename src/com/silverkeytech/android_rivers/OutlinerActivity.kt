@@ -27,7 +27,7 @@ import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.pl.polidea.treeview.InMemoryTreeStateManager
 import com.pl.polidea.treeview.TreeBuilder
 import com.pl.polidea.treeview.TreeViewList
-import com.silverkeytech.android_rivers.outliner.SimpleStandardAdapter
+import com.silverkeytech.android_rivers.outliner.SimpleAdapter
 import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
 import java.util.ArrayList
@@ -67,7 +67,7 @@ public class OutlinerActivity(): SherlockActivity()
 
             val textSize = getVisualPref().getListTextSize()
 
-            var simpleAdapter = SimpleStandardAdapter(this, manager, LEVEL_NUMBER, outlines, textSize)
+            var simpleAdapter = SimpleAdapter(this, manager, LEVEL_NUMBER, outlines, textSize)
             treeView.setAdapter(simpleAdapter)
         }
         else
