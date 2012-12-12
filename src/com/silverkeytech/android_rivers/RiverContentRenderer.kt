@@ -56,7 +56,6 @@ public class RiverContentRenderer(val context: Activity, val language : String){
     //hold the view data for the list
     public data class ViewHolder (var news: TextView, val indicator: TextView)
 
-
     //show and prepare the interaction for each individual news item
     fun handleNewsListing(sortedNewsItems: List<FeedItemMeta>) {
         val textSize = context.getVisualPref().getListTextSize()
@@ -98,15 +97,13 @@ public class RiverContentRenderer(val context: Activity, val language : String){
                     holder = ViewHolder(currentView!!.findViewById(R.id.news_item_text_tv) as TextView,
                             currentView!!.findViewById(R.id.news_item_indicator_tv) as TextView)
 
-                    holder?.news?.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize.toFloat())
                     currentView!!.setTag(holder)
                 }else{
                     holder = currentView?.getTag() as ViewHolder
                     Log.d(TAG, "List View reused")
                 }
 
-                handleForeignLanguage(holder!!.news, news!!)
-
+                handleText(holder!!.news, news!!, textSize.toFloat())
 
                 showIndicator()
 
@@ -125,7 +122,6 @@ public class RiverContentRenderer(val context: Activity, val language : String){
 
                 var dialog = AlertDialog.Builder(context)
 
-
                 var dlg : View = inflater.inflate(R.layout.news_details, null)!!
                 var msg : String
 
@@ -134,16 +130,22 @@ public class RiverContentRenderer(val context: Activity, val language : String){
                 else
                     msg = scrubHtml(currentNews.item.body)
 
+                //take care of color
+                var theme = context.getVisualPref().getTheme()
+                if (theme == R.style.Theme_Sherlock_Light_DarkActionBar)
+                    dlg.setBackgroundColor(android.graphics.Color.WHITE)
+                else if (theme == R.style.Theme_Sherlock)
+                    dlg.setBackgroundColor(android.graphics.Color.BLACK)
+
                 var body = dlg.findViewById(R.id.news_details_text_tv)!! as TextView
-                body.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize.toFloat())
-                handleForeignLanguage(body, msg)
+                handleText(body, msg,  textSize.toFloat())
+                handleTextColor(context, body)
 
                 var source = dlg.findViewById(R.id.news_details_source_tv)!! as TextView
-                source.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11.toFloat())
-                handleForeignLanguage(body, scrubHtml(currentNews.feedSourceTitle))
+                handleText(source, scrubHtml(currentNews.feedSourceTitle), 11.toFloat())
+                handleTextColor(context, body)
 
                 dialog.setView(dlg)
-
 
                 val currentLink = currentNews.item.link
                 val currentNewsLinkAvailable: Boolean = !currentLink.isNullOrEmpty() && currentLink!!.trim().indexOf("http") == 0
@@ -229,17 +231,27 @@ public class RiverContentRenderer(val context: Activity, val language : String){
     val arabicFont = Typeface.createFromAsset(context.getAssets(), "DroidKufi-Regular.ttf")
 
 
-    fun handleForeignLanguage(text : TextView, content : String){
+    fun handleText(text : TextView, content : String, textSize : Float){
         when(language){
             "ar" -> {
                 Log.d(TAG, "Switching to Arabic Font")
                 text.setTypeface(arabicFont)
                 text.setText(ArabicReshape.reshape(content))
                 text.setGravity(Gravity.RIGHT)
+                text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize - 3.toFloat())
             }
             else -> {
+                text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
                 text.setText(content);
             }
         }
+    }
+
+    fun handleTextColor(context : Activity, text : TextView){
+        var theme = context.getVisualPref().getTheme()
+        if (theme == R.style.Theme_Sherlock_Light_DarkActionBar)
+            text.setTextColor(android.graphics.Color.BLACK)
+        else if (theme == R.style.Theme_Sherlock)
+            text.setTextColor(android.graphics.Color.WHITE)
     }
 }
