@@ -23,12 +23,14 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Handler
 import android.os.Message
 import android.os.Messenger
 import android.util.Log
 import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,12 +41,10 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
 import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
-import android.graphics.Typeface
 import go.goyalla.dict.arabicDictionary.file.ArabicReshape
-import android.view.Gravity
 
 //Manage the rendering of each news item in the river list
-public class RiverContentRenderer(val context: Activity, val language : String){
+public class RiverContentRenderer(val context: Activity, val language: String){
     class object {
         val STANDARD_NEWS_COLOR = android.graphics.Color.GRAY
         val STANDARD_NEWS_IMAGE = android.graphics.Color.CYAN
@@ -122,8 +122,8 @@ public class RiverContentRenderer(val context: Activity, val language : String){
 
                 var dialog = AlertDialog.Builder(context)
 
-                var dlg : View = inflater.inflate(R.layout.news_details, null)!!
-                var msg : String
+                var dlg: View = inflater.inflate(R.layout.news_details, null)!!
+                var msg: String
 
                 if (currentNews.item.body.isNullOrEmpty() && !currentNews.item.title.isNullOrEmpty())
                     msg = scrubHtml(currentNews.item.title)
@@ -138,7 +138,7 @@ public class RiverContentRenderer(val context: Activity, val language : String){
                     dlg.setBackgroundColor(android.graphics.Color.BLACK)
 
                 var body = dlg.findViewById(R.id.news_details_text_tv)!! as TextView
-                handleText(body, msg,  textSize.toFloat())
+                handleText(body, msg, textSize.toFloat())
                 handleTextColor(context, body)
 
                 var source = dlg.findViewById(R.id.news_details_source_tv)!! as TextView
@@ -231,7 +231,7 @@ public class RiverContentRenderer(val context: Activity, val language : String){
     val arabicFont = Typeface.createFromAsset(context.getAssets(), "DroidKufi-Regular.ttf")
 
 
-    fun handleText(text : TextView, content : String, textSize : Float){
+    fun handleText(text: TextView, content: String, textSize: Float) {
         when(language){
             "ar" -> {
                 Log.d(TAG, "Switching to Arabic Font")
@@ -247,7 +247,7 @@ public class RiverContentRenderer(val context: Activity, val language : String){
         }
     }
 
-    fun handleTextColor(context : Activity, text : TextView){
+    fun handleTextColor(context: Activity, text: TextView) {
         var theme = context.getVisualPref().getTheme()
         if (theme == R.style.Theme_Sherlock_Light_DarkActionBar)
             text.setTextColor(android.graphics.Color.BLACK)

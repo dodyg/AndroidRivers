@@ -18,25 +18,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.os.AsyncTask
-import android.content.Context
-import com.silverkeytech.android_rivers.outlines.Opml
-import android.app.ProgressDialog
 import android.app.Activity
-import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
-import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
-import com.github.kevinsawicki.http.HttpRequest
+import android.app.ProgressDialog
+import android.content.Context
 import android.content.DialogInterface
-import com.silverkeytech.android_rivers.outliner.OutlineContent
-import com.silverkeytech.android_rivers.outliner.traverse
-import java.util.ArrayList
+import android.os.AsyncTask
 import android.util.Log
+import com.github.kevinsawicki.http.HttpRequest
+import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
+import com.silverkeytech.android_rivers.outliner.OutlineContent
+import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
+import com.silverkeytech.android_rivers.outliner.traverse
+import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
+import java.util.ArrayList
 
-
-public class DownloadOpml(it : Context?) : AsyncTask<String, Int, Result<Opml>>(){
+public class DownloadOpml(it: Context?): AsyncTask<String, Int, Result<Opml>>(){
     class object {
-        public val TAG : String = javaClass<DownloadOpml>().getSimpleName()
+        public val TAG: String = javaClass<DownloadOpml>().getSimpleName()
     }
 
     var dialog: ProgressDialog = ProgressDialog(it)
@@ -61,7 +60,7 @@ public class DownloadOpml(it : Context?) : AsyncTask<String, Int, Result<Opml>>(
         try{
             req = HttpRequest.get(url[0])?.body()
 
-            val opml = transformXmlToOpml(req?.replace("<?xml version=\"1.0\" encoding=\"utf-8\" ?>",""))
+            val opml = transformXmlToOpml(req?.replace("<?xml version=\"1.0\" encoding=\"utf-8\" ?>", ""))
             return opml
         }
         catch(e: HttpRequestException){
@@ -70,9 +69,9 @@ public class DownloadOpml(it : Context?) : AsyncTask<String, Int, Result<Opml>>(
         }
     }
 
-    var rawCallback : ((Result<Opml>) -> Unit)? = null
-    var processedCallBack : ((Result<ArrayList<OutlineContent>>) -> Unit)? = null
-    var processingFilter : ((Outline) -> Boolean)? = null
+    var rawCallback: ((Result<Opml>) -> Unit)? = null
+    var processedCallBack: ((Result<ArrayList<OutlineContent>>) -> Unit)? = null
+    var processingFilter: ((Outline) -> Boolean)? = null
 
     protected override fun onPostExecute(result: Result<Opml>?) {
         dialog.dismiss()
@@ -89,7 +88,7 @@ public class DownloadOpml(it : Context?) : AsyncTask<String, Int, Result<Opml>>(
                         Log.d(TAG, "Length of opml outlines ${opml.body?.outline?.get(0)?.outline?.size} compared to processed outlines ${processed.size}")
                         val res = Result.right(processed)
                         processedCallBack!!(res)
-                    }catch (e : Exception){
+                    }catch (e: Exception){
                         val res = Result.wrong<ArrayList<OutlineContent>>(e)
                         processedCallBack!!(res)
                     }
@@ -100,13 +99,13 @@ public class DownloadOpml(it : Context?) : AsyncTask<String, Int, Result<Opml>>(
     }
 
     //Set up function to call when download is done
-    public fun setCompletionCallback(action : ((Result<Opml>) -> Unit)? ){
+    public fun setCompletionCallback(action: ((Result<Opml>) -> Unit)?) {
         rawCallback = action
     }
 
     //set up function to call when download is done, include optional processing filter
-    public fun setProcessedCompletedCallback(action : ((Result<ArrayList<OutlineContent>>) -> Unit)?,
-                                             filter : ((Outline) -> Boolean)? = null){
+    public fun setProcessedCompletedCallback(action: ((Result<ArrayList<OutlineContent>>) -> Unit)?,
+                                             filter: ((Outline) -> Boolean)? = null) {
         processedCallBack = action
         processingFilter = filter
     }

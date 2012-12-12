@@ -22,22 +22,19 @@ package com.silverkeytech.android_rivers
 import android.os.Bundle
 import android.util.Log
 import com.actionbarsherlock.app.SherlockActivity
-import com.github.kevinsawicki.http.HttpRequest
-import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.pl.polidea.treeview.InMemoryTreeStateManager
 import com.pl.polidea.treeview.TreeBuilder
 import com.pl.polidea.treeview.TreeViewList
-import com.silverkeytech.android_rivers.outliner.SimpleAdapter
-import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
-import com.silverkeytech.android_rivers.outliner.traverse
-import java.util.ArrayList
 import com.silverkeytech.android_rivers.outliner.OutlineContent
+import com.silverkeytech.android_rivers.outliner.SimpleAdapter
+import java.util.ArrayList
 
 public class OutlinerActivity(): SherlockActivity()
 {
     class object {
         public val TAG: String = javaClass<OutlinerActivity>().getSimpleName()
-        public val OUTLINES_DATA : String = "OUTLINES_DATA"
+        public val OUTLINES_DATA: String = "OUTLINES_DATA"
+        public val OUTLINES_TITLE: String = "OUTLINES_TITLE"
     }
 
     val LEVEL_NUMBER: Int = 12
@@ -46,9 +43,16 @@ public class OutlinerActivity(): SherlockActivity()
         setTheme(this.getVisualPref().getTheme())
         super.onCreate(savedInstanceState)
 
+        var actionBar = getSupportActionBar()!!
+        actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
+
         val extras = getIntent()?.getExtras()
 
         if (extras != null){
+            val title = extras.getString(OUTLINES_TITLE)
+            if (title != null)
+                setTitle(title)
+
             val outlines = extras.getSerializable(OUTLINES_DATA)!! as ArrayList<OutlineContent>
 
             Log.d(TAG, "Length of outlines ${outlines.size}")

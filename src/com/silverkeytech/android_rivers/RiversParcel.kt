@@ -18,26 +18,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.os.Parcelable
 import android.os.Parcel
+import android.os.Parcelable
 
-public class RiverParcel(p : Parcel?): Parcelable {
+public class RiverParcel(p: Parcel?): Parcelable {
 
     class object{
-        val CREATOR : Parcelable.Creator<RiverParcel> = object : Parcelable.Creator<RiverParcel>{
+        val CREATOR: Parcelable.Creator<RiverParcel> = object : Parcelable.Creator<RiverParcel>{
 
             public override fun createFromParcel(p0: Parcel?): RiverParcel? {
                 return RiverParcel(p0)
             }
 
             public override fun newArray(p0: Int): Array<RiverParcel?>? {
-                return Array<RiverParcel?>(p0,{ null })
+                return Array<RiverParcel?>(p0, { null })
             }
         }
     }
 
-    public var title : String? = null
-    public var url : String? = null
+    public var title: String? = null
+    public var url: String? = null
 
     {
         if (p != null){

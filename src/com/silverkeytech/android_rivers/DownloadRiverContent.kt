@@ -33,7 +33,7 @@ import com.silverkeytech.android_rivers.riverjs.FeedsRiver
 import java.util.ArrayList
 
 //Responsible for handling a river js downloading and display in asynchronous way
-public class DownloadRiverContent(it: Context?, ignoreCache: Boolean, val language : String): AsyncTask<String, Int, Result<FeedsRiver>>(){
+public class DownloadRiverContent(it: Context?, ignoreCache: Boolean, val language: String): AsyncTask<String, Int, Result<FeedsRiver>>(){
     class object {
         public val TAG: String = javaClass<DownloadRiverContent>().getSimpleName()
     }
@@ -113,7 +113,7 @@ public class DownloadRiverContent(it: Context?, ignoreCache: Boolean, val langua
 
 
 //Take all the news items from several different feeds and combine them into one.
-fun FeedsRiver.getSortedNewsItems(): List<FeedItemMeta>{
+fun FeedsRiver.getSortedNewsItems(): List<FeedItemMeta> {
     var newsItems = ArrayList<FeedItemMeta>()
 
     var river = this

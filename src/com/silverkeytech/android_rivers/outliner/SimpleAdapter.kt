@@ -31,12 +31,12 @@ import com.pl.polidea.treeview.TreeStateManager
 import com.silverkeytech.android_rivers.DownloadOpml
 import com.silverkeytech.android_rivers.Duration
 import com.silverkeytech.android_rivers.OutlinerActivity
+import com.silverkeytech.android_rivers.Params
 import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.RiverActivity
 import com.silverkeytech.android_rivers.getMain
 import com.silverkeytech.android_rivers.toastee
 import java.util.ArrayList
-import com.silverkeytech.android_rivers.RiverActivity
-import com.silverkeytech.android_rivers.Params
 
 public open class SimpleAdapter(private var context: OutlinerActivity,
                                 treeStateManager: TreeStateManager<Long?>,
@@ -67,10 +67,11 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
     }
 
 
-    fun launchAnotherOutline(outl: ArrayList<OutlineContent>) {
+    fun launchAnotherOutline(outl: ArrayList<OutlineContent>, title : String) {
         var intent = Intent(Intent.ACTION_MAIN)
         intent.setClass(context, javaClass<OutlinerActivity>())
         intent.putExtra(OutlinerActivity.OUTLINES_DATA, outl)
+        intent.putExtra(OutlinerActivity.OUTLINES_TITLE, title)
 
         Log.d(TAG, "Launch another outline ${outl.size}")
         context.startActivity(intent)
@@ -105,7 +106,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         return viewLayout
     }
 
-    fun handleRiver(currentOutline : OutlineContent) {
+    fun handleRiver(currentOutline: OutlineContent) {
         var url = currentOutline.getAttribute("url")
         var text = currentOutline.text
         var lang = currentOutline.getAttribute("language")
@@ -142,7 +143,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         if (outlines.size == childList.size)
             return true
 
-        launchAnotherOutline(childList)
+        launchAnotherOutline(childList, currentOutline.text)
         return true
     }
 
@@ -169,6 +170,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
             intent.setClass(context, javaClass<OutlinerActivity>())
             var outlines = cache
             intent.putExtra(OutlinerActivity.OUTLINES_DATA, outlines)
+            intent.putExtra(OutlinerActivity.OUTLINES_TITLE, currentOutline.text)
 
             context.startActivity(intent)
         }
@@ -181,6 +183,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
                     intent.setClass(context, javaClass<OutlinerActivity>())
                     var outlines = res.value!!
                     intent.putExtra(OutlinerActivity.OUTLINES_DATA, outlines)
+                    intent.putExtra(OutlinerActivity.OUTLINES_TITLE, currentOutline.text)
 
                     context.getApplication().getMain().setOpmlCache(url, outlines)
 

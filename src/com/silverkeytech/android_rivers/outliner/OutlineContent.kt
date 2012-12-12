@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.outliner
 
-import java.util.HashMap
 import java.io.Serializable
+import java.util.HashMap
 
 public enum class OutlineType{
     NONE
@@ -29,25 +29,25 @@ public enum class OutlineType{
     RIVER
 }
 
-public data class OutlineContent (var level : Int, var text : String) : Serializable
+public data class OutlineContent (var level: Int, var text: String): Serializable
 {
-    private var bag : HashMap<String, String> = HashMap<String, String>()
+    private var bag: HashMap<String, String> = HashMap<String, String>()
 
-    public fun putAttribute(key : String, obj : String){
+    public fun putAttribute(key: String, obj: String) {
         bag.put(key, obj)
     }
 
-    public fun getAttribute(key : String) : String? = bag.get(key)
+    public fun getAttribute(key: String): String? = bag.get(key)
 
-    public fun containsKey(key : String ): Boolean{
+    public fun containsKey(key: String): Boolean {
         return bag.containsKey(key)
     }
 
-    public fun copyAttributes(outline : OutlineContent){
+    public fun copyAttributes(outline: OutlineContent) {
         bag = outline.bag
     }
 
-    public fun getType() : OutlineType{
+    public fun getType(): OutlineType {
         if (containsKey("type")){
             val tp = getAttribute("type")
             return when(tp){

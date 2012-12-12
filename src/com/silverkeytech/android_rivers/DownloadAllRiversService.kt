@@ -19,31 +19,31 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.app.IntentService
+import android.app.Notification
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.support.v4.app.NotificationCompat
 import android.util.Log
+import android.widget.RemoteViews
 import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
-import com.silverkeytech.android_rivers.riverjs.FeedsRiver
 import com.google.gson.Gson
+import com.silverkeytech.android_rivers.riverjs.FeedsRiver
 import java.util.Random
-import android.support.v4.app.NotificationCompat
-import android.app.PendingIntent
-import android.widget.RemoteViews
-import android.app.Notification
-import android.content.Context
-import android.app.NotificationManager
 
 public class DownloadAllRiversService(): IntentService("DownloadAllRiversService"){
     class object{
         public val TAG: String = javaClass<DownloadAllRiversService>().getSimpleName()
 
-        public val PARCEL : String = "Parcel"
-        public val TITLES : String = "TITLES"
-        public val URLS : String = "URLS"
+        public val PARCEL: String = "Parcel"
+        public val TITLES: String = "TITLES"
+        public val URLS: String = "URLS"
     }
 
     var targetUrls: List<String?> ? = null
-    var targetTitles : List<String?> ? = null
+    var targetTitles: List<String?> ? = null
 
 
     fun prepareNotification(): Notification {
@@ -123,7 +123,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
 
                         var sortedNewsItems = feeds.getSortedNewsItems()
 
-                        getApplication().getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes() )
+                        getApplication().getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
                         Log.d(TAG, "Download for $url is successful")
                     }
                     catch(e: Exception)
@@ -140,7 +140,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
 
         }
 
-        var msg : String
+        var msg: String
 
         if (errorCount == 0){
             msg = "All rivers successfully downloaded"

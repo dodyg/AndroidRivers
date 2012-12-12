@@ -18,19 +18,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.outliner
 
-import com.silverkeytech.android_rivers.outlines.Opml
-import java.util.ArrayList
-import com.silverkeytech.android_rivers.outlines.Outline
-import com.silverkeytech.android_rivers.Result
-import org.simpleframework.xml.core.Persister
-import org.simpleframework.xml.Serializer
 import android.util.Log
-import com.silverkeytech.android_rivers.scrubHtml
+import com.silverkeytech.android_rivers.Result
 import com.silverkeytech.android_rivers.isNullOrEmpty
+import com.silverkeytech.android_rivers.outlines.Opml
+import com.silverkeytech.android_rivers.outlines.Outline
+import com.silverkeytech.android_rivers.scrubHtml
 import go.goyalla.dict.arabicDictionary.file.ArabicReshape
+import java.util.ArrayList
+import org.simpleframework.xml.Serializer
+import org.simpleframework.xml.core.Persister
 
 //do an in order traversal so we can flatten it up to be used by outliner
-fun Opml.traverse (filter : ((Outline) -> Boolean)? = null, depthLimit : Int = 12) : ArrayList<OutlineContent>{
+fun Opml.traverse (filter: ((Outline) -> Boolean)? = null, depthLimit: Int = 12): ArrayList<OutlineContent> {
     var list = ArrayList<OutlineContent>()
 
     var level = 0
@@ -40,7 +40,7 @@ fun Opml.traverse (filter : ((Outline) -> Boolean)? = null, depthLimit : Int = 1
     return list
 }
 
-private fun traverseOutline(level : Int, outline : Outline?, list : ArrayList<OutlineContent>, filter : ((Outline) -> Boolean)?, depthLimit : Int){
+private fun traverseOutline(level: Int, outline: Outline?, list: ArrayList<OutlineContent>, filter: ((Outline) -> Boolean)?, depthLimit: Int) {
     if (outline != null){
         val proceed = level < depthLimit && (filter == null || filter(outline))
 
@@ -76,7 +76,7 @@ private fun traverseOutline(level : Int, outline : Outline?, list : ArrayList<Ou
     }
 }
 
-fun isLanguageRTL(language : String) : Boolean{
+fun isLanguageRTL(language: String): Boolean {
     return when(language){
         "ar" -> true
         else -> false

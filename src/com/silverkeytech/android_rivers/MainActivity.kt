@@ -103,15 +103,15 @@ public open class MainActivity(): SherlockActivity() {
                 }
             }
             R.id.subscription_menu_scripting_com_all -> {
-                downloadOpml("http://scripting.com/toc.opml")
+                downloadOpml("http://scripting.com/toc.opml", "Scripting.Com")
                 return false
             }
             R.id.subscription_menu_curry_com_all -> {
-                downloadOpml("http://blog.curry.com/toc.opml")
+                downloadOpml("http://blog.curry.com/toc.opml", "Adam Curry")
                 return false
             }
             EXPLORE -> {
-                downloadOpml("http://hobieu.apphb.com/api/1/opml/root")
+                downloadOpml("http://hobieu.apphb.com/api/1/opml/root", "Get more news")
                 return false
             }
             else ->
@@ -119,19 +119,20 @@ public open class MainActivity(): SherlockActivity() {
         }
     }
 
-    fun downloadOpml(url : String){
+    fun downloadOpml(url: String, title : String) {
         var opml = DownloadOpml(this)
-        opml.setProcessedCompletedCallback( {
+        opml.setProcessedCompletedCallback({
             res ->
             if (res.isTrue()){
                 var intent = Intent(Intent.ACTION_MAIN)
                 intent.setClass(getApplicationContext(), javaClass<OutlinerActivity>())
                 intent.putExtra(OutlinerActivity.OUTLINES_DATA, res.value!!)
+                intent.putExtra(OutlinerActivity.OUTLINES_TITLE, title)
 
                 startActivity(intent)
             }
             else{
-                toastee("Downloading url fails becaue of ${res.exception?.getMessage()}" , Duration.LONG)
+                toastee("Downloading url fails becaue of ${res.exception?.getMessage()}", Duration.LONG)
             }
         }, { outline -> outline.text != "<rules>" })
 

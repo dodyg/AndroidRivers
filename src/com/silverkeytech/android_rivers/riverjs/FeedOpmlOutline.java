@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.riverjs;
 
-import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;
 
 import java.util.ArrayList;

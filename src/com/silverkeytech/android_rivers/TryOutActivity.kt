@@ -33,24 +33,18 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Button
 import android.widget.RemoteViews
+import com.github.kevinsawicki.http.HttpRequest
+import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
+import com.google.gson.Gson
 import com.j256.ormlite.android.AndroidConnectionSource
 import com.j256.ormlite.android.DatabaseTableConfigUtil
 import com.j256.ormlite.android.apptools.OpenHelperManager
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper
 import com.silverkeytech.android_rivers.db.Bookmark
-import java.sql.SQLException
-import org.simpleframework.xml.core.Persister
-import org.simpleframework.xml.Serializer
-import com.silverkeytech.android_rivers.outlines.Opml
-import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
-import com.github.kevinsawicki.http.HttpRequest
-import com.silverkeytech.android_rivers.outlines.Outline
-import java.util.ArrayList
 import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
-import com.google.gson.Gson
 import com.silverkeytech.android_rivers.riverjs.FeedsRiver
-import com.silverkeytech.android_rivers.outliner.OutlineContent
+import java.sql.SQLException
 
 public class TryOutActivity(): Activity()
 {
@@ -225,12 +219,12 @@ public class TryOutActivity(): Activity()
         }
     }
 
-    public fun handleOutliner(){
+    public fun handleOutliner() {
         var btn = findView<Button>(R.id.tryout_show_outline_btn)
         btn.setOnClickListener {
 
             var opml = DownloadOpml(this)
-            opml.setProcessedCompletedCallback( {
+            opml.setProcessedCompletedCallback({
                 res ->
                 if (res.isTrue()){
                     var intent = Intent(Intent.ACTION_MAIN)
@@ -240,7 +234,7 @@ public class TryOutActivity(): Activity()
                     startActivity(intent)
                 }
                 else{
-                    toastee("Downloading url fails becaue of ${res.exception?.getMessage()}" , Duration.LONG)
+                    toastee("Downloading url fails becaue of ${res.exception?.getMessage()}", Duration.LONG)
                 }
             }, { outline -> outline.text != "<rules>" })
 
@@ -251,7 +245,7 @@ public class TryOutActivity(): Activity()
         }
     }
 
-    public fun handleRiverJsWithOpmlSource(){
+    public fun handleRiverJsWithOpmlSource() {
         var btn = findView<Button>(R.id.tryout_download_riverjs_with_opml_btn)
 
         btn.setOnClickListener(object: OnClickListener{
@@ -289,7 +283,7 @@ public class TryOutActivity(): Activity()
         })
     }
 
-    public fun handleDownloadRecursiveOpml(){
+    public fun handleDownloadRecursiveOpml() {
         var btn = findView<Button>(R.id.tryout_download_recursive_opml_btn)
 
         btn.setOnClickListener(object: OnClickListener{
@@ -308,7 +302,7 @@ public class TryOutActivity(): Activity()
 
                 Log.d(TAG, "Text : $req")
 
-                val opml = transformXmlToOpml(req?.replace("<?xml version=\"1.0\" encoding=\"utf-8\" ?>",""))
+                val opml = transformXmlToOpml(req?.replace("<?xml version=\"1.0\" encoding=\"utf-8\" ?>", ""))
 
                 if(opml.isTrue()){
                     val sorted = opml.value!!.traverse()

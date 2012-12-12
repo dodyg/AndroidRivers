@@ -22,9 +22,9 @@ package com.silverkeytech.android_rivers
 import android.app.Application
 import android.support.v4.util.LruCache
 import android.util.Log
+import com.silverkeytech.android_rivers.outliner.OutlineContent
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
-import com.silverkeytech.android_rivers.outliner.OutlineContent
 import java.util.ArrayList
 
 fun Application?.getMain(): MainApplication {
@@ -38,7 +38,7 @@ public class MainApplication(): Application()
     }
 
     var riverCache = LruCache<String, CacheItem<List<FeedItemMeta>>>(inMegaByte(4))
-    var opmlCache =  LruCache<String, CacheItem<ArrayList<OutlineContent>>>(inMegaByte(4))
+    var opmlCache = LruCache<String, CacheItem<ArrayList<OutlineContent>>>(inMegaByte(4))
     var subscriptionCache: CacheItem<Opml>? = null
 
     public override fun onCreate() {
@@ -64,7 +64,7 @@ public class MainApplication(): Application()
         subscriptionCache?.setExpireInMinutesFromNow(10.toHoursInMinutes())
     }
 
-    public fun getOpmlCache(uri: String): ArrayList<OutlineContent>?{
+    public fun getOpmlCache(uri: String): ArrayList<OutlineContent>? {
         val content = opmlCache.get(uri)
 
         if (content == null)
@@ -79,7 +79,7 @@ public class MainApplication(): Application()
         }
     }
 
-    public fun setOpmlCache(uri: String, opml: ArrayList<OutlineContent>, expirationInMinutes : Int =  30) {
+    public fun setOpmlCache(uri: String, opml: ArrayList<OutlineContent>, expirationInMinutes: Int = 30) {
         var item = CacheItem(opml)
         item.setExpireInMinutesFromNow(expirationInMinutes)
         opmlCache.put(uri, item)
@@ -100,7 +100,7 @@ public class MainApplication(): Application()
         }
     }
 
-    public fun setRiverCache(uri: String, river: List<FeedItemMeta>, expirationInMinutes : Int =  30) {
+    public fun setRiverCache(uri: String, river: List<FeedItemMeta>, expirationInMinutes: Int = 30) {
         var item = CacheItem(river)
         item.setExpireInMinutesFromNow(expirationInMinutes)
         riverCache.put(uri, item)

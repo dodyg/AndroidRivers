@@ -24,11 +24,6 @@ import com.actionbarsherlock.app.SherlockListActivity
 import com.actionbarsherlock.view.ActionMode
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
-import android.view.GestureDetector
-import android.view.GestureDetector.SimpleOnGestureListener
-
-import android.app.Activity
-import android.view.MotionEvent
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity(): SherlockListActivity()
@@ -46,7 +41,6 @@ public class RiverActivity(): SherlockListActivity()
         setTheme(this.getVisualPref().getTheme())
         super.onCreate(savedInstanceState)
         setContentView(R.layout.river)
-
 
         var actionBar = getSupportActionBar()!!
         actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
@@ -195,6 +189,4 @@ public class ResizeTextActionMode (private var context: RiverActivity, private v
 
         return true
     }
-
-
 }
