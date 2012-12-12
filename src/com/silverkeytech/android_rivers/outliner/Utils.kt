@@ -100,10 +100,11 @@ fun transformXmlToOpml(xml: String?): Result<Opml> {
     }
 }
 
-fun startOutlinerActivity(context : Context, outlines : ArrayList<OutlineContent>, title : String) {
+fun startOutlinerActivity(context : Context, outlines : ArrayList<OutlineContent>, title : String, url : String?) {
     var intent = Intent(Intent.ACTION_MAIN)
     intent.setClass(context, javaClass<OutlinerActivity>())
     intent.putExtra(OutlinerActivity.OUTLINES_DATA, outlines)
     intent.putExtra(OutlinerActivity.OUTLINES_TITLE, title)
+    intent.putExtra(OutlinerActivity.OUTLINES_URL, url)
     context.startActivity(intent)
 }

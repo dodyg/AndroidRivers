@@ -66,20 +66,13 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         return updateView(viewLayout, treeNodeInfo)
     }
 
-
     fun launchAnotherOutline(outl: ArrayList<OutlineContent>, title : String) {
-        var intent = Intent(Intent.ACTION_MAIN)
-        intent.setClass(context, javaClass<OutlinerActivity>())
-        intent.putExtra(OutlinerActivity.OUTLINES_DATA, outl)
-        intent.putExtra(OutlinerActivity.OUTLINES_TITLE, title)
-
         Log.d(TAG, "Launch another outline ${outl.size}")
-        context.startActivity(intent)
+        startOutlinerActivity(context, outl, title, null)
     }
 
     public override fun updateView(view: View?, treeNodeInfo: TreeNodeInfo<Long?>?): LinearLayout? {
         val viewLayout: LinearLayout? = view as LinearLayout?
-        val levelView = viewLayout?.findViewById(R.id.outliner_list_item_level) as TextView
 
         val descriptionView = viewLayout?.findViewById(R.id.outliner_list_item_description)!! as TextView
         descriptionView.setText(getDescription(treeNodeInfo?.getId()))
@@ -166,7 +159,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         val cache = context.getApplication().getMain().getOpmlCache(url)
 
         if (cache != null){
-            startOutlinerActivity(context, cache, currentOutline.text)
+            startOutlinerActivity(context, cache, currentOutline.text, url)
         }
         else {
             var opml = DownloadOpml(context)
@@ -175,7 +168,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
                 if (res.isTrue()){
                     var outlines = res.value!!
                     context.getApplication().getMain().setOpmlCache(url, outlines)
-                    startOutlinerActivity(context, outlines, currentOutline.text)
+                    startOutlinerActivity(context, outlines, currentOutline.text, url)
                 }
                 else{
                     context.toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)

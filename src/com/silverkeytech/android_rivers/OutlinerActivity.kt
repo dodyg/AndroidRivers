@@ -28,6 +28,8 @@ import com.pl.polidea.treeview.TreeViewList
 import com.silverkeytech.android_rivers.outliner.OutlineContent
 import com.silverkeytech.android_rivers.outliner.SimpleAdapter
 import java.util.ArrayList
+import com.actionbarsherlock.view.MenuItem
+import com.actionbarsherlock.view.Menu
 
 public class OutlinerActivity(): SherlockActivity()
 {
@@ -35,13 +37,17 @@ public class OutlinerActivity(): SherlockActivity()
         public val TAG: String = javaClass<OutlinerActivity>().getSimpleName()
         public val OUTLINES_DATA: String = "OUTLINES_DATA"
         public val OUTLINES_TITLE: String = "OUTLINES_TITLE"
+        public val OUTLINES_URL: String = "OUTLINES_URL"
     }
 
     val LEVEL_NUMBER: Int = 12
 
+    var outlinesUrl : String? = null
+
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.outliner)
 
         var actionBar = getSupportActionBar()!!
         actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
@@ -53,29 +59,61 @@ public class OutlinerActivity(): SherlockActivity()
             if (title != null)
                 setTitle(title)
 
+            val url = extras.getString(OUTLINES_URL)
+            if (url != null)
+                outlinesUrl = url
+
             val outlines = extras.getSerializable(OUTLINES_DATA)!! as ArrayList<OutlineContent>
 
-            Log.d(TAG, "Length of outlines ${outlines.size}")
-
-            var manager = InMemoryTreeStateManager<Long?>()
-            var treeBuilder = TreeBuilder(manager)
-
-            var counter = 0
-            for(val e in outlines){
-                treeBuilder.sequentiallyAddNextNode(counter.toLong(), e.level)
-                counter++
-            }
-
-            setContentView(R.layout.outliner)
-            var treeView = findView<TreeViewList>(R.id.outliner_main_tree)
-
-            val textSize = getVisualPref().getListTextSize()
-
-            var simpleAdapter = SimpleAdapter(this, manager, LEVEL_NUMBER, outlines, textSize)
-            treeView.setAdapter(simpleAdapter)
+            displayOutlines(outlines)
         }
         else
             toastee("There is no data to be displayed in outline mode ", Duration.LONG)
+    }
+
+    fun displayOutlines(outlines : ArrayList<OutlineContent>){
+        var manager = InMemoryTreeStateManager<Long?>()
+        var treeBuilder = TreeBuilder(manager)
+
+        var counter = 0
+        for(val e in outlines){
+            treeBuilder.sequentiallyAddNextNode(counter.toLong(), e.level)
+            counter++
+        }
+
+        var treeView = findView<TreeViewList>(R.id.outliner_main_tree)
+
+        val textSize = getVisualPref().getListTextSize()
+
+        var simpleAdapter = SimpleAdapter(this, manager, LEVEL_NUMBER, outlines, textSize)
+        treeView.setAdapter(simpleAdapter)
+    }
+
+    val REFRESH: Int = 1
+
+    public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        if (outlinesUrl != null){
+            menu?.add(0, REFRESH, 0, "Refresh")
+            ?.setIcon(R.drawable.ic_menu_refresh)
+            ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+        }
+
+        return true
+    }
+
+    internal fun refreshContent() {
+    }
+
+    public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.getItemId()){
+            REFRESH -> {
+                refreshContent()
+                return true
+            }
+            else ->
+                return super.onOptionsItemSelected(item)
+        }
     }
 
     public override fun onBackPressed() {
