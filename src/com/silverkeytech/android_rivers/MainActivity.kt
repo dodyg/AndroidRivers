@@ -103,14 +103,6 @@ public open class MainActivity(): SherlockActivity() {
                     return false
                 }
             }
-            R.id.subscription_menu_scripting_com_all -> {
-                downloadOpml("http://scripting.com/toc.opml", "Scripting.Com")
-                return false
-            }
-            R.id.subscription_menu_curry_com_all -> {
-                downloadOpml("http://blog.curry.com/toc.opml", "Adam Curry")
-                return false
-            }
             EXPLORE -> {
                 downloadOpml("http://hobieu.apphb.com/api/1/opml/root", "Get more news")
                 return false
