@@ -1,4 +1,4 @@
-Android Rivers is an app to view various news rivers based on http://riverjs.org/ format
+Android Rivers is an app to read and discover news using RiverJs, RSS and OPML format.
 Copyright (C) 2012 Dody Gunawinata (dodyg@silverkeytech.com)
 
 This program is free software: you can redistribute it and/or modify
