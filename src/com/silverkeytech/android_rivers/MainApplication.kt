@@ -26,6 +26,11 @@ import com.silverkeytech.android_rivers.outliner.OutlineContent
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
 import java.util.ArrayList
+import android.database.sqlite.SQLiteDatabase
+import java.io.File
+import android.content.Context
+import com.silverkeytech.android_rivers.db.Database
+import com.silverkeytech.android_rivers.db.DatabaseManager
 
 fun Application?.getMain(): MainApplication {
     return this!! as MainApplication
@@ -44,6 +49,19 @@ public class MainApplication(): Application()
     public override fun onCreate() {
         Log.d(TAG, "Main Application is started")
         super<Application>.onCreate()
+
+        val path = this.getApplicationContext()!!.getDatabasePath(Database.DATABASE_NAME)!!
+        Log.d(TAG, "My location ${path.canonicalPath}")
+
+        if (!path.exists()){
+            var db = this.openOrCreateDatabase(Database.DATABASE_NAME, Context.MODE_PRIVATE, null)
+            db?.close()
+            Log.d(TAG, "Create DB")
+        }else{
+            Log.d(TAG, "DB already exists")
+        }
+
+        DatabaseManager.init(this.getApplicationContext()!!)
     }
 
     public fun getSubscriptionListCache(): Opml? {

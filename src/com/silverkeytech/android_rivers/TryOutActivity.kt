@@ -40,11 +40,15 @@ import com.j256.ormlite.android.AndroidConnectionSource
 import com.j256.ormlite.android.DatabaseTableConfigUtil
 import com.j256.ormlite.android.apptools.OpenHelperManager
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper
-import com.silverkeytech.android_rivers.db.Bookmark
+//import com.silverkeytech.android_rivers.db.Bookmark
 import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
 import com.silverkeytech.android_rivers.riverjs.FeedsRiver
 import java.sql.SQLException
+import com.silverkeytech.android_rivers.db.DatabaseManager
+import com.silverkeytech.android_rivers.db.Bookmark
+
+//import com.silverkeytech.android_rivers.db.DatabaseManager
 
 public class TryOutActivity(): Activity()
 {
@@ -67,6 +71,7 @@ public class TryOutActivity(): Activity()
         handleOutliner()
         handleDownloadRecursiveOpml()
         handleRiverJsWithOpmlSource()
+
     }
 
     fun handleDownloadGifImage() {
@@ -122,22 +127,8 @@ public class TryOutActivity(): Activity()
 
         btn.setOnClickListener(object : OnClickListener{
             public override fun onClick(p0: View?) {
-                var connection: AndroidConnectionSource? = null
-
-                try{
-                    connection = AndroidConnectionSource(OpenHelperManager.getHelper(this@TryOutActivity, javaClass<OrmLiteSqliteOpenHelper>()))
-
-                    DatabaseTableConfigUtil.fromClass(connection, javaClass<Bookmark>())
-
-                    Log.d(TAG, "Table bookmarks created")
-                }
-                catch(e: SQLException){
-                    Log.d(TAG, "Exception when trying to create a Bookmark table ${e.getMessage()}")
-                }
-                finally{
-                    connection?.close()
-                    OpenHelperManager.release()
-                }
+              val total = DatabaseManager.bookmark!!.queryForAll()!!.count()
+              toastee("all $total", Duration.LONG)
             }
         })
     }
@@ -146,23 +137,12 @@ public class TryOutActivity(): Activity()
         var btn = findView<Button>(R.id.tryout_insert_data_bookmark_table_btn)
 
         btn.setOnClickListener {
-            var connection: AndroidConnectionSource? = null
-
-            try{
-                connection = AndroidConnectionSource(OpenHelperManager.getHelper(this@TryOutActivity, javaClass<OrmLiteSqliteOpenHelper>()))
-
-                Log.d(TAG, "Table bookmarks created")
-            }
-            catch(e: SQLException){
-                Log.d(TAG, "Exception when trying to create a Bookmark table ${e.getMessage()}")
-            }
-            finally{
-                connection!!.close()
-                OpenHelperManager.releaseHelper()
-            }
-            0
+            var bk = Bookmark()
+            bk.title = "good morning america"
+            bk.url = "http://www.cnn.com"
+            bk.kind = "book"
+            DatabaseManager.bookmark!!.create(bk)
         }
-
     }
 
     var counter: Int = 1

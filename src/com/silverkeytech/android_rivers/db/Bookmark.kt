@@ -19,11 +19,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers.db
 
 
+import com.j256.ormlite.table.DatabaseTable
+import com.j256.ormlite.field.DatabaseField
+
+[DatabaseTable]
 public class Bookmark(){
 
+    [DatabaseField(generatedId = true)]
     public var id: Int = 0
 
+    [DatabaseField]
     public var title: String = ""
 
+    [DatabaseField]
     public var url: String = ""
+
+    [DatabaseField]
+    public var kind: String = ""
 }

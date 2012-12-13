@@ -26,6 +26,9 @@ import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 import java.io.File
 import com.silverkeytech.android_rivers.outliner.startOutlinerActivity
+import android.database.sqlite.SQLiteDatabase
+import android.util.Log
+import android.content.Context
 
 public open class MainActivity(): SherlockActivity() {
     class object {
@@ -38,6 +41,7 @@ public open class MainActivity(): SherlockActivity() {
         setTheme(this.getVisualPref().getTheme())
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
+
         var intent = getIntent()
         if(intent != null){
             val locationPath = intent!!.getStringExtra(DownloadService.PARAM_DOWNLOAD_LOCATION_PATH)
