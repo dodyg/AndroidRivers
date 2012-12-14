@@ -7,7 +7,5 @@
     <item android:id="@+id/river_menu_bookmark"
           android:title="Bookmark" />
 
-    <item android:id="@+id/river_menu_bookmark_remove"
-          android:title="Remove from Bookmark" />
 </menu>
 

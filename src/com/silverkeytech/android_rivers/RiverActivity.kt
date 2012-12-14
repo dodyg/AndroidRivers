@@ -85,6 +85,8 @@ public class RiverActivity(): SherlockListActivity()
 
     val RESIZE_TEXT: Int = 2
 
+    var bookmarkMenu : MenuItem? = null
+
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
         menu?.add(0, RESIZE_TEXT, 0, "Resize Text")
@@ -98,11 +100,10 @@ public class RiverActivity(): SherlockListActivity()
         var inflater = getSupportMenuInflater()!!
         inflater.inflate(R.menu.river_menu, menu)
 
-        if (riverBookmarked)                                        {
-            menu?.findItem(R.id.river_menu_bookmark)?.setVisible(false)
-        }else{
-            menu?.findItem(R.id.river_menu_bookmark_remove)?.setVisible(false)
-        }
+        bookmarkMenu = menu?.findItem(R.id.river_menu_bookmark)
+
+        if (riverBookmarked)
+            bookmarkMenu?.setVisible(false)
 
         return true
     }
@@ -128,15 +129,14 @@ public class RiverActivity(): SherlockListActivity()
                     bk.url = riverUrl
                     bk.kind = BookmarkKind.RIVER.toString()
                     DatabaseManager.bookmark!!.create(bk)
+                    bookmarkMenu?.setVisible(false)
+                    toastee("$riverName is added to your bookmark.")
                     return true
                 }
                 catch(e : Exception){
                     toastee("Sorry, we cannot add this $riverUrl", Duration.LONG)
                     return false
                 }
-            }
-            R.id.river_menu_bookmark_remove -> {
-                return false
             }
             else ->
                 return super.onOptionsItemSelected(item)
