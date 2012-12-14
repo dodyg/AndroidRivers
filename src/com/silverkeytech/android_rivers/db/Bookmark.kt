@@ -21,19 +21,34 @@ package com.silverkeytech.android_rivers.db
 
 import com.j256.ormlite.table.DatabaseTable
 import com.j256.ormlite.field.DatabaseField
+import com.j256.ormlite.field.DataType
+
+public val BOOKMARK_ID : String = "id"
+public val BOOKMARK_TITLE  : String = "title"
+public val BOOKMARK_URL  : String = "url"
+public val BOOKMARK_KIND  : String = "kind"
 
 [DatabaseTable]
 public class Bookmark(){
+    class object{
+    }
 
-    [DatabaseField(generatedId = true)]
+    [DatabaseField(generatedId = true, columnName = "id")]
     public var id: Int = 0
 
-    [DatabaseField]
+    [DatabaseField(canBeNull = false, columnName = "title", width = 255, dataType = DataType.STRING)]
     public var title: String = ""
 
-    [DatabaseField(uniqueIndex = true)]
+    [DatabaseField(canBeNull = false, uniqueIndex = true, columnName = "url", width = 550, dataType = DataType.LONG_STRING)]
     public var url: String = ""
 
-    [DatabaseField]
+    [DatabaseField(canBeNull = false, columnName = "kind")]
     public var kind: String = ""
+}
+
+public enum class BookmarkKind{
+    RIVER
+    RSS
+    LINK
+    NONE
 }

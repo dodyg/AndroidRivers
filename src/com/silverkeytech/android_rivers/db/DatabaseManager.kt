@@ -20,5 +20,4 @@ public object DatabaseManager{
         get() = getDb().getBookmarkDao() as Dao<Bookmark, out Int?>
 
     public fun queryBookmark() : BookmarkQuery = BookmarkQuery(bookmark!!)
-
 }

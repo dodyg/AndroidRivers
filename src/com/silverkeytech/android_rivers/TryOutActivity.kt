@@ -47,6 +47,7 @@ import com.silverkeytech.android_rivers.riverjs.FeedsRiver
 import java.sql.SQLException
 import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.db.Bookmark
+import java.util.Random
 
 //import com.silverkeytech.android_rivers.db.DatabaseManager
 
@@ -131,6 +132,8 @@ public class TryOutActivity(): Activity()
 
               if (total.exist)
                 toastee("all ${total.values?.count()}", Duration.LONG)
+              else
+                toastee("There is no record", Duration.LONG)
             }
         })
     }
@@ -141,7 +144,7 @@ public class TryOutActivity(): Activity()
         btn.setOnClickListener {
             var bk = Bookmark()
             bk.title = "good morning america"
-            bk.url = "http://www.cnn.com"
+            bk.url = "http://www.cnn.com " + Random().nextInt()
             bk.kind = "book"
             DatabaseManager.bookmark!!.create(bk)
         }

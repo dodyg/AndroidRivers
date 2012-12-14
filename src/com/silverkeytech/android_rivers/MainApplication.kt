@@ -53,7 +53,10 @@ public class MainApplication(): Application()
         val path = this.getApplicationContext()!!.getDatabasePath(Database.DATABASE_NAME)!!
         Log.d(TAG, "My location ${path.canonicalPath}")
 
-        if (!path.exists()){
+        if (path.exists())
+            path.delete()// for development only
+
+        if (true){
             var db = this.openOrCreateDatabase(Database.DATABASE_NAME, Context.MODE_PRIVATE, null)
             db?.close()
             Log.d(TAG, "Create DB")

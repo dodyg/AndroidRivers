@@ -21,7 +21,6 @@ package com.silverkeytech.android_rivers.db
 import com.j256.ormlite.dao.Dao
 
 public class BookmarkQuery(private val dao : Dao<Bookmark, out Int?>){
-
     fun all() : QueryMany<Bookmark>{
         try{
             return QueryMany(dao.queryForAll())
@@ -31,4 +30,18 @@ public class BookmarkQuery(private val dao : Dao<Bookmark, out Int?>){
         }
     }
 
+    fun byUrl(url : String) : QueryOne<Bookmark>{
+        try
+        {
+            var q = dao.queryBuilder()!!
+                .where()!!
+                .eq(BOOKMARK_URL, url)!!
+                .prepare()
+
+            return QueryOne(dao.queryForFirst(q))
+        }
+        catch(e : Exception){
+            return QueryOne<Bookmark>(null, e)
+        }
+    }
 }
