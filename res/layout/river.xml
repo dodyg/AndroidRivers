@@ -12,5 +12,8 @@
     <ListView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@android:id/list" android:layout_gravity="right|center_vertical"/>
+            android:id="@android:id/list"
+            android:layout_gravity="right|center_vertical"
+            android:longClickable="true"
+            />
 </LinearLayout>

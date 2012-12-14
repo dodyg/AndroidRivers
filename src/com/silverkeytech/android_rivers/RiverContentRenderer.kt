@@ -116,6 +116,15 @@ public class RiverContentRenderer(val context: Activity, val language: String){
             }
         }
 
+        list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
+            public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
+
+                var item = p0!!.getitem
+                Log.d(TAG, "Item being clicked ${item!!.getClass().getSimpleName()}")
+                return true
+            }
+        })
+
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val currentNews = sortedNewsItems.get(p2);

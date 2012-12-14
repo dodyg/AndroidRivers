@@ -29,6 +29,9 @@ import com.silverkeytech.android_rivers.outliner.startOutlinerActivity
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 import android.content.Context
+import android.view.ContextMenu
+import android.view.View
+import android.widget.AdapterView
 
 public open class MainActivity(): SherlockActivity() {
     class object {
@@ -137,4 +140,5 @@ public open class MainActivity(): SherlockActivity() {
             opml.execute(url)
         }
     }
+
 }

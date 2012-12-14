@@ -27,6 +27,9 @@ import com.actionbarsherlock.view.MenuItem
 import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.db.Bookmark
 import com.silverkeytech.android_rivers.db.BookmarkKind
+import android.view.ContextMenu
+import android.view.View
+import android.widget.AdapterView
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity(): SherlockListActivity()
@@ -142,6 +145,7 @@ public class RiverActivity(): SherlockListActivity()
                 return super.onOptionsItemSelected(item)
         }
     }
+
 }
 
 public class ResizeTextActionMode (private var context: RiverActivity, private var mode: ActionMode?): ActionMode.Callback{

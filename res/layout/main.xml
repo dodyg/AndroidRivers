@@ -13,7 +13,11 @@
     <ListView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/main_rivers_lv" android:layout_gravity="center" android:headerDividersEnabled="false"/>
+            android:id="@+id/main_rivers_lv"
+            android:layout_gravity="center"
+            android:headerDividersEnabled="false"
+            android:longClickable="true"
+            />
 
 </LinearLayout>
 
