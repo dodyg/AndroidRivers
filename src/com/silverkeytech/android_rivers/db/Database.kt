@@ -64,3 +64,4 @@ public class Database (context : Context) : OrmLiteSqliteOpenHelper(context, Dat
         return bookmarkDao!!
     }
 }
+

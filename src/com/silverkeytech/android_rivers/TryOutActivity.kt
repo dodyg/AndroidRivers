@@ -127,8 +127,10 @@ public class TryOutActivity(): Activity()
 
         btn.setOnClickListener(object : OnClickListener{
             public override fun onClick(p0: View?) {
-              val total = DatabaseManager.bookmark!!.queryForAll()!!.count()
-              toastee("all $total", Duration.LONG)
+              val total = DatabaseManager.queryBookmark().all()
+
+              if (total.exist)
+                toastee("all ${total.values?.count()}", Duration.LONG)
             }
         })
     }

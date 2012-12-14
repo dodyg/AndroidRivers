@@ -31,7 +31,7 @@ public class Bookmark(){
     [DatabaseField]
     public var title: String = ""
 
-    [DatabaseField]
+    [DatabaseField(uniqueIndex = true)]
     public var url: String = ""
 
     [DatabaseField]

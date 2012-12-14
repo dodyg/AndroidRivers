@@ -2,6 +2,7 @@ package com.silverkeytech.android_rivers.db
 
 import android.content.Context
 import com.j256.ormlite.dao.Dao
+import com.j256.ormlite.stmt.QueryBuilder
 
 private var db : Database? = null
 
@@ -17,5 +18,7 @@ public object DatabaseManager{
 
     public var bookmark :  Dao<Bookmark, out Int?>? = null
         get() = getDb().getBookmarkDao() as Dao<Bookmark, out Int?>
+
+    public fun queryBookmark() : BookmarkQuery = BookmarkQuery(bookmark!!)
 
 }
