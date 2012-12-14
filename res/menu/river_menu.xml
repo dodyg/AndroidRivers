@@ -3,4 +3,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/river_menu_refresh"
           android:title="@string/refresh" />
+
+    <item android:id="@+id/river_menu_bookmark"
+          android:title="Bookmark" />
+
+    <item android:id="@+id/river_menu_bookmark_remove"
+          android:title="Remove from Bookmark" />
 </menu>
+

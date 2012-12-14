@@ -24,6 +24,9 @@ import com.actionbarsherlock.app.SherlockListActivity
 import com.actionbarsherlock.view.ActionMode
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
+import com.silverkeytech.android_rivers.db.DatabaseManager
+import com.silverkeytech.android_rivers.db.Bookmark
+import com.silverkeytech.android_rivers.db.BookmarkKind
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity(): SherlockListActivity()
@@ -35,7 +38,9 @@ public class RiverActivity(): SherlockListActivity()
     var riverUrl: String = ""
     var riverName: String = ""
     var riverLanguage: String = ""
+    var riverBookmarked: Boolean = false
     var mode: ActionMode? = null
+
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
@@ -53,6 +58,11 @@ public class RiverActivity(): SherlockListActivity()
         setTitle(riverName)
 
         downloadContent(riverUrl, false)
+        riverBookmarked = checkRiverBookmarkStatus(riverUrl)
+    }
+
+    fun checkRiverBookmarkStatus(url : String): Boolean{
+        return DatabaseManager.queryBookmark().byUrl(url).exists
     }
 
     fun downloadContent(riverUrl: String, ignoreCache: Boolean) {
@@ -88,6 +98,12 @@ public class RiverActivity(): SherlockListActivity()
         var inflater = getSupportMenuInflater()!!
         inflater.inflate(R.menu.river_menu, menu)
 
+        if (riverBookmarked)                                        {
+            menu?.findItem(R.id.river_menu_bookmark)?.setVisible(false)
+        }else{
+            menu?.findItem(R.id.river_menu_bookmark_remove)?.setVisible(false)
+        }
+
         return true
     }
 
@@ -104,6 +120,23 @@ public class RiverActivity(): SherlockListActivity()
             RESIZE_TEXT -> {
                 mode = startActionMode(ResizeTextActionMode(this, mode))
                 return true
+            }
+            R.id.river_menu_bookmark -> {
+                try{
+                    var bk = Bookmark()
+                    bk.title = riverName
+                    bk.url = riverUrl
+                    bk.kind = BookmarkKind.RIVER.toString()
+                    DatabaseManager.bookmark!!.create(bk)
+                    return true
+                }
+                catch(e : Exception){
+                    toastee("Sorry, we cannot add this $riverUrl", Duration.LONG)
+                    return false
+                }
+            }
+            R.id.river_menu_bookmark_remove -> {
+                return false
             }
             else ->
                 return super.onOptionsItemSelected(item)
