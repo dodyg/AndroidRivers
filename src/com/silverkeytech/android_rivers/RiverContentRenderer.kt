@@ -42,6 +42,7 @@ import android.widget.ListView
 import android.widget.TextView
 import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
 import go.goyalla.dict.arabicDictionary.file.ArabicReshape
+import android.widget.PopupWindow
 
 //Manage the rendering of each news item in the river list
 public class RiverContentRenderer(val context: Activity, val language: String){
@@ -118,9 +119,26 @@ public class RiverContentRenderer(val context: Activity, val language: String){
 
         list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
             public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
+                var item = p1!!
+                val popupWidth = item.getWidth()
+                val popupHeight = item.getHeight()
 
-                var item = p0!!.getitem
-                Log.d(TAG, "Item being clicked ${item!!.getClass().getSimpleName()}")
+                val loc = intArray(0,1)
+                p1!!.getLocationOnScreen(loc)
+                val popupX= loc[0]
+                val popupY = loc[1]
+
+                var inflater = context.getLayoutInflater()!!
+                var x = inflater.inflate(R.layout.river_quick_actions, null, false)!!
+                var pp = PopupWindow(x, popupWidth, popupHeight, true)
+
+                x.setBackgroundColor(android.graphics.Color.GRAY)
+
+                x.setOnClickListener {
+                    pp.dismiss()
+                }
+
+                pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, popupX, popupY)
                 return true
             }
         })

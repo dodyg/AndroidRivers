@@ -41,6 +41,8 @@ import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 import java.util.ArrayList
+import android.widget.PopupWindow
+import android.view.Gravity
 
 public class DownloadSubscription(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<Opml>>(){
     class object {
@@ -170,7 +172,36 @@ public class DownloadSubscription(it: Context?, ignoreCache: Boolean): AsyncTask
                 else
                     i.putExtra(Params.RIVER_LANGUAGE, "en")
 
-                context.startActivity(i);
+                context.startActivity(i)
+
+            }
+        })
+
+        list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
+            public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
+                //overlay popup at top of clicked overview position
+                var item = p1!!
+                val popupWidth = item.getWidth()
+                val popupHeight = item.getHeight()
+
+                val loc = intArray(0,1)
+                p1!!.getLocationOnScreen(loc)
+                val popupX= loc[0]
+                val popupY = loc[1]
+
+                var inflater = context.getLayoutInflater()!!
+                var x = inflater.inflate(R.layout.river_quick_actions, null, false)!!
+                var pp = PopupWindow(x, popupWidth, popupHeight, true)
+
+                x.setBackgroundColor(android.graphics.Color.GRAY)
+
+                x.setOnClickListener {
+                    pp.dismiss()
+                }
+
+                pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, popupX, popupY)
+                return true
+
             }
         })
     }
