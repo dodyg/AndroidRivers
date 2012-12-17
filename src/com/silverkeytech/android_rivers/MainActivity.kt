@@ -32,6 +32,8 @@ import android.content.Context
 import android.view.ContextMenu
 import android.view.View
 import android.widget.AdapterView
+import com.silverkeytech.android_rivers.db.getBookmarksFromDbAsOpml
+import com.silverkeytech.android_rivers.db.saveOpmlAsBookmarks
 
 public open class MainActivity(): SherlockActivity() {
     class object {
@@ -62,12 +64,29 @@ public open class MainActivity(): SherlockActivity() {
             }
         }
 
-        DownloadSubscription(this, false)
-                .executeOnComplete({
-            res ->
-                SubscriptionRenderer(this@MainActivity).handleRiversListing(res.value!!)
-                })
-                .execute(DEFAULT_SUBSCRIPTION_LIST)
+        var bookmarks = getBookmarksFromDbAsOpml()
+
+        if (bookmarks.body!!.outline!!.count() > 0){
+            Log.d(TAG, "Get bookmarks from the db")
+            SubscriptionRenderer(this@MainActivity).handleRiversListing(bookmarks)
+        }
+        else
+            DownloadSubscription(this, false)
+                    .executeOnComplete({
+                    res ->
+                        Log.d(TAG, "Download data from the Internet for bookmark")
+                        val res2 = saveOpmlAsBookmarks(res.value!!)
+
+                        if (res2.isTrue()){
+                            SubscriptionRenderer(this@MainActivity).handleRiversListing(res2.value!!)
+                            Log.d(TAG, "Rendering opml subscription list")
+                        }
+                        else{
+                            Log.d(TAG, "Saving opml bookmark to db fails ${res2.exception?.getMessage()}")
+                            toastee("Sorry, we cannot download your initial bookmarks at the moment ${res2.exception?.getMessage()}", Duration.LONG)
+                        }
+                    })
+                    .execute(DEFAULT_SUBSCRIPTION_LIST)
     }
 
 
@@ -143,7 +162,7 @@ public open class MainActivity(): SherlockActivity() {
                     startOutlinerActivity(this, res.value!!, title, url, false)
                 }
                 else{
-                    toastee("Downloading url fails becaue of ${res.exception?.getMessage()}", Duration.LONG)
+                    toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)
                 }
             }, { outline -> outline.text != "<rules>" })
 

@@ -25,5 +25,5 @@ import java.util.List;
 
 public class Body {
     @ElementList(inline = true)
-    public List<Outline> outline = new ArrayList<Outline>();
+    public ArrayList<Outline> outline = new ArrayList<Outline>();
 }
