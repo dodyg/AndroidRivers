@@ -37,5 +37,14 @@ public object DatabaseManager{
     public var bookmark :  Dao<Bookmark, out Int?>? = null
         get() = getDb().getBookmarkDao() as Dao<Bookmark, out Int?>
 
-    public fun queryBookmark() : BookmarkQuery = BookmarkQuery(bookmark!!)
+    public fun query() : Query = Query(bookmark)
+    public fun cmd() : Command = Command(bookmark)
+}
+
+public class Query (private val bookmark :  Dao<Bookmark, out Int?>?){
+    public fun bookmark() : BookmarkQuery = BookmarkQuery(bookmark!!)
+}
+
+public class Command(private val bookmark :  Dao<Bookmark, out Int?>?){
+    public fun bookmark() : BookmarkCommand = BookmarkCommand(bookmark!!)
 }

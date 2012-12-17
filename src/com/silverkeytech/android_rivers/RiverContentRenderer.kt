@@ -117,32 +117,6 @@ public class RiverContentRenderer(val context: Activity, val language: String){
             }
         }
 
-        list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
-            public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
-                var item = p1!!
-                val popupWidth = item.getWidth()
-                val popupHeight = item.getHeight()
-
-                val loc = intArray(0,1)
-                p1!!.getLocationOnScreen(loc)
-                val popupX= loc[0]
-                val popupY = loc[1]
-
-                var inflater = context.getLayoutInflater()!!
-                var x = inflater.inflate(R.layout.river_quick_actions, null, false)!!
-                var pp = PopupWindow(x, popupWidth, popupHeight, true)
-
-                x.setBackgroundColor(android.graphics.Color.GRAY)
-
-                x.setOnClickListener {
-                    pp.dismiss()
-                }
-
-                pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, popupX, popupY)
-                return true
-            }
-        })
-
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val currentNews = sortedNewsItems.get(p2);

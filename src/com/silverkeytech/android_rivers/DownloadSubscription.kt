@@ -43,6 +43,8 @@ import com.silverkeytech.android_rivers.outlines.Outline
 import java.util.ArrayList
 import android.widget.PopupWindow
 import android.view.Gravity
+import com.silverkeytech.android_rivers.db.DatabaseManager
+import android.widget.ImageView
 
 public class DownloadSubscription(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<Opml>>(){
     class object {
@@ -179,13 +181,17 @@ public class DownloadSubscription(it: Context?, ignoreCache: Boolean): AsyncTask
 
         list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
             public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
+                val currentOutline = values.get(p2)
+
+                val found = DatabaseManager.query().bookmark().byUrl(currentOutline.url!!)
+
                 //overlay popup at top of clicked overview position
                 var item = p1!!
                 val popupWidth = item.getWidth()
                 val popupHeight = item.getHeight()
 
                 val loc = intArray(0,1)
-                p1!!.getLocationOnScreen(loc)
+                item.getLocationOnScreen(loc)
                 val popupX= loc[0]
                 val popupY = loc[1]
 
@@ -193,15 +199,28 @@ public class DownloadSubscription(it: Context?, ignoreCache: Boolean): AsyncTask
                 var x = inflater.inflate(R.layout.river_quick_actions, null, false)!!
                 var pp = PopupWindow(x, popupWidth, popupHeight, true)
 
-                x.setBackgroundColor(android.graphics.Color.GRAY)
+                x.setBackgroundColor(android.graphics.Color.YELLOW)
 
                 x.setOnClickListener {
                     pp.dismiss()
                 }
 
+                var icon = x.findViewById(R.id.river_quick_action_delete_icon) as ImageView
+                icon.setOnClickListener {
+                    try{
+                        var res = DatabaseManager.cmd().bookmark().deleteByUrl(currentOutline.url!!)
+                        if (res.isFalse())
+                            context.toastee("Error in removing this bookmark ${res.exception?.getMessage()}")
+                        else
+                            context.toastee("Bookmark removed")
+                    }
+                    catch(e : Exception){
+                        context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
+                    }
+                }
+
                 pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, popupX, popupY)
                 return true
-
             }
         })
     }

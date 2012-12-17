@@ -19,6 +19,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers.db
 
 import com.j256.ormlite.dao.Dao
+import com.silverkeytech.android_rivers.Result
+
+public class BookmarkCommand(private val dao : Dao<Bookmark, out Int?>){
+    fun deleteByUrl (url : String) : Result<Boolean>{
+        try{
+            var condition = dao.deleteBuilder()!!
+            condition.where()!!.eq(BOOKMARK_URL, url)
+
+            dao.delete(condition.prepare())
+
+            return Result.right(true)
+        }catch (e : Exception){
+            return Result.wrong(e)
+        }
+    }
+}
 
 public class BookmarkQuery(private val dao : Dao<Bookmark, out Int?>){
     fun all() : QueryMany<Bookmark>{

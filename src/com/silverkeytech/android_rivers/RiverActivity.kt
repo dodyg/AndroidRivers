@@ -65,7 +65,7 @@ public class RiverActivity(): SherlockListActivity()
     }
 
     fun checkRiverBookmarkStatus(url : String): Boolean{
-        return DatabaseManager.queryBookmark().byUrl(url).exists
+        return DatabaseManager.query().bookmark().byUrl(url).exists
     }
 
     fun downloadContent(riverUrl: String, ignoreCache: Boolean) {
