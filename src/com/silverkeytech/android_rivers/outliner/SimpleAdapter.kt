@@ -112,7 +112,6 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
     fun handleOpmlZoom(currentOutline: OutlineContent, currentPosition: Int): Boolean {
         var idx = currentPosition + 1
 
-        var level = 0
         var childList = ArrayList<OutlineContent>()
 
         //root level

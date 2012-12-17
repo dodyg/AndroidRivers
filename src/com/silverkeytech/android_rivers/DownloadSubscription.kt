@@ -86,6 +86,13 @@ public class DownloadSubscription(it: Context?, ignoreCache: Boolean): AsyncTask
         }
     }
 
+    var rawCallback: ((Result<Opml>) -> Unit)? = null
+
+    public fun executeOnComplete(callback : (Result<Opml>) -> Unit) : DownloadSubscription{
+        rawCallback = callback
+        return this
+    }
+
     protected override fun onPostExecute(result: Result<Opml>?) {
         dialog.dismiss()
 
@@ -103,7 +110,8 @@ public class DownloadSubscription(it: Context?, ignoreCache: Boolean): AsyncTask
                 context.handleConnectivityError(result.exception, error)
 
             } else {
-                SubscriptionRenderer(context).handleRiversListing(result.value!!)
+                if (rawCallback != null)
+                    rawCallback!!(result)
             }
         }
     }

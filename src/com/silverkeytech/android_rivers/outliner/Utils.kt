@@ -72,8 +72,8 @@ private fun traverseOutline(level: Int, outline: Outline?, list: ArrayList<Outli
             var lvl = level
             lvl++
 
-            for(val o in outline.outline?.iterator()){
-                traverseOutline(lvl, o, list, filter, depthLimit)
+            for(val ox in outline.outline?.iterator()){
+                traverseOutline(lvl, ox, list, filter, depthLimit)
             }
         }
     }

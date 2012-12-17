@@ -62,7 +62,12 @@ public open class MainActivity(): SherlockActivity() {
             }
         }
 
-        DownloadSubscription(this, false).execute(DEFAULT_SUBSCRIPTION_LIST)
+        DownloadSubscription(this, false)
+                .executeOnComplete({
+            res ->
+                SubscriptionRenderer(this@MainActivity).handleRiversListing(res.value!!)
+                })
+                .execute(DEFAULT_SUBSCRIPTION_LIST)
     }
 
 
@@ -83,7 +88,12 @@ public open class MainActivity(): SherlockActivity() {
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
             R.id.subscription_menu_refresh -> {
-                DownloadSubscription(this, true).execute(DEFAULT_SUBSCRIPTION_LIST)
+                DownloadSubscription(this, true)
+                    .executeOnComplete({
+                        res ->
+                        SubscriptionRenderer(this@MainActivity).handleRiversListing(res.value!!)
+                    })
+                    .execute(DEFAULT_SUBSCRIPTION_LIST)
                 return true
             }
             R.id.river_menu_tryout -> {

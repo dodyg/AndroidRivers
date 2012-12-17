@@ -103,8 +103,6 @@ public class SubscriptionRenderer(val context: Activity){
             public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
                 val currentOutline = values.get(p2)
 
-                val found = DatabaseManager.query().bookmark().byUrl(currentOutline.url!!)
-
                 //overlay popup at top of clicked overview position
                 var item = p1!!
                 val popupWidth = item.getWidth()
@@ -137,6 +135,7 @@ public class SubscriptionRenderer(val context: Activity){
                     catch(e : Exception){
                         context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
                     }
+                    pp.dismiss()
                 }
 
                 pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, popupX, popupY)
