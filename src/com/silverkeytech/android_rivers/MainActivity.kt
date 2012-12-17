@@ -62,31 +62,9 @@ public open class MainActivity(): SherlockActivity() {
                     toastee("Sorry, I cannot play the file $locationPath. Please click Refresh on the menu option to download the news list again.", Duration.LONG)
                 }
             }
+            else
+                displaySubscription()
         }
-
-        var bookmarks = getBookmarksFromDbAsOpml()
-
-        if (bookmarks.body!!.outline!!.count() > 0){
-            Log.d(TAG, "Get bookmarks from the db")
-            SubscriptionRenderer(this@MainActivity).handleRiversListing(bookmarks)
-        }
-        else
-            DownloadSubscription(this, false)
-                    .executeOnComplete({
-                    res ->
-                        Log.d(TAG, "Download data from the Internet for bookmark")
-                        val res2 = saveOpmlAsBookmarks(res.value!!)
-
-                        if (res2.isTrue()){
-                            SubscriptionRenderer(this@MainActivity).handleRiversListing(res2.value!!)
-                            Log.d(TAG, "Rendering opml subscription list")
-                        }
-                        else{
-                            Log.d(TAG, "Saving opml bookmark to db fails ${res2.exception?.getMessage()}")
-                            toastee("Sorry, we cannot download your initial bookmarks at the moment ${res2.exception?.getMessage()}", Duration.LONG)
-                        }
-                    })
-                    .execute(DEFAULT_SUBSCRIPTION_LIST)
     }
 
 
@@ -107,12 +85,7 @@ public open class MainActivity(): SherlockActivity() {
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
             R.id.subscription_menu_refresh -> {
-                DownloadSubscription(this, true)
-                    .executeOnComplete({
-                        res ->
-                        SubscriptionRenderer(this@MainActivity).handleRiversListing(res.value!!)
-                    })
-                    .execute(DEFAULT_SUBSCRIPTION_LIST)
+                displaySubscription()
                 return true
             }
             R.id.river_menu_tryout -> {
@@ -148,6 +121,43 @@ public open class MainActivity(): SherlockActivity() {
         }
     }
 
+    fun displaySubscription(){
+        val cache = this.getApplication().getMain().getSubscriptionListCache()
+
+        if (cache != null){
+            Log.d(TAG, "Get bookmarks from cache")
+            SubscriptionRenderer(this@MainActivity).handleRiversListing(cache)
+        }  else{
+            Log.d(TAG, "Try to retrieve bookmarks from DB")
+            var bookmarks = getBookmarksFromDbAsOpml()
+
+            if (bookmarks.body!!.outline!!.count() > 0){
+                Log.d(TAG, "Now bookmarks come from the db")
+                this.getApplication().getMain().setSubscriptionListCache(bookmarks)
+                SubscriptionRenderer(this@MainActivity).handleRiversListing(bookmarks)
+            }
+            else{
+                Log.d(TAG, "Start downloading bookmarks from the Internet")
+                DownloadSubscription(this, true)
+                        .executeOnComplete({
+                    res ->
+                    Log.d(TAG, "Using downloaded bookmark data from the Internt")
+                    val res2 = saveOpmlAsBookmarks(res.value!!)
+
+                    if (res2.isTrue()){
+                        SubscriptionRenderer(this@MainActivity).handleRiversListing(res2.value!!)
+                        Log.d(TAG, "Bookmark data from the Internet is successfully saved")
+                    }
+                    else{
+                        Log.d(TAG, "Saving opml bookmark to db fails ${res2.exception?.getMessage()}")
+                        toastee("Sorry, we cannot download your initial bookmarks at the moment ${res2.exception?.getMessage()}", Duration.LONG)
+                    }
+                })
+                        .execute(DEFAULT_SUBSCRIPTION_LIST)
+            }
+        }
+    }
+
     fun downloadOpml(url: String, title : String) {
         val cache = getApplication().getMain().getOpmlCache(url)
 
@@ -169,5 +179,4 @@ public open class MainActivity(): SherlockActivity() {
             opml.execute(url)
         }
     }
-
 }
