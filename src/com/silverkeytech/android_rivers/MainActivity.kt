@@ -144,7 +144,7 @@ public open class MainActivity(): SherlockActivity() {
             }
             else{
                 Log.d(TAG, "Start downloading bookmarks from the Internet")
-                DownloadSubscription(this, true)
+                DownloadBookmarks(this, true)
                         .executeOnComplete({
                     res ->
                     Log.d(TAG, "Using downloaded bookmark data from the Internt")
