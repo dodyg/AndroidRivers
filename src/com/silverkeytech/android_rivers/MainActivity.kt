@@ -63,7 +63,7 @@ public open class MainActivity(): SherlockActivity() {
                 }
             }
             else
-                displaySubscription()
+                displayBookmarks()
         }
     }
 
@@ -85,7 +85,7 @@ public open class MainActivity(): SherlockActivity() {
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
             R.id.subscription_menu_refresh -> {
-                displaySubscription()
+                displayBookmarks()
                 return true
             }
             R.id.river_menu_tryout -> {
@@ -94,7 +94,7 @@ public open class MainActivity(): SherlockActivity() {
                 return true
             }
             R.id.subscription_menu_download_all -> {
-                val subscriptionList = getApplication().getMain().getSubscriptionListCache()
+                val subscriptionList = getApplication().getMain().getBookmarksCache()
 
                 if (subscriptionList != null){
                     var intent = Intent(this, javaClass<DownloadAllRiversService>())
@@ -121,8 +121,14 @@ public open class MainActivity(): SherlockActivity() {
         }
     }
 
-    fun displaySubscription(){
-        val cache = this.getApplication().getMain().getSubscriptionListCache()
+    public fun refreshBookmarks()
+    {
+        this.getApplication().getMain().clearBookmarksCache()
+        displayBookmarks()
+    }
+
+    private fun  displayBookmarks(){
+        val cache = this.getApplication().getMain().getBookmarksCache()
 
         if (cache != null){
             Log.d(TAG, "Get bookmarks from cache")
@@ -133,7 +139,7 @@ public open class MainActivity(): SherlockActivity() {
 
             if (bookmarks.body!!.outline!!.count() > 0){
                 Log.d(TAG, "Now bookmarks come from the db")
-                this.getApplication().getMain().setSubscriptionListCache(bookmarks)
+                this.getApplication().getMain().setBookmarksCache(bookmarks)
                 SubscriptionRenderer(this@MainActivity).handleRiversListing(bookmarks)
             }
             else{

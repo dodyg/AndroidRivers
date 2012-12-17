@@ -39,7 +39,7 @@ import android.widget.ImageView
 import android.view.Gravity
 import android.content.Intent
 
-public class SubscriptionRenderer(val context: Activity){
+public class SubscriptionRenderer(val context: MainActivity){
     class object {
         public val TAG: String = javaClass<SubscriptionRenderer>().getSimpleName()
     }
@@ -129,8 +129,10 @@ public class SubscriptionRenderer(val context: Activity){
                         var res = DatabaseManager.cmd().bookmark().deleteByUrl(currentOutline.url!!)
                         if (res.isFalse())
                             context.toastee("Error in removing this bookmark ${res.exception?.getMessage()}")
-                        else
+                        else {
                             context.toastee("Bookmark removed")
+                            context.refreshBookmarks()
+                        }
                     }
                     catch(e : Exception){
                         context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")

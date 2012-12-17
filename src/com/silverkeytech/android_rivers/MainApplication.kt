@@ -44,7 +44,7 @@ public class MainApplication(): Application()
 
     var riverCache = LruCache<String, CacheItem<List<FeedItemMeta>>>(inMegaByte(4))
     var opmlCache = LruCache<String, CacheItem<ArrayList<OutlineContent>>>(inMegaByte(4))
-    var subscriptionCache: CacheItem<Opml>? = null
+    var bookmarksCache: CacheItem<Opml>? = null
 
     public override fun onCreate() {
         Log.d(TAG, "Main Application is started")
@@ -67,22 +67,26 @@ public class MainApplication(): Application()
         DatabaseManager.init(this.getApplicationContext()!!)
     }
 
-    public fun getSubscriptionListCache(): Opml? {
-        if (subscriptionCache == null)
+    public fun getBookmarksCache(): Opml? {
+        if (bookmarksCache == null)
             return null
         else{
-            if (subscriptionCache!!.isExpired){
-                subscriptionCache = null
+            if (bookmarksCache!!.isExpired){
+                bookmarksCache = null
                 return null
             } else {
-                return subscriptionCache?.item
+                return bookmarksCache?.item
             }
         }
     }
 
-    public fun setSubscriptionListCache(opml: Opml) {
-        subscriptionCache = CacheItem(opml)
-        subscriptionCache?.setExpireInMinutesFromNow(10.toHoursInMinutes())
+    public fun clearBookmarksCache(){
+        bookmarksCache = null
+    }
+
+    public fun setBookmarksCache(opml: Opml) {
+        bookmarksCache = CacheItem(opml)
+        bookmarksCache?.setExpireInMinutesFromNow(10.toHoursInMinutes())
     }
 
     public fun getOpmlCache(uri: String): ArrayList<OutlineContent>? {

@@ -55,7 +55,7 @@ public class DownloadSubscription(it: Context?, ignoreCache: Boolean): AsyncTask
 
     protected override fun doInBackground(vararg url: String?): Result<Opml>? {
         try{
-            val cache = context.getApplication().getMain().getSubscriptionListCache()
+            val cache = context.getApplication().getMain().getBookmarksCache()
 
             if (cache != null && !ignoreCache){
                 Log.d(TAG, "Cache is hit for subscription list")
@@ -76,7 +76,7 @@ public class DownloadSubscription(it: Context?, ignoreCache: Boolean): AsyncTask
                 val opml = transformXmlToOpml(req)
 
                 if(opml.isTrue()){
-                    context.getApplication().getMain().setSubscriptionListCache(opml.value!!)
+                    context.getApplication().getMain().setBookmarksCache(opml.value!!)
                 }
 
                 return opml

@@ -131,9 +131,13 @@ public class RiverActivity(): SherlockListActivity()
                     bk.title = riverName
                     bk.url = riverUrl
                     bk.kind = BookmarkKind.RIVER.toString()
+                    bk.language = riverLanguage
+
                     DatabaseManager.bookmark!!.create(bk)
                     bookmarkMenu?.setVisible(false)
                     toastee("$riverName is added to your bookmark.")
+
+                    this@RiverActivity.getApplication().getMain().clearBookmarksCache()
                     return true
                 }
                 catch(e : Exception){
