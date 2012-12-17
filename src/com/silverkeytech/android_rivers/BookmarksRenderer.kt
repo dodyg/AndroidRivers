@@ -38,9 +38,9 @@ import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 import java.util.ArrayList
 
-public class SubscriptionRenderer(val context: MainActivity){
+public class BookmarksRenderer(val context: MainActivity){
     class object {
-        public val TAG: String = javaClass<SubscriptionRenderer>().getSimpleName()
+        public val TAG: String = javaClass<BookmarksRenderer>().getSimpleName()
     }
 
     public data class ViewHolder (var riverName: TextView)

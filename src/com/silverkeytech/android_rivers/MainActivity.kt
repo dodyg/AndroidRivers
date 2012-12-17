@@ -125,7 +125,7 @@ public open class MainActivity(): SherlockActivity() {
 
         if (cache != null){
             Log.d(TAG, "Get bookmarks from cache")
-            SubscriptionRenderer(this@MainActivity).handleRiversListing(cache)
+            BookmarksRenderer(this@MainActivity).handleRiversListing(cache)
         }  else{
             Log.d(TAG, "Try to retrieve bookmarks from DB")
             var bookmarks = getBookmarksFromDbAsOpml()
@@ -133,7 +133,7 @@ public open class MainActivity(): SherlockActivity() {
             if (bookmarks.body!!.outline!!.count() > 0){
                 Log.d(TAG, "Now bookmarks come from the db")
                 this.getApplication().getMain().setBookmarksCache(bookmarks)
-                SubscriptionRenderer(this@MainActivity).handleRiversListing(bookmarks)
+                BookmarksRenderer(this@MainActivity).handleRiversListing(bookmarks)
             }
             else{
                 Log.d(TAG, "Start downloading bookmarks from the Internet")
@@ -144,7 +144,7 @@ public open class MainActivity(): SherlockActivity() {
                     val res2 = saveOpmlAsBookmarks(res.value!!)
 
                     if (res2.isTrue()){
-                        SubscriptionRenderer(this@MainActivity).handleRiversListing(res2.value!!)
+                        BookmarksRenderer(this@MainActivity).handleRiversListing(res2.value!!)
                         Log.d(TAG, "Bookmark data from the Internet is successfully saved")
                     }
                     else{
