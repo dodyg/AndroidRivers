@@ -45,18 +45,14 @@ public class BookmarksRenderer(val context: MainActivity){
 
     public data class ViewHolder (var riverName: TextView)
 
-    fun handleRiversListing(outlines: Opml) {
-        var list = context.findView<ListView>(R.id.main_rivers_lv)
+    fun handleRiversListing(opml: Opml) {
+        var outlines = ArrayList<Outline>()
 
-        var vals = ArrayList<Outline>()
-
-        outlines.body?.outline?.forEach {
-            vals.add(it!!)
+        opml.body?.outline?.forEach {
+            outlines.add(it!!)
         }
 
-        var values = vals
-
-        var adapter = object : ArrayAdapter<Outline>(context, android.R.layout.simple_list_item_1, android.R.id.text1, values){
+        var adapter = object : ArrayAdapter<Outline>(context, android.R.layout.simple_list_item_1, android.R.id.text1, outlines){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 var vw = convertView
                 var holder: ViewHolder?
@@ -66,11 +62,11 @@ public class BookmarksRenderer(val context: MainActivity){
                     vw = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
 
                     holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
-                    holder!!.riverName.setText(vals[position].toString())
+                    holder!!.riverName.setText(outlines[position].toString())
                     vw!!.setTag(holder)
                 }else{
                     holder = vw!!.getTag() as ViewHolder
-                    holder!!.riverName.setText(vals[position].toString())
+                    holder!!.riverName.setText(outlines[position].toString())
                     Log.d(TAG, "List View reused")
                 }
 
@@ -78,11 +74,12 @@ public class BookmarksRenderer(val context: MainActivity){
             }
         }
 
+        var list = context.findView<ListView>(R.id.main_rivers_lv)
         list.setAdapter(adapter)
 
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
-                val currentOutline = values.get(p2)
+                val currentOutline = outlines.get(p2)
 
                 var i = Intent(context, javaClass<RiverActivity>())
                 i.putExtra(Params.RIVER_URL, currentOutline.url)
@@ -100,7 +97,7 @@ public class BookmarksRenderer(val context: MainActivity){
 
         list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
             public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
-                val currentOutline = values.get(p2)
+                val currentOutline = outlines.get(p2)
 
                 //overlay popup at top of clicked overview position
                 var item = p1!!
