@@ -89,7 +89,7 @@ public class BookmarksRenderer(val context: MainActivity){
                 i.putExtra(Params.RIVER_NAME, currentOutline.text)
 
                 if (!currentOutline.language.isNullOrEmpty())
-                    i.putExtra(Params.RIVER_LANGUAGE, currentOutline.text)
+                    i.putExtra(Params.RIVER_LANGUAGE, currentOutline.language)
                 else
                     i.putExtra(Params.RIVER_LANGUAGE, "en")
 
