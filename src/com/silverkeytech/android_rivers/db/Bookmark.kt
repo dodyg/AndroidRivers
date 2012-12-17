@@ -18,16 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.db
 
-
-import com.j256.ormlite.table.DatabaseTable
-import com.j256.ormlite.field.DatabaseField
 import com.j256.ormlite.field.DataType
+import com.j256.ormlite.field.DatabaseField
+import com.j256.ormlite.table.DatabaseTable
 
-public val BOOKMARK_ID : String = "id"
-public val BOOKMARK_TITLE  : String = "title"
-public val BOOKMARK_URL  : String = "url"
-public val BOOKMARK_LANGUAGE : String = "language"
-public val BOOKMARK_KIND  : String = "kind"
+public val BOOKMARK_ID: String = "id"
+public val BOOKMARK_TITLE: String = "title"
+public val BOOKMARK_URL: String = "url"
+public val BOOKMARK_LANGUAGE: String = "language"
+public val BOOKMARK_KIND: String = "kind"
 
 [DatabaseTable]
 public class Bookmark(){
@@ -44,7 +43,7 @@ public class Bookmark(){
     public var url: String = ""
 
     [DatabaseField(canBeNull = false, columnName = "language", width = 2, dataType = DataType.STRING)]
-    public var language : String = "en"
+    public var language: String = "en"
 
     [DatabaseField(canBeNull = false, columnName = "kind")]
     public var kind: String = ""

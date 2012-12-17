@@ -20,31 +20,30 @@ package com.silverkeytech.android_rivers.db
 
 import android.content.Context
 import com.j256.ormlite.dao.Dao
-import com.j256.ormlite.stmt.QueryBuilder
 
-private var db : Database? = null
+private var db: Database? = null
 
 public object DatabaseManager{
-    fun init (context : Context){
+    fun init (context: Context) {
         if (db == null)
             db = Database(context)
     }
 
-    public fun getDb() : Database{
+    public fun getDb(): Database {
         return db!!
     }
 
-    public var bookmark :  Dao<Bookmark, out Int?>? = null
+    public var bookmark: Dao<Bookmark, out Int?>? = null
         get() = getDb().getBookmarkDao() as Dao<Bookmark, out Int?>
 
-    public fun query() : Query = Query(bookmark)
-    public fun cmd() : Command = Command(bookmark)
+    public fun query(): Query = Query(bookmark)
+    public fun cmd(): Command = Command(bookmark)
 }
 
-public class Query (private val bookmark :  Dao<Bookmark, out Int?>?){
-    public fun bookmark() : BookmarkQuery = BookmarkQuery(bookmark!!)
+public class Query (private val bookmark: Dao<Bookmark, out Int?>?){
+    public fun bookmark(): BookmarkQuery = BookmarkQuery(bookmark!!)
 }
 
-public class Command(private val bookmark :  Dao<Bookmark, out Int?>?){
-    public fun bookmark() : BookmarkCommand = BookmarkCommand(bookmark!!)
+public class Command(private val bookmark: Dao<Bookmark, out Int?>?){
+    public fun bookmark(): BookmarkCommand = BookmarkCommand(bookmark!!)
 }

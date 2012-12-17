@@ -21,19 +21,14 @@ package com.silverkeytech.android_rivers
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import com.actionbarsherlock.app.SherlockActivity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
-import java.io.File
-import com.silverkeytech.android_rivers.outliner.startOutlinerActivity
-import android.database.sqlite.SQLiteDatabase
-import android.util.Log
-import android.content.Context
-import android.view.ContextMenu
-import android.view.View
-import android.widget.AdapterView
 import com.silverkeytech.android_rivers.db.getBookmarksFromDbAsOpml
 import com.silverkeytech.android_rivers.db.saveOpmlAsBookmarks
+import com.silverkeytech.android_rivers.outliner.startOutlinerActivity
+import java.io.File
 
 public open class MainActivity(): SherlockActivity() {
     class object {
@@ -67,9 +62,7 @@ public open class MainActivity(): SherlockActivity() {
         }
     }
 
-
     val EXPLORE: Int = 1
-
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         var inflater = getSupportMenuInflater()!!
@@ -127,7 +120,7 @@ public open class MainActivity(): SherlockActivity() {
         displayBookmarks()
     }
 
-    private fun  displayBookmarks(){
+    private fun  displayBookmarks() {
         val cache = this.getApplication().getMain().getBookmarksCache()
 
         if (cache != null){
@@ -164,7 +157,7 @@ public open class MainActivity(): SherlockActivity() {
         }
     }
 
-    fun downloadOpml(url: String, title : String) {
+    fun downloadOpml(url: String, title: String) {
         val cache = getApplication().getMain().getOpmlCache(url)
 
         if (cache != null){

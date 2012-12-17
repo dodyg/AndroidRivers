@@ -21,8 +21,8 @@ package com.silverkeytech.android_rivers.db
 import com.j256.ormlite.dao.Dao
 import com.silverkeytech.android_rivers.Result
 
-public class BookmarkCommand(private val dao : Dao<Bookmark, out Int?>){
-    fun deleteByUrl (url : String) : Result<Boolean>{
+public class BookmarkCommand(private val dao: Dao<Bookmark, out Int?>){
+    fun deleteByUrl (url: String): Result<Boolean> {
         try{
             var condition = dao.deleteBuilder()!!
             condition.where()!!.eq(BOOKMARK_URL, url)
@@ -30,33 +30,33 @@ public class BookmarkCommand(private val dao : Dao<Bookmark, out Int?>){
             dao.delete(condition.prepare())
 
             return Result.right(true)
-        }catch (e : Exception){
+        }catch (e: Exception){
             return Result.wrong(e)
         }
     }
 }
 
-public class BookmarkQuery(private val dao : Dao<Bookmark, out Int?>){
-    fun all() : QueryMany<Bookmark>{
+public class BookmarkQuery(private val dao: Dao<Bookmark, out Int?>){
+    fun all(): QueryMany<Bookmark> {
         try{
             return QueryMany(dao.queryForAll())
         }
-        catch(e : Exception){
+        catch(e: Exception){
             return QueryMany<Bookmark>(null, e)
         }
     }
 
-    fun byUrl(url : String) : QueryOne<Bookmark>{
+    fun byUrl(url: String): QueryOne<Bookmark> {
         try
         {
             var q = dao.queryBuilder()!!
-                .where()!!
-                .eq(BOOKMARK_URL, url)!!
-                .prepare()
+                    .where()!!
+                    .eq(BOOKMARK_URL, url)!!
+                    .prepare()
 
             return QueryOne(dao.queryForFirst(q))
         }
-        catch(e : Exception){
+        catch(e: Exception){
             return QueryOne<Bookmark>(null, e)
         }
     }

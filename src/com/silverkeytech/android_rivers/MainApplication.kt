@@ -20,17 +20,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.app.Application
+import android.content.Context
 import android.support.v4.util.LruCache
 import android.util.Log
+import com.silverkeytech.android_rivers.db.Database
+import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.outliner.OutlineContent
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
 import java.util.ArrayList
-import android.database.sqlite.SQLiteDatabase
-import java.io.File
-import android.content.Context
-import com.silverkeytech.android_rivers.db.Database
-import com.silverkeytech.android_rivers.db.DatabaseManager
 
 fun Application?.getMain(): MainApplication {
     return this!! as MainApplication
@@ -80,7 +78,7 @@ public class MainApplication(): Application()
         }
     }
 
-    public fun clearBookmarksCache(){
+    public fun clearBookmarksCache() {
         bookmarksCache = null
     }
 

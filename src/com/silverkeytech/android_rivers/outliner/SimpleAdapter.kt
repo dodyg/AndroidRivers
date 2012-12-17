@@ -20,7 +20,6 @@ package com.silverkeytech.android_rivers.outliner
 
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.LinearLayout
@@ -150,7 +149,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         }
     }
 
-    fun handleOpmlInclude(currentOutline: OutlineContent, expandAll : Boolean): Boolean {
+    fun handleOpmlInclude(currentOutline: OutlineContent, expandAll: Boolean): Boolean {
         val url = currentOutline.getAttribute("url")!!
 
         val cache = context.getApplication().getMain().getOpmlCache(url)

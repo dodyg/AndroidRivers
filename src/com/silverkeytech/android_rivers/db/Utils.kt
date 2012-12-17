@@ -19,17 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.db
 
-import com.silverkeytech.android_rivers.outlines.Opml
-import com.silverkeytech.android_rivers.outlines.Body
-import com.silverkeytech.android_rivers.outlines.Outline
 import com.silverkeytech.android_rivers.Result
-import com.j256.ormlite.misc.TransactionManager
-import java.util.ArrayList
 import com.silverkeytech.android_rivers.isNullOrEmpty
-
+import com.silverkeytech.android_rivers.outlines.Body
+import com.silverkeytech.android_rivers.outlines.Opml
+import com.silverkeytech.android_rivers.outlines.Outline
 
 //get bookmarks from db and return the data in opml format
-public fun getBookmarksFromDbAsOpml() : Opml{
+public fun getBookmarksFromDbAsOpml(): Opml {
     var opml = Opml()
     opml.body = Body()
 
@@ -47,7 +44,7 @@ public fun getBookmarksFromDbAsOpml() : Opml{
     return opml
 }
 
-public fun saveOpmlAsBookmarks(opml : Opml) : Result<Opml> {
+public fun saveOpmlAsBookmarks(opml: Opml): Result<Opml> {
     try{
         val bkDao = DatabaseManager.bookmark!!
 
@@ -65,7 +62,7 @@ public fun saveOpmlAsBookmarks(opml : Opml) : Result<Opml> {
 
         return Result.right(opml)
     }
-    catch (e : Exception)
+    catch (e: Exception)
     {
         return Result.wrong(e)
     }

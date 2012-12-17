@@ -24,12 +24,9 @@ import com.actionbarsherlock.app.SherlockListActivity
 import com.actionbarsherlock.view.ActionMode
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
-import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.db.Bookmark
 import com.silverkeytech.android_rivers.db.BookmarkKind
-import android.view.ContextMenu
-import android.view.View
-import android.widget.AdapterView
+import com.silverkeytech.android_rivers.db.DatabaseManager
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity(): SherlockListActivity()
@@ -64,7 +61,7 @@ public class RiverActivity(): SherlockListActivity()
         riverBookmarked = checkRiverBookmarkStatus(riverUrl)
     }
 
-    fun checkRiverBookmarkStatus(url : String): Boolean{
+    fun checkRiverBookmarkStatus(url: String): Boolean {
         return DatabaseManager.query().bookmark().byUrl(url).exists
     }
 
@@ -88,7 +85,7 @@ public class RiverActivity(): SherlockListActivity()
 
     val RESIZE_TEXT: Int = 2
 
-    var bookmarkMenu : MenuItem? = null
+    var bookmarkMenu: MenuItem? = null
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
@@ -140,7 +137,7 @@ public class RiverActivity(): SherlockListActivity()
                     this@RiverActivity.getApplication().getMain().clearBookmarksCache()
                     return true
                 }
-                catch(e : Exception){
+                catch(e: Exception){
                     toastee("Sorry, we cannot add this $riverUrl", Duration.LONG)
                     return false
                 }

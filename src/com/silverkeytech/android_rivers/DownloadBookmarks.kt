@@ -88,7 +88,7 @@ public class DownloadBookmarks(it: Context?, ignoreCache: Boolean): AsyncTask<St
 
     var rawCallback: ((Result<Opml>) -> Unit)? = null
 
-    public fun executeOnComplete(callback : (Result<Opml>) -> Unit) : DownloadBookmarks {
+    public fun executeOnComplete(callback: (Result<Opml>) -> Unit): DownloadBookmarks {
         rawCallback = callback
         return this
     }

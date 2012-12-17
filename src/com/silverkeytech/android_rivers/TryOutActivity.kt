@@ -36,17 +36,11 @@ import android.widget.RemoteViews
 import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.google.gson.Gson
-import com.j256.ormlite.android.AndroidConnectionSource
-import com.j256.ormlite.android.DatabaseTableConfigUtil
-import com.j256.ormlite.android.apptools.OpenHelperManager
-import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper
-//import com.silverkeytech.android_rivers.db.Bookmark
+import com.silverkeytech.android_rivers.db.Bookmark
+import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
 import com.silverkeytech.android_rivers.riverjs.FeedsRiver
-import java.sql.SQLException
-import com.silverkeytech.android_rivers.db.DatabaseManager
-import com.silverkeytech.android_rivers.db.Bookmark
 import java.util.Random
 
 //import com.silverkeytech.android_rivers.db.DatabaseManager
@@ -128,12 +122,12 @@ public class TryOutActivity(): Activity()
 
         btn.setOnClickListener(object : OnClickListener{
             public override fun onClick(p0: View?) {
-              val total = DatabaseManager.query().bookmark().all()
+                val total = DatabaseManager.query().bookmark().all()
 
-              if (total.exist)
-                toastee("all ${total.values?.count()}", Duration.LONG)
-              else
-                toastee("There is no record", Duration.LONG)
+                if (total.exist)
+                    toastee("all ${total.values?.count()}", Duration.LONG)
+                else
+                    toastee("There is no record", Duration.LONG)
             }
         })
     }

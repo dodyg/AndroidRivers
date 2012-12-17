@@ -18,26 +18,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.widget.ArrayAdapter
-import com.silverkeytech.android_rivers.outlines.Outline
-import com.silverkeytech.android_rivers.outlines.Opml
-import android.widget.TextView
+import android.content.Context
+import android.content.Intent
+import android.util.Log
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.LayoutInflater
-import android.util.Log
-import android.content.Context
-import android.widget.ListView
-import android.app.Activity
-import java.util.ArrayList
 import android.widget.Adapter
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.AdapterView
-import com.silverkeytech.android_rivers.db.DatabaseManager
-import android.widget.PopupWindow
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.ArrayAdapter
 import android.widget.ImageView
-import android.view.Gravity
-import android.content.Intent
+import android.widget.ListView
+import android.widget.PopupWindow
+import android.widget.TextView
+import com.silverkeytech.android_rivers.db.DatabaseManager
+import com.silverkeytech.android_rivers.outlines.Opml
+import com.silverkeytech.android_rivers.outlines.Outline
+import java.util.ArrayList
 
 public class SubscriptionRenderer(val context: MainActivity){
     class object {
@@ -108,9 +107,9 @@ public class SubscriptionRenderer(val context: MainActivity){
                 val popupWidth = item.getWidth()
                 val popupHeight = item.getHeight()
 
-                val loc = intArray(0,1)
+                val loc = intArray(0, 1)
                 item.getLocationOnScreen(loc)
-                val popupX= loc[0]
+                val popupX = loc[0]
                 val popupY = loc[1]
 
                 var inflater = context.getLayoutInflater()!!
@@ -134,7 +133,7 @@ public class SubscriptionRenderer(val context: MainActivity){
                             context.refreshBookmarks()
                         }
                     }
-                    catch(e : Exception){
+                    catch(e: Exception){
                         context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
                     }
                     pp.dismiss()

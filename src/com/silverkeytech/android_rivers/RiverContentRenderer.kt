@@ -42,7 +42,6 @@ import android.widget.ListView
 import android.widget.TextView
 import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
 import go.goyalla.dict.arabicDictionary.file.ArabicReshape
-import android.widget.PopupWindow
 
 //Manage the rendering of each news item in the river list
 public class RiverContentRenderer(val context: Activity, val language: String){

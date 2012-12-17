@@ -20,16 +20,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.os.Bundle
-import android.util.Log
 import com.actionbarsherlock.app.SherlockActivity
+import com.actionbarsherlock.view.Menu
+import com.actionbarsherlock.view.MenuItem
 import com.pl.polidea.treeview.InMemoryTreeStateManager
 import com.pl.polidea.treeview.TreeBuilder
 import com.pl.polidea.treeview.TreeViewList
 import com.silverkeytech.android_rivers.outliner.OutlineContent
 import com.silverkeytech.android_rivers.outliner.SimpleAdapter
 import java.util.ArrayList
-import com.actionbarsherlock.view.MenuItem
-import com.actionbarsherlock.view.Menu
 
 public class OutlinerActivity(): SherlockActivity()
 {
@@ -38,13 +37,13 @@ public class OutlinerActivity(): SherlockActivity()
         public val OUTLINES_DATA: String = "OUTLINES_DATA"
         public val OUTLINES_TITLE: String = "OUTLINES_TITLE"
         public val OUTLINES_URL: String = "OUTLINES_URL"
-        public val OUTLINES_EXPAND_ALL : String = "OUTLINES_EXPAND_ALL"
+        public val OUTLINES_EXPAND_ALL: String = "OUTLINES_EXPAND_ALL"
     }
 
     val LEVEL_NUMBER: Int = 12
 
-    var outlinesUrl : String? = null
-    var expandAll : Boolean = false
+    var outlinesUrl: String? = null
+    var expandAll: Boolean = false
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
@@ -76,7 +75,7 @@ public class OutlinerActivity(): SherlockActivity()
             toastee("There is no data to be displayed in outline mode ", Duration.LONG)
     }
 
-    fun displayOutlines(outlines : ArrayList<OutlineContent>, expandAll : Boolean){
+    fun displayOutlines(outlines: ArrayList<OutlineContent>, expandAll: Boolean) {
         var manager = InMemoryTreeStateManager<Long?>()
         manager.setVisibleByDefault(expandAll)
         var treeBuilder = TreeBuilder(manager)
@@ -108,7 +107,7 @@ public class OutlinerActivity(): SherlockActivity()
         return true
     }
 
-    internal fun refreshContent(url : String) {
+    internal fun refreshContent(url: String) {
         var opml = DownloadOpml(this)
         opml.setProcessedCompletedCallback({
             res ->
