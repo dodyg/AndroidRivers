@@ -78,7 +78,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                     news = ""
 
                 fun showIndicator() {
-                    if (currentNewsItem.item.containsEnclosure()){
+                    if (currentNewsItem.item.containsEnclosure()!!){
                         var enclosure = currentNewsItem.item.enclosure!!.get(0)
                         if (isSupportedImageMime(enclosure.`type`!!)){
                             holder?.indicator?.setBackgroundColor(STANDARD_NEWS_IMAGE)
@@ -162,7 +162,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 }
 
                 //check for image enclosure
-                if (currentNews.item.containsEnclosure() ){
+                if (currentNews.item.containsEnclosure()!!){
                     var enclosure = currentNews.item.enclosure!!.get(0)
                     if (isSupportedImageMime(enclosure.`type`!!)){
                         dialog.setNegativeButton("Image", object : DialogInterface.OnClickListener{

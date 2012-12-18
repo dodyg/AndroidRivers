@@ -42,6 +42,8 @@ import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
 import com.silverkeytech.android_rivers.riverjs.FeedsRiver
 import java.util.Random
+import com.silverkeytech.android_rivers.outliner.transformFeedOpmlToOpml
+import com.silverkeytech.android_rivers.outliner.startOutlinerActivity
 
 //import com.silverkeytech.android_rivers.db.DatabaseManager
 
@@ -246,10 +248,27 @@ public class TryOutActivity(): Activity()
                     val scrubbed = scrubJsonP(req!!)
                     val feeds = Gson().fromJson(scrubbed, javaClass<FeedsRiver>())!!
 
-                    var sortedNewsWithOpml = feeds.getSortedNewsItems().filter { it.item.containsSource() }
+                    val sortedNewsWithOpml = feeds.getSortedNewsItems().filter { it.item.containsSource()!! }
 
-                    if (sortedNewsWithOpml.count() > 0)
-                        toastee("Has opml ${sortedNewsWithOpml.get(0).item.source?.get(0)?.opml?.head?.title}")
+                    if (sortedNewsWithOpml.count() > 0){
+                        val opmlNews = sortedNewsWithOpml.get(0)
+                        val feedOpml = opmlNews.item.source!!.get(0).opml!!
+
+                        var opml = transformFeedOpmlToOpml(feedOpml)
+
+                        if (opml.isTrue()){
+                            val outlines = opml.value!!.traverse()
+                            val title = if (opml.value!!.head!!.title.isNullOrEmpty())
+                                    "Opml Comment"
+                                else
+                                    opml.value!!.head!!.title
+
+                            startOutlinerActivity(this@TryOutActivity, outlines, title!!, null, true)
+                        }
+                        else{
+                            Log.d(TAG, "Error in transformation feedopml to opml ${opml.exception?.getMessage()}")
+                        }
+                    }
                     else
                         toastee("No OPML but Successful in parsing $url")
                 }
