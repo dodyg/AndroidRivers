@@ -223,7 +223,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 }
 
                 if (currentNews.item.containsSource()!!){
-                    dialog.setNeutralButton("Comments", object : DialogInterface.OnClickListener{
+                    dialog.setNeutralButton("Outlines", object : DialogInterface.OnClickListener{
                         public override fun onClick(p0: DialogInterface?, p1: Int) {
                            try{
 
