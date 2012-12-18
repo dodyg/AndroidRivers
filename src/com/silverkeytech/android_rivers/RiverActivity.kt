@@ -15,7 +15,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
-
 package com.silverkeytech.android_rivers
 
 import android.os.Bundle
@@ -40,7 +39,6 @@ public class RiverActivity(): SherlockListActivity()
     var riverLanguage: String = ""
     var riverBookmarked: Boolean = false
     var mode: ActionMode? = null
-
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
@@ -146,7 +144,6 @@ public class RiverActivity(): SherlockListActivity()
                 return super.onOptionsItemSelected(item)
         }
     }
-
 }
 
 public class ResizeTextActionMode (private var context: RiverActivity, private var mode: ActionMode?): ActionMode.Callback{

@@ -15,8 +15,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
-
-
 package com.silverkeytech.android_rivers
 
 import android.os.Bundle
@@ -45,6 +43,9 @@ public class OutlinerActivity(): SherlockActivity()
     var outlinesUrl: String? = null
     var expandAll: Boolean = false
 
+    var outlinesData: ArrayList<OutlineContent>? = null
+    var treeManager = InMemoryTreeStateManager<Long?>()
+
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
         super.onCreate(savedInstanceState)
@@ -65,19 +66,18 @@ public class OutlinerActivity(): SherlockActivity()
                 outlinesUrl = url
 
             expandAll = extras.getBoolean(OUTLINES_EXPAND_ALL)
+            outlinesData = extras.getSerializable(OUTLINES_DATA)!! as ArrayList<OutlineContent>
 
-
-            val outlines = extras.getSerializable(OUTLINES_DATA)!! as ArrayList<OutlineContent>
-
-            displayOutlines(outlines, expandAll)
+            displayOutlines(treeManager, outlinesData!!, expandAll)
         }
         else
             toastee("There is no data to be displayed in outline mode ", Duration.LONG)
     }
 
-    fun displayOutlines(outlines: ArrayList<OutlineContent>, expandAll: Boolean) {
-        var manager = InMemoryTreeStateManager<Long?>()
-        manager.setVisibleByDefault(expandAll)
+    fun displayOutlines(manager : InMemoryTreeStateManager<Long?>, outlines: ArrayList<OutlineContent>, expandAllInitially: Boolean) {
+        manager.clear()
+        manager.setVisibleByDefault(expandAllInitially)
+
         var treeBuilder = TreeBuilder(manager)
 
         var counter = 0
@@ -87,16 +87,37 @@ public class OutlinerActivity(): SherlockActivity()
         }
 
         var treeView = findView<TreeViewList>(R.id.outliner_main_tree)
-
         val textSize = getVisualPref().getListTextSize()
 
-        var simpleAdapter = SimpleAdapter(this, manager, LEVEL_NUMBER, outlines, textSize)
+        var simpleAdapter = SimpleAdapter(this, treeManager, LEVEL_NUMBER, outlines, textSize)
         treeView.setAdapter(simpleAdapter)
+    }
+
+    fun collapseOutlines(manager : InMemoryTreeStateManager<Long?>, outlines: ArrayList<OutlineContent>){
+        var counter = 0
+        for(val e in outlines){
+            if (e.level == 0){
+                manager.collapseChildren(counter.toLong())
+            }
+            counter++
+        }
+    }
+
+    fun expandOutlines(manager : InMemoryTreeStateManager<Long?>, outlines: ArrayList<OutlineContent>){
+        var counter = 0
+        for(val e in outlines){
+            if (e.level == 0){
+                manager.expandEverythingBelow(counter.toLong())
+            }
+            counter++
+        }
     }
 
     val REFRESH: Int = 1
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        var inflater = getSupportMenuInflater()!!
+        inflater.inflate(R.menu.outliner_menu, menu)
 
         if (outlinesUrl != null){
             menu?.add(0, REFRESH, 0, "Refresh")
@@ -112,7 +133,7 @@ public class OutlinerActivity(): SherlockActivity()
         .executeOnProcessedCompletion({
             res ->
             if (res.isTrue()){
-                displayOutlines(res.value!!, expandAll)
+                displayOutlines(treeManager, res.value!!, expandAll)
                 this.getApplication().getMain().setOpmlCache(url, res.value!!)
             }
             else{
@@ -128,6 +149,14 @@ public class OutlinerActivity(): SherlockActivity()
                 refreshContent(outlinesUrl!!)
                 return true
             }
+            R.id.outliner_menu_collapse -> {
+                collapseOutlines(treeManager, outlinesData!!)
+                return true
+            }
+            R.id.outliner_menu_expand ->{
+                expandOutlines(treeManager, outlinesData!!)
+                return true
+            }
             else ->
                 return super.onOptionsItemSelected(item)
         }
@@ -137,5 +166,4 @@ public class OutlinerActivity(): SherlockActivity()
         super<SherlockActivity>.onBackPressed()
         finish()
     }
-
 }

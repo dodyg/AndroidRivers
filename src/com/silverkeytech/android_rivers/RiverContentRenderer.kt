@@ -230,7 +230,6 @@ public class RiverContentRenderer(val context: Activity, val language: String){
 
     val arabicFont = Typeface.createFromAsset(context.getAssets(), "DroidKufi-Regular.ttf")
 
-
     fun handleText(text: TextView, content: String, textSize: Float) {
         when(language){
             "ar" -> {

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/outliner_menu_expand"
+          android:title="Expand all" />
+
+    <item android:id="@+id/outliner_menu_collapse"
+          android:title="Collapse all" />
+</menu>

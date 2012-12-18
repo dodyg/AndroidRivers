@@ -79,8 +79,6 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
         val notificationId = Random().nextLong().toInt()
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        val gson = Gson()
-
         var notification = prepareNotification()
         var riverNumber = 0
         val riverTotal = targetUrls!!.count()
@@ -119,6 +117,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
                 if (successful){
                     try{
                         val scrubbed = scrubJsonP(req!!)
+                        val gson = Gson()
                         val feeds = gson.fromJson(scrubbed, javaClass<FeedsRiver>())!!
 
                         var sortedNewsItems = feeds.getSortedNewsItems()
@@ -137,7 +136,6 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
 
                 riverNumber++
             }
-
         }
 
         var msg: String
