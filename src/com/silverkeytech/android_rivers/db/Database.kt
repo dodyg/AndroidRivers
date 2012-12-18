@@ -34,7 +34,6 @@ public class Database (context: Context): OrmLiteSqliteOpenHelper(context, Datab
         public val DATABASE_NAME: String = "AndroidRivers.sqlite"
     }
 
-
     public override fun onCreate(p0: SQLiteDatabase?, p1: ConnectionSource?) {
         try{
             TableUtils.createTable(p1, javaClass<Bookmark>())
@@ -63,4 +62,3 @@ public class Database (context: Context): OrmLiteSqliteOpenHelper(context, Datab
         return bookmarkDao!!
     }
 }
-
