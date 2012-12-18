@@ -50,7 +50,7 @@ public fun saveOpmlAsBookmarks(opml: Opml): Result<Opml> {
 
         for(val o in opml.body!!.outline!!.iterator()){
             var b = Bookmark()
-            b.title = o!!.text!!
+            b.title = o.text!!
             b.url = o.url!!
             if (!o.language!!.isNullOrEmpty())
                 b.language = o.language!!

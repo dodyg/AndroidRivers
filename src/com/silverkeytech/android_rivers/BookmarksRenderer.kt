@@ -49,7 +49,7 @@ public class BookmarksRenderer(val context: MainActivity){
         var outlines = ArrayList<Outline>()
 
         opml.body?.outline?.forEach {
-            outlines.add(it!!)
+            outlines.add(it)
         }
 
         var adapter = object : ArrayAdapter<Outline>(context, android.R.layout.simple_list_item_1, android.R.id.text1, outlines){
