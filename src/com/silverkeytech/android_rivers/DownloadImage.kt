@@ -34,9 +34,7 @@ import java.io.File
 
 public data class DownloadedFile(val contentType: String, val filePath: String)
 
-
 public class DownloadImage(it: Context?): AsyncTask<String, Int, Result<DownloadedFile>>(){
-
     class object {
         public val TAG: String = javaClass<DownloadImage>().getSimpleName()
     }

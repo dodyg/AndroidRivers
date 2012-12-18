@@ -45,7 +45,6 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
     var targetUrls: List<String?> ? = null
     var targetTitles: List<String?> ? = null
 
-
     fun prepareNotification(): Notification {
         var notificationIntent = Intent(Intent.ACTION_MAIN)
         notificationIntent.setClass(getApplicationContext(), javaClass<MainActivity>())
@@ -69,7 +68,6 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
         return notification!!
     }
 
-
     protected override fun onHandleIntent(p0: Intent?) {
         targetTitles = p0?.getStringArrayListExtra(TITLES)
         targetUrls = p0?.getStringArrayListExtra(URLS)
@@ -87,7 +85,6 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
 
         for(val url in targetUrls?.iterator()){
             if (url != null){
-
                 var successful = false
 
                 //take care of notification
