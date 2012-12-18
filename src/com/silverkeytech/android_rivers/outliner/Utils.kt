@@ -31,6 +31,10 @@ import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 import java.util.ArrayList
 import org.simpleframework.xml.Serializer
 import org.simpleframework.xml.core.Persister
+import com.silverkeytech.android_rivers.riverjs.FeedOpml
+import com.silverkeytech.android_rivers.outlines.Head
+import com.silverkeytech.android_rivers.outlines.Body
+import com.silverkeytech.android_rivers.riverjs.FeedOpmlOutline
 
 //do an in order traversal so we can flatten it up to be used by outliner
 fun Opml.traverse (filter: ((Outline) -> Boolean)? = null, depthLimit: Int = 12): ArrayList<OutlineContent> {
@@ -96,6 +100,53 @@ fun transformXmlToOpml(xml: String?): Result<Opml> {
     }
     catch (e: Exception){
         Log.d("OPML Transform", "Exception ${e.getMessage()}")
+        return Result.wrong(e)
+    }
+}
+
+fun transformFeedOpmlToOpml(feedOpml : FeedOpml) :Result<Opml>{
+    fun traverseFeedOpml(outline : Outline, feedOutline : FeedOpmlOutline){
+        outline.text = feedOutline.text
+        outline.url = feedOutline.url
+        outline.xmlUrl = feedOutline.xmlUrl
+        outline.htmlUrl = feedOutline.htmlUrl
+        outline.language = feedOutline.language
+        outline.outlineType = feedOutline.outlineType
+
+        for(var fo in feedOutline.outline!!.iterator()){
+            var outl = Outline()
+            traverseFeedOpml(outl, fo)
+            outline.outline!!.add(outl)
+        }
+    }
+
+    try
+    {
+        var opml = Opml()
+
+        if (feedOpml.head != null){
+            var head = Head()
+            head.title = feedOpml.head!!.title
+            head.ownerName = feedOpml.head!!.ownerName
+            head.dateCreated = feedOpml.head!!.dateCreated
+            head.dateModified = feedOpml.head!!.dateModified
+            opml.head = head
+        }
+
+        if (feedOpml.body != null){
+            var body = Body()
+            for(var fo in feedOpml.body!!.outline!!.iterator()){
+                var outline = Outline()
+                traverseFeedOpml(outline, fo)
+                body.outline!!.add(outline)
+            }
+
+            opml.body = body
+        }
+
+        return Result.right(opml)
+    }
+    catch (e: Exception){
         return Result.wrong(e)
     }
 }

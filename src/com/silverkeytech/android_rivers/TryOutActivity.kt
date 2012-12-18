@@ -243,12 +243,10 @@ public class TryOutActivity(): Activity()
                 }
 
                 try{
-                    val gson = Gson()
                     val scrubbed = scrubJsonP(req!!)
-                    val feeds = gson.fromJson(scrubbed, javaClass<FeedsRiver>())!!
+                    val feeds = Gson().fromJson(scrubbed, javaClass<FeedsRiver>())!!
 
-                    var msg = ""
-                    var sortedNewsWithOpml = feeds.getSortedNewsItems().filter { it.item.source != null && (it.item.source!!.count() > 0) }
+                    var sortedNewsWithOpml = feeds.getSortedNewsItems().filter { it.item.containsSource() }
 
                     if (sortedNewsWithOpml.count() > 0)
                         toastee("Has opml ${sortedNewsWithOpml.get(0).item.source?.get(0)?.opml?.head?.title}")

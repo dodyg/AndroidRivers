@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers.riverjs;
 
 import com.silverkeytech.android_rivers.DateHelper;
+import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class FeedItem {
     public ArrayList<FeedEnclosure> enclosure;
     public ArrayList<FeedSource> source;
 
+    @NotNull
     public Boolean isPublicationDate() {
         return pubDate != null && pubDate != "";
     }
@@ -48,11 +50,18 @@ public class FeedItem {
         }
     }
 
+    @NotNull
     public Boolean containsEnclosure() {
         return enclosure != null && !enclosure.isEmpty();
     }
 
+    @NotNull
+    public Boolean containsSource(){
+        return source != null && source.size() > 0;
+    }
+
     @Override
+    @NotNull
     public String toString() {
         if (title != null && title.length() > 0)
             return android.text.Html.fromHtml(title).toString();

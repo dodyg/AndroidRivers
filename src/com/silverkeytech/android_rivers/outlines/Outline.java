@@ -43,7 +43,7 @@ public class Outline {
     public String language;
 
     @ElementList(inline = true, required = false)
-    public List<Outline> outline = new ArrayList<Outline>();
+    public ArrayList<Outline> outline = new ArrayList<Outline>();
 
     @Override
     public String toString() {
