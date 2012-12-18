@@ -232,50 +232,14 @@ public class TryOutActivity(): Activity()
 
         btn.setOnClickListener(object: OnClickListener{
             public override fun onClick(p0: View?) {
-                var req: String? = ""
                 val url = "http://hobieu.apphb.com/api/1/samples/riverjswithopml"
 
-                try{
-                    req = HttpRequest.get(url)?.body()
-                }
-                catch(e: HttpRequestException){
-                    var ex = e.getCause()
-                    Log.d(TAG, "Error in downloading OPML $url")
-                    toastee("Error in downloading OPML from $url")
-                }
+                var i = Intent(this@TryOutActivity, javaClass<RiverActivity>())
+                i.putExtra(Params.RIVER_URL, url)
+                i.putExtra(Params.RIVER_NAME, "Sample River with OPML")
+                i.putExtra(Params.RIVER_LANGUAGE, "en")
 
-                try{
-                    val scrubbed = scrubJsonP(req!!)
-                    val feeds = Gson().fromJson(scrubbed, javaClass<FeedsRiver>())!!
-
-                    val sortedNewsWithOpml = feeds.getSortedNewsItems().filter { it.item.containsSource()!! }
-
-                    if (sortedNewsWithOpml.count() > 0){
-                        val opmlNews = sortedNewsWithOpml.get(0)
-                        val feedOpml = opmlNews.item.source!!.get(0).opml!!
-
-                        var opml = transformFeedOpmlToOpml(feedOpml)
-
-                        if (opml.isTrue()){
-                            val outlines = opml.value!!.traverse()
-                            val title = if (opml.value!!.head!!.title.isNullOrEmpty())
-                                    "Opml Comment"
-                                else
-                                    opml.value!!.head!!.title
-
-                            startOutlinerActivity(this@TryOutActivity, outlines, title!!, null, true)
-                        }
-                        else{
-                            Log.d(TAG, "Error in transformation feedopml to opml ${opml.exception?.getMessage()}")
-                        }
-                    }
-                    else
-                        toastee("No OPML but Successful in parsing $url")
-                }
-                catch(e: Exception)
-                {
-                    Log.d(TAG, "Error in parsing river ${e.getMessage()}")
-                }
+                startActivity(i)
             }
         })
     }

@@ -42,6 +42,9 @@ import android.widget.ListView
 import android.widget.TextView
 import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
 import go.goyalla.dict.arabicDictionary.file.ArabicReshape
+import com.silverkeytech.android_rivers.outliner.transformFeedOpmlToOpml
+import com.silverkeytech.android_rivers.outliner.startOutlinerActivity
+import com.silverkeytech.android_rivers.outliner.traverse
 
 //Manage the rendering of each news item in the river list
 public class RiverContentRenderer(val context: Activity, val language: String){
@@ -49,6 +52,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
         val STANDARD_NEWS_COLOR = android.graphics.Color.GRAY
         val STANDARD_NEWS_IMAGE = android.graphics.Color.CYAN
         val STANDARD_NEWS_PODCAST = android.graphics.Color.MAGENTA
+        val STANDARD_NEWS_SOURCE = android.graphics.Color.BLUE
 
         public val TAG: String = javaClass<RiverContentRenderer>().getSimpleName()
     }
@@ -86,6 +90,9 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                         else{
                             holder?.indicator?.setBackgroundColor(STANDARD_NEWS_PODCAST)
                         }
+                    }
+                    else if (currentNewsItem.item.containsSource()!!){
+                        holder?.indicator?.setBackgroundColor(STANDARD_NEWS_SOURCE)
                     }else{
                         holder?.indicator?.setBackgroundColor(STANDARD_NEWS_COLOR)
                     }
@@ -152,7 +159,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
 
                 //check for go link
                 if (currentNewsLinkAvailable){
-                    dialog.setNeutralButton("Go", object : DialogInterface.OnClickListener{
+                    dialog.setPositiveButton("Go", object : DialogInterface.OnClickListener{
                         public override fun onClick(p0: DialogInterface?, p1: Int) {
                             var i = Intent("android.intent.action.VIEW", Uri.parse(currentNews.item.link))
                             context.startActivity(i)
@@ -165,7 +172,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 if (currentNews.item.containsEnclosure()!!){
                     var enclosure = currentNews.item.enclosure!!.get(0)
                     if (isSupportedImageMime(enclosure.`type`!!)){
-                        dialog.setNegativeButton("Image", object : DialogInterface.OnClickListener{
+                        dialog.setNeutralButton("Image", object : DialogInterface.OnClickListener{
                             public override fun onClick(p0: DialogInterface?, p1: Int) {
                                 Log.d(TAG, "I am downloading a ${enclosure.url} with type ${enclosure.`type`}")
                                 DownloadImage(context).execute(enclosure.url)
@@ -174,7 +181,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                     }
                     //assume podcast
                     else {
-                        dialog.setNegativeButton("Podcast", object : DialogInterface.OnClickListener{
+                        dialog.setNeutralButton("Podcast", object : DialogInterface.OnClickListener{
                             public override fun onClick(p0: DialogInterface?, p1: Int) {
                                 var messenger = Messenger(object : Handler(){
                                     public override fun handleMessage(msg: Message?) {
@@ -204,7 +211,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 }else{
                     //there is not enclosure detected, so enable sharing
                     if (currentNewsLinkAvailable) {
-                        dialog.setNegativeButton("Share", object : DialogInterface.OnClickListener{
+                        dialog.setNeutralButton("Share", object : DialogInterface.OnClickListener{
                             public override fun onClick(p0: DialogInterface?, p1: Int) {
                                 var intent = Intent(Intent.ACTION_SEND)
                                 intent.setType("text/plain")
@@ -213,6 +220,36 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                             }
                         })
                     }
+                }
+
+                if (currentNews.item.containsSource()!!){
+                    dialog.setNeutralButton("Comments", object : DialogInterface.OnClickListener{
+                        public override fun onClick(p0: DialogInterface?, p1: Int) {
+                           try{
+
+                            val feedOpml = currentNews.item.source!!.get(0).opml!!
+
+                            var opml = transformFeedOpmlToOpml(feedOpml)
+
+                            if (opml.isTrue()){
+                                val outlines = opml.value!!.traverse()
+                                val title = if (opml.value!!.head!!.title.isNullOrEmpty())
+                                    "Opml Comment"
+                                else
+                                    opml.value!!.head!!.title
+
+                                startOutlinerActivity(context, outlines, title!!, null, true)
+                            }
+                            else{
+                                Log.d(TAG, "Error in transformation feedopml to opml ${opml.exception?.getMessage()}")
+                            }
+                           }
+                           catch(e : Exception){
+                               context.toastee("Error in processing opml source ${e.getMessage()}")
+                           }
+
+                        }
+                    })
                 }
 
                 var createdDialog = dialog.create()!!
