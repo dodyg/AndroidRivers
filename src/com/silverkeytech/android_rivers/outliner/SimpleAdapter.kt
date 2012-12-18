@@ -158,8 +158,8 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
             startOutlinerActivity(context, cache, currentOutline.text, url, expandAll)
         }
         else {
-            var opml = DownloadOpml(context)
-            opml.setProcessedCompletedCallback({
+            DownloadOpml(context)
+            .executeOnProcessedCompletion({
                 res ->
                 if (res.isTrue()){
                     var outlines = res.value!!
@@ -170,7 +170,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
                     context.toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)
                 }
             }, { outline -> outline.text != "<rules>" })
-            opml.execute(url)
+            .execute(url)
         }
 
         return true

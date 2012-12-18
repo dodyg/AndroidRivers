@@ -131,5 +131,6 @@ public class MainApplication(): Application()
 
     public override fun onLowMemory() {
         riverCache.evictAll();
+        opmlCache.evictAll()
     }
 }

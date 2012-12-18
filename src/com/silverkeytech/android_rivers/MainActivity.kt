@@ -138,7 +138,7 @@ public open class MainActivity(): SherlockActivity() {
             else{
                 Log.d(TAG, "Start downloading bookmarks from the Internet")
                 DownloadBookmarks(this, true)
-                        .executeOnComplete({
+                 .executeOnComplete({
                     res ->
                     Log.d(TAG, "Using downloaded bookmark data from the Internt")
                     val res2 = saveOpmlAsBookmarks(res.value!!)
@@ -152,7 +152,7 @@ public open class MainActivity(): SherlockActivity() {
                         toastee("Sorry, we cannot download your initial bookmarks at the moment ${res2.exception?.getMessage()}", Duration.LONG)
                     }
                 })
-                        .execute(DEFAULT_SUBSCRIPTION_LIST)
+                .execute(DEFAULT_SUBSCRIPTION_LIST)
             }
         }
     }
@@ -164,8 +164,8 @@ public open class MainActivity(): SherlockActivity() {
             startOutlinerActivity(this, cache, title, url, false)
         }
         else{
-            var opml = DownloadOpml(this)
-            opml.setProcessedCompletedCallback({
+            DownloadOpml(this)
+            .executeOnProcessedCompletion({
                 res ->
                 if (res.isTrue()){
                     startOutlinerActivity(this, res.value!!, title, url, false)
@@ -174,8 +174,7 @@ public open class MainActivity(): SherlockActivity() {
                     toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)
                 }
             }, { outline -> outline.text != "<rules>" })
-
-            opml.execute(url)
+            .execute(url)
         }
     }
 }

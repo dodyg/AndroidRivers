@@ -70,9 +70,9 @@ public class DownloadOpml(it: Context?): AsyncTask<String, Int, Pair<String, Res
         }
     }
 
-    var rawCallback: ((Result<Opml>) -> Unit)? = null
-    var processedCallBack: ((Result<ArrayList<OutlineContent>>) -> Unit)? = null
-    var processingFilter: ((Outline) -> Boolean)? = null
+    private var rawCallback: ((Result<Opml>) -> Unit)? = null
+    private var processedCallBack: ((Result<ArrayList<OutlineContent>>) -> Unit)? = null
+    private var processingFilter: ((Outline) -> Boolean)? = null
 
     protected override fun onPostExecute(result: Pair<String, Result<Opml>>?) {
         dialog.dismiss()
@@ -102,14 +102,16 @@ public class DownloadOpml(it: Context?): AsyncTask<String, Int, Pair<String, Res
     }
 
     //Set up function to call when download is done
-    public fun setCompletionCallback(action: ((Result<Opml>) -> Unit)?) {
+    public fun executeOnRawCompletion(action: ((Result<Opml>) -> Unit)?) : DownloadOpml {
         rawCallback = action
+        return this
     }
 
     //set up function to call when download is done, include optional processing filter
-    public fun setProcessedCompletedCallback(action: ((Result<ArrayList<OutlineContent>>) -> Unit)?,
-                                             filter: ((Outline) -> Boolean)? = null) {
+    public fun executeOnProcessedCompletion(action: ((Result<ArrayList<OutlineContent>>) -> Unit)?,
+                                             filter: ((Outline) -> Boolean)? = null) : DownloadOpml {
         processedCallBack = action
         processingFilter = filter
+        return this
     }
 }

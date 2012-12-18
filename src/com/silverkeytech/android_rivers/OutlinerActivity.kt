@@ -108,8 +108,8 @@ public class OutlinerActivity(): SherlockActivity()
     }
 
     internal fun refreshContent(url: String) {
-        var opml = DownloadOpml(this)
-        opml.setProcessedCompletedCallback({
+        DownloadOpml(this)
+        .executeOnProcessedCompletion({
             res ->
             if (res.isTrue()){
                 displayOutlines(res.value!!, expandAll)
@@ -119,8 +119,7 @@ public class OutlinerActivity(): SherlockActivity()
                 toastee("Downloading url fails becaue of ${res.exception?.getMessage()}", Duration.LONG)
             }
         }, { outline -> outline.text != "<rules>" })
-
-        opml.execute(url)
+        .execute(url)
     }
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {

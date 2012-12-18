@@ -202,8 +202,10 @@ public class TryOutActivity(): Activity()
         var btn = findView<Button>(R.id.tryout_show_outline_btn)
         btn.setOnClickListener {
 
-            var opml = DownloadOpml(this)
-            opml.setProcessedCompletedCallback({
+            val url = "http://scripting.com/toc.opml"
+
+            DownloadOpml(this)
+            .executeOnProcessedCompletion({
                 res ->
                 if (res.isTrue()){
                     var intent = Intent(Intent.ACTION_MAIN)
@@ -216,11 +218,10 @@ public class TryOutActivity(): Activity()
                     toastee("Downloading url fails becaue of ${res.exception?.getMessage()}", Duration.LONG)
                 }
             }, { outline -> outline.text != "<rules>" })
+            .execute(url)
 
-            val url = "http://scripting.com/toc.opml"
             //val url = "http://opmlviewer.com/Content/Directories.opml"
             //val url = "http://static.scripting.com/denver/wo/dave/2012/11/22/archive018.opml"
-            opml.execute(url)
         }
     }
 
