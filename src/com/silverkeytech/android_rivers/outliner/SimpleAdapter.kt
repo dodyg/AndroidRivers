@@ -65,7 +65,6 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         return updateView(viewLayout, treeNodeInfo)
     }
 
-
     public override fun updateView(view: View?, treeNodeInfo: TreeNodeInfo<Long?>?): LinearLayout? {
         val viewLayout: LinearLayout? = view as LinearLayout?
 
