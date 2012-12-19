@@ -18,7 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.syndications.rss;
 
+import com.silverkeytech.android_rivers.DateHelper;
 import org.simpleframework.xml.Element;
+
+import java.util.Date;
 
 public class Item {
     @Element(required = false)
@@ -44,4 +47,17 @@ public class Item {
 
     @Element(required = false)
     public Enclosure enclosure;
+
+    public Date getPubDate() {
+        if (pubDate == null)
+            return null;
+
+        try {
+            Date date = DateHelper.parseRFC822(pubDate);
+            return date;
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
