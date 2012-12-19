@@ -58,6 +58,7 @@ public class TryOutActivity(): Activity()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tryout)
+        handleDownloadRss()
         handleDownloadGifImage()
         handleDownloadFile()
         handleDownloadJpgImage()
@@ -69,6 +70,24 @@ public class TryOutActivity(): Activity()
         handleDownloadRecursiveOpml()
         handleRiverJsWithOpmlSource()
 
+    }
+
+    fun handleDownloadRss(){
+        var btn = findView<Button>(R.id.tryout_download_rss_btn)
+
+        btn.setOnClickListener {
+            DownloadFeed(this, false)
+                    .executeOnComplete {
+                        res ->
+                        if (res.isTrue()){
+                            var rss = res.value!!.rss
+                            toastee("Title ${rss?.channel?.title}")
+                        }else{
+                            toastee("Error ${res.exception?.getMessage()}", Duration.LONG)
+                        }
+                    }
+                    .execute("http://cyber.law.harvard.edu/rss/examples/rss2sample.xml")
+        }
     }
 
     fun handleDownloadGifImage() {
