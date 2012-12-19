@@ -8,8 +8,15 @@
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:text="Download Rss"
+            android:id="@+id/tryout_download_rss_btn"/>
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:text="Download File"
             android:id="@+id/tryout_download_file_btn"/>
+
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

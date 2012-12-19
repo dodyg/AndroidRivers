@@ -138,7 +138,7 @@ public class TryOutActivity(): Activity()
         }
     }
 
-    fun  handleCreateBookmarkTable() {
+    fun handleCreateBookmarkTable() {
         var btn = findView<Button>(R.id.tryout_setup_bookmark_table_btn)
 
         btn.setOnClickListener(object : OnClickListener{

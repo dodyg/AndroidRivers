@@ -18,33 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.syndications.rss;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Root;
-
-import java.util.ArrayList;
-
-public class Channel {
-    @Element
+public class Item {
     public String title;
-    @Element
     public String link;
-    @Element
     public String description;
-    @Element
-    public String language;
-    @Element
+    public String author;
+    public String guid;
+    public String isPermalink;
+    public String author;
     public String pubDate;
-    @Element
-    public String lastBuildDate;
-    @Element
-    public String docs;
-    @Element
-    public String generator;
-    @Element
-    public String managingEditor;
-    @Element
-    public String webMaster;
-
-    public ArrayList<Item> item;
 }
