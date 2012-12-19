@@ -20,6 +20,7 @@ package com.silverkeytech.android_rivers.syndications.rss;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
@@ -27,24 +28,40 @@ import java.util.ArrayList;
 public class Channel {
     @Element
     public String title;
+
     @Element
     public String link;
+
     @Element
     public String description;
-    @Element
+
+    @Element(required = false)
     public String language;
-    @Element
+
+    @Element(required = false)
     public String pubDate;
-    @Element
+
+    @Element(required = false)
     public String lastBuildDate;
-    @Element
+
+    @Element(required = false)
     public String docs;
-    @Element
+
+    @Element(required = false)
     public String generator;
-    @Element
+
+    @Element(required = false)
     public String managingEditor;
-    @Element
+
+    @Element(required = false)
     public String webMaster;
 
-    public ArrayList<Item> item;
+    @Element(required = false)
+    public Integer ttl;
+
+    @Element(required = false)
+    public Cloud cloud;
+
+    @ElementList(inline = true)
+    public ArrayList<Item> item = new ArrayList<Item>();
 }

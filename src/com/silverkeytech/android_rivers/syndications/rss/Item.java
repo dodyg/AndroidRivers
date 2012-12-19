@@ -18,13 +18,30 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.syndications.rss;
 
+import org.simpleframework.xml.Element;
+
 public class Item {
+    @Element(required = false)
     public String title;
+
+    @Element(required = false)
     public String link;
+
+    @Element(required = false)
     public String description;
+
+    @Element(required = false)
     public String author;
+
+    @Element(required = false)
     public String guid;
+
+    @Element(required = false)
     public String isPermalink;
-    public String author;
+
+    @Element(required = false)
     public String pubDate;
+
+    @Element(required = false)
+    public Enclosure enclosure;
 }

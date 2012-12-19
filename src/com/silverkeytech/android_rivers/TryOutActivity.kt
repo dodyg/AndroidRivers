@@ -81,7 +81,7 @@ public class TryOutActivity(): Activity()
                         res ->
                         if (res.isTrue()){
                             var rss = res.value!!.rss
-                            toastee("Title ${rss?.channel?.title}")
+                            toastee("Title ${rss?.channel?.title} and items ${rss?.channel?.item?.size()}")
                         }else{
                             toastee("Error ${res.exception?.getMessage()}", Duration.LONG)
                         }
