@@ -16,7 +16,4 @@ public class DownloadFeedTests : AndroidTestCase() {
         .execute("http://static.scripting.com/rss.xml")
     }
 
-    protected override fun tearDown() {
-        super<AndroidTestCase>.tearDown()
-    }
 }
