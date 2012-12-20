@@ -29,12 +29,17 @@ public enum class FeedType{
 }
 
 public data class Feed(public val rss : Rss?, public val atom : Rss?){
+    {
+        transformRss()
+    }
+
     public var title : String = ""
     public var language : String = ""
     public var feedType : FeedType = FeedType.NONE
-    public var items : ArrayList<Item> = ArrayList<Item>()
+    public var items : ArrayList<FeedItem> = ArrayList<FeedItem>()
 
-    fun transformRss()
+
+    public fun transformRss()
     {
         if (rss != null){
             title = if (rss!!.channel!!.title == null) "" else rss!!.channel!!.title!!
@@ -42,6 +47,11 @@ public data class Feed(public val rss : Rss?, public val atom : Rss?){
             feedType = FeedType.RSS
 
             for(val i in rss!!.channel!!.item!!.iterator()){
+                var fi = FeedItem()
+                fi.title = i.title
+                fi.description = i.description
+                fi.pubDate = i.getPubDate()
+                items.add(fi)
             }
         }
     }
