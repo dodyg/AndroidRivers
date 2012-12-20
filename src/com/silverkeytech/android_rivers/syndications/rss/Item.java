@@ -53,9 +53,7 @@ public class Item {
             return null;
 
         try {
-            Date date = DateHelper.parseRFC822(pubDate);
-            return date;
-
+            return DateHelper.parseRFC822(pubDate);
         } catch (Exception e) {
             return null;
         }

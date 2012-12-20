@@ -41,6 +41,7 @@ public class DateHelper {
         return parse(DEFAULT, date);
     }
 
+
     public static Date parse(String format, String date) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         return sdf.parse(date);

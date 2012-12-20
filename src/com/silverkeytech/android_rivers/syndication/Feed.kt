@@ -19,7 +19,34 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers.syndication
 
 import com.silverkeytech.android_rivers.syndications.rss.Rss
+import com.silverkeytech.android_rivers.syndications.rss.Item
+import java.util.ArrayList
+
+public enum class FeedType{
+    NONE
+    ATOM
+    RSS
+}
 
 public data class Feed(public val rss : Rss?, public val atom : Rss?){
+    public var title : String = ""
+    public var language : String = ""
+    public var feedType : FeedType = FeedType.NONE
+    public var items : ArrayList<Item> = ArrayList<Item>()
 
+    fun transformRss()
+    {
+        if (rss != null){
+            title = if (rss!!.channel!!.title == null) "" else rss!!.channel!!.title!!
+            language = if (rss!!.channel!!.language == null) "" else rss!!.channel!!.language!!
+            feedType = FeedType.RSS
+
+            for(val i in rss!!.channel!!.item!!.iterator()){
+            }
+        }
+    }
+
+    fun transformAtom(){
+
+    }
 }
