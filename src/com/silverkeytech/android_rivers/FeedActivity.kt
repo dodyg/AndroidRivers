@@ -49,10 +49,23 @@ public class FeedActivity(): SherlockListActivity()
         actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
 
         var i = getIntent()!!
-        feedUrl = i.getStringExtra(Params.RIVER_URL)!!
-        feedName = i.getStringExtra(Params.RIVER_NAME)!!
-        feedLanguage = i.getStringExtra(Params.RIVER_LANGUAGE)!!
+        feedUrl = i.getStringExtra(Params.FEED_URL)!!
+        feedName = i.getStringExtra(Params.FEED_NAME)!!
+        feedLanguage = i.getStringExtra(Params.FEED_LANGUAGE)!!
 
         setTitle(feedName)
+
+        DownloadFeed(this, false)
+                .executeOnComplete {
+            res ->
+            if (res.isTrue()){
+                var feed = res.value!!
+                FeedContentRenderer(this, feedLanguage)
+                .handleNewsListing(feed.items)
+            }else{
+                toastee("Error ${res.exception?.getMessage()}", Duration.LONG)
+            }
+        }
+                .execute(feedUrl)
     }
 }

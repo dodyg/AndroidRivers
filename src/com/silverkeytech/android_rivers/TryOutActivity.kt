@@ -76,17 +76,14 @@ public class TryOutActivity(): Activity()
         var btn = findView<Button>(R.id.tryout_download_rss_btn)
 
         btn.setOnClickListener {
-            DownloadFeed(this, false)
-                    .executeOnComplete {
-                        res ->
-                        if (res.isTrue()){
-                            var rss = res.value!!.rss
-                            toastee("Title ${rss?.channel?.title} and items ${rss?.channel?.item?.size()}")
-                        }else{
-                            toastee("Error ${res.exception?.getMessage()}", Duration.LONG)
-                        }
-                    }
-                    .execute("http://cyber.law.harvard.edu/rss/examples/rss2sample.xml")
+            var url = "http://cyber.law.harvard.edu/rss/examples/rss2sample.xml"
+
+            var i = Intent(this@TryOutActivity, javaClass<FeedActivity>())
+            i.putExtra(Params.FEED_URL, url)
+            i.putExtra(Params.FEED_NAME, "Sample River with OPML")
+            i.putExtra(Params.FEED_LANGUAGE, "en")
+
+            startActivity(i)
         }
     }
 

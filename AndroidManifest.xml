@@ -23,6 +23,14 @@
             </intent-filter>
         </activity>
 
+
+        <activity android:name="FeedActivity" android:configChanges="keyboardHidden|orientation"
+                >
+            <intent-filter>
+
+            </intent-filter>
+        </activity>
+
         <activity android:name="TryOutActivity" android:configChanges="keyboardHidden|orientation" android:launchMode="singleTop">
             <intent-filter>
 

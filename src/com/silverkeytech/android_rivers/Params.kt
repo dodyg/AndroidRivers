@@ -23,5 +23,9 @@ public class Params(){
         val RIVER_NAME = "RIVER_NAME"
         val RIVER_LANGUAGE = "RIVER_LANGUAGE"
         var MESSENGER = "MESSENGER"
+
+        val FEED_URL = "FEED_URL"
+        val FEED_NAME = "FEED_NAME"
+        val FEED_LANGUAGE = "FEED_LANGUAGE"
     }
 }
