@@ -72,24 +72,32 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         descriptionView.setText(getDescription(treeNodeInfo?.getId()))
         descriptionView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize.toFloat())
 
-        descriptionView.setOnLongClickListener(object : View.OnLongClickListener {
-
-            public override fun onLongClick(p0: View?): Boolean {
+        descriptionView.setOnClickListener(object : View.OnClickListener{
+            public override fun onClick(p0: View?) {
                 var currentPosition = treeNodeInfo!!.getId()!!.toInt()
                 var currentOutline = outlines.get(currentPosition)
 
-                return when(currentOutline.getType()){
+                when(currentOutline.getType()){
                     OutlineType.INCLUDE ->  handleOpmlInclude(currentOutline, false)
                     OutlineType.BLOGPOST -> handleOpmlInclude(currentOutline, true)
                     OutlineType.LINK -> handleLink(currentOutline)
                     OutlineType.RIVER -> {
                         handleRiver(currentOutline)
-                        return true
                     }
-                    else -> handleOpmlZoom(currentOutline, currentPosition)
+                    else ->{ }
                 }
             }
         })
+
+        descriptionView.setOnLongClickListener(object : View.OnLongClickListener{
+            public override fun onLongClick(p0: View?): Boolean {
+                var currentPosition = treeNodeInfo!!.getId()!!.toInt()
+                var currentOutline = outlines.get(currentPosition)
+
+                return handleOpmlZoom(currentOutline, currentPosition)
+            }
+        })
+
 
         return viewLayout
     }
