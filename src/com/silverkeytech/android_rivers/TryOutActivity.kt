@@ -44,6 +44,9 @@ import com.silverkeytech.android_rivers.riverjs.FeedsRiver
 import java.util.Random
 import com.silverkeytech.android_rivers.outliner.transformFeedOpmlToOpml
 import com.silverkeytech.android_rivers.outliner.startOutlinerActivity
+import android.app.AlertDialog
+import java.util.ArrayList
+import android.content.DialogInterface
 
 //import com.silverkeytech.android_rivers.db.DatabaseManager
 
@@ -73,17 +76,39 @@ public class TryOutActivity(): Activity()
     }
 
     fun handleDownloadRss(){
-        var btn = findView<Button>(R.id.tryout_download_rss_btn)
+        val btn = findView<Button>(R.id.tryout_download_rss_btn)
+
+        val list = ArrayList<Pair<String,String>>()
+        list.add(Pair<String, String>("Sample", "http://cyber.law.harvard.edu/rss/examples/rss2sample.xml"))
+        list.add(Pair<String, String>("Scripting", "http://static.scripting.com/rss.xml"))
+
+        val names = Array<String>(list.size(), { "" })
+        var i = 0
+        list.forEach {
+            names[i] = it.first
+            i++
+        }
 
         btn.setOnClickListener {
-            var url = "http://cyber.law.harvard.edu/rss/examples/rss2sample.xml"
 
-            var i = Intent(this@TryOutActivity, javaClass<FeedActivity>())
-            i.putExtra(Params.FEED_URL, url)
-            i.putExtra(Params.FEED_NAME, "Sample River with OPML")
-            i.putExtra(Params.FEED_LANGUAGE, "en")
+            val dialog = AlertDialog.Builder(this)
+            dialog.setItems(names, object : DialogInterface.OnClickListener{
+                public override fun onClick(p0: DialogInterface?, p1: Int) {
+                    val url = list.get(p1).second
 
-            startActivity(i)
+                    Log.d(TAG, "Opening $url")
+
+                    var i = Intent(this@TryOutActivity, javaClass<FeedActivity>())
+                    i.putExtra(Params.FEED_URL, url)
+                    i.putExtra(Params.FEED_NAME, "Sample River with OPML")
+                    i.putExtra(Params.FEED_LANGUAGE, "en")
+
+                    startActivity(i)
+                }
+            })
+
+            dialog.create()!!.show()
+
         }
     }
 
