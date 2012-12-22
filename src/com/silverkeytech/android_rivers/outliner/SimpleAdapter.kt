@@ -36,9 +36,10 @@ import com.silverkeytech.android_rivers.RiverActivity
 import com.silverkeytech.android_rivers.getMain
 import com.silverkeytech.android_rivers.toastee
 import java.util.ArrayList
+import android.util.Log
 
-public open class SimpleAdapter(private var context: OutlinerActivity,
-                                treeStateManager: TreeStateManager<Long?>,
+public open class SimpleAdapter(private val context: OutlinerActivity,
+                                private val treeStateManager: TreeStateManager<Long?>,
                                 numberOfLevels: Int,
                                 val outlines: List<OutlineContent>,
                                 val textSize: Int):
@@ -84,7 +85,14 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
                     OutlineType.RIVER -> {
                         handleRiver(currentOutline)
                     }
-                    else ->{ }
+                    else ->{
+                        val id = treeNodeInfo.getId()!!
+                        Log.d(TAG, "Clicked on id $id")
+                        if (treeNodeInfo.isExpanded())
+                            treeStateManager.collapseChildren(id)
+                        else
+                            treeStateManager.expandDirectChildren(id)
+                    }
                 }
             }
         })
