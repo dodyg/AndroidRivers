@@ -108,7 +108,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
 
                 var dialog = AlertDialog.Builder(context)
 
-                var dlg: View = inflater.inflate(R.layout.news_details, null)!!
+                var dlg: View = inflater.inflate(R.layout.feed_details, null)!!
                 var msg: String
 
                 if (currentNews.description.isNullOrEmpty() && !currentNews.title.isNullOrEmpty())
@@ -123,11 +123,11 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                 else if (theme == R.style.Theme_Sherlock)
                     dlg.setBackgroundColor(android.graphics.Color.BLACK)
 
-                var body = dlg.findViewById(R.id.news_details_text_tv)!! as TextView
+                var body = dlg.findViewById(R.id.feed_details_text_tv)!! as TextView
                 handleText(body, msg, textSize.toFloat())
                 handleTextColor(context, body)
 
-                var source = dlg.findViewById(R.id.news_details_source_tv)!! as TextView
+                var source = dlg.findViewById(R.id.feed_details_source_tv)!! as TextView
 
                 dialog.setView(dlg)
 
