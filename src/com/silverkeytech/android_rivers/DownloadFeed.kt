@@ -70,7 +70,9 @@ public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String,
             Log.d(TAG, "Transforming XML to RSS")
 
             if (feed.isTrue()){
-                return Result.right(Feed(feed.value!!, null))
+                var f = Feed(feed.value, null)
+                f.transformRss()
+                return Result.right(f)
             } else{
                 return Result.wrong(feed.exception)
             }

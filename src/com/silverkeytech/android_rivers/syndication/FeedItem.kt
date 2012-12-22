@@ -29,10 +29,19 @@ public data class FeedItem(){
     public var pubDate : Date? = null
 
     fun hasTitle() : Boolean{
-        return title.isNullOrEmpty()
+        return !title.isNullOrEmpty()
     }
 
     fun hasDescription() : Boolean{
-        return description.isNullOrEmpty()
+        return !description.isNullOrEmpty()
+    }
+
+    public fun toString(): String{
+        if (hasTitle())
+            return title!!
+        else if (hasDescription())
+            return description!!
+        else
+            return ""
     }
 }

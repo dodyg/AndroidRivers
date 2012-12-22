@@ -21,6 +21,7 @@ package com.silverkeytech.android_rivers.syndication
 import com.silverkeytech.android_rivers.syndications.rss.Rss
 import com.silverkeytech.android_rivers.syndications.rss.Item
 import java.util.ArrayList
+import com.silverkeytech.android_rivers.scrubHtml
 
 public enum class FeedType{
     NONE
@@ -29,9 +30,6 @@ public enum class FeedType{
 }
 
 public data class Feed(public val rss : Rss?, public val atom : Rss?){
-    {
-        transformRss()
-    }
 
     public var title : String = ""
     public var language : String = ""
@@ -39,19 +37,29 @@ public data class Feed(public val rss : Rss?, public val atom : Rss?){
     public var items : ArrayList<FeedItem> = ArrayList<FeedItem>()
 
 
-    public fun transformRss()
+    public fun transform(){
+        transformRss()
+        transformAtom()
+    }
+
+    fun transformRss()
     {
         if (rss != null){
-            title = if (rss!!.channel!!.title == null) "" else rss!!.channel!!.title!!
-            language = if (rss!!.channel!!.language == null) "" else rss!!.channel!!.language!!
-            feedType = FeedType.RSS
+            val channel = rss!!.channel
+            if (channel != null){
+                title = if (channel.title == null) "" else channel.title!!
+                language = if (channel.language == null) "" else channel.language!!
 
-            for(val i in rss!!.channel!!.item!!.iterator()){
-                var fi = FeedItem()
-                fi.title = i.title
-                fi.description = i.description
-                fi.pubDate = i.getPubDate()
-                items.add(fi)
+                feedType = FeedType.RSS
+
+                for(val i in channel.item!!.iterator()){
+                    var fi = FeedItem()
+                    fi.title = i.title
+                    fi.description = scrubHtml(i.description)
+                    fi.pubDate = i.getPubDate()
+                    fi.link = i.link
+                    items.add(fi)
+                }
             }
         }
     }
