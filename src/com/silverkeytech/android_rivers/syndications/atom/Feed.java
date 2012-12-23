@@ -31,4 +31,13 @@ public class Feed {
 
     @Element(required = false)
     public String link;
+
+    @Element
+    public String updated;
+
+    @Element
+    public String id;
+
+    @ElementList(inline = true)
+    public ArrayList<Entry> entry = new ArrayList<Entry>();
 }
