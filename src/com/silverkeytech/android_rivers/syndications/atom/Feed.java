@@ -40,17 +40,17 @@ public class Feed {
 
     //recommended optional elements
 
-    @ElementList(inline = true, required = false)
+    @ElementList(inline = true, required = false, entry = "author")
     public ArrayList<PersonElement> author = new ArrayList<PersonElement>();
 
-    @Element(required = false)
-    public LinkElement link;
+    @ElementList(inline = true, required = false)
+    public ArrayList<LinkElement> link = new ArrayList<LinkElement>();
 
     //the rest
     @ElementList(inline = true, required = false)
     public ArrayList<CategoryElement> category = new ArrayList<CategoryElement>();
 
-    @ElementList(inline = true, required = false)
+    @ElementList(inline = true, required = false, entry = "contributor")
     public ArrayList<PersonElement> contributor = new ArrayList<PersonElement>();
 
     @Element(required = false)

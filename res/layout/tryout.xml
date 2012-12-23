@@ -8,6 +8,12 @@
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:text="Download Atom"
+            android:id="@+id/tryout_download_atom_btn"/>
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:text="Download Rss"
             android:id="@+id/tryout_download_rss_btn"/>
 

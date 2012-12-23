@@ -38,14 +38,14 @@ public class Entry {
 
     //recommended elements
 
-    @ElementList(inline = true, required = false)
+    @ElementList(inline = true, required = false, entry = "author")
     public ArrayList<PersonElement> author = new ArrayList<PersonElement>();
 
     @Element(required = false)
     public ContentElement content;
 
-    @Element(required = false)
-    public LinkElement link;
+    @ElementList(inline = true, required = false)
+    public ArrayList<LinkElement> link = new ArrayList<LinkElement>();
 
     @Element(required = false)
     public ContentElement summary;
@@ -54,7 +54,7 @@ public class Entry {
     @ElementList(inline = true, required = false)
     public ArrayList<CategoryElement> category = new ArrayList<CategoryElement>();
 
-    @ElementList(inline = true, required = false)
+    @ElementList(inline = true, required = false, entry = "contributor")
     public ArrayList<PersonElement> contributor = new ArrayList<PersonElement>();
 
     @Element(required = false)

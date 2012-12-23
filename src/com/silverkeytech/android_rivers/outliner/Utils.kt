@@ -36,6 +36,7 @@ import com.silverkeytech.android_rivers.outlines.Head
 import com.silverkeytech.android_rivers.outlines.Body
 import com.silverkeytech.android_rivers.riverjs.FeedOpmlOutline
 import com.silverkeytech.android_rivers.syndications.rss.Rss
+import com.silverkeytech.android_rivers.syndications.atom.Feed
 
 //do an in order traversal so we can flatten it up to be used by outliner
 fun Opml.traverse (filter: ((Outline) -> Boolean)? = null, depthLimit: Int = 12): ArrayList<OutlineContent> {
@@ -172,6 +173,20 @@ fun transformXmlToRss(xml: String?): Result<Rss> {
     }
     catch (e: Exception){
         Log.d("Rss Transform", "Exception ${e.getMessage()}")
+        return Result.wrong(e)
+    }
+}
+
+fun transformXmlToAtom(xml: String?): Result<Feed>{
+    var serial: Serializer = Persister()
+
+    try{
+        val feed: Feed? = serial.read(javaClass<Feed>(), xml, false)
+        Log.d("Atom Transform", "Works ok")
+        return Result.right(feed)
+    }
+    catch (e: Exception){
+        Log.d("Atom Transform", "Exception ${e.getMessage()}")
         return Result.wrong(e)
     }
 }

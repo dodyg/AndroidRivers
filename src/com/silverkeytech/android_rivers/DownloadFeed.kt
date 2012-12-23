@@ -28,6 +28,7 @@ import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.silverkeytech.android_rivers.outliner.transformXmlToRss
 import android.util.Log
+import com.silverkeytech.android_rivers.outliner.transformXmlToAtom
 
 public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<SyndicationFeed>>(){
     class object {
@@ -54,27 +55,45 @@ public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String,
 
     protected override fun doInBackground(p0: Array<String?>): Result<SyndicationFeed>? {
         try{
-            var req: String?
+            var downloadedContent: String?
+            var mimeType: String?
             try{
-                req = HttpRequest.get(p0[0])?.body()
+                val request = HttpRequest.get(p0[0])
+                mimeType = request?.contentType()
+
+                downloadedContent = request?.body()
             }
             catch(e: HttpRequestException){
                 var ex = e.getCause()
                 return Result.wrong(ex)
             }
 
-            Log.d(TAG, "RSS XML is downloaded at ${p0[0]}")
+            Log.d(TAG, "Syndication XML is downloaded at ${p0[0]}")
 
-            var feed = transformXmlToRss(req)
+            if (mimeType!!.contains("atom")){
+                var feed = transformXmlToAtom(downloadedContent)
 
-            Log.d(TAG, "Transforming XML to RSS")
+                Log.d(TAG, "Transforming XML to ATOM")
 
-            if (feed.isTrue()){
-                var f = SyndicationFeed(feed.value, null)
-                f.transformRss()
-                return Result.right(f)
-            } else{
-                return Result.wrong(feed.exception)
+                if (feed.isTrue()){
+                    var f = SyndicationFeed(null, feed.value)
+                    f.transformRss()
+                    return Result.right(f)
+                } else{
+                    return Result.wrong(feed.exception)
+                }
+            } else {
+                var feed = transformXmlToRss(downloadedContent)
+
+                Log.d(TAG, "Transforming XML to RSS")
+
+                if (feed.isTrue()){
+                    var f = SyndicationFeed(feed.value, null)
+                    f.transformRss()
+                    return Result.right(f)
+                } else{
+                    return Result.wrong(feed.exception)
+                }
             }
         }
         catch (e : Exception){

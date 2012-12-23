@@ -61,6 +61,7 @@ public class TryOutActivity(): Activity()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tryout)
+        handleDownloadAtom()
         handleDownloadRss()
         handleDownloadGifImage()
         handleDownloadFile()
@@ -72,7 +73,40 @@ public class TryOutActivity(): Activity()
         handleOutliner()
         handleDownloadRecursiveOpml()
         handleRiverJsWithOpmlSource()
+    }
 
+    fun handleDownloadAtom(){
+        val btn = findView<Button>(R.id.tryout_download_atom_btn)
+
+        val list = ArrayList<Pair<String,String>>()
+        list.add(Pair("Daring Fireball", "http://daringfireball.net/index.xml"))
+
+        val names = Array<String>(list.size(), { "" })
+        var i = 0
+        list.forEach {
+            names[i] = it.first
+            i++
+        }
+
+        btn.setOnClickListener {
+            val dialog = AlertDialog.Builder(this)
+            dialog.setItems(names, object : DialogInterface.OnClickListener{
+                public override fun onClick(p0: DialogInterface?, p1: Int) {
+                    val url = list.get(p1).second
+
+                    Log.d(TAG, "Opening $url")
+
+                    DownloadFeed(this@TryOutActivity, true).executeOnComplete {
+                        res ->
+                        val atom = res.value!!.atom!!
+                        Log.d(TAG, "Atom ${atom.title}")
+                    }
+                    .execute(url)
+                }
+            })
+
+            dialog.create()!!.show()
+        }
     }
 
     fun handleDownloadRss(){
@@ -92,7 +126,6 @@ public class TryOutActivity(): Activity()
         }
 
         btn.setOnClickListener {
-
             val dialog = AlertDialog.Builder(this)
             dialog.setItems(names, object : DialogInterface.OnClickListener{
                 public override fun onClick(p0: DialogInterface?, p1: Int) {
@@ -110,7 +143,6 @@ public class TryOutActivity(): Activity()
             })
 
             dialog.create()!!.show()
-
         }
     }
 

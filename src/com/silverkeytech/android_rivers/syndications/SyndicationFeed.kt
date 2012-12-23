@@ -23,6 +23,7 @@ import com.silverkeytech.android_rivers.syndications.rss.Item
 import java.util.ArrayList
 import com.silverkeytech.android_rivers.scrubHtml
 import android.util.Log
+import com.silverkeytech.android_rivers.syndications.atom.Feed
 
 public enum class SyndicationFeedType{
     NONE
@@ -30,7 +31,7 @@ public enum class SyndicationFeedType{
     RSS
 }
 
-public data class SyndicationFeed(public val rss : Rss?, public val atom : Rss?){
+public data class SyndicationFeed(public val rss : Rss?, public val atom : Feed?){
 
     public var title : String = ""
     public var language : String = ""
