@@ -18,10 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.syndications.atom;
 
+import com.silverkeytech.android_rivers.DateHelper;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 //Source http://www.atomenabled.org/developers/syndication/
 
@@ -65,6 +67,17 @@ public class Entry {
 
     @Element(required = false)
     public TextElement rights;
+
+    public Date getUpdated() {
+        if (updated == null)
+            return null;
+
+        try {
+            return DateHelper.parseRFC822(updated);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
 
 

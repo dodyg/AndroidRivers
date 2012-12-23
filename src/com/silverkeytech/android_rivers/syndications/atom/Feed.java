@@ -18,12 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.syndications.atom;
 
+import com.silverkeytech.android_rivers.DateHelper;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /* follows http://www.atomenabled.org/developers/syndication/ */
 
@@ -67,4 +69,15 @@ public class Feed {
 
     @ElementList(inline = true)
     public ArrayList<Entry> entry = new ArrayList<Entry>();
+
+    public Date getUpdated() {
+        if (updated == null)
+            return null;
+
+        try {
+            return DateHelper.parseRFC822(updated);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

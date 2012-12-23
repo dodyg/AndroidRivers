@@ -97,12 +97,12 @@ public class TryOutActivity(): Activity()
 
                     Log.d(TAG, "Opening $url")
 
-                    DownloadFeed(this@TryOutActivity, true).executeOnComplete {
-                        res ->
-                        val atom = res.value!!.atom!!
-                        Log.d(TAG, "Atom ${atom.title}")
-                    }
-                    .execute(url)
+                    var i = Intent(this@TryOutActivity, javaClass<FeedActivity>())
+                    i.putExtra(Params.FEED_URL, url)
+                    i.putExtra(Params.FEED_NAME, "Display ATOM Feeds")
+                    i.putExtra(Params.FEED_LANGUAGE, "en")
+
+                    startActivity(i)
                 }
             })
 
@@ -136,7 +136,7 @@ public class TryOutActivity(): Activity()
 
                     var i = Intent(this@TryOutActivity, javaClass<FeedActivity>())
                     i.putExtra(Params.FEED_URL, url)
-                    i.putExtra(Params.FEED_NAME, "Sample River with OPML")
+                    i.putExtra(Params.FEED_NAME, "Display RSS Feed")
                     i.putExtra(Params.FEED_LANGUAGE, "en")
 
                     startActivity(i)
