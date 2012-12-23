@@ -18,19 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.syndications.atom;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.Root;
-
-import java.util.ArrayList;
-
 public class Entry {
     public String title;
     public String id;
     public String updated;
     public String summary;
-    public Link link;
+    public LinkElement link;
 }
 
 

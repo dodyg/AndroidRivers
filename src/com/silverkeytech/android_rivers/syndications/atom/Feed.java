@@ -30,13 +30,19 @@ public class Feed {
     public String title;
 
     @Element(required = false)
-    public String link;
+    public LinkElement link;
 
     @Element
     public String updated;
 
     @Element
     public String id;
+
+    @Element(required = false)
+    public String icon;
+
+    @Element(required = false)
+    public String logo;
 
     @ElementList(inline = true)
     public ArrayList<Entry> entry = new ArrayList<Entry>();

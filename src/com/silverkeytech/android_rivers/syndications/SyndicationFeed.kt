@@ -24,18 +24,18 @@ import java.util.ArrayList
 import com.silverkeytech.android_rivers.scrubHtml
 import android.util.Log
 
-public enum class FeedType{
+public enum class SyndicationFeedType{
     NONE
     ATOM
     RSS
 }
 
-public data class Feed(public val rss : Rss?, public val atom : Rss?){
+public data class SyndicationFeed(public val rss : Rss?, public val atom : Rss?){
 
     public var title : String = ""
     public var language : String = ""
-    public var feedType : FeedType = FeedType.NONE
-    public var items : ArrayList<FeedItem> = ArrayList<FeedItem>()
+    public var feedType : SyndicationFeedType = SyndicationFeedType.NONE
+    public var items : ArrayList<SyndicationFeedItem> = ArrayList<SyndicationFeedItem>()
 
 
     public fun transform(){
@@ -51,17 +51,17 @@ public data class Feed(public val rss : Rss?, public val atom : Rss?){
                 title = if (channel.title == null) "" else channel.title!!
                 language = if (channel.language == null) "" else channel.language!!
 
-                feedType = FeedType.RSS
+                feedType = SyndicationFeedType.RSS
 
                 for(val i in channel.item!!.iterator()){
-                    var fi = FeedItem()
+                    var fi = SyndicationFeedItem()
                     fi.title = i.title
                     fi.description = scrubHtml(i.description)
                     fi.pubDate = i.getPubDate()
                     fi.link = i.link
 
                     if (i.enclosure != null){
-                        var enclosure = FeedEnclosure(
+                        var enclosure = SyndicationFeedEnclosure(
                             i.enclosure!!.url!!,
                             i.enclosure!!.length!!,
                             i.enclosure!!.`type`!!

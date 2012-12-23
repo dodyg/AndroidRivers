@@ -45,7 +45,7 @@ import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 import com.silverkeytech.android_rivers.outliner.transformFeedOpmlToOpml
 import com.silverkeytech.android_rivers.outliner.startOutlinerActivity
 import com.silverkeytech.android_rivers.outliner.traverse
-import com.silverkeytech.android_rivers.syndication.FeedItem
+import com.silverkeytech.android_rivers.syndication.SyndicationFeedItem
 
 //Manage the rendering of each news item in the river list
 public class FeedContentRenderer(val context: Activity, val language: String){
@@ -62,7 +62,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
     public data class ViewHolder (var news: TextView, val indicator: TextView)
 
     //show and prepare the interaction for each individual news item
-    fun handleNewsListing(feedItems: List<FeedItem>) {
+    fun handleNewsListing(feedItems: List<SyndicationFeedItem>) {
         val textSize = context.getVisualPref().getListTextSize()
 
         //now sort it so people always have the latest news first
@@ -71,7 +71,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
 
         var inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-        var adapter = object : ArrayAdapter<FeedItem>(context, R.layout.news_item, feedItems) {
+        var adapter = object : ArrayAdapter<SyndicationFeedItem>(context, R.layout.news_item, feedItems) {
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 var currentView = convertView
                 var holder: ViewHolder?

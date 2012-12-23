@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers.syndications.atom;
 
 
-public class Link{
+public class LinkElement {
     public String href;
     public String rel;
     public String type;

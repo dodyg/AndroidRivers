@@ -22,12 +22,12 @@ import com.silverkeytech.android_rivers.isNullOrEmpty
 import java.util.Date
 
 
-public data class FeedItem(){
+public data class SyndicationFeedItem(){
     public var title : String? = null
     public var description : String? = null
     public var link : String? = null
     public var pubDate : Date? = null
-    public var enclosure : FeedEnclosure? = null
+    public var enclosure : SyndicationFeedEnclosure? = null
 
     fun hasTitle() : Boolean{
         return !title.isNullOrEmpty()
@@ -59,7 +59,7 @@ public data class FeedItem(){
     }
 }
 
-public data class FeedEnclosure (
+public data class SyndicationFeedEnclosure (
     public val url : String,
     public val length : Int,
     public val mimeType : String)

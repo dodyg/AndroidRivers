@@ -20,7 +20,7 @@ package com.silverkeytech.android_rivers
 
 import android.os.AsyncTask
 import android.content.Context
-import com.silverkeytech.android_rivers.syndication.Feed
+import com.silverkeytech.android_rivers.syndication.SyndicationFeed
 import android.app.ProgressDialog
 import android.app.Activity
 import android.content.DialogInterface
@@ -29,7 +29,7 @@ import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.silverkeytech.android_rivers.outliner.transformXmlToRss
 import android.util.Log
 
-public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<Feed>>(){
+public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<SyndicationFeed>>(){
     class object {
         public val TAG: String = javaClass<DownloadFeed>().getSimpleName()
     }
@@ -52,7 +52,7 @@ public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String,
         dialog.show()
     }
 
-    protected override fun doInBackground(p0: Array<String?>): Result<Feed>? {
+    protected override fun doInBackground(p0: Array<String?>): Result<SyndicationFeed>? {
         try{
             var req: String?
             try{
@@ -70,7 +70,7 @@ public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String,
             Log.d(TAG, "Transforming XML to RSS")
 
             if (feed.isTrue()){
-                var f = Feed(feed.value, null)
+                var f = SyndicationFeed(feed.value, null)
                 f.transformRss()
                 return Result.right(f)
             } else{
@@ -82,14 +82,14 @@ public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String,
         }
     }
 
-    var rawCallback: ((Result<Feed>) -> Unit)? = null
+    var rawCallback: ((Result<SyndicationFeed>) -> Unit)? = null
 
-    public fun executeOnComplete(callback: (Result<Feed>) -> Unit): DownloadFeed {
+    public fun executeOnComplete(callback: (Result<SyndicationFeed>) -> Unit): DownloadFeed {
         rawCallback = callback
         return this
     }
 
-    protected override fun onPostExecute(result: Result<Feed>?) {
+    protected override fun onPostExecute(result: Result<SyndicationFeed>?) {
         dialog.dismiss()
 
         if (result == null){
