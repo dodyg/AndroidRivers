@@ -81,8 +81,29 @@ public data class SyndicationFeed(public val rss : Rss?, public val atom : Feed?
             for(val i in atom!!.entry!!.iterator()){
                 var fi = SyndicationFeedItem()
                 fi.title = i.title
-                if (i.link!!.count() > 0)
-                    fi.link = i.link!!.first().href
+                //link type "alternate"
+                if (i.link!!.count() > 0){
+                    var alternateLinks = i.link!!.filter { x -> !x.rel.isNullOrEmpty() && x.rel == "alternate" }
+                    if (alternateLinks.count() > 0)
+                        fi.link = alternateLinks.first().href
+
+                    //enclosure
+                    var enclosureLinks =  i.link!!.filter { x -> !x.rel.isNullOrEmpty() && x.rel == "enclosure" }
+
+                    if (alternateLinks.count() > 0){
+                        var altLink = alternateLinks.first()
+
+                        if (altLink.length != null && altLink.length!! > 0
+                            && !altLink.`type`.isNullOrEmpty()){
+                            val enclosure = SyndicationFeedEnclosure(
+                                    altLink.href!!,
+                                    altLink.length!!,
+                                    altLink.`type`!!
+                            )
+                            fi.enclosure = enclosure
+                        }
+                    }
+                }
 
                 if (i.content != null){
                     if (i.content!!.`type` == null){
