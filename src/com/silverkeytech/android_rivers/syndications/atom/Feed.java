@@ -16,15 +16,19 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-package com.silverkeytech.android_rivers.syndications.rss;
+package com.silverkeytech.android_rivers.syndications.atom;
 
 import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.Root;
 
-public class Enclosure {
-    @Attribute
-    public String url;
-    @Attribute
-    public Integer length;
-    @Attribute
-    public String type;
+import java.util.ArrayList;
+
+public class Feed {
+    @Element
+    public String title;
+
+    @Element(required = false)
+    public String link;
 }
