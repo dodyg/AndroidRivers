@@ -79,8 +79,9 @@ public class TryOutActivity(): Activity()
         val btn = findView<Button>(R.id.tryout_download_rss_btn)
 
         val list = ArrayList<Pair<String,String>>()
-        list.add(Pair<String, String>("Sample", "http://cyber.law.harvard.edu/rss/examples/rss2sample.xml"))
-        list.add(Pair<String, String>("Scripting", "http://static.scripting.com/rss.xml"))
+        list.add(Pair("Sample", "http://cyber.law.harvard.edu/rss/examples/rss2sample.xml"))
+        list.add(Pair("Scripting", "http://static.scripting.com/rss.xml"))
+        list.add(Pair("NPR Songs", "http://www.npr.org/rss/podcast.php?id=510019"))
 
         val names = Array<String>(list.size(), { "" })
         var i = 0

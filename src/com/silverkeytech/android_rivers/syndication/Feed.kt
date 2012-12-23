@@ -22,6 +22,7 @@ import com.silverkeytech.android_rivers.syndications.rss.Rss
 import com.silverkeytech.android_rivers.syndications.rss.Item
 import java.util.ArrayList
 import com.silverkeytech.android_rivers.scrubHtml
+import android.util.Log
 
 public enum class FeedType{
     NONE
@@ -58,6 +59,15 @@ public data class Feed(public val rss : Rss?, public val atom : Rss?){
                     fi.description = scrubHtml(i.description)
                     fi.pubDate = i.getPubDate()
                     fi.link = i.link
+
+                    if (i.enclosure != null){
+                        var enclosure = FeedEnclosure(
+                            i.enclosure!!.url!!,
+                            i.enclosure!!.length!!,
+                            i.enclosure!!.`type`!!
+                        )
+                        fi.enclosure = enclosure
+                    }
                     items.add(fi)
                 }
             }

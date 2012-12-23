@@ -141,6 +141,35 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                     })
                 }
 
+                if (currentNews.isPodcast()){
+                    dialog.setNeutralButton("Podcast", object : DialogInterface.OnClickListener{
+                        public override fun onClick(p0: DialogInterface?, p1: Int) {
+                            var messenger = Messenger(object : Handler(){
+                                public override fun handleMessage(msg: Message?) {
+                                    if (msg != null){
+                                        val path = msg.obj as String
+
+                                        if (msg.arg1 == Activity.RESULT_OK && !path.isNullOrEmpty()){
+                                            context.toastee("File is successfully downloaded at $path", Duration.LONG)
+                                            MediaScannerWrapper.scanPodcasts(context, path)
+                                        }else{
+                                            context.toastee("Download failed", Duration.LONG)
+                                        }
+                                    }else{
+                                        Log.d(TAG, "handleMessage returns null, which is very weird")
+                                    }
+                                }
+                            })
+
+                            var intent = Intent(context, javaClass<DownloadService>())
+                            intent.putExtra(DownloadService.PARAM_DOWNLOAD_URL, currentNews.enclosure!!.url)
+                            intent.putExtra(DownloadService.PARAM_DOWNLOAD_TITLE, currentNews.title)
+                            intent.putExtra(Params.MESSENGER, messenger)
+                            context.startService(intent)
+                        }
+                    })
+                }
+
                 var createdDialog = dialog.create()!!
                 createdDialog.setCanceledOnTouchOutside(true)
                 dlg.setOnClickListener {
