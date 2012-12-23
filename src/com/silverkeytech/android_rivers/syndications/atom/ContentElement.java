@@ -18,28 +18,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.syndications.atom;
 
-
 import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Text;
 
-public class LinkElement {
-    @Attribute
-    public String href;
+public class ContentElement {
 
-    @Attribute(required = false)
-    public String rel;
+    @Text
+    public String value;
 
     @Attribute(required = false)
     public String type;
 
     @Attribute(required = false)
-    public String hreflang;
-
-    @Attribute(required = false)
-    public String title;
-
-    @Attribute(required = false)
-    public Integer length;
+    public String url;
 }
-/*
-rel, type, hreflang, title, and length
- */

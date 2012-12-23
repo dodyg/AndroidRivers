@@ -23,9 +23,7 @@ import org.simpleframework.xml.ElementList;
 
 import java.util.ArrayList;
 
-//Source http://www.atomenabled.org/developers/syndication/
-
-public class Entry {
+public class Source {
     //required elements
     @Element
     public String id;
@@ -36,21 +34,15 @@ public class Entry {
     @Element
     public String updated;
 
-    //recommended elements
+    //recommended optional elements
 
     @ElementList(inline = true, required = false)
     public ArrayList<PersonElement> author = new ArrayList<PersonElement>();
 
     @Element(required = false)
-    public ContentElement content;
-
-    @Element(required = false)
     public LinkElement link;
 
-    @Element(required = false)
-    public ContentElement summary;
-
-    //the rest of the elements
+    //the rest
     @ElementList(inline = true, required = false)
     public ArrayList<CategoryElement> category = new ArrayList<CategoryElement>();
 
@@ -58,27 +50,14 @@ public class Entry {
     public ArrayList<PersonElement> contributor = new ArrayList<PersonElement>();
 
     @Element(required = false)
-    public String published;
+    public String icon;
 
     @Element(required = false)
-    public Source source;
+    public String logo;
 
     @Element(required = false)
     public TextElement rights;
+
+    @Element(required = false)
+    public String subtitle;
 }
-
-
-/*
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-
-  <entry>
-    <title>Atom-Powered Robots Run Amok</title>
-    <link href="http://example.org/2003/12/13/atom03"/>
-    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
-    <updated>2003-12-13T18:30:02Z</updated>
-    <summary>Some text.</summary>
-  </entry>
-
-</feed>
- */

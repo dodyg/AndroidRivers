@@ -18,28 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.syndications.atom;
 
-
 import org.simpleframework.xml.Attribute;
 
-public class LinkElement {
+public class CategoryElement {
     @Attribute
-    public String href;
+    public String term;
 
     @Attribute(required = false)
-    public String rel;
+    public String scheme;
 
     @Attribute(required = false)
-    public String type;
-
-    @Attribute(required = false)
-    public String hreflang;
-
-    @Attribute(required = false)
-    public String title;
-
-    @Attribute(required = false)
-    public Integer length;
+    public String label;
 }
-/*
-rel, type, hreflang, title, and length
- */

@@ -25,24 +25,45 @@ import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
 
+/* follows http://www.atomenabled.org/developers/syndication/ */
+
 public class Feed {
+    //required elements
+    @Element
+    public String id;
+
     @Element
     public String title;
-
-    @Element(required = false)
-    public LinkElement link;
 
     @Element
     public String updated;
 
-    @Element
-    public String id;
+    //recommended optional elements
+
+    @ElementList(inline = true, required = false)
+    public ArrayList<PersonElement> author = new ArrayList<PersonElement>();
+
+    @Element(required = false)
+    public LinkElement link;
+
+    //the rest
+    @ElementList(inline = true, required = false)
+    public ArrayList<CategoryElement> category = new ArrayList<CategoryElement>();
+
+    @ElementList(inline = true, required = false)
+    public ArrayList<PersonElement> contributor = new ArrayList<PersonElement>();
 
     @Element(required = false)
     public String icon;
 
     @Element(required = false)
     public String logo;
+
+    @Element(required = false)
+    public TextElement rights;
+
+    @Element(required = false)
+    public String subtitle;
 
     @ElementList(inline = true)
     public ArrayList<Entry> entry = new ArrayList<Entry>();

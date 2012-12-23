@@ -1,8 +1,15 @@
 package com.silverkeytech.android_rivers.syndications.atom;
 
-public class Author {
+import org.simpleframework.xml.Element;
+
+public class PersonElement {
+    @Element
     public String name;
+
+    @Element(required = false)
     public String email;
+
+    @Element(required = false)
     public String uri;
 }
 
