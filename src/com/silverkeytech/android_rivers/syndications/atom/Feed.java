@@ -45,11 +45,11 @@ public class Feed {
     @ElementList(inline = true, required = false, entry = "author")
     public ArrayList<PersonElement> author = new ArrayList<PersonElement>();
 
-    @ElementList(inline = true, required = false)
+    @ElementList(inline = true, required = false, entry = "link")
     public ArrayList<LinkElement> link = new ArrayList<LinkElement>();
 
     //the rest
-    @ElementList(inline = true, required = false)
+    @ElementList(inline = true, required = false, entry = "category")
     public ArrayList<CategoryElement> category = new ArrayList<CategoryElement>();
 
     @ElementList(inline = true, required = false, entry = "contributor")

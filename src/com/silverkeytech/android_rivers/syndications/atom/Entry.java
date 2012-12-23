@@ -46,14 +46,14 @@ public class Entry {
     @Element(required = false)
     public ContentElement content;
 
-    @ElementList(inline = true, required = false)
+    @ElementList(inline = true, required = false, entry = "link")
     public ArrayList<LinkElement> link = new ArrayList<LinkElement>();
 
     @Element(required = false)
     public ContentElement summary;
 
     //the rest of the elements
-    @ElementList(inline = true, required = false)
+    @ElementList(inline = true, required = false, entry = "category")
     public ArrayList<CategoryElement> category = new ArrayList<CategoryElement>();
 
     @ElementList(inline = true, required = false, entry = "contributor")

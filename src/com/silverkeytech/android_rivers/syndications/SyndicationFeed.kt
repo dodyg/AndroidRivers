@@ -82,6 +82,8 @@ public data class SyndicationFeed(public val rss : Rss?, public val atom : Feed?
                 var fi = SyndicationFeedItem()
                 fi.title = i.title
                 //link type "alternate"
+                Log.d("transformAtom", "Links available ${i.link?.count()}")
+
                 if (i.link!!.count() > 0){
                     var alternateLinks = i.link!!.filter { x -> !x.rel.isNullOrEmpty() && x.rel == "alternate" }
                     if (alternateLinks.count() > 0)
