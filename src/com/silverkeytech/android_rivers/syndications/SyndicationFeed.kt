@@ -84,8 +84,17 @@ public data class SyndicationFeed(public val rss : Rss?, public val atom : Feed?
                 if (i.link!!.count() > 0)
                     fi.link = i.link!!.first().href
 
-                if (i.summary != null){
-                    fi.description = i.summary?.value
+                if (i.content != null){
+                    if (i.content!!.`type` == null){
+                        fi.description = i.content!!.value
+                    }
+                    else if (i.content!!.`type` != null){
+                        if (i.content!!.`type` == "text"){
+                            fi.description = i.content!!.value
+                        } else {
+                            fi.description = scrubHtml(i.content!!.value)
+                        }
+                    }
                 }
 
                 fi.pubDate = i.getUpdated()
