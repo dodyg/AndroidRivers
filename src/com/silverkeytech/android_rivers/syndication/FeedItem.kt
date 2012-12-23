@@ -36,6 +36,10 @@ public data class FeedItem(){
         return !description.isNullOrEmpty()
     }
 
+    fun hasLink() : Boolean {
+        return !link.isNullOrEmpty() && link!!.contains("http://")
+    }
+
     public fun toString(): String{
         if (hasTitle())
             return title!!

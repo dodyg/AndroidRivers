@@ -131,6 +131,16 @@ public class FeedContentRenderer(val context: Activity, val language: String){
 
                 dialog.setView(dlg)
 
+                if (currentNews.hasLink()){
+                    dialog.setPositiveButton("Go", object : DialogInterface.OnClickListener{
+                        public override fun onClick(p0: DialogInterface?, p1: Int) {
+                            var i = Intent("android.intent.action.VIEW", Uri.parse(currentNews.link))
+                            context.startActivity(i)
+                            p0?.dismiss()
+                        }
+                    })
+                }
+
                 var createdDialog = dialog.create()!!
                 createdDialog.setCanceledOnTouchOutside(true)
                 dlg.setOnClickListener {
