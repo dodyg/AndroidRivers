@@ -80,6 +80,7 @@ public class TryOutActivity(): Activity()
 
         val list = ArrayList<Pair<String,String>>()
         list.add(Pair("Daring Fireball", "http://daringfireball.net/index.xml"))
+        list.add(Pair("Nomadlife", "http://nomadone.nomadlife.org/atom.xml"))
 
         val names = Array<String>(list.size(), { "" })
         var i = 0

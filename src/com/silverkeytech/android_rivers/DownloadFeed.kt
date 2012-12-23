@@ -77,7 +77,7 @@ public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String,
 
                 if (feed.isTrue()){
                     var f = SyndicationFeed(null, feed.value)
-                    f.transformRss()
+                    f.transformAtom()
                     return Result.right(f)
                 } else{
                     return Result.wrong(feed.exception)

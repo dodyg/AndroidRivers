@@ -48,6 +48,12 @@ public class DownloadImage(it: Context?): AsyncTask<String, Int, Result<Download
         dialog.setMessage(context.getString(R.string.please_wait_while_loading))
         dialog.setIndeterminate(true)
         dialog.setCancelable(false)
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", object : DialogInterface.OnClickListener{
+            public override fun onClick(p0: DialogInterface?, p1: Int) {
+                p0!!.dismiss()
+                this@DownloadImage.cancel(true)
+            }
+        })
         dialog.show()
     }
 

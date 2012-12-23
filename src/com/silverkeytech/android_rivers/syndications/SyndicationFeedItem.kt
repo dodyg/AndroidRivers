@@ -20,7 +20,7 @@ package com.silverkeytech.android_rivers.syndication
 
 import com.silverkeytech.android_rivers.isNullOrEmpty
 import java.util.Date
-
+import com.silverkeytech.android_rivers.syndications.SyndicationFeedEnclosure
 
 public data class SyndicationFeedItem(){
     public var title : String? = null
@@ -58,8 +58,3 @@ public data class SyndicationFeedItem(){
             return ""
     }
 }
-
-public data class SyndicationFeedEnclosure (
-    public val url : String,
-    public val length : Int,
-    public val mimeType : String)

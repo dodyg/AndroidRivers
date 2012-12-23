@@ -24,12 +24,9 @@ import java.util.ArrayList
 import com.silverkeytech.android_rivers.scrubHtml
 import android.util.Log
 import com.silverkeytech.android_rivers.syndications.atom.Feed
-
-public enum class SyndicationFeedType{
-    NONE
-    ATOM
-    RSS
-}
+import com.silverkeytech.android_rivers.isNullOrEmpty
+import com.silverkeytech.android_rivers.syndications.SyndicationFeedType
+import com.silverkeytech.android_rivers.syndications.SyndicationFeedEnclosure
 
 public data class SyndicationFeed(public val rss : Rss?, public val atom : Feed?){
 
@@ -49,8 +46,8 @@ public data class SyndicationFeed(public val rss : Rss?, public val atom : Feed?
         if (rss != null){
             val channel = rss!!.channel
             if (channel != null){
-                title = if (channel.title == null) "" else channel.title!!
-                language = if (channel.language == null) "" else channel.language!!
+                title = if (channel.title.isNullOrEmpty()) "" else channel.title!!
+                language = if (channel.language.isNullOrEmpty()) "" else channel.language!!
 
                 feedType = SyndicationFeedType.RSS
 
@@ -76,6 +73,10 @@ public data class SyndicationFeed(public val rss : Rss?, public val atom : Feed?
     }
 
     fun transformAtom(){
+        if (atom != null){
+            title = if (atom!!.title.isNullOrEmpty()) "" else atom!!.title!!
 
+            feedType = SyndicationFeedType.ATOM
+        }
     }
 }
