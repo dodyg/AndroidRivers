@@ -82,6 +82,7 @@ public class TryOutActivity(): Activity()
         list.add(Pair("Sample", "http://cyber.law.harvard.edu/rss/examples/rss2sample.xml"))
         list.add(Pair("Scripting", "http://static.scripting.com/rss.xml"))
         list.add(Pair("NPR Songs", "http://www.npr.org/rss/podcast.php?id=510019"))
+        list.add(Pair("Times of India", "http://timesofindia.feedsportal.com/c/33039/f/533965/index.rss"))
 
         val names = Array<String>(list.size(), { "" })
         var i = 0

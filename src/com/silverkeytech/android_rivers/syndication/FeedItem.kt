@@ -27,6 +27,7 @@ public data class FeedItem(){
     public var description : String? = null
     public var link : String? = null
     public var pubDate : Date? = null
+    public var enclosure : FeedEnclosure? = null
 
     fun hasTitle() : Boolean{
         return !title.isNullOrEmpty()
@@ -40,6 +41,14 @@ public data class FeedItem(){
         return !link.isNullOrEmpty() && link!!.contains("http://")
     }
 
+    fun hasEnclosure() : Boolean{
+        return enclosure != null
+    }
+
+    fun isPodcast() : Boolean {
+        return enclosure != null && enclosure!!.mimeType == "audio/mpeg"
+    }
+
     public fun toString(): String{
         if (hasTitle())
             return title!!
@@ -49,3 +58,8 @@ public data class FeedItem(){
             return ""
     }
 }
+
+public data class FeedEnclosure (
+    public val url : String,
+    public val length : Int,
+    public val mimeType : String)
