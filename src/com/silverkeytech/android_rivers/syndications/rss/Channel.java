@@ -18,10 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.syndications.rss;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.Root;
+import org.simpleframework.xml.*;
 
 import java.util.ArrayList;
 
@@ -30,9 +27,10 @@ public class Channel {
     public String title;
 
     @Element(required = false) //this is wrong by spec but it won't process for times of india
+    @Namespace
     public String link;  //http://timesofindia.feedsportal.com/c/33039/f/533965/index.rss
 
-    @Element
+    @Element(required = false)
     public String description;
 
     @Element(required = false)

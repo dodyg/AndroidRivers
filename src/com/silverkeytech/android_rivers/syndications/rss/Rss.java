@@ -21,13 +21,15 @@ package com.silverkeytech.android_rivers.syndications.rss;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
 @Root(strict = false)
+@Namespace
 public class Rss {
     @Element
     public Channel channel;
 
-    @Attribute
+    @Attribute(required = false)
     public String version;
 }
