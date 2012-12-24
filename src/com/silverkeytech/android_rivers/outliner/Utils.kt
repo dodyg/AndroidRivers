@@ -37,6 +37,7 @@ import com.silverkeytech.android_rivers.outlines.Body
 import com.silverkeytech.android_rivers.riverjs.FeedOpmlOutline
 import com.silverkeytech.android_rivers.syndications.rss.Rss
 import com.silverkeytech.android_rivers.syndications.atom.Feed
+import com.silverkeytech.android_rivers.XmlComponent
 
 //do an in order traversal so we can flatten it up to be used by outliner
 fun Opml.traverse (filter: ((Outline) -> Boolean)? = null, depthLimit: Int = 12): ArrayList<OutlineContent> {
@@ -93,10 +94,8 @@ fun isLanguageRTL(language: String): Boolean {
 }
 
 fun transformXmlToOpml(xml: String?): Result<Opml> {
-    var serial: Serializer = Persister()
-
     try{
-        val opml: Opml? = serial.read(javaClass<Opml>(), xml, false)
+        val opml: Opml? = XmlComponent.serial.read(javaClass<Opml>(), xml, false)
         Log.d("OPML Transform", "OPML ${opml?.head?.title} created on ${opml?.head?.getDateCreated()} and modified on ${opml?.head?.getDateModified()}")
         return Result.right(opml)
     }
@@ -164,10 +163,9 @@ fun startOutlinerActivity(context: Context, outlines: ArrayList<OutlineContent>,
 }
 
 fun transformXmlToRss(xml: String?): Result<Rss> {
-    var serial: Serializer = Persister()
 
     try{
-        val rss: Rss? = serial.read(javaClass<Rss>(), xml, false)
+        val rss: Rss? = XmlComponent.serial.read(javaClass<Rss>(), xml, false)
         Log.d("RSS Transform", "Works ok")
         return Result.right(rss)
     }
@@ -178,10 +176,9 @@ fun transformXmlToRss(xml: String?): Result<Rss> {
 }
 
 fun transformXmlToAtom(xml: String?): Result<Feed>{
-    var serial: Serializer = Persister()
 
     try{
-        val feed: Feed? = serial.read(javaClass<Feed>(), xml, false)
+        val feed: Feed? = XmlComponent.serial.read(javaClass<Feed>(), xml, false)
         Log.d("Atom Transform", "Works ok")
         return Result.right(feed)
     }

@@ -25,7 +25,6 @@ import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
 @Root(strict = false)
-@Namespace
 public class Rss {
     @Element
     public Channel channel;

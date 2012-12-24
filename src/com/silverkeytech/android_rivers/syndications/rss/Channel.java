@@ -22,11 +22,14 @@ import org.simpleframework.xml.*;
 
 import java.util.ArrayList;
 
+@NamespaceList({
+        @Namespace(reference="http://www.w3.org/2005/Atom", prefix="atom")
+})
 public class Channel {
     @Element
     public String title;
 
-    @Element(required = false) //this is wrong by spec but it won't process for times of india
+    @Element(required = false, name = "link") //this is wrong by spec but it won't process for times of india
     @Namespace
     public String link;  //http://timesofindia.feedsportal.com/c/33039/f/533965/index.rss
 
