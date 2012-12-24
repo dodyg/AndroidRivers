@@ -37,6 +37,7 @@ import com.silverkeytech.android_rivers.getMain
 import com.silverkeytech.android_rivers.toastee
 import java.util.ArrayList
 import android.util.Log
+import com.silverkeytech.android_rivers.FeedActivity
 
 public open class SimpleAdapter(private val context: OutlinerActivity,
                                 private val treeStateManager: TreeStateManager<Long?>,
@@ -57,6 +58,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
             OutlineType.LINK -> currentOutline.text + " ->"
             OutlineType.BLOGPOST -> currentOutline.text + " +"
             OutlineType.RIVER -> currentOutline.text + " ~"
+            OutlineType.RSS -> currentOutline.text + " ::"
             else -> currentOutline.text
         }
     }
@@ -82,9 +84,8 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
                     OutlineType.INCLUDE ->  handleOpmlInclude(currentOutline, false)
                     OutlineType.BLOGPOST -> handleOpmlInclude(currentOutline, true)
                     OutlineType.LINK -> handleLink(currentOutline)
-                    OutlineType.RIVER -> {
-                        handleRiver(currentOutline)
-                    }
+                    OutlineType.RIVER -> handleRiver(currentOutline)
+                    OutlineType.RSS -> handleRss(currentOutline)
                     else ->{
                         val id = treeNodeInfo.getId()!!
                         Log.d(TAG, "Clicked on id $id")
@@ -121,6 +122,19 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         i.putExtra(Params.RIVER_LANGUAGE, lang)
 
         context.startActivity(i);
+    }
+
+    fun handleRss(currentOutline : OutlineContent){
+        var url = currentOutline.getAttribute("url")
+        var text = currentOutline.text
+        var lang = currentOutline.getAttribute("language")
+
+        var i = Intent(context, javaClass<FeedActivity>())
+        i.putExtra(Params.FEED_URL, url)
+        i.putExtra(Params.FEED_NAME, text)
+        i.putExtra(Params.FEED_LANGUAGE, lang)
+
+        context.startActivity(i)
     }
 
     fun handleOpmlZoom(currentOutline: OutlineContent, currentPosition: Int): Boolean {

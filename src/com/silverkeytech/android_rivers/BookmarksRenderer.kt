@@ -113,7 +113,7 @@ public class BookmarksRenderer(val context: MainActivity){
                 var x = inflater.inflate(R.layout.river_quick_actions, null, false)!!
                 var pp = PopupWindow(x, popupWidth, popupHeight, true)
 
-                x.setBackgroundColor(android.graphics.Color.YELLOW)
+                x.setBackgroundColor(android.graphics.Color.LTGRAY)
 
                 x.setOnClickListener {
                     pp.dismiss()

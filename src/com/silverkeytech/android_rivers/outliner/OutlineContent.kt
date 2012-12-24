@@ -27,6 +27,7 @@ public enum class OutlineType{
     LINK
     BLOGPOST
     RIVER
+    RSS
 }
 
 public data class OutlineContent (var level: Int, var text: String): Serializable
@@ -55,6 +56,7 @@ public data class OutlineContent (var level: Int, var text: String): Serializabl
                 "link" -> OutlineType.LINK
                 "blogpost" -> OutlineType.BLOGPOST
                 "river" -> OutlineType.RIVER
+                "rss" -> OutlineType.RSS
                 else -> OutlineType.NONE
             }
         }
