@@ -15,6 +15,8 @@ public object XmlComponent{
                 persister = Persister(strategy)
             }
 
+
+
             return persister!!
         }
 }
