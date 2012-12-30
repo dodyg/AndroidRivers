@@ -81,21 +81,21 @@ public data class SyndicationFeed(public val rss : Rss?, public val atom : Feed?
             feedType = SyndicationFeedType.ATOM
 
             for(val i in atom!!.entry!!.iterator()){
-                var fi = SyndicationFeedItem()
+                val fi = SyndicationFeedItem()
                 fi.title = i.title
                 //link type "alternate"
                 Log.d("transformAtom", "Links available ${i.link?.count()}")
 
                 if (i.link!!.count() > 0){
-                    var alternateLinks = i.link!!.filter { x -> !x.rel.isNullOrEmpty() && x.rel == "alternate" }
+                    val alternateLinks = i.link!!.filter { x -> !x.rel.isNullOrEmpty() && x.rel == "alternate" }
                     if (alternateLinks.count() > 0)
                         fi.link = alternateLinks.first().href
 
                     //enclosure
-                    var enclosureLinks =  i.link!!.filter { x -> !x.rel.isNullOrEmpty() && x.rel == "enclosure" }
+                    val enclosureLinks =  i.link!!.filter { x -> !x.rel.isNullOrEmpty() && x.rel == "enclosure" }
 
                     if (alternateLinks.count() > 0){
-                        var altLink = alternateLinks.first()
+                        val altLink = alternateLinks.first()
 
                         if (altLink.length != null && altLink.length!! > 0
                             && !altLink.`type`.isNullOrEmpty()){
