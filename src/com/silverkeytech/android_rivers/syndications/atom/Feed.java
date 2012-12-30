@@ -19,10 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers.syndications.atom;
 
 import com.silverkeytech.android_rivers.DateHelper;
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.Root;
+import org.simpleframework.xml.*;
 
 import java.util.ArrayList;
 import java.util.Date;
