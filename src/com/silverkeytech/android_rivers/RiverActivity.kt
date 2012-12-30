@@ -45,10 +45,10 @@ public class RiverActivity(): SherlockListActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.river)
 
-        var actionBar = getSupportActionBar()!!
+        val actionBar = getSupportActionBar()!!
         actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
 
-        var i = getIntent()!!
+        val i = getIntent()!!
         riverUrl = i.getStringExtra(Params.RIVER_URL)!!
         riverName = i.getStringExtra(Params.RIVER_NAME)!!
         riverLanguage = i.getStringExtra(Params.RIVER_LANGUAGE)!!

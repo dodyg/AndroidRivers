@@ -48,8 +48,6 @@ import android.app.AlertDialog
 import java.util.ArrayList
 import android.content.DialogInterface
 
-//import com.silverkeytech.android_rivers.db.DatabaseManager
-
 public class TryOutActivity(): Activity()
 {
     class object {
@@ -97,12 +95,12 @@ public class TryOutActivity(): Activity()
 
                     Log.d(TAG, "Opening $url")
 
-                    var i = Intent(this@TryOutActivity, javaClass<FeedActivity>())
-                    i.putExtra(Params.FEED_URL, url)
-                    i.putExtra(Params.FEED_NAME, "Display ATOM Feeds")
-                    i.putExtra(Params.FEED_LANGUAGE, "en")
+                    val ix = Intent(this@TryOutActivity, javaClass<FeedActivity>())
+                    ix.putExtra(Params.FEED_URL, url)
+                    ix.putExtra(Params.FEED_NAME, "Display ATOM Feeds")
+                    ix.putExtra(Params.FEED_LANGUAGE, "en")
 
-                    startActivity(i)
+                    startActivity(ix)
                 }
             })
 
@@ -134,12 +132,12 @@ public class TryOutActivity(): Activity()
 
                     Log.d(TAG, "Opening $url")
 
-                    var i = Intent(this@TryOutActivity, javaClass<FeedActivity>())
-                    i.putExtra(Params.FEED_URL, url)
-                    i.putExtra(Params.FEED_NAME, "Display RSS Feed")
-                    i.putExtra(Params.FEED_LANGUAGE, "en")
+                    val ix = Intent(this@TryOutActivity, javaClass<FeedActivity>())
+                    ix.putExtra(Params.FEED_URL, url)
+                    ix.putExtra(Params.FEED_NAME, "Display RSS Feed")
+                    ix.putExtra(Params.FEED_LANGUAGE, "en")
 
-                    startActivity(i)
+                    startActivity(ix)
                 }
             })
 
@@ -148,7 +146,7 @@ public class TryOutActivity(): Activity()
     }
 
     fun handleDownloadGifImage() {
-        var btn = findView<Button>(R.id.tryout_download_gif_image_btn)
+        val btn = findView<Button>(R.id.tryout_download_gif_image_btn)
         btn.setOnClickListener {
             Log.d(TAG, "Start downloading gif image")
             DownloadImage(this).execute("http://www.science.mcmaster.ca/brainbee/images/stories/announcements/brainbee-logo-small.gif")
@@ -156,7 +154,7 @@ public class TryOutActivity(): Activity()
     }
 
     fun handleDownloadJpgImage() {
-        var btn = findView<Button>(R.id.tryout_download_jpg_image_btn)
+        val btn = findView<Button>(R.id.tryout_download_jpg_image_btn)
         btn.setOnClickListener {
             Log.d(TAG, "Start downloading jpeg image")
             DownloadImage(this).execute("http://www.fantom-xp.com/wallpapers/42/Iceberg_Very_Large.jpg")
@@ -164,7 +162,7 @@ public class TryOutActivity(): Activity()
     }
 
     fun handleDownloadPngImage() {
-        var btn = findView<Button>(R.id.tryout_download_png_image_btn)
+        val btn = findView<Button>(R.id.tryout_download_png_image_btn)
         btn.setOnClickListener {
             Log.d(TAG, "Start downloading png image")
             DownloadImage(this).execute("http://bartelme.at/material/news/NetNewsWire256.png")
@@ -172,11 +170,11 @@ public class TryOutActivity(): Activity()
     }
 
     fun handleDownloadFile() {
-        var btn = findView<Button>(R.id.tryout_download_file_btn)
+        val btn = findView<Button>(R.id.tryout_download_file_btn)
         btn.setOnClickListener {
             Log.d(TAG, "Start downloading file")
 
-            var messenger = Messenger(object : Handler(){
+            val messenger = Messenger(object : Handler(){
                 public override fun handleMessage(msg: Message?) {
                     var path = msg!!.obj as String
 
@@ -188,15 +186,15 @@ public class TryOutActivity(): Activity()
                 }
             })
 
-            var intent = Intent(this, javaClass<DownloadService>())
-            intent.putExtra(DownloadService.PARAM_DOWNLOAD_URL, "http://podcastdownload.npr.org/anon.npr-podcasts/podcast/13/166038315/npr_166038315.mp3")
-            intent.putExtra(Params.MESSENGER, messenger)
-            this.startService(intent)
+            val ix = Intent(this, javaClass<DownloadService>())
+            ix.putExtra(DownloadService.PARAM_DOWNLOAD_URL, "http://podcastdownload.npr.org/anon.npr-podcasts/podcast/13/166038315/npr_166038315.mp3")
+            ix.putExtra(Params.MESSENGER, messenger)
+            this.startService(ix)
         }
     }
 
     fun handleCreateBookmarkTable() {
-        var btn = findView<Button>(R.id.tryout_setup_bookmark_table_btn)
+        val btn = findView<Button>(R.id.tryout_setup_bookmark_table_btn)
 
         btn.setOnClickListener(object : OnClickListener{
             public override fun onClick(p0: View?) {
@@ -211,7 +209,7 @@ public class TryOutActivity(): Activity()
     }
 
     fun handleInsertToBookmarkTable() {
-        var btn = findView<Button>(R.id.tryout_insert_data_bookmark_table_btn)
+        val btn = findView<Button>(R.id.tryout_insert_data_bookmark_table_btn)
 
         btn.setOnClickListener {
             var bk = Bookmark()

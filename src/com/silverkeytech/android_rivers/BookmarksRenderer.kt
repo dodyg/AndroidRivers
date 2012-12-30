@@ -52,13 +52,13 @@ public class BookmarksRenderer(val context: MainActivity){
             outlines.add(it)
         }
 
-        var adapter = object : ArrayAdapter<Outline>(context, android.R.layout.simple_list_item_1, android.R.id.text1, outlines){
+        val adapter = object : ArrayAdapter<Outline>(context, android.R.layout.simple_list_item_1, android.R.id.text1, outlines){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 var vw = convertView
                 var holder: ViewHolder?
 
                 if (vw == null){
-                    var inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                    val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
                     vw = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
 
                     holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
@@ -74,24 +74,23 @@ public class BookmarksRenderer(val context: MainActivity){
             }
         }
 
-        var list = context.findView<ListView>(R.id.main_rivers_lv)
+        val list = context.findView<ListView>(R.id.main_rivers_lv)
         list.setAdapter(adapter)
 
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val currentOutline = outlines.get(p2)
 
-                var i = Intent(context, javaClass<RiverActivity>())
-                i.putExtra(Params.RIVER_URL, currentOutline.url)
-                i.putExtra(Params.RIVER_NAME, currentOutline.text)
+                val ix = Intent(context, javaClass<RiverActivity>())
+                ix.putExtra(Params.RIVER_URL, currentOutline.url)
+                ix.putExtra(Params.RIVER_NAME, currentOutline.text)
 
                 if (!currentOutline.language.isNullOrEmpty())
-                    i.putExtra(Params.RIVER_LANGUAGE, currentOutline.language)
+                    ix.putExtra(Params.RIVER_LANGUAGE, currentOutline.language)
                 else
-                    i.putExtra(Params.RIVER_LANGUAGE, "en")
+                    ix.putExtra(Params.RIVER_LANGUAGE, "en")
 
-                context.startActivity(i)
-
+                context.startActivity(ix)
             }
         })
 
@@ -100,7 +99,7 @@ public class BookmarksRenderer(val context: MainActivity){
                 val currentOutline = outlines.get(p2)
 
                 //overlay popup at top of clicked overview position
-                var item = p1!!
+                val item = p1!!
                 val popupWidth = item.getWidth()
                 val popupHeight = item.getHeight()
 
@@ -109,9 +108,9 @@ public class BookmarksRenderer(val context: MainActivity){
                 val popupX = loc[0]
                 val popupY = loc[1]
 
-                var inflater = context.getLayoutInflater()!!
-                var x = inflater.inflate(R.layout.river_quick_actions, null, false)!!
-                var pp = PopupWindow(x, popupWidth, popupHeight, true)
+                val inflater = context.getLayoutInflater()!!
+                val x = inflater.inflate(R.layout.river_quick_actions, null, false)!!
+                val pp = PopupWindow(x, popupWidth, popupHeight, true)
 
                 x.setBackgroundColor(android.graphics.Color.LTGRAY)
 
@@ -119,10 +118,10 @@ public class BookmarksRenderer(val context: MainActivity){
                     pp.dismiss()
                 }
 
-                var icon = x.findViewById(R.id.river_quick_action_delete_icon) as ImageView
+                val icon = x.findViewById(R.id.river_quick_action_delete_icon) as ImageView
                 icon.setOnClickListener {
                     try{
-                        var res = DatabaseManager.cmd().bookmark().deleteByUrl(currentOutline.url!!)
+                        val res = DatabaseManager.cmd().bookmark().deleteByUrl(currentOutline.url!!)
                         if (res.isFalse())
                             context.toastee("Error in removing this bookmark ${res.exception?.getMessage()}")
                         else {

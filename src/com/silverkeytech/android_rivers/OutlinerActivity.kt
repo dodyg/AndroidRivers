@@ -116,7 +116,7 @@ public class OutlinerActivity(): SherlockActivity()
     val REFRESH: Int = 1
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        var inflater = getSupportMenuInflater()!!
+        val inflater = getSupportMenuInflater()!!
         inflater.inflate(R.menu.outliner_menu, menu)
 
         if (outlinesUrl != null){
