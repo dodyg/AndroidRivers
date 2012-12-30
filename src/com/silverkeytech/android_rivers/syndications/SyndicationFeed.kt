@@ -27,6 +27,8 @@ import com.silverkeytech.android_rivers.syndications.atom.Feed
 import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.syndications.SyndicationFeedType
 import com.silverkeytech.android_rivers.syndications.SyndicationFeedEnclosure
+import com.silverkeytech.android_rivers.syndications.atom.TextElement
+import com.silverkeytech.android_rivers.syndications.atom.ContentElement
 
 public data class SyndicationFeed(public val rss : Rss?, public val atom : Feed?){
 
@@ -107,17 +109,24 @@ public data class SyndicationFeed(public val rss : Rss?, public val atom : Feed?
                     }
                 }
 
-                if (i.content != null){
-                    if (i.content!!.`type` == null){
-                        fi.description = i.content!!.value
+                fun processDescription(text : ContentElement){
+                    if (text.`type` == null){
+                        fi.description = text.value
                     }
-                    else if (i.content!!.`type` != null){
-                        if (i.content!!.`type` == "text"){
-                            fi.description = i.content!!.value
+                    else if (text.`type` != null){
+                        if (text.`type` == "text"){
+                            fi.description = text.value
                         } else {
-                            fi.description = scrubHtml(i.content!!.value)
+                            fi.description = scrubHtml(text.value)
                         }
                     }
+                }
+
+                if (i.summary != null){
+                    processDescription(i.summary!!)
+                }
+                else if (i.content != null){
+                    processDescription(i.content!!)
                 }
 
                 fi.pubDate = i.getUpdated()

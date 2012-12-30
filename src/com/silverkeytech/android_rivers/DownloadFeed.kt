@@ -70,7 +70,11 @@ public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String,
 
             Log.d(TAG, "Syndication XML is downloaded at ${p0[0]}")
 
-            if (mimeType!!.contains("atom")){
+            fun isAtomFeed() : Boolean {
+                return mimeType!!.contains("atom") || downloadedContent!!.contains("<feed xmlns=\"http://www.w3.org/2005/Atom\">")
+            }
+
+            if (isAtomFeed()){
                 var feed = transformXmlToAtom(downloadedContent)
 
                 Log.d(TAG, "Transforming XML to ATOM")

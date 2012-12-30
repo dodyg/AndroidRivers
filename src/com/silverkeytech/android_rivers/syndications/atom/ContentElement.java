@@ -23,7 +23,7 @@ import org.simpleframework.xml.Text;
 
 public class ContentElement {
 
-    @Text
+    @Text(required = false) //This violates specification but http://hosted2.ap.org/atom/APDEFAULT/3d281c11a96b4ad082fe88aa0db04305 sucks
     public String value;
 
     @Attribute(required = false)
