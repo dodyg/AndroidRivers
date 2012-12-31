@@ -132,7 +132,7 @@ public class RiverActivity(): SherlockListActivity()
                     bookmarkMenu?.setVisible(false)
                     toastee("$riverName is added to your bookmark.")
 
-                    this@RiverActivity.getApplication().getMain().clearBookmarksCache()
+                    this@RiverActivity.getApplication().getMain().clearRiverBookmarksCache()
                     return true
                 }
                 catch(e: Exception){

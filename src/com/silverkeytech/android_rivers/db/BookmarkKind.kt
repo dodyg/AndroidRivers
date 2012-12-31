@@ -20,7 +20,7 @@ package com.silverkeytech.android_rivers.db
 
 public enum class BookmarkKind{
     RIVER
-    RSS
+    SYNDICATION
     LINK
     NONE
 }

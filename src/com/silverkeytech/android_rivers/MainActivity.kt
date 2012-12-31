@@ -88,7 +88,7 @@ public open class MainActivity(): SherlockActivity() {
                 return true
             }
             R.id.subscription_menu_download_all -> {
-                val subscriptionList = getApplication().getMain().getBookmarksCache()
+                val subscriptionList = getApplication().getMain().getRiverBookmarksCache()
 
                 if (subscriptionList != null){
                     var intent = Intent(this, javaClass<DownloadAllRiversService>())
@@ -117,12 +117,12 @@ public open class MainActivity(): SherlockActivity() {
 
     public fun refreshBookmarks()
     {
-        this.getApplication().getMain().clearBookmarksCache()
+        this.getApplication().getMain().clearRiverBookmarksCache()
         displayBookmarks()
     }
 
     private fun  displayBookmarks() {
-        val cache = this.getApplication().getMain().getBookmarksCache()
+        val cache = this.getApplication().getMain().getRiverBookmarksCache()
 
         if (cache != null){
             Log.d(TAG, "Get bookmarks from cache")
@@ -133,7 +133,7 @@ public open class MainActivity(): SherlockActivity() {
 
             if (bookmarks.body!!.outline!!.count() > 0){
                 Log.d(TAG, "Now bookmarks come from the db")
-                this.getApplication().getMain().setBookmarksCache(bookmarks)
+                this.getApplication().getMain().setRiverBookmarksCache(bookmarks)
                 BookmarksRenderer(this@MainActivity).handleRiversListing(bookmarks)
             }
             else{

@@ -53,7 +53,7 @@ public class DownloadBookmarks(it: Context?, ignoreCache: Boolean): AsyncTask<St
 
     protected override fun doInBackground(vararg url: String?): Result<Opml>? {
         try{
-            val cache = context.getApplication().getMain().getBookmarksCache()
+            val cache = context.getApplication().getMain().getRiverBookmarksCache()
 
             if (cache != null && !ignoreCache){
                 Log.d(TAG, "Cache is hit for subscription list")
@@ -74,7 +74,7 @@ public class DownloadBookmarks(it: Context?, ignoreCache: Boolean): AsyncTask<St
                 val opml = transformXmlToOpml(req)
 
                 if(opml.isTrue()){
-                    context.getApplication().getMain().setBookmarksCache(opml.value!!)
+                    context.getApplication().getMain().setRiverBookmarksCache(opml.value!!)
                 }
 
                 return opml

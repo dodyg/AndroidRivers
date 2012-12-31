@@ -40,6 +40,8 @@ public class FeedActivity(): SherlockListActivity()
     var feedLanguage: String = ""
     var mode: ActionMode? = null
 
+    var feedBookmarked: Boolean = false
+
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
         super.onCreate(savedInstanceState)
@@ -56,6 +58,8 @@ public class FeedActivity(): SherlockListActivity()
         setTitle(feedName)
 
         downloadFeed()
+
+        feedBookmarked = checkFeedBookmarkStatus(feedUrl)
     }
 
     fun downloadFeed(){
@@ -75,14 +79,24 @@ public class FeedActivity(): SherlockListActivity()
 
     val REFRESH: Int = 1
 
+    var bookmarkMenu: MenuItem? = null
+
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menu?.add(0, REFRESH, 0, "Refresh")
         ?.setIcon(R.drawable.ic_menu_refresh)
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
 
+
+        var inflater = getSupportMenuInflater()!!
+        inflater.inflate(R.menu.feed_menu, menu)
+
+        bookmarkMenu = menu?.findItem(R.id.feed_menu_bookmark)
+
+        if (feedBookmarked)
+            bookmarkMenu?.setVisible(false)
+
         return true
     }
-
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
@@ -90,8 +104,32 @@ public class FeedActivity(): SherlockListActivity()
                 downloadFeed()
                 return true
             }
+            R.id.feed_menu_bookmark -> {
+                try{
+                    var bk = Bookmark()
+                    bk.title = feedName
+                    bk.url = feedUrl
+                    bk.kind = BookmarkKind.SYNDICATION.toString()
+                    bk.language = feedLanguage
+
+                    DatabaseManager.bookmark!!.create(bk)
+                    bookmarkMenu?.setVisible(false)
+                    toastee("$feedName syndication is added to your bookmark.")
+
+                    this@FeedActivity.getApplication().getMain().clearRiverBookmarksCache()
+                    return true
+                }
+                catch(e: Exception){
+                    toastee("Sorry, we cannot add this $feedUrl", Duration.LONG)
+                    return false
+                }
+            }
             else ->
                 return super.onOptionsItemSelected(item)
         }
+    }
+
+    fun checkFeedBookmarkStatus(url: String): Boolean {
+        return DatabaseManager.query().bookmark().byUrl(url).exists
     }
 }
