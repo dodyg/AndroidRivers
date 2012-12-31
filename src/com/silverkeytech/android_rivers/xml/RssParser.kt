@@ -30,7 +30,7 @@ public class RssParser{
         var parser = XMLParser<RssBuilder>(channelTitle, channelLink, channelDescription, channelPubDate,
                 channelLastBuildDate, channelDocs, channelGenerator, channelManagingEditor, channelWebMaster,
                 channelTtl, channelCloud,
-                itemTag, itemTitle, itemLink, itemDescription, itemAuthor, itemGuid, itemPubDate, itemEnclosure
+                itemTag, itemTitle, itemLink, itemDescription, itemAuthor, itemGuid, itemIsPermaLink, itemPubDate, itemEnclosure
                 )
         parser.parse(input, rss)
     }
@@ -115,6 +115,11 @@ val itemAuthor = textRule<RssBuilder>("/rss/channel/item/author", { (text, rss) 
 val itemGuid = textRule<RssBuilder>("/rss/channel/item/guid", { (text, rss) ->
     rss.channel.item.setGuid(text)
 })
+
+val itemIsPermaLink = attributeRule<RssBuilder>("/rss/channel/item/guid", { (attrName, attrValue, rss) ->
+    if (attrName == "isPermaLink")
+        rss.channel.item.setIsPermaLink(attrValue)
+}, "isPermaLink")
 
 val itemPubDate = textRule<RssBuilder>("/rss/channel/item/pubDate", { (text , rss) ->
     rss.channel.item.setPubDate(text)
