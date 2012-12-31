@@ -1,0 +1,110 @@
+/*
+Android Rivers is an app to read and discover news using RiverJs, RSS and OPML format.
+Copyright (C) 2012 Dody Gunawinata (dodyg@silverkeytech.com)
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>
+*/
+
+package com.silverkeytech.android_rivers.syndications.rss
+
+import com.silverkeytech.android_rivers.syndications.rss.Rss
+import com.silverkeytech.android_rivers.syndications.rss.Item
+
+public class RssBuilder(){
+    private val rss : Rss = Rss()
+    public val channel : ChannelBuilder = ChannelBuilder(rss)
+
+    public fun build() : Rss{
+        return rss
+    }
+
+    public class ChannelBuilder(private val rss : Rss){
+        {
+            rss.channel = Channel()
+        }
+
+        public var item : ItemBuilder = ItemBuilder(Item())
+            get() = $item
+            set(value) {
+                $item = value
+            }
+
+        public fun setTitle(title : String){
+            rss.channel!!.title = title;
+        }
+
+        public fun setLink(link : String){
+            rss.channel!!.link = link
+        }
+
+        public fun setDescription(description : String){
+            rss.channel!!.description = description
+        }
+
+        public fun setLanguage(lang : String){
+            rss.channel!!.language = lang
+        }
+
+        public fun setPubDate(pubDate : String){
+            rss.channel!!.pubDate = pubDate
+        }
+
+        public fun setLastBuildDate(lastBuildDate : String){
+            rss.channel!!.lastBuildDate = lastBuildDate
+        }
+
+        public fun setDocs(docs : String) {
+            rss.channel!!.docs = docs
+        }
+
+        public fun setGenerators(generator : String){
+            rss.channel!!.generator = generator
+        }
+
+        public fun setManagingDirectory(managing : String){
+            rss.channel!!.managingEditor = managing
+        }
+
+        public fun setWebMaster(master : String){
+            rss.channel!!.webMaster = master
+        }
+
+        public fun setTitle(ttl : Int){
+            rss.channel!!.ttl = ttl
+        }
+
+        public fun startItem(){
+            item = ItemBuilder(Item())
+        }
+
+        public fun endItem(){
+            rss.channel!!.item!!.add(item.data)
+        }
+
+        public class ItemBuilder(public val data : Item){
+            public fun setTitle(title : String){
+                data.title = title
+            }
+
+            public fun setLink(link : String){
+                data.link = link
+            }
+
+            public fun setDescription(desc: String){
+                data.description = desc
+            }
+        }
+    }
+}
+

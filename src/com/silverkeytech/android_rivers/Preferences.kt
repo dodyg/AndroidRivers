@@ -27,13 +27,22 @@ public class Preferences{
         public val VISUAL: String = "PREFERENCE_VISUAL"
         public val VISUAL_LIST_TEXT_SIZE: String = "PREFERENCE_VISUAL_LIST_TEXT_SIZE"
         public val VISUAL_THEME: String = "PREFERENCE_VISUAL_THEME"
+
+        public val BOOKMARK_SORTING: String = "PREFERENCE_VISUAL_BOOKMARK_SORTING"
     }
 }
+
+
+public val SORT_DESC : Int = 100
+public val SORT_NONE : Int = 101
+public val SORT_ASC : Int = 102
+
 
 public class PreferenceDefaults{
     class object {
         public val VISUAL_LIST_TEXT_SIZE: Int = 24
         public val VISUAL_THEME: Int = R.style.Theme_Sherlock_Light_DarkActionBar
+        public val BOOKMARK_SORTING: Int = SORT_NONE
     }
 }
 
@@ -53,6 +62,13 @@ public class VisualPreference (public val pref: SharedPreferences){
     }
 
     public fun getTheme(): Int = pref.getInt(Preferences.VISUAL_THEME, PreferenceDefaults.VISUAL_THEME)
+
+    public fun getBookmarkSorting(): Int = pref.getInt(Preferences.BOOKMARK_SORTING, PreferenceDefaults.BOOKMARK_SORTING)
+    public fun setBookmarkSorting(sort : Int){
+        var edit = pref.edit()!!
+        edit.putInt(Preferences.BOOKMARK_SORTING, sort)
+        edit.commit()
+    }
 
     public fun switchTheme() {
         val currentTheme = getTheme()

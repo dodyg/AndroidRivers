@@ -30,8 +30,6 @@ public val BOOKMARK_KIND: String = "kind"
 
 [DatabaseTable]
 public class Bookmark(){
-    class object{
-    }
 
     [DatabaseField(generatedId = true, columnName = "id")]
     public var id: Int = 0

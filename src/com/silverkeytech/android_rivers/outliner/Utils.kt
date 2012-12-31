@@ -38,6 +38,10 @@ import com.silverkeytech.android_rivers.riverjs.FeedOpmlOutline
 import com.silverkeytech.android_rivers.syndications.rss.Rss
 import com.silverkeytech.android_rivers.syndications.atom.Feed
 import com.silverkeytech.android_rivers.XmlComponent
+import java.io.StringReader
+import com.silverkeytech.android_rivers.xml.Parser
+import java.io.ByteArrayInputStream
+import com.silverkeytech.android_rivers.syndications.rss.RssBuilder
 
 //do an in order traversal so we can flatten it up to be used by outliner
 fun Opml.traverse (filter: ((Outline) -> Boolean)? = null, depthLimit: Int = 12): ArrayList<OutlineContent> {
@@ -165,8 +169,13 @@ fun startOutlinerActivity(context: Context, outlines: ArrayList<OutlineContent>,
 fun transformXmlToRss(xml: String?): Result<Rss> {
 
     try{
-        val rss: Rss? = XmlComponent.serial.read(javaClass<Rss>(), xml, false)
-        Log.d("RSS Transform", "Works ok")
+        val builder = RssBuilder()
+        val reader = ByteArrayInputStream(xml!!.getBytes())
+        Parser().parseRss(reader, builder)
+
+        val rss = builder.build()
+
+        Log.d("RSS Transform", "Works ok ${rss.channel?.title} - ${rss.channel?.link} ")
         return Result.right(rss)
     }
     catch (e: Exception){
