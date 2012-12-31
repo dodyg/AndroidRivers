@@ -24,28 +24,20 @@ import org.simpleframework.xml.Element;
 import java.util.Date;
 
 public class Item {
-    @Element(required = false)
     public String title;
 
-    @Element(required = false)
     public String link;
 
-    @Element(required = false)
     public String description;
 
-    @Element(required = false)
     public String author;
 
-    @Element(required = false)
     public String guid;
 
-    @Element(required = false)
     public String isPermalink;
 
-    @Element(required = false)
     public String pubDate;
 
-    @Element(required = false)
     public Enclosure enclosure;
 
     public Date getPubDate() {

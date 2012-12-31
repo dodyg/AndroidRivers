@@ -24,11 +24,8 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
-@Root(strict = false)
 public class Rss {
-    @Element
     public Channel channel;
 
-    @Attribute(required = false)
     public String version;
 }

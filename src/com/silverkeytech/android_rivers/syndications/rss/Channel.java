@@ -18,51 +18,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.syndications.rss;
 
-import com.silverkeytech.android_rivers.syndications.atom.LinkElement;
-import org.simpleframework.xml.*;
-
 import java.util.ArrayList;
 
-@NamespaceList({
-        @Namespace(reference="http://www.w3.org/2005/Atom", prefix="atom")
-})
 public class Channel {
-    @Element
     public String title;
 
-    @Element(required = false) //this is wrong by spec but it won't process for times of india
     public String link;  //http://timesofindia.feedsportal.com/c/33039/f/533965/index.rss
 
-    @Element(required = false)
     public String description;
 
-    @Element(required = false)
     public String language;
 
-    @Element(required = false)
     public String pubDate;
 
-    @Element(required = false)
     public String lastBuildDate;
 
-    @Element(required = false)
     public String docs;
 
-    @Element(required = false)
     public String generator;
 
-    @Element(required = false)
     public String managingEditor;
 
-    @Element(required = false)
     public String webMaster;
 
-    @Element(required = false)
     public Integer ttl;
 
-    @Element(required = false)
     public Cloud cloud;
 
-    @ElementList(inline = true)
     public ArrayList<Item> item = new ArrayList<Item>();
 }
