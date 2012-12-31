@@ -11,3 +11,4 @@ Open Source Library used:
 * [google-gson](http://code.google.com/p/google-gson/) - [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 * [http-request](https://github.com/kevinsawicki/http-request)
 * [Simple XML](http://simple.sourceforge.net/)
+* [Simple Java Xml Parser](https://github.com/thebuzzmedia/simple-java-xml-parser)
