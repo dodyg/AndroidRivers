@@ -18,18 +18,35 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.xml
 
-fun textRule (path : String, action : (text : String, rss : RssBuilder) -> Unit) : DefaultRule<RssBuilder>{
-    return object: DefaultRule<RssBuilder> (ParsingMode.CHARACTER, path){
-        public override fun handleParsedCharacters(parser: XMLParser<RssBuilder>?, text: String?, userObject: RssBuilder?) {
+import com.silverkeytech.android_rivers.syndications.rss.RssBuilder
+import com.thebuzzmedia.sjxp.rule.ParsingMode
+import com.thebuzzmedia.sjxp.rule.DefaultRule
+import com.silverkeytech.android_rivers.isNullOrEmpty
+import com.thebuzzmedia.sjxp.XMLParser
+
+fun textRule <T : Any>(path : String, action : (text : String, rss : T) -> Unit) : DefaultRule<T>{
+    return object: DefaultRule<T> (ParsingMode.CHARACTER, path){
+        public override fun handleParsedCharacters(parser: XMLParser<T>?, text: String?, userObject: T?) {
             if (!text.isNullOrEmpty())
                 action(text!!, userObject!!)
         }
     }
 }
 
-fun tagRule (path : String, action : (isStartTag : Boolean, rss : RssBuilder) -> Unit) : DefaultRule<RssBuilder>{
-    return object: DefaultRule<RssBuilder> (ParsingMode.TAG, path){
-        public override fun handleTag(parser: XMLParser<RssBuilder>?, isStartTag: Boolean, userObject: RssBuilder?) {
+fun attributeRule <T : Any>(path : String, action : (attrName : String, attrValue : String, rss : T) -> Unit) : DefaultRule<T>{
+    return object: DefaultRule<T> (ParsingMode.ATTRIBUTE, path){
+        public override fun handleParsedAttribute(parser: XMLParser<T>?, index: Int, value: String?, userObject: T?) {
+            if (!value.isNullOrEmpty()){
+                val attrName = this.getAttributeNames()!!.get(index)
+                action(attrName, value!!, userObject!!)
+            }
+        }
+    }
+}
+
+fun tagRule <T : Any>(path : String, action : (isStartTag : Boolean, rss : T) -> Unit) : DefaultRule<T>{
+    return object: DefaultRule<T> (ParsingMode.TAG, path){
+        public override fun handleTag(parser: XMLParser<T>?, isStartTag: Boolean, userObject: T?) {
             action(isStartTag, userObject!!)
         }
     }

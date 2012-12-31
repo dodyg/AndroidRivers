@@ -34,37 +34,37 @@ public class Parser{
     }
 }
 
-val channelTitle = textRule("/rss/channel/title", { (text, rss) ->
+val channelTitle = textRule<RssBuilder>("/rss/channel/title", { (text, rss) ->
     rss.channel.setTitle(text)
 })
 
-val channelLink = textRule("/rss/channel/link", { (text, rss) ->
+val channelLink = textRule<RssBuilder>("/rss/channel/link", { (text, rss) ->
     rss.channel.setLink(text)
 })
 
-val channelDescription = textRule("/rss/channel/description", { (text, rss) ->
+val channelDescription = textRule<RssBuilder>("/rss/channel/description", { (text, rss) ->
     rss.channel.setDescription(text)
 })
 
-val channelPubTitle = textRule("/rss/channel/pubDate", { (text, rss) ->
+val channelPubTitle = textRule<RssBuilder>("/rss/channel/pubDate", { (text, rss) ->
     rss.channel.setPubDate(text)
 })
 
-val itemTag = tagRule("/rss/channel/item", { (isStartTag, rss) ->
+val itemTag = tagRule<RssBuilder>("/rss/channel/item", { (isStartTag, rss) ->
     if (isStartTag)
         rss.channel.startItem()
     else
         rss.channel.endItem()
 })
 
-val itemTitle = textRule("/rss/channel/item/title", { (text, rss) ->
+val itemTitle = textRule<RssBuilder>("/rss/channel/item/title", { (text, rss) ->
     rss.channel.item.setTitle(text)
 })
 
-val itemDescription = textRule("/rss/channel/item/description", { (text, rss) ->
+val itemDescription = textRule<RssBuilder>("/rss/channel/item/description", { (text, rss) ->
     rss.channel.item.setDescription(text)
 })
 
-val itemLink = textRule("/rss/channel/item/link", { (text, rss) ->
+val itemLink = textRule<RssBuilder>("/rss/channel/item/link", { (text, rss) ->
     rss.channel.item.setLink(text)
 })

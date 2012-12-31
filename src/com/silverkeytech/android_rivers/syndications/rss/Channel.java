@@ -30,8 +30,7 @@ public class Channel {
     @Element
     public String title;
 
-    @Element(required = false, name = "link") //this is wrong by spec but it won't process for times of india
-    @Path("channel/link")
+    @Element(required = false) //this is wrong by spec but it won't process for times of india
     public String link;  //http://timesofindia.feedsportal.com/c/33039/f/533965/index.rss
 
     @Element(required = false)
