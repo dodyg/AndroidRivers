@@ -175,7 +175,8 @@ fun transformXmlToRss(xml: String?): Result<Rss> {
 
         val rss = builder.build()
 
-        Log.d("RSS Transform", "Works ok ${rss.channel?.title} - ${rss.channel?.link} ")
+        Log.d("RSS Transform", "Works ok ${rss.channel?.title} - ${rss.channel?.link} - ${rss.channel?.cloud?.domain} ")
+
         return Result.right(rss)
     }
     catch (e: Exception){

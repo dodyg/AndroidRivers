@@ -84,6 +84,13 @@ public class RssBuilder(){
             rss.channel!!.ttl = ttl
         }
 
+        public fun getCloud() : Cloud{
+            if (rss.channel!!.cloud == null)
+                rss.channel!!.cloud = Cloud()
+
+            return rss.channel!!.cloud!!
+        }
+
         public fun startItem(){
             item = ItemBuilder(Item())
         }

@@ -33,8 +33,8 @@ fun textRule <T : Any>(path : String, action : (text : String, rss : T) -> Unit)
     }
 }
 
-fun attributeRule <T : Any>(path : String, action : (attrName : String, attrValue : String, rss : T) -> Unit) : DefaultRule<T>{
-    return object: DefaultRule<T> (ParsingMode.ATTRIBUTE, path){
+fun attributeRule <T : Any>(path : String, action : (attrName : String, attrValue : String, rss : T) -> Unit, vararg attrNames : String?) : DefaultRule<T>{
+    return object: DefaultRule<T> (ParsingMode.ATTRIBUTE, path, *attrNames){
         public override fun handleParsedAttribute(parser: XMLParser<T>?, index: Int, value: String?, userObject: T?) {
             if (!value.isNullOrEmpty()){
                 val attrName = this.getAttributeNames()!!.get(index)

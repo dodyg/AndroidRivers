@@ -29,7 +29,7 @@ public class RssParser{
     public fun parse(input : InputStream, rss : RssBuilder){
         var parser = XMLParser<RssBuilder>(channelTitle, channelLink, channelDescription, channelPubDate,
                 channelLastBuildDate, channelDocs, channelGenerator, channelManagingEditor, channelWebMaster,
-                channelTtl,
+                channelTtl, channelCloud,
                 itemTag, itemTitle, itemLink, itemDescription
                 )
         parser.parse(input, rss)
@@ -75,6 +75,19 @@ val channelWebMaster = textRule<RssBuilder>("/rss/channel/webMaster", { (text, r
 val channelTtl = textRule<RssBuilder>("/rss/channel/ttl", { (text, rss) ->
     rss.channel.setTitle(text.toInt())
 })
+
+val channelCloud = attributeRule<RssBuilder>("/rss/channel/cloud", { (attrName, attrValue, rss) ->
+    val cloud = rss.channel.getCloud()
+    when(attrName){
+        "domain" -> cloud.domain = attrValue
+        "port" -> cloud.port = attrValue.toInt()
+        "path" -> cloud.path = attrValue
+        "registerProcedure" -> cloud.registerProcedure
+        "protocol" -> cloud.protocol
+        else -> { }
+    }
+
+}, "domain", "port", "path", "registerProcedure", "protocol")
 
 val itemTag = tagRule<RssBuilder>("/rss/channel/item", { (isStartTag, rss) ->
     if (isStartTag)
