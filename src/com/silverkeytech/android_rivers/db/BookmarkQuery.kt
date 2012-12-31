@@ -37,9 +37,14 @@ public class BookmarkCommand(private val dao: Dao<Bookmark, out Int?>){
 }
 
 public class BookmarkQuery(private val dao: Dao<Bookmark, out Int?>){
-    fun all(): QueryMany<Bookmark> {
+    fun byKind(kind : BookmarkKind): QueryMany<Bookmark>{
         try{
-            return QueryMany(dao.queryForAll())
+            var q = dao.queryBuilder()!!
+                    .where()!!
+                    .eq(BOOKMARK_KIND, kind.toString())!!
+                    .prepare()
+
+            return QueryMany(dao.query(q))
         }
         catch(e: Exception){
             return QueryMany<Bookmark>(null, e)

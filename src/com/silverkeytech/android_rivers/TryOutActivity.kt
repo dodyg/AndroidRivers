@@ -40,13 +40,14 @@ import com.silverkeytech.android_rivers.db.Bookmark
 import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
-import com.silverkeytech.android_rivers.riverjs.FeedsRiver
+import com.silverkeytech.android_rivers.riverjs.River
 import java.util.Random
 import com.silverkeytech.android_rivers.outliner.transformFeedOpmlToOpml
 import com.silverkeytech.android_rivers.outliner.startOutlinerActivity
 import android.app.AlertDialog
 import java.util.ArrayList
 import android.content.DialogInterface
+import com.silverkeytech.android_rivers.db.BookmarkKind
 
 public class TryOutActivity(): Activity()
 {
@@ -198,7 +199,7 @@ public class TryOutActivity(): Activity()
 
         btn.setOnClickListener(object : OnClickListener{
             public override fun onClick(p0: View?) {
-                val total = DatabaseManager.query().bookmark().all()
+                val total = DatabaseManager.query().bookmark().byKind(BookmarkKind.RIVER)
 
                 if (total.exist)
                     toastee("all ${total.values?.count()}", Duration.LONG)

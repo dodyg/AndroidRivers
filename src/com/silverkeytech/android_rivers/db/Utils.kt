@@ -24,11 +24,11 @@ import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 
 //get bookmarks from db and return the data in opml format
-public fun getBookmarksFromDbAsOpml(): Opml {
+public fun getBookmarksFromDbAsOpml(kind : BookmarkKind): Opml {
     var opml = Opml()
     opml.body = Body()
 
-    var bookmarks = DatabaseManager.query().bookmark().all()
+    var bookmarks = DatabaseManager.query().bookmark().byKind(kind)
 
     if (bookmarks.exist){
         for(val b in bookmarks.values?.iterator()){
@@ -47,7 +47,7 @@ public fun saveOpmlAsBookmarks(opml: Opml): Result<Opml> {
         val bkDao = DatabaseManager.bookmark!!
 
         for(val o in opml.body!!.outline!!.iterator()){
-            var b = Bookmark()
+            val b = Bookmark()
             b.title = o.text!!
             b.url = o.url!!
             if (!o.language!!.isNullOrEmpty())

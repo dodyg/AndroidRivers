@@ -46,10 +46,3 @@ public class Bookmark(){
     [DatabaseField(canBeNull = false, columnName = "kind")]
     public var kind: String = ""
 }
-
-public enum class BookmarkKind{
-    RIVER
-    RSS
-    LINK
-    NONE
-}

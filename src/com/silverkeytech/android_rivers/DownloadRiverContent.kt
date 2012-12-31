@@ -27,13 +27,13 @@ import android.util.Log
 import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.google.gson.Gson
-import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
-import com.silverkeytech.android_rivers.riverjs.FeedSite
-import com.silverkeytech.android_rivers.riverjs.FeedsRiver
+import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
+import com.silverkeytech.android_rivers.riverjs.RiverSite
+import com.silverkeytech.android_rivers.riverjs.River
 import java.util.ArrayList
 
 //Responsible for handling a river js downloading and display in asynchronous way
-public class DownloadRiverContent(it: Context?, val language: String): AsyncTask<String, Int, Result<FeedsRiver>>(){
+public class DownloadRiverContent(it: Context?, val language: String): AsyncTask<String, Int, Result<River>>(){
     class object {
         public val TAG: String = javaClass<DownloadRiverContent>().getSimpleName()
     }
@@ -59,7 +59,7 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
     var url: String = ""
 
     //Download river data in a thread
-    protected override fun doInBackground(vararg p0: String?): Result<FeedsRiver>? {
+    protected override fun doInBackground(vararg p0: String?): Result<River>? {
         url = p0.get(0)!!
         Log.d(TAG, "Cache is missed for url $url")
 
@@ -75,7 +75,7 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
         try{
             val gson = Gson()
             val scrubbed = scrubJsonP(req!!)
-            val feeds = gson.fromJson(scrubbed, javaClass<FeedsRiver>())!!
+            val feeds = gson.fromJson(scrubbed, javaClass<River>())!!
 
             return Result.right(feeds)
         }
@@ -86,7 +86,7 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
     }
 
     //Once the thread is done.
-    protected override fun onPostExecute(result: Result<FeedsRiver>?) {
+    protected override fun onPostExecute(result: Result<River>?) {
         dialog.dismiss();
         if (result == null)
             context.toastee("Sorry, we cannot process this feed because the operation is cancelled", Duration.AVERAGE)
@@ -110,15 +110,15 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
 }
 
 //Take all the news items from several different feeds and combine them into one.
-fun FeedsRiver.getSortedNewsItems(): List<FeedItemMeta> {
-    var newsItems = ArrayList<FeedItemMeta>()
+fun River.getSortedNewsItems(): List<RiverItemMeta> {
+    var newsItems = ArrayList<RiverItemMeta>()
 
     var river = this
-    for(val f : FeedSite? in river.updatedFeeds?.updatedFeed?.iterator()){
+    for(val f : RiverSite? in river.updatedFeeds?.updatedFeed?.iterator()){
         if (f != null){
             f.item?.forEach{
                 if (it != null) {
-                    newsItems.add(FeedItemMeta(it, f.feedTitle, f.feedUrl))
+                    newsItems.add(RiverItemMeta(it, f.feedTitle, f.feedUrl))
                 }
             }
         }

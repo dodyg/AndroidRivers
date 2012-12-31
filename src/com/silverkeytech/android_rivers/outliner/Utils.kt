@@ -31,10 +31,10 @@ import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 import java.util.ArrayList
 import org.simpleframework.xml.Serializer
 import org.simpleframework.xml.core.Persister
-import com.silverkeytech.android_rivers.riverjs.FeedOpml
+import com.silverkeytech.android_rivers.riverjs.RiverOpml
 import com.silverkeytech.android_rivers.outlines.Head
 import com.silverkeytech.android_rivers.outlines.Body
-import com.silverkeytech.android_rivers.riverjs.FeedOpmlOutline
+import com.silverkeytech.android_rivers.riverjs.RiverOpmlOutline
 import com.silverkeytech.android_rivers.syndications.rss.Rss
 import com.silverkeytech.android_rivers.syndications.atom.Feed
 import com.silverkeytech.android_rivers.XmlComponent
@@ -109,8 +109,8 @@ fun transformXmlToOpml(xml: String?): Result<Opml> {
     }
 }
 
-fun transformFeedOpmlToOpml(feedOpml : FeedOpml) :Result<Opml>{
-    fun traverseFeedOpml(outline : Outline, feedOutline : FeedOpmlOutline){
+fun transformFeedOpmlToOpml(feedOpml : RiverOpml) :Result<Opml>{
+    fun traverseFeedOpml(outline : Outline, feedOutline : RiverOpmlOutline){
         outline.text = feedOutline.text
         outline.url = feedOutline.url
         outline.xmlUrl = feedOutline.xmlUrl

@@ -30,7 +30,7 @@ import android.widget.RemoteViews
 import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.google.gson.Gson
-import com.silverkeytech.android_rivers.riverjs.FeedsRiver
+import com.silverkeytech.android_rivers.riverjs.River
 import java.util.Random
 
 public class DownloadAllRiversService(): IntentService("DownloadAllRiversService"){
@@ -115,7 +115,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
                     try{
                         val scrubbed = scrubJsonP(req!!)
                         val gson = Gson()
-                        val feeds = gson.fromJson(scrubbed, javaClass<FeedsRiver>())!!
+                        val feeds = gson.fromJson(scrubbed, javaClass<River>())!!
 
                         var sortedNewsItems = feeds.getSortedNewsItems()
 

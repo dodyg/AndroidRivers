@@ -40,7 +40,7 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
-import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
+import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 import com.silverkeytech.android_rivers.outliner.transformFeedOpmlToOpml
 import com.silverkeytech.android_rivers.outliner.startOutlinerActivity
@@ -61,7 +61,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
     public data class ViewHolder (var news: TextView, val indicator: TextView)
 
     //show and prepare the interaction for each individual news item
-    fun handleNewsListing(sortedNewsItems: List<FeedItemMeta>) {
+    fun handleNewsListing(sortedNewsItems: List<RiverItemMeta>) {
         val textSize = context.getVisualPref().getListTextSize()
 
         //now sort it so people always have the latest news first
@@ -70,7 +70,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
 
         var inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-        var adapter = object : ArrayAdapter<FeedItemMeta>(context, R.layout.news_item, sortedNewsItems) {
+        var adapter = object : ArrayAdapter<RiverItemMeta>(context, R.layout.news_item, sortedNewsItems) {
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 var currentView = convertView
                 var holder: ViewHolder?

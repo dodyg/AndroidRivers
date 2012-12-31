@@ -29,6 +29,7 @@ import com.silverkeytech.android_rivers.db.getBookmarksFromDbAsOpml
 import com.silverkeytech.android_rivers.db.saveOpmlAsBookmarks
 import com.silverkeytech.android_rivers.outliner.startOutlinerActivity
 import java.io.File
+import com.silverkeytech.android_rivers.db.BookmarkKind
 
 public open class MainActivity(): SherlockActivity() {
     class object {
@@ -128,7 +129,7 @@ public open class MainActivity(): SherlockActivity() {
             BookmarksRenderer(this@MainActivity).handleRiversListing(cache)
         }  else{
             Log.d(TAG, "Try to retrieve bookmarks from DB")
-            var bookmarks = getBookmarksFromDbAsOpml()
+            var bookmarks = getBookmarksFromDbAsOpml(BookmarkKind.RIVER)
 
             if (bookmarks.body!!.outline!!.count() > 0){
                 Log.d(TAG, "Now bookmarks come from the db")

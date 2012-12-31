@@ -40,7 +40,7 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
-import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
+import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 import com.silverkeytech.android_rivers.outliner.transformFeedOpmlToOpml
 import com.silverkeytech.android_rivers.outliner.startOutlinerActivity
@@ -117,7 +117,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                     msg = scrubHtml(currentNews.description)
 
                 //take care of color
-                var theme = context.getVisualPref().getTheme()
+                val theme = context.getVisualPref().getTheme()
                 if (theme == R.style.Theme_Sherlock_Light_DarkActionBar)
                     dlg.setBackgroundColor(android.graphics.Color.WHITE)
                 else if (theme == R.style.Theme_Sherlock)

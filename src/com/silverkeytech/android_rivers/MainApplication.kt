@@ -27,7 +27,7 @@ import com.silverkeytech.android_rivers.db.Database
 import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.outliner.OutlineContent
 import com.silverkeytech.android_rivers.outlines.Opml
-import com.silverkeytech.android_rivers.riverjs.FeedItemMeta
+import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 import java.util.ArrayList
 
 fun Application?.getMain(): MainApplication {
@@ -40,7 +40,7 @@ public class MainApplication(): Application()
         public val TAG: String = javaClass<MainApplication>().getSimpleName()
     }
 
-    var riverCache = LruCache<String, CacheItem<List<FeedItemMeta>>>(inMegaByte(4))
+    var riverCache = LruCache<String, CacheItem<List<RiverItemMeta>>>(inMegaByte(4))
     var opmlCache = LruCache<String, CacheItem<ArrayList<OutlineContent>>>(inMegaByte(4))
     var bookmarksCache: CacheItem<Opml>? = null
 
@@ -108,7 +108,7 @@ public class MainApplication(): Application()
         opmlCache.put(uri, item)
     }
 
-    public fun getRiverCache (uri: String): List<FeedItemMeta>? {
+    public fun getRiverCache (uri: String): List<RiverItemMeta>? {
         val content = riverCache.get(uri)
 
         if (content == null)
@@ -123,7 +123,7 @@ public class MainApplication(): Application()
         }
     }
 
-    public fun setRiverCache(uri: String, river: List<FeedItemMeta>, expirationInMinutes: Int = 30) {
+    public fun setRiverCache(uri: String, river: List<RiverItemMeta>, expirationInMinutes: Int = 30) {
         var item = CacheItem(river)
         item.setExpireInMinutesFromNow(expirationInMinutes)
         riverCache.put(uri, item)
