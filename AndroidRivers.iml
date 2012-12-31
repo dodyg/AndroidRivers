@@ -64,6 +64,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="sjxp-2.2" level="project" />
   </component>
 </module>
 
