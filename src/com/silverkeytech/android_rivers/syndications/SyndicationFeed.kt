@@ -61,10 +61,11 @@ public data class SyndicationFeed(public val rss : Rss?, public val atom : Feed?
                     fi.link = i.link
 
                     if (i.enclosure != null){
+                        val e = i.enclosure!!
                         val enclosure = SyndicationFeedEnclosure(
-                            i.enclosure!!.url!!,
-                            i.enclosure!!.length!!,
-                            i.enclosure!!.`type`!!
+                            e.url!!,
+                            if (e.length != null) e.length!! else 0,
+                            if (!e.`type`.isNullOrEmpty()) e.`type`!! else ""
                         )
                         fi.enclosure = enclosure
                     }

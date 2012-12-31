@@ -101,6 +101,7 @@ public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String,
             }
         }
         catch (e : Exception){
+            Log.d(TAG, "Problem when processing the feed ${e.getMessage()}")
             return Result.wrong(e)
         }
     }
