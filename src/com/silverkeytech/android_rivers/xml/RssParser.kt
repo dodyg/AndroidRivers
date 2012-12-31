@@ -30,7 +30,7 @@ public class RssParser{
         var parser = XMLParser<RssBuilder>(channelTitle, channelLink, channelDescription, channelPubDate,
                 channelLastBuildDate, channelDocs, channelGenerator, channelManagingEditor, channelWebMaster,
                 channelTtl, channelCloud,
-                itemTag, itemTitle, itemLink, itemDescription
+                itemTag, itemTitle, itemLink, itemDescription, itemAuthor, itemGuid, itemPubDate, itemEnclosure
                 )
         parser.parse(input, rss)
     }
@@ -100,10 +100,32 @@ val itemTitle = textRule<RssBuilder>("/rss/channel/item/title", { (text, rss) ->
     rss.channel.item.setTitle(text)
 })
 
+val itemLink = textRule<RssBuilder>("/rss/channel/item/link", { (text, rss) ->
+    rss.channel.item.setLink(text)
+})
+
 val itemDescription = textRule<RssBuilder>("/rss/channel/item/description", { (text, rss) ->
     rss.channel.item.setDescription(text)
 })
 
-val itemLink = textRule<RssBuilder>("/rss/channel/item/link", { (text, rss) ->
-    rss.channel.item.setLink(text)
+val itemAuthor = textRule<RssBuilder>("/rss/channel/item/author", { (text, rss) ->
+    rss.channel.item.setAuthor(text)
 })
+
+val itemGuid = textRule<RssBuilder>("/rss/channel/item/guid", { (text, rss) ->
+    rss.channel.item.setGuid(text)
+})
+
+val itemPubDate = textRule<RssBuilder>("/rss/channel/item/pubDate", { (text , rss) ->
+    rss.channel.item.setPubDate(text)
+})
+
+val itemEnclosure = attributeRule<RssBuilder>("/rss/channel/item/enclosure", { (attrName, attrValue, rss) ->
+    val enclosure = rss.channel.item.getEnclosure()
+    when(attrName){
+        "url" -> enclosure.url = attrValue
+        "length" -> enclosure.length = attrValue.toInt()
+        "type" -> enclosure.`type` = attrValue
+        else -> { }
+    }
+}, "url", "length", "type")

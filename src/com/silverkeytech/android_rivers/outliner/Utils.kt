@@ -177,6 +177,9 @@ fun transformXmlToRss(xml: String?): Result<Rss> {
 
         Log.d("RSS Transform", "Works ok ${rss.channel?.title} - ${rss.channel?.link} - ${rss.channel?.cloud?.domain} ")
 
+        for(val x in rss.channel!!.item!!.iterator())
+            Log.d("RSS Transform", "Enclosure ${x.enclosure?.`type`} - ${x.enclosure?.length}")
+
         return Result.right(rss)
     }
     catch (e: Exception){

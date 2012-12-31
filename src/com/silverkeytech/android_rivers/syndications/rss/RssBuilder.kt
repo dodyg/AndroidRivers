@@ -111,6 +111,29 @@ public class RssBuilder(){
             public fun setDescription(desc: String){
                 data.description = desc
             }
+
+            public fun setAuthor(author: String){
+                data.author = author
+            }
+
+            public fun setGuid(guid : String){
+                data.guid = guid
+            }
+
+            public fun setIsPermaLink(isPermaLink : String){
+                data.isPermalink = isPermaLink
+            }
+
+            public fun setPubDate(pubDate: String){
+                data.pubDate = pubDate
+            }
+
+            public fun getEnclosure() : Enclosure{
+                if (data.enclosure == null)
+                    data.enclosure = Enclosure()
+
+                return data.enclosure!!
+            }
         }
     }
 }
