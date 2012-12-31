@@ -39,7 +39,7 @@ import com.silverkeytech.android_rivers.syndications.rss.Rss
 import com.silverkeytech.android_rivers.syndications.atom.Feed
 import com.silverkeytech.android_rivers.XmlComponent
 import java.io.StringReader
-import com.silverkeytech.android_rivers.xml.Parser
+import com.silverkeytech.android_rivers.xml.RssParser
 import java.io.ByteArrayInputStream
 import com.silverkeytech.android_rivers.syndications.rss.RssBuilder
 
@@ -171,7 +171,7 @@ fun transformXmlToRss(xml: String?): Result<Rss> {
     try{
         val builder = RssBuilder()
         val reader = ByteArrayInputStream(xml!!.getBytes())
-        Parser().parseRss(reader, builder)
+        RssParser().parse(reader, builder)
 
         val rss = builder.build()
 

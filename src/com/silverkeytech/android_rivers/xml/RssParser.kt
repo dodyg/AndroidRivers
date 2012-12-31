@@ -25,8 +25,8 @@ import java.io.InputStream
 import com.thebuzzmedia.sjxp.rule.ParsingMode
 import com.silverkeytech.android_rivers.isNullOrEmpty
 
-public class Parser{
-    public fun parseRss(input : InputStream, rss : RssBuilder){
+public class RssParser{
+    public fun parse(input : InputStream, rss : RssBuilder){
         var parser = XMLParser<RssBuilder>(channelTitle, channelLink, channelDescription, channelPubDate,
                 channelLastBuildDate, channelDocs, channelGenerator, channelManagingEditor, channelWebMaster,
                 channelTtl,
