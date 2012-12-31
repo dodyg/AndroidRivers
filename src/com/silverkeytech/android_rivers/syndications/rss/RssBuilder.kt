@@ -68,11 +68,11 @@ public class RssBuilder(){
             rss.channel!!.docs = docs
         }
 
-        public fun setGenerators(generator : String){
+        public fun setGenerator(generator : String){
             rss.channel!!.generator = generator
         }
 
-        public fun setManagingDirectory(managing : String){
+        public fun setManagingDirector(managing : String){
             rss.channel!!.managingEditor = managing
         }
 

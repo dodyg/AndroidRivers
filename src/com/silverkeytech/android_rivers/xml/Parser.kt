@@ -27,7 +27,9 @@ import com.silverkeytech.android_rivers.isNullOrEmpty
 
 public class Parser{
     public fun parseRss(input : InputStream, rss : RssBuilder){
-        var parser = XMLParser<RssBuilder>(channelTitle, channelLink, channelDescription, channelPubTitle,
+        var parser = XMLParser<RssBuilder>(channelTitle, channelLink, channelDescription, channelPubDate,
+                channelLastBuildDate, channelDocs, channelGenerator, channelManagingEditor, channelWebMaster,
+                channelTtl,
                 itemTag, itemTitle, itemLink, itemDescription
                 )
         parser.parse(input, rss)
@@ -46,8 +48,32 @@ val channelDescription = textRule<RssBuilder>("/rss/channel/description", { (tex
     rss.channel.setDescription(text)
 })
 
-val channelPubTitle = textRule<RssBuilder>("/rss/channel/pubDate", { (text, rss) ->
+val channelPubDate = textRule<RssBuilder>("/rss/channel/pubDate", { (text, rss) ->
     rss.channel.setPubDate(text)
+})
+
+val channelLastBuildDate = textRule<RssBuilder>("/rss/channel/lastBuildDate", { (text, rss) ->
+    rss.channel.setLastBuildDate(text)
+})
+
+val channelDocs = textRule<RssBuilder>("/rss/channel/docs", { (text, rss) ->
+    rss.channel.setDocs(text)
+})
+
+val channelGenerator = textRule<RssBuilder>("/rss/channel/generator", { (text, rss) ->
+    rss.channel.setGenerator(text)
+})
+
+val channelManagingEditor = textRule<RssBuilder>("/rss/channel/managingEditor", { (text, rss) ->
+    rss.channel.setManagingDirector(text)
+})
+
+val channelWebMaster = textRule<RssBuilder>("/rss/channel/webMaster", { (text, rss) ->
+    rss.channel.setWebMaster(text)
+})
+
+val channelTtl = textRule<RssBuilder>("/rss/channel/ttl", { (text, rss) ->
+    rss.channel.setTitle(text.toInt())
 })
 
 val itemTag = tagRule<RssBuilder>("/rss/channel/item", { (isStartTag, rss) ->
