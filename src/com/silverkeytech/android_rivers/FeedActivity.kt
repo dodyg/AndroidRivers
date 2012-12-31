@@ -116,7 +116,6 @@ public class FeedActivity(): SherlockListActivity()
                     bookmarkMenu?.setVisible(false)
                     toastee("$feedName syndication is added to your bookmark.")
 
-                    this@FeedActivity.getApplication().getMain().clearRiverBookmarksCache()
                     return true
                 }
                 catch(e: Exception){
