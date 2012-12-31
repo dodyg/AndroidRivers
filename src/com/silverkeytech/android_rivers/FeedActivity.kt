@@ -55,17 +55,43 @@ public class FeedActivity(): SherlockListActivity()
 
         setTitle(feedName)
 
+        downloadFeed()
+    }
+
+    fun downloadFeed(){
         DownloadFeed(this, false)
                 .executeOnComplete {
             res ->
             if (res.isTrue()){
                 var feed = res.value!!
                 FeedContentRenderer(this, feedLanguage)
-                .handleNewsListing(feed.items)
+                        .handleNewsListing(feed.items)
             }else{
                 toastee("Error ${res.exception?.getMessage()}", Duration.LONG)
             }
         }
                 .execute(feedUrl)
+    }
+
+    val REFRESH: Int = 1
+
+    public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menu?.add(0, REFRESH, 0, "Refresh")
+        ?.setIcon(R.drawable.ic_menu_refresh)
+        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+
+        return true
+    }
+
+
+    public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.getItemId()){
+            R.id.river_menu_refresh, REFRESH -> {
+                downloadFeed()
+                return true
+            }
+            else ->
+                return super.onOptionsItemSelected(item)
+        }
     }
 }
