@@ -36,6 +36,29 @@ public class BookmarkQuery(private val dao: Dao<Bookmark, out Int?>){
         }
     }
 
+    fun byCollectionId(collectionId : Int): QueryMany<Bookmark>{
+        try{
+            var q = dao.queryBuilder()!!
+                    .where()!!
+                    .eq(BOOKMARK_COLLECTION, collectionId)!!
+                    .prepare()
+
+            return QueryMany(dao.query(q))
+        }
+        catch(e: Exception){
+            return QueryMany<Bookmark>(null, e)
+        }
+    }
+
+    fun all() : QueryMany<Bookmark>{
+        try{
+            return QueryMany(dao.queryForAll())
+        }
+        catch(e: Exception){
+            return QueryMany<Bookmark>(null, e)
+        }
+    }
+
     fun byUrl(url: String): QueryOne<Bookmark> {
         try
         {

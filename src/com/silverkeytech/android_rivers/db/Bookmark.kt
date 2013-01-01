@@ -27,6 +27,7 @@ public val BOOKMARK_TITLE: String = "title"
 public val BOOKMARK_URL: String = "url"
 public val BOOKMARK_LANGUAGE: String = "language"
 public val BOOKMARK_KIND: String = "kind"
+public val BOOKMARK_COLLECTION : String = "bookmark_collection_id"
 
 [DatabaseTable]
 public class Bookmark(){

@@ -97,6 +97,12 @@ public class TryOutActivity(): Activity()
 
             bk = DatabaseManager.bookmark!!.first()
             Log.d(TAG, "Loading bookmark with id ${bk.id} and collection id ${bk.collection?.id}")
+
+            var bookmarks = DatabaseManager.query().bookmark().all()
+
+            for(val b in bookmarks.values!!.iterator()){
+                Log.d(TAG, "Collection ${b.title} - ${b.collection?.id}")
+            }
         }
     }
 
