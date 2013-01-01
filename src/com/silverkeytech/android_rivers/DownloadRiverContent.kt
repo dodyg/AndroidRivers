@@ -124,7 +124,8 @@ fun River.getSortedNewsItems(): List<RiverItemMeta> {
         }
     }
 
-    var sortedNewsItems = newsItems.filter { x -> x.item.isPublicationDate()!! }.sort(comparator {(p1, p2) ->
+    var sortedNewsItems = newsItems.filter { x -> x.item.isPublicationDate()!! }.sort(
+            comparator {(p1 : RiverItemMeta, p2 : RiverItemMeta) ->
         val date1 = p1.item.getPublicationDate()
         val date2 = p2.item.getPublicationDate()
 

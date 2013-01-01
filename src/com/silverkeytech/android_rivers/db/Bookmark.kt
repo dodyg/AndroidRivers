@@ -45,4 +45,7 @@ public class Bookmark(){
 
     [DatabaseField(canBeNull = false, columnName = "kind")]
     public var kind: String = ""
+
+    [DatabaseField(canBeNull = true, foreign = true, columnName = "bookmark_collection_id")]
+    public var collection : BookmarkCollection? = null
 }

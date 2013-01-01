@@ -52,7 +52,7 @@ public class MainApplication(): Application()
         Log.d(TAG, "My location ${path.canonicalPath}")
 
         //if (path.exists())
-        //    path.delete()// for development only
+          //  path.delete()// for development only
 
         if (true){
             var db = this.openOrCreateDatabase(Database.DATABASE_NAME, Context.MODE_PRIVATE, null)

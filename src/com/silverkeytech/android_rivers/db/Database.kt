@@ -30,24 +30,27 @@ import com.j256.ormlite.table.TableUtils
 public class Database (context: Context): OrmLiteSqliteOpenHelper(context, Database.DATABASE_NAME, null, Database.DATABASE_VERSION) {
     class object {
         val TAG: String = javaClass<Database>().getSimpleName()
-        public val DATABASE_VERSION: Int = 1
+        public val DATABASE_VERSION: Int = 2
         public val DATABASE_NAME: String = "AndroidRivers.sqlite"
     }
 
     public override fun onCreate(p0: SQLiteDatabase?, p1: ConnectionSource?) {
-        try{
-            TableUtils.createTable(p1, javaClass<Bookmark>())
-        }
-        catch (e: SQLException){
-            Log.d(TAG, "Exception in creating database")
-        }
+        SchemaCreation(p0!!).create(1)
     }
 
     public override fun onUpgrade(p0: SQLiteDatabase?, p1: ConnectionSource?, p2: Int, p3: Int) {
-        when(p2){
-            1 -> {
-            }
-            else -> {
+        val oldVersion = p2
+        val newVersion = p3
+
+        Log.d(TAG, "Old version $oldVersion and new version $newVersion")
+        if (newVersion > oldVersion){
+            var migrator = SchemaMigration(p0!!)
+            for(val current in oldVersion..(newVersion - 1)){
+                val res = migrator.migrate(current)
+                if (res)
+                    Log.d(TAG, "Performing upgrade for version $current successful")
+                else
+                    Log.d(TAG, "Performing upgrade for version $current fails")
             }
         }
     }
