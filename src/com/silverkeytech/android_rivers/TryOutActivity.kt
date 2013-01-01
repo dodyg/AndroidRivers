@@ -48,6 +48,8 @@ import android.app.AlertDialog
 import java.util.ArrayList
 import android.content.DialogInterface
 import com.silverkeytech.android_rivers.db.BookmarkKind
+import com.silverkeytech.android_rivers.db.BookmarkCollection
+import com.silverkeytech.android_rivers.db.BookmarkCollectionKind
 
 public class TryOutActivity(): Activity()
 {
@@ -60,6 +62,7 @@ public class TryOutActivity(): Activity()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tryout)
+        handleBookmarkCollectionCreation()
         handleDownloadAtom()
         handleDownloadRss()
         handleDownloadGifImage()
@@ -72,6 +75,29 @@ public class TryOutActivity(): Activity()
         handleOutliner()
         handleDownloadRecursiveOpml()
         handleRiverJsWithOpmlSource()
+    }
+
+    fun handleBookmarkCollectionCreation(){
+        val btn = findView<Button>(R.id.tryout_bookmark_collection_btn)
+
+        btn.setOnClickListener {
+            var coll = BookmarkCollection()
+            coll.title = "Channel 1"
+            coll.kind  = BookmarkCollectionKind.RIVER.toString()
+
+            DatabaseManager.bookmarkCollection!!.create(coll)
+
+            Log.d(TAG, "BookmarkCollection id ${coll.id}")
+
+            var bk = DatabaseManager.bookmark!!.first()
+            Log.d(TAG, "Loading bookmark with id ${bk.id}")
+            bk.collection = coll
+
+            DatabaseManager.bookmark!!.update(bk)
+
+            bk = DatabaseManager.bookmark!!.first()
+            Log.d(TAG, "Loading bookmark with id ${bk.id} and collection id ${bk.collection?.id}")
+        }
     }
 
     fun handleDownloadAtom(){

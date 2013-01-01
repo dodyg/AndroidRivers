@@ -61,7 +61,15 @@ public class Database (context: Context): OrmLiteSqliteOpenHelper(context, Datab
         if (bookmarkDao == null){
             bookmarkDao = super<OrmLiteSqliteOpenHelper>.getDao(javaClass<Bookmark>())
         }
-
         return bookmarkDao!!
+    }
+
+    var bookmarkCollectionDao: Dao<BookmarkCollection, out Int?>? = null
+
+    fun getBookmarkCollectionDao(): Any{
+        if (bookmarkCollectionDao == null){
+            bookmarkCollectionDao = super<OrmLiteSqliteOpenHelper>.getDao(javaClass<BookmarkCollection>())
+        }
+        return bookmarkCollectionDao!!
     }
 }
