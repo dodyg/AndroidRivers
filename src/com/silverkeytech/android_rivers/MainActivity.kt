@@ -32,6 +32,11 @@ import java.io.File
 import com.silverkeytech.android_rivers.db.BookmarkKind
 import com.silverkeytech.android_rivers.db.getBookmarksFromDb
 
+enum class MainActivityMode {
+    RIVER
+    RSS
+}
+
 public open class MainActivity(): SherlockActivity() {
     class object {
         public val TAG: String = javaClass<MainActivity>().getSimpleName()
@@ -39,10 +44,18 @@ public open class MainActivity(): SherlockActivity() {
 
     val DEFAULT_SUBSCRIPTION_LIST = "http://hobieu.apphb.com/api/1/default/riverssubscription"
 
+    var mode : MainActivityMode = MainActivityMode.RIVER
+
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
+
+        var actionBar = getSupportActionBar()!!
+        actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
+        actionBar.setDisplayShowTitleEnabled(true)
+
+        setTitle()
 
         var intent = getIntent()
         if(intent != null){
@@ -64,15 +77,31 @@ public open class MainActivity(): SherlockActivity() {
         }
     }
 
+    fun setTitle(){
+        var actionBar = getSupportActionBar()!!
+        if (mode == MainActivityMode.RIVER)
+            actionBar.setTitle("Rivers")
+        else if (mode == MainActivityMode.RSS)
+            actionBar.setTitle("RSS")
+    }
+
+    val SWITCH: Int = 0
     val EXPLORE: Int = 1
+
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         var inflater = getSupportMenuInflater()!!
         inflater.inflate(R.menu.subscription_menu, menu)
 
         //top menu
+
+        //top menu
+        menu?.add(0, SWITCH, 0, "Switch")
+        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+
+
         menu?.add(0, EXPLORE, 0, "MORE NEWS")
-        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
         return true
     }
@@ -80,7 +109,11 @@ public open class MainActivity(): SherlockActivity() {
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
             R.id.subscription_menu_refresh -> {
-                displayRiverBookmarks()
+                if (mode == MainActivityMode.RIVER)
+                    displayRiverBookmarks()
+                else if (mode == MainActivityMode.RSS)
+                    displayRssBookmarks()
+
                 return true
             }
             R.id.river_menu_tryout -> {
@@ -115,6 +148,18 @@ public open class MainActivity(): SherlockActivity() {
                 displayRssBookmarks()
                 return false
             }
+            SWITCH -> {
+                if (mode == MainActivityMode.RSS){
+                    displayRiverBookmarks()
+                    mode = MainActivityMode.RIVER
+                }   else if (mode == MainActivityMode.RIVER){
+                    displayRssBookmarks()
+                    mode = MainActivityMode.RSS
+                }
+
+                setTitle()
+                return true
+            }
             else ->
                 return super.onOptionsItemSelected(item)
         }
@@ -123,6 +168,10 @@ public open class MainActivity(): SherlockActivity() {
     private fun displayRssBookmarks(){
         var bookmarks = getBookmarksFromDb(BookmarkKind.RSS)
         BookmarksRenderer(this@MainActivity).handleListing(bookmarks)
+    }
+
+    public fun refreshRssBookmarks(){
+        displayRssBookmarks()
     }
 
     public fun refreshRiverBookmarks()

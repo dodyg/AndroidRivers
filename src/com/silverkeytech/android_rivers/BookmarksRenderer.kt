@@ -79,7 +79,46 @@ public class BookmarksRenderer(val context: MainActivity){
             }
         })
 
-        list.setOnItemLongClickListener(null)
+        list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
+            public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
+                val currentBookmark = bookmarks.get(p2)
+
+                //overlay popup at top of clicked overview position
+                val item = p1!!
+                val popupWidth = item.getWidth()
+                val popupHeight = item.getHeight()
+
+                val x = context.getLayoutInflater()!!.inflate(R.layout.river_quick_actions, null, false)!!
+                val pp = PopupWindow(x, popupWidth, popupHeight, true)
+
+                x.setBackgroundColor(android.graphics.Color.LTGRAY)
+
+                x.setOnClickListener {
+                    pp.dismiss()
+                }
+
+                val icon = x.findViewById(R.id.river_quick_action_delete_icon) as ImageView
+                icon.setOnClickListener {
+                    try{
+                        val res = DatabaseManager.cmd().bookmark().deleteByUrl(currentBookmark.url)
+                        if (res.isFalse())
+                            context.toastee("Error in removing this bookmark ${res.exception?.getMessage()}")
+                        else {
+                            context.toastee("Bookmark removed")
+                            context.refreshRssBookmarks()
+                        }
+                    }
+                    catch(e: Exception){
+                        context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
+                    }
+                    pp.dismiss()
+                }
+
+                val itemLocation = getLocationOnScreen(item)
+                pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
+                return true
+            }
+        })
     }
 
     fun handleRiversListing(opml: Opml) {
@@ -140,13 +179,7 @@ public class BookmarksRenderer(val context: MainActivity){
                 val popupWidth = item.getWidth()
                 val popupHeight = item.getHeight()
 
-                val loc = intArray(0, 1)
-                item.getLocationOnScreen(loc)
-                val popupX = loc[0]
-                val popupY = loc[1]
-
-                val inflater = context.getLayoutInflater()!!
-                val x = inflater.inflate(R.layout.river_quick_actions, null, false)!!
+                val x = context.getLayoutInflater()!!.inflate(R.layout.river_quick_actions, null, false)!!
                 val pp = PopupWindow(x, popupWidth, popupHeight, true)
 
                 x.setBackgroundColor(android.graphics.Color.LTGRAY)
@@ -172,9 +205,21 @@ public class BookmarksRenderer(val context: MainActivity){
                     pp.dismiss()
                 }
 
-                pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, popupX, popupY)
+                val itemLocation = getLocationOnScreen(item)
+                pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
                 return true
             }
         })
+    }
+
+    data class Location(val x : Int, val y : Int)
+
+    fun getLocationOnScreen(item : View) : Location{
+        val loc = intArray(0, 1)
+        item.getLocationOnScreen(loc)
+        val popupX = loc[0]
+        val popupY = loc[1]
+
+        return Location(popupX, popupY)
     }
 }
