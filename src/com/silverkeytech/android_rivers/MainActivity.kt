@@ -35,6 +35,7 @@ import com.silverkeytech.android_rivers.db.getBookmarksFromDb
 enum class MainActivityMode {
     RIVER
     RSS
+    COLLECTION
 }
 
 public open class MainActivity(): SherlockActivity() {
@@ -79,26 +80,34 @@ public open class MainActivity(): SherlockActivity() {
 
     fun setTitle(){
         var actionBar = getSupportActionBar()!!
-        if (mode == MainActivityMode.RIVER)
-            actionBar.setTitle("Rivers")
-        else if (mode == MainActivityMode.RSS)
-            actionBar.setTitle("RSS")
+        when(mode){
+            MainActivityMode.RIVER -> actionBar.setTitle("Rivers")
+            MainActivityMode.RSS -> actionBar.setTitle("RSS")
+            MainActivityMode.COLLECTION -> actionBar.setTitle("Collections")
+            else -> {}
+        }
+    }
+
+    fun changeMode(){
+        val currentMode = mode
+        mode = when (currentMode){
+            MainActivityMode.RIVER -> MainActivityMode.RSS
+            MainActivityMode.RSS -> MainActivityMode.COLLECTION
+            MainActivityMode.COLLECTION -> MainActivityMode.RIVER
+            else -> MainActivityMode.RIVER
+        }
     }
 
     val SWITCH: Int = 0
     val EXPLORE: Int = 1
-
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         var inflater = getSupportMenuInflater()!!
         inflater.inflate(R.menu.subscription_menu, menu)
 
         //top menu
-
-        //top menu
         menu?.add(0, SWITCH, 0, "Switch")
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-
 
         menu?.add(0, EXPLORE, 0, "MORE NEWS")
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
@@ -109,13 +118,19 @@ public open class MainActivity(): SherlockActivity() {
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
             R.id.subscription_menu_refresh -> {
-                if (mode == MainActivityMode.RIVER)
-                    displayRiverBookmarks()
-                else if (mode == MainActivityMode.RSS)
-                    displayRssBookmarks()
+                when(mode){
+                    MainActivityMode.RIVER -> {
+                        displayRiverBookmarks()
+                    }
+                    MainActivityMode.RSS -> {
+                        displayRssBookmarks()
+                    }
+                    else -> { }
+                }
 
                 return true
             }
+
             R.id.river_menu_tryout -> {
                 var i = Intent(this, javaClass<TryOutActivity>())
                 startActivity(i)
@@ -149,12 +164,15 @@ public open class MainActivity(): SherlockActivity() {
                 return false
             }
             SWITCH -> {
-                if (mode == MainActivityMode.RSS){
-                    displayRiverBookmarks()
-                    mode = MainActivityMode.RIVER
-                }   else if (mode == MainActivityMode.RIVER){
-                    displayRssBookmarks()
-                    mode = MainActivityMode.RSS
+                changeMode()
+                when(mode){
+                    MainActivityMode.RIVER -> {
+                        displayRiverBookmarks()
+                    }
+                    MainActivityMode.RSS -> {
+                        displayRssBookmarks()
+                    }
+                    else -> { }
                 }
 
                 setTitle()
