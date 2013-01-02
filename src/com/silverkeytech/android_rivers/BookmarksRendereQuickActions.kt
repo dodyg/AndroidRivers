@@ -41,7 +41,7 @@ fun showCollectionQuickActionPopup(context: MainActivity, collection: BookmarkCo
     val popupWidth = item.getWidth()
     val popupHeight = item.getHeight()
 
-    val x = context.getLayoutInflater()!!.inflate(R.layout.collection_quick_actions, null, false)!!
+    val x = context.getLayoutInflater()!!.inflate(R.layout.main_collection_quick_actions, null, false)!!
     val pp = PopupWindow(x, popupWidth, popupHeight, true)
 
     x.setBackgroundColor(android.graphics.Color.LTGRAY)
@@ -50,7 +50,7 @@ fun showCollectionQuickActionPopup(context: MainActivity, collection: BookmarkCo
         pp.dismiss()
     }
 
-    val icon = x.findViewById(R.id.collection_quick_action_delete_icon) as ImageView
+    val icon = x.findViewById(R.id.main_collection_quick_action_delete_icon) as ImageView
     icon.setOnClickListener {
         try{
             Log.d("showCollectionQuickActionPopup", "Start clearing bookmarks from collection ${collection.id}")
@@ -81,7 +81,7 @@ fun showBookmarkListingQuickActionPopup(context: MainActivity, currentBookmark: 
     val popupWidth = item.getWidth()
     val popupHeight = item.getHeight()
 
-    val x = context.getLayoutInflater()!!.inflate(R.layout.feed_quick_actions, null, false)!!
+    val x = context.getLayoutInflater()!!.inflate(R.layout.main_feed_quick_actions, null, false)!!
     val pp = PopupWindow(x, popupWidth, popupHeight, true)
 
     x.setBackgroundColor(android.graphics.Color.LTGRAY)
@@ -90,7 +90,7 @@ fun showBookmarkListingQuickActionPopup(context: MainActivity, currentBookmark: 
         pp.dismiss()
     }
 
-    val icon = x.findViewById(R.id.feed_quick_action_delete_icon) as ImageView
+    val icon = x.findViewById(R.id.main_feed_quick_action_delete_icon) as ImageView
     icon.setOnClickListener {
         try{
             val res = DatabaseManager.cmd().bookmark().deleteByUrl(currentBookmark.url)
@@ -116,7 +116,7 @@ fun showRiverListingQuickActionPopup(context: MainActivity, currentOutline: Outl
     val popupWidth = item.getWidth()
     val popupHeight = item.getHeight()
 
-    val x = inflater(context).inflate(R.layout.river_quick_actions, null, false)!!
+    val x = inflater(context).inflate(R.layout.main_river_quick_actions, null, false)!!
     val pp = PopupWindow(x, popupWidth, popupHeight, true)
 
     x.setBackgroundColor(android.graphics.Color.LTGRAY)
@@ -125,7 +125,7 @@ fun showRiverListingQuickActionPopup(context: MainActivity, currentOutline: Outl
         pp.dismiss()
     }
 
-    val icon = x.findViewById(R.id.river_quick_action_delete_icon) as ImageView
+    val icon = x.findViewById(R.id.main_river_quick_action_delete_icon) as ImageView
     icon.setOnClickListener {
         try{
             val res = DatabaseManager.cmd().bookmark().deleteByUrl(currentOutline.url!!)
