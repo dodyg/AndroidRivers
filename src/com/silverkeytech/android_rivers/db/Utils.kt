@@ -23,6 +23,15 @@ import com.silverkeytech.android_rivers.outlines.Body
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 
+public fun getBookmarksFromDb(kind : BookmarkKind) : List<Bookmark>{
+    var bookmarks = DatabaseManager.query().bookmark().byKind(kind)
+
+    if (bookmarks.exist)
+        return bookmarks.values!!
+    else
+        return arrayListOf<Bookmark>()
+}
+
 //get bookmarks from db and return the data in opml format
 public fun getBookmarksFromDbAsOpml(kind : BookmarkKind): Opml {
     var opml = Opml()

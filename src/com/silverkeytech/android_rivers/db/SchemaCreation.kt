@@ -46,6 +46,7 @@ public class SchemaCreation(val db : SQLiteDatabase){
                 `kind` VARCHAR NOT NULL ,
                 `language` VARCHAR NOT NULL ,
                 `title` VARCHAR NOT NULL ,
+                'bookmark_collection_id' INTEGER NULL,
                 `id` INTEGER PRIMARY KEY AUTOINCREMENT
               )
             """)

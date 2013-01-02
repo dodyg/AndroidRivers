@@ -3,7 +3,10 @@
         <item android:id="@+id/subscription_menu_refresh"
               android:title="@string/refresh" />
 
-        <item android:id="@+id/subscription_menu_download_all"
+    <item android:id="@+id/subscription_menu_view_rss"
+          android:title="RSS Collection" />
+
+    <item android:id="@+id/subscription_menu_download_all"
               android:title="Download All" />
 
         <item android:id="@+id/river_menu_tryout"

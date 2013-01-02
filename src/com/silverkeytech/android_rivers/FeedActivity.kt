@@ -109,7 +109,7 @@ public class FeedActivity(): SherlockListActivity()
                     var bk = Bookmark()
                     bk.title = feedName
                     bk.url = feedUrl
-                    bk.kind = BookmarkKind.SYNDICATION.toString()
+                    bk.kind = BookmarkKind.RSS.toString()
                     bk.language = feedLanguage
 
                     DatabaseManager.bookmark!!.create(bk)

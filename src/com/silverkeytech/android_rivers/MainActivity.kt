@@ -30,6 +30,7 @@ import com.silverkeytech.android_rivers.db.saveOpmlAsBookmarks
 import com.silverkeytech.android_rivers.outliner.startOutlinerActivity
 import java.io.File
 import com.silverkeytech.android_rivers.db.BookmarkKind
+import com.silverkeytech.android_rivers.db.getBookmarksFromDb
 
 public open class MainActivity(): SherlockActivity() {
     class object {
@@ -59,7 +60,7 @@ public open class MainActivity(): SherlockActivity() {
                 }
             }
             else
-                displayBookmarks()
+                displayRiverBookmarks()
         }
     }
 
@@ -79,7 +80,7 @@ public open class MainActivity(): SherlockActivity() {
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
             R.id.subscription_menu_refresh -> {
-                displayBookmarks()
+                displayRiverBookmarks()
                 return true
             }
             R.id.river_menu_tryout -> {
@@ -110,18 +111,27 @@ public open class MainActivity(): SherlockActivity() {
                 downloadOpml("http://hobieu.apphb.com/api/1/opml/root", "Get more news")
                 return false
             }
+            R.id.subscription_menu_view_rss -> {
+                displayRssBookmarks()
+                return false
+            }
             else ->
                 return super.onOptionsItemSelected(item)
         }
     }
 
-    public fun refreshBookmarks()
-    {
-        this.getApplication().getMain().clearRiverBookmarksCache()
-        displayBookmarks()
+    private fun displayRssBookmarks(){
+        var bookmarks = getBookmarksFromDb(BookmarkKind.RSS)
+        BookmarksRenderer(this@MainActivity).handleListing(bookmarks)
     }
 
-    private fun  displayBookmarks() {
+    public fun refreshRiverBookmarks()
+    {
+        this.getApplication().getMain().clearRiverBookmarksCache()
+        displayRiverBookmarks()
+    }
+
+    private fun displayRiverBookmarks() {
         val cache = this.getApplication().getMain().getRiverBookmarksCache()
 
         if (cache != null){

@@ -37,13 +37,50 @@ import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 import java.util.ArrayList
+import com.silverkeytech.android_rivers.db.Bookmark
 
 public class BookmarksRenderer(val context: MainActivity){
     class object {
         public val TAG: String = javaClass<BookmarksRenderer>().getSimpleName()
     }
 
-    public data class ViewHolder (var riverName: TextView)
+    public data class ViewHolder (var name: TextView)
+
+    fun handleListing(bookmarks : List<Bookmark>){
+        val adapter = object : ArrayAdapter<Bookmark>(context, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
+            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
+                var vw = convertView
+                var holder: ViewHolder?
+
+                if (vw == null){
+                    val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                    vw = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
+
+                    holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
+                    holder!!.name.setText(bookmarks[position].toString())
+                    vw!!.setTag(holder)
+                }else{
+                    holder = vw!!.getTag() as ViewHolder
+                    holder!!.name.setText(bookmarks[position].toString())
+                    Log.d(TAG, "List View reused")
+                }
+
+                return vw
+            }
+        }
+
+        val list = context.findView<ListView>(R.id.main_rivers_lv)
+        list.setAdapter(adapter)
+        list.setOnItemClickListener(object : OnItemClickListener{
+            public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
+                val bookmark = bookmarks.get(p2)
+                var i = startFeedActivity(context, bookmark.url, bookmark.title, bookmark.language)
+                context.startActivity(i)
+            }
+        })
+
+        list.setOnItemLongClickListener(null)
+    }
 
     fun handleRiversListing(opml: Opml) {
         var outlines = ArrayList<Outline>()
@@ -62,11 +99,11 @@ public class BookmarksRenderer(val context: MainActivity){
                     vw = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
 
                     holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
-                    holder!!.riverName.setText(outlines[position].toString())
+                    holder!!.name.setText(outlines[position].toString())
                     vw!!.setTag(holder)
                 }else{
                     holder = vw!!.getTag() as ViewHolder
-                    holder!!.riverName.setText(outlines[position].toString())
+                    holder!!.name.setText(outlines[position].toString())
                     Log.d(TAG, "List View reused")
                 }
 
@@ -126,7 +163,7 @@ public class BookmarksRenderer(val context: MainActivity){
                             context.toastee("Error in removing this bookmark ${res.exception?.getMessage()}")
                         else {
                             context.toastee("Bookmark removed")
-                            context.refreshBookmarks()
+                            context.refreshRiverBookmarks()
                         }
                     }
                     catch(e: Exception){

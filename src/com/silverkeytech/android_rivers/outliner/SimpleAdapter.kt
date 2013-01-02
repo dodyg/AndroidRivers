@@ -38,6 +38,8 @@ import com.silverkeytech.android_rivers.toastee
 import java.util.ArrayList
 import android.util.Log
 import com.silverkeytech.android_rivers.FeedActivity
+import com.silverkeytech.android_rivers.startFeedActivity
+import com.silverkeytech.android_rivers.startRiverActivity
 
 public open class SimpleAdapter(private val context: OutlinerActivity,
                                 private val treeStateManager: TreeStateManager<Long?>,
@@ -112,28 +114,20 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
     }
 
     fun handleRiver(currentOutline: OutlineContent) {
-        var url = currentOutline.getAttribute("url")
+        var url = currentOutline.getAttribute("url")!!
         var text = currentOutline.text
-        var lang = currentOutline.getAttribute("language")
+        var lang = currentOutline.getAttribute("language")!!
 
-        var i = Intent(context, javaClass<RiverActivity>())
-        i.putExtra(Params.RIVER_URL, url)
-        i.putExtra(Params.RIVER_NAME, text)
-        i.putExtra(Params.RIVER_LANGUAGE, lang)
-
+        var i = startRiverActivity(context, url, text, lang)
         context.startActivity(i);
     }
 
     fun handleRss(currentOutline : OutlineContent){
-        var url = currentOutline.getAttribute("url")
+        var url = currentOutline.getAttribute("url")!!
         var text = currentOutline.text
-        var lang = currentOutline.getAttribute("language")
+        var lang = currentOutline.getAttribute("language")!!
 
-        var i = Intent(context, javaClass<FeedActivity>())
-        i.putExtra(Params.FEED_URL, url)
-        i.putExtra(Params.FEED_NAME, text)
-        i.putExtra(Params.FEED_LANGUAGE, lang)
-
+        var i = startFeedActivity(context, url, text, lang)
         context.startActivity(i)
     }
 
