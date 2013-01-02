@@ -43,13 +43,19 @@ public class BookmarksRenderer(val context: MainActivity){
         val adapter = object : ArrayAdapter<BookmarkCollection>(context, android.R.layout.simple_list_item_1, android.R.id.text1, coll){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 val text = coll[position].toString()
-                return currentListItem(text!!, convertView, parent)
+                return currentListItem(text, convertView, parent)
             }
         }
 
         val list = context.findView<ListView>(R.id.main_rivers_lv)
         list.setAdapter(adapter)
-        list.setOnItemClickListener(null)
+        list.setOnItemClickListener(object : OnItemClickListener{
+            public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
+                val i = startCollectionActivityIntent(context)
+                context.startActivity(i)
+            }
+        })
+
         list.setOnItemLongClickListener(null)
     }
 
@@ -57,7 +63,7 @@ public class BookmarksRenderer(val context: MainActivity){
         val adapter = object : ArrayAdapter<Bookmark>(context, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 val text = bookmarks[position].toString()
-                return currentListItem(text!!, convertView, parent)
+                return currentListItem(text, convertView, parent)
             }
         }
 

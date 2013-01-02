@@ -30,5 +30,10 @@ public open class BookmarkCollectionActivity(): SherlockActivity() {
         setTheme(this.getVisualPref().getTheme())
         super.onCreate(savedInstanceState)
         setContentView(R.layout.collection)
+
+        var actionBar = getSupportActionBar()!!
+        actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
+        actionBar.setDisplayShowTitleEnabled(true)
+
     }
 }
