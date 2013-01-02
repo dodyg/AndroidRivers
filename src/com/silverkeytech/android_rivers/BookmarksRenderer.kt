@@ -53,17 +53,16 @@ public class BookmarksRenderer(val context: MainActivity){
                 var vw = convertView
                 var holder: ViewHolder?
 
+                val text = coll[position].toString()
                 if (vw == null){
-                    val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-                    vw = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
+                    vw = inflater().inflate(android.R.layout.simple_list_item_1, parent, false)
 
                     holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
-                    holder!!.name.setText(coll[position].toString())
+                    holder!!.name.setText(text)
                     vw!!.setTag(holder)
                 }else{
                     holder = vw!!.getTag() as ViewHolder
-                    holder!!.name.setText(coll[position].toString())
-                    Log.d(TAG, "List View reused")
+                    holder!!.name.setText(text)
                 }
 
                 return vw
@@ -82,17 +81,16 @@ public class BookmarksRenderer(val context: MainActivity){
                 var vw = convertView
                 var holder: ViewHolder?
 
+                val text = bookmarks[position].toString()
                 if (vw == null){
-                    val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-                    vw = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
+                    vw = inflater().inflate(android.R.layout.simple_list_item_1, parent, false)
 
                     holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
-                    holder!!.name.setText(bookmarks[position].toString())
+                    holder!!.name.setText(text)
                     vw!!.setTag(holder)
                 }else{
                     holder = vw!!.getTag() as ViewHolder
-                    holder!!.name.setText(bookmarks[position].toString())
-                    Log.d(TAG, "List View reused")
+                    holder!!.name.setText(text)
                 }
 
                 return vw
@@ -112,40 +110,7 @@ public class BookmarksRenderer(val context: MainActivity){
         list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
             public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
                 val currentBookmark = bookmarks.get(p2)
-
-                //overlay popup at top of clicked overview position
-                val item = p1!!
-                val popupWidth = item.getWidth()
-                val popupHeight = item.getHeight()
-
-                val x = context.getLayoutInflater()!!.inflate(R.layout.river_quick_actions, null, false)!!
-                val pp = PopupWindow(x, popupWidth, popupHeight, true)
-
-                x.setBackgroundColor(android.graphics.Color.LTGRAY)
-
-                x.setOnClickListener {
-                    pp.dismiss()
-                }
-
-                val icon = x.findViewById(R.id.river_quick_action_delete_icon) as ImageView
-                icon.setOnClickListener {
-                    try{
-                        val res = DatabaseManager.cmd().bookmark().deleteByUrl(currentBookmark.url)
-                        if (res.isFalse())
-                            context.toastee("Error in removing this bookmark ${res.exception?.getMessage()}")
-                        else {
-                            context.toastee("Bookmark removed")
-                            context.refreshRssBookmarks()
-                        }
-                    }
-                    catch(e: Exception){
-                        context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
-                    }
-                    pp.dismiss()
-                }
-
-                val itemLocation = getLocationOnScreen(item)
-                pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
+                showBookmarkListingQuickActionPopup(context, currentBookmark, p1!!, list)
                 return true
             }
         })
@@ -163,17 +128,16 @@ public class BookmarksRenderer(val context: MainActivity){
                 var vw = convertView
                 var holder: ViewHolder?
 
+                val text = outlines[position].toString()
                 if (vw == null){
-                    val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-                    vw = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
+                    vw = inflater().inflate(android.R.layout.simple_list_item_1, parent, false)
 
                     holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
-                    holder!!.name.setText(outlines[position].toString())
+                    holder!!.name.setText(text)
                     vw!!.setTag(holder)
                 }else{
                     holder = vw!!.getTag() as ViewHolder
-                    holder!!.name.setText(outlines[position].toString())
-                    Log.d(TAG, "List View reused")
+                    holder!!.name.setText(text)
                 }
 
                 return vw
@@ -187,14 +151,13 @@ public class BookmarksRenderer(val context: MainActivity){
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val currentOutline = outlines.get(p2)
 
-                val ix = Intent(context, javaClass<RiverActivity>())
-                ix.putExtra(Params.RIVER_URL, currentOutline.url)
-                ix.putExtra(Params.RIVER_NAME, currentOutline.text)
+                var lang =
+                        if (!currentOutline.language.isNullOrEmpty())
+                            currentOutline.language!!
+                        else
+                            "en"
 
-                if (!currentOutline.language.isNullOrEmpty())
-                    ix.putExtra(Params.RIVER_LANGUAGE, currentOutline.language)
-                else
-                    ix.putExtra(Params.RIVER_LANGUAGE, "en")
+                val ix = startRiverActivityIntent(context,currentOutline.url!!, currentOutline.text!!, lang )
 
                 context.startActivity(ix)
             }
@@ -203,53 +166,15 @@ public class BookmarksRenderer(val context: MainActivity){
         list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
             public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
                 val currentOutline = outlines.get(p2)
-
-                //overlay popup at top of clicked overview position
-                val item = p1!!
-                val popupWidth = item.getWidth()
-                val popupHeight = item.getHeight()
-
-                val x = context.getLayoutInflater()!!.inflate(R.layout.river_quick_actions, null, false)!!
-                val pp = PopupWindow(x, popupWidth, popupHeight, true)
-
-                x.setBackgroundColor(android.graphics.Color.LTGRAY)
-
-                x.setOnClickListener {
-                    pp.dismiss()
-                }
-
-                val icon = x.findViewById(R.id.river_quick_action_delete_icon) as ImageView
-                icon.setOnClickListener {
-                    try{
-                        val res = DatabaseManager.cmd().bookmark().deleteByUrl(currentOutline.url!!)
-                        if (res.isFalse())
-                            context.toastee("Error in removing this bookmark ${res.exception?.getMessage()}")
-                        else {
-                            context.toastee("Bookmark removed")
-                            context.refreshRiverBookmarks()
-                        }
-                    }
-                    catch(e: Exception){
-                        context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
-                    }
-                    pp.dismiss()
-                }
-
-                val itemLocation = getLocationOnScreen(item)
-                pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
+                showRiverListingQuickActionPopup(context, currentOutline, p1!!, list)
                 return true
             }
         })
     }
 
-    data class Location(val x : Int, val y : Int)
-
-    fun getLocationOnScreen(item : View) : Location{
-        val loc = intArray(0, 1)
-        item.getLocationOnScreen(loc)
-        val popupX = loc[0]
-        val popupY = loc[1]
-
-        return Location(popupX, popupY)
+    fun inflater() : LayoutInflater{
+        val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        return inflater
     }
 }
+
