@@ -39,10 +39,6 @@ import java.util.Random
 
 public class DownloadService(): IntentService("DownloadService"){
     class object{
-        public val PARAM_DOWNLOAD_URL: String = "downloadUrl"
-        public val PARAM_DOWNLOAD_TITLE: String = "downloadTitle"
-        public val PARAM_DOWNLOAD_LOCATION_PATH: String = "downloadLocationPath"
-
         public val TAG: String = javaClass<DownloadService>().getSimpleName()
     }
 
@@ -52,7 +48,7 @@ public class DownloadService(): IntentService("DownloadService"){
     fun prepareNotification(title: String, filePath: String): Notification {
         var notificationIntent = Intent(Intent.ACTION_MAIN)
         notificationIntent.setClass(getApplicationContext(), javaClass<MainActivity>())
-        notificationIntent.putExtra(PARAM_DOWNLOAD_LOCATION_PATH, filePath)
+        notificationIntent.putExtra(Params.DOWNLOAD_LOCATION_PATH, filePath)
 
         var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
@@ -74,8 +70,8 @@ public class DownloadService(): IntentService("DownloadService"){
     }
 
     protected override fun onHandleIntent(p0: Intent?) {
-        targetUrl = p0?.getStringExtra(PARAM_DOWNLOAD_URL)
-        targetTitle = p0?.getStringExtra(PARAM_DOWNLOAD_TITLE)
+        targetUrl = p0?.getStringExtra(Params.DOWNLOAD_URL)
+        targetTitle = p0?.getStringExtra(Params.DOWNLOAD_TITLE)
 
         Log.d(TAG, "onHandleIntent with ${targetUrl}")
 

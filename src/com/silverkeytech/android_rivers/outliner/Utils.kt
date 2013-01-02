@@ -39,6 +39,7 @@ import com.silverkeytech.android_rivers.xml.RssParser
 import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 import java.io.ByteArrayInputStream
 import java.util.ArrayList
+import com.silverkeytech.android_rivers.Params
 
 //do an in order traversal so we can flatten it up to be used by outliner
 fun Opml.traverse (filter: ((Outline) -> Boolean)? = null, depthLimit: Int = 12): ArrayList<OutlineContent> {
@@ -156,10 +157,10 @@ fun transformFeedOpmlToOpml(feedOpml: RiverOpml): Result<Opml> {
 fun startOutlinerActivity(context: Context, outlines: ArrayList<OutlineContent>, title: String, url: String?, expandAll: Boolean) {
     var intent = Intent(Intent.ACTION_MAIN)
     intent.setClass(context, javaClass<OutlinerActivity>())
-    intent.putExtra(OutlinerActivity.OUTLINES_DATA, outlines)
-    intent.putExtra(OutlinerActivity.OUTLINES_TITLE, title)
-    intent.putExtra(OutlinerActivity.OUTLINES_URL, url)
-    intent.putExtra(OutlinerActivity.OUTLINES_EXPAND_ALL, expandAll)
+    intent.putExtra(Params.OUTLINES_DATA, outlines)
+    intent.putExtra(Params.OUTLINES_TITLE, title)
+    intent.putExtra(Params.OUTLINES_URL, url)
+    intent.putExtra(Params.OUTLINES_EXPAND_ALL, expandAll)
     context.startActivity(intent)
 }
 

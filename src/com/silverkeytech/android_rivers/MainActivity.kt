@@ -61,7 +61,7 @@ public open class MainActivity(): SherlockActivity() {
 
         var intent = getIntent()
         if(intent != null){
-            val locationPath = intent!!.getStringExtra(DownloadService.PARAM_DOWNLOAD_LOCATION_PATH)
+            val locationPath = intent!!.getStringExtra(Params.DOWNLOAD_LOCATION_PATH)
             if (!locationPath.isNullOrEmpty()){
                 try{
                     var playIntent = Intent()

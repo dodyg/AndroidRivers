@@ -220,7 +220,7 @@ public class TryOutActivity(): Activity()
             })
 
             val ix = Intent(this, javaClass<DownloadService>())
-            ix.putExtra(DownloadService.PARAM_DOWNLOAD_URL, "http://podcastdownload.npr.org/anon.npr-podcasts/podcast/13/166038315/npr_166038315.mp3")
+            ix.putExtra(Params.DOWNLOAD_URL, "http://podcastdownload.npr.org/anon.npr-podcasts/podcast/13/166038315/npr_166038315.mp3")
             ix.putExtra(Params.MESSENGER, messenger)
             this.startService(ix)
         }
@@ -261,7 +261,7 @@ public class TryOutActivity(): Activity()
 
             var notificationIntent = Intent(Intent.ACTION_MAIN)
             notificationIntent.setClass(getApplicationContext(), javaClass<MainActivity>())
-            notificationIntent.putExtra(DownloadService.PARAM_DOWNLOAD_LOCATION_PATH, "Location PATH")
+            notificationIntent.putExtra(Params.DOWNLOAD_LOCATION_PATH, "Location PATH")
 
             var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_ONE_SHOT)
 
@@ -319,7 +319,7 @@ public class TryOutActivity(): Activity()
                 if (res.isTrue()){
                     var intent = Intent(Intent.ACTION_MAIN)
                     intent.setClass(getApplicationContext(), javaClass<OutlinerActivity>())
-                    intent.putExtra(OutlinerActivity.OUTLINES_DATA, res.value!!)
+                    intent.putExtra(Params.OUTLINES_DATA, res.value!!)
 
                     startActivity(intent)
                 }

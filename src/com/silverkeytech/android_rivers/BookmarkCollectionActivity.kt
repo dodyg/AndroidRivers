@@ -26,6 +26,10 @@ public open class BookmarkCollectionActivity(): SherlockActivity() {
         public val TAG: String = javaClass<BookmarkCollectionActivity>().getSimpleName()
     }
 
+
+    var collectionTitle: String = ""
+    var collectionId: Int = 0
+
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
         super.onCreate(savedInstanceState)

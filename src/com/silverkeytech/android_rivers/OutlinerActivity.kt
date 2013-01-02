@@ -32,10 +32,6 @@ public class OutlinerActivity(): SherlockActivity()
 {
     class object {
         public val TAG: String = javaClass<OutlinerActivity>().getSimpleName()
-        public val OUTLINES_DATA: String = "OUTLINES_DATA"
-        public val OUTLINES_TITLE: String = "OUTLINES_TITLE"
-        public val OUTLINES_URL: String = "OUTLINES_URL"
-        public val OUTLINES_EXPAND_ALL: String = "OUTLINES_EXPAND_ALL"
     }
 
     val LEVEL_NUMBER: Int = 12
@@ -57,16 +53,16 @@ public class OutlinerActivity(): SherlockActivity()
         val extras = getIntent()?.getExtras()
 
         if (extras != null){
-            val title = extras.getString(OUTLINES_TITLE)
+            val title = extras.getString(Params.OUTLINES_TITLE)
             if (title != null)
                 setTitle(title)
 
-            val url = extras.getString(OUTLINES_URL)
+            val url = extras.getString(Params.OUTLINES_URL)
             if (url != null)
                 outlinesUrl = url
 
-            expandAll = extras.getBoolean(OUTLINES_EXPAND_ALL)
-            outlinesData = extras.getSerializable(OUTLINES_DATA)!! as ArrayList<OutlineContent>
+            expandAll = extras.getBoolean(Params.OUTLINES_EXPAND_ALL)
+            outlinesData = extras.getSerializable(Params.OUTLINES_DATA)!! as ArrayList<OutlineContent>
 
             displayOutlines(treeManager, outlinesData!!, expandAll)
         }

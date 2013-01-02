@@ -27,5 +27,14 @@ public class Params(){
         val FEED_URL = "FEED_URL"
         val FEED_NAME = "FEED_NAME"
         val FEED_LANGUAGE = "FEED_LANGUAGE"
+
+        val OUTLINES_DATA: String = "OUTLINES_DATA"
+        val OUTLINES_TITLE: String = "OUTLINES_TITLE"
+        val OUTLINES_URL: String = "OUTLINES_URL"
+        val OUTLINES_EXPAND_ALL: String = "OUTLINES_EXPAND_ALL"
+
+        val DOWNLOAD_URL: String = "downloadUrl"
+        val DOWNLOAD_TITLE: String = "downloadTitle"
+        val DOWNLOAD_LOCATION_PATH: String = "downloadLocationPath"
     }
 }
