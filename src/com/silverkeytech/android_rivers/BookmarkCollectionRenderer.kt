@@ -33,6 +33,7 @@ import com.silverkeytech.android_rivers.db.BookmarkCollection
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 import java.util.ArrayList
+import android.util.Log
 
 public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity){
     class object {
@@ -52,6 +53,7 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val bookmark = bookmarks.get(p2)
+                Log.d(TAG, "Downloading feed ${bookmark.title} - ${bookmark.url}")
                 var i = startFeedActivityIntent(context, bookmark.url, bookmark.title, bookmark.language)
                 context.startActivity(i)
             }

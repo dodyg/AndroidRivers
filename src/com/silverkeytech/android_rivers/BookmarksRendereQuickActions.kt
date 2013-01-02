@@ -27,11 +27,54 @@ import android.widget.PopupWindow
 import com.silverkeytech.android_rivers.db.Bookmark
 import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.outlines.Outline
+import com.silverkeytech.android_rivers.db.BookmarkCollection
+import android.util.Log
+import com.silverkeytech.android_rivers.db.clearBookmarksFromCollection
 
 fun inflater(context: Context): LayoutInflater {
     val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     return inflater
 }
+
+fun showCollectionQuickActionPopup(context: MainActivity, collection: BookmarkCollection, item: View, list: View) {
+    //overlay popup at top of clicked overview position
+    val popupWidth = item.getWidth()
+    val popupHeight = item.getHeight()
+
+    val x = context.getLayoutInflater()!!.inflate(R.layout.collection_quick_actions, null, false)!!
+    val pp = PopupWindow(x, popupWidth, popupHeight, true)
+
+    x.setBackgroundColor(android.graphics.Color.LTGRAY)
+
+    x.setOnClickListener {
+        pp.dismiss()
+    }
+
+    val icon = x.findViewById(R.id.collection_quick_action_delete_icon) as ImageView
+    icon.setOnClickListener {
+        try{
+            Log.d("showCollectionQuickActionPopup", "Start clearing bookmarks from collection ${collection.id}")
+            clearBookmarksFromCollection(collection.id)
+            Log.d("showCollectionQuickActionPopup", "Start deleting collection ${collection.id}")
+
+            val res = DatabaseManager.cmd().bookmarkCollection().deleteById(collection.id)
+            if (res.isFalse())
+                context.toastee("Error in removing this bookmark collection ${res.exception?.getMessage()}")
+            else {
+                context.toastee("Bookmark removed")
+                context.refreshBookmarkCollection()
+            }
+        }
+        catch(e: Exception){
+            context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
+        }
+        pp.dismiss()
+    }
+
+    val itemLocation = getLocationOnScreen(item)
+    pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
+}
+
 
 fun showBookmarkListingQuickActionPopup(context: MainActivity, currentBookmark: Bookmark, item: View, list: View) {
     //overlay popup at top of clicked overview position

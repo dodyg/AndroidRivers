@@ -23,6 +23,37 @@ import com.silverkeytech.android_rivers.outlines.Body
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 
+public fun clearBookmarksFromCollection(collectionId : Int){
+    var bookmarks = getBookmarksFromDbByCollection(collectionId)
+    if (bookmarks.count() > 0){
+        for(val bk in bookmarks){
+            val b = DatabaseManager.query().bookmark().byUrl(bk.url)
+            //double check to make sure that the bookmark really exists
+            if (b.exists){
+                b.value!!.collection = null
+                DatabaseManager.bookmark!!.update(b.value!!) //now it is removed
+            }
+        }
+    }
+}
+
+public fun removeBookmarkFromCollection(collectionId : Int, bookmarkId : Int){
+    var bookmarks = getBookmarksFromDbByCollection(collectionId)
+    if (bookmarks.count() > 0){
+        var bookmark = bookmarks.filter { it.id == bookmarkId }
+
+        if (bookmark.count() == 1){
+            val bk = bookmark.get(0)
+            val b = DatabaseManager.query().bookmark().byUrl(bk.url)
+            //double check to make sure that the bookmark really exists
+            if (b.exists){
+                b.value!!.collection = null
+                DatabaseManager.bookmark!!.update(b.value!!) //now it is removed
+            }
+        }
+    }
+}
+
 public fun getBookmarkCollectionFromDb() : List<BookmarkCollection>{
     var coll = DatabaseManager.query().bookmarkCollection().all()
 

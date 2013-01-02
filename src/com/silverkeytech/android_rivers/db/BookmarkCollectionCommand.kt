@@ -23,5 +23,16 @@ import com.silverkeytech.android_rivers.Result
 
 
 public class BookmarkCollectionCommand(private val dao: Dao<BookmarkCollection, out Int?>){
+    fun deleteById (id : Int): Result<Boolean> {
+        try{
+            var condition = dao.deleteBuilder()!!
+            condition.where()!!.eq(BOOKMARK_COLLECTION_ID, id)
 
+            dao.delete(condition.prepare())
+
+            return Result.right(true)
+        }catch (e: Exception){
+            return Result.wrong(e)
+        }
+    }
 }

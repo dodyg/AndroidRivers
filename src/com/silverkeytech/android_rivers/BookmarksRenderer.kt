@@ -58,7 +58,14 @@ public class BookmarksRenderer(val context: MainActivity){
             }
         })
 
-        list.setOnItemLongClickListener(null)
+        list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
+            public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
+                val current  = coll[p2]
+                showCollectionQuickActionPopup(context, current, p1!!, list)
+                return true
+            }
+        })
+
     }
 
     fun handleListing(bookmarks: List<Bookmark>) {
