@@ -19,9 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.content.Context
-import android.content.Intent
-import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,43 +26,24 @@ import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
-import android.widget.ImageView
 import android.widget.ListView
-import android.widget.PopupWindow
 import android.widget.TextView
-import com.silverkeytech.android_rivers.db.DatabaseManager
+import com.silverkeytech.android_rivers.db.Bookmark
+import com.silverkeytech.android_rivers.db.BookmarkCollection
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 import java.util.ArrayList
-import com.silverkeytech.android_rivers.db.Bookmark
-import com.silverkeytech.android_rivers.db.BookmarkCollection
 
 public class BookmarksRenderer(val context: MainActivity){
     class object {
         public val TAG: String = javaClass<BookmarksRenderer>().getSimpleName()
     }
 
-    public data class ViewHolder (var name: TextView)
-
-    fun handleCollection(coll : List<BookmarkCollection>){
+    fun handleCollection(coll: List<BookmarkCollection>) {
         val adapter = object : ArrayAdapter<BookmarkCollection>(context, android.R.layout.simple_list_item_1, android.R.id.text1, coll){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-                var vw = convertView
-                var holder: ViewHolder?
-
                 val text = coll[position].toString()
-                if (vw == null){
-                    vw = inflater().inflate(android.R.layout.simple_list_item_1, parent, false)
-
-                    holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
-                    holder!!.name.setText(text)
-                    vw!!.setTag(holder)
-                }else{
-                    holder = vw!!.getTag() as ViewHolder
-                    holder!!.name.setText(text)
-                }
-
-                return vw
+                return currentListItem(text!!, convertView, parent)
             }
         }
 
@@ -75,25 +53,11 @@ public class BookmarksRenderer(val context: MainActivity){
         list.setOnItemLongClickListener(null)
     }
 
-    fun handleListing(bookmarks : List<Bookmark>){
+    fun handleListing(bookmarks: List<Bookmark>) {
         val adapter = object : ArrayAdapter<Bookmark>(context, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-                var vw = convertView
-                var holder: ViewHolder?
-
                 val text = bookmarks[position].toString()
-                if (vw == null){
-                    vw = inflater().inflate(android.R.layout.simple_list_item_1, parent, false)
-
-                    holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
-                    holder!!.name.setText(text)
-                    vw!!.setTag(holder)
-                }else{
-                    holder = vw!!.getTag() as ViewHolder
-                    holder!!.name.setText(text)
-                }
-
-                return vw
+                return currentListItem(text!!, convertView, parent)
             }
         }
 
@@ -125,22 +89,8 @@ public class BookmarksRenderer(val context: MainActivity){
 
         val adapter = object : ArrayAdapter<Outline>(context, android.R.layout.simple_list_item_1, android.R.id.text1, outlines){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-                var vw = convertView
-                var holder: ViewHolder?
-
                 val text = outlines[position].toString()
-                if (vw == null){
-                    vw = inflater().inflate(android.R.layout.simple_list_item_1, parent, false)
-
-                    holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
-                    holder!!.name.setText(text)
-                    vw!!.setTag(holder)
-                }else{
-                    holder = vw!!.getTag() as ViewHolder
-                    holder!!.name.setText(text)
-                }
-
-                return vw
+                return currentListItem(text!!, convertView, parent)
             }
         }
 
@@ -157,7 +107,7 @@ public class BookmarksRenderer(val context: MainActivity){
                         else
                             "en"
 
-                val ix = startRiverActivityIntent(context,currentOutline.url!!, currentOutline.text!!, lang )
+                val ix = startRiverActivityIntent(context, currentOutline.url!!, currentOutline.text!!, lang)
 
                 context.startActivity(ix)
             }
@@ -172,7 +122,28 @@ public class BookmarksRenderer(val context: MainActivity){
         })
     }
 
-    fun inflater() : LayoutInflater{
+    public data class ViewHolder (var name: TextView)
+
+    fun currentListItem(text: String, convertView : View?, parent: ViewGroup?) : View?{
+        var holder: ViewHolder?
+
+        var vw : View? = convertView
+
+        if (vw == null){
+            vw = inflater().inflate(android.R.layout.simple_list_item_1, parent, false)
+
+            holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
+            holder!!.name.setText(text)
+            vw!!.setTag(holder)
+        }else{
+            holder = vw!!.getTag() as ViewHolder
+            holder!!.name.setText(text)
+        }
+
+        return vw
+    }
+
+    fun inflater(): LayoutInflater {
         val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         return inflater
     }

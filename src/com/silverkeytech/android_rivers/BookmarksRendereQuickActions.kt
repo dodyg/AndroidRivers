@@ -19,34 +19,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.content.Context
-import android.content.Intent
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Adapter
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemClickListener
-import android.widget.ArrayAdapter
 import android.widget.ImageView
-import android.widget.ListView
 import android.widget.PopupWindow
-import android.widget.TextView
-import com.silverkeytech.android_rivers.db.DatabaseManager
-import com.silverkeytech.android_rivers.outlines.Opml
-import com.silverkeytech.android_rivers.outlines.Outline
-import java.util.ArrayList
 import com.silverkeytech.android_rivers.db.Bookmark
-import com.silverkeytech.android_rivers.db.BookmarkCollection
+import com.silverkeytech.android_rivers.db.DatabaseManager
+import com.silverkeytech.android_rivers.outlines.Outline
 
-
-fun inflater(context: Context) : LayoutInflater{
+fun inflater(context: Context): LayoutInflater {
     val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     return inflater
 }
 
-fun showBookmarkListingQuickActionPopup(context : MainActivity, currentBookmark : Bookmark, item : View, list : View){
+fun showBookmarkListingQuickActionPopup(context: MainActivity, currentBookmark: Bookmark, item: View, list: View) {
     //overlay popup at top of clicked overview position
     val popupWidth = item.getWidth()
     val popupHeight = item.getHeight()
@@ -81,7 +68,7 @@ fun showBookmarkListingQuickActionPopup(context : MainActivity, currentBookmark 
     pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
 }
 
-fun showRiverListingQuickActionPopup(context : MainActivity, currentOutline : Outline, item : View, list : View){
+fun showRiverListingQuickActionPopup(context: MainActivity, currentOutline: Outline, item: View, list: View) {
     //overlay popup at top of clicked overview position
     val popupWidth = item.getWidth()
     val popupHeight = item.getHeight()
@@ -116,9 +103,9 @@ fun showRiverListingQuickActionPopup(context : MainActivity, currentOutline : Ou
     pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
 }
 
-data class Location(val x : Int, val y : Int)
+data class Location(val x: Int, val y: Int)
 
-fun getLocationOnScreen(item : View) : Location{
+fun getLocationOnScreen(item: View): Location {
     val loc = intArray(0, 1)
     item.getLocationOnScreen(loc)
     val popupX = loc[0]
