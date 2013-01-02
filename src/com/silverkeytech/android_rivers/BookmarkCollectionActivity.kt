@@ -18,14 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import com.actionbarsherlock.app.SherlockActivity
+import com.actionbarsherlock.app.SherlockListActivity
 import android.os.Bundle
+import com.silverkeytech.android_rivers.db.getBookmarksFromDbByCollection
 
-public open class BookmarkCollectionActivity(): SherlockActivity() {
+public open class BookmarkCollectionActivity(): SherlockListActivity() {
     class object {
         public val TAG: String = javaClass<BookmarkCollectionActivity>().getSimpleName()
     }
-
 
     var collectionTitle: String = ""
     var collectionId: Int = 0
@@ -35,9 +35,20 @@ public open class BookmarkCollectionActivity(): SherlockActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.collection)
 
+        var i = getIntent()!!
+        collectionId = i.getIntExtra(Params.COLLECTION_ID, 0)
+        collectionTitle = i.getStringExtra(Params.COLLECTION_TITLE)!!
+
         var actionBar = getSupportActionBar()!!
         actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
         actionBar.setDisplayShowTitleEnabled(true)
+        actionBar.setTitle(collectionTitle)
 
+        displayCollection()
+    }
+
+    fun displayCollection(){
+        val bookmarks = getBookmarksFromDbByCollection(collectionId)
+        BookmarkCollectionRenderer(this).handleListing(bookmarks)
     }
 }

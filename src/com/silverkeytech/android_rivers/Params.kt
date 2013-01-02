@@ -40,5 +40,8 @@ public class Params(){
         val RIVERS_DOWNLOAD_PARCEL: String = "RIVERS_DOWNLOAD_PARCEL"
         val RIVERS_DOWNLOAD_TITLE: String = "RIVERS_DOWNLOAD_TITLE"
         val RIVERS_DOWNLOAD_URLS: String = "RIVERS_DOWNLOAD_URLS"
+
+        val COLLECTION_TITLE = "COLLECTION_TITLE"
+        val COLLECTION_ID = "COLLECTION_ID"
     }
 }

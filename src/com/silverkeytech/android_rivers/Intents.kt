@@ -21,8 +21,10 @@ public fun startRiverActivityIntent(context: Context, url : String, text : Strin
     return i
 }
 
-public fun startCollectionActivityIntent(context : Context) : Intent{
+public fun startCollectionActivityIntent(context : Context, id : Int, title : String) : Intent{
     val i = Intent(context, javaClass<BookmarkCollectionActivity>())
+    i.putExtra(Params.COLLECTION_ID, id)
+    i.putExtra(Params.COLLECTION_TITLE, title)
     return i
 }
 

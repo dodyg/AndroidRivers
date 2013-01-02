@@ -34,31 +34,9 @@ import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 import java.util.ArrayList
 
-public class BookmarksRenderer(val context: MainActivity){
+public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity){
     class object {
-        public val TAG: String = javaClass<BookmarksRenderer>().getSimpleName()
-    }
-
-    fun handleCollection(coll: List<BookmarkCollection>) {
-        val adapter = object : ArrayAdapter<BookmarkCollection>(context, android.R.layout.simple_list_item_1, android.R.id.text1, coll){
-            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-                val text = coll[position].toString()
-                return currentListItem(text, convertView, parent)
-            }
-        }
-
-        val list = context.findView<ListView>(R.id.main_rivers_lv)
-        list.setAdapter(adapter)
-        list.setOnItemClickListener(object : OnItemClickListener{
-            public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
-                val current = coll[p2]
-
-                val i = startCollectionActivityIntent(context, current.id, current.title)
-                context.startActivity(i)
-            }
-        })
-
-        list.setOnItemLongClickListener(null)
+        public val TAG: String = javaClass<BookmarkCollectionRenderer>().getSimpleName()
     }
 
     fun handleListing(bookmarks: List<Bookmark>) {
@@ -69,7 +47,7 @@ public class BookmarksRenderer(val context: MainActivity){
             }
         }
 
-        val list = context.findView<ListView>(R.id.main_rivers_lv)
+        val list = context.findView<ListView>(android.R.id.list)
         list.setAdapter(adapter)
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
@@ -82,49 +60,6 @@ public class BookmarksRenderer(val context: MainActivity){
         list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
             public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
                 val currentBookmark = bookmarks.get(p2)
-                showBookmarkListingQuickActionPopup(context, currentBookmark, p1!!, list)
-                return true
-            }
-        })
-    }
-
-    fun handleRiversListing(opml: Opml) {
-        var outlines = ArrayList<Outline>()
-
-        opml.body?.outline?.forEach {
-            outlines.add(it)
-        }
-
-        val adapter = object : ArrayAdapter<Outline>(context, android.R.layout.simple_list_item_1, android.R.id.text1, outlines){
-            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-                val text = outlines[position].toString()
-                return currentListItem(text!!, convertView, parent)
-            }
-        }
-
-        val list = context.findView<ListView>(R.id.main_rivers_lv)
-        list.setAdapter(adapter)
-
-        list.setOnItemClickListener(object : OnItemClickListener{
-            public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
-                val currentOutline = outlines.get(p2)
-
-                var lang =
-                        if (!currentOutline.language.isNullOrEmpty())
-                            currentOutline.language!!
-                        else
-                            "en"
-
-                val ix = startRiverActivityIntent(context, currentOutline.url!!, currentOutline.text!!, lang)
-
-                context.startActivity(ix)
-            }
-        })
-
-        list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
-            public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
-                val currentOutline = outlines.get(p2)
-                showRiverListingQuickActionPopup(context, currentOutline, p1!!, list)
                 return true
             }
         })

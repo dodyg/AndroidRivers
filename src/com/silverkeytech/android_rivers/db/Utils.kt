@@ -32,6 +32,15 @@ public fun getBookmarkCollectionFromDb() : List<BookmarkCollection>{
         return arrayListOf<BookmarkCollection>()
 }
 
+public fun getBookmarksFromDbByCollection(collectionId : Int) : List<Bookmark>{
+    var bookmarks = DatabaseManager.query().bookmark().byCollectionId(collectionId)
+
+    if (bookmarks.exist)
+        return bookmarks.values!!
+    else
+        return arrayListOf<Bookmark>()
+}
+
 public fun getBookmarksFromDb(kind : BookmarkKind) : List<Bookmark>{
     var bookmarks = DatabaseManager.query().bookmark().byKind(kind)
 
