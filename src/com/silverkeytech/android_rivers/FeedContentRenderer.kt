@@ -139,10 +139,17 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                             p0?.dismiss()
                         }
                     })
+
+                    dialog.setNeutralButton("Share", object : DialogInterface.OnClickListener{
+                        public override fun onClick(p0: DialogInterface?, p1: Int) {
+                            var intent = shareActionIntent(currentNews.link!!)
+                            context.startActivity(Intent.createChooser(intent, "Share page"))
+                        }
+                    })
                 }
 
                 if (currentNews.isPodcast()){
-                    dialog.setNeutralButton("Podcast", object : DialogInterface.OnClickListener{
+                    dialog.setNegativeButton("Podcast", object : DialogInterface.OnClickListener{
                         public override fun onClick(p0: DialogInterface?, p1: Int) {
                             var messenger = Messenger(object : Handler(){
                                 public override fun handleMessage(msg: Message?) {

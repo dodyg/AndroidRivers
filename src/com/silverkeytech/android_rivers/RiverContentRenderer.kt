@@ -166,13 +166,20 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                             p0?.dismiss()
                         }
                     })
+
+                    dialog.setNeutralButton("Share", object : DialogInterface.OnClickListener{
+                        public override fun onClick(p0: DialogInterface?, p1: Int) {
+                            var intent = shareActionIntent(currentNews.item.link!!)
+                            context.startActivity(Intent.createChooser(intent, "Share page"))
+                        }
+                    })
                 }
 
                 //check for image enclosure
                 if (currentNews.item.containsEnclosure()!!){
                     var enclosure = currentNews.item.enclosure!!.get(0)
                     if (isSupportedImageMime(enclosure.`type`!!)){
-                        dialog.setNeutralButton("Image", object : DialogInterface.OnClickListener{
+                        dialog.setNegativeButton("Image", object : DialogInterface.OnClickListener{
                             public override fun onClick(p0: DialogInterface?, p1: Int) {
                                 Log.d(TAG, "I am downloading a ${enclosure.url} with type ${enclosure.`type`}")
                                 DownloadImage(context).execute(enclosure.url)
@@ -181,7 +188,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                     }
                     //assume podcast
                     else {
-                        dialog.setNeutralButton("Podcast", object : DialogInterface.OnClickListener{
+                        dialog.setNegativeButton("Podcast", object : DialogInterface.OnClickListener{
                             public override fun onClick(p0: DialogInterface?, p1: Int) {
                                 var messenger = Messenger(object : Handler(){
                                     public override fun handleMessage(msg: Message?) {
@@ -208,21 +215,8 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                             }
                         })
                     }
-                }else{
-                    //there is not enclosure detected, so enable sharing
-                    if (currentNewsLinkAvailable) {
-                        dialog.setNeutralButton("Share", object : DialogInterface.OnClickListener{
-                            public override fun onClick(p0: DialogInterface?, p1: Int) {
-                                var intent = Intent(Intent.ACTION_SEND)
-                                intent.setType("text/plain")
-                                intent.putExtra(Intent.EXTRA_TEXT, currentNews.item.link!!)
-                                context.startActivity(Intent.createChooser(intent, "Share page"))
-                            }
-                        })
-                    }
                 }
-
-                if (currentNews.item.containsSource()!!){
+                else if (currentNews.item.containsSource()!!){
                     dialog.setNeutralButton("Outlines", object : DialogInterface.OnClickListener{
                         public override fun onClick(p0: DialogInterface?, p1: Int) {
                            try{

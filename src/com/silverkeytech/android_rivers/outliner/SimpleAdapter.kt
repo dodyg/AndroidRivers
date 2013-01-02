@@ -38,8 +38,8 @@ import com.silverkeytech.android_rivers.toastee
 import java.util.ArrayList
 import android.util.Log
 import com.silverkeytech.android_rivers.FeedActivity
-import com.silverkeytech.android_rivers.startFeedActivity
-import com.silverkeytech.android_rivers.startRiverActivity
+import com.silverkeytech.android_rivers.startFeedActivityIntent
+import com.silverkeytech.android_rivers.startRiverActivityIntent
 
 public open class SimpleAdapter(private val context: OutlinerActivity,
                                 private val treeStateManager: TreeStateManager<Long?>,
@@ -118,7 +118,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         var text = currentOutline.text
         var lang = currentOutline.getAttribute("language")!!
 
-        var i = startRiverActivity(context, url, text, lang)
+        var i = startRiverActivityIntent(context, url, text, lang)
         context.startActivity(i);
     }
 
@@ -127,7 +127,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         var text = currentOutline.text
         var lang = currentOutline.getAttribute("language")!!
 
-        var i = startFeedActivity(context, url, text, lang)
+        var i = startFeedActivityIntent(context, url, text, lang)
         context.startActivity(i)
     }
 

@@ -74,7 +74,7 @@ public class BookmarksRenderer(val context: MainActivity){
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val bookmark = bookmarks.get(p2)
-                var i = startFeedActivity(context, bookmark.url, bookmark.title, bookmark.language)
+                var i = startFeedActivityIntent(context, bookmark.url, bookmark.title, bookmark.language)
                 context.startActivity(i)
             }
         })
