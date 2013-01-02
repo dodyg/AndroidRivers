@@ -23,25 +23,22 @@ import android.content.Intent
 import android.util.Log
 import com.silverkeytech.android_rivers.OutlinerActivity
 import com.silverkeytech.android_rivers.Result
+import com.silverkeytech.android_rivers.XmlComponent
 import com.silverkeytech.android_rivers.isNullOrEmpty
+import com.silverkeytech.android_rivers.outlines.Body
+import com.silverkeytech.android_rivers.outlines.Head
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
-import com.silverkeytech.android_rivers.scrubHtml
-import go.goyalla.dict.arabicDictionary.file.ArabicReshape
-import java.util.ArrayList
-import org.simpleframework.xml.Serializer
-import org.simpleframework.xml.core.Persister
 import com.silverkeytech.android_rivers.riverjs.RiverOpml
-import com.silverkeytech.android_rivers.outlines.Head
-import com.silverkeytech.android_rivers.outlines.Body
 import com.silverkeytech.android_rivers.riverjs.RiverOpmlOutline
-import com.silverkeytech.android_rivers.syndications.rss.Rss
+import com.silverkeytech.android_rivers.scrubHtml
 import com.silverkeytech.android_rivers.syndications.atom.Feed
-import com.silverkeytech.android_rivers.XmlComponent
-import java.io.StringReader
-import com.silverkeytech.android_rivers.xml.RssParser
-import java.io.ByteArrayInputStream
+import com.silverkeytech.android_rivers.syndications.rss.Rss
 import com.silverkeytech.android_rivers.syndications.rss.RssBuilder
+import com.silverkeytech.android_rivers.xml.RssParser
+import go.goyalla.dict.arabicDictionary.file.ArabicReshape
+import java.io.ByteArrayInputStream
+import java.util.ArrayList
 
 //do an in order traversal so we can flatten it up to be used by outliner
 fun Opml.traverse (filter: ((Outline) -> Boolean)? = null, depthLimit: Int = 12): ArrayList<OutlineContent> {
@@ -109,8 +106,8 @@ fun transformXmlToOpml(xml: String?): Result<Opml> {
     }
 }
 
-fun transformFeedOpmlToOpml(feedOpml : RiverOpml) :Result<Opml>{
-    fun traverseFeedOpml(outline : Outline, feedOutline : RiverOpmlOutline){
+fun transformFeedOpmlToOpml(feedOpml: RiverOpml): Result<Opml> {
+    fun traverseFeedOpml(outline: Outline, feedOutline: RiverOpmlOutline) {
         outline.text = feedOutline.text
         outline.url = feedOutline.url
         outline.xmlUrl = feedOutline.xmlUrl
@@ -188,7 +185,7 @@ fun transformXmlToRss(xml: String?): Result<Rss> {
     }
 }
 
-fun transformXmlToAtom(xml: String?): Result<Feed>{
+fun transformXmlToAtom(xml: String?): Result<Feed> {
 
     try{
         val feed: Feed? = XmlComponent.serial.read(javaClass<Feed>(), xml, false)

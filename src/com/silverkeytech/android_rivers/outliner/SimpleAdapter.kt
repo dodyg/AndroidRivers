@@ -20,6 +20,7 @@ package com.silverkeytech.android_rivers.outliner
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.LinearLayout
@@ -30,16 +31,12 @@ import com.pl.polidea.treeview.TreeStateManager
 import com.silverkeytech.android_rivers.DownloadOpml
 import com.silverkeytech.android_rivers.Duration
 import com.silverkeytech.android_rivers.OutlinerActivity
-import com.silverkeytech.android_rivers.Params
 import com.silverkeytech.android_rivers.R
-import com.silverkeytech.android_rivers.RiverActivity
 import com.silverkeytech.android_rivers.getMain
-import com.silverkeytech.android_rivers.toastee
-import java.util.ArrayList
-import android.util.Log
-import com.silverkeytech.android_rivers.FeedActivity
 import com.silverkeytech.android_rivers.startFeedActivityIntent
 import com.silverkeytech.android_rivers.startRiverActivityIntent
+import com.silverkeytech.android_rivers.toastee
+import java.util.ArrayList
 
 public open class SimpleAdapter(private val context: OutlinerActivity,
                                 private val treeStateManager: TreeStateManager<Long?>,
@@ -122,7 +119,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         context.startActivity(i);
     }
 
-    fun handleRss(currentOutline : OutlineContent){
+    fun handleRss(currentOutline: OutlineContent) {
         var url = currentOutline.getAttribute("url")!!
         var text = currentOutline.text
         var lang = currentOutline.getAttribute("language")!!
@@ -182,7 +179,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         }
         else {
             DownloadOpml(context)
-            .executeOnProcessedCompletion({
+                    .executeOnProcessedCompletion({
                 res ->
                 if (res.isTrue()){
                     var outlines = res.value!!
@@ -193,7 +190,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
                     context.toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)
                 }
             }, { outline -> outline.text != "<rules>" })
-            .execute(url)
+                    .execute(url)
         }
 
         return true
