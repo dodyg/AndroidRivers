@@ -37,9 +37,6 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
     class object{
         public val TAG: String = javaClass<DownloadAllRiversService>().getSimpleName()
 
-        public val PARCEL: String = "Parcel"
-        public val TITLES: String = "TITLES"
-        public val URLS: String = "URLS"
     }
 
     var targetUrls: List<String?> ? = null
@@ -69,8 +66,8 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
     }
 
     protected override fun onHandleIntent(p0: Intent?) {
-        targetTitles = p0?.getStringArrayListExtra(TITLES)
-        targetUrls = p0?.getStringArrayListExtra(URLS)
+        targetTitles = p0?.getStringArrayListExtra(Params.RIVERS_DOWNLOAD_TITLE)
+        targetUrls = p0?.getStringArrayListExtra(Params.RIVERS_DOWNLOAD_URLS)
 
         Log.d(TAG, "Getting parcel successfully ${targetTitles?.count()}")
 

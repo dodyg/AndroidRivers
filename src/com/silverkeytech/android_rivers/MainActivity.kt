@@ -148,8 +148,8 @@ public open class MainActivity(): SherlockActivity() {
                     var titleList = subscriptionList.body?.outline?.iterator()?.map { it.text!! }?.toArrayList()
                     var urlList = subscriptionList.body?.outline?.iterator()?.map { it.url!! }?.toArrayList()
 
-                    intent.putStringArrayListExtra(DownloadAllRiversService.TITLES, titleList)
-                    intent.putStringArrayListExtra(DownloadAllRiversService.URLS, urlList)
+                    intent.putStringArrayListExtra(Params.RIVERS_DOWNLOAD_TITLE, titleList)
+                    intent.putStringArrayListExtra(Params.RIVERS_DOWNLOAD_URLS, urlList)
 
                     startService(intent)
                     return true

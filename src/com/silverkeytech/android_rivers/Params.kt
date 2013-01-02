@@ -36,5 +36,9 @@ public class Params(){
         val DOWNLOAD_URL: String = "downloadUrl"
         val DOWNLOAD_TITLE: String = "downloadTitle"
         val DOWNLOAD_LOCATION_PATH: String = "downloadLocationPath"
+
+        val RIVERS_DOWNLOAD_PARCEL: String = "RIVERS_DOWNLOAD_PARCEL"
+        val RIVERS_DOWNLOAD_TITLE: String = "RIVERS_DOWNLOAD_TITLE"
+        val RIVERS_DOWNLOAD_URLS: String = "RIVERS_DOWNLOAD_URLS"
     }
 }
