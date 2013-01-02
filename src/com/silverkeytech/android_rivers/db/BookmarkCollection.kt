@@ -39,4 +39,8 @@ public class BookmarkCollection(){
 
     [DatabaseField(canBeNull = false, columnName = "kind")]
     public var kind: String = ""
+
+    public fun toString() : String{
+        return title
+    }
 }

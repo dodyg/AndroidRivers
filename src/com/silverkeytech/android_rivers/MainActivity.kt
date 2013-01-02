@@ -31,6 +31,7 @@ import com.silverkeytech.android_rivers.outliner.startOutlinerActivity
 import java.io.File
 import com.silverkeytech.android_rivers.db.BookmarkKind
 import com.silverkeytech.android_rivers.db.getBookmarksFromDb
+import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 
 enum class MainActivityMode {
     RIVER
@@ -125,6 +126,9 @@ public open class MainActivity(): SherlockActivity() {
                     MainActivityMode.RSS -> {
                         displayRssBookmarks()
                     }
+                    MainActivityMode.COLLECTION -> {
+                        displayBookmarkCollection()
+                    }
                     else -> { }
                 }
 
@@ -172,6 +176,9 @@ public open class MainActivity(): SherlockActivity() {
                     MainActivityMode.RSS -> {
                         displayRssBookmarks()
                     }
+                    MainActivityMode.COLLECTION ->{
+                        displayBookmarkCollection()
+                    }
                     else -> { }
                 }
 
@@ -184,8 +191,17 @@ public open class MainActivity(): SherlockActivity() {
     }
 
     private fun displayRssBookmarks(){
-        var bookmarks = getBookmarksFromDb(BookmarkKind.RSS)
+        val bookmarks = getBookmarksFromDb(BookmarkKind.RSS)
         BookmarksRenderer(this@MainActivity).handleListing(bookmarks)
+    }
+
+    private fun displayBookmarkCollection(){
+       val coll = getBookmarkCollectionFromDb()
+       BookmarksRenderer(this@MainActivity).handleCollection(coll)
+    }
+
+    public fun refreshBookmarkCollection(){
+        displayBookmarkCollection()
     }
 
     public fun refreshRssBookmarks(){

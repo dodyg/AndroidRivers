@@ -38,6 +38,7 @@ import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 import java.util.ArrayList
 import com.silverkeytech.android_rivers.db.Bookmark
+import com.silverkeytech.android_rivers.db.BookmarkCollection
 
 public class BookmarksRenderer(val context: MainActivity){
     class object {
@@ -45,6 +46,35 @@ public class BookmarksRenderer(val context: MainActivity){
     }
 
     public data class ViewHolder (var name: TextView)
+
+    fun handleCollection(coll : List<BookmarkCollection>){
+        val adapter = object : ArrayAdapter<BookmarkCollection>(context, android.R.layout.simple_list_item_1, android.R.id.text1, coll){
+            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
+                var vw = convertView
+                var holder: ViewHolder?
+
+                if (vw == null){
+                    val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                    vw = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
+
+                    holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
+                    holder!!.name.setText(coll[position].toString())
+                    vw!!.setTag(holder)
+                }else{
+                    holder = vw!!.getTag() as ViewHolder
+                    holder!!.name.setText(coll[position].toString())
+                    Log.d(TAG, "List View reused")
+                }
+
+                return vw
+            }
+        }
+
+        val list = context.findView<ListView>(R.id.main_rivers_lv)
+        list.setAdapter(adapter)
+        list.setOnItemClickListener(null)
+        list.setOnItemLongClickListener(null)
+    }
 
     fun handleListing(bookmarks : List<Bookmark>){
         val adapter = object : ArrayAdapter<Bookmark>(context, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){

@@ -23,6 +23,15 @@ import com.silverkeytech.android_rivers.outlines.Body
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 
+public fun getBookmarkCollectionFromDb() : List<BookmarkCollection>{
+    var coll = DatabaseManager.query().bookmarkCollection().all()
+
+    if (coll.exist)
+        return coll.values!!
+    else
+        return arrayListOf<BookmarkCollection>()
+}
+
 public fun getBookmarksFromDb(kind : BookmarkKind) : List<Bookmark>{
     var bookmarks = DatabaseManager.query().bookmark().byKind(kind)
 
