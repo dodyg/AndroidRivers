@@ -53,8 +53,13 @@ public open class MainActivity(): SherlockActivity() {
 
     var mode: MainActivityMode = MainActivityMode.RIVER
 
+    var currentTheme : Int? = null
+    var isOnCreate : Boolean = true
+
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
-        setTheme(this.getVisualPref().getTheme())
+        currentTheme = this.getVisualPref().getTheme()
+        isOnCreate = true
+        setTheme(currentTheme!!)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
 
@@ -102,6 +107,31 @@ public open class MainActivity(): SherlockActivity() {
             MainActivityMode.RSS -> MainActivityMode.COLLECTION
             MainActivityMode.COLLECTION -> MainActivityMode.RIVER
             else -> MainActivityMode.RIVER
+        }
+    }
+
+    fun restart(){
+        val intent = getIntent()
+        finish()
+        startActivity(intent)
+    }
+
+    protected override fun onResume() {
+        super.onResume()
+        //skip if this event comes after onCreate
+        if (!isOnCreate){
+            Log.d(TAG, "RESUMING Current Theme $currentTheme vs ${this.getVisualPref().getTheme()}")
+            //detect if there has been any theme changes
+            if (currentTheme != null && currentTheme!! != this.getVisualPref().getTheme()){
+                Log.d(TAG, "Theme changes detected - updating theme")
+                restart()
+                return
+            }
+
+            displayModeContent(mode)
+        }else {
+            Log.d(TAG, "RESUMING AFTER CREATION")
+            isOnCreate = false
         }
     }
 
@@ -157,6 +187,7 @@ public open class MainActivity(): SherlockActivity() {
 
         val dialog = AlertDialog.Builder(this)
         dialog.setView(dlg)
+        dialog.setTitle("Add new collection")
 
         var input = dlg.findViewById(R.id.collection_add_new_title_et)!! as EditText
 

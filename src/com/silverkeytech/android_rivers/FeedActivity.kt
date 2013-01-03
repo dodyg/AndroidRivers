@@ -27,6 +27,10 @@ import com.actionbarsherlock.view.MenuItem
 import com.silverkeytech.android_rivers.db.Bookmark
 import com.silverkeytech.android_rivers.db.BookmarkKind
 import com.silverkeytech.android_rivers.db.DatabaseManager
+import android.app.AlertDialog
+import android.content.DialogInterface
+import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
+import com.silverkeytech.android_rivers.db.BookmarkCollection
 
 //Responsible of downloading, caching and viewing a news river content
 public class FeedActivity(): SherlockListActivity()
@@ -105,26 +109,59 @@ public class FeedActivity(): SherlockListActivity()
                 return true
             }
             R.id.feed_menu_bookmark -> {
-                try{
-                    var bk = Bookmark()
-                    bk.title = feedName
-                    bk.url = feedUrl
-                    bk.kind = BookmarkKind.RSS.toString()
-                    bk.language = feedLanguage
-
-                    DatabaseManager.bookmark!!.create(bk)
-                    bookmarkMenu?.setVisible(false)
-                    toastee("$feedName syndication is added to your bookmark.")
-
-                    return true
-                }
-                catch(e: Exception){
-                    toastee("Sorry, we cannot add this $feedUrl", Duration.LONG)
-                    return false
-                }
+                addBookmarkOption()
+                return true
             }
             else ->
                 return super.onOptionsItemSelected(item)
+        }
+    }
+
+    fun saveBookmark(collection : BookmarkCollection?){
+        try{
+            var bk = Bookmark()
+            bk.title = feedName
+            bk.url = feedUrl
+            bk.kind = BookmarkKind.RSS.toString()
+            bk.language = feedLanguage
+            bk.collection = collection
+
+            DatabaseManager.bookmark!!.create(bk)
+            bookmarkMenu?.setVisible(false)
+
+            if (collection == null)
+                toastee("$feedName is bookmarked.")
+            else
+                toastee("$feedName is bookmarked to your ${collection?.title} collection.")
+        }
+        catch(e: Exception){
+            toastee("Sorry, I cannot bookmark $feedUrl", Duration.LONG)
+        }
+    }
+
+    fun addBookmarkOption(){
+        var coll = getBookmarkCollectionFromDb()
+
+        if (!coll.isEmpty()){
+
+            val dialog = AlertDialog.Builder(this)
+
+            dialog.setTitle("Bookmark to a collection")
+
+            var collectionTitles = coll.map { it.title }.toArray(array<String>())
+
+            dialog.setItems(collectionTitles, object : DialogInterface.OnClickListener{
+                public override fun onClick(p0: DialogInterface?, p1: Int) {
+                    val currentCollection = coll[p1]
+                    saveBookmark(currentCollection)
+                }
+            } )
+
+            var createdDialog = dialog.create()!!
+            createdDialog.show()
+
+        } else {
+            saveBookmark(null)
         }
     }
 
