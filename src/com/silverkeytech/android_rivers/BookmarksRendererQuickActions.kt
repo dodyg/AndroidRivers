@@ -50,8 +50,8 @@ fun showCollectionQuickActionPopup(context: MainActivity, collection: BookmarkCo
         pp.dismiss()
     }
 
-    val icon = x.findViewById(R.id.main_collection_quick_action_delete_icon) as ImageView
-    icon.setOnClickListener {
+    val delete = x.findViewById(R.id.main_collection_quick_action_delete_icon) as ImageView
+    delete.setOnClickListener {
         try{
             Log.d("showCollectionQuickActionPopup", "Start clearing bookmarks from collection ${collection.id}")
             clearBookmarksFromCollection(collection.id)
@@ -69,6 +69,12 @@ fun showCollectionQuickActionPopup(context: MainActivity, collection: BookmarkCo
             context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
         }
         pp.dismiss()
+    }
+
+    val edit = x.findViewById(R.id.main_collection_quick_action_edit_icon) as ImageView
+    edit.setOnClickListener{
+        pp.dismiss()
+        startCollectionActivityIntent(context, collection.id, collection.title)
     }
 
     val itemLocation = getLocationOnScreen(item)
