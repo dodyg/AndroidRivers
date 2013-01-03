@@ -40,6 +40,10 @@ public fun addNewCollection(title : String, kind : BookmarkCollectionKind) : Res
     }
 }
 
+fun checkIfUrlAlreadyBookmarked(url: String): Boolean {
+    return DatabaseManager.query().bookmark().byUrl(url).exists
+}
+
 public fun clearBookmarksFromCollection(collectionId : Int) : Result<None>{
     try{
         var bookmarks = getBookmarksFromDbByCollection(collectionId)

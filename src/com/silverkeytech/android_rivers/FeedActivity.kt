@@ -31,6 +31,7 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.BookmarkCollection
+import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 
 //Responsible of downloading, caching and viewing a news river content
 public class FeedActivity(): SherlockListActivity()
@@ -80,9 +81,8 @@ public class FeedActivity(): SherlockListActivity()
 
     val REFRESH: Int = 1
 
-
     public override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        val feedBookmarked = checkFeedBookmarkStatus(feedUrl)
+        val feedBookmarked = checkIfUrlAlreadyBookmarked(feedUrl)
 
         val bookmarkMenu =  menu!!.findItem(R.id.feed_menu_bookmark)!!
         bookmarkMenu.setVisible(!feedBookmarked)
@@ -160,9 +160,5 @@ public class FeedActivity(): SherlockListActivity()
         } else {
             saveBookmark(null)
         }
-    }
-
-    fun checkFeedBookmarkStatus(url: String): Boolean {
-        return DatabaseManager.query().bookmark().byUrl(url).exists
     }
 }

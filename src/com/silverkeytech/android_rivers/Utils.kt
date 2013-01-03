@@ -42,6 +42,12 @@ public fun Activity.findView<T: View>(id: Int): T {
     return (this.findViewById(id) as T)
 }
 
+public fun Activity.restart() {
+    var intent = this.getIntent()
+    this.finish()
+    this.startActivity(intent)
+}
+
 public fun OnClickListener(action: (View?) -> Unit): OnClickListener {
     return object : OnClickListener {
         public override fun onClick(p0: View?) {

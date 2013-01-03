@@ -26,6 +26,7 @@ import com.actionbarsherlock.view.MenuItem
 import com.silverkeytech.android_rivers.db.Bookmark
 import com.silverkeytech.android_rivers.db.BookmarkKind
 import com.silverkeytech.android_rivers.db.DatabaseManager
+import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity(): SherlockListActivity()
@@ -37,7 +38,6 @@ public class RiverActivity(): SherlockListActivity()
     var riverUrl: String = ""
     var riverName: String = ""
     var riverLanguage: String = ""
-    var riverBookmarked: Boolean = false
     var mode: ActionMode? = null
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
@@ -56,12 +56,8 @@ public class RiverActivity(): SherlockListActivity()
         setTitle(riverName)
 
         downloadContent(riverUrl, false)
-        riverBookmarked = checkRiverBookmarkStatus(riverUrl)
     }
 
-    fun checkRiverBookmarkStatus(url: String): Boolean {
-        return DatabaseManager.query().bookmark().byUrl(url).exists
-    }
 
     fun downloadContent(riverUrl: String, ignoreCache: Boolean) {
         var cache = getApplication().getMain().getRiverCache(riverUrl)
@@ -83,7 +79,6 @@ public class RiverActivity(): SherlockListActivity()
 
     val RESIZE_TEXT: Int = 2
 
-    var bookmarkMenu: MenuItem? = null
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
@@ -98,16 +93,19 @@ public class RiverActivity(): SherlockListActivity()
         var inflater = getSupportMenuInflater()!!
         inflater.inflate(R.menu.river_menu, menu)
 
-        bookmarkMenu = menu?.findItem(R.id.river_menu_bookmark)
-
-        if (riverBookmarked)
-            bookmarkMenu?.setVisible(false)
-
         return true
     }
 
     internal fun refreshContent() {
         downloadContent(riverUrl, false)
+    }
+
+    public override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        val riverBookmarked = checkIfUrlAlreadyBookmarked(riverUrl)
+
+        val bookmarkMenu = menu?.findItem(R.id.river_menu_bookmark)!!
+        bookmarkMenu.setVisible(!riverBookmarked)
+        return true
     }
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -129,7 +127,6 @@ public class RiverActivity(): SherlockListActivity()
                     bk.language = riverLanguage
 
                     DatabaseManager.bookmark!!.create(bk)
-                    bookmarkMenu?.setVisible(false)
                     toastee("$riverName is added to your bookmark.")
 
                     this@RiverActivity.getApplication().getMain().clearRiverBookmarksCache()
@@ -178,9 +175,7 @@ public class ResizeTextActionMode (private var context: RiverActivity, private v
             }
             SWITCH_THEME -> {
                 context.getVisualPref().switchTheme()
-                var intent = context.getIntent()
-                context.finish()
-                context.startActivity(intent)
+                context.restart()
                 return true
             }
             else -> {
