@@ -32,6 +32,7 @@ import android.content.DialogInterface
 import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.BookmarkCollection
 import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
+import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 
 //Responsible of downloading, caching and viewing a news river content
 public class FeedActivity(): SherlockListActivity()
@@ -61,7 +62,6 @@ public class FeedActivity(): SherlockListActivity()
         setTitle(feedName)
 
         downloadFeed()
-
     }
 
     fun downloadFeed(){
@@ -116,22 +116,15 @@ public class FeedActivity(): SherlockListActivity()
     }
 
     fun saveBookmark(collection : BookmarkCollection?){
-        try{
-            var bk = Bookmark()
-            bk.title = feedName
-            bk.url = feedUrl
-            bk.kind = BookmarkKind.RSS.toString()
-            bk.language = feedLanguage
-            bk.collection = collection
+        val res = saveBookmarkToDb(feedName, feedUrl, BookmarkKind.RSS, feedLanguage, collection)
 
-            DatabaseManager.bookmark!!.create(bk)
-
+        if (res.isTrue()){
             if (collection == null)
                 toastee("$feedName is bookmarked.")
             else
                 toastee("$feedName is bookmarked to your ${collection.title} collection.")
         }
-        catch(e: Exception){
+        else {
             toastee("Sorry, I cannot bookmark $feedUrl", Duration.LONG)
         }
     }

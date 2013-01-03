@@ -25,6 +25,28 @@ import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 import com.silverkeytech.android_rivers.with
 
+fun saveBookmarkToDb(title : String,
+                 url : String,
+                 kind : BookmarkKind,
+                 lang : String,
+                 collection : BookmarkCollection?) : Result<None> {
+    try{
+        var bk = Bookmark()
+        bk.title = title
+        bk.url = url
+        bk.kind = kind.toString()
+        bk.language = lang
+        bk.collection = collection
+
+        DatabaseManager.bookmark!!.create(bk)
+
+        return Result.right(None())
+    }
+    catch(e: Exception){
+        return Result.wrong<None>(e)
+    }
+}
+
 
 public fun addNewCollection(title : String, kind : BookmarkCollectionKind) : Result<BookmarkCollection>{
     try{

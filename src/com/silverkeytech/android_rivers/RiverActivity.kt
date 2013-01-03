@@ -27,6 +27,7 @@ import com.silverkeytech.android_rivers.db.Bookmark
 import com.silverkeytech.android_rivers.db.BookmarkKind
 import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
+import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity(): SherlockListActivity()
@@ -119,20 +120,14 @@ public class RiverActivity(): SherlockListActivity()
                 return true
             }
             R.id.river_menu_bookmark -> {
-                try{
-                    var bk = Bookmark()
-                    bk.title = riverName
-                    bk.url = riverUrl
-                    bk.kind = BookmarkKind.RIVER.toString()
-                    bk.language = riverLanguage
+                var res = saveBookmarkToDb(riverName, riverUrl, BookmarkKind.RIVER, riverLanguage, null)
 
-                    DatabaseManager.bookmark!!.create(bk)
+                if (res.isTrue()){
                     toastee("$riverName is added to your bookmark.")
 
                     this@RiverActivity.getApplication().getMain().clearRiverBookmarksCache()
                     return true
-                }
-                catch(e: Exception){
+                } else{
                     toastee("Sorry, we cannot add this $riverUrl", Duration.LONG)
                     return false
                 }
