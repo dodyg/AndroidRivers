@@ -44,7 +44,6 @@ public class FeedActivity(): SherlockListActivity()
     var feedLanguage: String = ""
     var mode: ActionMode? = null
 
-
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
         super.onCreate(savedInstanceState)
@@ -86,7 +85,7 @@ public class FeedActivity(): SherlockListActivity()
         val feedBookmarked = checkFeedBookmarkStatus(feedUrl)
 
         val bookmarkMenu =  menu!!.findItem(R.id.feed_menu_bookmark)!!
-        bookmarkMenu.setVisible(feedBookmarked)
+        bookmarkMenu.setVisible(!feedBookmarked)
         return true
     }
 
