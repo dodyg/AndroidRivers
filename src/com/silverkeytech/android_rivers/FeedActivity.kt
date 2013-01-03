@@ -44,7 +44,6 @@ public class FeedActivity(): SherlockListActivity()
     var feedLanguage: String = ""
     var mode: ActionMode? = null
 
-    var feedBookmarked: Boolean = false
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
@@ -63,7 +62,6 @@ public class FeedActivity(): SherlockListActivity()
 
         downloadFeed()
 
-        feedBookmarked = checkFeedBookmarkStatus(feedUrl)
     }
 
     fun downloadFeed(){
@@ -83,21 +81,21 @@ public class FeedActivity(): SherlockListActivity()
 
     val REFRESH: Int = 1
 
-    var bookmarkMenu: MenuItem? = null
+
+    public override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        val feedBookmarked = checkFeedBookmarkStatus(feedUrl)
+
+        val bookmarkMenu =  menu!!.findItem(R.id.feed_menu_bookmark)!!
+
+    }
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menu?.add(0, REFRESH, 0, "Refresh")
         ?.setIcon(R.drawable.ic_menu_refresh)
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
 
-
         var inflater = getSupportMenuInflater()!!
         inflater.inflate(R.menu.feed_menu, menu)
-
-        bookmarkMenu = menu?.findItem(R.id.feed_menu_bookmark)
-
-        if (feedBookmarked)
-            bookmarkMenu?.setVisible(false)
 
         return true
     }
@@ -117,6 +115,7 @@ public class FeedActivity(): SherlockListActivity()
         }
     }
 
+
     fun saveBookmark(collection : BookmarkCollection?){
         try{
             var bk = Bookmark()
@@ -132,7 +131,7 @@ public class FeedActivity(): SherlockListActivity()
             if (collection == null)
                 toastee("$feedName is bookmarked.")
             else
-                toastee("$feedName is bookmarked to your ${collection?.title} collection.")
+                toastee("$feedName is bookmarked to your ${collection.title} collection.")
         }
         catch(e: Exception){
             toastee("Sorry, I cannot bookmark $feedUrl", Duration.LONG)
