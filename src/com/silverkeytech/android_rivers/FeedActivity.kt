@@ -86,7 +86,8 @@ public class FeedActivity(): SherlockListActivity()
         val feedBookmarked = checkFeedBookmarkStatus(feedUrl)
 
         val bookmarkMenu =  menu!!.findItem(R.id.feed_menu_bookmark)!!
-
+        bookmarkMenu.setVisible(feedBookmarked)
+        return true
     }
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -115,7 +116,6 @@ public class FeedActivity(): SherlockListActivity()
         }
     }
 
-
     fun saveBookmark(collection : BookmarkCollection?){
         try{
             var bk = Bookmark()
@@ -126,7 +126,6 @@ public class FeedActivity(): SherlockListActivity()
             bk.collection = collection
 
             DatabaseManager.bookmark!!.create(bk)
-            bookmarkMenu?.setVisible(false)
 
             if (collection == null)
                 toastee("$feedName is bookmarked.")

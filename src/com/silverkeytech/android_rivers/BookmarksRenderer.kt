@@ -33,6 +33,8 @@ import com.silverkeytech.android_rivers.db.BookmarkCollection
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 import java.util.ArrayList
+import com.silverkeytech.android_rivers.db.getBookmarksFromDbByCollection
+import android.util.Log
 
 public class BookmarksRenderer(val context: MainActivity){
     class object {
@@ -53,7 +55,12 @@ public class BookmarksRenderer(val context: MainActivity){
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val current = coll[p2]
 
-                startCollectionActivityIntent(context, current.id, current.title)
+                val bookmarks = getBookmarksFromDbByCollection(current.id)
+
+                val urls = bookmarks.map { it.url }.toArray(array<String?>())
+
+                Log.d(TAG, "Starts the process of downloading urls")
+                DownloadCollectionAsRiver(context).execute(*urls)
             }
         })
 
