@@ -34,6 +34,11 @@ import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 import java.util.ArrayList
 import android.util.Log
+import android.widget.PopupWindow
+import android.widget.ImageView
+import android.view.Gravity
+import com.silverkeytech.android_rivers.db.DatabaseManager
+import com.silverkeytech.android_rivers.db.removeBookmarkFromCollection
 
 public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity){
     class object {
@@ -54,14 +59,14 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val bookmark = bookmarks.get(p2)
                 Log.d(TAG, "Downloading feed ${bookmark.title} - ${bookmark.url}")
-                var i = startFeedActivityIntent(context, bookmark.url, bookmark.title, bookmark.language)
-                context.startActivity(i)
+                startFeedActivityIntent(context, bookmark.url, bookmark.title, bookmark.language)
             }
         })
 
         list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
             public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
                 val currentBookmark = bookmarks.get(p2)
+                showCollectionQuickActionPopup(context, currentBookmark, p1!!, list)
                 return true
             }
         })
@@ -94,3 +99,38 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
     }
 }
 
+fun showCollectionQuickActionPopup(context: BookmarkCollectionActivity, bookmark: Bookmark, item: View, list: View) {
+    //overlay popup at top of clicked overview position
+    val popupWidth = item.getWidth()
+    val popupHeight = item.getHeight()
+
+    val x = context.getLayoutInflater()!!.inflate(R.layout.collection_quick_actions, null, false)!!
+    val pp = PopupWindow(x, popupWidth, popupHeight, true)
+
+    x.setBackgroundColor(android.graphics.Color.LTGRAY)
+
+    x.setOnClickListener {
+        pp.dismiss()
+    }
+
+    val icon = x.findViewById(R.id.collection_quick_action_delete_icon) as ImageView
+    icon.setOnClickListener {
+        try{
+            var res = removeBookmarkFromCollection(bookmark.collection!!.id, bookmark.id)
+
+            if (res.isFalse())
+                context.toastee("Error in removing this bookmark collection ${res.exception?.getMessage()}")
+            else {
+                context.toastee("Bookmark removed")
+                context.refreshCollection()
+            }
+        }
+        catch(e: Exception){
+            context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
+        }
+        pp.dismiss()
+    }
+
+    val itemLocation = getLocationOnScreen(item)
+    pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
+}

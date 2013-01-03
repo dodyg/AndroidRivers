@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers.db
 
 import com.silverkeytech.android_rivers.Result
+import com.silverkeytech.android_rivers.None
 import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.outlines.Body
 import com.silverkeytech.android_rivers.outlines.Opml
@@ -37,20 +38,26 @@ public fun clearBookmarksFromCollection(collectionId : Int){
     }
 }
 
-public fun removeBookmarkFromCollection(collectionId : Int, bookmarkId : Int){
-    var bookmarks = getBookmarksFromDbByCollection(collectionId)
-    if (bookmarks.count() > 0){
-        var bookmark = bookmarks.filter { it.id == bookmarkId }
+public fun removeBookmarkFromCollection(collectionId : Int, bookmarkId : Int) : Result<None>{
+    try{
+        var bookmarks = getBookmarksFromDbByCollection(collectionId)
+        if (bookmarks.count() > 0){
+            var bookmark = bookmarks.filter { it.id == bookmarkId }
 
-        if (bookmark.count() == 1){
-            val bk = bookmark.get(0)
-            val b = DatabaseManager.query().bookmark().byUrl(bk.url)
-            //double check to make sure that the bookmark really exists
-            if (b.exists){
-                b.value!!.collection = null
-                DatabaseManager.bookmark!!.update(b.value!!) //now it is removed
+            if (bookmark.count() == 1){
+                val bk = bookmark.get(0)
+                val b = DatabaseManager.query().bookmark().byUrl(bk.url)
+                //double check to make sure that the bookmark really exists
+                if (b.exists){
+                    b.value!!.collection = null
+                    DatabaseManager.bookmark!!.update(b.value!!) //now it is removed
+                }
             }
         }
+        return Result.right(None())
+    }
+    catch(e: Exception){
+        return Result.wrong<None>(e)
     }
 }
 

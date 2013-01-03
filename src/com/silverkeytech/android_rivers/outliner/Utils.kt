@@ -154,16 +154,6 @@ fun transformFeedOpmlToOpml(feedOpml: RiverOpml): Result<Opml> {
     }
 }
 
-fun startOutlinerActivity(context: Context, outlines: ArrayList<OutlineContent>, title: String, url: String?, expandAll: Boolean) {
-    var intent = Intent(Intent.ACTION_MAIN)
-    intent.setClass(context, javaClass<OutlinerActivity>())
-    intent.putExtra(Params.OUTLINES_DATA, outlines)
-    intent.putExtra(Params.OUTLINES_TITLE, title)
-    intent.putExtra(Params.OUTLINES_URL, url)
-    intent.putExtra(Params.OUTLINES_EXPAND_ALL, expandAll)
-    context.startActivity(intent)
-}
-
 fun transformXmlToRss(xml: String?): Result<Rss> {
 
     try{

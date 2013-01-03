@@ -18,20 +18,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.actionbarsherlock.app.SherlockActivity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
+import com.silverkeytech.android_rivers.db.BookmarkKind
+import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
+import com.silverkeytech.android_rivers.db.getBookmarksFromDb
 import com.silverkeytech.android_rivers.db.getBookmarksFromDbAsOpml
 import com.silverkeytech.android_rivers.db.saveOpmlAsBookmarks
-import com.silverkeytech.android_rivers.outliner.startOutlinerActivity
 import java.io.File
-import com.silverkeytech.android_rivers.db.BookmarkKind
-import com.silverkeytech.android_rivers.db.getBookmarksFromDb
-import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 
 enum class MainActivityMode {
     RIVER
@@ -46,7 +48,7 @@ public open class MainActivity(): SherlockActivity() {
 
     val DEFAULT_SUBSCRIPTION_LIST = "http://hobieu.apphb.com/api/1/default/riverssubscription"
 
-    var mode : MainActivityMode = MainActivityMode.RIVER
+    var mode: MainActivityMode = MainActivityMode.RIVER
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
@@ -79,17 +81,18 @@ public open class MainActivity(): SherlockActivity() {
         }
     }
 
-    fun setTitle(){
+    fun setTitle() {
         var actionBar = getSupportActionBar()!!
         when(mode){
             MainActivityMode.RIVER -> actionBar.setTitle("Rivers")
             MainActivityMode.RSS -> actionBar.setTitle("RSS")
             MainActivityMode.COLLECTION -> actionBar.setTitle("Collections")
-            else -> {}
+            else -> {
+            }
         }
     }
 
-    fun changeMode(){
+    fun changeMode() {
         val currentMode = mode
         mode = when (currentMode){
             MainActivityMode.RIVER -> MainActivityMode.RSS
@@ -102,9 +105,36 @@ public open class MainActivity(): SherlockActivity() {
     val SWITCH: Int = 0
     val EXPLORE: Int = 1
 
+    public override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        if (menu != null){
+            val downloadAll = menu.findItem(R.id.main_menu_download_all_rivers)
+            val newCollection = menu.findItem(R.id.main_menu_collection_add_new)
+
+            when(mode){
+                MainActivityMode.RIVER -> {
+                    newCollection?.setVisible(false)
+                    downloadAll?.setVisible(true)
+                }
+                MainActivityMode.RSS -> {
+                    newCollection?.setVisible(false)
+                    downloadAll?.setVisible(false)
+                }
+                MainActivityMode.COLLECTION -> {
+                    newCollection?.setVisible(true)
+                    downloadAll?.setVisible(false)
+                }
+                else -> {
+                }
+            }
+            return true
+        }
+        else
+            return false
+    }
+
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         var inflater = getSupportMenuInflater()!!
-        inflater.inflate(R.menu.subscription_menu, menu)
+        inflater.inflate(R.menu.main_menu, menu)
 
         //top menu
         menu?.add(0, SWITCH, 0, "Switch")
@@ -116,31 +146,42 @@ public open class MainActivity(): SherlockActivity() {
         return true
     }
 
-    public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item!!.getItemId()){
-            R.id.subscription_menu_refresh -> {
-                when(mode){
-                    MainActivityMode.RIVER -> {
-                        displayRiverBookmarks()
-                    }
-                    MainActivityMode.RSS -> {
-                        displayRssBookmarks()
-                    }
-                    MainActivityMode.COLLECTION -> {
-                        displayBookmarkCollection()
-                    }
-                    else -> { }
-                }
+    fun promptNewCollection() {
+        val dlg: View = this.getLayoutInflater()!!.inflate(R.layout.collection_add_new, null)!!
 
+        //take care of color
+        dlg.setDrawingCacheBackgroundColor(this.getStandardDialogBackgroundColor())
+
+        val dialog = AlertDialog.Builder(this)
+        dialog.setView(dlg)
+        dialog.setNegativeButton("Cancel", object : DialogInterface.OnClickListener{
+            public override fun onClick(p0: DialogInterface?, p1: Int) {
+                p0?.dismiss()
+            }
+        })
+
+        val createdDialog = dialog.create()!!
+        createdDialog.show()
+    }
+
+    public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.getItemId()) {
+            R.id.collection_menu_add -> {
+                promptNewCollection()
                 return true
             }
 
-            R.id.river_menu_tryout -> {
+            R.id.main_menu_refresh -> {
+                displayModeContent(mode)
+                return true
+            }
+
+            R.id.main_menu_tryout -> {
                 var i = Intent(this, javaClass<TryOutActivity>())
                 startActivity(i)
                 return true
             }
-            R.id.subscription_menu_download_all -> {
+            R.id.main_menu_download_all_rivers -> {
                 val subscriptionList = getApplication().getMain().getRiverBookmarksCache()
 
                 if (subscriptionList != null){
@@ -163,25 +204,9 @@ public open class MainActivity(): SherlockActivity() {
                 downloadOpml("http://hobieu.apphb.com/api/1/opml/root", "Get more news")
                 return false
             }
-            R.id.subscription_menu_view_rss -> {
-                displayRssBookmarks()
-                return false
-            }
             SWITCH -> {
                 changeMode()
-                when(mode){
-                    MainActivityMode.RIVER -> {
-                        displayRiverBookmarks()
-                    }
-                    MainActivityMode.RSS -> {
-                        displayRssBookmarks()
-                    }
-                    MainActivityMode.COLLECTION ->{
-                        displayBookmarkCollection()
-                    }
-                    else -> { }
-                }
-
+                displayModeContent(mode)
                 setTitle()
                 return true
             }
@@ -190,21 +215,37 @@ public open class MainActivity(): SherlockActivity() {
         }
     }
 
-    private fun displayRssBookmarks(){
+    fun displayModeContent(mode : MainActivityMode){
+        when(mode){
+            MainActivityMode.RIVER -> {
+                displayRiverBookmarks()
+            }
+            MainActivityMode.RSS -> {
+                displayRssBookmarks()
+            }
+            MainActivityMode.COLLECTION ->{
+                displayBookmarkCollection()
+            }
+            else -> {
+            }
+        }
+    }
+
+    private fun displayRssBookmarks() {
         val bookmarks = getBookmarksFromDb(BookmarkKind.RSS)
         BookmarksRenderer(this@MainActivity).handleListing(bookmarks)
     }
 
-    private fun displayBookmarkCollection(){
-       val coll = getBookmarkCollectionFromDb()
-       BookmarksRenderer(this@MainActivity).handleCollection(coll)
+    private fun displayBookmarkCollection() {
+        val coll = getBookmarkCollectionFromDb()
+        BookmarksRenderer(this@MainActivity).handleCollection(coll)
     }
 
-    public fun refreshBookmarkCollection(){
+    public fun refreshBookmarkCollection() {
         displayBookmarkCollection()
     }
 
-    public fun refreshRssBookmarks(){
+    public fun refreshRssBookmarks() {
         displayRssBookmarks()
     }
 
@@ -232,7 +273,7 @@ public open class MainActivity(): SherlockActivity() {
             else{
                 Log.d(TAG, "Start downloading bookmarks from the Internet")
                 DownloadBookmarks(this, true)
-                 .executeOnComplete({
+                        .executeOnComplete({
                     res ->
                     Log.d(TAG, "Using downloaded bookmark data from the Internt")
                     val res2 = saveOpmlAsBookmarks(res.value!!)
@@ -246,7 +287,7 @@ public open class MainActivity(): SherlockActivity() {
                         toastee("Sorry, we cannot download your initial bookmarks at the moment ${res2.exception?.getMessage()}", Duration.LONG)
                     }
                 })
-                .execute(DEFAULT_SUBSCRIPTION_LIST)
+                        .execute(DEFAULT_SUBSCRIPTION_LIST)
             }
         }
     }
@@ -259,7 +300,7 @@ public open class MainActivity(): SherlockActivity() {
         }
         else{
             DownloadOpml(this)
-            .executeOnProcessedCompletion({
+                    .executeOnProcessedCompletion({
                 res ->
                 if (res.isTrue()){
                     startOutlinerActivity(this, res.value!!, title, url, false)
@@ -268,7 +309,7 @@ public open class MainActivity(): SherlockActivity() {
                     toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)
                 }
             }, { outline -> outline.text != "<rules>" })
-            .execute(url)
+                    .execute(url)
         }
     }
 }

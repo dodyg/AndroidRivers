@@ -2,30 +2,44 @@ package com.silverkeytech.android_rivers
 
 import android.content.Intent
 import android.content.Context
+import java.util.ArrayList
+import com.silverkeytech.android_rivers.outliner.OutlineContent
 
 
-public fun startFeedActivityIntent(context : Context, url : String, text : String, lang : String) : Intent{
+public fun startFeedActivityIntent(context : Context, url : String, text : String, lang : String) {
     val i = Intent(context, javaClass<FeedActivity>())
     i.putExtra(Params.FEED_URL, url)
     i.putExtra(Params.FEED_NAME, text)
     i.putExtra(Params.FEED_LANGUAGE, lang)
 
-    return i
+    context.startActivity(i)
 }
 
-public fun startRiverActivityIntent(context: Context, url : String, text : String, lang : String) : Intent{
+public fun startRiverActivity(context: Context, url : String, text : String, lang : String){
     val i = Intent(context, javaClass<RiverActivity>())
     i.putExtra(Params.RIVER_URL, url)
     i.putExtra(Params.RIVER_NAME, text)
     i.putExtra(Params.RIVER_LANGUAGE, lang)
-    return i
+
+    context.startActivity(i)
 }
 
-public fun startCollectionActivityIntent(context : Context, id : Int, title : String) : Intent{
+public fun startCollectionActivityIntent(context : Context, id : Int, title : String){
     val i = Intent(context, javaClass<BookmarkCollectionActivity>())
     i.putExtra(Params.COLLECTION_ID, id)
     i.putExtra(Params.COLLECTION_TITLE, title)
-    return i
+
+    context.startActivity(i)
+}
+
+fun startOutlinerActivity(context: Context, outlines: ArrayList<OutlineContent>, title: String, url: String?, expandAll: Boolean) {
+    var intent = Intent(Intent.ACTION_MAIN)
+    intent.setClass(context, javaClass<OutlinerActivity>())
+    intent.putExtra(Params.OUTLINES_DATA, outlines)
+    intent.putExtra(Params.OUTLINES_TITLE, title)
+    intent.putExtra(Params.OUTLINES_URL, url)
+    intent.putExtra(Params.OUTLINES_EXPAND_ALL, expandAll)
+    context.startActivity(intent)
 }
 
 public fun shareActionIntent(url : String) : Intent{

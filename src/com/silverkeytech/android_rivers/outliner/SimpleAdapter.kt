@@ -34,9 +34,10 @@ import com.silverkeytech.android_rivers.OutlinerActivity
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.getMain
 import com.silverkeytech.android_rivers.startFeedActivityIntent
-import com.silverkeytech.android_rivers.startRiverActivityIntent
+import com.silverkeytech.android_rivers.startRiverActivity
 import com.silverkeytech.android_rivers.toastee
 import java.util.ArrayList
+import com.silverkeytech.android_rivers.startOutlinerActivity
 
 public open class SimpleAdapter(private val context: OutlinerActivity,
                                 private val treeStateManager: TreeStateManager<Long?>,
@@ -115,8 +116,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         var text = currentOutline.text
         var lang = currentOutline.getAttribute("language")!!
 
-        var i = startRiverActivityIntent(context, url, text, lang)
-        context.startActivity(i);
+        startRiverActivity(context, url, text, lang)
     }
 
     fun handleRss(currentOutline: OutlineContent) {
@@ -124,8 +124,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         var text = currentOutline.text
         var lang = currentOutline.getAttribute("language")!!
 
-        var i = startFeedActivityIntent(context, url, text, lang)
-        context.startActivity(i)
+        startFeedActivityIntent(context, url, text, lang)
     }
 
     fun handleOpmlZoom(currentOutline: OutlineContent, currentPosition: Int): Boolean {

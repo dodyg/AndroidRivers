@@ -28,6 +28,16 @@ import java.net.UnknownHostException
 import java.text.SimpleDateFormat
 import org.apache.http.conn.ConnectTimeoutException
 
+public fun Activity.getStandardDialogBackgroundColor() : Int{
+    val theme = this.getVisualPref().getTheme()
+    if (theme == R.style.Theme_Sherlock_Light_DarkActionBar)
+        return android.graphics.Color.WHITE
+    else if (theme == R.style.Theme_Sherlock)
+        return android.graphics.Color.BLACK
+    else
+        return android.graphics.Color.WHITE
+}
+
 public fun Activity.findView<T: View>(id: Int): T {
     return (this.findViewById(id) as T)
 }

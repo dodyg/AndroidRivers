@@ -53,8 +53,7 @@ public class BookmarksRenderer(val context: MainActivity){
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val current = coll[p2]
 
-                val i = startCollectionActivityIntent(context, current.id, current.title)
-                context.startActivity(i)
+                startCollectionActivityIntent(context, current.id, current.title)
             }
         })
 
@@ -81,8 +80,7 @@ public class BookmarksRenderer(val context: MainActivity){
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val bookmark = bookmarks.get(p2)
-                var i = startFeedActivityIntent(context, bookmark.url, bookmark.title, bookmark.language)
-                context.startActivity(i)
+                startFeedActivityIntent(context, bookmark.url, bookmark.title, bookmark.language)
             }
         })
 
@@ -93,6 +91,7 @@ public class BookmarksRenderer(val context: MainActivity){
                 return true
             }
         })
+
     }
 
     fun handleRiversListing(opml: Opml) {
@@ -122,9 +121,7 @@ public class BookmarksRenderer(val context: MainActivity){
                         else
                             "en"
 
-                val ix = startRiverActivityIntent(context, currentOutline.url!!, currentOutline.text!!, lang)
-
-                context.startActivity(ix)
+                startRiverActivity(context, currentOutline.url!!, currentOutline.text!!, lang)
             }
         })
 

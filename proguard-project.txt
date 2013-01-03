@@ -18,3 +18,17 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+
+-dontpreverify
+-repackageclasses ''
+-allowaccessmodification
+-optimizations !code/simplification/arithmetic
+-keepattributes *Annotation*
+
+
+-keep public class * extends com.actionbarsherlock.app.SherlockListActivity
+-keep public class * extends com.actionbarsherlock.app.SherlockActivity
+-keep public class javax.xml.stream.Location
+-keep public class javax.xml.stream.events.Attribute
+

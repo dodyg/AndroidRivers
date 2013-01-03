@@ -43,7 +43,6 @@ import android.widget.TextView
 import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 import com.silverkeytech.android_rivers.outliner.transformFeedOpmlToOpml
-import com.silverkeytech.android_rivers.outliner.startOutlinerActivity
 import com.silverkeytech.android_rivers.outliner.traverse
 import com.silverkeytech.android_rivers.syndication.SyndicationFeedItem
 
@@ -105,7 +104,6 @@ public class FeedContentRenderer(val context: Activity, val language: String){
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val currentNews = feedItems.get(p2);
-
                 var dialog = AlertDialog.Builder(context)
 
                 var dlg: View = inflater.inflate(R.layout.feed_details, null)!!
@@ -116,12 +114,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                 else
                     msg = scrubHtml(currentNews.description)
 
-                //take care of color
-                val theme = context.getVisualPref().getTheme()
-                if (theme == R.style.Theme_Sherlock_Light_DarkActionBar)
-                    dlg.setBackgroundColor(android.graphics.Color.WHITE)
-                else if (theme == R.style.Theme_Sherlock)
-                    dlg.setBackgroundColor(android.graphics.Color.BLACK)
+                dlg.setBackgroundColor(context.getStandardDialogBackgroundColor())
 
                 var body = dlg.findViewById(R.id.feed_details_text_tv)!! as TextView
                 handleText(body, msg, textSize.toFloat())

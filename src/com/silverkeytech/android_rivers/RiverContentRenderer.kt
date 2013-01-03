@@ -43,7 +43,6 @@ import android.widget.TextView
 import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 import com.silverkeytech.android_rivers.outliner.transformFeedOpmlToOpml
-import com.silverkeytech.android_rivers.outliner.startOutlinerActivity
 import com.silverkeytech.android_rivers.outliner.traverse
 
 //Manage the rendering of each news item in the river list

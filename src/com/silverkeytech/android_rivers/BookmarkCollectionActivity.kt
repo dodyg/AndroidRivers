@@ -21,6 +21,12 @@ package com.silverkeytech.android_rivers
 import com.actionbarsherlock.app.SherlockListActivity
 import android.os.Bundle
 import com.silverkeytech.android_rivers.db.getBookmarksFromDbByCollection
+import com.actionbarsherlock.view.Menu
+import com.actionbarsherlock.view.MenuItem
+import android.app.AlertDialog
+import android.view.View
+import android.view.LayoutInflater
+import android.content.DialogInterface
 
 public open class BookmarkCollectionActivity(): SherlockListActivity() {
     class object {
@@ -44,6 +50,28 @@ public open class BookmarkCollectionActivity(): SherlockListActivity() {
         actionBar.setDisplayShowTitleEnabled(true)
         actionBar.setTitle(collectionTitle)
 
+        displayCollection()
+    }
+
+
+    public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        var inflater = getSupportMenuInflater()!!
+        inflater.inflate(R.menu.collection_menu, menu)
+        return true
+    }
+
+    public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.getItemId()){
+         R.id.collection_menu_add -> {
+             return true
+         }
+         else -> {
+             return false
+         }
+        }
+    }
+
+    public fun refreshCollection(){
         displayCollection()
     }
 

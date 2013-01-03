@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:id="@+id/main_menu_refresh"
+              android:title="@string/refresh" />
+
+    <item android:id="@+id/main_menu_download_all_rivers"
+              android:title="Download All" />
+
+    <item android:id="@+id/main_menu_collection_add_new"
+          android:title="Add Collection" />
+
+        <item android:id="@+id/main_menu_tryout"
+            android:title="Tryout" />
+</menu>
