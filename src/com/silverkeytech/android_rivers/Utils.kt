@@ -117,3 +117,9 @@ fun isSupportedImageMime(val mimeType: String): Boolean {
 fun inMegaByte(mb: Int): Int = mb * 1024 * 1024
 
 fun Int.toHoursInMinutes() = this * 60
+
+
+public fun <T>T.with(operations : T.() -> Unit) : T {
+    this.operations()
+    return this
+}

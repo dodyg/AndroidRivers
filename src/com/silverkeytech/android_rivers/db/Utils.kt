@@ -23,18 +23,40 @@ import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.outlines.Body
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
+import com.silverkeytech.android_rivers.with
 
-public fun clearBookmarksFromCollection(collectionId : Int){
-    var bookmarks = getBookmarksFromDbByCollection(collectionId)
-    if (bookmarks.count() > 0){
-        for(val bk in bookmarks){
-            val b = DatabaseManager.query().bookmark().byUrl(bk.url)
-            //double check to make sure that the bookmark really exists
-            if (b.exists){
-                b.value!!.collection = null
-                DatabaseManager.bookmark!!.update(b.value!!) //now it is removed
+
+public fun addNewCollection(title : String, kind : BookmarkCollectionKind) : Result<BookmarkCollection>{
+    try{
+        var coll = BookmarkCollection()
+        coll.title = title
+        coll.kind = kind.toString()
+
+        DatabaseManager.bookmarkCollection!!.create(coll)
+        return Result.right(coll)
+    }
+    catch(e : Exception){
+        return Result.wrong<BookmarkCollection>(null)
+    }
+}
+
+public fun clearBookmarksFromCollection(collectionId : Int) : Result<None>{
+    try{
+        var bookmarks = getBookmarksFromDbByCollection(collectionId)
+        if (bookmarks.count() > 0){
+            for(val bk in bookmarks){
+                val b = DatabaseManager.query().bookmark().byUrl(bk.url)
+                //double check to make sure that the bookmark really exists
+                if (b.exists){
+                    b.value!!.collection = null
+                    DatabaseManager.bookmark!!.update(b.value!!) //now it is removed
+                }
             }
         }
+        return Result.right(None())
+    }
+    catch(e : Exception){
+        return Result.wrong<None>(e)
     }
 }
 

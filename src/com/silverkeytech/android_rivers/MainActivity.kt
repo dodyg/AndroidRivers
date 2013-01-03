@@ -34,6 +34,9 @@ import com.silverkeytech.android_rivers.db.getBookmarksFromDb
 import com.silverkeytech.android_rivers.db.getBookmarksFromDbAsOpml
 import com.silverkeytech.android_rivers.db.saveOpmlAsBookmarks
 import java.io.File
+import android.widget.EditText
+import com.silverkeytech.android_rivers.db.addNewCollection
+import com.silverkeytech.android_rivers.db.BookmarkCollectionKind
 
 enum class MainActivityMode {
     RIVER
@@ -82,7 +85,7 @@ public open class MainActivity(): SherlockActivity() {
     }
 
     fun setTitle() {
-        var actionBar = getSupportActionBar()!!
+        val actionBar = getSupportActionBar()!!
         when(mode){
             MainActivityMode.RIVER -> actionBar.setTitle("Rivers")
             MainActivityMode.RSS -> actionBar.setTitle("RSS")
@@ -133,7 +136,7 @@ public open class MainActivity(): SherlockActivity() {
     }
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        var inflater = getSupportMenuInflater()!!
+        val inflater = getSupportMenuInflater()!!
         inflater.inflate(R.menu.main_menu, menu)
 
         //top menu
@@ -154,6 +157,29 @@ public open class MainActivity(): SherlockActivity() {
 
         val dialog = AlertDialog.Builder(this)
         dialog.setView(dlg)
+
+        var input = dlg.findViewById(R.id.collection_add_new_title_et)!! as EditText
+
+        dialog.setPositiveButton("OK",  object : DialogInterface.OnClickListener{
+            public override fun onClick(p0: DialogInterface?, p1: Int) {
+                val text = input.getText().toString()
+                if (text.isNullOrEmpty()){
+                    toastee("Please enter collection title", Duration.AVERAGE)
+                    return
+                }
+
+                val res = addNewCollection(text, BookmarkCollectionKind.RIVER)
+
+                if (res.isTrue()){
+                    toastee("Collection is successfully added")
+                    this@MainActivity.refreshBookmarkCollection()
+                }
+                else{
+                    toastee("Sorry, I have problem adding this new collection", Duration.AVERAGE)
+                }
+            }
+        })
+
         dialog.setNegativeButton("Cancel", object : DialogInterface.OnClickListener{
             public override fun onClick(p0: DialogInterface?, p1: Int) {
                 p0?.dismiss()
@@ -166,7 +192,7 @@ public open class MainActivity(): SherlockActivity() {
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()) {
-            R.id.collection_menu_add -> {
+            R.id.main_menu_collection_add_new -> {
                 promptNewCollection()
                 return true
             }
@@ -185,14 +211,10 @@ public open class MainActivity(): SherlockActivity() {
                 val subscriptionList = getApplication().getMain().getRiverBookmarksCache()
 
                 if (subscriptionList != null){
-                    var intent = Intent(this, javaClass<DownloadAllRiversService>())
-                    var titleList = subscriptionList.body?.outline?.iterator()?.map { it.text!! }?.toArrayList()
-                    var urlList = subscriptionList.body?.outline?.iterator()?.map { it.url!! }?.toArrayList()
+                    val titleList = subscriptionList.body?.outline?.iterator()?.map { it.text!! }?.toArrayList()!!
+                    val urlList = subscriptionList.body?.outline?.iterator()?.map { it.url!! }?.toArrayList()!!
 
-                    intent.putStringArrayListExtra(Params.RIVERS_DOWNLOAD_TITLE, titleList)
-                    intent.putStringArrayListExtra(Params.RIVERS_DOWNLOAD_URLS, urlList)
-
-                    startService(intent)
+                    startDownloadAllRiverService(this, titleList, urlList)
                     return true
                 }
                 else {
@@ -263,7 +285,7 @@ public open class MainActivity(): SherlockActivity() {
             BookmarksRenderer(this@MainActivity).handleRiversListing(cache)
         }  else{
             Log.d(TAG, "Try to retrieve bookmarks from DB")
-            var bookmarks = getBookmarksFromDbAsOpml(BookmarkKind.RIVER)
+            val bookmarks = getBookmarksFromDbAsOpml(BookmarkKind.RIVER)
 
             if (bookmarks.body!!.outline!!.count() > 0){
                 Log.d(TAG, "Now bookmarks come from the db")
