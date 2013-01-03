@@ -18,17 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.os.AsyncTask
-import android.content.Context
-import com.silverkeytech.android_rivers.syndication.SyndicationFeed
-import android.app.ProgressDialog
 import android.app.Activity
+import android.app.ProgressDialog
+import android.content.Context
 import android.content.DialogInterface
-import com.github.kevinsawicki.http.HttpRequest
-import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
-import com.silverkeytech.android_rivers.outliner.transformXmlToRss
-import android.util.Log
-import com.silverkeytech.android_rivers.outliner.transformXmlToAtom
+import android.os.AsyncTask
+import com.silverkeytech.android_rivers.syndication.SyndicationFeed
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 
 public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<SyndicationFeed>>(){
