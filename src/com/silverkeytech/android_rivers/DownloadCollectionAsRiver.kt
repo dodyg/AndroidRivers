@@ -17,9 +17,10 @@ import java.util.ArrayList
 import com.silverkeytech.android_rivers.outliner.transformXmlToRss
 import com.silverkeytech.android_rivers.syndication.SyndicationFeed
 import com.silverkeytech.android_rivers.outliner.transformXmlToAtom
+import com.silverkeytech.android_rivers.riverjs.RiverItem
 
 
-public class DownloadCollectionAsRiver(it: Context?): AsyncTask<String, Int, Result<River>>(){
+public class DownloadCollectionAsRiver(it: Context?, private val collectionId : Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
     class object {
         public val TAG: String = javaClass<DownloadCollectionAsRiver>().getSimpleName()
     }
@@ -41,18 +42,41 @@ public class DownloadCollectionAsRiver(it: Context?): AsyncTask<String, Int, Res
         dialog.show()
     }
 
-    protected override fun doInBackground(vararg p0: String?): Result<River>? {
+    protected override fun doInBackground(vararg p0: String?): Result<List<RiverItemMeta>>? {
+        var list = arrayListOf<RiverItemMeta>()
         for(val url in p0){
             val res = downloadFeed(url!!)
 
             if (res.isFalse())
                 Log.d(TAG, "Value at ${res.exception?.getMessage()}")
             else
+            {
                 Log.d(TAG, "Download for $url is successful")
+                accumulateList(list, res.value!!)
+            }
         }
 
-        return null
+        return Result.right(list)
     }
+
+    fun accumulateList(list : ArrayList<RiverItemMeta>, feed : SyndicationFeed){
+        for(val f in feed.items.iterator()){
+            val item = RiverItem()
+
+            item.title = f.title
+            item.body = f.description
+            if (f.hasLink())
+                item.link = f.link
+
+            val link = if (feed.hasLink())
+                    feed.link else ""
+
+            val meta = RiverItemMeta(item, feed.title!!, link)
+
+            list.add(meta)
+        }
+    }
+
 
     fun downloadFeed(url : String) : Result<SyndicationFeed>{
         try{
@@ -107,7 +131,29 @@ public class DownloadCollectionAsRiver(it: Context?): AsyncTask<String, Int, Res
         }
     }
 
-    protected override fun onPostExecute(result: Result<River>?) {
+    var callback : ((Result<List<RiverItemMeta>>) -> Unit)? = null
+
+    //Set up function to call when download is done
+    public fun executeOnCompletion(action: ((Result<List<RiverItemMeta>>) -> Unit)?) : DownloadCollectionAsRiver {
+        callback = action
+        return this
+    }
+
+    protected override fun onPostExecute(result: Result<List<RiverItemMeta>>?) {
         dialog.dismiss()
+        if (result !=null){
+            if (result.isTrue()){
+                val url = "http://www.localhost/" + collectionId.toString()
+                val sortedNewsItems = result.value!!
+                context.getApplication().getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
+                if (callback != null)
+                    callback!!(Result.right(sortedNewsItems))
+            }
+            else
+                {
+                    if (callback != null)
+                        callback!!(Result.wrong<List<RiverItemMeta>>(result.exception))
+                }
+        }
     }
 }

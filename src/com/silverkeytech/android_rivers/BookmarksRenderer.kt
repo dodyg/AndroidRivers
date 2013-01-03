@@ -60,7 +60,16 @@ public class BookmarksRenderer(val context: MainActivity){
                 val urls = bookmarks.map { it.url }.toArray(array<String?>())
 
                 Log.d(TAG, "Starts the process of downloading urls")
-                DownloadCollectionAsRiver(context).execute(*urls)
+                DownloadCollectionAsRiver(context, current.id)
+                        .executeOnCompletion { res ->
+                            if (res.isTrue()){
+                                Log.d(TAG, "Downloaded ${res.value?.count()} items")
+                            }
+                            else {
+                                Log.d(TAG, "Downloading $current.id fails")
+                            }
+                        }
+                        .execute(*urls)
             }
         })
 

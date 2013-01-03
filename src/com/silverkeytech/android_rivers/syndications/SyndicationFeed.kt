@@ -34,9 +34,14 @@ public data class SyndicationFeed(public val rss : Rss?, public val atom : Feed?
 
     public var title : String = ""
     public var language : String = ""
+    public var link : String = ""
     public var feedType : SyndicationFeedType = SyndicationFeedType.NONE
     public var items : ArrayList<SyndicationFeedItem> = ArrayList<SyndicationFeedItem>()
 
+
+    public fun hasLink() : Boolean {
+        return !link.isNullOrEmpty()
+    }
 
     public fun transform(){
         transformRss()
@@ -50,6 +55,9 @@ public data class SyndicationFeed(public val rss : Rss?, public val atom : Feed?
             if (channel != null){
                 title = if (channel.title.isNullOrEmpty()) "" else channel.title!!
                 language = if (channel.language.isNullOrEmpty()) "" else channel.language!!
+
+                if (!channel.link.isNullOrEmpty())
+                    link = channel.link!!
 
                 feedType = SyndicationFeedType.RSS
 
