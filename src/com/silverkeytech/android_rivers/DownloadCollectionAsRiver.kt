@@ -131,28 +131,28 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId : 
         }
     }
 
-    var callback : ((Result<List<RiverItemMeta>>) -> Unit)? = null
+    var callback : ((String, Result<List<RiverItemMeta>>) -> Unit)? = null
 
     //Set up function to call when download is done
-    public fun executeOnCompletion(action: ((Result<List<RiverItemMeta>>) -> Unit)?) : DownloadCollectionAsRiver {
+    public fun executeOnCompletion(action: ((String, Result<List<RiverItemMeta>>) -> Unit)?) : DownloadCollectionAsRiver {
         callback = action
         return this
     }
 
     protected override fun onPostExecute(result: Result<List<RiverItemMeta>>?) {
         dialog.dismiss()
+        val url = "http://www.localhost/" + collectionId.toString()
         if (result !=null){
             if (result.isTrue()){
-                val url = "http://www.localhost/" + collectionId.toString()
                 val sortedNewsItems = result.value!!
                 context.getApplication().getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
                 if (callback != null)
-                    callback!!(Result.right(sortedNewsItems))
+                    callback!!(url, Result.right(sortedNewsItems))
             }
             else
                 {
                     if (callback != null)
-                        callback!!(Result.wrong<List<RiverItemMeta>>(result.exception))
+                        callback!!(url, Result.wrong<List<RiverItemMeta>>(result.exception))
                 }
         }
     }

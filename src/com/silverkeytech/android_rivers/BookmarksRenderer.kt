@@ -61,9 +61,10 @@ public class BookmarksRenderer(val context: MainActivity){
 
                 Log.d(TAG, "Starts the process of downloading urls")
                 DownloadCollectionAsRiver(context, current.id)
-                        .executeOnCompletion { res ->
+                        .executeOnCompletion { url, res ->
                             if (res.isTrue()){
                                 Log.d(TAG, "Downloaded ${res.value?.count()} items")
+                                startRiverActivity(context, url, current.title, "en")
                             }
                             else {
                                 Log.d(TAG, "Downloading $current.id fails")
