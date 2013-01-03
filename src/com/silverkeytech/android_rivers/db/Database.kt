@@ -19,13 +19,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers.db
 
 import android.content.Context
-import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper
 import com.j256.ormlite.dao.Dao
 import com.j256.ormlite.support.ConnectionSource
-import com.j256.ormlite.table.TableUtils
 
 public class Database (context: Context): OrmLiteSqliteOpenHelper(context, Database.DATABASE_NAME, null, Database.DATABASE_VERSION) {
     class object {
@@ -66,7 +64,7 @@ public class Database (context: Context): OrmLiteSqliteOpenHelper(context, Datab
 
     var bookmarkCollectionDao: Dao<BookmarkCollection, out Int?>? = null
 
-    fun getBookmarkCollectionDao(): Any{
+    fun getBookmarkCollectionDao(): Any {
         if (bookmarkCollectionDao == null){
             bookmarkCollectionDao = super<OrmLiteSqliteOpenHelper>.getDao(javaClass<BookmarkCollection>())
         }

@@ -18,117 +18,114 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.syndications.rss
 
-import com.silverkeytech.android_rivers.syndications.rss.Rss
-import com.silverkeytech.android_rivers.syndications.rss.Item
-
 public class RssBuilder(){
-    private val rss : Rss = Rss()
-    public val channel : ChannelBuilder = ChannelBuilder(rss)
+    private val rss: Rss = Rss()
+    public val channel: ChannelBuilder = ChannelBuilder(rss)
 
-    public fun build() : Rss{
+    public fun build(): Rss {
         return rss
     }
 
-    public class ChannelBuilder(private val rss : Rss){
+    public class ChannelBuilder(private val rss: Rss){
         {
             rss.channel = Channel()
         }
 
-        public var item : ItemBuilder = ItemBuilder(Item())
+        public var item: ItemBuilder = ItemBuilder(Item())
             get() = $item
             set(value) {
                 $item = value
             }
 
-        public fun setTitle(title : String){
+        public fun setTitle(title: String) {
             rss.channel!!.title = title;
         }
 
-        public fun setLink(link : String){
+        public fun setLink(link: String) {
             rss.channel!!.link = link
         }
 
-        public fun setDescription(description : String){
+        public fun setDescription(description: String) {
             rss.channel!!.description = description
         }
 
-        public fun setLanguage(lang : String){
+        public fun setLanguage(lang: String) {
             rss.channel!!.language = lang
         }
 
-        public fun setPubDate(pubDate : String){
+        public fun setPubDate(pubDate: String) {
             rss.channel!!.pubDate = pubDate
         }
 
-        public fun setLastBuildDate(lastBuildDate : String){
+        public fun setLastBuildDate(lastBuildDate: String) {
             rss.channel!!.lastBuildDate = lastBuildDate
         }
 
-        public fun setDocs(docs : String) {
+        public fun setDocs(docs: String) {
             rss.channel!!.docs = docs
         }
 
-        public fun setGenerator(generator : String){
+        public fun setGenerator(generator: String) {
             rss.channel!!.generator = generator
         }
 
-        public fun setManagingDirector(managing : String){
+        public fun setManagingDirector(managing: String) {
             rss.channel!!.managingEditor = managing
         }
 
-        public fun setWebMaster(master : String){
+        public fun setWebMaster(master: String) {
             rss.channel!!.webMaster = master
         }
 
-        public fun setTitle(ttl : Int){
+        public fun setTitle(ttl: Int) {
             rss.channel!!.ttl = ttl
         }
 
-        public fun getCloud() : Cloud{
+        public fun getCloud(): Cloud {
             if (rss.channel!!.cloud == null)
                 rss.channel!!.cloud = Cloud()
 
             return rss.channel!!.cloud!!
         }
 
-        public fun startItem(){
+        public fun startItem() {
             item = ItemBuilder(Item())
         }
 
-        public fun endItem(){
+        public fun endItem() {
             rss.channel!!.item!!.add(item.data)
         }
 
-        public class ItemBuilder(public val data : Item){
-            public fun setTitle(title : String){
+        public class ItemBuilder(public val data: Item){
+            public fun setTitle(title: String) {
                 data.title = title
             }
 
-            public fun setLink(link : String){
+            public fun setLink(link: String) {
                 data.link = link
             }
 
-            public fun setDescription(desc: String){
+            public fun setDescription(desc: String) {
                 data.description = desc
             }
 
-            public fun setAuthor(author: String){
+            public fun setAuthor(author: String) {
                 data.author = author
             }
 
-            public fun setGuid(guid : String){
+            public fun setGuid(guid: String) {
                 data.guid = guid
             }
 
-            public fun setIsPermaLink(isPermaLink : String){
+            public fun setIsPermaLink(isPermaLink: String) {
                 data.isPermalink = isPermaLink
             }
 
-            public fun setPubDate(pubDate: String){
+            public fun setPubDate(pubDate: String) {
                 data.pubDate = pubDate
             }
 
-            public fun getEnclosure() : Enclosure{
+            public fun getEnclosure(): Enclosure {
                 if (data.enclosure == null)
                     data.enclosure = Enclosure()
 

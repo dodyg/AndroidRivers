@@ -18,10 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-fun futureTimeFromNowInMilies(seconds: Int): Long {
-    return System.currentTimeMillis() + (seconds.toLong() * 1000.toLong())
-}
-
 public data class CacheItem<T: Any>(val item: T){
     public var expireIn: Long = futureTimeFromNowInMilies(60 * 10)
 
@@ -35,5 +31,4 @@ public data class CacheItem<T: Any>(val item: T){
 
     public val isExpired: Boolean
         get() = System.currentTimeMillis() > expireIn
-
 }

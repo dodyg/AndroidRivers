@@ -22,7 +22,6 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Outline {
     @Attribute(required = true)

@@ -17,19 +17,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 package com.silverkeytech.android_rivers.db
 
-import com.silverkeytech.android_rivers.Result
 import com.silverkeytech.android_rivers.None
+import com.silverkeytech.android_rivers.Result
 import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.outlines.Body
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
-import com.silverkeytech.android_rivers.with
 
-fun saveBookmarkToDb(title : String,
-                 url : String,
-                 kind : BookmarkKind,
-                 lang : String,
-                 collection : BookmarkCollection?) : Result<None> {
+
+fun saveBookmarkToDb(title: String,
+                     url: String,
+                     kind: BookmarkKind,
+                     lang: String,
+                     collection: BookmarkCollection?): Result<None> {
     try{
         var bk = Bookmark()
         bk.title = title
@@ -48,7 +48,7 @@ fun saveBookmarkToDb(title : String,
 }
 
 
-public fun addNewCollection(title : String, kind : BookmarkCollectionKind) : Result<BookmarkCollection>{
+public fun addNewCollection(title: String, kind: BookmarkCollectionKind): Result<BookmarkCollection> {
     try{
         var coll = BookmarkCollection()
         coll.title = title
@@ -57,7 +57,7 @@ public fun addNewCollection(title : String, kind : BookmarkCollectionKind) : Res
         DatabaseManager.bookmarkCollection!!.create(coll)
         return Result.right(coll)
     }
-    catch(e : Exception){
+    catch(e: Exception){
         return Result.wrong<BookmarkCollection>(null)
     }
 }
@@ -66,7 +66,7 @@ fun checkIfUrlAlreadyBookmarked(url: String): Boolean {
     return DatabaseManager.query().bookmark().byUrl(url).exists
 }
 
-public fun clearBookmarksFromCollection(collectionId : Int) : Result<None>{
+public fun clearBookmarksFromCollection(collectionId: Int): Result<None> {
     try{
         var bookmarks = getBookmarksFromDbByCollection(collectionId)
         if (bookmarks.count() > 0){
@@ -81,12 +81,12 @@ public fun clearBookmarksFromCollection(collectionId : Int) : Result<None>{
         }
         return Result.right(None())
     }
-    catch(e : Exception){
+    catch(e: Exception){
         return Result.wrong<None>(e)
     }
 }
 
-public fun removeBookmarkFromCollection(collectionId : Int, bookmarkId : Int) : Result<None>{
+public fun removeBookmarkFromCollection(collectionId: Int, bookmarkId: Int): Result<None> {
     try{
         var bookmarks = getBookmarksFromDbByCollection(collectionId)
         if (bookmarks.count() > 0){
@@ -109,7 +109,8 @@ public fun removeBookmarkFromCollection(collectionId : Int, bookmarkId : Int) : 
     }
 }
 
-public fun getBookmarkCollectionFromDb() : List<BookmarkCollection>{
+
+public fun getBookmarkCollectionFromDb(): List<BookmarkCollection> {
     var coll = DatabaseManager.query().bookmarkCollection().all()
 
     if (coll.exist)
@@ -118,7 +119,7 @@ public fun getBookmarkCollectionFromDb() : List<BookmarkCollection>{
         return arrayListOf<BookmarkCollection>()
 }
 
-public fun getBookmarksFromDbByCollection(collectionId : Int) : List<Bookmark>{
+public fun getBookmarksFromDbByCollection(collectionId: Int): List<Bookmark> {
     var bookmarks = DatabaseManager.query().bookmark().byCollectionId(collectionId)
 
     if (bookmarks.exist)
@@ -127,7 +128,7 @@ public fun getBookmarksFromDbByCollection(collectionId : Int) : List<Bookmark>{
         return arrayListOf<Bookmark>()
 }
 
-public fun getBookmarksFromDb(kind : BookmarkKind) : List<Bookmark>{
+public fun getBookmarksFromDb(kind: BookmarkKind): List<Bookmark> {
     var bookmarks = DatabaseManager.query().bookmark().byKind(kind)
 
     if (bookmarks.exist)
@@ -137,7 +138,7 @@ public fun getBookmarksFromDb(kind : BookmarkKind) : List<Bookmark>{
 }
 
 //get bookmarks from db and return the data in opml format
-public fun getBookmarksFromDbAsOpml(kind : BookmarkKind): Opml {
+public fun getBookmarksFromDbAsOpml(kind: BookmarkKind): Opml {
     var opml = Opml()
     opml.body = Body()
 

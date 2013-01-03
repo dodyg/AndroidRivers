@@ -21,18 +21,16 @@ package com.silverkeytech.android_rivers.db
 import com.j256.ormlite.field.DataType
 import com.j256.ormlite.field.DatabaseField
 import com.j256.ormlite.table.DatabaseTable
-import com.j256.ormlite.field.ForeignCollectionField
-import com.j256.ormlite.dao.ForeignCollection
 
 public val BOOKMARK_COLLECTION_ID: String = "id"
-public val BOOKMARK_COLLECTION_TITLE : String = "title"
-public val BOOKMARK_COLLECTION_KIND : String = "kind"
+public val BOOKMARK_COLLECTION_TITLE: String = "title"
+public val BOOKMARK_COLLECTION_KIND: String = "kind"
 
 [DatabaseTable(tableName = "bookmark_collection")]
 public class BookmarkCollection(){
 
     [DatabaseField(generatedId = true, columnName = "id")]
-    public var id : Int = 0
+    public var id: Int = 0
 
     [DatabaseField(canBeNull = false, columnName = "title", width = 255, dataType = DataType.STRING)]
     public var title: String = ""
@@ -40,7 +38,7 @@ public class BookmarkCollection(){
     [DatabaseField(canBeNull = false, columnName = "kind")]
     public var kind: String = ""
 
-    public fun toString() : String{
+    public fun toString(): String {
         return title
     }
 }

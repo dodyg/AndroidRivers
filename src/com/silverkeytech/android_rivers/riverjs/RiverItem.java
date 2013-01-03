@@ -52,7 +52,7 @@ public class RiverItem {
         return enclosure != null && !enclosure.isEmpty();
     }
 
-    public Boolean containsSource(){
+    public Boolean containsSource() {
         return source != null && source.size() > 0;
     }
 

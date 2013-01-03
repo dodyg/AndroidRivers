@@ -19,9 +19,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -35,20 +37,15 @@ import android.widget.Button
 import android.widget.RemoteViews
 import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
-import com.google.gson.Gson
 import com.silverkeytech.android_rivers.db.Bookmark
+import com.silverkeytech.android_rivers.db.BookmarkCollection
+import com.silverkeytech.android_rivers.db.BookmarkCollectionKind
+import com.silverkeytech.android_rivers.db.BookmarkKind
 import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
-import com.silverkeytech.android_rivers.riverjs.River
-import java.util.Random
-import com.silverkeytech.android_rivers.outliner.transformFeedOpmlToOpml
-import android.app.AlertDialog
 import java.util.ArrayList
-import android.content.DialogInterface
-import com.silverkeytech.android_rivers.db.BookmarkKind
-import com.silverkeytech.android_rivers.db.BookmarkCollection
-import com.silverkeytech.android_rivers.db.BookmarkCollectionKind
+import java.util.Random
 
 public class TryOutActivity(): Activity()
 {
@@ -76,13 +73,13 @@ public class TryOutActivity(): Activity()
         handleRiverJsWithOpmlSource()
     }
 
-    fun handleBookmarkCollectionCreation(){
+    fun handleBookmarkCollectionCreation() {
         val btn = findView<Button>(R.id.tryout_bookmark_collection_btn)
 
         btn.setOnClickListener {
             var coll = BookmarkCollection()
             coll.title = "Channel 1"
-            coll.kind  = BookmarkCollectionKind.RIVER.toString()
+            coll.kind = BookmarkCollectionKind.RIVER.toString()
 
             DatabaseManager.bookmarkCollection!!.create(coll)
 
@@ -105,10 +102,10 @@ public class TryOutActivity(): Activity()
         }
     }
 
-    fun handleDownloadAtom(){
+    fun handleDownloadAtom() {
         val btn = findView<Button>(R.id.tryout_download_atom_btn)
 
-        val list = ArrayList<Pair<String,String>>()
+        val list = ArrayList<Pair<String, String>>()
         list.add(Pair("Daring Fireball", "http://daringfireball.net/index.xml"))
         list.add(Pair("Nomadlife", "http://nomadone.nomadlife.org/atom.xml"))
 
@@ -140,10 +137,10 @@ public class TryOutActivity(): Activity()
         }
     }
 
-    fun handleDownloadRss(){
+    fun handleDownloadRss() {
         val btn = findView<Button>(R.id.tryout_download_rss_btn)
 
-        val list = ArrayList<Pair<String,String>>()
+        val list = ArrayList<Pair<String, String>>()
         list.add(Pair("Sample", "http://cyber.law.harvard.edu/rss/examples/rss2sample.xml"))
         list.add(Pair("Scripting", "http://static.scripting.com/rss.xml"))
         list.add(Pair("NPR Songs", "http://www.npr.org/rss/podcast.php?id=510019"))
@@ -313,7 +310,7 @@ public class TryOutActivity(): Activity()
             val url = "http://scripting.com/toc.opml"
 
             DownloadOpml(this)
-            .executeOnProcessedCompletion({
+                    .executeOnProcessedCompletion({
                 res ->
                 if (res.isTrue()){
                     var intent = Intent(Intent.ACTION_MAIN)
@@ -326,7 +323,7 @@ public class TryOutActivity(): Activity()
                     toastee("Downloading url fails becaue of ${res.exception?.getMessage()}", Duration.LONG)
                 }
             }, { outline -> outline.text != "<rules>" })
-            .execute(url)
+                    .execute(url)
 
             //val url = "http://opmlviewer.com/Content/Directories.opml"
             //val url = "http://static.scripting.com/denver/wo/dave/2012/11/22/archive018.opml"

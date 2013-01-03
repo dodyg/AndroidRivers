@@ -18,8 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.syndications.rss;
 
-import org.simpleframework.xml.Attribute;
-
 public class Enclosure {
     public String url;
     public Integer length;

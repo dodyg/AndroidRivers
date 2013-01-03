@@ -27,9 +27,9 @@ import android.util.Log
 import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.google.gson.Gson
+import com.silverkeytech.android_rivers.riverjs.River
 import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 import com.silverkeytech.android_rivers.riverjs.RiverSite
-import com.silverkeytech.android_rivers.riverjs.River
 import java.util.ArrayList
 
 //Responsible for handling a river js downloading and display in asynchronous way
@@ -73,9 +73,8 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
         }
 
         try{
-            val gson = Gson()
             val scrubbed = scrubJsonP(req!!)
-            val feeds = gson.fromJson(scrubbed, javaClass<River>())!!
+            val feeds = Gson().fromJson(scrubbed, javaClass<River>())!!
 
             return Result.right(feeds)
         }
@@ -125,20 +124,20 @@ fun River.getSortedNewsItems(): List<RiverItemMeta> {
     }
 
     var sortedNewsItems = newsItems.filter { x -> x.item.isPublicationDate()!! }.sort(
-            comparator {(p1 : RiverItemMeta, p2 : RiverItemMeta) ->
-        val date1 = p1.item.getPublicationDate()
-        val date2 = p2.item.getPublicationDate()
+            comparator {(p1: RiverItemMeta, p2: RiverItemMeta) ->
+                val date1 = p1.item.getPublicationDate()
+                val date2 = p2.item.getPublicationDate()
 
-        if (date1 != null && date2 != null) {
-            date1.compareTo(date2) * -1
-        } else if (date1 == null && date2 == null) {
-            0
-        } else if (date1 == null) {
-            -1
-        } else {
-            1
-        }
-    })
+                if (date1 != null && date2 != null) {
+                    date1.compareTo(date2) * -1
+                } else if (date1 == null && date2 == null) {
+                    0
+                } else if (date1 == null) {
+                    -1
+                } else {
+                    1
+                }
+            })
 
     return sortedNewsItems
 }

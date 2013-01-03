@@ -27,7 +27,7 @@ public val BOOKMARK_TITLE: String = "title"
 public val BOOKMARK_URL: String = "url"
 public val BOOKMARK_LANGUAGE: String = "language"
 public val BOOKMARK_KIND: String = "kind"
-public val BOOKMARK_COLLECTION : String = "bookmark_collection_id"
+public val BOOKMARK_COLLECTION: String = "bookmark_collection_id"
 
 [DatabaseTable]
 public class Bookmark(){
@@ -48,9 +48,9 @@ public class Bookmark(){
     public var kind: String = ""
 
     [DatabaseField(canBeNull = true, foreign = true, columnName = "bookmark_collection_id")]
-    public var collection : BookmarkCollection? = null
+    public var collection: BookmarkCollection? = null
 
-    public fun toString(): String{
+    public fun toString(): String {
         return title
     }
 }

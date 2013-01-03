@@ -18,32 +18,30 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.syndication
 
-import com.silverkeytech.android_rivers.syndications.rss.Rss
-import com.silverkeytech.android_rivers.syndications.rss.Item
-import java.util.ArrayList
-import com.silverkeytech.android_rivers.scrubHtml
 import android.util.Log
-import com.silverkeytech.android_rivers.syndications.atom.Feed
 import com.silverkeytech.android_rivers.isNullOrEmpty
-import com.silverkeytech.android_rivers.syndications.SyndicationFeedType
+import com.silverkeytech.android_rivers.scrubHtml
 import com.silverkeytech.android_rivers.syndications.SyndicationFeedEnclosure
-import com.silverkeytech.android_rivers.syndications.atom.TextElement
+import com.silverkeytech.android_rivers.syndications.SyndicationFeedType
 import com.silverkeytech.android_rivers.syndications.atom.ContentElement
+import com.silverkeytech.android_rivers.syndications.atom.Feed
+import com.silverkeytech.android_rivers.syndications.rss.Rss
+import java.util.ArrayList
 
-public data class SyndicationFeed(public val rss : Rss?, public val atom : Feed?){
+public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?){
 
-    public var title : String = ""
-    public var language : String = ""
-    public var link : String = ""
-    public var feedType : SyndicationFeedType = SyndicationFeedType.NONE
-    public var items : ArrayList<SyndicationFeedItem> = ArrayList<SyndicationFeedItem>()
+    public var title: String = ""
+    public var language: String = ""
+    public var link: String = ""
+    public var feedType: SyndicationFeedType = SyndicationFeedType.NONE
+    public var items: ArrayList<SyndicationFeedItem> = ArrayList<SyndicationFeedItem>()
 
 
-    public fun hasLink() : Boolean {
+    public fun hasLink(): Boolean {
         return !link.isNullOrEmpty()
     }
 
-    public fun transform(){
+    public fun transform() {
         transformRss()
         transformAtom()
     }
@@ -71,9 +69,9 @@ public data class SyndicationFeed(public val rss : Rss?, public val atom : Feed?
                     if (i.enclosure != null){
                         val e = i.enclosure!!
                         val enclosure = SyndicationFeedEnclosure(
-                            e.url!!,
-                            if (e.length != null) e.length!! else 0,
-                            if (!e.`type`.isNullOrEmpty()) e.`type`!! else ""
+                                e.url!!,
+                                if (e.length != null) e.length!! else 0,
+                                if (!e.`type`.isNullOrEmpty()) e.`type`!! else ""
                         )
                         fi.enclosure = enclosure
                     }
@@ -83,7 +81,7 @@ public data class SyndicationFeed(public val rss : Rss?, public val atom : Feed?
         }
     }
 
-    fun transformAtom(){
+    fun transformAtom() {
         if (atom != null){
             title = if (atom!!.title.isNullOrEmpty()) "" else atom!!.title!!
 
@@ -101,13 +99,13 @@ public data class SyndicationFeed(public val rss : Rss?, public val atom : Feed?
                         fi.link = alternateLinks.first().href
 
                     //enclosure
-                    val enclosureLinks =  i.link!!.filter { x -> !x.rel.isNullOrEmpty() && x.rel == "enclosure" }
+                    val enclosureLinks = i.link!!.filter { x -> !x.rel.isNullOrEmpty() && x.rel == "enclosure" }
 
                     if (alternateLinks.count() > 0){
                         val altLink = alternateLinks.first()
 
                         if (altLink.length != null && altLink.length!! > 0
-                            && !altLink.`type`.isNullOrEmpty()){
+                        && !altLink.`type`.isNullOrEmpty()){
                             val enclosure = SyndicationFeedEnclosure(
                                     altLink.href!!,
                                     altLink.length!!,
@@ -118,7 +116,7 @@ public data class SyndicationFeed(public val rss : Rss?, public val atom : Feed?
                     }
                 }
 
-                fun processDescription(text : ContentElement){
+                fun processDescription(text: ContentElement) {
                     if (text.`type` == null){
                         fi.description = text.value
                     }

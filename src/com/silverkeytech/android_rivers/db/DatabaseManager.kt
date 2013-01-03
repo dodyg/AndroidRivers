@@ -40,17 +40,17 @@ public object DatabaseManager{
         get() = getDb().getBookmarkCollectionDao() as Dao<BookmarkCollection, out Int?>
 
     public fun query(): Query = Query(bookmark, bookmarkCollection)
-    public fun cmd(): Command = Command(bookmark,  bookmarkCollection)
+    public fun cmd(): Command = Command(bookmark, bookmarkCollection)
 }
 
 public class Query (private val bookmark: Dao<Bookmark, out Int?>?,
                     private val bookmarkCollection: Dao<BookmarkCollection, out Int?>?){
     public fun bookmark(): BookmarkQuery = BookmarkQuery(bookmark!!)
-    public fun bookmarkCollection() : BookmarkCollectionQuery = BookmarkCollectionQuery(bookmarkCollection!!)
+    public fun bookmarkCollection(): BookmarkCollectionQuery = BookmarkCollectionQuery(bookmarkCollection!!)
 }
 
 public class Command(private val bookmark: Dao<Bookmark, out Int?>?,
                      private val bookmarkCollection: Dao<BookmarkCollection, out Int?>?){
     public fun bookmark(): BookmarkCommand = BookmarkCommand(bookmark!!)
-    public fun bookmarkCollection() : BookmarkCollectionCommand = BookmarkCollectionCommand(bookmarkCollection!!)
+    public fun bookmarkCollection(): BookmarkCollectionCommand = BookmarkCollectionCommand(bookmarkCollection!!)
 }

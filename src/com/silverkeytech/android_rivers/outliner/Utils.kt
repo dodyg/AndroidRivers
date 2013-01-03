@@ -18,10 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.outliner
 
-import android.content.Context
-import android.content.Intent
 import android.util.Log
-import com.silverkeytech.android_rivers.OutlinerActivity
 import com.silverkeytech.android_rivers.Result
 import com.silverkeytech.android_rivers.XmlComponent
 import com.silverkeytech.android_rivers.isNullOrEmpty
@@ -39,7 +36,6 @@ import com.silverkeytech.android_rivers.xml.RssParser
 import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 import java.io.ByteArrayInputStream
 import java.util.ArrayList
-import com.silverkeytech.android_rivers.Params
 
 //do an in order traversal so we can flatten it up to be used by outliner
 fun Opml.traverse (filter: ((Outline) -> Boolean)? = null, depthLimit: Int = 12): ArrayList<OutlineContent> {

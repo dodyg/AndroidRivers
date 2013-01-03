@@ -19,6 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers.syndications
 
 public data class SyndicationFeedEnclosure (
-        public val url : String,
-        public val length : Int,
-        public val mimeType : String)
+        public val url: String,
+        public val length: Int,
+        public val mimeType: String)

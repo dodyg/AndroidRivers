@@ -19,17 +19,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.content.Context
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.PopupWindow
 import com.silverkeytech.android_rivers.db.Bookmark
-import com.silverkeytech.android_rivers.db.DatabaseManager
-import com.silverkeytech.android_rivers.outlines.Outline
 import com.silverkeytech.android_rivers.db.BookmarkCollection
-import android.util.Log
+import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.db.clearBookmarksFromCollection
+import com.silverkeytech.android_rivers.outlines.Outline
 
 fun inflater(context: Context): LayoutInflater {
     val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -80,7 +80,6 @@ fun showCollectionQuickActionPopup(context: MainActivity, collection: BookmarkCo
     val itemLocation = getLocationOnScreen(item)
     pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
 }
-
 
 fun showBookmarkListingQuickActionPopup(context: MainActivity, currentBookmark: Bookmark, item: View, list: View) {
     //overlay popup at top of clicked overview position

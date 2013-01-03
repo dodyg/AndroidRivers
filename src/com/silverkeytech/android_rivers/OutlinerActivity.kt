@@ -70,7 +70,7 @@ public class OutlinerActivity(): SherlockActivity()
             toastee("There is no data to be displayed in outline mode ", Duration.LONG)
     }
 
-    fun displayOutlines(manager : InMemoryTreeStateManager<Long?>, outlines: ArrayList<OutlineContent>, expandAllInitially: Boolean) {
+    fun displayOutlines(manager: InMemoryTreeStateManager<Long?>, outlines: ArrayList<OutlineContent>, expandAllInitially: Boolean) {
         manager.clear()
         manager.setVisibleByDefault(expandAllInitially)
 
@@ -89,7 +89,7 @@ public class OutlinerActivity(): SherlockActivity()
         treeView.setAdapter(simpleAdapter)
     }
 
-    fun collapseOutlines(manager : InMemoryTreeStateManager<Long?>, outlines: ArrayList<OutlineContent>){
+    fun collapseOutlines(manager: InMemoryTreeStateManager<Long?>, outlines: ArrayList<OutlineContent>) {
         var counter = 0
         for(val e in outlines){
             if (e.level == 0){
@@ -99,7 +99,7 @@ public class OutlinerActivity(): SherlockActivity()
         }
     }
 
-    fun expandOutlines(manager : InMemoryTreeStateManager<Long?>, outlines: ArrayList<OutlineContent>){
+    fun expandOutlines(manager: InMemoryTreeStateManager<Long?>, outlines: ArrayList<OutlineContent>) {
         var counter = 0
         for(val e in outlines){
             if (e.level == 0){
@@ -126,7 +126,7 @@ public class OutlinerActivity(): SherlockActivity()
 
     internal fun refreshContent(url: String) {
         DownloadOpml(this)
-        .executeOnProcessedCompletion({
+                .executeOnProcessedCompletion({
             res ->
             if (res.isTrue()){
                 displayOutlines(treeManager, res.value!!, expandAll)
@@ -136,7 +136,7 @@ public class OutlinerActivity(): SherlockActivity()
                 toastee("Downloading url fails becaue of ${res.exception?.getMessage()}", Duration.LONG)
             }
         }, { outline -> outline.text != "<rules>" })
-        .execute(url)
+                .execute(url)
     }
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {

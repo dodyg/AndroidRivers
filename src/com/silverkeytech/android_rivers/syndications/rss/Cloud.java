@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.syndications.rss;
 
-public class Cloud{
+public class Cloud {
     public String domain;
     public Integer port;
     public String path;

@@ -18,15 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import com.actionbarsherlock.app.SherlockListActivity
 import android.os.Bundle
-import com.silverkeytech.android_rivers.db.getBookmarksFromDbByCollection
+import com.actionbarsherlock.app.SherlockListActivity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
-import android.app.AlertDialog
-import android.view.View
-import android.view.LayoutInflater
-import android.content.DialogInterface
+import com.silverkeytech.android_rivers.db.getBookmarksFromDbByCollection
 
 public open class BookmarkCollectionActivity(): SherlockListActivity() {
     class object {
@@ -48,7 +44,7 @@ public open class BookmarkCollectionActivity(): SherlockListActivity() {
         var actionBar = getSupportActionBar()!!
         actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
         actionBar.setDisplayShowTitleEnabled(true)
-        actionBar.setTitle(collectionTitle)
+        actionBar.setTitle("Edit " + collectionTitle)
 
         displayCollection()
     }
@@ -62,20 +58,17 @@ public open class BookmarkCollectionActivity(): SherlockListActivity() {
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
-         R.id.collection_menu_add -> {
-             return true
-         }
-         else -> {
-             return false
-         }
+            else -> {
+                return false
+            }
         }
     }
 
-    public fun refreshCollection(){
+    public fun refreshCollection() {
         displayCollection()
     }
 
-    fun displayCollection(){
+    fun displayCollection() {
         val bookmarks = getBookmarksFromDbByCollection(collectionId)
         BookmarkCollectionRenderer(this).handleListing(bookmarks)
     }

@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,11 +31,10 @@ import android.widget.ListView
 import android.widget.TextView
 import com.silverkeytech.android_rivers.db.Bookmark
 import com.silverkeytech.android_rivers.db.BookmarkCollection
+import com.silverkeytech.android_rivers.db.getBookmarksFromDbByCollection
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 import java.util.ArrayList
-import com.silverkeytech.android_rivers.db.getBookmarksFromDbByCollection
-import android.util.Log
 
 public class BookmarksRenderer(val context: MainActivity){
     class object {
@@ -62,26 +62,25 @@ public class BookmarksRenderer(val context: MainActivity){
                 Log.d(TAG, "Starts the process of downloading urls")
                 DownloadCollectionAsRiver(context, current.id)
                         .executeOnCompletion { url, res ->
-                            if (res.isTrue()){
-                                Log.d(TAG, "Downloaded ${res.value?.count()} items")
-                                startRiverActivity(context, url, current.title, "en")
-                            }
-                            else {
-                                Log.d(TAG, "Downloading $current.id fails")
-                            }
-                        }
-                        .execute(*urls)
+                    if (res.isTrue()){
+                        Log.d(TAG, "Downloaded ${res.value?.count()} items")
+                        startRiverActivity(context, url, current.title, "en")
+                    }
+                    else {
+                        Log.d(TAG, "Downloading $current.id fails")
+                    }
+                }
+                .execute(*urls)
             }
         })
 
         list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
             public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
-                val current  = coll[p2]
+                val current = coll[p2]
                 showCollectionQuickActionPopup(context, current, p1!!, list)
                 return true
             }
         })
-
     }
 
     fun handleListing(bookmarks: List<Bookmark>) {
@@ -108,7 +107,6 @@ public class BookmarksRenderer(val context: MainActivity){
                 return true
             }
         })
-
     }
 
     fun handleRiversListing(opml: Opml) {
@@ -153,10 +151,10 @@ public class BookmarksRenderer(val context: MainActivity){
 
     public data class ViewHolder (var name: TextView)
 
-    fun currentListItem(text: String, convertView : View?, parent: ViewGroup?) : View?{
+    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?): View? {
         var holder: ViewHolder?
 
-        var vw : View? = convertView
+        var vw: View? = convertView
 
         if (vw == null){
             vw = inflater().inflate(android.R.layout.simple_list_item_1, parent, false)
@@ -177,4 +175,3 @@ public class BookmarksRenderer(val context: MainActivity){
         return inflater
     }
 }
-

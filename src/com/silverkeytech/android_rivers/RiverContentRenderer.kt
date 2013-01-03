@@ -40,10 +40,10 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
-import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
-import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 import com.silverkeytech.android_rivers.outliner.transformFeedOpmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
+import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
+import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 
 //Manage the rendering of each news item in the river list
 public class RiverContentRenderer(val context: Activity, val language: String){
@@ -109,7 +109,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                     Log.d(TAG, "List View reused")
                 }
 
-                handleText(holder!!.news, news!!, textSize.toFloat())
+                handleText(context, language, holder!!.news, news!!, textSize.toFloat())
 
                 showIndicator()
 
@@ -144,11 +144,11 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                     dlg.setBackgroundColor(android.graphics.Color.BLACK)
 
                 var body = dlg.findViewById(R.id.news_details_text_tv)!! as TextView
-                handleText(body, msg, textSize.toFloat())
+                handleText(context, language, body, msg, textSize.toFloat())
                 handleTextColor(context, body)
 
                 var source = dlg.findViewById(R.id.news_details_source_tv)!! as TextView
-                handleText(source, scrubHtml(currentNews.feedSourceTitle), 11.toFloat())
+                handleText(context, language, source, scrubHtml(currentNews.feedSourceTitle), 11.toFloat())
                 handleTextColor(context, body)
 
                 dialog.setView(dlg)
@@ -218,28 +218,28 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 else if (currentNews.item.containsSource()!!){
                     dialog.setNeutralButton("Outlines", object : DialogInterface.OnClickListener{
                         public override fun onClick(p0: DialogInterface?, p1: Int) {
-                           try{
+                            try{
 
-                            val feedOpml = currentNews.item.source!!.get(0).opml!!
+                                val feedOpml = currentNews.item.source!!.get(0).opml!!
 
-                            var opml = transformFeedOpmlToOpml(feedOpml)
+                                var opml = transformFeedOpmlToOpml(feedOpml)
 
-                            if (opml.isTrue()){
-                                val outlines = opml.value!!.traverse()
-                                val title = if (opml.value!!.head!!.title.isNullOrEmpty())
-                                    "Opml Comment"
-                                else
-                                    opml.value!!.head!!.title
+                                if (opml.isTrue()){
+                                    val outlines = opml.value!!.traverse()
+                                    val title = if (opml.value!!.head!!.title.isNullOrEmpty())
+                                        "Opml Comment"
+                                    else
+                                        opml.value!!.head!!.title
 
-                                startOutlinerActivity(context, outlines, title!!, null, true)
+                                    startOutlinerActivity(context, outlines, title!!, null, true)
+                                }
+                                else{
+                                    Log.d(TAG, "Error in transformation feedopml to opml ${opml.exception?.getMessage()}")
+                                }
                             }
-                            else{
-                                Log.d(TAG, "Error in transformation feedopml to opml ${opml.exception?.getMessage()}")
+                            catch(e: Exception){
+                                context.toastee("Error in processing opml source ${e.getMessage()}")
                             }
-                           }
-                           catch(e : Exception){
-                               context.toastee("Error in processing opml source ${e.getMessage()}")
-                           }
 
                         }
                     })
@@ -256,31 +256,5 @@ public class RiverContentRenderer(val context: Activity, val language: String){
         })
 
         list.setAdapter(adapter)
-    }
-
-    val arabicFont = Typeface.createFromAsset(context.getAssets(), "DroidKufi-Regular.ttf")
-
-    fun handleText(text: TextView, content: String, textSize: Float) {
-        when(language){
-            "ar" -> {
-                Log.d(TAG, "Switching to Arabic Font")
-                text.setTypeface(arabicFont)
-                text.setText(ArabicReshape.reshape(content))
-                text.setGravity(Gravity.RIGHT)
-                text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize - 3.toFloat())
-            }
-            else -> {
-                text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
-                text.setText(content);
-            }
-        }
-    }
-
-    fun handleTextColor(context: Activity, text: TextView) {
-        var theme = context.getVisualPref().getTheme()
-        if (theme == R.style.Theme_Sherlock_Light_DarkActionBar)
-            text.setTextColor(android.graphics.Color.BLACK)
-        else if (theme == R.style.Theme_Sherlock)
-            text.setTextColor(android.graphics.Color.WHITE)
     }
 }

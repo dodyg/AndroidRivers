@@ -19,6 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.content.Context
+import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,18 +28,11 @@ import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.ListView
+import android.widget.PopupWindow
 import android.widget.TextView
 import com.silverkeytech.android_rivers.db.Bookmark
-import com.silverkeytech.android_rivers.db.BookmarkCollection
-import com.silverkeytech.android_rivers.outlines.Opml
-import com.silverkeytech.android_rivers.outlines.Outline
-import java.util.ArrayList
-import android.util.Log
-import android.widget.PopupWindow
-import android.widget.ImageView
-import android.view.Gravity
-import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.db.removeBookmarkFromCollection
 
 public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity){
@@ -74,10 +69,10 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
 
     public data class ViewHolder (var name: TextView)
 
-    fun currentListItem(text: String, convertView : View?, parent: ViewGroup?) : View?{
+    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?): View? {
         var holder: ViewHolder?
 
-        var vw : View? = convertView
+        var vw: View? = convertView
 
         if (vw == null){
             vw = inflater().inflate(android.R.layout.simple_list_item_1, parent, false)

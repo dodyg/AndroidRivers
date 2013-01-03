@@ -21,7 +21,6 @@ package com.silverkeytech.android_rivers.db
 import com.j256.ormlite.dao.Dao
 import com.silverkeytech.android_rivers.Result
 
-
 public class BookmarkCommand(private val dao: Dao<Bookmark, out Int?>){
     fun deleteByUrl (url: String): Result<Boolean> {
         try{

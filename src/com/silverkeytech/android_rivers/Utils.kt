@@ -27,8 +27,13 @@ import java.net.SocketException
 import java.net.UnknownHostException
 import java.text.SimpleDateFormat
 import org.apache.http.conn.ConnectTimeoutException
+import android.widget.TextView
+import android.graphics.Typeface
+import go.goyalla.dict.arabicDictionary.file.ArabicReshape
+import android.util.Log
+import android.util.TypedValue
 
-public fun Activity.getStandardDialogBackgroundColor() : Int{
+public fun Activity.getStandardDialogBackgroundColor(): Int {
     val theme = this.getVisualPref().getTheme()
     if (theme == R.style.Theme_Sherlock_Light_DarkActionBar)
         return android.graphics.Color.WHITE
@@ -124,8 +129,39 @@ fun inMegaByte(mb: Int): Int = mb * 1024 * 1024
 
 fun Int.toHoursInMinutes() = this * 60
 
-
-public fun <T>T.with(operations : T.() -> Unit) : T {
+public fun <T>T.with(operations: T.() -> Unit): T {
     this.operations()
     return this
+}
+
+fun futureTimeFromNowInMilies(seconds: Int): Long {
+    return System.currentTimeMillis() + (seconds.toLong() * 1000.toLong())
+}
+
+fun handleText(context: Activity, language : String, text: TextView, content: String, textSize: Float) {
+    val TAG = "handleText"
+
+    val arabicFont = Typeface.createFromAsset(context.getAssets(), "DroidKufi-Regular.ttf")
+
+    when(language){
+        "ar" -> {
+            Log.d(TAG, "Switching to Arabic Font")
+            text.setTypeface(arabicFont)
+            text.setText(ArabicReshape.reshape(content))
+            text.setGravity(Gravity.RIGHT)
+            text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize - 3.toFloat())
+        }
+        else -> {
+            text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+            text.setText(content);
+        }
+    }
+}
+
+fun handleTextColor(context: Activity, text: TextView) {
+    var theme = context.getVisualPref().getTheme()
+    if (theme == R.style.Theme_Sherlock_Light_DarkActionBar)
+        text.setTextColor(android.graphics.Color.BLACK)
+    else if (theme == R.style.Theme_Sherlock)
+        text.setTextColor(android.graphics.Color.WHITE)
 }

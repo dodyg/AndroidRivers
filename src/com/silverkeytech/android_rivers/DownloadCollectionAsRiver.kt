@@ -1,27 +1,18 @@
 package com.silverkeytech.android_rivers
 
-
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.AsyncTask
 import android.util.Log
-import com.github.kevinsawicki.http.HttpRequest
-import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
-import com.google.gson.Gson
-import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
-import com.silverkeytech.android_rivers.riverjs.RiverSite
-import com.silverkeytech.android_rivers.riverjs.River
-import java.util.ArrayList
-import com.silverkeytech.android_rivers.outliner.transformXmlToRss
-import com.silverkeytech.android_rivers.syndication.SyndicationFeed
-import com.silverkeytech.android_rivers.outliner.transformXmlToAtom
 import com.silverkeytech.android_rivers.riverjs.RiverItem
+import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
+import com.silverkeytech.android_rivers.syndication.SyndicationFeed
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
+import java.util.ArrayList
 
-
-public class DownloadCollectionAsRiver(it: Context?, private val collectionId : Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
+public class DownloadCollectionAsRiver(it: Context?, private val collectionId: Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
     class object {
         public val TAG: String = javaClass<DownloadCollectionAsRiver>().getSimpleName()
     }
@@ -60,7 +51,7 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId : 
         return Result.right(list)
     }
 
-    fun accumulateList(list : ArrayList<RiverItemMeta>, feed : SyndicationFeed){
+    fun accumulateList(list: ArrayList<RiverItemMeta>, feed: SyndicationFeed) {
         for(val f in feed.items.iterator()){
             val item = RiverItem()
 
@@ -70,7 +61,7 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId : 
                 item.link = f.link
 
             val link = if (feed.hasLink())
-                    feed.link else ""
+                feed.link else ""
 
             val meta = RiverItemMeta(item, feed.title, link)
 
@@ -78,10 +69,10 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId : 
         }
     }
 
-    var callback : ((String, Result<List<RiverItemMeta>>) -> Unit)? = null
+    var callback: ((String, Result<List<RiverItemMeta>>) -> Unit)? = null
 
     //Set up function to call when download is done
-    public fun executeOnCompletion(action: ((String, Result<List<RiverItemMeta>>) -> Unit)?) : DownloadCollectionAsRiver {
+    public fun executeOnCompletion(action: ((String, Result<List<RiverItemMeta>>) -> Unit)?): DownloadCollectionAsRiver {
         callback = action
         return this
     }
@@ -89,7 +80,7 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId : 
     protected override fun onPostExecute(result: Result<List<RiverItemMeta>>?) {
         dialog.dismiss()
         val url = "http://www.localhost/" + collectionId.toString()
-        if (result !=null){
+        if (result != null){
             if (result.isTrue()){
                 val sortedNewsItems = result.value!!
                 context.getApplication().getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
@@ -97,10 +88,10 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId : 
                     callback!!(url, Result.right(sortedNewsItems))
             }
             else
-                {
-                    if (callback != null)
-                        callback!!(url, Result.wrong<List<RiverItemMeta>>(result.exception))
-                }
+            {
+                if (callback != null)
+                    callback!!(url, Result.wrong<List<RiverItemMeta>>(result.exception))
+            }
         }
     }
 }

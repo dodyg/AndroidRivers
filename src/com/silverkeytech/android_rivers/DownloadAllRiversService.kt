@@ -111,8 +111,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
                 if (successful){
                     try{
                         val scrubbed = scrubJsonP(req!!)
-                        val gson = Gson()
-                        val feeds = gson.fromJson(scrubbed, javaClass<River>())!!
+                        val feeds = Gson().fromJson(scrubbed, javaClass<River>())!!
 
                         var sortedNewsItems = feeds.getSortedNewsItems()
 

@@ -18,65 +18,62 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.xml
 
-import com.thebuzzmedia.sjxp.XMLParser
-import com.thebuzzmedia.sjxp.rule.DefaultRule
 import com.silverkeytech.android_rivers.syndications.rss.RssBuilder
+import com.thebuzzmedia.sjxp.XMLParser
 import java.io.InputStream
-import com.thebuzzmedia.sjxp.rule.ParsingMode
-import com.silverkeytech.android_rivers.isNullOrEmpty
 
 public class RssParser{
-    public fun parse(input : InputStream, rss : RssBuilder){
+    public fun parse(input: InputStream, rss: RssBuilder) {
         var parser = XMLParser<RssBuilder>(channelTitle, channelLink, channelDescription, channelPubDate,
                 channelLastBuildDate, channelDocs, channelGenerator, channelManagingEditor, channelWebMaster,
                 channelTtl, channelCloud,
                 itemTag, itemTitle, itemLink, itemDescription, itemAuthor, itemGuid, itemIsPermaLink, itemPubDate, itemEnclosure
-                )
+        )
         parser.parse(input, rss)
     }
 }
 
-val channelTitle = textRule<RssBuilder>("/rss/channel/title", { (text, rss) ->
+val channelTitle = textRule<RssBuilder>("/rss/channel/title", {(text, rss) ->
     rss.channel.setTitle(text)
 })
 
-val channelLink = textRule<RssBuilder>("/rss/channel/link", { (text, rss) ->
+val channelLink = textRule<RssBuilder>("/rss/channel/link", {(text, rss) ->
     rss.channel.setLink(text)
 })
 
-val channelDescription = textRule<RssBuilder>("/rss/channel/description", { (text, rss) ->
+val channelDescription = textRule<RssBuilder>("/rss/channel/description", {(text, rss) ->
     rss.channel.setDescription(text)
 })
 
-val channelPubDate = textRule<RssBuilder>("/rss/channel/pubDate", { (text, rss) ->
+val channelPubDate = textRule<RssBuilder>("/rss/channel/pubDate", {(text, rss) ->
     rss.channel.setPubDate(text)
 })
 
-val channelLastBuildDate = textRule<RssBuilder>("/rss/channel/lastBuildDate", { (text, rss) ->
+val channelLastBuildDate = textRule<RssBuilder>("/rss/channel/lastBuildDate", {(text, rss) ->
     rss.channel.setLastBuildDate(text)
 })
 
-val channelDocs = textRule<RssBuilder>("/rss/channel/docs", { (text, rss) ->
+val channelDocs = textRule<RssBuilder>("/rss/channel/docs", {(text, rss) ->
     rss.channel.setDocs(text)
 })
 
-val channelGenerator = textRule<RssBuilder>("/rss/channel/generator", { (text, rss) ->
+val channelGenerator = textRule<RssBuilder>("/rss/channel/generator", {(text, rss) ->
     rss.channel.setGenerator(text)
 })
 
-val channelManagingEditor = textRule<RssBuilder>("/rss/channel/managingEditor", { (text, rss) ->
+val channelManagingEditor = textRule<RssBuilder>("/rss/channel/managingEditor", {(text, rss) ->
     rss.channel.setManagingDirector(text)
 })
 
-val channelWebMaster = textRule<RssBuilder>("/rss/channel/webMaster", { (text, rss) ->
+val channelWebMaster = textRule<RssBuilder>("/rss/channel/webMaster", {(text, rss) ->
     rss.channel.setWebMaster(text)
 })
 
-val channelTtl = textRule<RssBuilder>("/rss/channel/ttl", { (text, rss) ->
+val channelTtl = textRule<RssBuilder>("/rss/channel/ttl", {(text, rss) ->
     rss.channel.setTitle(text.toInt())
 })
 
-val channelCloud = attributeRule<RssBuilder>("/rss/channel/cloud", { (attrName, attrValue, rss) ->
+val channelCloud = attributeRule<RssBuilder>("/rss/channel/cloud", {(attrName, attrValue, rss) ->
     val cloud = rss.channel.getCloud()
     when(attrName){
         "domain" -> cloud.domain = attrValue
@@ -84,53 +81,55 @@ val channelCloud = attributeRule<RssBuilder>("/rss/channel/cloud", { (attrName, 
         "path" -> cloud.path = attrValue
         "registerProcedure" -> cloud.registerProcedure
         "protocol" -> cloud.protocol
-        else -> { }
+        else -> {
+        }
     }
 
 }, "domain", "port", "path", "registerProcedure", "protocol")
 
-val itemTag = tagRule<RssBuilder>("/rss/channel/item", { (isStartTag, rss) ->
+val itemTag = tagRule<RssBuilder>("/rss/channel/item", {(isStartTag, rss) ->
     if (isStartTag)
         rss.channel.startItem()
     else
         rss.channel.endItem()
 })
 
-val itemTitle = textRule<RssBuilder>("/rss/channel/item/title", { (text, rss) ->
+val itemTitle = textRule<RssBuilder>("/rss/channel/item/title", {(text, rss) ->
     rss.channel.item.setTitle(text)
 })
 
-val itemLink = textRule<RssBuilder>("/rss/channel/item/link", { (text, rss) ->
+val itemLink = textRule<RssBuilder>("/rss/channel/item/link", {(text, rss) ->
     rss.channel.item.setLink(text)
 })
 
-val itemDescription = textRule<RssBuilder>("/rss/channel/item/description", { (text, rss) ->
+val itemDescription = textRule<RssBuilder>("/rss/channel/item/description", {(text, rss) ->
     rss.channel.item.setDescription(text)
 })
 
-val itemAuthor = textRule<RssBuilder>("/rss/channel/item/author", { (text, rss) ->
+val itemAuthor = textRule<RssBuilder>("/rss/channel/item/author", {(text, rss) ->
     rss.channel.item.setAuthor(text)
 })
 
-val itemGuid = textRule<RssBuilder>("/rss/channel/item/guid", { (text, rss) ->
+val itemGuid = textRule<RssBuilder>("/rss/channel/item/guid", {(text, rss) ->
     rss.channel.item.setGuid(text)
 })
 
-val itemIsPermaLink = attributeRule<RssBuilder>("/rss/channel/item/guid", { (attrName, attrValue, rss) ->
+val itemIsPermaLink = attributeRule<RssBuilder>("/rss/channel/item/guid", {(attrName, attrValue, rss) ->
     if (attrName == "isPermaLink")
         rss.channel.item.setIsPermaLink(attrValue)
 }, "isPermaLink")
 
-val itemPubDate = textRule<RssBuilder>("/rss/channel/item/pubDate", { (text , rss) ->
+val itemPubDate = textRule<RssBuilder>("/rss/channel/item/pubDate", {(text, rss) ->
     rss.channel.item.setPubDate(text)
 })
 
-val itemEnclosure = attributeRule<RssBuilder>("/rss/channel/item/enclosure", { (attrName, attrValue, rss) ->
+val itemEnclosure = attributeRule<RssBuilder>("/rss/channel/item/enclosure", {(attrName, attrValue, rss) ->
     val enclosure = rss.channel.item.getEnclosure()
     when(attrName){
         "url" -> enclosure.url = attrValue
         "length" -> enclosure.length = attrValue.toInt()
         "type" -> enclosure.`type` = attrValue
-        else -> { }
+        else -> {
+        }
     }
 }, "url", "length", "type")

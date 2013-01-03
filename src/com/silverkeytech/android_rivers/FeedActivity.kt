@@ -18,20 +18,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import com.actionbarsherlock.app.SherlockListActivity
 import com.actionbarsherlock.view.ActionMode
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
-import com.silverkeytech.android_rivers.db.Bookmark
-import com.silverkeytech.android_rivers.db.BookmarkKind
-import com.silverkeytech.android_rivers.db.DatabaseManager
-import android.app.AlertDialog
-import android.content.DialogInterface
-import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.BookmarkCollection
+import com.silverkeytech.android_rivers.db.BookmarkKind
 import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
+import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 
 //Responsible of downloading, caching and viewing a news river content
@@ -64,7 +61,7 @@ public class FeedActivity(): SherlockListActivity()
         downloadFeed()
     }
 
-    fun downloadFeed(){
+    fun downloadFeed() {
         DownloadFeed(this, false)
                 .executeOnComplete {
             res ->
@@ -84,7 +81,7 @@ public class FeedActivity(): SherlockListActivity()
     public override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         val feedBookmarked = checkIfUrlAlreadyBookmarked(feedUrl)
 
-        val bookmarkMenu =  menu!!.findItem(R.id.feed_menu_bookmark)!!
+        val bookmarkMenu = menu!!.findItem(R.id.feed_menu_bookmark)!!
         bookmarkMenu.setVisible(!feedBookmarked)
         return true
     }
@@ -115,7 +112,7 @@ public class FeedActivity(): SherlockListActivity()
         }
     }
 
-    fun saveBookmark(collection : BookmarkCollection?){
+    fun saveBookmark(collection: BookmarkCollection?) {
         val res = saveBookmarkToDb(feedName, feedUrl, BookmarkKind.RSS, feedLanguage, collection)
 
         if (res.isTrue()){
@@ -129,13 +126,11 @@ public class FeedActivity(): SherlockListActivity()
         }
     }
 
-    fun addBookmarkOption(){
+    fun addBookmarkOption() {
         var coll = getBookmarkCollectionFromDb()
 
         if (!coll.isEmpty()){
-
             val dialog = AlertDialog.Builder(this)
-
             dialog.setTitle("Bookmark to a collection")
 
             var collectionTitles = coll.map { it.title }.toArray(array<String>())
@@ -145,7 +140,7 @@ public class FeedActivity(): SherlockListActivity()
                     val currentCollection = coll[p1]
                     saveBookmark(currentCollection)
                 }
-            } )
+            })
 
             var createdDialog = dialog.create()!!
             createdDialog.show()

@@ -34,10 +34,10 @@ import com.silverkeytech.android_rivers.OutlinerActivity
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.getMain
 import com.silverkeytech.android_rivers.startFeedActivityIntent
+import com.silverkeytech.android_rivers.startOutlinerActivity
 import com.silverkeytech.android_rivers.startRiverActivity
 import com.silverkeytech.android_rivers.toastee
 import java.util.ArrayList
-import com.silverkeytech.android_rivers.startOutlinerActivity
 
 public open class SimpleAdapter(private val context: OutlinerActivity,
                                 private val treeStateManager: TreeStateManager<Long?>,

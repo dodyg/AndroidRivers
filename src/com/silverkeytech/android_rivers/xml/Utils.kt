@@ -18,13 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.xml
 
-import com.silverkeytech.android_rivers.syndications.rss.RssBuilder
-import com.thebuzzmedia.sjxp.rule.ParsingMode
-import com.thebuzzmedia.sjxp.rule.DefaultRule
 import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.thebuzzmedia.sjxp.XMLParser
+import com.thebuzzmedia.sjxp.rule.DefaultRule
+import com.thebuzzmedia.sjxp.rule.ParsingMode
 
-fun textRule <T : Any>(path : String, action : (text : String, rss : T) -> Unit) : DefaultRule<T>{
+fun textRule <T: Any>(path: String, action: (text: String, rss: T) -> Unit): DefaultRule<T> {
     return object: DefaultRule<T> (ParsingMode.CHARACTER, path){
         public override fun handleParsedCharacters(parser: XMLParser<T>?, text: String?, userObject: T?) {
             if (!text.isNullOrEmpty())
@@ -33,7 +32,7 @@ fun textRule <T : Any>(path : String, action : (text : String, rss : T) -> Unit)
     }
 }
 
-fun attributeRule <T : Any>(path : String, action : (attrName : String, attrValue : String, rss : T) -> Unit, vararg attrNames : String?) : DefaultRule<T>{
+fun attributeRule <T: Any>(path: String, action: (attrName: String, attrValue: String, rss: T) -> Unit, vararg attrNames: String?): DefaultRule<T> {
     return object: DefaultRule<T> (ParsingMode.ATTRIBUTE, path, *attrNames){
         public override fun handleParsedAttribute(parser: XMLParser<T>?, index: Int, value: String?, userObject: T?) {
             if (!value.isNullOrEmpty()){
@@ -44,7 +43,7 @@ fun attributeRule <T : Any>(path : String, action : (attrName : String, attrValu
     }
 }
 
-fun tagRule <T : Any>(path : String, action : (isStartTag : Boolean, rss : T) -> Unit) : DefaultRule<T>{
+fun tagRule <T: Any>(path: String, action: (isStartTag: Boolean, rss: T) -> Unit): DefaultRule<T> {
     return object: DefaultRule<T> (ParsingMode.TAG, path){
         public override fun handleTag(parser: XMLParser<T>?, isStartTag: Boolean, userObject: T?) {
             action(isStartTag, userObject!!)

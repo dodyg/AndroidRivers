@@ -25,18 +25,18 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import com.actionbarsherlock.app.SherlockActivity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
+import com.silverkeytech.android_rivers.db.BookmarkCollectionKind
 import com.silverkeytech.android_rivers.db.BookmarkKind
+import com.silverkeytech.android_rivers.db.addNewCollection
 import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.getBookmarksFromDb
 import com.silverkeytech.android_rivers.db.getBookmarksFromDbAsOpml
 import com.silverkeytech.android_rivers.db.saveOpmlAsBookmarks
 import java.io.File
-import android.widget.EditText
-import com.silverkeytech.android_rivers.db.addNewCollection
-import com.silverkeytech.android_rivers.db.BookmarkCollectionKind
 
 enum class MainActivityMode {
     RIVER
@@ -53,8 +53,8 @@ public open class MainActivity(): SherlockActivity() {
 
     var mode: MainActivityMode = MainActivityMode.RIVER
 
-    var currentTheme : Int? = null
-    var isOnCreate : Boolean = true
+    var currentTheme: Int? = null
+    var isOnCreate: Boolean = true
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         currentTheme = this.getVisualPref().getTheme()
@@ -110,7 +110,7 @@ public open class MainActivity(): SherlockActivity() {
         }
     }
 
-    fun restart(){
+    fun restart() {
         val intent = getIntent()
         finish()
         startActivity(intent)
@@ -191,7 +191,7 @@ public open class MainActivity(): SherlockActivity() {
 
         var input = dlg.findViewById(R.id.collection_add_new_title_et)!! as EditText
 
-        dialog.setPositiveButton("OK",  object : DialogInterface.OnClickListener{
+        dialog.setPositiveButton("OK", object : DialogInterface.OnClickListener{
             public override fun onClick(p0: DialogInterface?, p1: Int) {
                 val text = input.getText().toString()
                 if (text.isNullOrEmpty()){
@@ -268,7 +268,7 @@ public open class MainActivity(): SherlockActivity() {
         }
     }
 
-    fun displayModeContent(mode : MainActivityMode){
+    fun displayModeContent(mode: MainActivityMode) {
         when(mode){
             MainActivityMode.RIVER -> {
                 displayRiverBookmarks()

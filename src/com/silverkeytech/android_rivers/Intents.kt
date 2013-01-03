@@ -1,12 +1,11 @@
 package com.silverkeytech.android_rivers
 
-import android.content.Intent
 import android.content.Context
-import java.util.ArrayList
+import android.content.Intent
 import com.silverkeytech.android_rivers.outliner.OutlineContent
+import java.util.ArrayList
 
-
-public fun startFeedActivityIntent(context : Context, url : String, text : String, lang : String) {
+public fun startFeedActivityIntent(context: Context, url: String, text: String, lang: String) {
     val i = Intent(context, javaClass<FeedActivity>())
     i.putExtra(Params.FEED_URL, url)
     i.putExtra(Params.FEED_NAME, text)
@@ -15,7 +14,7 @@ public fun startFeedActivityIntent(context : Context, url : String, text : Strin
     context.startActivity(i)
 }
 
-public fun startRiverActivity(context: Context, url : String, text : String, lang : String){
+public fun startRiverActivity(context: Context, url: String, text: String, lang: String) {
     val i = Intent(context, javaClass<RiverActivity>())
     i.putExtra(Params.RIVER_URL, url)
     i.putExtra(Params.RIVER_NAME, text)
@@ -24,7 +23,7 @@ public fun startRiverActivity(context: Context, url : String, text : String, lan
     context.startActivity(i)
 }
 
-public fun startDownloadAllRiverService(context : Context, titleList : ArrayList<String>, urlList : ArrayList<String>){
+public fun startDownloadAllRiverService(context: Context, titleList: ArrayList<String>, urlList: ArrayList<String>) {
     val i = Intent(context, javaClass<DownloadAllRiversService>())
 
     i.putStringArrayListExtra(Params.RIVERS_DOWNLOAD_TITLE, titleList)
@@ -33,7 +32,7 @@ public fun startDownloadAllRiverService(context : Context, titleList : ArrayList
     context.startActivity(i)
 }
 
-public fun startCollectionActivityIntent(context : Context, id : Int, title : String){
+public fun startCollectionActivityIntent(context: Context, id: Int, title: String) {
     val i = Intent(context, javaClass<BookmarkCollectionActivity>())
     i.putExtra(Params.COLLECTION_ID, id)
     i.putExtra(Params.COLLECTION_TITLE, title)
@@ -51,7 +50,7 @@ fun startOutlinerActivity(context: Context, outlines: ArrayList<OutlineContent>,
     context.startActivity(intent)
 }
 
-public fun shareActionIntent(url : String) : Intent{
+public fun shareActionIntent(url: String): Intent {
     var i = Intent(Intent.ACTION_SEND)
     i.setType("text/plain")
     i.putExtra(Intent.EXTRA_TEXT, url)

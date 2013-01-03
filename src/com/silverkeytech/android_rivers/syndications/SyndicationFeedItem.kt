@@ -19,37 +19,37 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers.syndication
 
 import com.silverkeytech.android_rivers.isNullOrEmpty
-import java.util.Date
 import com.silverkeytech.android_rivers.syndications.SyndicationFeedEnclosure
+import java.util.Date
 
 public data class SyndicationFeedItem(){
-    public var title : String? = null
-    public var description : String? = null
-    public var link : String? = null
-    public var pubDate : Date? = null
-    public var enclosure : SyndicationFeedEnclosure? = null
+    public var title: String? = null
+    public var description: String? = null
+    public var link: String? = null
+    public var pubDate: Date? = null
+    public var enclosure: SyndicationFeedEnclosure? = null
 
-    fun hasTitle() : Boolean{
+    fun hasTitle(): Boolean {
         return !title.isNullOrEmpty()
     }
 
-    fun hasDescription() : Boolean{
+    fun hasDescription(): Boolean {
         return !description.isNullOrEmpty()
     }
 
-    fun hasLink() : Boolean {
+    fun hasLink(): Boolean {
         return !link.isNullOrEmpty() && link!!.contains("http://")
     }
 
-    fun hasEnclosure() : Boolean{
+    fun hasEnclosure(): Boolean {
         return enclosure != null
     }
 
-    fun isPodcast() : Boolean {
+    fun isPodcast(): Boolean {
         return enclosure != null && enclosure!!.mimeType == "audio/mpeg"
     }
 
-    public fun toString(): String{
+    public fun toString(): String {
         if (hasTitle())
             return title!!
         else if (hasDescription())

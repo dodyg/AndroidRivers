@@ -19,10 +19,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers.db
 
 import com.j256.ormlite.dao.Dao
-import com.silverkeytech.android_rivers.Result
 
 public class BookmarkCollectionQuery(private val dao: Dao<BookmarkCollection, out Int?>){
-    fun all() : QueryMany<BookmarkCollection>{
+    fun all(): QueryMany<BookmarkCollection> {
         try{
             return QueryMany(dao.queryForAll())
         }

@@ -41,7 +41,6 @@ public class DateHelper {
         return parse(DEFAULT, date);
     }
 
-
     public static Date parse(String format, String date) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         return sdf.parse(date);
@@ -58,7 +57,6 @@ public class DateHelper {
     public static Date parseRFC822(String date) throws ParseException {
         return parse(RFC822, date);
     }
-
 
     public static Date Now() {
         return new Date();

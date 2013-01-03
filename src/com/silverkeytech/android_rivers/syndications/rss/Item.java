@@ -19,7 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers.syndications.rss;
 
 import com.silverkeytech.android_rivers.DateHelper;
-import org.simpleframework.xml.Element;
 
 import java.util.Date;
 

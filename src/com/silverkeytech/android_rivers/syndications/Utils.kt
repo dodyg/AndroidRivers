@@ -1,16 +1,15 @@
 package com.silverkeytech.android_rivers.syndications
 
-import com.silverkeytech.android_rivers.outliner.transformXmlToAtom
-import com.silverkeytech.android_rivers.Result
-import com.silverkeytech.android_rivers.syndication.SyndicationFeed
+import android.util.Log
 import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
-import android.util.Log
+import com.silverkeytech.android_rivers.Result
+import com.silverkeytech.android_rivers.outliner.transformXmlToAtom
 import com.silverkeytech.android_rivers.outliner.transformXmlToRss
+import com.silverkeytech.android_rivers.syndication.SyndicationFeed
 
-
-fun downloadSingleFeed(url : String) : Result<SyndicationFeed>{
-    val TAG  = "downloadFeed"
+fun downloadSingleFeed(url: String): Result<SyndicationFeed> {
+    val TAG = "downloadFeed"
     try{
         var downloadedContent: String?
         var mimeType: String?
@@ -27,7 +26,7 @@ fun downloadSingleFeed(url : String) : Result<SyndicationFeed>{
 
         Log.d(TAG, "Syndication XML is downloaded at ${url}")
 
-        fun isAtomFeed() : Boolean {
+        fun isAtomFeed(): Boolean {
             return mimeType!!.contains("atom") || downloadedContent!!.contains("<feed xmlns=\"http://www.w3.org/2005/Atom\">")
         }
 
@@ -57,7 +56,7 @@ fun downloadSingleFeed(url : String) : Result<SyndicationFeed>{
             }
         }
     }
-    catch (e : Exception){
+    catch (e: Exception){
         Log.d(TAG, "Problem when processing the feed ${e.getMessage()}")
         return Result.wrong(e)
     }

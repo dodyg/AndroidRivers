@@ -18,24 +18,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.db
 
+import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
-import android.database.SQLException
 
-
-public class SchemaMigration(val db : SQLiteDatabase){
+public class SchemaMigration(val db: SQLiteDatabase){
     class object {
         val TAG: String = javaClass<SchemaMigration>().getSimpleName()
     }
 
-    public fun migrate(version : Int) : Boolean{
+    public fun migrate(version: Int): Boolean {
         return when(version){
             1 -> migrate1()
-            else -> { false }
+            else -> {
+                false
+            }
         }
     }
 
-    private fun migrate1() : Boolean{
+    private fun migrate1(): Boolean {
         try{
             Log.d(TAG, "OnUpgrade(1): Create collection Table")
             db.execSQL("""
@@ -53,7 +54,7 @@ public class SchemaMigration(val db : SQLiteDatabase){
                             'bookmark_collection_id' INTEGER NULL
                         """)
             return true
-        }catch (e : SQLException){
+        }catch (e: SQLException){
             Log.d(TAG, "Exception on Upgrade(1) ${e.getMessage()}")
             return false
         }

@@ -19,10 +19,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers.db
 
 import com.j256.ormlite.dao.Dao
-import com.silverkeytech.android_rivers.Result
 
 public class BookmarkQuery(private val dao: Dao<Bookmark, out Int?>){
-    fun byKind(kind : BookmarkKind): QueryMany<Bookmark>{
+    fun byKind(kind: BookmarkKind): QueryMany<Bookmark> {
         try{
             var q = dao.queryBuilder()!!
                     .where()!!
@@ -36,7 +35,7 @@ public class BookmarkQuery(private val dao: Dao<Bookmark, out Int?>){
         }
     }
 
-    fun byCollectionId(collectionId : Int): QueryMany<Bookmark>{
+    fun byCollectionId(collectionId: Int): QueryMany<Bookmark> {
         try{
             var q = dao.queryBuilder()!!
                     .where()!!
@@ -50,7 +49,7 @@ public class BookmarkQuery(private val dao: Dao<Bookmark, out Int?>){
         }
     }
 
-    fun all() : QueryMany<Bookmark>{
+    fun all(): QueryMany<Bookmark> {
         try{
             return QueryMany(dao.queryForAll())
         }

@@ -18,24 +18,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.db
 
-import android.database.sqlite.SQLiteDatabase
-import com.j256.ormlite.support.ConnectionSource
-import android.util.Log
 import android.database.SQLException
+import android.database.sqlite.SQLiteDatabase
+import android.util.Log
 
-public class SchemaCreation(val db : SQLiteDatabase){
+public class SchemaCreation(val db: SQLiteDatabase){
     class object {
         val TAG: String = javaClass<SchemaCreation>().getSimpleName()
     }
 
-    public fun create(version : Int){
+    public fun create(version: Int) {
         when(version){
             1 -> create1()
-            else -> {}
+            else -> {
+            }
         }
     }
 
-    private fun create1(){
+    private fun create1() {
         try{
             Log.d(TAG, "OnCreate(1): Create bookmark Table")
 

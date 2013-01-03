@@ -33,9 +33,9 @@ public class Preferences{
 }
 
 
-public val SORT_DESC : Int = 100
-public val SORT_NONE : Int = 101
-public val SORT_ASC : Int = 102
+public val SORT_DESC: Int = 100
+public val SORT_NONE: Int = 101
+public val SORT_ASC: Int = 102
 
 
 public class PreferenceDefaults{
@@ -64,7 +64,7 @@ public class VisualPreference (public val pref: SharedPreferences){
     public fun getTheme(): Int = pref.getInt(Preferences.VISUAL_THEME, PreferenceDefaults.VISUAL_THEME)
 
     public fun getBookmarkSorting(): Int = pref.getInt(Preferences.BOOKMARK_SORTING, PreferenceDefaults.BOOKMARK_SORTING)
-    public fun setBookmarkSorting(sort : Int){
+    public fun setBookmarkSorting(sort: Int) {
         var edit = pref.edit()!!
         edit.putInt(Preferences.BOOKMARK_SORTING, sort)
         edit.commit()

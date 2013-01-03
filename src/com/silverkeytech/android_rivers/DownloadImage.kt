@@ -85,11 +85,8 @@ public class DownloadImage(it: Context?): AsyncTask<String, Int, Result<Download
         }
         else{
             if (result.isTrue()){
-                //context.toastee("The file is ready for download ${result.value!!.filePath}", Duration.LONG)
-
                 var dialog = AlertDialog.Builder(context)
-                var inflater = context.getLayoutInflater()!!
-                var vw = inflater.inflate(R.layout.image_view, null)!!
+                var vw = context.getLayoutInflater()!!.inflate(R.layout.image_view, null)!!
 
                 var img: File = File(result.value!!.filePath)
 
