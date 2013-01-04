@@ -128,6 +128,13 @@ public fun getBookmarksFromDbByCollection(collectionId: Int): List<Bookmark> {
         return arrayListOf<Bookmark>()
 }
 
+public fun getBookmarksUrlsFromDbByCollection(collectionId : Int): Array<String?>{
+    val bookmarks = getBookmarksFromDbByCollection(collectionId)
+    val urls = bookmarks.map { it.url }.toArray(array<String?>())
+
+    return urls
+}
+
 public fun getBookmarksFromDb(kind: BookmarkKind): List<Bookmark> {
     var bookmarks = DatabaseManager.query().bookmark().byKind(kind)
 

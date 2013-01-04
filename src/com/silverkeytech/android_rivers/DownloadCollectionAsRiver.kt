@@ -82,7 +82,7 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
 
     protected override fun onPostExecute(result: Result<List<RiverItemMeta>>?) {
         dialog.dismiss()
-        val url = "http://www.localhost/" + collectionId.toString()
+        val url = makeLocalUrl(collectionId)
         if (result != null){
             if (result.isTrue()){
                 try{

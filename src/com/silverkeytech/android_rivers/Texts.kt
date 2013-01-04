@@ -85,3 +85,24 @@ fun handleTextColorBasedOnTheme(context: Activity, text: TextView) {
     else if (theme == R.style.Theme_Sherlock)
         text.setTextColor(android.graphics.Color.WHITE)
 }
+
+val LOCAL_URL : String = "http://www.localhost/"
+public fun makeLocalUrl(id : Int) : String{
+    val url = LOCAL_URL + id.toString()
+    return url
+}
+
+public fun isLocalUrl(url : String) : Boolean = url.contains(LOCAL_URL)
+
+public fun extractIdFromLocalUrl(url : String) : Int?{
+    try{
+        val id = url.substring(LOCAL_URL.size).toString()
+        Log.d("extractIdFromLocalUrl", "Substring $id")
+        if (id.isNullOrEmpty())
+            return null
+        else
+            return id.toInt()
+    }catch(e : Exception){
+        return null
+    }
+}

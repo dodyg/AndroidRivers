@@ -26,6 +26,7 @@ import com.actionbarsherlock.view.MenuItem
 import com.silverkeytech.android_rivers.db.BookmarkKind
 import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
+import com.silverkeytech.android_rivers.db.getBookmarksUrlsFromDbByCollection
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity(): SherlockListActivity()
@@ -65,8 +66,34 @@ public class RiverActivity(): SherlockListActivity()
             Log.d(TAG, "Cache is hit for url $riverUrl")
             RiverContentRenderer(this, riverLanguage).handleNewsListing(cache!!)
         }
-        else
-            DownloadRiverContent(this, riverLanguage).execute(riverUrl)
+        else{
+            if (isLocalUrl(riverUrl)){
+                val id = extractIdFromLocalUrl(riverUrl)
+                if (id != null){
+                    Log.d(TAG, "Downloading bookmark collection $id")
+
+                    val urls = getBookmarksUrlsFromDbByCollection(id)
+
+                    DownloadCollectionAsRiver(this, id).executeOnCompletion {
+                        url, res ->
+                        if (res.isTrue()){
+                            Log.d(TAG, "Downloaded ${res.value?.count()} items")
+                            val sortedNews = res.value!!
+                            RiverContentRenderer(this, riverLanguage).handleNewsListing(sortedNews)
+                        }
+                        else {
+                            Log.d(TAG, "Downloading collection $id with ${urls.size} urls fails")
+                        }
+                    }.execute(*urls)
+                }
+                else{
+                    Log.d(TAG, "Cannot extract id from $riverUrl")
+                }
+            }
+            else{
+                DownloadRiverContent(this, riverLanguage).execute(riverUrl)
+            }
+        }
     }
 
     public override fun onBackPressed() {
