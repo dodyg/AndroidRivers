@@ -61,12 +61,15 @@ public class FeedActivity(): SherlockListActivity()
         downloadFeed()
     }
 
+    var feedDateIsParseable: Boolean = false
+
     fun downloadFeed() {
         DownloadFeed(this, false)
                 .executeOnComplete {
             res ->
             if (res.isTrue()){
                 var feed = res.value!!
+                feedDateIsParseable = feed.isDateParseable
                 FeedContentRenderer(this, feedLanguage)
                         .handleNewsListing(feed.items)
             }else{
@@ -130,23 +133,28 @@ public class FeedActivity(): SherlockListActivity()
         var coll = getBookmarkCollectionFromDb()
 
         if (!coll.isEmpty()){
-            val dialog = AlertDialog.Builder(this)
-            dialog.setTitle("Bookmark to a collection")
+            if (feedDateIsParseable){
+                val dialog = AlertDialog.Builder(this)
+                dialog.setTitle("Bookmark to a collection")
 
-            var collectionTitles = coll.map { it.title }.toArray(array<String>())
+                var collectionTitles = coll.map { it.title }.toArray(array<String>())
 
-            dialog.setItems(collectionTitles, object : DialogInterface.OnClickListener{
-                public override fun onClick(p0: DialogInterface?, p1: Int) {
-                    val currentCollection = coll[p1]
-                    saveBookmark(currentCollection)
-                }
-            })
+                dialog.setItems(collectionTitles, object : DialogInterface.OnClickListener{
+                    public override fun onClick(p0: DialogInterface?, p1: Int) {
+                        val currentCollection = coll[p1]
+                        saveBookmark(currentCollection)
+                    }
+                })
 
-            var createdDialog = dialog.create()!!
-            createdDialog.show()
+                var createdDialog = dialog.create()!!
+                createdDialog.show()
+            }
+            else{
+                toastee("This feed's date cannot be determined so it is bookmarked without collection immediately", Duration.LONG)
+                saveBookmark(null)
+            }
 
         } else {
-            saveBookmark(null)
         }
     }
 }

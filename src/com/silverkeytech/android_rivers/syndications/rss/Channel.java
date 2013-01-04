@@ -18,7 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.syndications.rss;
 
+import com.silverkeytech.android_rivers.DateHelper;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Channel {
     public String title;
@@ -46,4 +49,26 @@ public class Channel {
     public Cloud cloud;
 
     public ArrayList<Item> item = new ArrayList<Item>();
+
+    public Date getPubDate() {
+        if (pubDate == null)
+            return null;
+
+        try {
+            return DateHelper.parseRFC822(pubDate);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public Date getLastBuildDate() {
+        if (lastBuildDate == null)
+            return null;
+
+        try{
+            return DateHelper.parseRFC822(lastBuildDate);
+        } catch (Exception e){
+            return null;
+        }
+    }
 }

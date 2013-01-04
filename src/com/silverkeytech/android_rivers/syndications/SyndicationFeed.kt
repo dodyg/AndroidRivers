@@ -27,6 +27,8 @@ import com.silverkeytech.android_rivers.syndications.atom.ContentElement
 import com.silverkeytech.android_rivers.syndications.atom.Feed
 import com.silverkeytech.android_rivers.syndications.rss.Rss
 import java.util.ArrayList
+import com.silverkeytech.android_rivers.syndications.verifyRssFeedForDateFitness
+import com.silverkeytech.android_rivers.syndications.verifyAtomFeedForDateFitness
 
 public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?){
 
@@ -35,7 +37,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?){
     public var link: String = ""
     public var feedType: SyndicationFeedType = SyndicationFeedType.NONE
     public var items: ArrayList<SyndicationFeedItem> = ArrayList<SyndicationFeedItem>()
-
+    public var isDateParseable : Boolean = false
 
     public fun hasLink(): Boolean {
         return !link.isNullOrEmpty()
@@ -49,6 +51,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?){
     fun transformRss()
     {
         if (rss != null){
+            isDateParseable = verifyRssFeedForDateFitness(rss!!)
             val channel = rss!!.channel
             if (channel != null){
                 title = if (channel.title.isNullOrEmpty()) "" else channel.title!!
@@ -63,7 +66,10 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?){
                     val fi = SyndicationFeedItem()
                     fi.title = i.title
                     fi.description = scrubHtml(i.description)
-                    fi.pubDate = i.getPubDate()
+                    //the date parsing is exception heavy. Don't do it over a loop. Better verify it first.
+                    if (isDateParseable)
+                        fi.pubDate = i.getPubDate()
+
                     fi.link = i.link
 
                     if (i.enclosure != null){
@@ -83,7 +89,17 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?){
 
     fun transformAtom() {
         if (atom != null){
+            isDateParseable = verifyAtomFeedForDateFitness(atom!!)
+
             title = if (atom!!.title.isNullOrEmpty()) "" else atom!!.title!!
+
+            //look for rel='alternate' which contains the url to itself
+            if (atom!!.link != null && atom!!.link!!.count() > 0){
+                val l = atom!!.link!!.filter { it.rel == "alternate" }
+
+                if (l.size == 1 && !l.get(0).href.isNullOrEmpty())
+                    link = l.get(0).href!!
+            }
 
             feedType = SyndicationFeedType.ATOM
 
@@ -136,7 +152,10 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?){
                     processDescription(i.content!!)
                 }
 
-                fi.pubDate = i.getUpdated()
+                //date parsing is exception heavy. Better take a sample in the beginning first than blowing up in exceptions
+                //in a loop
+                if (isDateParseable)
+                    fi.pubDate = i.getUpdated()
 
                 items.add(fi)
             }

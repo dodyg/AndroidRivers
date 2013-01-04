@@ -109,7 +109,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                     Log.d(TAG, "List View reused")
                 }
 
-                handleText(context, language, holder!!.news, news!!, textSize.toFloat())
+                handleForeignTextFont(context, language, holder!!.news, news!!, textSize.toFloat())
 
                 showIndicator()
 
@@ -144,12 +144,12 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                     dlg.setBackgroundColor(android.graphics.Color.BLACK)
 
                 var body = dlg.findViewById(R.id.news_details_text_tv)!! as TextView
-                handleText(context, language, body, msg, textSize.toFloat())
-                handleTextColor(context, body)
+                handleForeignTextFont(context, language, body, msg, textSize.toFloat())
+                handleTextColorBasedOnTheme(context, body)
 
                 var source = dlg.findViewById(R.id.news_details_source_tv)!! as TextView
-                handleText(context, language, source, scrubHtml(currentNews.feedSourceTitle), 11.toFloat())
-                handleTextColor(context, body)
+                handleForeignTextFont(context, language, source, scrubHtml(currentNews.feedSourceTitle), 11.toFloat())
+                handleTextColorBasedOnTheme(context, body)
 
                 dialog.setView(dlg)
 

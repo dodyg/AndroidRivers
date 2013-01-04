@@ -85,7 +85,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                     holder = currentView?.getTag() as ViewHolder
                 }
 
-                handleText(context, language, holder!!.news, news, textSize.toFloat())
+                handleForeignTextFont(context, language, holder!!.news, news, textSize.toFloat())
 
                 if (news.isNullOrEmpty()){
                     currentView?.setVisibility(View.GONE)
@@ -112,8 +112,8 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                 dlg.setBackgroundColor(context.getStandardDialogBackgroundColor())
 
                 var body = dlg.findViewById(R.id.feed_details_text_tv)!! as TextView
-                handleText(context, language, body, msg, textSize.toFloat())
-                handleTextColor(context, body)
+                handleForeignTextFont(context, language, body, msg, textSize.toFloat())
+                handleTextColorBasedOnTheme(context, body)
 
                 var source = dlg.findViewById(R.id.feed_details_source_tv)!! as TextView
 

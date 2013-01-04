@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers.syndications.atom;
 
 import com.silverkeytech.android_rivers.DateHelper;
+import org.apache.abdera.model.AtomDate;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
@@ -73,7 +74,20 @@ public class Entry {
             return null;
 
         try {
-            return DateHelper.parseRFC822(updated);
+            AtomDate date = new AtomDate(updated);
+            return date.getDate();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public Date getPublished(){
+        if (published == null)
+            return null;
+
+        try {
+            AtomDate date = new AtomDate(published);
+            return date.getDate();
         } catch (Exception e) {
             return null;
         }
