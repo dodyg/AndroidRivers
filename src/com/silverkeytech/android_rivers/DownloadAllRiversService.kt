@@ -36,7 +36,6 @@ import java.util.Random
 public class DownloadAllRiversService(): IntentService("DownloadAllRiversService"){
     class object{
         public val TAG: String = javaClass<DownloadAllRiversService>().getSimpleName()
-
     }
 
     var targetUrls: List<String?> ? = null

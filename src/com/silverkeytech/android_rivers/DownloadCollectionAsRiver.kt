@@ -11,6 +11,7 @@ import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 import com.silverkeytech.android_rivers.syndication.SyndicationFeed
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 import java.util.ArrayList
+import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
 
 public class DownloadCollectionAsRiver(it: Context?, private val collectionId: Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
     class object {
@@ -57,6 +58,8 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
 
             item.title = f.title
             item.body = f.description
+            item.pubDate = DateHelper.formatRFC822(f.pubDate!!)
+
             if (f.hasLink())
                 item.link = f.link
 
@@ -82,10 +85,19 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
         val url = "http://www.localhost/" + collectionId.toString()
         if (result != null){
             if (result.isTrue()){
-                val sortedNewsItems = result.value!!
-                context.getApplication().getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
-                if (callback != null)
-                    callback!!(url, Result.right(sortedNewsItems))
+                try{
+                    Log.d(TAG, "Total of items before sorting is ${result.value!!.size()}")
+
+                    val sortedNewsItems = sortRiverItemMeta(result.value!!)
+                    Log.d(TAG, "Total of sorted items is ${sortedNewsItems.size()}")
+                    context.getApplication().getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
+                    if (callback != null)
+                        callback!!(url, Result.right(sortedNewsItems))
+                }
+                catch (e : Exception){
+                    if (callback != null)
+                        callback!!(url, Result.wrong<List<RiverItemMeta>>(result.exception))
+                }
             }
             else
             {

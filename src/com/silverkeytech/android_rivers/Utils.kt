@@ -32,6 +32,7 @@ import android.graphics.Typeface
 import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 import android.util.Log
 import android.util.TypedValue
+import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 
 public fun Activity.getStandardDialogBackgroundColor(): Int {
     val theme = this.getVisualPref().getTheme()
@@ -137,3 +138,6 @@ public fun <T>T.with(operations: T.() -> Unit): T {
 fun futureTimeFromNowInMilies(seconds: Int): Long {
     return System.currentTimeMillis() + (seconds.toLong() * 1000.toLong())
 }
+
+
+

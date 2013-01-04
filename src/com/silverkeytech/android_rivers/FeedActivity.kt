@@ -30,6 +30,7 @@ import com.silverkeytech.android_rivers.db.BookmarkKind
 import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
+import android.util.Log
 
 //Responsible of downloading, caching and viewing a news river content
 public class FeedActivity(): SherlockListActivity()
@@ -70,6 +71,7 @@ public class FeedActivity(): SherlockListActivity()
             if (res.isTrue()){
                 var feed = res.value!!
                 feedDateIsParseable = feed.isDateParseable
+                Log.d(TAG, "$feedUrl is parseable = $feedDateIsParseable")
                 FeedContentRenderer(this, feedLanguage)
                         .handleNewsListing(feed.items)
             }else{

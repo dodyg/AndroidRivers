@@ -54,11 +54,11 @@ public class RiverActivity(): SherlockListActivity()
 
         setTitle(riverName)
 
-        downloadContent(riverUrl, false)
+        downloadRiver(riverUrl, false)
     }
 
 
-    fun downloadContent(riverUrl: String, ignoreCache: Boolean) {
+    fun downloadRiver(riverUrl: String, ignoreCache: Boolean) {
         var cache = getApplication().getMain().getRiverCache(riverUrl)
 
         if (cache != null && !ignoreCache){
@@ -96,7 +96,7 @@ public class RiverActivity(): SherlockListActivity()
     }
 
     internal fun refreshContent() {
-        downloadContent(riverUrl, false)
+        downloadRiver(riverUrl, false)
     }
 
     public override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
@@ -110,7 +110,7 @@ public class RiverActivity(): SherlockListActivity()
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
             R.id.river_menu_refresh, REFRESH -> {
-                downloadContent(riverUrl, true)
+                downloadRiver(riverUrl, true)
                 return true
             }
             RESIZE_TEXT -> {

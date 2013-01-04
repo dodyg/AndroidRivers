@@ -31,6 +31,9 @@ import com.silverkeytech.android_rivers.syndications.verifyRssFeedForDateFitness
 import com.silverkeytech.android_rivers.syndications.verifyAtomFeedForDateFitness
 
 public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?){
+    class object{
+        public val TAG: String = javaClass<SyndicationFeed>().getSimpleName()
+    }
 
     public var title: String = ""
     public var language: String = ""
@@ -52,6 +55,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?){
     {
         if (rss != null){
             isDateParseable = verifyRssFeedForDateFitness(rss!!)
+            Log.d(TAG, "isDateParseable is $isDateParseable")
             val channel = rss!!.channel
             if (channel != null){
                 title = if (channel.title.isNullOrEmpty()) "" else channel.title!!
@@ -90,6 +94,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?){
     fun transformAtom() {
         if (atom != null){
             isDateParseable = verifyAtomFeedForDateFitness(atom!!)
+            Log.d(TAG, "isDateParseable is $isDateParseable")
 
             title = if (atom!!.title.isNullOrEmpty()) "" else atom!!.title!!
 
