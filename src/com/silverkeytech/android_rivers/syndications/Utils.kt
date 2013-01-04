@@ -6,11 +6,11 @@ import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.silverkeytech.android_rivers.Result
 import com.silverkeytech.android_rivers.outliner.transformXmlToAtom
 import com.silverkeytech.android_rivers.outliner.transformXmlToRss
-import com.silverkeytech.android_rivers.syndication.SyndicationFeed
+import com.silverkeytech.android_rivers.syndications.SyndicationFeed
 import com.silverkeytech.android_rivers.syndications.atom.Feed
 import com.silverkeytech.android_rivers.syndications.rss.Rss
 
-fun downloadSingleFeed(url: String): Result<SyndicationFeed> {
+fun downloadSingleFeed(url: String, filter : SyndicationFilter? = null): Result<SyndicationFeed> {
     val TAG = "downloadFeed"
     try{
         var downloadedContent: String?
@@ -38,7 +38,7 @@ fun downloadSingleFeed(url: String): Result<SyndicationFeed> {
             Log.d(TAG, "Transforming XML to ATOM")
 
             if (feed.isTrue()){
-                var f = SyndicationFeed(null, feed.value)
+                var f = SyndicationFeed(null, feed.value, filter)
                 f.transformAtom()
                 return Result.right(f)
             } else{
@@ -50,7 +50,7 @@ fun downloadSingleFeed(url: String): Result<SyndicationFeed> {
             Log.d(TAG, "Transforming XML to RSS")
 
             if (feed.isTrue()){
-                var f = SyndicationFeed(feed.value, null)
+                var f = SyndicationFeed(feed.value, null, filter)
                 f.transformRss()
                 return Result.right(f)
             } else{

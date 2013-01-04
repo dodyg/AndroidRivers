@@ -23,8 +23,11 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.AsyncTask
-import com.silverkeytech.android_rivers.syndication.SyndicationFeed
+import com.silverkeytech.android_rivers.syndications.SyndicationFeed
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
+import com.silverkeytech.android_rivers.syndications.SyndicationFilter
+import java.util.Date
+import java.util.Calendar
 
 public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<SyndicationFeed>>(){
     class object {
@@ -50,7 +53,8 @@ public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String,
     }
 
     protected override fun doInBackground(p0: Array<String?>): Result<SyndicationFeed>? {
-        return downloadSingleFeed(p0[0]!!)
+        val latestDate = daysBeforeNow(3)
+        return downloadSingleFeed(p0[0]!!, SyndicationFilter(20, latestDate))
     }
 
     var rawCallback: ((Result<SyndicationFeed>) -> Unit)? = null

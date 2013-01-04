@@ -33,6 +33,8 @@ import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 import android.util.Log
 import android.util.TypedValue
 import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
+import java.util.Date
+import java.util.Calendar
 
 public fun Activity.getStandardDialogBackgroundColor(): Int {
     val theme = this.getVisualPref().getTheme()
@@ -129,6 +131,19 @@ fun isSupportedImageMime(val mimeType: String): Boolean {
 fun inMegaByte(mb: Int): Int = mb * 1024 * 1024
 
 fun Int.toHoursInMinutes() = this * 60
+
+public fun hoursBeforeNow(hours : Int) : Date{
+    val now = Calendar.getInstance()
+    now.add(Calendar.HOUR, -hours)
+    return now.getTime()
+}
+
+public fun daysBeforeNow(days : Int) : Date{
+    val hours = days * 24
+    val now = Calendar.getInstance()
+    now.add(Calendar.HOUR, -hours)
+    return now.getTime()
+}
 
 public fun <T>T.with(operations: T.() -> Unit): T {
     this.operations()

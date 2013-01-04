@@ -40,7 +40,7 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
-import com.silverkeytech.android_rivers.syndication.SyndicationFeedItem
+import com.silverkeytech.android_rivers.syndications.SyndicationFeedItem
 import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 
 //Manage the rendering of each news item in the river list

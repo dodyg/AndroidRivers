@@ -8,10 +8,11 @@ import android.os.AsyncTask
 import android.util.Log
 import com.silverkeytech.android_rivers.riverjs.RiverItem
 import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
-import com.silverkeytech.android_rivers.syndication.SyndicationFeed
+import com.silverkeytech.android_rivers.syndications.SyndicationFeed
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 import java.util.ArrayList
 import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
+import com.silverkeytech.android_rivers.syndications.SyndicationFilter
 
 public class DownloadCollectionAsRiver(it: Context?, private val collectionId: Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
     class object {
@@ -36,9 +37,11 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
     }
 
     protected override fun doInBackground(vararg p0: String?): Result<List<RiverItemMeta>>? {
+        val latestDate = daysBeforeNow(1)
+
         var list = arrayListOf<RiverItemMeta>()
         for(val url in p0){
-            val res = downloadSingleFeed(url!!)
+            val res = downloadSingleFeed(url!!, SyndicationFilter(20, latestDate))
 
             if (res.isFalse())
                 Log.d(TAG, "Value at ${res.exception?.getMessage()}")
