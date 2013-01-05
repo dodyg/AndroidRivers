@@ -31,6 +31,7 @@ import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import android.util.Log
+import com.silverkeytech.android_rivers.db.SortingOrder
 
 //Responsible of downloading, caching and viewing a news river content
 public class FeedActivity(): SherlockListActivity()
@@ -132,7 +133,7 @@ public class FeedActivity(): SherlockListActivity()
     }
 
     fun addBookmarkOption() {
-        var coll = getBookmarkCollectionFromDb()
+        var coll = getBookmarkCollectionFromDb(sortByTitleOrder = SortingOrder.ASC)
 
         if (!coll.isEmpty()){
             if (feedDateIsParseable){

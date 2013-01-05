@@ -37,6 +37,7 @@ import com.silverkeytech.android_rivers.db.getBookmarksFromDb
 import com.silverkeytech.android_rivers.db.getBookmarksFromDbAsOpml
 import com.silverkeytech.android_rivers.db.saveOpmlAsBookmarks
 import java.io.File
+import com.silverkeytech.android_rivers.db.SortingOrder
 
 enum class MainActivityMode {
     RIVER
@@ -285,12 +286,12 @@ public open class MainActivity(): SherlockActivity() {
     }
 
     private fun displayRssBookmarks() {
-        val bookmarks = getBookmarksFromDb(BookmarkKind.RSS)
+        val bookmarks = getBookmarksFromDb(BookmarkKind.RSS, SortingOrder.ASC)
         BookmarksRenderer(this@MainActivity).handleListing(bookmarks)
     }
 
     private fun displayBookmarkCollection() {
-        val coll = getBookmarkCollectionFromDb()
+        val coll = getBookmarkCollectionFromDb(SortingOrder.ASC)
         BookmarksRenderer(this@MainActivity).handleCollection(coll)
     }
 
@@ -316,7 +317,7 @@ public open class MainActivity(): SherlockActivity() {
             BookmarksRenderer(this@MainActivity).handleRiversListing(cache)
         }  else{
             Log.d(TAG, "Try to retrieve bookmarks from DB")
-            val bookmarks = getBookmarksFromDbAsOpml(BookmarkKind.RIVER)
+            val bookmarks = getBookmarksFromDbAsOpml(BookmarkKind.RIVER, SortingOrder.NONE)
 
             if (bookmarks.body!!.outline!!.count() > 0){
                 Log.d(TAG, "Now bookmarks come from the db")

@@ -46,6 +46,7 @@ import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
 import java.util.ArrayList
 import java.util.Random
+import com.silverkeytech.android_rivers.db.SortingOrder
 
 public class TryOutActivity(): Activity()
 {
@@ -227,7 +228,7 @@ public class TryOutActivity(): Activity()
 
         btn.setOnClickListener(object : OnClickListener{
             public override fun onClick(p0: View?) {
-                val total = DatabaseManager.query().bookmark().byKind(BookmarkKind.RIVER)
+                val total = DatabaseManager.query().bookmark().byKind(BookmarkKind.RIVER, SortingOrder.NONE)
 
                 if (total.exist)
                     toastee("all ${total.values?.count()}", Duration.LONG)

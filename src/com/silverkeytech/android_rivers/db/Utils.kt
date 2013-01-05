@@ -110,8 +110,8 @@ public fun removeBookmarkFromCollection(collectionId: Int, bookmarkId: Int): Res
 }
 
 
-public fun getBookmarkCollectionFromDb(): List<BookmarkCollection> {
-    var coll = DatabaseManager.query().bookmarkCollection().all()
+public fun getBookmarkCollectionFromDb(sortByTitleOrder : SortingOrder): List<BookmarkCollection> {
+    var coll = DatabaseManager.query().bookmarkCollection().all(sortByTitleOrder)
 
     if (coll.exist)
         return coll.values!!
@@ -135,8 +135,8 @@ public fun getBookmarksUrlsFromDbByCollection(collectionId : Int): Array<String?
     return urls
 }
 
-public fun getBookmarksFromDb(kind: BookmarkKind): List<Bookmark> {
-    var bookmarks = DatabaseManager.query().bookmark().byKind(kind)
+public fun getBookmarksFromDb(kind: BookmarkKind, sortByTitleOrder: SortingOrder): List<Bookmark> {
+    var bookmarks = DatabaseManager.query().bookmark().byKind(kind, sortByTitleOrder)
 
     if (bookmarks.exist)
         return bookmarks.values!!
@@ -145,11 +145,11 @@ public fun getBookmarksFromDb(kind: BookmarkKind): List<Bookmark> {
 }
 
 //get bookmarks from db and return the data in opml format
-public fun getBookmarksFromDbAsOpml(kind: BookmarkKind): Opml {
+public fun getBookmarksFromDbAsOpml(kind: BookmarkKind, sortByTitleOrder : SortingOrder): Opml {
     var opml = Opml()
     opml.body = Body()
 
-    var bookmarks = DatabaseManager.query().bookmark().byKind(kind)
+    var bookmarks = DatabaseManager.query().bookmark().byKind(kind, sortByTitleOrder)
 
     if (bookmarks.exist){
         for(val b in bookmarks.values?.iterator()){

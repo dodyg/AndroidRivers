@@ -19,16 +19,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers.db
 
 import com.j256.ormlite.dao.Dao
+import com.silverkeytech.android_rivers.db.SortingOrder
 
 public class BookmarkQuery(private val dao: Dao<Bookmark, out Int?>){
-    fun byKind(kind: BookmarkKind): QueryMany<Bookmark> {
+    fun byKind(kind: BookmarkKind, sortByTitleOrder: SortingOrder): QueryMany<Bookmark> {
         try{
             var q = dao.queryBuilder()!!
-                    .where()!!
-                    .eq(BOOKMARK_KIND, kind.toString())!!
-                    .prepare()
+            q.where()!!
+              .eq(BOOKMARK_KIND, kind.toString())!!
 
-            return QueryMany(dao.query(q))
+            if (sortByTitleOrder == SortingOrder.ASC)
+                q.orderBy(BOOKMARK_TITLE, true)
+            else if (sortByTitleOrder == SortingOrder.DESC)
+                q.orderBy(BOOKMARK_TITLE, false)
+
+            return QueryMany(dao.query(q.prepare()))
         }
         catch(e: Exception){
             return QueryMany<Bookmark>(null, e)
