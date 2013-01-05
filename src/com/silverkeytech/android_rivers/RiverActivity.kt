@@ -103,7 +103,6 @@ public class RiverActivity(): SherlockListActivity(), WithVisualModificationPane
     }
 
     val REFRESH: Int = 1
-
     val RESIZE_TEXT: Int = 2
 
 

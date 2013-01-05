@@ -32,9 +32,10 @@ import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import android.util.Log
 import com.silverkeytech.android_rivers.db.SortingOrder
+import android.app.Activity
 
 //Responsible of downloading, caching and viewing a news river content
-public class FeedActivity(): SherlockListActivity()
+public class FeedActivity(): SherlockListActivity(), WithVisualModificationPanel
 {
     class object {
         public val TAG: String = javaClass<FeedActivity>().getSimpleName()
@@ -47,7 +48,7 @@ public class FeedActivity(): SherlockListActivity()
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
-        super.onCreate(savedInstanceState)
+        super<SherlockListActivity>.onCreate(savedInstanceState)
         setContentView(R.layout.feeds)
 
         var actionBar = getSupportActionBar()!!
@@ -60,13 +61,13 @@ public class FeedActivity(): SherlockListActivity()
 
         setTitle(feedName)
 
-        downloadFeed()
+        downloadFeed(false)
     }
 
     var feedDateIsParseable: Boolean = false
 
-    fun downloadFeed() {
-        DownloadFeed(this, false)
+    fun downloadFeed(ignoreCache : Boolean) {
+        DownloadFeed(this, ignoreCache)
                 .executeOnComplete {
             res ->
             if (res.isTrue()){
@@ -83,6 +84,8 @@ public class FeedActivity(): SherlockListActivity()
     }
 
     val REFRESH: Int = 1
+    val RESIZE_TEXT: Int = 2
+
 
     public override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         val feedBookmarked = checkIfUrlAlreadyBookmarked(feedUrl)
@@ -93,6 +96,10 @@ public class FeedActivity(): SherlockListActivity()
     }
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menu?.add(0, RESIZE_TEXT, 0, "Resize Text")
+        ?.setIcon(android.R.drawable.ic_menu_preferences)
+        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+
         menu?.add(0, REFRESH, 0, "Refresh")
         ?.setIcon(R.drawable.ic_menu_refresh)
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
@@ -106,7 +113,11 @@ public class FeedActivity(): SherlockListActivity()
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
             R.id.river_menu_refresh, REFRESH -> {
-                downloadFeed()
+                downloadFeed(true)
+                return true
+            }
+            RESIZE_TEXT -> {
+                mode = startActionMode(ResizeTextActionMode(this, mode))
                 return true
             }
             R.id.feed_menu_bookmark -> {
@@ -114,7 +125,7 @@ public class FeedActivity(): SherlockListActivity()
                 return true
             }
             else ->
-                return super.onOptionsItemSelected(item)
+                return super<SherlockListActivity>.onOptionsItemSelected(item)
         }
     }
 
@@ -164,5 +175,13 @@ public class FeedActivity(): SherlockListActivity()
 
         } else {
         }
+    }
+
+    override fun getActivity(): Activity {
+        return this
+    }
+
+    override fun refreshContent() {
+        downloadFeed(false)
     }
 }
