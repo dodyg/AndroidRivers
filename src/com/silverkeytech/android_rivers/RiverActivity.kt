@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 package com.silverkeytech.android_rivers
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import com.actionbarsherlock.app.SherlockListActivity
@@ -25,11 +26,11 @@ import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 import com.silverkeytech.android_rivers.db.BookmarkKind
 import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
-import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import com.silverkeytech.android_rivers.db.getBookmarksUrlsFromDbByCollection
+import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 
 //Responsible of downloading, caching and viewing a news river content
-public class RiverActivity(): SherlockListActivity()
+public class RiverActivity(): SherlockListActivity(), WithVisualModificationPanel
 {
     class object {
         public val TAG: String = javaClass<RiverActivity>().getSimpleName()
@@ -42,7 +43,7 @@ public class RiverActivity(): SherlockListActivity()
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
-        super.onCreate(savedInstanceState)
+        super<SherlockListActivity>.onCreate(savedInstanceState)
         setContentView(R.layout.river)
 
         val actionBar = getSupportActionBar()!!
@@ -122,8 +123,12 @@ public class RiverActivity(): SherlockListActivity()
         return true
     }
 
-    internal fun refreshContent() {
+    public override fun refreshContent() {
         downloadRiver(riverUrl, false)
+    }
+
+    public override fun getActivity() : Activity{
+        return this
     }
 
     public override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
@@ -158,82 +163,8 @@ public class RiverActivity(): SherlockListActivity()
                 }
             }
             else ->
-                return super.onOptionsItemSelected(item)
+                return super<SherlockListActivity>.onOptionsItemSelected(item)
         }
     }
 }
 
-public class ResizeTextActionMode (private var context: RiverActivity, private var mode: ActionMode?): ActionMode.Callback{
-    val INCREASE_SIZE = 1
-    val DECREASE_SIZE = 2
-    val SWITCH_THEME: Int = 3
-
-    //Get the display text size from preference
-    fun increaseTextSize() {
-        var pref = context.getVisualPref()
-        var textSize = pref.getListTextSize()
-        textSize += 2
-        pref.setListTextSize(textSize)
-    }
-
-    fun decreaseTextSize() {
-        var pref = context.getVisualPref()
-        var textSize = pref.getListTextSize()
-        textSize -= 2
-        pref.setListTextSize(textSize)
-    }
-
-    public override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
-        when(item!!.getItemId()){
-            INCREASE_SIZE -> {
-                increaseTextSize()
-                context.refreshContent()
-            }
-            DECREASE_SIZE -> {
-                decreaseTextSize()
-                context.refreshContent()
-            }
-            SWITCH_THEME -> {
-                context.getVisualPref().switchTheme()
-                context.restart()
-                return true
-            }
-            else -> {
-                if (mode != null)
-                    mode.finish()
-            }
-        }
-
-        return true
-    }
-
-    public override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-        return false
-    }
-
-    public override fun onDestroyActionMode(mode: ActionMode?) {
-
-    }
-
-    public override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-
-        menu?.add(0, DECREASE_SIZE, 0, "Decrease Text Size")
-        ?.setIcon(android.R.drawable.btn_minus)
-        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-
-        menu?.add(0, INCREASE_SIZE, 0, "Increase Text Size")
-        ?.setIcon(android.R.drawable.btn_plus)
-        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-
-        val switchText = when(context.getVisualPref().getTheme()){
-            R.style.Theme_Sherlock -> "Light Theme"
-            R.style.Theme_Sherlock_Light_DarkActionBar -> "Dark Theme"
-            else -> ""
-        }
-
-        menu?.add(0, SWITCH_THEME, 0, switchText)
-        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
-
-        return true
-    }
-}
