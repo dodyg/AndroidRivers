@@ -29,6 +29,7 @@ import com.silverkeytech.android_rivers.outliner.OutlineContent
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 import java.util.ArrayList
+import com.silverkeytech.android_rivers.syndications.SyndicationFeed
 
 fun Application?.getMain(): MainApplication {
     return this!! as MainApplication
@@ -42,6 +43,8 @@ public class MainApplication(): Application()
 
     var riverCache = LruCache<String, CacheItem<List<RiverItemMeta>>>(inMegaByte(4))
     var opmlCache = LruCache<String, CacheItem<ArrayList<OutlineContent>>>(inMegaByte(4))
+    var syndicationCache = LruCache<String, CacheItem<SyndicationFeed>>(inMegaByte(4))
+
     var riverBookmarksCache: CacheItem<Opml>? = null
 
     public override fun onCreate() {
@@ -85,6 +88,27 @@ public class MainApplication(): Application()
     public fun setRiverBookmarksCache(opml: Opml) {
         riverBookmarksCache = CacheItem(opml)
         riverBookmarksCache?.setExpireInMinutesFromNow(10.toHoursInMinutes())
+    }
+
+    public fun getSyndicationCache(uri : String) : SyndicationFeed? {
+        val synd = syndicationCache.get(uri)
+
+        if (synd == null)
+            return null
+        else{
+            if (synd.isExpired){
+                syndicationCache.remove(uri)
+                return null
+            } else {
+                return synd.item
+            }
+        }
+    }
+
+    public fun setSyndicationCache(uri: String, feed : SyndicationFeed, expirationInMinutes : Int = 30){
+        val item = CacheItem(feed)
+        item.setExpireInMinutesFromNow(expirationInMinutes)
+        syndicationCache.put(uri, item)
     }
 
     public fun getOpmlCache(uri: String): ArrayList<OutlineContent>? {
