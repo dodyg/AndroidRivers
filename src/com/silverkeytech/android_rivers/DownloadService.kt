@@ -60,11 +60,11 @@ public class DownloadService(): IntentService("DownloadService"){
 
         notification!!.icon = android.R.drawable.star_big_on
 
-        notification!!.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.download_progress)
-
-        notification!!.contentView!!.setImageViewResource(R.id.download_progress_status_icon, android.R.drawable.btn_star);
-        notification!!.contentView!!.setProgressBar(R.id.download_progress_status_progress, 100, 0, false)
-        notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "Downloading $targetTitle")
+        notification!!.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.download_progress).with {
+            this.setImageViewResource(R.id.download_progress_status_icon, android.R.drawable.btn_star);
+            this.setProgressBar(R.id.download_progress_status_progress, 100, 0, false)
+            this.setTextViewText(R.id.download_progress_status_text, "Downloading $targetTitle")
+        }
 
         return notification!!
     }
