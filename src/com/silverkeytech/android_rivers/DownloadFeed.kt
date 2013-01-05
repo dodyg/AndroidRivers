@@ -24,6 +24,7 @@ import android.os.AsyncTask
 import com.silverkeytech.android_rivers.syndications.SyndicationFeed
 import com.silverkeytech.android_rivers.syndications.SyndicationFilter
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
+import android.util.Log
 
 public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<SyndicationFeed>>(){
     class object {
@@ -45,8 +46,28 @@ public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String,
     }
 
     protected override fun doInBackground(p0: Array<String?>): Result<SyndicationFeed>? {
-        val latestDate = daysBeforeNow(3)
-        return downloadSingleFeed(p0[0]!!, SyndicationFilter(20, latestDate))
+        try{
+            val url = p0[0]!!
+
+            val cache = context.getApplication().getMain().getSyndicationCache(url)
+            if (cache != null && !ignoreCache){
+                Log.d(TAG, "Cache is hit for feed")
+                return Result.right(cache)
+            } else {
+                val latestDate = daysBeforeNow(3)
+                val res = downloadSingleFeed(url, SyndicationFilter(20, latestDate))
+
+                if (res.isTrue()){
+                    context.getApplication().getMain().setSyndicationCache(url, res.value!!)
+                    return res
+                }
+                else
+                    return res
+            }
+        }
+        catch (e : Exception){
+            return Result.wrong<SyndicationFeed>(e)
+        }
     }
 
     var rawCallback: ((Result<SyndicationFeed>) -> Unit)? = null
