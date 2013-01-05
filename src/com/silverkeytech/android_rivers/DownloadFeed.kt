@@ -19,36 +19,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.AsyncTask
 import com.silverkeytech.android_rivers.syndications.SyndicationFeed
-import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 import com.silverkeytech.android_rivers.syndications.SyndicationFilter
-import java.util.Date
-import java.util.Calendar
+import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 
 public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<SyndicationFeed>>(){
     class object {
         public val TAG: String = javaClass<DownloadFeed>().getSimpleName()
     }
 
-    var dialog: ProgressDialog = ProgressDialog(it)
     var context: Activity = it!! as Activity
+    var dialog: InfinityProgressDialog = InfinityProgressDialog(context, "Downloading RSS feed")
     val ignoreCache: Boolean = ignoreCache
 
     protected override fun onPreExecute() {
-        dialog.setMessage("Downloading RSS feed")
-        dialog.setIndeterminate(true)
-        dialog.setCancelable(false)
-        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", object : DialogInterface.OnClickListener{
+        dialog.onCancel {
+            dlg ->
+            dlg.dismiss()
+            this@DownloadFeed.cancel(true)
+        }
 
-            public override fun onClick(p0: DialogInterface?, p1: Int) {
-                p0!!.dismiss()
-                this@DownloadFeed.cancel(true)
-            }
-        })
         dialog.show()
     }
 

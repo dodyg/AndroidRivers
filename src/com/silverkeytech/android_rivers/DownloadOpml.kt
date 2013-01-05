@@ -18,9 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.AsyncTask
 import android.util.Log
 import com.github.kevinsawicki.http.HttpRequest
@@ -37,20 +35,15 @@ public class DownloadOpml(it: Context?): AsyncTask<String, Int, Pair<String, Res
         public val TAG: String = javaClass<DownloadOpml>().getSimpleName()
     }
 
-    var dialog: ProgressDialog = ProgressDialog(it)
     var context: Activity = it!! as Activity
+    var dialog: InfinityProgressDialog = InfinityProgressDialog(context, "Please wait while downloading opml list")
 
     protected override fun onPreExecute() {
-        dialog.setMessage("Please wait while downloading opml list")
-        dialog.setIndeterminate(true)
-        dialog.setCancelable(false)
-        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", object : DialogInterface.OnClickListener{
-
-            public override fun onClick(p0: DialogInterface?, p1: Int) {
-                p0!!.dismiss()
+        dialog.onCancel {
+            dlg ->
+                dlg.dismiss()
                 this@DownloadOpml.cancel(true)
-            }
-        })
+        }
         dialog.show()
     }
 

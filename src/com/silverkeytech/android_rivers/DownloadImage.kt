@@ -20,7 +20,6 @@ package com.silverkeytech.android_rivers
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Bitmap
@@ -39,21 +38,15 @@ public class DownloadImage(it: Context?): AsyncTask<String, Int, Result<Download
         public val TAG: String = javaClass<DownloadImage>().getSimpleName()
     }
 
-    var dialog: ProgressDialog = ProgressDialog(it)
     var context: Activity = it!! as Activity
+    var dialog: InfinityProgressDialog = InfinityProgressDialog(context, context.getString(R.string.please_wait_while_loading)!!)
 
     protected override fun onPreExecute() {
-        super<AsyncTask>.onPreExecute()
-
-        dialog.setMessage(context.getString(R.string.please_wait_while_loading))
-        dialog.setIndeterminate(true)
-        dialog.setCancelable(false)
-        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", object : DialogInterface.OnClickListener{
-            public override fun onClick(p0: DialogInterface?, p1: Int) {
-                p0!!.dismiss()
+        dialog.onCancel {
+            dlg ->
+                dlg.dismiss()
                 this@DownloadImage.cancel(true)
-            }
-        })
+        }
         dialog.show()
     }
 

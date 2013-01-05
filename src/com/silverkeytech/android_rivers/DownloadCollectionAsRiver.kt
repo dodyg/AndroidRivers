@@ -1,37 +1,31 @@
 package com.silverkeytech.android_rivers
 
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.AsyncTask
 import android.util.Log
 import com.silverkeytech.android_rivers.riverjs.RiverItem
 import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
+import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
 import com.silverkeytech.android_rivers.syndications.SyndicationFeed
+import com.silverkeytech.android_rivers.syndications.SyndicationFilter
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 import java.util.ArrayList
-import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
-import com.silverkeytech.android_rivers.syndications.SyndicationFilter
 
 public class DownloadCollectionAsRiver(it: Context?, private val collectionId: Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
     class object {
         public val TAG: String = javaClass<DownloadCollectionAsRiver>().getSimpleName()
     }
 
-    var dialog: ProgressDialog = ProgressDialog(it)
     var context: Activity = it!! as Activity
+    var dialog: InfinityProgressDialog = InfinityProgressDialog(context, context.getString(R.string.please_wait_while_loading)!!)
 
     protected override fun onPreExecute() {
-        dialog.setMessage(context.getString(R.string.please_wait_while_loading))
-        dialog.setIndeterminate(true)
-        dialog.setCancelable(false)
-        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(android.R.string.cancel), object : DialogInterface.OnClickListener{
-            public override fun onClick(p0: DialogInterface?, p1: Int) {
-                p0!!.dismiss()
+        dialog.onCancel {
+            dlg ->
+                dlg.dismiss()
                 this@DownloadCollectionAsRiver.cancel(true)
-            }
-        })
+        }
 
         dialog.show()
     }

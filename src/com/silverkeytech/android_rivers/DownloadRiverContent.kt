@@ -39,20 +39,16 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
         public val TAG: String = javaClass<DownloadRiverContent>().getSimpleName()
     }
 
-    var dialog: ProgressDialog = ProgressDialog(it)
     var context: Activity = it!! as Activity
+    var dialog: InfinityProgressDialog = InfinityProgressDialog(context, context.getString(R.string.please_wait_while_loading)!!)
 
     //Prepare stuff before execution
     protected override fun onPreExecute() {
-        dialog.setMessage(context.getString(R.string.please_wait_while_loading))
-        dialog.setIndeterminate(true)
-        dialog.setCancelable(false)
-        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(android.R.string.cancel), object : DialogInterface.OnClickListener{
-            public override fun onClick(p0: DialogInterface?, p1: Int) {
-                p0!!.dismiss()
+        dialog.onCancel{
+            dlg ->
+                dlg.dismiss()
                 this@DownloadRiverContent.cancel(true)
-            }
-        })
+        }
 
         dialog.show()
     }
