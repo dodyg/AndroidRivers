@@ -140,12 +140,17 @@ public class FeedActivity(): SherlockListActivity()
                 val dialog = AlertDialog.Builder(this)
                 dialog.setTitle("Bookmark to a collection")
 
-                var collectionTitles = coll.map { it.title }.toArray(array<String>())
+                val collectionTitles = coll.map { it.title }.toArray()
+                val withInstruction = arrayListOf("Skip Collection", *collectionTitles).toArray(array<String>())
 
-                dialog.setItems(collectionTitles, object : DialogInterface.OnClickListener{
+                dialog.setItems(withInstruction, object : DialogInterface.OnClickListener{
                     public override fun onClick(p0: DialogInterface?, p1: Int) {
-                        val currentCollection = coll[p1]
-                        saveBookmark(currentCollection)
+                        if (p1 == 0) { //skip adding bookmark to collection. Just add to RSS bookmark
+                            saveBookmark(null)
+                        } else {
+                            val currentCollection = coll[p1 - 1] //we added one extra item that was "no instruction" so the index must be deducted by 1
+                            saveBookmark(currentCollection)
+                        }
                     }
                 })
 
