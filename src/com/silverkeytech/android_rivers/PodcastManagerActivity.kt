@@ -10,6 +10,11 @@ import android.widget.ListView
 import android.widget.ArrayAdapter
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.AdapterView
+import android.widget.Adapter
+import android.content.Intent
+import android.net.Uri
 
 public class PodcastManagerActivity : SherlockListActivity()
 {
@@ -76,5 +81,16 @@ public class PodcastManagerActivity : SherlockListActivity()
         }
 
         list.setAdapter(adapter)
+
+        list.setOnItemClickListener(object : OnItemClickListener{
+            public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
+                val currentFile = files[p2]
+
+                var playIntent = Intent()
+                playIntent.setAction(android.content.Intent.ACTION_VIEW);
+                playIntent.setDataAndType(Uri.fromFile(currentFile), "audio/*");
+                startActivity(playIntent)
+            }
+        })
     }
 }
