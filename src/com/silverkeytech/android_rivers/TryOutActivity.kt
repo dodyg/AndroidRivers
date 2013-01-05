@@ -59,6 +59,7 @@ public class TryOutActivity(): Activity()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tryout)
+        handleStartPodcastManager()
         handleBookmarkCollectionCreation()
         handleDownloadAtom()
         handleDownloadRss()
@@ -72,6 +73,16 @@ public class TryOutActivity(): Activity()
         handleOutliner()
         handleDownloadRecursiveOpml()
         handleRiverJsWithOpmlSource()
+    }
+
+    fun handleStartPodcastManager(){
+        val btn = findView<Button>(R.id.tryout_start_podcast_manager)
+
+        btn.setOnClickListener {
+            val i = Intent(this, javaClass<PodcastManagerActivity>())
+            startActivity(i)
+            Log.d(TAG, "Start handleStartPodcastManager")
+        }
     }
 
     fun handleBookmarkCollectionCreation() {

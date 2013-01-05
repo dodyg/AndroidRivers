@@ -49,6 +49,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="PodcastManagerActivity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+
+            </intent-filter>
+        </activity>
+
+
         <service android:enabled="true" android:name=".DownloadService" />
         <service android:enabled="true" android:name=".DownloadAllRiversService" />
     </application>
