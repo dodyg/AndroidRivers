@@ -33,6 +33,8 @@ import android.widget.AdapterView
 import android.widget.Adapter
 import android.content.Intent
 import android.net.Uri
+import com.actionbarsherlock.view.Menu
+import com.actionbarsherlock.view.MenuItem
 
 public class PodcastManagerActivity : SherlockListActivity()
 {
@@ -52,6 +54,53 @@ public class PodcastManagerActivity : SherlockListActivity()
         actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
         actionBar.setTitle("Podcasts")
         listFile()
+    }
+
+
+    public override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        if (menu != null){
+            val forward = menu.findItem(SWITCH_FORWARD)
+            forward?.setEnabled(false)
+        }
+
+        return super.onPrepareOptionsMenu(menu)
+    }
+
+    public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = getSupportMenuInflater()!!
+        inflater.inflate(R.menu.main_menu, menu)
+
+        //top menu
+
+        menu?.add(0, SWITCH_BACKWARD, 0, "<")
+        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+
+        menu?.add(0, SWITCH_FORWARD, 0, ">")
+        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+
+        menu?.add(0, EXPLORE, 0, "MORE NEWS")
+        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+
+        return true
+    }
+
+    val SWITCH_BACKWARD: Int = 0
+    val SWITCH_FORWARD: Int = 1
+    val EXPLORE: Int = 2
+
+    public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.getItemId()) {
+            EXPLORE -> {
+                downloadOpml(this, "http://hobieu.apphb.com/api/1/opml/root", "Get more news")
+                return false
+            }
+            SWITCH_BACKWARD -> {
+                this.finish()
+                return true
+            }
+            else ->
+                return super.onOptionsItemSelected(item)
+        }
     }
 
     fun listFile(){

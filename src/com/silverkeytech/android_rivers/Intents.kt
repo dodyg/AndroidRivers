@@ -5,6 +5,11 @@ import android.content.Intent
 import com.silverkeytech.android_rivers.outliner.OutlineContent
 import java.util.ArrayList
 
+public fun startPodcastActivity(context : Context){
+    val i = Intent(context, javaClass<PodcastManagerActivity>())
+    context.startActivity(i)
+}
+
 public fun startFeedActivityIntent(context: Context, url: String, text: String, lang: String) {
     val i = Intent(context, javaClass<FeedActivity>())
     i.putExtra(Params.FEED_URL, url)
