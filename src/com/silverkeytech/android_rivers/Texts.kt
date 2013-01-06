@@ -97,7 +97,6 @@ public fun isLocalUrl(url : String) : Boolean = url.contains(LOCAL_URL)
 public fun extractIdFromLocalUrl(url : String) : Int?{
     try{
         val id = url.substring(LOCAL_URL.size).toString()
-        Log.d("extractIdFromLocalUrl", "Substring $id")
         if (id.isNullOrEmpty())
             return null
         else

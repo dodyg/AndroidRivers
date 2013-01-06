@@ -161,8 +161,10 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
                             }
                         }
 
-                        val sortedNewsItems = sortRiverItemMeta(list)
-                        getApplication().getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
+                        if (list.count() > 0){
+                            val sortedNewsItems = sortRiverItemMeta(list)
+                            getApplication().getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
+                        }
                     }
                     else{
                         notify("Problem downloading collection river $title due to id extraction failure")
