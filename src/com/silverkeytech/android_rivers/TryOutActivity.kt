@@ -79,27 +79,9 @@ public class TryOutActivity(): Activity()
         val btn = findView<Button>(R.id.tryout_start_podcast_manager)
 
         btn.setOnClickListener {
-            //val i = Intent(this, javaClass<PodcastManagerActivity>())
-            //startActivity(i)
-            //Log.d(TAG, "Start handleStartPodcastManager")
-            var messenger = Messenger(object : Handler(){
-                public override fun handleMessage(msg: Message?) {
-                    if (msg != null){
-                        val path = msg.obj as String
-
-                        if (msg.arg1 == Activity.RESULT_OK && !path.isNullOrEmpty()){
-                        }else{
-                        }
-                    }else{
-                        Log.d(TAG, "handleMessage returns null, which is very weird")
-                    }
-                }
-            })
-
-            var intent = Intent(this, javaClass<DownloadAllRiversService>())
-            intent.putExtra(Params.DOWNLOAD_URL, "http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510019/167984647/npr_167984647.mp3")
-            intent.putExtra(Params.DOWNLOAD_TITLE,"Test Single 3 Download" )
-            this.startService(intent)
+            val i = Intent(this, javaClass<PodcastManagerActivity>())
+            startActivity(i)
+            Log.d(TAG, "Start handleStartPodcastManager")
         }
     }
 

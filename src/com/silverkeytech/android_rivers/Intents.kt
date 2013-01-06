@@ -31,15 +31,14 @@ public fun startRiverActivity(context: Context, url: String, text: String, lang:
     context.startActivity(i)
 }
 
-/*
 public fun startDownloadAllRiverService(context: Context, titleList: ArrayList<String>, urlList: ArrayList<String>) {
     val i = Intent(context, javaClass<DownloadAllRiversService>())
 
     i.putStringArrayListExtra(Params.RIVERS_DOWNLOAD_TITLE, titleList)
     i.putStringArrayListExtra(Params.RIVERS_DOWNLOAD_URLS, urlList)
 
-    context.startActivity(i)
-}*/
+    context.startService(i)
+}
 
 public fun startCollectionActivityIntent(context: Context, id: Int, title: String) {
     val i = Intent(context, javaClass<BookmarkCollectionActivity>())
