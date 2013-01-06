@@ -106,16 +106,17 @@ public class DownloadService(): IntentService("DownloadService"){
 
             notificationManager.notify(notificationId, notification)
 
+            var input : BufferedInputStream? = null
+            var output : FileOutputStream? = null
             try{
-                var input = BufferedInputStream(url.openStream()!!)
-                var output = FileOutputStream(filename)
+                input = BufferedInputStream(url.openStream()!!)
+                output = FileOutputStream(filename)
 
                 var data = ByteArray(1024)
-                Log.d(TAG, "Length of byte array ${data.size}")
                 var total: Long = 0
                 var progress: Int = 0
 
-                var count: Int = input.read(data)
+                var count: Int = input!!.read(data)
 
                 var oldProgress: Int
 
@@ -130,13 +131,9 @@ public class DownloadService(): IntentService("DownloadService"){
                         notificationManager.notify(notificationId, notification)
                     }
 
-                    output.write(data, 0, count)
-                    count = input.read(data)
+                    output!!.write(data, 0, count)
+                    count = input!!.read(data)
                 }
-
-                output.flush()
-                output.close()
-                input.close()
 
                 notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "File successfully download to $filename")
                 notificationManager.notify(notificationId, notification)
@@ -146,6 +143,11 @@ public class DownloadService(): IntentService("DownloadService"){
                 notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "Download fails due to ${e.getMessage()}")
                 notificationManager.notify(notificationId, notification)
                 result = Activity.RESULT_CANCELED
+            }
+            finally{
+                input?.close()
+                output?.flush()
+                output?.close()
             }
         }
         catch(e: HttpRequestException){
