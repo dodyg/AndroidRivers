@@ -79,9 +79,16 @@ public class TryOutActivity(): Activity()
         val btn = findView<Button>(R.id.tryout_start_podcast_manager)
 
         btn.setOnClickListener {
-            val i = Intent(this, javaClass<PodcastManagerActivity>())
+            //val i = Intent(this, javaClass<PodcastManagerActivity>())
+            //startActivity(i)
+            //Log.d(TAG, "Start handleStartPodcastManager")
+
+            /*
+            val i = Intent(this, javaClass<DownloadRiversService>())
+            i.putStringArrayListExtra(Params.RIVERS_DOWNLOAD_TITLE, ArrayList<String>())
+            i.putStringArrayListExtra(Params.RIVERS_DOWNLOAD_URLS, ArrayList<String>())
             startActivity(i)
-            Log.d(TAG, "Start handleStartPodcastManager")
+            */
         }
     }
 

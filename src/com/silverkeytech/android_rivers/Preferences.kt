@@ -43,6 +43,8 @@ public class PreferenceDefaults{
         public val VISUAL_LIST_TEXT_SIZE: Int = 24
         public val VISUAL_THEME: Int = R.style.Theme_Sherlock_Light_DarkActionBar
         public val BOOKMARK_SORTING: Int = SORT_NONE
+
+        public val BOOKMARK_COLLECTION_LATEST_DATE_FILTER_IN_DAYS : Int = 1
     }
 }
 

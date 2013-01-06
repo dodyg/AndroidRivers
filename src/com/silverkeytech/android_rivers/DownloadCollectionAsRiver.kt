@@ -11,6 +11,7 @@ import com.silverkeytech.android_rivers.syndications.SyndicationFeed
 import com.silverkeytech.android_rivers.syndications.SyndicationFilter
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 import java.util.ArrayList
+import com.silverkeytech.android_rivers.riverjs.accumulateList
 
 public class DownloadCollectionAsRiver(it: Context?, private val collectionId: Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
     class object {
@@ -31,7 +32,7 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
     }
 
     protected override fun doInBackground(vararg p0: String?): Result<List<RiverItemMeta>>? {
-        val latestDate = daysBeforeNow(1)
+        val latestDate = daysBeforeNow(PreferenceDefaults.BOOKMARK_COLLECTION_LATEST_DATE_FILTER_IN_DAYS)
 
         var list = arrayListOf<RiverItemMeta>()
         for(val url in p0){
@@ -47,26 +48,6 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
         }
 
         return Result.right(list)
-    }
-
-    fun accumulateList(list: ArrayList<RiverItemMeta>, feed: SyndicationFeed) {
-        for(val f in feed.items.iterator()){
-            val item = RiverItem()
-
-            item.title = f.title
-            item.body = f.description
-            item.pubDate = DateHelper.formatRFC822(f.pubDate!!)
-
-            if (f.hasLink())
-                item.link = f.link
-
-            val link = if (feed.hasLink())
-                feed.link else ""
-
-            val meta = RiverItemMeta(item, feed.title, link)
-
-            list.add(meta)
-        }
     }
 
     var callback: ((String, Result<List<RiverItemMeta>>) -> Unit)? = null

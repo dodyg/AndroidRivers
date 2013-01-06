@@ -263,8 +263,16 @@ public open class MainActivity(): SherlockActivity() {
                     val titleList = subscriptionList.body?.outline?.iterator()?.map { it.text!! }?.toArrayList()!!
                     val urlList = subscriptionList.body?.outline?.iterator()?.map { it.url!! }?.toArrayList()!!
 
-                    startDownloadAllRiverService(this, titleList, urlList)
-                    return true
+                    toastee("hello world ${titleList.size()} - ${urlList.size()}", Duration.LONG)
+
+                    //startDownloadAllRiverService(this, titleList, urlList)
+                                        /*
+                    val i = Intent(this, javaClass<DownloadRiversService>())
+                    i.putStringArrayListExtra(Params.RIVERS_DOWNLOAD_TITLE, titleList)
+                    i.putStringArrayListExtra(Params.RIVERS_DOWNLOAD_URLS, urlList)
+                    startActivity(i)
+                    */
+                    return false
                 }
                 else {
                     toastee("Sorry, there's nothing to download.", Duration.AVERAGE)
