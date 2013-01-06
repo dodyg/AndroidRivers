@@ -35,6 +35,7 @@ import android.content.Intent
 import android.net.Uri
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
+import android.media.MediaMetadataRetriever
 
 public class PodcastManagerActivity : SherlockListActivity()
 {
@@ -132,6 +133,7 @@ public class PodcastManagerActivity : SherlockListActivity()
                 var holder: ViewHolder?
 
                 var currentFile = files[position]
+
                 var text = currentFile.name
 
                 if (currentView == null){

@@ -77,11 +77,7 @@ public open class MainActivity(): SherlockActivity() {
             val locationPath = intent!!.getStringExtra(Params.DOWNLOAD_LOCATION_PATH)
             if (!locationPath.isNullOrEmpty()){
                 try{
-                    var playIntent = Intent()
-                    playIntent.setAction(android.content.Intent.ACTION_VIEW);
-                    var file = File(locationPath!!);
-                    playIntent.setDataAndType(Uri.fromFile(file), "audio/*");
-                    startActivity(playIntent)
+                    startPodcastActivity(this, locationPath!!)
                 }
                 catch(e: Exception){
                     toastee("Sorry, I cannot play the file $locationPath. Please click Refresh on the menu option to download the news list again.", Duration.LONG)

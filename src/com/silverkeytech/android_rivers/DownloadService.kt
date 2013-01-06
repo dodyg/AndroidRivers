@@ -106,46 +106,53 @@ public class DownloadService(): IntentService("DownloadService"){
 
             notificationManager.notify(notificationId, notification)
 
-            var input = BufferedInputStream(url.openStream()!!)
-            var output = FileOutputStream(filename)
+            try{
+                var input = BufferedInputStream(url.openStream()!!)
+                var output = FileOutputStream(filename)
 
-            var data = ByteArray(1024)
-            Log.d(TAG, "Length of byte array ${data.size}")
-            var total: Long = 0
-            var progress: Int = 0
+                var data = ByteArray(1024)
+                Log.d(TAG, "Length of byte array ${data.size}")
+                var total: Long = 0
+                var progress: Int = 0
 
-            var count: Int = input.read(data)
+                var count: Int = input.read(data)
 
-            var oldProgress: Int
+                var oldProgress: Int
 
-            while (count != -1){
-                total += count
-                oldProgress = progress
-                progress = (total.toInt() * 100) div fileLength
-                Log.d(TAG, "Download progress ($total * 100) / $fileLength $progress")
+                while (count != -1){
+                    total += count
+                    oldProgress = progress
+                    progress = (total.toInt() * 100) div fileLength
+                    Log.d(TAG, "Download progress ($total * 100) / $fileLength $progress")
 
-                if (progress != oldProgress){
-                    notification!!.contentView!!.setProgressBar(R.id.download_progress_status_progress, 100, progress, false)
-                    notificationManager.notify(notificationId, notification)
+                    if (progress != oldProgress){
+                        notification!!.contentView!!.setProgressBar(R.id.download_progress_status_progress, 100, progress, false)
+                        notificationManager.notify(notificationId, notification)
+                    }
+
+                    output.write(data, 0, count)
+                    count = input.read(data)
                 }
 
-                output.write(data, 0, count)
-                count = input.read(data)
+                output.flush()
+                output.close()
+                input.close()
+
+                notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "File successfully download to $filename")
+                notificationManager.notify(notificationId, notification)
+
+                result = Activity.RESULT_OK
+            }catch (e : java.io.FileNotFoundException){
+                notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "Download fails due to ${e.getMessage()}")
+                notificationManager.notify(notificationId, notification)
+                result = Activity.RESULT_CANCELED
             }
-
-            output.flush()
-            output.close()
-            input.close()
-
-            notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "File successfully download to $filename")
-            notificationManager.notify(notificationId, notification)
-
-            result = Activity.RESULT_OK
         }
         catch(e: HttpRequestException){
             Log.d(TAG, "Exception happend at attempt to download ${e.getMessage()}")
             notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "File $inferredName download cancelled")
             notificationManager.notify(notificationId, notification)
+            result = Activity.RESULT_CANCELED
         }
 
         var extras = p0?.getExtras()

@@ -198,7 +198,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                                                 context.toastee("File is successfully downloaded at $path", Duration.LONG)
                                                 MediaScannerWrapper.scanPodcasts(context, path)
                                             }else{
-                                                context.toastee("Download failed", Duration.LONG)
+                                                context.toastee("Sorry, I cannot download podcast ${currentNews.item.title}", Duration.LONG)
                                             }
                                         }else{
                                             Log.d(TAG, "handleMessage returns null, which is very weird")

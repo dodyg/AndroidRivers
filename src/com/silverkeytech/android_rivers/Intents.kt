@@ -5,8 +5,11 @@ import android.content.Intent
 import com.silverkeytech.android_rivers.outliner.OutlineContent
 import java.util.ArrayList
 
-public fun startPodcastActivity(context : Context){
+public fun startPodcastActivity(context : Context, downloadLocationPath : String? = null){
     val i = Intent(context, javaClass<PodcastManagerActivity>())
+    if (!downloadLocationPath.isNullOrEmpty())
+        i.putExtra(Params.DOWNLOAD_LOCATION_PATH, downloadLocationPath!!)
+
     context.startActivity(i)
 }
 
