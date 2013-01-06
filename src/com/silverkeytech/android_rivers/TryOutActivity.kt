@@ -96,9 +96,9 @@ public class TryOutActivity(): Activity()
                 }
             })
 
-            var intent = Intent(this, javaClass<DownloadService2>())
+            var intent = Intent(this, javaClass<DownloadAllRiversService>())
             intent.putExtra(Params.DOWNLOAD_URL, "http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510019/167984647/npr_167984647.mp3")
-            intent.putExtra(Params.DOWNLOAD_TITLE,"Test Single 2 Download" )
+            intent.putExtra(Params.DOWNLOAD_TITLE,"Test Single 3 Download" )
             this.startService(intent)
         }
     }
