@@ -33,7 +33,7 @@ public class Database (context: Context): OrmLiteSqliteOpenHelper(context, Datab
     }
 
     public override fun onCreate(p0: SQLiteDatabase?, p1: ConnectionSource?) {
-        SchemaCreation(p0!!).create(1)
+        SchemaCreation(p0!!).create(2)
     }
 
     public override fun onUpgrade(p0: SQLiteDatabase?, p1: ConnectionSource?, p2: Int, p3: Int) {

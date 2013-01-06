@@ -30,12 +30,13 @@ public class SchemaCreation(val db: SQLiteDatabase){
     public fun create(version: Int) {
         when(version){
             1 -> create1()
+            2 -> create2()
             else -> {
             }
         }
     }
 
-    private fun create1() {
+    private fun create1() : Boolean {
         try{
             Log.d(TAG, "OnCreate(1): Create bookmark Table")
 
@@ -54,9 +55,31 @@ public class SchemaCreation(val db: SQLiteDatabase){
             db.execSQL("""
               CREATE UNIQUE INDEX `bookmark_url_idx` ON `bookmark` ( `url` )
             """)
+
+            return true
         }
         catch (e: SQLException){
-            Log.d(TAG, "Exception in creating database")
+            Log.d(TAG, "OnCreate(1) Exception in creating database")
+            return false
+        }
+    }
+
+    private fun create2() : Boolean {
+        create1()
+        try{
+            Log.d(TAG, "OnUpgrade(1): Create collection Table")
+            db.execSQL("""
+                          CREATE TABLE `bookmark_collection`
+                          (
+                            `title` VARCHAR NOT NULL ,
+                            `kind` VARCHAR NOT NULL ,
+                            `id` INTEGER PRIMARY KEY AUTOINCREMENT
+                          )
+                        """)
+            return true
+        }catch (e: SQLException){
+            Log.d(TAG, "OnCreate(2) ${e.getMessage()}")
+            return false
         }
     }
 }
