@@ -173,7 +173,8 @@ public class FeedActivity(): SherlockListActivity(), WithVisualModificationPanel
                 saveBookmark(null)
             }
 
-        } else {
+        } else { //no collection is available so save it straight to bookmark
+            saveBookmark(null)
         }
     }
 

@@ -68,11 +68,6 @@ public class PodcastManagerActivity : SherlockListActivity()
     }
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater = getSupportMenuInflater()!!
-        inflater.inflate(R.menu.main_menu, menu)
-
-        //top menu
-
         menu?.add(0, SWITCH_BACKWARD, 0, "<")
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
