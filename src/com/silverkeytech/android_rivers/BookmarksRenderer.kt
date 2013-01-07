@@ -42,7 +42,25 @@ public class BookmarksRenderer(val context: MainActivity){
         public val TAG: String = javaClass<BookmarksRenderer>().getSimpleName()
     }
 
+    fun showMessage(msg : String){
+        val txt = context.findView<TextView>(R.id.main_message_tv)
+        if (msg.isNullOrEmpty()){
+            txt.setVisibility(View.INVISIBLE)
+            txt.setText("")
+        }
+        else{
+            txt.setVisibility(View.VISIBLE)
+            txt.setText(msg)
+        }
+    }
+
     fun handleCollection(coll: List<BookmarkCollection>) {
+        if (coll.count() == 0){
+            showMessage("""Collection is useful to group your feeds from 'more news'. Each collection presents the news in one river of news. Use menu option to add a new collection.""")
+        }
+        else
+            showMessage("")
+
         val adapter = object : ArrayAdapter<BookmarkCollection>(context, android.R.layout.simple_list_item_1, android.R.id.text1, coll){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 val text = coll[position].toString()
@@ -82,7 +100,13 @@ public class BookmarksRenderer(val context: MainActivity){
         })
     }
 
-    fun handleListing(bookmarks: List<Bookmark>) {
+    fun handleBookmarkCollectionListing(bookmarks: List<Bookmark>) {
+        if (bookmarks.count() == 0){
+            showMessage("Your bookmarked feed will be listed here. Click on 'more news' to find more news feeds.")
+        }
+        else
+            showMessage("")
+
         val adapter = object : ArrayAdapter<Bookmark>(context, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 val text = bookmarks[position].toString()
@@ -102,7 +126,7 @@ public class BookmarksRenderer(val context: MainActivity){
         list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
             public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
                 val currentBookmark = bookmarks.get(p2)
-                showBookmarkListingQuickActionPopup(context, currentBookmark, p1!!, list)
+                showRssBookmarkQuickActionPopup(context, currentBookmark, p1!!, list)
                 return true
             }
         })
@@ -114,6 +138,11 @@ public class BookmarksRenderer(val context: MainActivity){
         opml.body?.outline?.forEach {
             outlines.add(it)
         }
+
+        if (outlines.count() == 0){
+            showMessage("""Your bookmarked rivers will appear here. To find more river, click on 'more news' or add a new collection. You can also click on 'refresh' option to download default rivers.""")
+        } else
+            showMessage("")
 
         val adapter = object : ArrayAdapter<Outline>(context, android.R.layout.simple_list_item_1, android.R.id.text1, outlines){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
@@ -142,7 +171,7 @@ public class BookmarksRenderer(val context: MainActivity){
         list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
             public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
                 val currentOutline = outlines.get(p2)
-                showRiverListingQuickActionPopup(context, currentOutline, p1!!, list)
+                showRiverBookmarksQuickActionPopup(context, currentOutline, p1!!, list)
                 return true
             }
         })

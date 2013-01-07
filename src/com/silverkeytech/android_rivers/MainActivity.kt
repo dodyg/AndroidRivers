@@ -40,6 +40,7 @@ import java.io.File
 import com.silverkeytech.android_rivers.db.SortingOrder
 import android.app.Activity
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
+import com.silverkeytech.android_rivers.outlines.Opml
 
 enum class MainActivityMode {
     RIVER
@@ -85,7 +86,7 @@ public open class MainActivity(): SherlockActivity() {
                 }
             }
             else
-                displayRiverBookmarks()
+                displayRiverBookmarks(true)
         }
     }
 
@@ -139,7 +140,7 @@ public open class MainActivity(): SherlockActivity() {
                 return
             }
 
-            displayModeContent(mode)
+            displayModeContent(mode, false)
         }else {
             Log.d(TAG, "RESUMING AFTER CREATION")
             isOnCreate = false
@@ -253,7 +254,7 @@ public open class MainActivity(): SherlockActivity() {
             }
 
             R.id.main_menu_refresh -> {
-                displayModeContent(mode)
+                displayModeContent(mode, true)
                 return true
             }
 
@@ -283,14 +284,14 @@ public open class MainActivity(): SherlockActivity() {
             }
             SWITCH_FORWARD -> {
                 changeModeForward()
-                displayModeContent(mode)
+                displayModeContent(mode, false)
                 setTitle()
                 this.supportInvalidateOptionsMenu()
                 return true
             }
             SWITCH_BACKWARD -> {
                 changeModeBackward()
-                displayModeContent(mode)
+                displayModeContent(mode, false)
                 setTitle()
                 this.supportInvalidateOptionsMenu()
                 return true
@@ -300,10 +301,10 @@ public open class MainActivity(): SherlockActivity() {
         }
     }
 
-    fun displayModeContent(mode: MainActivityMode) {
+    fun displayModeContent(mode: MainActivityMode, downloadRiverBookmarksFromInternetIfNoneExisted : Boolean) {
         when(mode){
             MainActivityMode.RIVER -> {
-                displayRiverBookmarks()
+                displayRiverBookmarks(downloadRiverBookmarksFromInternetIfNoneExisted)
             }
             MainActivityMode.RSS -> {
                 displayRssBookmarks()
@@ -326,7 +327,7 @@ public open class MainActivity(): SherlockActivity() {
 
     private fun displayRssBookmarks() {
         val bookmarks = getBookmarksFromDb(BookmarkKind.RSS, SortingOrder.ASC)
-        BookmarksRenderer(this@MainActivity).handleListing(bookmarks)
+        BookmarksRenderer(this@MainActivity).handleBookmarkCollectionListing(bookmarks)
     }
 
     private fun displayBookmarkCollection() {
@@ -342,13 +343,13 @@ public open class MainActivity(): SherlockActivity() {
         displayRssBookmarks()
     }
 
-    public fun refreshRiverBookmarks()
+    public fun refreshRiverBookmarks(retrieveRiversFromInternetIfNoneExisted : Boolean)
     {
         this.getApplication().getMain().clearRiverBookmarksCache()
-        displayRiverBookmarks()
+        displayRiverBookmarks(retrieveRiversFromInternetIfNoneExisted)
     }
 
-    private fun displayRiverBookmarks() {
+    private fun displayRiverBookmarks(retrieveDefaultFromInternet: Boolean) {
         val cache = this.getApplication().getMain().getRiverBookmarksCache()
 
         if (cache != null){
@@ -363,7 +364,7 @@ public open class MainActivity(): SherlockActivity() {
                 this.getApplication().getMain().setRiverBookmarksCache(bookmarks)
                 BookmarksRenderer(this@MainActivity).handleRiversListing(bookmarks)
             }
-            else{
+            else if (retrieveDefaultFromInternet){
                 Log.d(TAG, "Start downloading bookmarks from the Internet")
                 DownloadBookmarks(this, true)
                         .executeOnComplete({
@@ -381,6 +382,10 @@ public open class MainActivity(): SherlockActivity() {
                     }
                 })
                         .execute(DEFAULT_SUBSCRIPTION_LIST)
+            }
+            else{
+                //this happen when you remove the last item from the river bookmark. So have it render an empty opml
+                BookmarksRenderer(this@MainActivity).handleRiversListing(Opml())
             }
         }
     }

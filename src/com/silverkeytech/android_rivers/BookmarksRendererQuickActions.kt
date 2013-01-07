@@ -93,7 +93,7 @@ fun showCollectionQuickActionPopup(context: MainActivity, collection: BookmarkCo
     pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
 }
 
-fun showBookmarkListingQuickActionPopup(context: MainActivity, currentBookmark: Bookmark, item: View, list: View) {
+fun showRssBookmarkQuickActionPopup(context: MainActivity, currentBookmark: Bookmark, item: View, list: View) {
     //overlay popup at top of clicked overview position
     val popupWidth = item.getWidth()
     val popupHeight = item.getHeight()
@@ -128,7 +128,7 @@ fun showBookmarkListingQuickActionPopup(context: MainActivity, currentBookmark: 
     pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
 }
 
-fun showRiverListingQuickActionPopup(context: MainActivity, currentOutline: Outline, item: View, list: View) {
+fun showRiverBookmarksQuickActionPopup(context: MainActivity, currentOutline: Outline, item: View, list: View) {
     //overlay popup at top of clicked overview position
     val popupWidth = item.getWidth()
     val popupHeight = item.getHeight()
@@ -150,7 +150,7 @@ fun showRiverListingQuickActionPopup(context: MainActivity, currentOutline: Outl
                 context.toastee("Error in removing this bookmark ${res.exception?.getMessage()}")
             else {
                 context.toastee("Bookmark removed")
-                context.refreshRiverBookmarks()
+                context.refreshRiverBookmarks(false)
             }
         }
         catch(e: Exception){
