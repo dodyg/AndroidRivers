@@ -20,18 +20,19 @@ package com.silverkeytech.android_rivers.db
 
 import com.j256.ormlite.dao.Dao
 import com.silverkeytech.android_rivers.Result
+import com.silverkeytech.android_rivers.None
 
 public class BookmarkCommand(private val dao: Dao<Bookmark, out Int?>){
-    fun deleteByUrl (url: String): Result<Boolean> {
+    fun deleteByUrl (url: String): Result<None> {
         try{
             var condition = dao.deleteBuilder()!!
             condition.where()!!.eq(BOOKMARK_URL, url)
 
             dao.delete(condition.prepare())
 
-            return Result.right(true)
+            return Result.right(None())
         }catch (e: Exception){
-            return Result.wrong(e)
+            return Result.wrong<None>(e)
         }
     }
 }

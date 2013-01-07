@@ -186,3 +186,7 @@ public fun saveOpmlAsBookmarks(opml: Opml): Result<Opml> {
         return Result.wrong(e)
     }
 }
+
+public fun removeItemByUrlFromBookmarkDb(url : String) : Result<None>{
+    return  DatabaseManager.cmd().bookmark().deleteByUrl(url)
+}

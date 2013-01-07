@@ -16,6 +16,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
+/*
+  The functions here are specific to handle the long press in each of the main application mode (RIVER, RSS, COLLECTION)
+*/
+
 package com.silverkeytech.android_rivers
 
 import android.content.Context
@@ -30,6 +34,7 @@ import com.silverkeytech.android_rivers.db.BookmarkCollection
 import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.db.clearBookmarksFromCollection
 import com.silverkeytech.android_rivers.outlines.Outline
+import com.silverkeytech.android_rivers.db.removeItemByUrlFromBookmarkDb
 
 fun inflater(context: Context): LayoutInflater {
     val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -61,7 +66,14 @@ fun showCollectionQuickActionPopup(context: MainActivity, collection: BookmarkCo
             if (res.isFalse())
                 context.toastee("Error in removing this bookmark collection ${res.exception?.getMessage()}")
             else {
-                context.toastee("Bookmark removed")
+                //assume that this collection is bookmarked. So remove the id from the bookmark
+                //and refresh the cache so when user view the rivers bookmark view, it is already removed
+                //This operation doesn't fail even if the collection was never added to the RIVER bookmark
+                val url = makeLocalUrl(collection.id)
+                removeItemByUrlFromBookmarkDb(url)
+                context.getApplication().getMain().clearRiverBookmarksCache()
+
+                context.toastee("Bookmark collection removed")
                 context.refreshBookmarkCollection()
             }
         }
@@ -98,7 +110,7 @@ fun showBookmarkListingQuickActionPopup(context: MainActivity, currentBookmark: 
     val icon = x.findViewById(R.id.main_feed_quick_action_delete_icon) as ImageView
     icon.setOnClickListener {
         try{
-            val res = DatabaseManager.cmd().bookmark().deleteByUrl(currentBookmark.url)
+            val res = removeItemByUrlFromBookmarkDb(currentBookmark.url)
             if (res.isFalse())
                 context.toastee("Error in removing this bookmark ${res.exception?.getMessage()}")
             else {

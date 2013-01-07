@@ -39,6 +39,7 @@ import com.silverkeytech.android_rivers.db.saveOpmlAsBookmarks
 import java.io.File
 import com.silverkeytech.android_rivers.db.SortingOrder
 import android.app.Activity
+import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 
 enum class MainActivityMode {
     RIVER
@@ -220,6 +221,11 @@ public open class MainActivity(): SherlockActivity() {
                 val res = addNewCollection(text, BookmarkCollectionKind.RIVER)
 
                 if (res.isTrue()){
+                    val url = makeLocalUrl(res.value!!.id)
+                    //when a collection is added as a river, bookmark it immediately
+                    saveBookmarkToDb(text, url, BookmarkKind.RIVER, "en", null)
+                    getApplication().getMain().clearRiverBookmarksCache()
+
                     toastee("Collection is successfully added")
                     this@MainActivity.refreshBookmarkCollection()
                 }
