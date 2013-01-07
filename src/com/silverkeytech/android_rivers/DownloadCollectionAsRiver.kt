@@ -32,7 +32,7 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
     }
 
     protected override fun doInBackground(vararg p0: String?): Result<List<RiverItemMeta>>? {
-        val latestDate = daysBeforeNow(PreferenceDefaults.BOOKMARK_COLLECTION_LATEST_DATE_FILTER_IN_DAYS)
+        val latestDate = daysBeforeNow(PreferenceDefaults.CONTENT_BOOKMARK_COLLECTION_LATEST_DATE_FILTER_IN_DAYS)
 
         var list = arrayListOf<RiverItemMeta>()
         for(val url in p0){

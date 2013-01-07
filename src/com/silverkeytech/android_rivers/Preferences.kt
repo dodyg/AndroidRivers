@@ -24,32 +24,65 @@ import android.content.SharedPreferences
 
 public class Preferences{
     class object{
+        public val CONTENT: String = "CONTENT"
+        public val CONTENT_RIVER_BOOKMARKS_SORTING: String = "CONTENT_RIVER_BOOKMARKS_SORTING"
+
+        public val SETUP: String = "SETUP"
+        public val SETUP_DOWNLOAD_DEFAULT_RIVERS: String = "SETUP_DOWNLOAD_DEFAULT_RIVERS"
+
         public val VISUAL: String = "PREFERENCE_VISUAL"
         public val VISUAL_LIST_TEXT_SIZE: String = "PREFERENCE_VISUAL_LIST_TEXT_SIZE"
         public val VISUAL_THEME: String = "PREFERENCE_VISUAL_THEME"
-
-        public val BOOKMARK_SORTING: String = "PREFERENCE_VISUAL_BOOKMARK_SORTING"
     }
 }
 
-
-public val SORT_DESC: Int = 100
-public val SORT_NONE: Int = 101
-public val SORT_ASC: Int = 102
-
+public class PreferenceValue{
+    class object {
+        public val SORT_DESC: Int = 100
+        public val SORT_NONE: Int = 101
+        public val SORT_ASC: Int = 102
+    }
+}
 
 public class PreferenceDefaults{
     class object {
+        public val CONTENT_RIVER_BOOKMARKS_SORTING: Int = PreferenceValue.SORT_NONE
+        public val CONTENT_BOOKMARK_COLLECTION_LATEST_DATE_FILTER_IN_DAYS: Int = 1
+
+        public val SETUP_DOWNLOAD_DEFAULT_RIVERS : Boolean = true
+
         public val VISUAL_LIST_TEXT_SIZE: Int = 24
         public val VISUAL_THEME: Int = R.style.Theme_Sherlock_Light_DarkActionBar
-        public val BOOKMARK_SORTING: Int = SORT_NONE
-
-        public val BOOKMARK_COLLECTION_LATEST_DATE_FILTER_IN_DAYS : Int = 1
     }
 }
 
-fun Activity.getVisualPref(): VisualPreference {
-    return VisualPreference(this.getSharedPreferences(Preferences.VISUAL_LIST_TEXT_SIZE, Context.MODE_PRIVATE)!!)
+fun Activity.getContentPref() : ContentPreference =
+    ContentPreference(this.getSharedPreferences(Preferences.CONTENT, Context.MODE_PRIVATE)!!)
+
+fun Activity.getSetupPref(): SetupPreference =
+    SetupPreference(this.getSharedPreferences(Preferences.SETUP, Context.MODE_PRIVATE)!!)
+
+fun Activity.getVisualPref(): VisualPreference =
+    VisualPreference(this.getSharedPreferences(Preferences.VISUAL, Context.MODE_PRIVATE)!!)
+
+public class ContentPreference(public val pref: SharedPreferences){
+    public fun getRiverBookmarksSorting(): Int = pref.getInt(Preferences.CONTENT_RIVER_BOOKMARKS_SORTING, PreferenceDefaults.CONTENT_RIVER_BOOKMARKS_SORTING)
+    public fun setRiverBookmarksSorting(sort: Int) {
+        var edit = pref.edit()!!
+        edit.putInt(Preferences.CONTENT_RIVER_BOOKMARKS_SORTING, sort)
+        edit.commit()
+    }
+}
+
+public class SetupPreference(public val pref: SharedPreferences){
+    public fun getDownloadDefaultRivers() : Boolean =
+            pref.getBoolean(Preferences.SETUP_DOWNLOAD_DEFAULT_RIVERS, PreferenceDefaults.SETUP_DOWNLOAD_DEFAULT_RIVERS)
+
+    public fun setDownloadDefaultRivers(yes : Boolean){
+        val edit = pref.edit()!!
+        edit.putBoolean(Preferences.SETUP_DOWNLOAD_DEFAULT_RIVERS, yes)
+        edit.commit()
+    }
 }
 
 public class VisualPreference (public val pref: SharedPreferences){
@@ -64,13 +97,6 @@ public class VisualPreference (public val pref: SharedPreferences){
     }
 
     public fun getTheme(): Int = pref.getInt(Preferences.VISUAL_THEME, PreferenceDefaults.VISUAL_THEME)
-
-    public fun getBookmarkSorting(): Int = pref.getInt(Preferences.BOOKMARK_SORTING, PreferenceDefaults.BOOKMARK_SORTING)
-    public fun setBookmarkSorting(sort: Int) {
-        var edit = pref.edit()!!
-        edit.putInt(Preferences.BOOKMARK_SORTING, sort)
-        edit.commit()
-    }
 
     public fun switchTheme() {
         val currentTheme = getTheme()

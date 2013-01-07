@@ -140,7 +140,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
                     }
                 }
                 else {
-                    val latestDate = daysBeforeNow(PreferenceDefaults.BOOKMARK_COLLECTION_LATEST_DATE_FILTER_IN_DAYS)
+                    val latestDate = daysBeforeNow(PreferenceDefaults.CONTENT_BOOKMARK_COLLECTION_LATEST_DATE_FILTER_IN_DAYS)
 
                     val id = extractIdFromLocalUrl(url)
                     if (id != null){
