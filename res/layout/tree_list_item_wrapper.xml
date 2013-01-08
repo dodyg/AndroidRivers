@@ -6,8 +6,9 @@
 		<ImageView android:id="@+id/treeview_list_item_image"
                    android:layout_width="wrap_content"
 			       android:layout_height="wrap_content"
-                   android:layout_gravity="fill_vertical"
-                   android:src="@drawable/treeview_collapsed" >
+                   android:layout_gravity="center_vertical"
+                   android:src="@drawable/treeview_collapsed"
+                    >
 		</ImageView>
 	</LinearLayout>
 	<FrameLayout android:id="@+id/treeview_list_item_frame" android:layout_width="fill_parent"
