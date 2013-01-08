@@ -39,6 +39,12 @@ import android.media.MediaMetadataRetriever
 import com.silverkeytech.android_rivers.db.getPodcastsFromDb
 import com.silverkeytech.android_rivers.db.Podcast
 import com.silverkeytech.android_rivers.db.SortingOrder
+import com.actionbarsherlock.internal.widget.IcsAdapterView.OnItemLongClickListener
+import com.actionbarsherlock.internal.widget.IcsAdapterView
+import android.widget.PopupWindow
+import android.widget.ImageView
+import android.view.Gravity
+import com.silverkeytech.android_rivers.db.removePodcast
 
 public class PodcastManagerActivity : SherlockListActivity()
 {
@@ -102,9 +108,13 @@ public class PodcastManagerActivity : SherlockListActivity()
         }
     }
 
-    fun listPodcasts(){
+    public fun listPodcasts(){
         val podcast = getPodcastsFromDb(SortingOrder.DESC)
         renderFileListing(podcast)
+    }
+
+    public fun refreshPodcasts(){
+        listPodcasts()
     }
 
     //hold the view data for the list
@@ -158,5 +168,56 @@ public class PodcastManagerActivity : SherlockListActivity()
                 startActivity(playIntent)
             }
         })
+
+        list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
+            public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
+                val currentPodcast = podcasts[p2]
+                showPodcastQuickActionPopup(this@PodcastManagerActivity, currentPodcast, p1!!, list)
+                return true
+            }
+        })
     }
 }
+
+
+fun showPodcastQuickActionPopup(context: PodcastManagerActivity, currentPodcast: Podcast, item: View, list: View) {
+    //overlay popup at top of clicked overview position
+    val popupWidth = item.getWidth()
+    val popupHeight = item.getHeight()
+
+    val x = context.getLayoutInflater()!!.inflate(R.layout.main_feed_quick_actions, null, false)!!
+    val pp = PopupWindow(x, popupWidth, popupHeight, true)
+
+    x.setBackgroundColor(android.graphics.Color.LTGRAY)
+
+    x.setOnClickListener {
+        pp.dismiss()
+    }
+
+    val icon = x.findViewById(R.id.main_feed_quick_action_delete_icon) as ImageView
+    icon.setOnClickListener {
+        try{
+
+            var f = File(currentPodcast.localPath)
+
+            if (f.exists())
+                f.delete()
+
+            val res = removePodcast(currentPodcast.id)
+            if (res.isFalse())
+                context.toastee("Error in removing this podcast ${res.exception?.getMessage()}")
+            else {
+                context.toastee("Podcast removed")
+                context.refreshPodcasts()
+            }
+        }
+        catch(e: Exception){
+            context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
+        }
+        pp.dismiss()
+    }
+
+    val itemLocation = getLocationOnScreen(item)
+    pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
+}
+

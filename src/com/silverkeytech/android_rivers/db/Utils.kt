@@ -24,6 +24,10 @@ import com.silverkeytech.android_rivers.outlines.Body
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 
+public fun removePodcast (id : Int): Result<None>{
+    return DatabaseManager.cmd().podcast().deleteById(id)
+}
+
 public fun getPodcastsFromDb(sortByTitle : SortingOrder) : List<Podcast>{
     val podcasts = DatabaseManager.query().podcast().all(sortByTitle)
 

@@ -23,5 +23,16 @@ import com.silverkeytech.android_rivers.Result
 import com.silverkeytech.android_rivers.None
 
 public class PodcastCommand(private val dao: Dao<Podcast, out Int?>){
+    fun deleteById (id: Int): Result<None> {
+        try{
+            var condition = dao.deleteBuilder()!!
+            condition.where()!!.eq(PODCAST_ID, id)
 
+            dao.delete(condition.prepare())
+
+            return Result.right(None())
+        }catch (e: Exception){
+            return Result.wrong<None>(e)
+        }
+    }
 }
