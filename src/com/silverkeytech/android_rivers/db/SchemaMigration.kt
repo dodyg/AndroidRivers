@@ -50,6 +50,7 @@ public class SchemaMigration(val db: SQLiteDatabase){
                         `url` VARCHAR NOT NULL,
                         `source_title` VARCHAR NOT NULL,
                         `source_url` VARCHAR NOT NULL,
+                        `local_path` VARCHAR NOT NULL,
                         `mime_type` VARCHAR NOT NULL,
                         `length` INTEGER NOT NULL DEFAULT 0,
                         `description` VARCHAR NOT NULL,

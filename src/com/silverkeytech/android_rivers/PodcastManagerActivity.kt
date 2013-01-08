@@ -36,6 +36,9 @@ import android.net.Uri
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 import android.media.MediaMetadataRetriever
+import com.silverkeytech.android_rivers.db.getPodcastsFromDb
+import com.silverkeytech.android_rivers.db.Podcast
+import com.silverkeytech.android_rivers.db.SortingOrder
 
 public class PodcastManagerActivity : SherlockListActivity()
 {
@@ -54,7 +57,7 @@ public class PodcastManagerActivity : SherlockListActivity()
         var actionBar = getSupportActionBar()!!
         actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
         actionBar.setTitle("Podcasts")
-        listFile()
+        listPodcasts()
     }
 
 
@@ -99,37 +102,30 @@ public class PodcastManagerActivity : SherlockListActivity()
         }
     }
 
-    fun listFile(){
-        val directory = File(podcastDirectory)
-        var files = directory.listFiles()!!.toList().sort(
-            comparator {(p1: File, p2: File) ->
-                val date1 = p1.lastModified()
-                val date2 = p2.lastModified()
-
-                date1.compareTo(date2) * -1
-            })
-        renderFileListing(files)
+    fun listPodcasts(){
+        val podcast = getPodcastsFromDb(SortingOrder.DESC)
+        renderFileListing(podcast)
     }
 
     //hold the view data for the list
     public data class ViewHolder (var podcastName: TextView)
 
     //show and prepare the interaction for each individual news item
-    fun renderFileListing(files: List<File>) {
+    fun renderFileListing(podcasts: List<Podcast>) {
         val textSize = getVisualPref().getListTextSize()
 
         //now sort it so people always have the latest news first
         var list = findView<ListView>(android.R.id.list)
         var inflater: LayoutInflater = getLayoutInflater()!!
 
-        var adapter = object : ArrayAdapter<File>(this, android.R.layout.simple_list_item_1, android.R.id.text1, files) {
+        var adapter = object : ArrayAdapter<Podcast>(this, android.R.layout.simple_list_item_1, android.R.id.text1, podcasts) {
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 var currentView = convertView
                 var holder: ViewHolder?
 
-                var currentFile = files[position]
+                var currentPodcast = podcasts[position]
 
-                var text = currentFile.name
+                var text = currentPodcast.title
 
                 if (currentView == null){
                     currentView = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
@@ -154,11 +150,11 @@ public class PodcastManagerActivity : SherlockListActivity()
 
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
-                val currentFile = files[p2]
+                val currentPodcast = podcasts[p2]
 
                 var playIntent = Intent()
                 playIntent.setAction(android.content.Intent.ACTION_VIEW);
-                playIntent.setDataAndType(Uri.fromFile(currentFile), "audio/*");
+                playIntent.setDataAndType(Uri.fromFile(File(currentPodcast.localPath)), "audio/*");
                 startActivity(playIntent)
             }
         })

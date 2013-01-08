@@ -29,15 +29,14 @@ public val PODCAST_TITLE: String = "title"
 public val PODCAST_URL: String = "url"
 public val PODCAST_SOURCE_TITLE: String = "source_title"
 public val PODCAST_SOURCE_URL: String = "source_url"
+public val PODCAST_LOCAL_PATH: String = "local_path"
 public val PODCAST_MIME_TYPE: String = "mime_type"
 public val PODCAST_LENGTH: String = "length"
 public val PODCAST_DESCRIPTION: String = "description"
 public val PODCAST_DATE_CREATED: String = "date_created"
 
-
 [DatabaseTable]
 public class Podcast(){
-
     [DatabaseField(generatedId = true, columnName = "id")]
     public var id: Int = 0
 
@@ -53,15 +52,22 @@ public class Podcast(){
     [DatabaseField(canBeNull = false, columnName = "source_url", width = 255, dataType = DataType.STRING)]
     public var sourceUrl: String = ""
 
+    [DatabaseField(canBeNull = false, columnName = "local_path", width = 550, dataType = DataType.LONG_STRING)]
+    public var localPath: String = ""
+
     [DatabaseField(canBeNull = false, columnName = "mime_type", width = 20, dataType = DataType.STRING)]
     public var mimeType: String = ""
 
     [DatabaseField(canBeNull = false, columnName = "length", dataType = DataType.INTEGER)]
-    public var Integer: Int = 0
+    public var length: Int = 0
 
     [DatabaseField(canBeNull = false, columnName = "description", width = 550, dataType = DataType.LONG_STRING)]
     public var description: String = ""
 
     [DatabaseField(canBeNull = false, columnName = "date_created", dataType = DataType.DATE)]
     public var dateCreated: Date = Calendar.getInstance().getTime()
+
+    public fun toString() : String{
+        return title
+    }
 }

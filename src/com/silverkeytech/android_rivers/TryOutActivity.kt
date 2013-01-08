@@ -47,6 +47,7 @@ import com.silverkeytech.android_rivers.outliner.traverse
 import java.util.ArrayList
 import java.util.Random
 import com.silverkeytech.android_rivers.db.SortingOrder
+import com.silverkeytech.android_rivers.db.savePodcastToDb
 
 public class TryOutActivity(): Activity()
 {
@@ -59,6 +60,7 @@ public class TryOutActivity(): Activity()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tryout)
+        handleInsertPodcast()
         handleStartPodcastManager()
         handleBookmarkCollectionCreation()
         handleDownloadAtom()
@@ -73,6 +75,27 @@ public class TryOutActivity(): Activity()
         handleOutliner()
         handleDownloadRecursiveOpml()
         handleRiverJsWithOpmlSource()
+    }
+
+    fun handleInsertPodcast(){
+        val btn = findView<Button>(R.id.tryout_insert_podcast_entry)
+
+        btn.setOnClickListener {
+            val res = savePodcastToDb("New Music From Tom Waits & Keith Richards, Ra Ra Riot, Villagers, More",
+                    "http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510019/168865214/npr_168865214.mp3",
+                    "NPR: All Songs Considered Podcast",
+                    "http://www.npr.org/rss/podcast.php?id=510019",
+                    "/mnt/podcasts/storage.mp3",
+                    "<p>On this edition of All Songs Considered we've got a bunch of new-year premieres for you",
+                    "audio/mpeg",
+                    47647644
+                    )
+
+            if (res.isTrue())
+                toastee("${res.value!!.title} - ${res.value!!.id}")
+            else
+                toastee("Exception ${res.exception?.getMessage()}")
+        }
     }
 
     fun handleStartPodcastManager(){

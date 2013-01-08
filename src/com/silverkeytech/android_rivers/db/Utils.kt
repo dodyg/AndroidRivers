@@ -24,33 +24,40 @@ import com.silverkeytech.android_rivers.outlines.Body
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 
+public fun getPodcastsFromDb(sortByTitle : SortingOrder) : List<Podcast>{
+    val podcasts = DatabaseManager.query().podcast().all(sortByTitle)
 
-fun saveBookmarkToDb(title: String,
-                     url: String,
-                     kind: BookmarkKind,
-                     lang: String,
-                     collection: BookmarkCollection?): Result<None> {
+    if (podcasts.exist)
+        return podcasts.values!!
+    else
+        return arrayListOf<Podcast>()
+}
+
+public fun savePodcastToDb(
+        title : String, url : String, sourceTitle : String, sourceUrl : String, localPath : String,
+        description : String, mimeType : String, length : Int) : Result<Podcast>{
     try{
-        var bk = Bookmark()
-        bk.title = title
-        bk.url = url
-        bk.kind = kind.toString()
-        bk.language = lang
-        bk.collection = collection
+        val p = Podcast()
+        p.title = title
+        p.url = url
+        p.sourceTitle = sourceTitle
+        p.sourceUrl = sourceUrl
+        p.localPath = localPath
+        p.description = description
+        p.mimeType = mimeType
+        p.length = length
 
-        DatabaseManager.bookmark!!.create(bk)
-
-        return Result.right(None())
+        DatabaseManager.podcast!!.create(p)
+        return Result.right(p)
     }
-    catch(e: Exception){
-        return Result.wrong<None>(e)
+    catch(e : Exception){
+        return Result.wrong<Podcast>(null)
     }
 }
 
-
 public fun addNewCollection(title: String, kind: BookmarkCollectionKind): Result<BookmarkCollection> {
     try{
-        var coll = BookmarkCollection()
+        val coll = BookmarkCollection()
         coll.title = title
         coll.kind = kind.toString()
 
@@ -62,13 +69,10 @@ public fun addNewCollection(title: String, kind: BookmarkCollectionKind): Result
     }
 }
 
-fun checkIfUrlAlreadyBookmarked(url: String): Boolean {
-    return DatabaseManager.query().bookmark().byUrl(url).exists
-}
 
 public fun clearBookmarksFromCollection(collectionId: Int): Result<None> {
     try{
-        var bookmarks = getBookmarksFromDbByCollection(collectionId)
+        val bookmarks = getBookmarksFromDbByCollection(collectionId)
         if (bookmarks.count() > 0){
             for(val bk in bookmarks){
                 val b = DatabaseManager.query().bookmark().byUrl(bk.url)
@@ -88,7 +92,7 @@ public fun clearBookmarksFromCollection(collectionId: Int): Result<None> {
 
 public fun removeBookmarkFromCollection(collectionId: Int, bookmarkId: Int): Result<None> {
     try{
-        var bookmarks = getBookmarksFromDbByCollection(collectionId)
+        val bookmarks = getBookmarksFromDbByCollection(collectionId)
         if (bookmarks.count() > 0){
             var bookmark = bookmarks.filter { it.id == bookmarkId }
 
@@ -111,7 +115,7 @@ public fun removeBookmarkFromCollection(collectionId: Int, bookmarkId: Int): Res
 
 
 public fun getBookmarkCollectionFromDb(sortByTitleOrder : SortingOrder): List<BookmarkCollection> {
-    var coll = DatabaseManager.query().bookmarkCollection().all(sortByTitleOrder)
+    val coll = DatabaseManager.query().bookmarkCollection().all(sortByTitleOrder)
 
     if (coll.exist)
         return coll.values!!
@@ -120,7 +124,7 @@ public fun getBookmarkCollectionFromDb(sortByTitleOrder : SortingOrder): List<Bo
 }
 
 public fun getBookmarksFromDbByCollection(collectionId: Int): List<Bookmark> {
-    var bookmarks = DatabaseManager.query().bookmark().byCollectionId(collectionId)
+    val bookmarks = DatabaseManager.query().bookmark().byCollectionId(collectionId)
 
     if (bookmarks.exist)
         return bookmarks.values!!
@@ -135,8 +139,34 @@ public fun getBookmarksUrlsFromDbByCollection(collectionId : Int): Array<String?
     return urls
 }
 
+public fun checkIfUrlAlreadyBookmarked(url: String): Boolean {
+    return DatabaseManager.query().bookmark().byUrl(url).exists
+}
+
+public fun saveBookmarkToDb(title: String,
+                            url: String,
+                            kind: BookmarkKind,
+                            lang: String,
+                            collection: BookmarkCollection?): Result<None> {
+    try{
+        val bk = Bookmark()
+        bk.title = title
+        bk.url = url
+        bk.kind = kind.toString()
+        bk.language = lang
+        bk.collection = collection
+
+        DatabaseManager.bookmark!!.create(bk)
+
+        return Result.right(None())
+    }
+    catch(e: Exception){
+        return Result.wrong<None>(e)
+    }
+}
+
 public fun getBookmarksFromDb(kind: BookmarkKind, sortByTitleOrder: SortingOrder): List<Bookmark> {
-    var bookmarks = DatabaseManager.query().bookmark().byKind(kind, sortByTitleOrder)
+    val bookmarks = DatabaseManager.query().bookmark().byKind(kind, sortByTitleOrder)
 
     if (bookmarks.exist)
         return bookmarks.values!!
@@ -146,7 +176,7 @@ public fun getBookmarksFromDb(kind: BookmarkKind, sortByTitleOrder: SortingOrder
 
 //get bookmarks from db and return the data in opml format
 public fun getBookmarksFromDbAsOpml(kind: BookmarkKind, sortByTitleOrder : SortingOrder): Opml {
-    var opml = Opml()
+    val opml = Opml()
     opml.body = Body()
 
     var bookmarks = DatabaseManager.query().bookmark().byKind(kind, sortByTitleOrder)
