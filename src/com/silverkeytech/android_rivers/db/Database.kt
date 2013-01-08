@@ -28,12 +28,12 @@ import com.j256.ormlite.support.ConnectionSource
 public class Database (context: Context): OrmLiteSqliteOpenHelper(context, Database.DATABASE_NAME, null, Database.DATABASE_VERSION) {
     class object {
         val TAG: String = javaClass<Database>().getSimpleName()
-        public val DATABASE_VERSION: Int = 2
+        public val DATABASE_VERSION: Int = 3
         public val DATABASE_NAME: String = "AndroidRivers.sqlite"
     }
 
     public override fun onCreate(p0: SQLiteDatabase?, p1: ConnectionSource?) {
-        SchemaCreation(p0!!).create(2)
+        SchemaCreation(p0!!).create(3)
     }
 
     public override fun onUpgrade(p0: SQLiteDatabase?, p1: ConnectionSource?, p2: Int, p3: Int) {

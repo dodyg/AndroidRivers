@@ -31,8 +31,54 @@ public class SchemaCreation(val db: SQLiteDatabase){
         when(version){
             1 -> create1()
             2 -> create2()
+            3 -> create3()
             else -> {
             }
+        }
+    }
+
+    private fun create3() : Boolean {
+        create1()
+        create2()
+        try{
+            Log.d(TAG, "OnUpgrade(1): Create collection Table")
+            db.execSQL("""
+                          CREATE TABLE `podcast`
+                          (
+                            `title` VARCHAR NOT NULL,
+                            `url` VARCHAR NOT NULL,
+                            `source_title` VARCHAR NOT NULL,
+                            `source_url` VARCHAR NOT NULL,
+                            `mime_type` VARCHAR NOT NULL,
+                            `length` INTEGER NOT NULL DEFAULT 0,
+                            `description` VARCHAR NOT NULL,
+                            `date_created` DATETIME NOT NULL DEFAULT current_timestamp,
+                            `id` INTEGER PRIMARY KEY AUTOINCREMENT
+                          )
+                        """)
+            return true
+        }catch (e: SQLException){
+            Log.d(TAG, "OnCreate(3) ${e.getMessage()}")
+            return false
+        }
+    }
+
+    private fun create2() : Boolean {
+        create1()
+        try{
+            Log.d(TAG, "OnUpgrade(1): Create collection Table")
+            db.execSQL("""
+                          CREATE TABLE `bookmark_collection`
+                          (
+                            `title` VARCHAR NOT NULL ,
+                            `kind` VARCHAR NOT NULL ,
+                            `id` INTEGER PRIMARY KEY AUTOINCREMENT
+                          )
+                        """)
+            return true
+        }catch (e: SQLException){
+            Log.d(TAG, "OnCreate(2) ${e.getMessage()}")
+            return false
         }
     }
 
@@ -64,22 +110,4 @@ public class SchemaCreation(val db: SQLiteDatabase){
         }
     }
 
-    private fun create2() : Boolean {
-        create1()
-        try{
-            Log.d(TAG, "OnUpgrade(1): Create collection Table")
-            db.execSQL("""
-                          CREATE TABLE `bookmark_collection`
-                          (
-                            `title` VARCHAR NOT NULL ,
-                            `kind` VARCHAR NOT NULL ,
-                            `id` INTEGER PRIMARY KEY AUTOINCREMENT
-                          )
-                        """)
-            return true
-        }catch (e: SQLException){
-            Log.d(TAG, "OnCreate(2) ${e.getMessage()}")
-            return false
-        }
-    }
 }

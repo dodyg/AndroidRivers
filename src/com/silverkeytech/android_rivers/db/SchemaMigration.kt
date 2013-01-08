@@ -30,9 +30,37 @@ public class SchemaMigration(val db: SQLiteDatabase){
     public fun migrate(version: Int): Boolean {
         return when(version){
             1 -> migrate1()
+            2 -> {
+                migrate1()
+                migrate2()
+            }
             else -> {
                 false
             }
+        }
+    }
+
+    private fun migrate2(): Boolean {
+        try{
+            Log.d(TAG, "OnUpgrade(2): Create podcast Table")
+            db.execSQL("""
+                      CREATE TABLE `podcast`
+                      (
+                        `title` VARCHAR NOT NULL,
+                        `url` VARCHAR NOT NULL,
+                        `source_title` VARCHAR NOT NULL,
+                        `source_url` VARCHAR NOT NULL,
+                        `mime_type` VARCHAR NOT NULL,
+                        `length` INTEGER NOT NULL DEFAULT 0,
+                        `description` VARCHAR NOT NULL,
+                        `date_created` DATETIME NOT NULL DEFAULT current_timestamp,
+                        `id` INTEGER PRIMARY KEY AUTOINCREMENT
+                      )
+                        """)
+            return true
+        }catch (e: SQLException){
+            Log.d(TAG, "Exception on Upgrade(2) ${e.getMessage()}")
+            return false
         }
     }
 
