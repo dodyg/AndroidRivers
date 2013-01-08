@@ -43,8 +43,10 @@ public class DownloadService(): IntentService("DownloadService"){
         public val TAG: String = javaClass<DownloadService>().getSimpleName()
     }
 
-    var targetUrl: String? = null
     var targetTitle: String? = null
+    var targetUrl: String? = null
+    var targetSourceTitle: String? = null
+    var targetSourceUrl: String? = null
 
     fun prepareNotification(title: String, filePath: String): Notification {
         var notificationIntent = Intent(Intent.ACTION_MAIN)
@@ -71,8 +73,10 @@ public class DownloadService(): IntentService("DownloadService"){
     }
 
     protected override fun onHandleIntent(p0: Intent?) {
-        targetUrl = p0?.getStringExtra(Params.DOWNLOAD_URL)
         targetTitle = p0?.getStringExtra(Params.DOWNLOAD_TITLE)
+        targetUrl = p0?.getStringExtra(Params.DOWNLOAD_URL)
+        targetSourceTitle = p0?.getStringExtra(Params.DOWNLOAD_SOURCE_TITLE)
+        targetSourceUrl = p0?.getStringExtra(Params.DOWNLOAD_SOURCE_URL)
 
         Log.d(TAG, "onHandleIntent with ${targetUrl}")
 
@@ -140,8 +144,8 @@ public class DownloadService(): IntentService("DownloadService"){
 
                 val res = savePodcastToDb(targetTitle!!,
                         targetUrl!!,
-                        "NPR: All Songs Considered Podcast",
-                        "http://www.npr.org/rss/podcast.php?id=510019",
+                        targetSourceTitle!!,
+                        targetSourceUrl!!,
                         filename,
                         "<p>On this edition of All Songs Considered we've got a bunch of new-year premieres for you",
                         contentType,

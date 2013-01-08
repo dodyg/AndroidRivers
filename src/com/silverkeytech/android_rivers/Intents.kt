@@ -4,6 +4,18 @@ import android.content.Context
 import android.content.Intent
 import com.silverkeytech.android_rivers.outliner.OutlineContent
 import java.util.ArrayList
+import android.os.Messenger
+
+public fun startDownloadService(context : Context, title : String, url : String, sourceTitle : String, sourceUrl : String, description : String, messenger : Messenger){
+    var i = Intent(context, javaClass<DownloadService>())
+    i.putExtra(Params.DOWNLOAD_TITLE, title)
+    i.putExtra(Params.DOWNLOAD_URL, url)
+    i.putExtra(Params.DOWNLOAD_SOURCE_TITLE, sourceTitle)
+    i.putExtra(Params.DOWNLOAD_SOURCE_URL, sourceUrl)
+    i.putExtra(Params.DOWNLOAD_DESCRIPTION, description)
+    i.putExtra(Params.MESSENGER, messenger)
+    context.startService(i)
+}
 
 public fun startPodcastActivity(context : Context, downloadLocationPath : String? = null){
     val i = Intent(context, javaClass<PodcastManagerActivity>())
@@ -13,7 +25,7 @@ public fun startPodcastActivity(context : Context, downloadLocationPath : String
     context.startActivity(i)
 }
 
-public fun startFeedActivityIntent(context: Context, url: String, text: String, lang: String) {
+public fun startFeedActivity(context: Context, url: String, text: String, lang: String) {
     val i = Intent(context, javaClass<FeedActivity>())
     i.putExtra(Params.FEED_URL, url)
     i.putExtra(Params.FEED_NAME, text)
@@ -40,7 +52,7 @@ public fun startDownloadAllRiverService(context: Context, titleList: ArrayList<S
     context.startService(i)
 }
 
-public fun startCollectionActivityIntent(context: Context, id: Int, title: String) {
+public fun startCollectionActivity(context: Context, id: Int, title: String) {
     val i = Intent(context, javaClass<BookmarkCollectionActivity>())
     i.putExtra(Params.COLLECTION_ID, id)
     i.putExtra(Params.COLLECTION_TITLE, title)

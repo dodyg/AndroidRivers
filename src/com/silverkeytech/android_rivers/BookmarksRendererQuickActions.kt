@@ -86,7 +86,7 @@ fun showCollectionQuickActionPopup(context: MainActivity, collection: BookmarkCo
     val edit = x.findViewById(R.id.main_collection_quick_action_edit_icon) as ImageView
     edit.setOnClickListener{
         pp.dismiss()
-        startCollectionActivityIntent(context, collection.id, collection.title)
+        startCollectionActivity(context, collection.id, collection.title)
     }
 
     val itemLocation = getLocationOnScreen(item)

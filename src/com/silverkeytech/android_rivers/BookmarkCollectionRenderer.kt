@@ -54,7 +54,7 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val bookmark = bookmarks.get(p2)
                 Log.d(TAG, "Downloading feed ${bookmark.title} - ${bookmark.url}")
-                startFeedActivityIntent(context, bookmark.url, bookmark.title, bookmark.language)
+                startFeedActivity(context, bookmark.url, bookmark.title, bookmark.language)
             }
         })
 

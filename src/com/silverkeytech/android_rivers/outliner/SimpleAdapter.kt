@@ -33,7 +33,7 @@ import com.silverkeytech.android_rivers.Duration
 import com.silverkeytech.android_rivers.OutlinerActivity
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.getMain
-import com.silverkeytech.android_rivers.startFeedActivityIntent
+import com.silverkeytech.android_rivers.startFeedActivity
 import com.silverkeytech.android_rivers.startOutlinerActivity
 import com.silverkeytech.android_rivers.startRiverActivity
 import com.silverkeytech.android_rivers.toastee
@@ -124,7 +124,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         var text = currentOutline.text
         var lang = currentOutline.getAttribute("language")!!
 
-        startFeedActivityIntent(context, url, text, lang)
+        startFeedActivity(context, url, text, lang)
     }
 
     fun handleOpmlZoom(currentOutline: OutlineContent, currentPosition: Int): Boolean {

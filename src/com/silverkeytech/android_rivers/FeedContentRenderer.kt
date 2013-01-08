@@ -58,7 +58,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
     public data class ViewHolder (var news: TextView, val indicator: TextView)
 
     //show and prepare the interaction for each individual news item
-    fun handleNewsListing(feedItems: List<SyndicationFeedItem>) {
+    fun handleNewsListing(feedTitle : String, feedUrl : String, feedItems: List<SyndicationFeedItem>) {
         val textSize = context.getVisualPref().getListTextSize()
 
         //now sort it so people always have the latest news first
@@ -156,11 +156,9 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                                 }
                             })
 
-                            var intent = Intent(context, javaClass<DownloadService>())
-                            intent.putExtra(Params.DOWNLOAD_URL, currentNews.enclosure!!.url)
-                            intent.putExtra(Params.DOWNLOAD_TITLE, currentNews.title)
-                            intent.putExtra(Params.MESSENGER, messenger)
-                            context.startService(intent)
+                            startDownloadService(context, currentNews.title!!, currentNews.enclosure!!.url,
+                                    feedTitle, feedUrl, currentNews.description!!,
+                                    messenger)
                         }
                     })
                 }

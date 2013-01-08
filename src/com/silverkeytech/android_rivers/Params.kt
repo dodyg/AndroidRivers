@@ -35,6 +35,9 @@ public class Params(){
 
         val DOWNLOAD_URL: String = "downloadUrl"
         val DOWNLOAD_TITLE: String = "downloadTitle"
+        val DOWNLOAD_SOURCE_TITLE: String = "downloadSourceTitle"
+        val DOWNLOAD_SOURCE_URL: String = "downloadSourceUrl"
+        val DOWNLOAD_DESCRIPTION: String = "downloadDescription"
         val DOWNLOAD_LOCATION_PATH: String = "downloadLocationPath"
 
         val RIVERS_DOWNLOAD_PARCEL: String = "RIVERS_DOWNLOAD_PARCEL"

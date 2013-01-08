@@ -206,11 +206,10 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                                     }
                                 })
 
-                                var intent = Intent(context, javaClass<DownloadService>())
-                                intent.putExtra(Params.DOWNLOAD_URL, enclosure.url)
-                                intent.putExtra(Params.DOWNLOAD_TITLE, currentNews.item.title)
-                                intent.putExtra(Params.MESSENGER, messenger)
-                                context.startService(intent)
+                                startDownloadService(context, currentNews.item.title!!, enclosure.url!!,
+                                        currentNews.feedSourceTitle!!, currentNews.feedSourceUri!!, currentNews.item.body!!,
+                                        messenger)
+
                             }
                         })
                     }

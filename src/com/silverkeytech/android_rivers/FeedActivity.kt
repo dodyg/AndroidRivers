@@ -75,7 +75,7 @@ public class FeedActivity(): SherlockListActivity(), WithVisualModificationPanel
                 feedDateIsParseable = feed.isDateParseable
                 Log.d(TAG, "$feedUrl is parseable = $feedDateIsParseable")
                 FeedContentRenderer(this, feedLanguage)
-                        .handleNewsListing(feed.items)
+                        .handleNewsListing(feedName, feedUrl, feed.items)
             }else{
                 toastee("Error ${res.exception?.getMessage()}", Duration.LONG)
             }
