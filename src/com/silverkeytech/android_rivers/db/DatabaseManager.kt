@@ -39,18 +39,27 @@ public object DatabaseManager{
     public var bookmarkCollection: Dao<BookmarkCollection, out Int?>? = null
         get() = getDb().getBookmarkCollectionDao() as Dao<BookmarkCollection, out Int?>
 
-    public fun query(): Query = Query(bookmark, bookmarkCollection)
-    public fun cmd(): Command = Command(bookmark, bookmarkCollection)
+    public var podcast: Dao<Podcast, out Int?>? = null
+        get() = getDb().getPodcastDao() as Dao<Podcast, out Int?>
+
+    public fun query(): Query = Query(bookmark, bookmarkCollection, podcast)
+    public fun cmd(): Command = Command(bookmark, bookmarkCollection, podcast)
 }
 
 public class Query (private val bookmark: Dao<Bookmark, out Int?>?,
-                    private val bookmarkCollection: Dao<BookmarkCollection, out Int?>?){
+                    private val bookmarkCollection: Dao<BookmarkCollection, out Int?>?,
+                    private val podcast: Dao<Podcast, out Int?>?
+                    ){
     public fun bookmark(): BookmarkQuery = BookmarkQuery(bookmark!!)
     public fun bookmarkCollection(): BookmarkCollectionQuery = BookmarkCollectionQuery(bookmarkCollection!!)
+    public fun podcast(): PodcastQuery = PodcastQuery(podcast!!)
 }
 
 public class Command(private val bookmark: Dao<Bookmark, out Int?>?,
-                     private val bookmarkCollection: Dao<BookmarkCollection, out Int?>?){
+                     private val bookmarkCollection: Dao<BookmarkCollection, out Int?>?,
+                     private val podcast: Dao<Podcast, out Int?>?
+                     ){
     public fun bookmark(): BookmarkCommand = BookmarkCommand(bookmark!!)
     public fun bookmarkCollection(): BookmarkCollectionCommand = BookmarkCollectionCommand(bookmarkCollection!!)
+    public fun podcast(): PodcastCommand = PodcastCommand(podcast!!)
 }

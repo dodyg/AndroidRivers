@@ -70,4 +70,12 @@ public class Database (context: Context): OrmLiteSqliteOpenHelper(context, Datab
         }
         return bookmarkCollectionDao!!
     }
+
+    var podcastDao: Dao<Podcast, out Int?>? = null
+    public fun getPodcastDao(): Any{
+        if (podcastDao == null){
+            podcastDao = super<OrmLiteSqliteOpenHelper>.getDao(javaClass<Podcast>())
+        }
+        return podcastDao!!
+    }
 }
