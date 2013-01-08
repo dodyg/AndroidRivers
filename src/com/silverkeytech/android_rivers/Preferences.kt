@@ -75,7 +75,7 @@ public class ContentPreference(public val pref: SharedPreferences){
 }
 
 public class SetupPreference(public val pref: SharedPreferences){
-    public fun getDownloadDefaultRivers() : Boolean =
+    public fun getDownloadDefaultRiversIfNecessary() : Boolean =
             pref.getBoolean(Preferences.SETUP_DOWNLOAD_DEFAULT_RIVERS, PreferenceDefaults.SETUP_DOWNLOAD_DEFAULT_RIVERS)
 
     public fun setDownloadDefaultRivers(yes : Boolean){

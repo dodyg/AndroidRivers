@@ -85,8 +85,11 @@ public open class MainActivity(): SherlockActivity() {
                     toastee("Sorry, I cannot play the file $locationPath. Please click Refresh on the menu option to download the news list again.", Duration.LONG)
                 }
             }
-            else
-                displayRiverBookmarks(true)
+            else {
+                val downloadIf = getSetupPref().getDownloadDefaultRiversIfNecessary()
+                Log.d(TAG, "Preference for download default rivers is $downloadIf")
+                displayRiverBookmarks(downloadIf)
+            }
         }
     }
 
@@ -375,6 +378,7 @@ public open class MainActivity(): SherlockActivity() {
                     if (res2.isTrue()){
                         BookmarksRenderer(this@MainActivity).handleRiversListing(res2.value!!)
                         Log.d(TAG, "Bookmark data from the Internet is successfully saved")
+                        getSetupPref().setDownloadDefaultRivers(false)//we only download standard rivers from the internet by default when at setup the first time
                     }
                     else{
                         Log.d(TAG, "Saving opml bookmark to db fails ${res2.exception?.getMessage()}")
