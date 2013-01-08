@@ -22,5 +22,19 @@ import com.j256.ormlite.dao.Dao
 import com.silverkeytech.android_rivers.db.SortingOrder
 
 public class PodcastQuery(private val dao: Dao<Podcast, out Int?>){
+    fun all(sortByDateCreated: SortingOrder): QueryMany<Podcast> {
+        try{
+            var q = dao.queryBuilder()!!
 
+            if (sortByDateCreated == SortingOrder.ASC)
+                q.orderBy(PODCAST_DATE_CREATED, true)
+            else
+                q.orderBy(PODCAST_DATE_CREATED, false)
+
+            return QueryMany(dao.query(q.prepare()))
+        }
+        catch(e: Exception){
+            return QueryMany<Podcast>(null, e)
+        }
+    }
 }
