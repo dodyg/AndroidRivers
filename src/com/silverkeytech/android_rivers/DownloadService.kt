@@ -36,6 +36,7 @@ import java.io.BufferedInputStream
 import java.io.FileOutputStream
 import java.net.URL
 import java.util.Random
+import com.silverkeytech.android_rivers.db.savePodcastToDb
 
 public class DownloadService(): IntentService("DownloadService"){
     class object{
@@ -90,7 +91,8 @@ public class DownloadService(): IntentService("DownloadService"){
             var connection = url.openConnection()!!
             connection.connect()
 
-            var fileLength: Int = connection.getContentLength()
+            val fileLength: Int = connection.getContentLength()
+            val contentType = connection.getContentType()!!
 
             Log.d(TAG, "File length $fileLength")
 
@@ -135,10 +137,28 @@ public class DownloadService(): IntentService("DownloadService"){
                     count = input!!.read(data)
                 }
 
-                notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "File successfully download to $filename")
-                notificationManager.notify(notificationId, notification)
 
-                result = Activity.RESULT_OK
+                val res = savePodcastToDb(targetTitle!!,
+                        targetUrl!!,
+                        "NPR: All Songs Considered Podcast",
+                        "http://www.npr.org/rss/podcast.php?id=510019",
+                        filename,
+                        "<p>On this edition of All Songs Considered we've got a bunch of new-year premieres for you",
+                        contentType,
+                        fileLength
+                )
+
+                if (res.isFalse()){
+                    notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "File download fails to save to db")
+                    notificationManager.notify(notificationId, notification)
+                    result = Activity.RESULT_CANCELED
+                }
+                else{
+                    notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "File successfully download to $filename")
+                    notificationManager.notify(notificationId, notification)
+                    result = Activity.RESULT_OK
+                }
+
             }catch (e : java.io.FileNotFoundException){
                 notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "Download fails due to ${e.getMessage()}")
                 notificationManager.notify(notificationId, notification)

@@ -8,6 +8,12 @@
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:text="Insert Podcast entry"
+            android:id="@+id/tryout_insert_podcast_entry"/>
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:text="Start podcast manager"
             android:id="@+id/tryout_start_podcast_manager"/>
 
