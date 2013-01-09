@@ -62,7 +62,7 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
 
         var req: String?
         try{
-            req = HttpRequest.get(url)?.body()
+            req = httpGet(url).body()
         }
         catch(e: HttpRequestException){
             val ex = e.getCause()

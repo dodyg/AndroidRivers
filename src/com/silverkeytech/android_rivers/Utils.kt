@@ -35,6 +35,7 @@ import android.util.TypedValue
 import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 import java.util.Date
 import java.util.Calendar
+import com.github.kevinsawicki.http.HttpRequest
 
 public fun Activity.getStandardDialogBackgroundColor(): Int {
     val theme = this.getVisualPref().getTheme()
@@ -154,5 +155,7 @@ fun futureTimeFromNowInMilies(seconds: Int): Long {
     return System.currentTimeMillis() + (seconds.toLong() * 1000.toLong())
 }
 
-
+fun httpGet(url : String) : HttpRequest{
+    return HttpRequest.get(url)!!.acceptGzipEncoding()!!.uncompress(true)!!
+}
 

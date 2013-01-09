@@ -9,6 +9,7 @@ import com.silverkeytech.android_rivers.outliner.transformXmlToRss
 import com.silverkeytech.android_rivers.syndications.SyndicationFeed
 import com.silverkeytech.android_rivers.syndications.atom.Feed
 import com.silverkeytech.android_rivers.syndications.rss.Rss
+import com.silverkeytech.android_rivers.httpGet
 
 fun downloadSingleFeed(url: String, filter : SyndicationFilter? = null): Result<SyndicationFeed> {
     val TAG = "downloadFeed"
@@ -16,7 +17,7 @@ fun downloadSingleFeed(url: String, filter : SyndicationFilter? = null): Result<
         var downloadedContent: String?
         var mimeType: String?
         try{
-            val request = HttpRequest.get(url)
+            val request = httpGet(url)
             mimeType = request?.contentType()
 
             downloadedContent = request?.body()

@@ -64,7 +64,7 @@ public class DownloadBookmarks(it: Context?, ignoreCache: Boolean): AsyncTask<St
 
                 var req: String?
                 try{
-                    req = HttpRequest.get(url[0])?.body()
+                    req = httpGet(url[0]!!).body()
                 }
                 catch(e: HttpRequestException){
                     var ex = e.getCause()

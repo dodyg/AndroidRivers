@@ -108,7 +108,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
 
                 if (!isLocalUrl(url)){
                     try{
-                        req = HttpRequest.get(url)?.body()
+                        req = httpGet(url).body()
                         successful = true
                     }
                     catch(e: HttpRequestException){
