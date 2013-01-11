@@ -196,25 +196,31 @@ fun showPodcastQuickActionPopup(context: PodcastManagerActivity, currentPodcast:
 
     val icon = x.findViewById(R.id.main_feed_quick_action_delete_icon) as ImageView
     icon.setOnClickListener {
-        try{
+        val dlg = createConfirmationDialog(context = context, message = "Are you sure about removing this River bookmark?", positive = {
+            try{
 
-            var f = File(currentPodcast.localPath)
+                var f = File(currentPodcast.localPath)
 
-            if (f.exists())
-                f.delete()
+                if (f.exists())
+                    f.delete()
 
-            val res = removePodcast(currentPodcast.id)
-            if (res.isFalse())
-                context.toastee("Error in removing this podcast ${res.exception?.getMessage()}")
-            else {
-                context.toastee("Podcast removed")
-                context.refreshPodcasts()
+                val res = removePodcast(currentPodcast.id)
+                if (res.isFalse())
+                    context.toastee("Error in removing this podcast ${res.exception?.getMessage()}")
+                else {
+                    context.toastee("Podcast removed")
+                    context.refreshPodcasts()
+                }
             }
-        }
-        catch(e: Exception){
-            context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
-        }
-        pp.dismiss()
+            catch(e: Exception){
+                context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
+            }
+            pp.dismiss()
+        }, negative = {
+            pp.dismiss()
+        })
+
+        dlg.show()
     }
 
     val itemLocation = getLocationOnScreen(item)

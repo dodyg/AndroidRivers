@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="add_new_collection">Add collection</string>
     <string name="app_name">Android Rivers</string>
+    <string name="confirmation_dialog_title">Confirmation</string>
+    <string name="download_all">Download all</string>
     <string name="please_wait_while_loading">Please wait while loading</string>
     <string name="please_wait_while_downloading_news_rivers_list">Please wait while downloading news rivers list</string>
     <string name="refresh">Refresh</string>
-    <string name="title_subscription_menu">Subscriptions</string>
+    <string name="sort_asc">Sort &#x25B2;</string>
+    <string name="sort_desc">Sort &#x25BC;</string>
+    <string name="sort_cancel">Do not sort</string>
 </resources>

@@ -54,8 +54,8 @@ public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String,
                 Log.d(TAG, "Cache is hit for feed")
                 return Result.right(cache)
             } else {
-                val latestDate = daysBeforeNow(3)
-                val res = downloadSingleFeed(url, SyndicationFilter(20, latestDate))
+                val latestDate = daysBeforeNow(PreferenceDefaults.RSS_LATEST_DATE_FILTER_IN_DAYS)
+                val res = downloadSingleFeed(url, SyndicationFilter(PreferenceDefaults.RSS_MAX_ITEMS_FILTER, latestDate))
 
                 if (res.isTrue()){
                     context.getApplication().getMain().setSyndicationCache(url, res.value!!)

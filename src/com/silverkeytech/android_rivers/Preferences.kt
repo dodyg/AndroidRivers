@@ -47,7 +47,11 @@ public class PreferenceValue{
 public class PreferenceDefaults{
     class object {
         public val CONTENT_RIVER_BOOKMARKS_SORTING: Int = PreferenceValue.SORT_NONE
-        public val CONTENT_BOOKMARK_COLLECTION_LATEST_DATE_FILTER_IN_DAYS: Int = 1
+        public val CONTENT_BOOKMARK_COLLECTION_LATEST_DATE_FILTER_IN_DAYS: Int = 30
+        public val CONTENT_BOOKMARK_COLLECTION_MAX_ITEMS_FILTER: Int = 20
+
+        public val RSS_LATEST_DATE_FILTER_IN_DAYS: Int = 30
+        public val RSS_MAX_ITEMS_FILTER:Int = 20
 
         public val SETUP_DOWNLOAD_DEFAULT_RIVERS : Boolean = true
 

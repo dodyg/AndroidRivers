@@ -19,16 +19,8 @@
 #   public *;
 #}
 
-
--dontpreverify
--repackageclasses ''
--allowaccessmodification
--optimizations !code/simplification/arithmetic
--keepattributes *Annotation*
-
-
--keep public class * extends com.actionbarsherlock.app.SherlockListActivity
--keep public class * extends com.actionbarsherlock.app.SherlockActivity
--keep public class javax.xml.stream.Location
--keep public class javax.xml.stream.events.Attribute
-
+-dontwarn kotlin.**
+-dontwarn com.silverkeytech.android_rivers.**
+-dontwarn org.w3c.dom.events.*
+-dontwarn javax.xml.stream.*
+-dontwarn javax.xml.stream.events.*

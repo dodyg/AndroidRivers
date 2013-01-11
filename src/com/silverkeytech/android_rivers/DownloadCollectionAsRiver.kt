@@ -36,7 +36,7 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
 
         var list = arrayListOf<RiverItemMeta>()
         for(val url in p0){
-            val res = downloadSingleFeed(url!!, SyndicationFilter(20, latestDate))
+            val res = downloadSingleFeed(url!!, SyndicationFilter(PreferenceDefaults.CONTENT_BOOKMARK_COLLECTION_MAX_ITEMS_FILTER, latestDate))
 
             if (res.isFalse())
                 Log.d(TAG, "Value at ${res.exception?.getMessage()}")

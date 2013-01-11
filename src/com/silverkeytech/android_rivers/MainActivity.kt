@@ -199,6 +199,7 @@ public open class MainActivity(): SherlockActivity() {
         menu?.add(0, EXPLORE, 0, "MORE NEWS")
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
+
         return true
     }
 

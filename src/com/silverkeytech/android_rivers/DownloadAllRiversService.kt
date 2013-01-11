@@ -150,7 +150,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
 
                         var list = arrayListOf<RiverItemMeta>()
                         for(val u in urls){
-                            val res = downloadSingleFeed(u!!, SyndicationFilter(20, latestDate))
+                            val res = downloadSingleFeed(u!!, SyndicationFilter(PreferenceDefaults.CONTENT_BOOKMARK_COLLECTION_MAX_ITEMS_FILTER, latestDate))
 
                             if (res.isFalse())
                                 Log.d(TAG, "Value at ${res.exception?.getMessage()}")

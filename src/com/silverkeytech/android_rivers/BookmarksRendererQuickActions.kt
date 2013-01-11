@@ -57,30 +57,36 @@ fun showCollectionQuickActionPopup(context: MainActivity, collection: BookmarkCo
 
     val delete = x.findViewById(R.id.main_collection_quick_action_delete_icon) as ImageView
     delete.setOnClickListener {
-        try{
-            Log.d("showCollectionQuickActionPopup", "Start clearing bookmarks from collection ${collection.id}")
-            clearBookmarksFromCollection(collection.id)
-            Log.d("showCollectionQuickActionPopup", "Start deleting collection ${collection.id}")
+        val dlg = createConfirmationDialog(context = context, message = "Are you sure about deleting this collection?", positive = {
+            try{
+                Log.d("showCollectionQuickActionPopup", "Start clearing bookmarks from collection ${collection.id}")
+                clearBookmarksFromCollection(collection.id)
+                Log.d("showCollectionQuickActionPopup", "Start deleting collection ${collection.id}")
 
-            val res = DatabaseManager.cmd().bookmarkCollection().deleteById(collection.id)
-            if (res.isFalse())
-                context.toastee("Error in removing this bookmark collection ${res.exception?.getMessage()}")
-            else {
-                //assume that this collection is bookmarked. So remove the id from the bookmark
-                //and refresh the cache so when user view the rivers bookmark view, it is already removed
-                //This operation doesn't fail even if the collection was never added to the RIVER bookmark
-                val url = makeLocalUrl(collection.id)
-                removeItemByUrlFromBookmarkDb(url)
-                context.getApplication().getMain().clearRiverBookmarksCache()
+                val res = DatabaseManager.cmd().bookmarkCollection().deleteById(collection.id)
+                if (res.isFalse())
+                    context.toastee("Error in removing this bookmark collection ${res.exception?.getMessage()}")
+                else {
+                    //assume that this collection is bookmarked. So remove the id from the bookmark
+                    //and refresh the cache so when user view the rivers bookmark view, it is already removed
+                    //This operation doesn't fail even if the collection was never added to the RIVER bookmark
+                    val url = makeLocalUrl(collection.id)
+                    removeItemByUrlFromBookmarkDb(url)
+                    context.getApplication().getMain().clearRiverBookmarksCache()
 
-                context.toastee("Bookmark collection removed")
-                context.refreshBookmarkCollection()
+                    context.toastee("Bookmark collection removed")
+                    context.refreshBookmarkCollection()
+                }
             }
-        }
-        catch(e: Exception){
-            context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
-        }
-        pp.dismiss()
+            catch(e: Exception){
+                context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
+            }
+            pp.dismiss()
+        }, negative = {
+            pp.dismiss()
+        })
+
+        dlg.show()
     }
 
     val edit = x.findViewById(R.id.main_collection_quick_action_edit_icon) as ImageView
@@ -109,19 +115,25 @@ fun showRssBookmarkQuickActionPopup(context: MainActivity, currentBookmark: Book
 
     val icon = x.findViewById(R.id.main_feed_quick_action_delete_icon) as ImageView
     icon.setOnClickListener {
-        try{
-            val res = removeItemByUrlFromBookmarkDb(currentBookmark.url)
-            if (res.isFalse())
-                context.toastee("Error in removing this bookmark ${res.exception?.getMessage()}")
-            else {
-                context.toastee("Bookmark removed")
-                context.refreshRssBookmarks()
+        val dlg = createConfirmationDialog(context = context, message = "Are you sure about removing this RSS bookmark?", positive = {
+            try{
+                val res = removeItemByUrlFromBookmarkDb(currentBookmark.url)
+                if (res.isFalse())
+                    context.toastee("Error in removing this bookmark ${res.exception?.getMessage()}")
+                else {
+                    context.toastee("Bookmark removed")
+                    context.refreshRssBookmarks()
+                }
             }
-        }
-        catch(e: Exception){
-            context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
-        }
-        pp.dismiss()
+            catch(e: Exception){
+                context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
+            }
+            pp.dismiss()
+        }, negative = {
+            pp.dismiss()
+        })
+
+        dlg.show()
     }
 
     val itemLocation = getLocationOnScreen(item)
@@ -144,19 +156,25 @@ fun showRiverBookmarksQuickActionPopup(context: MainActivity, currentOutline: Ou
 
     val icon = x.findViewById(R.id.main_river_quick_action_delete_icon) as ImageView
     icon.setOnClickListener {
-        try{
-            val res = DatabaseManager.cmd().bookmark().deleteByUrl(currentOutline.url!!)
-            if (res.isFalse())
-                context.toastee("Error in removing this bookmark ${res.exception?.getMessage()}")
-            else {
-                context.toastee("Bookmark removed")
-                context.refreshRiverBookmarks(false)
+        val dlg = createConfirmationDialog(context = context, message = "Are you sure about removing this River bookmark?", positive = {
+            try{
+                val res = DatabaseManager.cmd().bookmark().deleteByUrl(currentOutline.url!!)
+                if (res.isFalse())
+                    context.toastee("Error in removing this bookmark ${res.exception?.getMessage()}")
+                else {
+                    context.toastee("Bookmark removed")
+                    context.refreshRiverBookmarks(false)
+                }
             }
-        }
-        catch(e: Exception){
-            context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
-        }
-        pp.dismiss()
+            catch(e: Exception){
+                context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
+            }
+            pp.dismiss()
+        }, negative = {
+            pp.dismiss()
+        })
+
+        dlg.show()
     }
 
     val itemLocation = getLocationOnScreen(item)

@@ -24,7 +24,7 @@
         <resOverlayFolders>
           <path>/res-overlay</path>
         </resOverlayFolders>
-        <includeSystemProguardFile>true</includeSystemProguardFile>
+        <includeSystemProguardFile>false</includeSystemProguardFile>
         <includeAssetsFromLibraries>false</includeAssetsFromLibraries>
         <additionalNativeLibs />
       </configuration>
