@@ -21,6 +21,11 @@ package com.silverkeytech.android_rivers.riverjs
 import com.silverkeytech.android_rivers.DateHelper
 import com.silverkeytech.android_rivers.syndications.SyndicationFeed
 import java.util.ArrayList
+import com.silverkeytech.android_rivers.Result
+import com.silverkeytech.android_rivers.httpGet
+import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
+import com.silverkeytech.android_rivers.scrubJsonP
+import com.google.gson.Gson
 
 
 fun accumulateList(list: ArrayList<RiverItemMeta>, feed: SyndicationFeed) {
@@ -61,4 +66,27 @@ fun sortRiverItemMeta(newsItems : List<RiverItemMeta>) : List<RiverItemMeta>{
             })
 
     return sortedNewsItems
+}
+
+
+fun downloadSingleRiver(url : String) : Result<River>{
+    var req: String?
+    try{
+        req = httpGet(url).body()
+    }
+    catch(e: HttpRequestException){
+        val ex = e.getCause()
+        return Result.wrong(ex)
+    }
+
+    try{
+        val scrubbed = scrubJsonP(req!!)
+        val feeds = Gson().fromJson(scrubbed, javaClass<River>())!!
+
+        return Result.right(feeds)
+    }
+    catch(e: Exception)
+    {
+        return Result.wrong(e)
+    }
 }

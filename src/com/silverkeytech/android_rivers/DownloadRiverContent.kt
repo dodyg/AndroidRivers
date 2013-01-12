@@ -32,6 +32,7 @@ import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 import com.silverkeytech.android_rivers.riverjs.RiverSite
 import java.util.ArrayList
 import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
+import com.silverkeytech.android_rivers.riverjs.downloadSingleRiver
 
 //Responsible for handling a river js downloading and display in asynchronous way
 public class DownloadRiverContent(it: Context?, val language: String): AsyncTask<String, Int, Result<River>>(){
@@ -55,30 +56,22 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
 
     var url: String = ""
 
+
+    var rawCallback: ((Result<River>, String) -> Unit)? = null
+
+    public fun executeOnComplete(callback: (Result<River>, String) -> Unit): DownloadRiverContent {
+        rawCallback = callback
+        return this
+    }
+
+
     //Download river data in a thread
     protected override fun doInBackground(vararg p0: String?): Result<River>? {
         url = p0.get(0)!!
         Log.d(TAG, "Cache is missed for url $url")
 
-        var req: String?
-        try{
-            req = httpGet(url).body()
-        }
-        catch(e: HttpRequestException){
-            val ex = e.getCause()
-            return Result.wrong(ex)
-        }
-
-        try{
-            val scrubbed = scrubJsonP(req!!)
-            val feeds = Gson().fromJson(scrubbed, javaClass<River>())!!
-
-            return Result.right(feeds)
-        }
-        catch(e: Exception)
-        {
-            return Result.wrong(e)
-        }
+        val res = downloadSingleRiver(url)
+        return res
     }
 
     //Once the thread is done.
@@ -95,11 +88,9 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
                 )
                 context.handleConnectivityError(result.exception, error)
             }else{
-                var river = result.value!!
-                var sortedNewsItems = river.getSortedNewsItems()
+                if (rawCallback != null)
+                    rawCallback!!(result, language)
 
-                context.getApplication().getMain().setRiverCache(url, sortedNewsItems)
-                RiverContentRenderer(context, language).handleNewsListing(sortedNewsItems)
             }
         }
     }

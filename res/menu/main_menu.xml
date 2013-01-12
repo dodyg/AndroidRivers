@@ -12,5 +12,8 @@
     <item android:id="@+id/main_menu_collection_add_new"
           android:title="@string/add_new_collection"/>
 
+    <item android:id="@+id/main_menu_show_add_dialog"
+          android:title="Add" />
+
     <item android:id="@+id/main_menu_tryout" android:title="Tryout"/>
 </menu>

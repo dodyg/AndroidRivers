@@ -125,12 +125,6 @@ public open class MainActivity(): SherlockActivity() {
         }
     }
 
-    fun restart() {
-        val intent = getIntent()
-        finish()
-        startActivity(intent)
-    }
-
     protected override fun onResume() {
         super.onResume()
         //skip if this event comes after onCreate
@@ -160,28 +154,33 @@ public open class MainActivity(): SherlockActivity() {
             val newCollection = menu.findItem(R.id.main_menu_collection_add_new)
             val backward = menu.findItem(SWITCH_BACKWARD)
             val sort = menu.findItem(R.id.main_menu_sort)
+            val tryout = menu.findItem(R.id.main_menu_tryout)
+            tryout?.setVisible(false)
+
+            val addDialog = menu.findItem(R.id.main_menu_show_add_dialog)
 
             when(mode){
                 MainActivityMode.RIVER -> {
                     newCollection?.setVisible(false)
                     downloadAll?.setVisible(true)
                     backward?.setEnabled(false)
-
                     setSortButtonText(sort, nextSortCycle())
                     sort?.setVisible(true)
-
+                    addDialog?.setVisible(true)
                 }
                 MainActivityMode.RSS -> {
                     newCollection?.setVisible(false)
                     downloadAll?.setVisible(false)
                     backward?.setEnabled(true)
                     sort?.setVisible(false)
+                    addDialog?.setVisible(true)
                 }
                 MainActivityMode.COLLECTION -> {
                     newCollection?.setVisible(true)
                     downloadAll?.setVisible(false)
                     backward?.setEnabled(true)
                     sort?.setVisible(false)
+                    addDialog?.setVisible(false)
                 }
                 else -> {
                 }
@@ -257,8 +256,110 @@ public open class MainActivity(): SherlockActivity() {
         createdDialog.show()
     }
 
+    var lastEnteredUrl : String? = ""
+
+    fun manageAddDialog(currentMode : MainActivityMode){
+        if (currentMode == MainActivityMode.RIVER){
+            val dlg = createAddSourceDialog(this, "Add new river", lastEnteredUrl, {
+                dlg, url ->
+                    lastEnteredUrl = url
+                    Log.d(TAG, "Entered $url")
+                    if (url.isNullOrEmpty()){
+                        toastee("Please enter url of the river")
+                    }
+                    else {
+                        var currentUrl = url!!
+                        if (!currentUrl.contains("http://"))
+                            currentUrl = "http://" + currentUrl
+
+                        val u = safeUrlConvert(currentUrl)
+                        if (u.isTrue()){
+                            DownloadRiverContent(this, "en")
+                            .executeOnComplete {
+                                res, lang ->
+                                    if (res.isTrue()){
+                                        var river = res.value!!
+                                        var sortedNewsItems = river.getSortedNewsItems()
+                                        this@MainActivity.getApplication().getMain().setRiverCache(currentUrl, sortedNewsItems)
+
+                                        var res2 = saveBookmarkToDb(currentUrl, currentUrl, BookmarkKind.RIVER, "en", null)
+
+                                        if (res2.isTrue()){
+                                            toastee("$currentUrl river is successfully bookmarked", Duration.LONG)
+                                            this@MainActivity.getApplication().getMain().clearRiverBookmarksCache()
+                                            this@MainActivity.refreshRiverBookmarks(false)
+                                        } else{
+                                            toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
+                                        }
+                                    }
+                                    else{
+                                        toastee("$currentUrl is not a valid river", Duration.LONG)
+                                    }
+                            }
+                            .execute(currentUrl)
+
+                            dlg?.dismiss()
+                        }else{
+                            Log.d(TAG, "RIVER $currentUrl conversion generates ${u.exception?.getMessage()}")
+                            toastee("The url you entered is not valid. Please try again", Duration.LONG)
+                        }
+                    }
+            })
+
+            dlg.show()
+        }else if (currentMode == MainActivityMode.RSS){
+            val dlg = createAddSourceDialog(this, "Add new RSS", lastEnteredUrl, {
+                dlg, url ->
+                lastEnteredUrl = url
+                Log.d(TAG, "Entered $url")
+                if (url.isNullOrEmpty()){
+                    toastee("Please enter url of the river")
+                }
+                else {
+                    var currentUrl = url!!
+                    if (!currentUrl.contains("http://"))
+                        currentUrl = "http://" + currentUrl
+
+                    val u = safeUrlConvert(currentUrl)
+                    if (u.isTrue()){
+                        DownloadFeed(this, true)
+                        .executeOnComplete {
+                            res ->
+                                if (res.isTrue()){
+                                    var feed = res.value!!
+
+                                    val res2 = saveBookmarkToDb(feed.title, currentUrl, BookmarkKind.RSS, feed.language, null)
+
+                                    if (res2.isTrue()){
+                                        toastee("$currentUrl is successfully bookmarked")
+                                        this@MainActivity.refreshRssBookmarks()
+                                    }
+                                    else{
+                                        toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
+                                    }
+                                }else{
+                                    toastee("Error ${res.exception?.getMessage()}", Duration.LONG)
+                                }
+                        }
+                        .execute(currentUrl)
+                        dlg?.dismiss()
+                    }else{
+                        Log.d(TAG, "RSS $currentUrl conversion generates ${u.exception?.getMessage()}")
+                        toastee("The url you entered is not valid. Please try again", Duration.LONG)
+                    }
+                }
+            })
+
+            dlg.show()
+        }
+    }
+
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()) {
+            R.id.main_menu_show_add_dialog ->{
+                manageAddDialog(mode)
+                return true
+            }
             R.id.main_menu_sort ->{
                 val nextSort = nextSortCycle()
                 this.getContentPref().setRiverBookmarksSorting(nextSort)

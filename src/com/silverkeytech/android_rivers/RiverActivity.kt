@@ -92,7 +92,15 @@ public class RiverActivity(): SherlockListActivity(), WithVisualModificationPane
                 }
             }
             else{
-                DownloadRiverContent(this, riverLanguage).execute(riverUrl)
+                DownloadRiverContent(this, riverLanguage)
+                    .executeOnComplete {
+                    res, lang ->
+                        var river = res.value!!
+                        var sortedNewsItems = river.getSortedNewsItems()
+
+                        this@RiverActivity.getApplication().getMain().setRiverCache(riverUrl, sortedNewsItems)
+                        RiverContentRenderer(this@RiverActivity, lang).handleNewsListing(sortedNewsItems)
+                }.execute(riverUrl)
             }
         }
     }

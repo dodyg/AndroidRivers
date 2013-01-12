@@ -32,8 +32,7 @@ public fun dlgClickListener(action : (dlg : DialogInterface?, idx : Int) -> Unit
     }
 }
 
-public fun createAddSourceDialog(context : Activity, title : String, action : () -> Unit) : AlertDialog{
-
+public fun createAddSourceDialog(context : Activity, title : String, defaultInput : String?, action : (DialogInterface?, String?) -> Unit) : AlertDialog{
     val dlg: View = context.getLayoutInflater()!!.inflate(R.layout.dialog_add, null)!!
 
     //take care of color
@@ -43,11 +42,17 @@ public fun createAddSourceDialog(context : Activity, title : String, action : ()
     dialog.setView(dlg)
     dialog.setTitle(title)
 
-    var input = dlg.findViewById(R.id.collection_add_new_title_et)!! as EditText
+    var inputUrl = dlg.findViewById(R.id.dialog_add_url)!! as EditText
+
+    var default = defaultInput
+    if (default == null)
+        default = ""
+
+    inputUrl.setText(default)
 
     dialog.setPositiveButton("OK", dlgClickListener {
         dlg, idx ->
-            action()
+            action(dlg, inputUrl.getText()?.toString())
     })
 
     dialog.setNegativeButton("Cancel", dlgClickListener {

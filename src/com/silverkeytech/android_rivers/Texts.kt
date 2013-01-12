@@ -26,6 +26,8 @@ import android.util.Log
 import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 import android.view.Gravity
 import android.util.TypedValue
+import android.net.Uri
+import java.net.URL
 
 fun scrubJsonP(text: String): String {
     val rep = text.replace("onGetRiverStream (", "").trimTrailing(")")
@@ -103,5 +105,16 @@ public fun extractIdFromLocalUrl(url : String) : Int?{
             return id.toInt()
     }catch(e : Exception){
         return null
+    }
+}
+
+fun safeUrlConvert(url : String?) : Result<URL>{
+    try
+    {
+        val u = URL(url)
+        return Result.right(u)
+    }
+    catch(ex : Exception){
+        return Result.wrong<URL>(ex)
     }
 }
