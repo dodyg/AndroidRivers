@@ -36,6 +36,8 @@ import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 import java.util.ArrayList
 import com.silverkeytech.android_rivers.db.getBookmarksUrlsFromDbByCollection
+import com.silverkeytech.android_rivers.outlines.sortOutlineDesc
+import com.silverkeytech.android_rivers.outlines.sortOutlineAsc
 
 public class BookmarksRenderer(val context: MainActivity){
     class object {
@@ -132,7 +134,7 @@ public class BookmarksRenderer(val context: MainActivity){
         })
     }
 
-    fun handleRiversListing(opml: Opml) {
+    fun handleRiversListing(opml: Opml, sort : Int) {
         var outlines = ArrayList<Outline>()
 
         opml.body?.outline?.forEach {
@@ -143,6 +145,13 @@ public class BookmarksRenderer(val context: MainActivity){
             showMessage("""Your bookmarked rivers will appear here. To find more river, click on 'more news' or add a new collection. You can also click on 'refresh' option to download default rivers.""")
         } else
             showMessage("")
+
+        //perform sorting in the outlines (three choices, asc, desc and none)
+        if (sort == PreferenceValue.SORT_ASC){
+            outlines = sortOutlineAsc(outlines) as ArrayList<Outline>
+        } else if (sort == PreferenceValue.SORT_DESC){
+            outlines = sortOutlineDesc(outlines) as ArrayList<Outline>
+        }
 
         val adapter = object : ArrayAdapter<Outline>(context, android.R.layout.simple_list_item_1, android.R.id.text1, outlines){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {

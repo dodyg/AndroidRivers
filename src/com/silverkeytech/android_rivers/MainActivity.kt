@@ -159,22 +159,29 @@ public open class MainActivity(): SherlockActivity() {
             val downloadAll = menu.findItem(R.id.main_menu_download_all_rivers)
             val newCollection = menu.findItem(R.id.main_menu_collection_add_new)
             val backward = menu.findItem(SWITCH_BACKWARD)
+            val sort = menu.findItem(R.id.main_menu_sort)
 
             when(mode){
                 MainActivityMode.RIVER -> {
                     newCollection?.setVisible(false)
                     downloadAll?.setVisible(true)
                     backward?.setEnabled(false)
+
+                    setSortButtonText(sort, nextSortCycle())
+                    sort?.setVisible(true)
+
                 }
                 MainActivityMode.RSS -> {
                     newCollection?.setVisible(false)
                     downloadAll?.setVisible(false)
                     backward?.setEnabled(true)
+                    sort?.setVisible(false)
                 }
                 MainActivityMode.COLLECTION -> {
                     newCollection?.setVisible(true)
                     downloadAll?.setVisible(false)
                     backward?.setEnabled(true)
+                    sort?.setVisible(false)
                 }
                 else -> {
                 }
@@ -252,6 +259,12 @@ public open class MainActivity(): SherlockActivity() {
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()) {
+            R.id.main_menu_sort ->{
+                val nextSort = nextSortCycle()
+                this.getContentPref().setRiverBookmarksSorting(nextSort)
+                displayModeContent(mode, false)
+                return true
+            }
             R.id.main_menu_collection_add_new -> {
                 promptNewCollection()
                 return true
@@ -358,7 +371,7 @@ public open class MainActivity(): SherlockActivity() {
 
         if (cache != null){
             Log.d(TAG, "Get bookmarks from cache")
-            BookmarksRenderer(this@MainActivity).handleRiversListing(cache)
+            BookmarksRenderer(this@MainActivity).handleRiversListing(cache, this.getContentPref().getRiverBookmarksSorting())
         }  else{
             Log.d(TAG, "Try to retrieve bookmarks from DB")
             val bookmarks = getBookmarksFromDbAsOpml(BookmarkKind.RIVER, SortingOrder.NONE)
@@ -366,7 +379,7 @@ public open class MainActivity(): SherlockActivity() {
             if (bookmarks.body!!.outline!!.count() > 0){
                 Log.d(TAG, "Now bookmarks come from the db")
                 this.getApplication().getMain().setRiverBookmarksCache(bookmarks)
-                BookmarksRenderer(this@MainActivity).handleRiversListing(bookmarks)
+                BookmarksRenderer(this@MainActivity).handleRiversListing(bookmarks, this.getContentPref().getRiverBookmarksSorting())
             }
             else if (retrieveDefaultFromInternet){
                 Log.d(TAG, "Start downloading bookmarks from the Internet")
@@ -377,7 +390,7 @@ public open class MainActivity(): SherlockActivity() {
                     val res2 = saveOpmlAsBookmarks(res.value!!)
 
                     if (res2.isTrue()){
-                        BookmarksRenderer(this@MainActivity).handleRiversListing(res2.value!!)
+                        BookmarksRenderer(this@MainActivity).handleRiversListing(res2.value!!, this.getContentPref().getRiverBookmarksSorting())
                         Log.d(TAG, "Bookmark data from the Internet is successfully saved")
                         getSetupPref().setDownloadDefaultRivers(false)//we only download standard rivers from the internet by default when at setup the first time
                     }
@@ -390,7 +403,30 @@ public open class MainActivity(): SherlockActivity() {
             }
             else{
                 //this happen when you remove the last item from the river bookmark. So have it render an empty opml
-                BookmarksRenderer(this@MainActivity).handleRiversListing(Opml())
+                BookmarksRenderer(this@MainActivity).handleRiversListing(Opml(), this.getContentPref().getRiverBookmarksSorting())
+            }
+        }
+    }
+
+    fun setSortButtonText(item : MenuItem?, sort : Int){
+        when (sort){
+            PreferenceValue.SORT_ASC -> item?.setTitle(this.getString(R.string.sort_asc))
+            PreferenceValue.SORT_DESC -> item?.setTitle(this.getString(R.string.sort_desc))
+            PreferenceValue.SORT_NONE -> item?.setTitle(this.getString(R.string.sort_cancel))
+            else -> {
+
+            }
+        }
+    }
+
+    fun nextSortCycle() : Int{
+        val sort = this.getContentPref().getRiverBookmarksSorting()
+        return when (sort){
+            PreferenceValue.SORT_ASC -> PreferenceValue.SORT_DESC
+            PreferenceValue.SORT_DESC -> PreferenceValue.SORT_NONE
+            PreferenceValue.SORT_NONE -> PreferenceValue.SORT_ASC
+            else -> {
+                PreferenceValue.SORT_ASC
             }
         }
     }
