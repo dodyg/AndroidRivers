@@ -158,7 +158,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
 
                 //check for go link
                 if (currentNewsLinkAvailable){
-                    dialog.setPositiveButton("Go", object : DialogInterface.OnClickListener{
+                    dialog.setPositiveButton(context.getString(R.string.go), object : DialogInterface.OnClickListener{
                         public override fun onClick(p0: DialogInterface?, p1: Int) {
                             var i = Intent("android.intent.action.VIEW", Uri.parse(currentNews.item.link))
                             context.startActivity(i)
@@ -166,7 +166,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                         }
                     })
 
-                    dialog.setNeutralButton("Share", object : DialogInterface.OnClickListener{
+                    dialog.setNeutralButton(context.getString(R.string.share), object : DialogInterface.OnClickListener{
                         public override fun onClick(p0: DialogInterface?, p1: Int) {
                             var intent = shareActionIntent(currentNews.item.link!!)
                             context.startActivity(Intent.createChooser(intent, "Share page"))
@@ -187,7 +187,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                     }
                     //assume podcast
                     else {
-                        dialog.setNegativeButton("Podcast", object : DialogInterface.OnClickListener{
+                        dialog.setNegativeButton(context.getString(R.string.podcast), object : DialogInterface.OnClickListener{
                             public override fun onClick(p0: DialogInterface?, p1: Int) {
                                 var messenger = Messenger(object : Handler(){
                                     public override fun handleMessage(msg: Message?) {

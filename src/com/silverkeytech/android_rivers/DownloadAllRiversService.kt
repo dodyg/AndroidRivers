@@ -86,8 +86,16 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
         var progress: Int
         var errorCount = 0
 
-        fun notify(msg : String){
-            //notification.contentView!!.setTextViewText(R.id.download_progress_status_text, msg)
+        fun updateText(msg : String){
+            notification.contentView!!.setTextViewText(R.id.download_progress_status_text, msg)
+        }
+
+        fun updateProgress(sofar : Int){
+            notification.contentView!!.setProgressBar(R.id.download_progress_status_progress, 100, sofar, false)
+        }
+
+        fun notify(){
+            notificationManager.notify(notificationId, notification)
         }
 
         for(val url in targetUrls?.iterator()){
@@ -99,9 +107,9 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
 
                 var title = targetTitles?.get(riverNumber)
 
-                notify("Downloading $title ")
-                notification.contentView!!.setProgressBar(R.id.download_progress_status_progress, 100, progress, false)
-                notificationManager.notify(notificationId, notification)
+                updateText("Downloading $title ")
+                updateProgress(progress)
+                notify()
 
                 //do the river remote download
                 var req: String? = null
@@ -115,8 +123,8 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
                         val ex = e.getCause()
                         Log.d(TAG, "Error while trying to download $url")
 
-                        notify("Problem downloading $title ")
-                        notificationManager.notify(notificationId, notification)
+                        updateText("Problem downloading $title ")
+                        notify()
                         errorCount++
                     }
 
@@ -132,8 +140,8 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
                         }
                         catch(e: Exception)
                         {
-                            notify("Problem parsing $title ")
-                            notificationManager.notify(notificationId, notification)
+                            updateText("Problem parsing $title ")
+                            notify()
                             Log.d(TAG, "Error while trying to parse $url")
                             errorCount++
                         }
@@ -167,8 +175,8 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
                         }
                     }
                     else{
-                        notify("Problem downloading collection river $title due to id extraction failure")
-                        notificationManager.notify(notificationId, notification)
+                        updateText("Problem downloading collection river $title due to id extraction failure")
+                        notify()
                         Log.d(TAG, "Cannot extract id from $url")
                     }
                 }
@@ -186,9 +194,9 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
             msg = "${riverTotal - errorCount} are successfully downloaded out of ${riverTotal}"
         }
 
-        notification.contentView!!.setTextViewText(R.id.download_progress_status_text, msg)
-        notification.contentView!!.setProgressBar(R.id.download_progress_status_progress, 100, 100, false)
-        notificationManager.notify(notificationId, notification)
+        updateText(msg)
+        updateProgress(100)
+        notify()
     }
 
     public override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

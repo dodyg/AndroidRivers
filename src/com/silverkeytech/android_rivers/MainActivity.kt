@@ -197,7 +197,6 @@ public open class MainActivity(): SherlockActivity() {
         inflater.inflate(R.menu.main_menu, menu)
 
         //top menu
-
         menu?.add(0, SWITCH_BACKWARD, 0, "<")
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
@@ -206,7 +205,6 @@ public open class MainActivity(): SherlockActivity() {
 
         menu?.add(0, EXPLORE, 0, "MORE NEWS")
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-
 
         return true
     }

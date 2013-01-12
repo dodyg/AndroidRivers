@@ -120,7 +120,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                 dialog.setView(dlg)
 
                 if (currentNews.hasLink()){
-                    dialog.setPositiveButton("Go", object : DialogInterface.OnClickListener{
+                    dialog.setPositiveButton(context.getString(R.string.go), object : DialogInterface.OnClickListener{
                         public override fun onClick(p0: DialogInterface?, p1: Int) {
                             var i = Intent("android.intent.action.VIEW", Uri.parse(currentNews.link))
                             context.startActivity(i)
@@ -128,7 +128,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                         }
                     })
 
-                    dialog.setNeutralButton("Share", object : DialogInterface.OnClickListener{
+                    dialog.setNeutralButton(context.getString(R.string.share), object : DialogInterface.OnClickListener{
                         public override fun onClick(p0: DialogInterface?, p1: Int) {
                             var intent = shareActionIntent(currentNews.link!!)
                             context.startActivity(Intent.createChooser(intent, "Share page"))
@@ -137,7 +137,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                 }
 
                 if (currentNews.isPodcast()){
-                    dialog.setNegativeButton("Podcast", object : DialogInterface.OnClickListener{
+                    dialog.setNegativeButton(context.getString(R.string.podcast), object : DialogInterface.OnClickListener{
                         public override fun onClick(p0: DialogInterface?, p1: Int) {
                             var messenger = Messenger(object : Handler(){
                                 public override fun handleMessage(msg: Message?) {

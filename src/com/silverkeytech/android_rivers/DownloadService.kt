@@ -147,7 +147,7 @@ public class DownloadService(): IntentService("DownloadService"){
                         targetSourceTitle!!,
                         targetSourceUrl!!,
                         filename,
-                        "<p>On this edition of All Songs Considered we've got a bunch of new-year premieres for you",
+                        "",
                         contentType,
                         fileLength
                 )

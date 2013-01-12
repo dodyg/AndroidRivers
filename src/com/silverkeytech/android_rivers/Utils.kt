@@ -37,26 +37,6 @@ import java.util.Date
 import java.util.Calendar
 import com.github.kevinsawicki.http.HttpRequest
 
-public fun Activity.getStandardDialogBackgroundColor(): Int {
-    val theme = this.getVisualPref().getTheme()
-    if (theme == R.style.Theme_Sherlock_Light_DarkActionBar)
-        return android.graphics.Color.WHITE
-    else if (theme == R.style.Theme_Sherlock)
-        return android.graphics.Color.BLACK
-    else
-        return android.graphics.Color.WHITE
-}
-
-public fun Activity.findView<T: View>(id: Int): T {
-    return (this.findViewById(id) as T)
-}
-
-public fun Activity.restart() {
-    var intent = this.getIntent()
-    this.finish()
-    this.startActivity(intent)
-}
-
 public fun OnClickListener(action: (View?) -> Unit): OnClickListener {
     return object : OnClickListener {
         public override fun onClick(p0: View?) {
@@ -79,34 +59,6 @@ public fun parseRFC3339DateFormat(dt: String): java.util.Date? {
     }
 }
 
-public fun Activity.toastee(text: String, duration: Duration = Duration.QUICK, grav: Int = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL) {
-    var t = Toast.makeText(this, text, duration.toInt())
-    t!!.setGravity(grav, 0, 0);
-    t!!.show()
-}
-
-public data class ConnectivityErrorMessage(val timeoutException: String, val socketException: String, val otherException: String)
-
-public fun Activity.handleConnectivityError(e: Exception?, message: ConnectivityErrorMessage) {
-    if (e is ConnectTimeoutException)
-        this.toastee(message.timeoutException, Duration.AVERAGE)
-    else if (e is UnknownHostException || e is SocketException)
-        this.toastee(message.socketException, Duration.AVERAGE)
-    else
-        this.toastee(message.otherException, Duration.AVERAGE)
-
-}
-
-public enum class Duration {
-    QUICK
-    AVERAGE
-    LONG
-    public fun toInt(): Int = when(this) {
-        QUICK -> 3000
-        AVERAGE -> 10000
-        LONG -> 30000
-    }
-}
 
 fun imageMimeTypeToFileExtension (mimeType: String): String {
     return when(mimeType){

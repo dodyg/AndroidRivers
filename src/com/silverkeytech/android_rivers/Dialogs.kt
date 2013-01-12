@@ -32,6 +32,7 @@ public fun dlgClickListener(action : (dlg : DialogInterface?, idx : Int) -> Unit
     }
 }
 
+//Create a popup dialog with one text for url submission. Then provide the given url via a callback called 'action'
 public fun createAddSourceDialog(context : Activity, title : String, defaultInput : String?, action : (DialogInterface?, String?) -> Unit) : AlertDialog{
     val dlg: View = context.getLayoutInflater()!!.inflate(R.layout.dialog_add, null)!!
 
@@ -50,18 +51,17 @@ public fun createAddSourceDialog(context : Activity, title : String, defaultInpu
 
     inputUrl.setText(default)
 
-    dialog.setPositiveButton("OK", dlgClickListener {
+    dialog.setPositiveButton(context.getString(R.string.ok), dlgClickListener {
         dlg, idx ->
             action(dlg, inputUrl.getText()?.toString())
     })
 
-    dialog.setNegativeButton("Cancel", dlgClickListener {
+    dialog.setNegativeButton(context.getString(R.string.cancel), dlgClickListener {
         dlg, idx ->
             dlg?.dismiss()
     })
 
     val createdDialog = dialog.create()!!
-
     return createdDialog
 }
 
@@ -72,20 +72,19 @@ public fun createConfirmationDialog(context : Activity, message : String, positi
     dialog.setTitle(context.getString(R.string.confirmation_dialog_title))
     dialog.setMessage(message)
 
-    dialog.setPositiveButton("Yes", dlgClickListener {
+    dialog.setPositiveButton(context.getString(R.string.yes), dlgClickListener {
         dlg, idx ->
             positive()
             dlg?.dismiss()
     })
 
-    dialog.setNegativeButton("Cancel", dlgClickListener {
+    dialog.setNegativeButton(context.getString(R.string.cancel), dlgClickListener {
         dlg, idx ->
             negative()
             dlg?.dismiss()
     })
 
     val createdDialog = dialog.create()!!
-
     return createdDialog
 }
 
