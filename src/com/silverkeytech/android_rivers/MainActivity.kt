@@ -167,6 +167,7 @@ public open class MainActivity(): SherlockActivity() {
                     setSortButtonText(sort, nextSortCycle())
                     sort?.setVisible(true)
                     addDialog?.setVisible(true)
+                    addDialog?.setTitle("Add River")
                 }
                 MainActivityMode.RSS -> {
                     newCollection?.setVisible(false)
@@ -174,6 +175,7 @@ public open class MainActivity(): SherlockActivity() {
                     backward?.setEnabled(true)
                     sort?.setVisible(false)
                     addDialog?.setVisible(true)
+                    addDialog?.setTitle("Add RSS")
                 }
                 MainActivityMode.COLLECTION -> {
                     newCollection?.setVisible(true)
