@@ -104,7 +104,7 @@ public enum class Duration {
     public fun toInt(): Int = when(this) {
         QUICK -> 3000
         AVERAGE -> 10000
-        LONG -> 20000
+        LONG -> 30000
     }
 }
 
