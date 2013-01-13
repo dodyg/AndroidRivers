@@ -16,4 +16,6 @@
           android:title="Add" />
 
     <item android:id="@+id/main_menu_tryout" android:title="Tryout"/>
+
+    <item android:id="@+id/main_menu_help" android:title="Help" />
 </menu>

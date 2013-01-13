@@ -158,6 +158,7 @@ public open class MainActivity(): SherlockActivity() {
             tryout?.setVisible(false)
 
             val addDialog = menu.findItem(R.id.main_menu_show_add_dialog)
+            val refresh = menu.findItem(R.id.main_menu_refresh)
 
             when(mode){
                 MainActivityMode.RIVER -> {
@@ -166,6 +167,7 @@ public open class MainActivity(): SherlockActivity() {
                     backward?.setEnabled(false)
                     setSortButtonText(sort, nextSortCycle())
                     sort?.setVisible(true)
+                    refresh?.setVisible(true)
                     addDialog?.setVisible(true)
                     addDialog?.setTitle("Add River")
                 }
@@ -174,6 +176,7 @@ public open class MainActivity(): SherlockActivity() {
                     downloadAll?.setVisible(false)
                     backward?.setEnabled(true)
                     sort?.setVisible(false)
+                    refresh?.setVisible(false)
                     addDialog?.setVisible(true)
                     addDialog?.setTitle("Add RSS")
                 }
@@ -182,6 +185,7 @@ public open class MainActivity(): SherlockActivity() {
                     downloadAll?.setVisible(false)
                     backward?.setEnabled(true)
                     sort?.setVisible(false)
+                    refresh?.setVisible(false)
                     addDialog?.setVisible(false)
                 }
                 else -> {
@@ -210,6 +214,7 @@ public open class MainActivity(): SherlockActivity() {
     }
 
     fun promptNewCollection() {
+
         val dlg: View = this.getLayoutInflater()!!.inflate(R.layout.collection_add_new, null)!!
 
         //take care of color
@@ -356,6 +361,10 @@ public open class MainActivity(): SherlockActivity() {
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()) {
+            R.id.main_menu_help->{
+                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, "Help")
+                return true
+            }
             R.id.main_menu_show_add_dialog ->{
                 manageAddDialog(mode)
                 return true
@@ -397,7 +406,7 @@ public open class MainActivity(): SherlockActivity() {
                 }
             }
             EXPLORE -> {
-                downloadOpml(this, "http://hobieu.apphb.com/api/1/opml/root", "Get more news")
+                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_MORE_NEWS_SOURCE, "Get more news")
                 return false
             }
             SWITCH_FORWARD -> {

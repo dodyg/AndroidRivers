@@ -76,7 +76,12 @@ public class PodcastManagerActivity : SherlockListActivity()
         return super.onPrepareOptionsMenu(menu)
     }
 
+
+
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = getSupportMenuInflater()!!
+        inflater.inflate(R.menu.podcast_menu, menu)
+
         menu?.add(0, SWITCH_BACKWARD, 0, "<")
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
@@ -95,8 +100,12 @@ public class PodcastManagerActivity : SherlockListActivity()
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()) {
+            R.id.main_menu_help->{
+                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, "Help")
+                return true
+            }
             EXPLORE -> {
-                downloadOpml(this, "http://hobieu.apphb.com/api/1/opml/root", "Get more news")
+                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_MORE_NEWS_SOURCE , "Get more news")
                 return false
             }
             SWITCH_BACKWARD -> {
