@@ -28,6 +28,8 @@ import android.view.Gravity
 import android.util.TypedValue
 import android.net.Uri
 import java.net.URL
+import android.text.SpannableStringBuilder
+import android.text.style.ImageSpan
 
 fun scrubJsonP(text: String): String {
     val rep = text.replace("onGetRiverStream (", "").trimTrailing(")")
@@ -37,9 +39,23 @@ fun scrubJsonP(text: String): String {
 fun scrubHtml(text: String?): String {
     if (text.isNullOrEmpty())
         return ""
-    else
-        return android.text.Html.fromHtml(text!!).toString()
+    else {
+        val spanned = android.text.Html.fromHtml(text!!.trim()) as SpannableStringBuilder
+        val spannedObjects = spanned.getSpans(0, spanned.length(), javaClass<Any>())!!
+
+        for(val i in 0..(spannedObjects.size - 1)){
+            if (spannedObjects[i] is ImageSpan){
+                val img = spannedObjects[i] as ImageSpan
+                if (img != null){
+                    spanned.replace(spanned.getSpanStart(img), spanned.getSpanEnd(img), "")
+                }
+            }
+        }
+
+        return spanned.toString()
+    }
 }
+
 
 fun String?.isNullOrEmpty(): Boolean {
     val res = this == null || this.trim().length() == 0
