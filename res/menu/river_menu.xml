@@ -4,12 +4,10 @@
 
     <item android:id="@+id/river_menu_bookmark"
           android:title="Bookmark"
-          android:icon="@android:drawable/ic_menu_add"
             />
 
     <item android:id="@+id/river_menu_help"
           android:title="Help"
-          android:icon="@android:drawable/ic_menu_help"
             />
 </menu>
 

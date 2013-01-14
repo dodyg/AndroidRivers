@@ -2,6 +2,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/main_menu_help"
           android:title="Help"
-          android:icon="@android:drawable/ic_menu_help"
             />
 </menu>
