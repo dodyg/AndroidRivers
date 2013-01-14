@@ -36,7 +36,7 @@ public class DownloadOpml(it: Context?): AsyncTask<String, Int, Pair<String, Res
     }
 
     var context: Activity = it!! as Activity
-    var dialog: InfinityProgressDialog = InfinityProgressDialog(context, "Please wait while downloading opml")
+    var dialog: InfinityProgressDialog = InfinityProgressDialog(context, "Please wait while downloading opml document")
 
     protected override fun onPreExecute() {
         dialog.onCancel {
