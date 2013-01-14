@@ -148,7 +148,12 @@ public class RiverActivity(): SherlockListActivity(), WithVisualModificationPane
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
-            R.id.river_menu_refresh, REFRESH -> {
+            R.id.river_menu_help ->{
+                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
+                return true
+            }
+
+            REFRESH -> {
                 downloadRiver(riverUrl, true)
                 return true
             }

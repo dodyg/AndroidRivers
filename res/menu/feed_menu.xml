@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/feed_menu_refresh"
-          android:title="@string/refresh" />
-
     <item android:id="@+id/feed_menu_bookmark"
-          android:title="Bookmark" />
+          android:title="Bookmark"
+          android:icon="@android:drawable/ic_menu_add"
+            />
 
+    <item android:id="@+id/feed_menu_help"
+          android:title="@string/help"
+          android:icon="@android:drawable/ic_menu_help"
+            />
 </menu>
 

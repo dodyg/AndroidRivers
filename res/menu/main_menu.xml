@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/main_menu_refresh"
-          android:title="@string/refresh"/>
+          android:title="@string/refresh"
+          android:icon="@drawable/ic_menu_refresh"/>
 
     <item android:id="@+id/main_menu_download_all_rivers"
-          android:title="@string/download_all"/>
+          android:title="@string/download_all"
+          android:icon="@android:drawable/stat_sys_download"
+            />
 
     <item android:id="@+id/main_menu_sort"
-          android:title="@string/sort_asc"/>
+          android:title="@string/sort_asc"
+          android:icon="@android:drawable/ic_menu_sort_alphabetically"
+            />
 
     <item android:id="@+id/main_menu_collection_add_new"
-          android:title="@string/add_new_collection"/>
+          android:title="@string/add_new_collection"
+          android:icon="@android:drawable/ic_menu_add"
+            />
 
     <item android:id="@+id/main_menu_show_add_dialog"
-          android:title="Add" />
+          android:title="Add"
+          android:icon="@android:drawable/ic_menu_add"
+            />
 
     <item android:id="@+id/main_menu_tryout" android:title="Tryout"/>
 
-    <item android:id="@+id/main_menu_help" android:title="Help" />
+    <item android:id="@+id/main_menu_help" android:title="Help"
+          android:icon="@android:drawable/ic_menu_help"
+            />
 </menu>

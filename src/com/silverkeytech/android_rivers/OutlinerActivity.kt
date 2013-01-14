@@ -141,6 +141,10 @@ public class OutlinerActivity(): SherlockActivity()
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
+            R.id.outliner_menu_help ->{
+                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
+                return true
+            }
             REFRESH -> {
                 refreshContent(outlinesUrl!!)
                 return true

@@ -165,7 +165,9 @@ public open class MainActivity(): SherlockActivity() {
                     newCollection?.setVisible(false)
                     downloadAll?.setVisible(true)
                     backward?.setEnabled(false)
-                    setSortButtonText(sort, nextSortCycle())
+                    val nextSort = nextSortCycle()
+                    Log.d(TAG, "The next sort cycle from current ${this.getContentPref().getRiverBookmarksSorting()} is $nextSort")
+                    setSortButtonText(sort, nextSort)
                     sort?.setVisible(true)
                     refresh?.setVisible(true)
                     addDialog?.setVisible(true)
@@ -200,7 +202,7 @@ public open class MainActivity(): SherlockActivity() {
         val inflater = getSupportMenuInflater()!!
         inflater.inflate(R.menu.main_menu, menu)
 
-        //top menu
+        //fixed top menu
         menu?.add(0, SWITCH_BACKWARD, 0, "<")
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
@@ -210,7 +212,7 @@ public open class MainActivity(): SherlockActivity() {
         menu?.add(0, EXPLORE, 0, "MORE NEWS")
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
-        return true
+        return super.onCreateOptionsMenu(menu)
     }
 
     fun promptNewCollection() {
@@ -362,7 +364,7 @@ public open class MainActivity(): SherlockActivity() {
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()) {
             R.id.main_menu_help->{
-                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, "Help")
+                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
                 return true
             }
             R.id.main_menu_show_add_dialog ->{
@@ -371,6 +373,7 @@ public open class MainActivity(): SherlockActivity() {
             }
             R.id.main_menu_sort ->{
                 val nextSort = nextSortCycle()
+                Log.d(TAG, "The new sort is $nextSort")
                 this.getContentPref().setRiverBookmarksSorting(nextSort)
                 displayModeContent(mode, false)
                 return true

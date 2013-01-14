@@ -37,6 +37,7 @@ import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 import java.util.Date
 import java.util.Calendar
 import com.github.kevinsawicki.http.HttpRequest
+import android.os.Build
 
 
 public fun Activity.getStandardDialogBackgroundColor(): Int {
@@ -51,6 +52,11 @@ public fun Activity.getStandardDialogBackgroundColor(): Int {
 
 public fun Activity.findView<T: View>(id: Int): T {
     return (this.findViewById(id) as T)
+}
+
+public fun Activity.isModernTablet() : Boolean{
+    val beyondHoneycomb = Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH
+    return this.getResources()!!.getBoolean(R.bool.is_tablet) || beyondHoneycomb
 }
 
 public fun Activity.restart() {
@@ -86,8 +92,4 @@ public enum class Duration {
         AVERAGE -> 10000
         LONG -> 30000
     }
-}
-
-public fun Activity.getString(id : Int): String{
-        return this.getApplication()!!.getString(id)!!
 }

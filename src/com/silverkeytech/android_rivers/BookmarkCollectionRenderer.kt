@@ -41,6 +41,12 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
     }
 
     fun handleListing(bookmarks: List<Bookmark>) {
+
+        if (bookmarks.count() == 0){
+            var msg = context.findViewById(R.id.collection_message_tv)!! as TextView
+            msg.setText("There are no items in this collection yet. You can add items to this collection when you bookmark a River or RSS.")
+        }
+
         val adapter = object : ArrayAdapter<Bookmark>(context, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 val text = bookmarks[position].toString()

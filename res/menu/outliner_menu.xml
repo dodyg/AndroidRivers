@@ -6,4 +6,9 @@
 
     <item android:id="@+id/outliner_menu_collapse"
           android:title="Collapse all" />
+
+    <item android:id="@+id/outliner_menu_help"
+          android:title="Help"
+          android:icon="@android:drawable/ic_menu_help"
+            />
 </menu>

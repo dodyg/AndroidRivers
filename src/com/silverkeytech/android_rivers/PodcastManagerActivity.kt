@@ -101,7 +101,7 @@ public class PodcastManagerActivity : SherlockListActivity()
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()) {
             R.id.main_menu_help->{
-                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, "Help")
+                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
                 return true
             }
             EXPLORE -> {
