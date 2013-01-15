@@ -129,8 +129,12 @@ public class RiverContentRenderer(val context: Activity, val language: String){
 
                 if (currentNews.item.body.isNullOrEmpty() && !currentNews.item.title.isNullOrEmpty())
                     msg = scrubHtml(currentNews.item.title)
-                else
-                    msg = scrubHtml(currentNews.item.body)
+                else {
+                    if (language == "ar")
+                        msg = scrubHtml(currentNews.item.body.limitText(PreferenceDefaults.CONTENT_BODY_ARABIC_MAX_LENGTH))
+                    else
+                        msg = scrubHtml(currentNews.item.body.limitText(PreferenceDefaults.CONTENT_BODY_MAX_LENGTH))
+                }
 
                 //take care of color
                 var theme = context.getVisualPref().getTheme()

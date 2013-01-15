@@ -68,7 +68,7 @@ fun String?.limitText(maxSize: Int): String {
         return this
     else
     {
-        var cut = this.substring(0, maxSize - 3) + "..."
+        var cut = TextLimiter.ellipsize(this, maxSize)!!
         return cut
     }
 }
@@ -98,7 +98,7 @@ fun handleForeignTextFont(context: Activity, language: String, text: TextView, c
             text.setTypeface(arabicFont)
             text.setText(ArabicReshape.reshape(content))
             text.setGravity(Gravity.RIGHT)
-            text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize - 3.toFloat())
+            text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize - 4.toFloat())
         }
         else -> {
             text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
@@ -145,3 +145,5 @@ fun safeUrlConvert(url: String?): Result<URL> {
         return Result.wrong<URL>(ex)
     }
 }
+
+

@@ -53,6 +53,9 @@ public class PreferenceDefaults{
         public val CONTENT_OUTLINE_HELP_SOURCE: String = "http://hobieu.apphb.com/opml/xml/3618737e-5339-40a1-9eb6-68d09a9a41d2"
         public val CONTENT_OUTLINE_MORE_NEWS_SOURCE: String = "http://hobieu.apphb.com/api/1/opml/root"
 
+        public val CONTENT_BODY_MAX_LENGTH: Int = 280
+        public val CONTENT_BODY_ARABIC_MAX_LENGTH: Int = 220
+
         public val RSS_LATEST_DATE_FILTER_IN_DAYS: Int = 30
         public val RSS_MAX_ITEMS_FILTER: Int = 20
 
