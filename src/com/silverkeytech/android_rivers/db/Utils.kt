@@ -169,6 +169,7 @@ public fun saveBookmarkToDb(title: String,
     }
 }
 
+
 public fun getBookmarksFromDb(kind: BookmarkKind, sortByTitleOrder: SortingOrder): List<Bookmark> {
     val bookmarks = DatabaseManager.query().bookmark().byKind(kind, sortByTitleOrder)
 

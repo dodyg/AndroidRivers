@@ -267,7 +267,7 @@ public open class MainActivity(): SherlockActivity() {
 
     fun manageAddDialog(currentMode : MainActivityMode){
         if (currentMode == MainActivityMode.RIVER){
-            val dlg = createAddSourceDialog(this, "Add new river", lastEnteredUrl, {
+            val dlg = createSingleInputDialog(this, "Add new river", lastEnteredUrl, "Set url here", {
                 dlg, url ->
                     lastEnteredUrl = url
                     Log.d(TAG, "Entered $url")
@@ -315,7 +315,7 @@ public open class MainActivity(): SherlockActivity() {
 
             dlg.show()
         }else if (currentMode == MainActivityMode.RSS){
-            val dlg = createAddSourceDialog(this, "Add new RSS", lastEnteredUrl, {
+            val dlg = createSingleInputDialog(this, "Add new RSS", lastEnteredUrl, "Set url here", {
                 dlg, url ->
                 lastEnteredUrl = url
                 Log.d(TAG, "Entered $url")

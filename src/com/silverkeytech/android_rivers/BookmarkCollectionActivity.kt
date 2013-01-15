@@ -44,7 +44,7 @@ public open class BookmarkCollectionActivity(): SherlockListActivity() {
         var actionBar = getSupportActionBar()!!
         actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
         actionBar.setDisplayShowTitleEnabled(true)
-        actionBar.setTitle("Edit " + collectionTitle)
+        actionBar.setTitle("Edit sources of '" + collectionTitle + "'")
 
         displayCollection()
     }

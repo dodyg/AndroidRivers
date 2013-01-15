@@ -33,8 +33,8 @@ public fun dlgClickListener(action : (dlg : DialogInterface?, idx : Int) -> Unit
 }
 
 //Create a popup dialog with one text for url submission. Then provide the given url via a callback called 'action'
-public fun createAddSourceDialog(context : Activity, title : String, defaultInput : String?, action : (DialogInterface?, String?) -> Unit) : AlertDialog{
-    val dlg: View = context.getLayoutInflater()!!.inflate(R.layout.dialog_add, null)!!
+public fun createSingleInputDialog(context : Activity, title : String, defaultInput : String?, inputHint : String, action : (DialogInterface?, String?) -> Unit) : AlertDialog{
+    val dlg: View = context.getLayoutInflater()!!.inflate(R.layout.dialog_single_input, null)!!
 
     //take care of color
     dlg.setDrawingCacheBackgroundColor(context.getStandardDialogBackgroundColor())
@@ -43,7 +43,8 @@ public fun createAddSourceDialog(context : Activity, title : String, defaultInpu
     dialog.setView(dlg)
     dialog.setTitle(title)
 
-    var inputUrl = dlg.findViewById(R.id.dialog_add_url)!! as EditText
+    var inputUrl = dlg.findViewById(R.id.dialog_input)!! as EditText
+    inputUrl.setHint(inputHint)
 
     var default = defaultInput
     if (default == null)

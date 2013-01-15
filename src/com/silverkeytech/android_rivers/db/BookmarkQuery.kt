@@ -77,4 +77,19 @@ public class BookmarkQuery(private val dao: Dao<Bookmark, out Int?>){
             return QueryOne<Bookmark>(null, e)
         }
     }
+
+    fun byId(id: Int): QueryOne<Bookmark> {
+        try
+        {
+            var q = dao.queryBuilder()!!
+                    .where()!!
+                    .eq(BOOKMARK_ID, id)!!
+                    .prepare()
+
+            return QueryOne(dao.queryForFirst(q))
+        }
+        catch(e: Exception){
+            return QueryOne<Bookmark>(null, e)
+        }
+    }
 }

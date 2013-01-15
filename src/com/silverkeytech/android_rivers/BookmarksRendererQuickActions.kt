@@ -35,6 +35,9 @@ import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.db.clearBookmarksFromCollection
 import com.silverkeytech.android_rivers.outlines.Outline
 import com.silverkeytech.android_rivers.db.removeItemByUrlFromBookmarkDb
+import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
+import android.app.AlertDialog
+import com.silverkeytech.android_rivers.db.SortingOrder
 
 fun inflater(context: Context): LayoutInflater {
     val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -113,8 +116,8 @@ fun showRssBookmarkQuickActionPopup(context: MainActivity, currentBookmark: Book
         pp.dismiss()
     }
 
-    val icon = x.findViewById(R.id.main_feed_quick_action_delete_icon) as ImageView
-    icon.setOnClickListener {
+    val removeIcon = x.findViewById(R.id.main_feed_quick_action_delete_icon) as ImageView
+    removeIcon.setOnClickListener {
         val dlg = createConfirmationDialog(context = context, message = "Are you sure about removing this RSS bookmark?", positive = {
             try{
                 val res = removeItemByUrlFromBookmarkDb(currentBookmark.url)
@@ -134,6 +137,87 @@ fun showRssBookmarkQuickActionPopup(context: MainActivity, currentBookmark: Book
         })
 
         dlg.show()
+    }
+
+
+    fun showCollectionAssignmentPopup(alreadyBelongsToACollection : Boolean){
+        var coll = getBookmarkCollectionFromDb(sortByTitleOrder = SortingOrder.ASC)
+
+        if (coll.size == 0){
+            context.toastee("Please create a collection before assigning a bookmark to it")
+            pp.dismiss()
+        }
+        else if (coll.size == 1 && alreadyBelongsToACollection){
+            context.toastee("This RSS already belongs to a collection and there is no other collection to reassign it to")
+            pp.dismiss()
+        }
+        else {
+            val dialog = AlertDialog.Builder(context)
+            if (alreadyBelongsToACollection)
+                dialog.setTitle("Reassigned bookmark to collection")
+            else
+                dialog.setTitle("Assign bookmark to collection")
+
+            val collectionWithoutCurrent = coll.filter { x -> x.id != currentBookmark.collection?.id }
+            var collectionTitles = collectionWithoutCurrent.map { x -> x.title }.toArray(array<String>())
+
+            dialog.setItems(collectionTitles, dlgClickListener {
+                dlg, idx ->
+                val selectedCollection = collectionWithoutCurrent[idx]
+
+                if (currentBookmark.collection == null){
+                    currentBookmark.collection = BookmarkCollection()
+                }
+
+                currentBookmark.collection!!.id = selectedCollection.id
+
+                try{
+                    DatabaseManager.bookmark!!.update(currentBookmark)
+                    if (alreadyBelongsToACollection)
+                        context.toastee("This RSS has been successfully reassigned to '${selectedCollection.title}' collection", Duration.LONG)
+                    else
+                        context.toastee("This RSS has been successfuly assigned to '${selectedCollection.title}' collection", Duration.LONG)
+
+
+                } catch(ex : Exception){
+                    context.toastee("Sorry, I have problem updating this RSS bookmark record", Duration.LONG)
+                }
+
+                pp.dismiss()
+            })
+
+            var createdDialog = dialog.create()!!
+            createdDialog.setCanceledOnTouchOutside(true)
+            createdDialog.setCancelable(true)
+            createdDialog.show()
+        }
+    }
+
+    val editIcon = x.findViewById(R.id.main_feed_quick_action_edit_icon) as ImageView
+    editIcon.setOnClickListener {
+        //check if it already belongs to a collection so there is no need to download.
+        val alreadyBelongsToACollection = currentBookmark.collection != null
+        //do a verification that this feed can actually be part of a collection
+        if (!alreadyBelongsToACollection){
+            DownloadFeed(context, true)
+                    .executeOnComplete {
+                res ->
+                if (res.isTrue()){
+                    var feed = res.value!!
+                    if (!feed.isDateParseable){
+                        context.toastee("Sorry, this feed cannot belong to a collection because we cannot determine its dates", Duration.LONG)
+                    }
+                    else{
+                        showCollectionAssignmentPopup(alreadyBelongsToACollection)
+                    }
+                }else{
+                    context.toastee("Error ${res.exception?.getMessage()}", Duration.LONG)
+                }
+            }
+                    .execute(currentBookmark.url)
+        }else
+            showCollectionAssignmentPopup(alreadyBelongsToACollection)
+
     }
 
     val itemLocation = getLocationOnScreen(item)

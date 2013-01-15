@@ -170,6 +170,8 @@ public class FeedActivity(): SherlockListActivity(), WithVisualModificationPanel
                 })
 
                 var createdDialog = dialog.create()!!
+                createdDialog.setCanceledOnTouchOutside(true)
+                createdDialog.setCancelable(true)
                 createdDialog.show()
             }
             else{
