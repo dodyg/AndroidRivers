@@ -65,9 +65,9 @@ public class Channel {
         if (lastBuildDate == null)
             return null;
 
-        try{
+        try {
             return DateHelper.parseRFC822(lastBuildDate);
-        } catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }

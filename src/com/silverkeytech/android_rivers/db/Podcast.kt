@@ -21,8 +21,8 @@ package com.silverkeytech.android_rivers.db
 import com.j256.ormlite.field.DataType
 import com.j256.ormlite.field.DatabaseField
 import com.j256.ormlite.table.DatabaseTable
-import java.util.Date
 import java.util.Calendar
+import java.util.Date
 
 public val PODCAST_ID: String = "id"
 public val PODCAST_TITLE: String = "title"
@@ -67,7 +67,7 @@ public class Podcast(){
     [DatabaseField(canBeNull = false, columnName = "date_created", dataType = DataType.DATE)]
     public var dateCreated: Date = Calendar.getInstance().getTime()
 
-    public fun toString() : String{
+    public fun toString(): String {
         return title
     }
 }

@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -31,15 +31,13 @@ import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 import com.silverkeytech.android_rivers.db.BookmarkCollectionKind
 import com.silverkeytech.android_rivers.db.BookmarkKind
+import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.addNewCollection
 import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.getBookmarksFromDb
 import com.silverkeytech.android_rivers.db.getBookmarksFromDbAsOpml
-import com.silverkeytech.android_rivers.db.saveOpmlAsBookmarks
-import java.io.File
-import com.silverkeytech.android_rivers.db.SortingOrder
-import android.app.Activity
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
+import com.silverkeytech.android_rivers.db.saveOpmlAsBookmarks
 import com.silverkeytech.android_rivers.outlines.Opml
 
 enum class MainActivityMode {
@@ -105,14 +103,14 @@ public open class MainActivity(): SherlockActivity() {
                 Log.d(TAG, "Theme changes detected - updating theme")
                 restart()
             } else
-            if (getMain().flags.isRssJustBookmarked && mode == MainActivityMode.RSS){
-                getMain().flags.reset()
-                displayModeContent(mode, false)
-            } else
-            if (getMain().flags.isRiverJustBookmarked && mode == MainActivityMode.RIVER){
-                getMain().flags.reset()
-                displayModeContent(mode, false)
-            }
+                if (getMain().flags.isRssJustBookmarked && mode == MainActivityMode.RSS){
+                    getMain().flags.reset()
+                    displayModeContent(mode, false)
+                } else
+                    if (getMain().flags.isRiverJustBookmarked && mode == MainActivityMode.RIVER){
+                        getMain().flags.reset()
+                        displayModeContent(mode, false)
+                    }
         }else {
             Log.d(TAG, "RESUMING AFTER CREATION")
             isOnCreate = false
@@ -270,54 +268,54 @@ public open class MainActivity(): SherlockActivity() {
         createdDialog.show()
     }
 
-    var lastEnteredUrl : String? = ""
+    var lastEnteredUrl: String? = ""
 
-    fun manageAddDialog(currentMode : MainActivityMode){
+    fun manageAddDialog(currentMode: MainActivityMode) {
         if (currentMode == MainActivityMode.RIVER){
             val dlg = createSingleInputDialog(this, "Add new river", lastEnteredUrl, "Set url here", {
                 dlg, url ->
-                    lastEnteredUrl = url
-                    Log.d(TAG, "Entered $url")
-                    if (url.isNullOrEmpty()){
-                        toastee("Please enter url of the river")
-                    }
-                    else {
-                        var currentUrl = url!!
-                        if (!currentUrl.contains("http://"))
-                            currentUrl = "http://" + currentUrl
+                lastEnteredUrl = url
+                Log.d(TAG, "Entered $url")
+                if (url.isNullOrEmpty()){
+                    toastee("Please enter url of the river")
+                }
+                else {
+                    var currentUrl = url!!
+                    if (!currentUrl.contains("http://"))
+                        currentUrl = "http://" + currentUrl
 
-                        val u = safeUrlConvert(currentUrl)
-                        if (u.isTrue()){
-                            DownloadRiverContent(this, "en")
-                            .executeOnComplete {
-                                res, lang ->
-                                    if (res.isTrue()){
-                                        var river = res.value!!
-                                        var sortedNewsItems = river.getSortedNewsItems()
-                                        this@MainActivity.getMain().setRiverCache(currentUrl, sortedNewsItems)
+                    val u = safeUrlConvert(currentUrl)
+                    if (u.isTrue()){
+                        DownloadRiverContent(this, "en")
+                                .executeOnComplete {
+                            res, lang ->
+                            if (res.isTrue()){
+                                var river = res.value!!
+                                var sortedNewsItems = river.getSortedNewsItems()
+                                this@MainActivity.getMain().setRiverCache(currentUrl, sortedNewsItems)
 
-                                        var res2 = saveBookmarkToDb(currentUrl, currentUrl, BookmarkKind.RIVER, "en", null)
+                                var res2 = saveBookmarkToDb(currentUrl, currentUrl, BookmarkKind.RIVER, "en", null)
 
-                                        if (res2.isTrue()){
-                                            toastee("$currentUrl river is successfully bookmarked", Duration.LONG)
-                                            this@MainActivity.getMain().clearRiverBookmarksCache()
-                                            this@MainActivity.refreshRiverBookmarks(false)
-                                        } else{
-                                            toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
-                                        }
-                                    }
-                                    else{
-                                        toastee("$currentUrl is not a valid river", Duration.LONG)
-                                    }
+                                if (res2.isTrue()){
+                                    toastee("$currentUrl river is successfully bookmarked", Duration.LONG)
+                                    this@MainActivity.getMain().clearRiverBookmarksCache()
+                                    this@MainActivity.refreshRiverBookmarks(false)
+                                } else{
+                                    toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
+                                }
                             }
-                            .execute(currentUrl)
-
-                            dlg?.dismiss()
-                        }else{
-                            Log.d(TAG, "RIVER $currentUrl conversion generates ${u.exception?.getMessage()}")
-                            toastee("The url you entered is not valid. Please try again", Duration.LONG)
+                            else{
+                                toastee("$currentUrl is not a valid river", Duration.LONG)
+                            }
                         }
+                                .execute(currentUrl)
+
+                        dlg?.dismiss()
+                    }else{
+                        Log.d(TAG, "RIVER $currentUrl conversion generates ${u.exception?.getMessage()}")
+                        toastee("The url you entered is not valid. Please try again", Duration.LONG)
                     }
+                }
             })
 
             dlg.show()
@@ -337,25 +335,25 @@ public open class MainActivity(): SherlockActivity() {
                     val u = safeUrlConvert(currentUrl)
                     if (u.isTrue()){
                         DownloadFeed(this, true)
-                        .executeOnComplete {
+                                .executeOnComplete {
                             res ->
-                                if (res.isTrue()){
-                                    var feed = res.value!!
+                            if (res.isTrue()){
+                                var feed = res.value!!
 
-                                    val res2 = saveBookmarkToDb(feed.title, currentUrl, BookmarkKind.RSS, feed.language, null)
+                                val res2 = saveBookmarkToDb(feed.title, currentUrl, BookmarkKind.RSS, feed.language, null)
 
-                                    if (res2.isTrue()){
-                                        toastee("$currentUrl is successfully bookmarked")
-                                        this@MainActivity.refreshRssBookmarks()
-                                    }
-                                    else{
-                                        toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
-                                    }
-                                }else{
-                                    toastee("Error ${res.exception?.getMessage()}", Duration.LONG)
+                                if (res2.isTrue()){
+                                    toastee("$currentUrl is successfully bookmarked")
+                                    this@MainActivity.refreshRssBookmarks()
                                 }
+                                else{
+                                    toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
+                                }
+                            }else{
+                                toastee("Error ${res.exception?.getMessage()}", Duration.LONG)
+                            }
                         }
-                        .execute(currentUrl)
+                                .execute(currentUrl)
                         dlg?.dismiss()
                     }else{
                         Log.d(TAG, "RSS $currentUrl conversion generates ${u.exception?.getMessage()}")
@@ -438,7 +436,7 @@ public open class MainActivity(): SherlockActivity() {
         }
     }
 
-    fun displayModeContent(mode: MainActivityMode, downloadRiverBookmarksFromInternetIfNoneExisted : Boolean) {
+    fun displayModeContent(mode: MainActivityMode, downloadRiverBookmarksFromInternetIfNoneExisted: Boolean) {
         when(mode){
             MainActivityMode.RIVER -> {
                 displayRiverBookmarks(downloadRiverBookmarksFromInternetIfNoneExisted)
@@ -480,7 +478,7 @@ public open class MainActivity(): SherlockActivity() {
         displayRssBookmarks()
     }
 
-    public fun refreshRiverBookmarks(retrieveRiversFromInternetIfNoneExisted : Boolean)
+    public fun refreshRiverBookmarks(retrieveRiversFromInternetIfNoneExisted: Boolean)
     {
         this.getMain().clearRiverBookmarksCache()
         displayRiverBookmarks(retrieveRiversFromInternetIfNoneExisted)
@@ -528,7 +526,7 @@ public open class MainActivity(): SherlockActivity() {
         }
     }
 
-    fun setSortButtonText(item : MenuItem?, sort : Int){
+    fun setSortButtonText(item: MenuItem?, sort: Int) {
         when (sort){
             PreferenceValue.SORT_ASC -> item?.setTitle(this.getString(R.string.sort_asc))
             PreferenceValue.SORT_DESC -> item?.setTitle(this.getString(R.string.sort_desc))
@@ -539,7 +537,7 @@ public open class MainActivity(): SherlockActivity() {
         }
     }
 
-    fun nextSortCycle() : Int{
+    fun nextSortCycle(): Int {
         val sort = this.getContentPref().getRiverBookmarksSorting()
         return when (sort){
             PreferenceValue.SORT_ASC -> PreferenceValue.SORT_DESC
@@ -552,7 +550,7 @@ public open class MainActivity(): SherlockActivity() {
     }
 }
 
-fun downloadOpml(context : Activity, url: String, title: String) {
+fun downloadOpml(context: Activity, url: String, title: String) {
     val cache = context.getMain().getOpmlCache(url)
 
     if (cache != null){

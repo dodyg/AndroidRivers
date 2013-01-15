@@ -19,7 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers.syndications
 
 import com.silverkeytech.android_rivers.isNullOrEmpty
-import com.silverkeytech.android_rivers.syndications.SyndicationFeedEnclosure
 import java.util.Date
 
 public data class SyndicationFeedItem(){

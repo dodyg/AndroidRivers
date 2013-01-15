@@ -2,13 +2,11 @@ package com.silverkeytech.android_rivers
 
 import android.content.Context
 import android.content.Intent
+import android.os.Messenger
 import com.silverkeytech.android_rivers.outliner.OutlineContent
 import java.util.ArrayList
-import android.os.Messenger
-import android.util.Log
 
-
-public fun startRiverSourcesActivity(context: Context, riverTitle : String, riverUri : String, sourcesTitles: ArrayList<String>, sourcesUris: ArrayList<String>) {
+public fun startRiverSourcesActivity(context: Context, riverTitle: String, riverUri: String, sourcesTitles: ArrayList<String>, sourcesUris: ArrayList<String>) {
     val i = Intent(context, javaClass<RiverSourcesActivity>())
 
     i.putExtra(Params.RIVER_SOURCES_RIVER_TITLE, riverTitle)
@@ -19,7 +17,7 @@ public fun startRiverSourcesActivity(context: Context, riverTitle : String, rive
     context.startActivity(i)
 }
 
-public fun startDownloadService(context : Context, title : String, url : String, sourceTitle : String, sourceUrl : String, description : String, messenger : Messenger){
+public fun startDownloadService(context: Context, title: String, url: String, sourceTitle: String, sourceUrl: String, description: String, messenger: Messenger) {
     var i = Intent(context, javaClass<DownloadService>())
     i.putExtra(Params.DOWNLOAD_TITLE, title)
     i.putExtra(Params.DOWNLOAD_URL, url)
@@ -30,7 +28,7 @@ public fun startDownloadService(context : Context, title : String, url : String,
     context.startService(i)
 }
 
-public fun startPodcastActivity(context : Context, downloadLocationPath : String? = null){
+public fun startPodcastActivity(context: Context, downloadLocationPath: String? = null) {
     val i = Intent(context, javaClass<PodcastManagerActivity>())
     if (!downloadLocationPath.isNullOrEmpty())
         i.putExtra(Params.DOWNLOAD_LOCATION_PATH, downloadLocationPath!!)
@@ -86,6 +84,6 @@ fun startOutlinerActivity(context: Context, outlines: ArrayList<OutlineContent>,
 public fun shareActionIntent(context: Context, title: String, url: String): Intent {
     var i = Intent(Intent.ACTION_SEND)
     i.setType("text/plain")
-    i.putExtra(Intent.EXTRA_TEXT, "${title.limitText(PreferenceDefaults.LINK_SHARE_TITLE_MAX_LENGTH)} $url" )
+    i.putExtra(Intent.EXTRA_TEXT, "${title.limitText(PreferenceDefaults.LINK_SHARE_TITLE_MAX_LENGTH)} $url")
     return i
 }

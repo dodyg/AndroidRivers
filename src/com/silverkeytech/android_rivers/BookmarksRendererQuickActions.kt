@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
+import android.app.AlertDialog
 import android.content.Context
 import android.util.Log
 import android.view.Gravity
@@ -32,12 +33,11 @@ import android.widget.PopupWindow
 import com.silverkeytech.android_rivers.db.Bookmark
 import com.silverkeytech.android_rivers.db.BookmarkCollection
 import com.silverkeytech.android_rivers.db.DatabaseManager
-import com.silverkeytech.android_rivers.db.clearBookmarksFromCollection
-import com.silverkeytech.android_rivers.outlines.Outline
-import com.silverkeytech.android_rivers.db.removeItemByUrlFromBookmarkDb
-import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
-import android.app.AlertDialog
 import com.silverkeytech.android_rivers.db.SortingOrder
+import com.silverkeytech.android_rivers.db.clearBookmarksFromCollection
+import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
+import com.silverkeytech.android_rivers.db.removeItemByUrlFromBookmarkDb
+import com.silverkeytech.android_rivers.outlines.Outline
 
 fun inflater(context: Context): LayoutInflater {
     val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -139,7 +139,7 @@ fun showRssBookmarkQuickActionPopup(context: MainActivity, currentBookmark: Book
     }
 
 
-    fun showCollectionAssignmentPopup(alreadyBelongsToACollection : Boolean){
+    fun showCollectionAssignmentPopup(alreadyBelongsToACollection: Boolean) {
         var coll = getBookmarkCollectionFromDb(sortByTitleOrder = SortingOrder.ASC)
 
         if (coll.size == 0){
@@ -178,7 +178,7 @@ fun showRssBookmarkQuickActionPopup(context: MainActivity, currentBookmark: Book
                         context.toastee("This RSS has been successfuly assigned to '${selectedCollection.title}' collection", Duration.LONG)
 
 
-                } catch(ex : Exception){
+                } catch(ex: Exception){
                     context.toastee("Sorry, I have problem updating this RSS bookmark record", Duration.LONG)
                 }
 
@@ -264,42 +264,42 @@ fun showRiverBookmarksQuickActionPopup(context: MainActivity, currentOutline: Ou
     editIcon.setOnClickListener {
         val dlg = createSingleInputDialog(context, "Edit River Title", currentOutline.text, "Set title here", {
             dlg, title ->
-                if (title.isNullOrEmpty()){
-                    context.toastee("Please enter title", Duration.LONG)
-                }
-                else {
-                    val record = DatabaseManager.query().bookmark().byUrl(currentOutline.url!!)
+            if (title.isNullOrEmpty()){
+                context.toastee("Please enter title", Duration.LONG)
+            }
+            else {
+                val record = DatabaseManager.query().bookmark().byUrl(currentOutline.url!!)
 
-                    val isLocalUrl = isLocalUrl(currentOutline.url!!)
+                val isLocalUrl = isLocalUrl(currentOutline.url!!)
 
-                    if (record.exists){
-                        record.value!!.title = title!!
+                if (record.exists){
+                    record.value!!.title = title!!
 
-                        try{
-                            //perform this additional step so that when you modify a local RIVER, it updates the collection name as well
-                            if (isLocalUrl){
-                                val collectionId = extractIdFromLocalUrl(currentOutline.url!!)
-                                if (collectionId != null){
-                                    val collectionRecord = DatabaseManager.query().bookmarkCollection().byId(collectionId)
+                    try{
+                        //perform this additional step so that when you modify a local RIVER, it updates the collection name as well
+                        if (isLocalUrl){
+                            val collectionId = extractIdFromLocalUrl(currentOutline.url!!)
+                            if (collectionId != null){
+                                val collectionRecord = DatabaseManager.query().bookmarkCollection().byId(collectionId)
 
-                                    if (collectionRecord.exists){
-                                        collectionRecord.value!!.title = title
-                                        DatabaseManager.bookmarkCollection!!.update(collectionRecord.value!!)
-                                    }
+                                if (collectionRecord.exists){
+                                    collectionRecord.value!!.title = title
+                                    DatabaseManager.bookmarkCollection!!.update(collectionRecord.value!!)
                                 }
                             }
-
-                            DatabaseManager.bookmark!!.update(record.value!!)
-                            context.toastee("Bookmark title is successfully modified")
-                            context.refreshRiverBookmarks(false)
-                            pp.dismiss()
-                        }catch (ex : Exception){
-                            context.toastee("Sorry, I cannot update the title of this river for the following reason ${ex.getMessage()}", Duration.LONG)
                         }
-                    } else {
-                        context.toastee("Sorry, I cannot update the title of this river", Duration.LONG)
+
+                        DatabaseManager.bookmark!!.update(record.value!!)
+                        context.toastee("Bookmark title is successfully modified")
+                        context.refreshRiverBookmarks(false)
+                        pp.dismiss()
+                    }catch (ex: Exception){
+                        context.toastee("Sorry, I cannot update the title of this river for the following reason ${ex.getMessage()}", Duration.LONG)
                     }
+                } else {
+                    context.toastee("Sorry, I cannot update the title of this river", Duration.LONG)
                 }
+            }
 
         })
         dlg.show()

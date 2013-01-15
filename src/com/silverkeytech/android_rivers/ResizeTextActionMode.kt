@@ -25,10 +25,10 @@ import com.actionbarsherlock.view.MenuItem
 
 public trait WithVisualModificationPanel{
     open fun refreshContent()
-    open fun getActivity() : Activity
+    open fun getActivity(): Activity
 }
 
-public class ResizeTextActionMode (private val parent : WithVisualModificationPanel, private var mode: ActionMode?): ActionMode.Callback{
+public class ResizeTextActionMode (private val parent: WithVisualModificationPanel, private var mode: ActionMode?): ActionMode.Callback{
     val INCREASE_SIZE = 1
     val DECREASE_SIZE = 2
     val SWITCH_THEME: Int = 3

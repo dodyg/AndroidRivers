@@ -4,14 +4,11 @@ import android.app.Activity
 import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
-import com.silverkeytech.android_rivers.riverjs.RiverItem
 import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
+import com.silverkeytech.android_rivers.riverjs.accumulateList
 import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
-import com.silverkeytech.android_rivers.syndications.SyndicationFeed
 import com.silverkeytech.android_rivers.syndications.SyndicationFilter
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
-import java.util.ArrayList
-import com.silverkeytech.android_rivers.riverjs.accumulateList
 
 public class DownloadCollectionAsRiver(it: Context?, private val collectionId: Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
     class object {
@@ -24,8 +21,8 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
     protected override fun onPreExecute() {
         dialog.onCancel {
             dlg ->
-                dlg.dismiss()
-                this@DownloadCollectionAsRiver.cancel(true)
+            dlg.dismiss()
+            this@DownloadCollectionAsRiver.cancel(true)
         }
 
         dialog.show()
@@ -72,7 +69,7 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
                     if (callback != null)
                         callback!!(url, Result.right(sortedNewsItems))
                 }
-                catch (e : Exception){
+                catch (e: Exception){
                     if (callback != null)
                         callback!!(url, Result.wrong<List<RiverItemMeta>>(result.exception))
                 }

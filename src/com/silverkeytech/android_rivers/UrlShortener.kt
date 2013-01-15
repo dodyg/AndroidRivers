@@ -3,13 +3,13 @@ package com.silverkeytech.android_rivers
 import com.github.kevinsawicki.http.HttpRequest
 import com.google.gson.Gson
 
-public class shortenData (public val longUrl : String){
+public class shortenData (public val longUrl: String){
 }
 
-public class shortenDataReply(public val kind : String, public val id : String, public longUrl : String){
+public class shortenDataReply(public val kind: String, public val id: String, public longUrl: String){
 }
 
-public fun googleShorten(url : String): Result<String>
+public fun googleShorten(url: String): Result<String>
 {
     try
     {
@@ -29,7 +29,7 @@ public fun googleShorten(url : String): Result<String>
         else{
             return Result.wrong<String>(null)
         }
-    } catch(ex : Exception){
+    } catch(ex: Exception){
         return Result.wrong<String>(ex)
     }
 }

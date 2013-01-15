@@ -21,7 +21,7 @@ package com.silverkeytech.android_rivers.db
 import com.j256.ormlite.dao.Dao
 
 public class BookmarkCollectionQuery(private val dao: Dao<BookmarkCollection, out Int?>){
-    fun all(sortByTitleOrder : SortingOrder): QueryMany<BookmarkCollection> {
+    fun all(sortByTitleOrder: SortingOrder): QueryMany<BookmarkCollection> {
         try{
             var q = dao.queryBuilder()!!
 
@@ -37,7 +37,7 @@ public class BookmarkCollectionQuery(private val dao: Dao<BookmarkCollection, ou
         }
     }
 
-    fun byId(id : Int): QueryOne<BookmarkCollection>{
+    fun byId(id: Int): QueryOne<BookmarkCollection> {
         try{
             var q = dao.queryBuilder()!!
                     .where()!!

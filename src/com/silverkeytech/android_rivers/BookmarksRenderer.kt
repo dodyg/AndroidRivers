@@ -31,20 +31,19 @@ import android.widget.ListView
 import android.widget.TextView
 import com.silverkeytech.android_rivers.db.Bookmark
 import com.silverkeytech.android_rivers.db.BookmarkCollection
-import com.silverkeytech.android_rivers.db.getBookmarksFromDbByCollection
+import com.silverkeytech.android_rivers.db.getBookmarksUrlsFromDbByCollection
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
-import java.util.ArrayList
-import com.silverkeytech.android_rivers.db.getBookmarksUrlsFromDbByCollection
-import com.silverkeytech.android_rivers.outlines.sortOutlineDesc
 import com.silverkeytech.android_rivers.outlines.sortOutlineAsc
+import com.silverkeytech.android_rivers.outlines.sortOutlineDesc
+import java.util.ArrayList
 
 public class BookmarksRenderer(val context: MainActivity){
     class object {
         public val TAG: String = javaClass<BookmarksRenderer>().getSimpleName()
     }
 
-    fun showMessage(msg : String){
+    fun showMessage(msg: String) {
         val txt = context.findView<TextView>(R.id.main_message_tv)
         if (msg.isNullOrEmpty()){
             txt.setVisibility(View.INVISIBLE)
@@ -89,7 +88,7 @@ public class BookmarksRenderer(val context: MainActivity){
                         Log.d(TAG, "Downloading $current.id fails")
                     }
                 }
-                .execute(*urls)
+                        .execute(*urls)
             }
         })
 
@@ -134,7 +133,7 @@ public class BookmarksRenderer(val context: MainActivity){
         })
     }
 
-    fun handleRiversListing(opml: Opml, sort : Int) {
+    fun handleRiversListing(opml: Opml, sort: Int) {
         var outlines = ArrayList<Outline>()
 
         opml.body?.outline?.forEach {

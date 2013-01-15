@@ -24,11 +24,11 @@ import com.silverkeytech.android_rivers.outlines.Body
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 
-public fun removePodcast (id : Int): Result<None>{
+public fun removePodcast (id: Int): Result<None> {
     return DatabaseManager.cmd().podcast().deleteById(id)
 }
 
-public fun getPodcastsFromDb(sortByTitle : SortingOrder) : List<Podcast>{
+public fun getPodcastsFromDb(sortByTitle: SortingOrder): List<Podcast> {
     val podcasts = DatabaseManager.query().podcast().all(sortByTitle)
 
     if (podcasts.exist)
@@ -38,8 +38,8 @@ public fun getPodcastsFromDb(sortByTitle : SortingOrder) : List<Podcast>{
 }
 
 public fun savePodcastToDb(
-        title : String, url : String, sourceTitle : String, sourceUrl : String, localPath : String,
-        description : String, mimeType : String, length : Int) : Result<Podcast>{
+        title: String, url: String, sourceTitle: String, sourceUrl: String, localPath: String,
+        description: String, mimeType: String, length: Int): Result<Podcast> {
     try{
         val p = Podcast()
         p.title = title
@@ -54,7 +54,7 @@ public fun savePodcastToDb(
         DatabaseManager.podcast!!.create(p)
         return Result.right(p)
     }
-    catch(e : Exception){
+    catch(e: Exception){
         return Result.wrong<Podcast>(null)
     }
 }
@@ -118,7 +118,7 @@ public fun removeBookmarkFromCollection(collectionId: Int, bookmarkId: Int): Res
 }
 
 
-public fun getBookmarkCollectionFromDb(sortByTitleOrder : SortingOrder): List<BookmarkCollection> {
+public fun getBookmarkCollectionFromDb(sortByTitleOrder: SortingOrder): List<BookmarkCollection> {
     val coll = DatabaseManager.query().bookmarkCollection().all(sortByTitleOrder)
 
     if (coll.exist)
@@ -136,7 +136,7 @@ public fun getBookmarksFromDbByCollection(collectionId: Int): List<Bookmark> {
         return arrayListOf<Bookmark>()
 }
 
-public fun getBookmarksUrlsFromDbByCollection(collectionId : Int): Array<String?>{
+public fun getBookmarksUrlsFromDbByCollection(collectionId: Int): Array<String?> {
     val bookmarks = getBookmarksFromDbByCollection(collectionId)
     val urls = bookmarks.map { it.url }.toArray(array<String?>())
 
@@ -180,7 +180,7 @@ public fun getBookmarksFromDb(kind: BookmarkKind, sortByTitleOrder: SortingOrder
 }
 
 //get bookmarks from db and return the data in opml format
-public fun getBookmarksFromDbAsOpml(kind: BookmarkKind, sortByTitleOrder : SortingOrder): Opml {
+public fun getBookmarksFromDbAsOpml(kind: BookmarkKind, sortByTitleOrder: SortingOrder): Opml {
     val opml = Opml()
     opml.body = Body()
 
@@ -222,6 +222,6 @@ public fun saveOpmlAsBookmarks(opml: Opml): Result<Opml> {
     }
 }
 
-public fun removeItemByUrlFromBookmarkDb(url : String) : Result<None>{
+public fun removeItemByUrlFromBookmarkDb(url: String): Result<None> {
     return  DatabaseManager.cmd().bookmark().deleteByUrl(url)
 }

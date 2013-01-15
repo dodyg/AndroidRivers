@@ -18,35 +18,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import com.actionbarsherlock.app.SherlockListActivity
-import android.os.Bundle
-import android.os.Environment
-import java.io.File
-import android.widget.TextView
-import android.view.LayoutInflater
-import android.widget.ListView
-import android.widget.ArrayAdapter
-import android.view.View
-import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
-import android.widget.AdapterView
-import android.widget.Adapter
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
+import android.os.Environment
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Adapter
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.ListView
+import android.widget.PopupWindow
+import android.widget.TextView
+import com.actionbarsherlock.app.SherlockListActivity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
-import android.media.MediaMetadataRetriever
-import com.silverkeytech.android_rivers.db.getPodcastsFromDb
 import com.silverkeytech.android_rivers.db.Podcast
 import com.silverkeytech.android_rivers.db.SortingOrder
-import com.actionbarsherlock.internal.widget.IcsAdapterView.OnItemLongClickListener
-import com.actionbarsherlock.internal.widget.IcsAdapterView
-import android.widget.PopupWindow
-import android.widget.ImageView
-import android.view.Gravity
+import com.silverkeytech.android_rivers.db.getPodcastsFromDb
 import com.silverkeytech.android_rivers.db.removePodcast
+import java.io.File
 
-public class PodcastManagerActivity : SherlockListActivity()
+public class PodcastManagerActivity: SherlockListActivity()
 {
     class object {
         public val TAG: String = javaClass<PodcastManagerActivity>().getSimpleName()
@@ -77,7 +74,6 @@ public class PodcastManagerActivity : SherlockListActivity()
     }
 
 
-
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = getSupportMenuInflater()!!
         inflater.inflate(R.menu.podcast_menu, menu)
@@ -105,7 +101,7 @@ public class PodcastManagerActivity : SherlockListActivity()
                 return true
             }
             EXPLORE -> {
-                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_MORE_NEWS_SOURCE , "Get more news")
+                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_MORE_NEWS_SOURCE, "Get more news")
                 return false
             }
             SWITCH_BACKWARD -> {
@@ -117,12 +113,12 @@ public class PodcastManagerActivity : SherlockListActivity()
         }
     }
 
-    public fun listPodcasts(){
+    public fun listPodcasts() {
         val podcast = getPodcastsFromDb(SortingOrder.DESC)
         renderFileListing(podcast)
     }
 
-    public fun refreshPodcasts(){
+    public fun refreshPodcasts() {
         listPodcasts()
     }
 

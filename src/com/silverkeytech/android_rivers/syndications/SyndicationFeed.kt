@@ -21,18 +21,12 @@ package com.silverkeytech.android_rivers.syndications
 import android.util.Log
 import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.scrubHtml
-import com.silverkeytech.android_rivers.syndications.SyndicationFeedEnclosure
-import com.silverkeytech.android_rivers.syndications.SyndicationFeedType
 import com.silverkeytech.android_rivers.syndications.atom.ContentElement
 import com.silverkeytech.android_rivers.syndications.atom.Feed
 import com.silverkeytech.android_rivers.syndications.rss.Rss
 import java.util.ArrayList
-import com.silverkeytech.android_rivers.syndications.verifyRssFeedForDateFitness
-import com.silverkeytech.android_rivers.syndications.verifyAtomFeedForDateFitness
-import java.util.Date
 
-
-public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, val filter : SyndicationFilter? = null){
+public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, val filter: SyndicationFilter? = null){
     class object{
         public val TAG: String = javaClass<SyndicationFeed>().getSimpleName()
     }
@@ -42,7 +36,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
     public var link: String = ""
     public var feedType: SyndicationFeedType = SyndicationFeedType.NONE
     public var items: ArrayList<SyndicationFeedItem> = ArrayList<SyndicationFeedItem>()
-    public var isDateParseable : Boolean = false
+    public var isDateParseable: Boolean = false
 
     public fun hasLink(): Boolean {
         return !link.isNullOrEmpty()
@@ -72,7 +66,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
                 val maxSize = filter?.maximumSize
                 val oldestDate = filter?.oldestDate
                 for(val i in channel.item!!.iterator()){
-                    itemCounter ++
+                    itemCounter++
 
                     //stop processing if there's a limit on how many items to be processed
                     if (maxSize != null && itemCounter > maxSize){
@@ -86,7 +80,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
                     //the date parsing is exception heavy. Don't do it over a loop. Better verify it first.
                     if (isDateParseable)                                                  {
                         fi.pubDate = i.getPubDate()
-                        if (oldestDate !=null && fi.pubDate!!.compareTo(oldestDate) == -1){
+                        if (oldestDate != null && fi.pubDate!!.compareTo(oldestDate) == -1){
                             Log.d(TAG, "Oldest item limit reached at ${fi.pubDate}")
                             break
                         }

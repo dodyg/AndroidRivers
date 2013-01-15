@@ -44,8 +44,8 @@ public class DownloadImage(it: Context?): AsyncTask<String, Int, Result<Download
     protected override fun onPreExecute() {
         dialog.onCancel {
             dlg ->
-                dlg.dismiss()
-                this@DownloadImage.cancel(true)
+            dlg.dismiss()
+            this@DownloadImage.cancel(true)
         }
         dialog.show()
     }

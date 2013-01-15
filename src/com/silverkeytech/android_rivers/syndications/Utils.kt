@@ -1,17 +1,15 @@
 package com.silverkeytech.android_rivers.syndications
 
 import android.util.Log
-import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.silverkeytech.android_rivers.Result
+import com.silverkeytech.android_rivers.httpGet
 import com.silverkeytech.android_rivers.outliner.transformXmlToAtom
 import com.silverkeytech.android_rivers.outliner.transformXmlToRss
-import com.silverkeytech.android_rivers.syndications.SyndicationFeed
 import com.silverkeytech.android_rivers.syndications.atom.Feed
 import com.silverkeytech.android_rivers.syndications.rss.Rss
-import com.silverkeytech.android_rivers.httpGet
 
-fun downloadSingleFeed(url: String, filter : SyndicationFilter? = null): Result<SyndicationFeed> {
+fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<SyndicationFeed> {
     val TAG = "downloadFeed"
     try{
         var downloadedContent: String?
@@ -66,7 +64,7 @@ fun downloadSingleFeed(url: String, filter : SyndicationFilter? = null): Result<
 }
 
 //verify that this atom feed date are parseable. This is necessary for merging syndication date
-public fun verifyAtomFeedForDateFitness(f : Feed) : Boolean{
+public fun verifyAtomFeedForDateFitness(f: Feed): Boolean {
     try
     {
         if (f.getUpdated() == null)
@@ -82,13 +80,13 @@ public fun verifyAtomFeedForDateFitness(f : Feed) : Boolean{
 
         return true
     }
-    catch (e : Exception){
+    catch (e: Exception){
         return false
     }
 }
 
 //verify that this rss feed ate are parseable. Thsi is necessary for merging syndication date
-public fun verifyRssFeedForDateFitness(r : Rss) : Boolean {
+public fun verifyRssFeedForDateFitness(r: Rss): Boolean {
     try
     {
         if (r.channel?.item == null || r.channel!!.item!!.size() == 0)
@@ -101,7 +99,7 @@ public fun verifyRssFeedForDateFitness(r : Rss) : Boolean {
 
         return true
     }
-    catch (e : Exception){
+    catch (e: Exception){
         return false
     }
 }

@@ -32,11 +32,11 @@ import android.support.v4.app.NotificationCompat
 import android.util.Log
 import android.widget.RemoteViews
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
+import com.silverkeytech.android_rivers.db.savePodcastToDb
 import java.io.BufferedInputStream
 import java.io.FileOutputStream
 import java.net.URL
 import java.util.Random
-import com.silverkeytech.android_rivers.db.savePodcastToDb
 
 public class DownloadService(): IntentService("DownloadService"){
     class object{
@@ -112,8 +112,8 @@ public class DownloadService(): IntentService("DownloadService"){
 
             notificationManager.notify(notificationId, notification)
 
-            var input : BufferedInputStream? = null
-            var output : FileOutputStream? = null
+            var input: BufferedInputStream? = null
+            var output: FileOutputStream? = null
             try{
                 input = BufferedInputStream(url.openStream()!!)
                 output = FileOutputStream(filename)
@@ -163,7 +163,7 @@ public class DownloadService(): IntentService("DownloadService"){
                     result = Activity.RESULT_OK
                 }
 
-            }catch (e : java.io.FileNotFoundException){
+            }catch (e: java.io.FileNotFoundException){
                 notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "Download fails due to ${e.getMessage()}")
                 notificationManager.notify(notificationId, notification)
                 result = Activity.RESULT_CANCELED

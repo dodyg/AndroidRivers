@@ -29,8 +29,8 @@ import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 import com.silverkeytech.android_rivers.db.getBookmarksUrlsFromDbByCollection
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
-import java.util.ArrayList
 import com.silverkeytech.android_rivers.riverjs.RiverItemSource
+import java.util.ArrayList
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity(): SherlockListActivity(), WithVisualModificationPanel
@@ -122,13 +122,13 @@ public class RiverActivity(): SherlockListActivity(), WithVisualModificationPane
             }
             else{
                 DownloadRiverContent(this, riverLanguage)
-                    .executeOnComplete {
+                        .executeOnComplete {
                     res, lang ->
-                        var river = res.value!!
-                        sortedNewsItems = river.getSortedNewsItems()
+                    var river = res.value!!
+                    sortedNewsItems = river.getSortedNewsItems()
 
-                        this@RiverActivity.getMain().setRiverCache(riverUrl, sortedNewsItems!!)
-                        RiverContentRenderer(this@RiverActivity, lang).handleNewsListing(sortedNewsItems!!)
+                    this@RiverActivity.getMain().setRiverCache(riverUrl, sortedNewsItems!!)
+                    RiverContentRenderer(this@RiverActivity, lang).handleNewsListing(sortedNewsItems!!)
                 }.execute(riverUrl)
             }
         }
@@ -163,7 +163,7 @@ public class RiverActivity(): SherlockListActivity(), WithVisualModificationPane
         downloadRiver(riverUrl, false)
     }
 
-    public override fun getActivity() : Activity{
+    public override fun getActivity(): Activity {
         return this
     }
 
@@ -175,7 +175,7 @@ public class RiverActivity(): SherlockListActivity(), WithVisualModificationPane
         return true
     }
 
-    fun collectRiverSources(){
+    fun collectRiverSources() {
         if (sortedNewsItems != null && sortedNewsItems!!.size() > 0){
             val distinct = ArrayList<RiverItemSource>();
             var itm = sortedNewsItems!!.get(0).source
@@ -193,7 +193,7 @@ public class RiverActivity(): SherlockListActivity(), WithVisualModificationPane
 
             startRiverSourcesActivity(this, riverName, riverUrl,
                     ArrayList(sortedDistinct.map { x -> x.title!! }),
-                    ArrayList(sortedDistinct.map { x -> x.uri!!}))
+                    ArrayList(sortedDistinct.map { x -> x.uri!! }))
         }
         else{
             Log.d(TAG, "There are no sources")

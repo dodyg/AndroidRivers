@@ -21,10 +21,10 @@ package com.silverkeytech.android_rivers
 import android.app.Activity
 import android.content.Context
 import android.os.AsyncTask
+import android.util.Log
 import com.silverkeytech.android_rivers.syndications.SyndicationFeed
 import com.silverkeytech.android_rivers.syndications.SyndicationFilter
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
-import android.util.Log
 
 public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<SyndicationFeed>>(){
     class object {
@@ -65,7 +65,7 @@ public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String,
                     return res
             }
         }
-        catch (e : Exception){
+        catch (e: Exception){
             return Result.wrong<SyndicationFeed>(e)
         }
     }

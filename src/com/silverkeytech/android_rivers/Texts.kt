@@ -18,18 +18,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import java.util.UUID
 import android.app.Activity
-import android.widget.TextView
 import android.graphics.Typeface
-import android.util.Log
-import go.goyalla.dict.arabicDictionary.file.ArabicReshape
-import android.view.Gravity
-import android.util.TypedValue
-import android.net.Uri
-import java.net.URL
 import android.text.SpannableStringBuilder
 import android.text.style.ImageSpan
+import android.util.Log
+import android.util.TypedValue
+import android.view.Gravity
+import android.widget.TextView
+import go.goyalla.dict.arabicDictionary.file.ArabicReshape
+import java.net.URL
+import java.util.UUID
 
 fun scrubJsonP(text: String): String {
     val rep = text.replace("onGetRiverStream (", "").trimTrailing(")")
@@ -62,7 +61,7 @@ fun String?.isNullOrEmpty(): Boolean {
     return res
 }
 
-fun String?.limitText(maxSize : Int) : String{
+fun String?.limitText(maxSize: Int): String {
     if (this.isNullOrEmpty())
         return ""
     else if (this!!.size.toInt() <= maxSize)
@@ -88,7 +87,7 @@ fun generateThrowawayName(): String {
     return name.substring(0, 6)
 }
 
-fun handleForeignTextFont(context: Activity, language : String, text: TextView, content: String, textSize: Float) {
+fun handleForeignTextFont(context: Activity, language: String, text: TextView, content: String, textSize: Float) {
     val TAG = "handleText"
 
     val arabicFont = Typeface.createFromAsset(context.getAssets(), "DroidKufi-Regular.ttf")
@@ -116,33 +115,33 @@ fun handleTextColorBasedOnTheme(context: Activity, text: TextView) {
         text.setTextColor(android.graphics.Color.WHITE)
 }
 
-val LOCAL_URL : String = "http://www.localhost/"
-public fun makeLocalUrl(id : Int) : String{
+val LOCAL_URL: String = "http://www.localhost/"
+public fun makeLocalUrl(id: Int): String {
     val url = LOCAL_URL + id.toString()
     return url
 }
 
-public fun isLocalUrl(url : String) : Boolean = url.contains(LOCAL_URL)
+public fun isLocalUrl(url: String): Boolean = url.contains(LOCAL_URL)
 
-public fun extractIdFromLocalUrl(url : String) : Int?{
+public fun extractIdFromLocalUrl(url: String): Int? {
     try{
         val id = url.substring(LOCAL_URL.size).toString()
         if (id.isNullOrEmpty())
             return null
         else
             return id.toInt()
-    }catch(e : Exception){
+    }catch(e: Exception){
         return null
     }
 }
 
-fun safeUrlConvert(url : String?) : Result<URL>{
+fun safeUrlConvert(url: String?): Result<URL> {
     try
     {
         val u = URL(url)
         return Result.right(u)
     }
-    catch(ex : Exception){
+    catch(ex: Exception){
         return Result.wrong<URL>(ex)
     }
 }

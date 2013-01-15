@@ -54,9 +54,9 @@ public class PreferenceDefaults{
         public val CONTENT_OUTLINE_MORE_NEWS_SOURCE: String = "http://hobieu.apphb.com/api/1/opml/root"
 
         public val RSS_LATEST_DATE_FILTER_IN_DAYS: Int = 30
-        public val RSS_MAX_ITEMS_FILTER:Int = 20
+        public val RSS_MAX_ITEMS_FILTER: Int = 20
 
-        public val SETUP_DOWNLOAD_DEFAULT_RIVERS : Boolean = true
+        public val SETUP_DOWNLOAD_DEFAULT_RIVERS: Boolean = true
 
         public val VISUAL_LIST_TEXT_SIZE: Int = 24
         public val VISUAL_THEME: Int = R.style.Theme_Sherlock_Light_DarkActionBar
@@ -65,14 +65,14 @@ public class PreferenceDefaults{
     }
 }
 
-fun Activity.getContentPref() : ContentPreference =
-    ContentPreference(this.getSharedPreferences(Preferences.CONTENT, Context.MODE_PRIVATE)!!)
+fun Activity.getContentPref(): ContentPreference =
+        ContentPreference(this.getSharedPreferences(Preferences.CONTENT, Context.MODE_PRIVATE)!!)
 
 fun Activity.getSetupPref(): SetupPreference =
-    SetupPreference(this.getSharedPreferences(Preferences.SETUP, Context.MODE_PRIVATE)!!)
+        SetupPreference(this.getSharedPreferences(Preferences.SETUP, Context.MODE_PRIVATE)!!)
 
 fun Activity.getVisualPref(): VisualPreference =
-    VisualPreference(this.getSharedPreferences(Preferences.VISUAL, Context.MODE_PRIVATE)!!)
+        VisualPreference(this.getSharedPreferences(Preferences.VISUAL, Context.MODE_PRIVATE)!!)
 
 public class ContentPreference(public val pref: SharedPreferences){
     public fun getRiverBookmarksSorting(): Int = pref.getInt(Preferences.CONTENT_RIVER_BOOKMARKS_SORTING, PreferenceDefaults.CONTENT_RIVER_BOOKMARKS_SORTING)
@@ -84,10 +84,10 @@ public class ContentPreference(public val pref: SharedPreferences){
 }
 
 public class SetupPreference(public val pref: SharedPreferences){
-    public fun getDownloadDefaultRiversIfNecessary() : Boolean =
+    public fun getDownloadDefaultRiversIfNecessary(): Boolean =
             pref.getBoolean(Preferences.SETUP_DOWNLOAD_DEFAULT_RIVERS, PreferenceDefaults.SETUP_DOWNLOAD_DEFAULT_RIVERS)
 
-    public fun setDownloadDefaultRivers(yes : Boolean){
+    public fun setDownloadDefaultRivers(yes: Boolean) {
         val edit = pref.edit()!!
         edit.putBoolean(Preferences.SETUP_DOWNLOAD_DEFAULT_RIVERS, yes)
         edit.commit()

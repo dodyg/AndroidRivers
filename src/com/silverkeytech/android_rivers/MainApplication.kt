@@ -28,15 +28,14 @@ import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.outliner.OutlineContent
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
-import java.util.ArrayList
 import com.silverkeytech.android_rivers.syndications.SyndicationFeed
-import android.app.Activity
+import java.util.ArrayList
 
 public class SharedFlags{
     public var isRssJustBookmarked: Boolean = false
     public var isRiverJustBookmarked: Boolean = false
 
-    public fun reset(){
+    public fun reset() {
         isRiverJustBookmarked = false
         isRssJustBookmarked = false
     }
@@ -54,7 +53,7 @@ public class MainApplication(): Application()
 
     var riverBookmarksCache: CacheItem<Opml>? = null
 
-    public val flags : SharedFlags = SharedFlags()
+    public val flags: SharedFlags = SharedFlags()
 
     public override fun onCreate() {
         Log.d(TAG, "Main Application is started")
@@ -99,7 +98,7 @@ public class MainApplication(): Application()
         riverBookmarksCache?.setExpireInMinutesFromNow(10.toHoursInMinutes())
     }
 
-    public fun getSyndicationCache(uri : String) : SyndicationFeed? {
+    public fun getSyndicationCache(uri: String): SyndicationFeed? {
         val synd = syndicationCache.get(uri)
 
         if (synd == null)
@@ -114,7 +113,7 @@ public class MainApplication(): Application()
         }
     }
 
-    public fun setSyndicationCache(uri: String, feed : SyndicationFeed, expirationInMinutes : Int = 30){
+    public fun setSyndicationCache(uri: String, feed: SyndicationFeed, expirationInMinutes: Int = 30) {
         val item = CacheItem(feed)
         item.setExpireInMinutesFromNow(expirationInMinutes)
         syndicationCache.put(uri, item)

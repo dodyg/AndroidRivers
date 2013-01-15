@@ -72,7 +72,7 @@ public class Database (context: Context): OrmLiteSqliteOpenHelper(context, Datab
     }
 
     var podcastDao: Dao<Podcast, out Int?>? = null
-    public fun getPodcastDao(): Any{
+    public fun getPodcastDao(): Any {
         if (podcastDao == null){
             podcastDao = super<OrmLiteSqliteOpenHelper>.getDao(javaClass<Podcast>())
         }

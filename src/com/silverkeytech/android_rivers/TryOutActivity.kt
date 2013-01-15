@@ -42,12 +42,12 @@ import com.silverkeytech.android_rivers.db.BookmarkCollection
 import com.silverkeytech.android_rivers.db.BookmarkCollectionKind
 import com.silverkeytech.android_rivers.db.BookmarkKind
 import com.silverkeytech.android_rivers.db.DatabaseManager
+import com.silverkeytech.android_rivers.db.SortingOrder
+import com.silverkeytech.android_rivers.db.savePodcastToDb
 import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
 import java.util.ArrayList
 import java.util.Random
-import com.silverkeytech.android_rivers.db.SortingOrder
-import com.silverkeytech.android_rivers.db.savePodcastToDb
 
 public class TryOutActivity(): Activity()
 {
@@ -77,7 +77,7 @@ public class TryOutActivity(): Activity()
         handleRiverJsWithOpmlSource()
     }
 
-    fun handleInsertPodcast(){
+    fun handleInsertPodcast() {
         val btn = findView<Button>(R.id.tryout_insert_podcast_entry)
 
         btn.setOnClickListener {
@@ -89,7 +89,7 @@ public class TryOutActivity(): Activity()
                     "<p>On this edition of All Songs Considered we've got a bunch of new-year premieres for you",
                     "audio/mpeg",
                     47647644
-                    )
+            )
 
             if (res.isTrue())
                 toastee("${res.value!!.title} - ${res.value!!.id}")
@@ -98,7 +98,7 @@ public class TryOutActivity(): Activity()
         }
     }
 
-    fun handleStartPodcastManager(){
+    fun handleStartPodcastManager() {
         val btn = findView<Button>(R.id.tryout_start_podcast_manager)
 
         btn.setOnClickListener {

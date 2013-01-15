@@ -49,7 +49,7 @@ public object DatabaseManager{
 public class Query (private val bookmark: Dao<Bookmark, out Int?>?,
                     private val bookmarkCollection: Dao<BookmarkCollection, out Int?>?,
                     private val podcast: Dao<Podcast, out Int?>?
-                    ){
+){
     public fun bookmark(): BookmarkQuery = BookmarkQuery(bookmark!!)
     public fun bookmarkCollection(): BookmarkCollectionQuery = BookmarkCollectionQuery(bookmarkCollection!!)
     public fun podcast(): PodcastQuery = PodcastQuery(podcast!!)
@@ -58,7 +58,7 @@ public class Query (private val bookmark: Dao<Bookmark, out Int?>?,
 public class Command(private val bookmark: Dao<Bookmark, out Int?>?,
                      private val bookmarkCollection: Dao<BookmarkCollection, out Int?>?,
                      private val podcast: Dao<Podcast, out Int?>?
-                     ){
+){
     public fun bookmark(): BookmarkCommand = BookmarkCommand(bookmark!!)
     public fun bookmarkCollection(): BookmarkCollectionCommand = BookmarkCollectionCommand(bookmarkCollection!!)
     public fun podcast(): PodcastCommand = PodcastCommand(podcast!!)

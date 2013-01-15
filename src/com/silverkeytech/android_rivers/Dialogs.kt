@@ -18,13 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.widget.EditText
-import android.app.Activity
 import android.view.View
+import android.widget.EditText
 
-public fun dlgClickListener(action : (dlg : DialogInterface?, idx : Int) -> Unit) : DialogInterface.OnClickListener{
+public fun dlgClickListener(action: (dlg: DialogInterface?, idx: Int) -> Unit): DialogInterface.OnClickListener {
     return object: DialogInterface.OnClickListener {
         public override fun onClick(p0: DialogInterface?, p1: Int) {
             action(p0, p1)
@@ -33,7 +33,7 @@ public fun dlgClickListener(action : (dlg : DialogInterface?, idx : Int) -> Unit
 }
 
 //Create a popup dialog with one text for url submission. Then provide the given url via a callback called 'action'
-public fun createSingleInputDialog(context : Activity, title : String, defaultInput : String?, inputHint : String, action : (DialogInterface?, String?) -> Unit) : AlertDialog{
+public fun createSingleInputDialog(context: Activity, title: String, defaultInput: String?, inputHint: String, action: (DialogInterface?, String?) -> Unit): AlertDialog {
     val dlg: View = context.getLayoutInflater()!!.inflate(R.layout.dialog_single_input, null)!!
 
     //take care of color
@@ -54,12 +54,12 @@ public fun createSingleInputDialog(context : Activity, title : String, defaultIn
 
     dialog.setPositiveButton(context.getString(R.string.ok), dlgClickListener {
         dlg, idx ->
-            action(dlg, inputUrl.getText()?.toString())
+        action(dlg, inputUrl.getText()?.toString())
     })
 
     dialog.setNegativeButton(context.getString(R.string.cancel), dlgClickListener {
         dlg, idx ->
-            dlg?.dismiss()
+        dlg?.dismiss()
     })
 
     val createdDialog = dialog.create()!!
@@ -68,21 +68,21 @@ public fun createSingleInputDialog(context : Activity, title : String, defaultIn
 
 //Create a simple confirmation dialog for dangerous operation such as removal/delete operation. It handles both positive and negative choice.
 //The dialog box is automatically closed in either situation
-public fun createConfirmationDialog(context : Activity, message : String, positive : () -> Unit, negative : () -> Unit) : AlertDialog{
+public fun createConfirmationDialog(context: Activity, message: String, positive: () -> Unit, negative: () -> Unit): AlertDialog {
     val dialog = AlertDialog.Builder(context)
     dialog.setTitle(context.getString(R.string.confirmation_dialog_title))
     dialog.setMessage(message)
 
     dialog.setPositiveButton(context.getString(R.string.yes), dlgClickListener {
         dlg, idx ->
-            positive()
-            dlg?.dismiss()
+        positive()
+        dlg?.dismiss()
     })
 
     dialog.setNegativeButton(context.getString(R.string.cancel), dlgClickListener {
         dlg, idx ->
-            negative()
-            dlg?.dismiss()
+        negative()
+        dlg?.dismiss()
     })
 
     val createdDialog = dialog.create()!!

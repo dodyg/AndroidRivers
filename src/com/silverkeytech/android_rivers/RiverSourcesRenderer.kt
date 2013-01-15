@@ -19,8 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.content.Context
-import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,19 +26,15 @@ import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
-import android.widget.ImageView
 import android.widget.ListView
-import android.widget.PopupWindow
 import android.widget.TextView
-import com.silverkeytech.android_rivers.db.Bookmark
-import com.silverkeytech.android_rivers.db.removeBookmarkFromCollection
 
-public class RiverSourcesRenderer(val context: RiverSourcesActivity, val language : String){
+public class RiverSourcesRenderer(val context: RiverSourcesActivity, val language: String){
     class object {
         public val TAG: String = javaClass<RiverSourcesRenderer>().getSimpleName()
     }
 
-    fun handleListing(sourcesTitles : List<String>, sourcesUris: List<String>) {
+    fun handleListing(sourcesTitles: List<String>, sourcesUris: List<String>) {
 
         val adapter = object : ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, android.R.id.text1, sourcesTitles){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {

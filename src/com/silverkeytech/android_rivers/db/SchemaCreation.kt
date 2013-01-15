@@ -37,7 +37,7 @@ public class SchemaCreation(val db: SQLiteDatabase){
         }
     }
 
-    private fun create3() : Boolean {
+    private fun create3(): Boolean {
         create1()
         create2()
         try{
@@ -64,7 +64,7 @@ public class SchemaCreation(val db: SQLiteDatabase){
         }
     }
 
-    private fun create2() : Boolean {
+    private fun create2(): Boolean {
         create1()
         try{
             Log.d(TAG, "OnUpgrade(1): Create collection Table")
@@ -83,7 +83,7 @@ public class SchemaCreation(val db: SQLiteDatabase){
         }
     }
 
-    private fun create1() : Boolean {
+    private fun create1(): Boolean {
         try{
             Log.d(TAG, "OnCreate(1): Create bookmark Table")
 

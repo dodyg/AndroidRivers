@@ -19,7 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers.db
 
 import com.j256.ormlite.dao.Dao
-import com.silverkeytech.android_rivers.db.SortingOrder
 
 public class PodcastQuery(private val dao: Dao<Podcast, out Int?>){
     fun all(sortByDateCreated: SortingOrder): QueryMany<Podcast> {

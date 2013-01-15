@@ -18,21 +18,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import com.actionbarsherlock.app.SherlockListActivity
 import com.actionbarsherlock.view.ActionMode
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 import com.silverkeytech.android_rivers.db.BookmarkCollection
 import com.silverkeytech.android_rivers.db.BookmarkKind
+import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
-import android.util.Log
-import com.silverkeytech.android_rivers.db.SortingOrder
-import android.app.Activity
 
 //Responsible of downloading, caching and viewing a news river content
 public class FeedActivity(): SherlockListActivity(), WithVisualModificationPanel
@@ -66,7 +66,7 @@ public class FeedActivity(): SherlockListActivity(), WithVisualModificationPanel
 
     var feedDateIsParseable: Boolean = false
 
-    fun downloadFeed(ignoreCache : Boolean) {
+    fun downloadFeed(ignoreCache: Boolean) {
         DownloadFeed(this, ignoreCache)
                 .executeOnComplete {
             res ->
@@ -160,7 +160,8 @@ public class FeedActivity(): SherlockListActivity(), WithVisualModificationPanel
 
                 dialog.setItems(withInstruction, object : DialogInterface.OnClickListener{
                     public override fun onClick(p0: DialogInterface?, p1: Int) {
-                        if (p1 == 0) { //skip adding bookmark to collection. Just add to RSS bookmark
+                        if (p1 == 0) {
+                            //skip adding bookmark to collection. Just add to RSS bookmark
                             saveBookmark(null)
                         } else {
                             val currentCollection = coll[p1 - 1] //we added one extra item that was "no instruction" so the index must be deducted by 1
@@ -180,7 +181,8 @@ public class FeedActivity(): SherlockListActivity(), WithVisualModificationPanel
                 saveBookmark(null)
             }
 
-        } else { //no collection is available so save it straight to bookmark
+        } else {
+            //no collection is available so save it straight to bookmark
             saveBookmark(null)
         }
     }

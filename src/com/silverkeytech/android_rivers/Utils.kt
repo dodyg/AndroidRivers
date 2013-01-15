@@ -18,26 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.app.Activity
-import android.view.Gravity
+import android.content.Context
+import android.net.ConnectivityManager
 import android.view.View
 import android.view.View.OnClickListener
-import android.widget.Toast
-import java.net.SocketException
-import java.net.UnknownHostException
-import java.text.SimpleDateFormat
-import org.apache.http.conn.ConnectTimeoutException
-import android.widget.TextView
-import android.graphics.Typeface
-import go.goyalla.dict.arabicDictionary.file.ArabicReshape
-import android.util.Log
-import android.util.TypedValue
-import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
-import java.util.Date
-import java.util.Calendar
 import com.github.kevinsawicki.http.HttpRequest
-import android.net.ConnectivityManager
-import android.content.Context
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
 
 public fun OnClickListener(action: (View?) -> Unit): OnClickListener {
     return object : OnClickListener {
@@ -86,13 +74,13 @@ fun inMegaByte(mb: Int): Int = mb * 1024 * 1024
 
 fun Int.toHoursInMinutes() = this * 60
 
-public fun hoursBeforeNow(hours : Int) : Date{
+public fun hoursBeforeNow(hours: Int): Date {
     val now = Calendar.getInstance()
     now.add(Calendar.HOUR, -hours)
     return now.getTime()
 }
 
-public fun daysBeforeNow(days : Int) : Date{
+public fun daysBeforeNow(days: Int): Date {
     val hours = days * 24
     val now = Calendar.getInstance()
     now.add(Calendar.HOUR, -hours)
@@ -108,12 +96,12 @@ fun futureTimeFromNowInMilies(seconds: Int): Long {
     return System.currentTimeMillis() + (seconds.toLong() * 1000.toLong())
 }
 
-fun httpGet(url : String) : HttpRequest{
+fun httpGet(url: String): HttpRequest {
     return HttpRequest.get(url)!!.acceptGzipEncoding()!!.uncompress(true)!!
 }
 
-fun isNetworkAvailable(context : Context) : Boolean  {
-    val connectivityManager =  context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+fun isNetworkAvailable(context: Context): Boolean {
+    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val activeNetworkInfo = connectivityManager.getActiveNetworkInfo()
     return activeNetworkInfo != null
 }

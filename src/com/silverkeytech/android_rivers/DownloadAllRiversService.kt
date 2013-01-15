@@ -27,18 +27,16 @@ import android.content.Intent
 import android.support.v4.app.NotificationCompat
 import android.util.Log
 import android.widget.RemoteViews
-import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.google.gson.Gson
-import com.silverkeytech.android_rivers.riverjs.River
-import java.util.Random
 import com.silverkeytech.android_rivers.db.getBookmarksUrlsFromDbByCollection
-import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
-import com.silverkeytech.android_rivers.syndications.SyndicationFilter
-import com.silverkeytech.android_rivers.riverjs.accumulateList
+import com.silverkeytech.android_rivers.riverjs.River
 import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
+import com.silverkeytech.android_rivers.riverjs.accumulateList
 import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
-import com.silverkeytech.android_rivers.PreferenceDefaults
+import com.silverkeytech.android_rivers.syndications.SyndicationFilter
+import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
+import java.util.Random
 
 public class DownloadAllRiversService(): IntentService("DownloadAllRiversService"){
     class object{
@@ -86,15 +84,15 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
         var progress: Int
         var errorCount = 0
 
-        fun updateText(msg : String){
+        fun updateText(msg: String) {
             notification.contentView!!.setTextViewText(R.id.download_progress_status_text, msg)
         }
 
-        fun updateProgress(sofar : Int){
+        fun updateProgress(sofar: Int) {
             notification.contentView!!.setProgressBar(R.id.download_progress_status_progress, 100, sofar, false)
         }
 
-        fun notify(){
+        fun notify() {
             notificationManager.notify(notificationId, notification)
         }
 

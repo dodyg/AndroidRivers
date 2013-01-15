@@ -21,7 +21,6 @@ import android.app.Activity
 import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
-import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.silverkeytech.android_rivers.outliner.OutlineContent
 import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
@@ -41,8 +40,8 @@ public class DownloadOpml(it: Context?): AsyncTask<String, Int, Pair<String, Res
     protected override fun onPreExecute() {
         dialog.onCancel {
             dlg ->
-                dlg.dismiss()
-                this@DownloadOpml.cancel(true)
+            dlg.dismiss()
+            this@DownloadOpml.cancel(true)
         }
         dialog.show()
     }

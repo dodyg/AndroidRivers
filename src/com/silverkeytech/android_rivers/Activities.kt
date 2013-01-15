@@ -20,25 +20,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.app.Activity
+import android.app.Service
+import android.os.Build
 import android.view.Gravity
 import android.view.View
-import android.view.View.OnClickListener
 import android.widget.Toast
 import java.net.SocketException
 import java.net.UnknownHostException
-import java.text.SimpleDateFormat
 import org.apache.http.conn.ConnectTimeoutException
-import android.widget.TextView
-import android.graphics.Typeface
-import go.goyalla.dict.arabicDictionary.file.ArabicReshape
-import android.util.Log
-import android.util.TypedValue
-import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
-import java.util.Date
-import java.util.Calendar
-import com.github.kevinsawicki.http.HttpRequest
-import android.os.Build
-import android.app.Service
 
 fun Service?.getMain(): MainApplication {
     return this!!.getApplication() as MainApplication
@@ -62,7 +51,7 @@ public fun Activity.findView<T: View>(id: Int): T {
     return (this.findViewById(id) as T)
 }
 
-public fun Activity.isModernTablet() : Boolean{
+public fun Activity.isModernTablet(): Boolean {
     val beyondHoneycomb = Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH
     return this.getResources()!!.getBoolean(R.bool.is_tablet) || beyondHoneycomb
 }

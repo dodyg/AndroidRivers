@@ -19,21 +19,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.AsyncTask
 import android.util.Log
-import com.github.kevinsawicki.http.HttpRequest
-import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
-import com.google.gson.Gson
 import com.silverkeytech.android_rivers.riverjs.River
 import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
-import com.silverkeytech.android_rivers.riverjs.RiverSite
 import com.silverkeytech.android_rivers.riverjs.RiverItemSource
-import java.util.ArrayList
-import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
+import com.silverkeytech.android_rivers.riverjs.RiverSite
 import com.silverkeytech.android_rivers.riverjs.downloadSingleRiver
+import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
+import java.util.ArrayList
 
 //Responsible for handling a river js downloading and display in asynchronous way
 public class DownloadRiverContent(it: Context?, val language: String): AsyncTask<String, Int, Result<River>>(){
@@ -48,8 +43,8 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
     protected override fun onPreExecute() {
         dialog.onCancel{
             dlg ->
-                dlg.dismiss()
-                this@DownloadRiverContent.cancel(true)
+            dlg.dismiss()
+            this@DownloadRiverContent.cancel(true)
         }
 
         dialog.show()

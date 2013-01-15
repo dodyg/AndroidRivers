@@ -23,7 +23,6 @@ import android.content.Context
 import android.content.DialogInterface
 import android.os.AsyncTask
 import android.util.Log
-import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outlines.Opml
