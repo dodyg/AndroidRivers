@@ -191,13 +191,9 @@ public class RiverActivity(): SherlockListActivity(), WithVisualModificationPane
 
             val sortedDistinct = distinct.sortBy { x -> x.title!! }
 
-            val titleList = ArrayList<String>()
-            sortedDistinct.map { x -> x.title!! }.forEach { x -> titleList.add(x) }
-
-            var urlList = ArrayList<String>()
-            sortedDistinct.map { x -> x.uri!!}.forEach{ x -> urlList.add(x) }
-
-            startRiverSourcesActivity(this, riverName, riverUrl, titleList, urlList)
+            startRiverSourcesActivity(this, riverName, riverUrl,
+                    ArrayList(sortedDistinct.map { x -> x.title!! }),
+                    ArrayList(sortedDistinct.map { x -> x.uri!!}))
         }
         else{
             Log.d(TAG, "There are no sources")
