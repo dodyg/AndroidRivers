@@ -36,6 +36,8 @@ import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 import java.util.Date
 import java.util.Calendar
 import com.github.kevinsawicki.http.HttpRequest
+import android.net.ConnectivityManager
+import android.content.Context
 
 public fun OnClickListener(action: (View?) -> Unit): OnClickListener {
     return object : OnClickListener {
@@ -58,7 +60,6 @@ public fun parseRFC3339DateFormat(dt: String): java.util.Date? {
         return null;
     }
 }
-
 
 fun imageMimeTypeToFileExtension (mimeType: String): String {
     return when(mimeType){
@@ -111,3 +112,36 @@ fun httpGet(url : String) : HttpRequest{
     return HttpRequest.get(url)!!.acceptGzipEncoding()!!.uncompress(true)!!
 }
 
+fun isNetworkAvailable(context : Context) : Boolean  {
+    val connectivityManager =  context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val activeNetworkInfo = connectivityManager.getActiveNetworkInfo()
+    return activeNetworkInfo != null
+}
+
+/*
+public Intent findTwitterClient() {
+final String[] twitterApps = {
+// package // name - nb installs (thousands)
+"com.twitter.android", // official - 10 000
+"com.twidroid", // twidroid - 5 000
+"com.handmark.tweetcaster", // Tweecaster - 5 000
+"com.thedeck.android" }; // TweetDeck - 5 000 };
+Intent tweetIntent = new Intent();
+tweetIntent.setType("text/plain");
+final PackageManager packageManager = getPackageManager();
+List<ResolveInfo> list = packageManager.queryIntentActivities(
+        tweetIntent, PackageManager.MATCH_DEFAULT_ONLY);
+
+for (int i = 0; i < twitterApps.length; i++) {
+for (ResolveInfo resolveInfo : list) {
+String p = resolveInfo.activityInfo.packageName;
+if (p != null && p.startsWith(twitterApps[i])) {
+tweetIntent.setPackage(p);
+return tweetIntent;
+}
+}
+}
+return null;
+
+}
+*/

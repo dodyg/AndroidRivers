@@ -168,8 +168,8 @@ public class RiverContentRenderer(val context: Activity, val language: String){
 
                     dialog.setNeutralButton(context.getString(R.string.share), object : DialogInterface.OnClickListener{
                         public override fun onClick(p0: DialogInterface?, p1: Int) {
-                            var intent = shareActionIntent(currentNews.item.link!!)
-                            context.startActivity(Intent.createChooser(intent, "Share page"))
+                            var intent = shareActionIntent(context, currentNews.item.link!!)
+                            context.startActivity(Intent.createChooser(intent, "Share link"))
                         }
                     })
                 }

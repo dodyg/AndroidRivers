@@ -130,8 +130,8 @@ public class FeedContentRenderer(val context: Activity, val language: String){
 
                     dialog.setNeutralButton(context.getString(R.string.share), object : DialogInterface.OnClickListener{
                         public override fun onClick(p0: DialogInterface?, p1: Int) {
-                            var intent = shareActionIntent(currentNews.link!!)
-                            context.startActivity(Intent.createChooser(intent, "Share page"))
+                            var intent = shareActionIntent(context, currentNews.link!!)
+                            context.startActivity(Intent.createChooser(intent, "Share link"))
                         }
                     })
                 }

@@ -5,6 +5,7 @@ import android.content.Intent
 import com.silverkeytech.android_rivers.outliner.OutlineContent
 import java.util.ArrayList
 import android.os.Messenger
+import android.util.Log
 
 
 public fun startRiverSourcesActivity(context: Context, riverTitle : String, riverUri : String, sourcesTitles: ArrayList<String>, sourcesUris: ArrayList<String>) {
@@ -82,9 +83,18 @@ fun startOutlinerActivity(context: Context, outlines: ArrayList<OutlineContent>,
     context.startActivity(intent)
 }
 
-public fun shareActionIntent(url: String): Intent {
+public fun shareActionIntent(context: Context, url: String): Intent {
+    var shortened = url
+
+    if (isNetworkAvailable(context)){
+        val res = googleShorten(url)
+        if (res.isTrue())
+            shortened = res.value!!
+    }
+
+    Log.d("ShareActionIntent", " " + shortened)
     var i = Intent(Intent.ACTION_SEND)
     i.setType("text/plain")
-    i.putExtra(Intent.EXTRA_TEXT, url)
+    i.putExtra(Intent.EXTRA_TEXT, shortened)
     return i
 }
