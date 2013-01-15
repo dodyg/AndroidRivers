@@ -68,6 +68,7 @@ public class RiverActivity(): SherlockListActivity(), WithVisualModificationPane
         var cache = getApplication().getMain().getRiverCache(riverUrl)
 
         if (cache != null && !ignoreCache){
+            sortedNewsItems = cache!!
             Log.d(TAG, "Cache is hit for url $riverUrl")
             RiverContentRenderer(this, riverLanguage).handleNewsListing(cache!!)
         }

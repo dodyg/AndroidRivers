@@ -39,7 +39,7 @@ public open class RiverSourcesActivity(): SherlockListActivity() {
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         setTheme(this.getVisualPref().getTheme())
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.collection)
+        setContentView(R.layout.river_sources)
 
         var i = getIntent()!!
         riverTitle = i.getStringExtra(Params.RIVER_SOURCES_RIVER_TITLE)!!
@@ -59,13 +59,13 @@ public open class RiverSourcesActivity(): SherlockListActivity() {
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         var inflater = getSupportMenuInflater()!!
-        inflater.inflate(R.menu.collection_menu, menu)
+        inflater.inflate(R.menu.river_sources_menu, menu)
         return true
     }
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
-            R.id.collection_menu_help ->{
+            R.id.river_sources_menu_help ->{
                 downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
                 return true
             }
