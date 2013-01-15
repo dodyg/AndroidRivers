@@ -48,5 +48,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="RiverSourcesActivity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+            </intent-filter>
+        </activity>
+
     </application>
 </manifest>

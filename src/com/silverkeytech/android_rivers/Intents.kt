@@ -6,6 +6,18 @@ import com.silverkeytech.android_rivers.outliner.OutlineContent
 import java.util.ArrayList
 import android.os.Messenger
 
+
+public fun startRiverSourcesActivity(context: Context, riverTitle : String, riverUri : String, sourcesTitles: ArrayList<String>, sourcesUris: ArrayList<String>) {
+    val i = Intent(context, javaClass<RiverSourcesActivity>())
+
+    i.putExtra(Params.RIVER_SOURCES_RIVER_TITLE, riverTitle)
+    i.putExtra(Params.RIVER_SOURCES_RIVER_URI, riverUri)
+    i.putStringArrayListExtra(Params.RIVER_SOURCES_TITLES, sourcesTitles)
+    i.putStringArrayListExtra(Params.RIVER_SOURCES_URIS, sourcesUris)
+
+    context.startActivity(i)
+}
+
 public fun startDownloadService(context : Context, title : String, url : String, sourceTitle : String, sourceUrl : String, description : String, messenger : Messenger){
     var i = Intent(context, javaClass<DownloadService>())
     i.putExtra(Params.DOWNLOAD_TITLE, title)
