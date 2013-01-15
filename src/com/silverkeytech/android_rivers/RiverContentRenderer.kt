@@ -148,7 +148,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 handleTextColorBasedOnTheme(context, body)
 
                 var source = dlg.findViewById(R.id.news_details_source_tv)!! as TextView
-                handleForeignTextFont(context, language, source, scrubHtml(currentNews.feedSourceTitle), 11.toFloat())
+                handleForeignTextFont(context, language, source, scrubHtml(currentNews.source.title), 11.toFloat())
                 handleTextColorBasedOnTheme(context, body)
 
                 dialog.setView(dlg)
@@ -207,7 +207,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                                 })
 
                                 startDownloadService(context, currentNews.item.title!!, enclosure.url!!,
-                                        currentNews.feedSourceTitle!!, currentNews.feedSourceUri!!, currentNews.item.body!!,
+                                        currentNews.source.title!!, currentNews.source.uri!!, currentNews.item.body!!,
                                         messenger)
 
                             }

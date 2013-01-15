@@ -42,7 +42,7 @@ fun accumulateList(list: ArrayList<RiverItemMeta>, feed: SyndicationFeed) {
         val link = if (feed.hasLink())
             feed.link else ""
 
-        val meta = RiverItemMeta(item, feed.title, link)
+        val meta = RiverItemMeta(item, RiverItemSource(feed.title, link))
 
         list.add(meta)
     }

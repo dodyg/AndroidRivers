@@ -6,6 +6,10 @@
           android:title="Bookmark"
             />
 
+    <item android:id="@+id/river_menu_sources"
+          android:title="Sources"
+            />
+
     <item android:id="@+id/river_menu_help"
           android:title="Help"
             />

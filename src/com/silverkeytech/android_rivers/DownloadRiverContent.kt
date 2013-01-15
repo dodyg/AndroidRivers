@@ -30,6 +30,7 @@ import com.google.gson.Gson
 import com.silverkeytech.android_rivers.riverjs.River
 import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 import com.silverkeytech.android_rivers.riverjs.RiverSite
+import com.silverkeytech.android_rivers.riverjs.RiverItemSource
 import java.util.ArrayList
 import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
 import com.silverkeytech.android_rivers.riverjs.downloadSingleRiver
@@ -105,7 +106,7 @@ fun River.getSortedNewsItems(): List<RiverItemMeta> {
         if (f != null){
             f.item?.forEach{
                 if (it != null) {
-                    newsItems.add(RiverItemMeta(it, f.feedTitle, f.feedUrl))
+                    newsItems.add(RiverItemMeta(it, RiverItemSource(f.feedTitle, f.feedUrl)))
                 }
             }
         }

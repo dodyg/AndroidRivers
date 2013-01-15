@@ -20,7 +20,7 @@ package com.silverkeytech.android_rivers.riverjs
 
 public data class RiverItemMeta(
         val item: RiverItem,
-        val feedSourceTitle: String?,
-        val feedSourceUri: String?){
+        val source: RiverItemSource)
+{
 
 }

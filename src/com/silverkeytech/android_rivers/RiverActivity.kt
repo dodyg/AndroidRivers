@@ -28,6 +28,7 @@ import com.silverkeytech.android_rivers.db.BookmarkKind
 import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 import com.silverkeytech.android_rivers.db.getBookmarksUrlsFromDbByCollection
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
+import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity(): SherlockListActivity(), WithVisualModificationPanel
@@ -60,6 +61,8 @@ public class RiverActivity(): SherlockListActivity(), WithVisualModificationPane
     }
 
 
+    var sortedNews : List<RiverItemMeta>? = null
+
     fun downloadRiver(riverUrl: String, ignoreCache: Boolean) {
         var cache = getApplication().getMain().getRiverCache(riverUrl)
 
@@ -79,8 +82,8 @@ public class RiverActivity(): SherlockListActivity(), WithVisualModificationPane
                         url, res ->
                         if (res.isTrue()){
                             Log.d(TAG, "Downloaded ${res.value?.count()} items")
-                            val sortedNews = res.value!!
-                            RiverContentRenderer(this, riverLanguage).handleNewsListing(sortedNews)
+                            sortedNews = res.value!!
+                            RiverContentRenderer(this, riverLanguage).handleNewsListing(sortedNews!!)
                         }
                         else {
                             Log.d(TAG, "Downloading collection $id with ${urls.size} urls fails")
@@ -146,13 +149,23 @@ public class RiverActivity(): SherlockListActivity(), WithVisualModificationPane
         return true
     }
 
+    fun prepareRiverSources(){
+        if (sortedNews != null){
+
+        }
+    }
+
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
+            R.id.river_menu_sources->{
+                prepareRiverSources()
+                return false
+            }
+
             R.id.river_menu_help ->{
                 downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
                 return true
             }
-
             REFRESH -> {
                 downloadRiver(riverUrl, true)
                 return true
