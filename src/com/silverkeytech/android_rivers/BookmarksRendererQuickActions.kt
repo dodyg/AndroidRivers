@@ -75,8 +75,7 @@ fun showCollectionQuickActionPopup(context: MainActivity, collection: BookmarkCo
                     //This operation doesn't fail even if the collection was never added to the RIVER bookmark
                     val url = makeLocalUrl(collection.id)
                     removeItemByUrlFromBookmarkDb(url)
-                    context.getApplication().getMain().clearRiverBookmarksCache()
-
+                    context.getMain().clearRiverBookmarksCache()
                     context.toastee("Bookmark collection removed")
                     context.refreshBookmarkCollection()
                 }

@@ -130,7 +130,7 @@ public class OutlinerActivity(): SherlockActivity()
             res ->
             if (res.isTrue()){
                 displayOutlines(treeManager, res.value!!, expandAll)
-                this.getApplication().getMain().setOpmlCache(url, res.value!!)
+                this.getMain().setOpmlCache(url, res.value!!)
             }
             else{
                 toastee("Downloading url fails becaue of ${res.exception?.getMessage()}", Duration.LONG)

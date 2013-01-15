@@ -38,7 +38,15 @@ import java.util.Date
 import java.util.Calendar
 import com.github.kevinsawicki.http.HttpRequest
 import android.os.Build
+import android.app.Service
 
+fun Service?.getMain(): MainApplication {
+    return this!!.getApplication() as MainApplication
+}
+
+fun Activity?.getMain(): MainApplication {
+    return this!!.getApplication() as MainApplication
+}
 
 public fun Activity.getStandardDialogBackgroundColor(): Int {
     val theme = this.getVisualPref().getTheme()

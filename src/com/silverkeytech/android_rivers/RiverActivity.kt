@@ -89,7 +89,7 @@ public class RiverActivity(): SherlockListActivity(), WithVisualModificationPane
     var sortedNewsItems: List<RiverItemMeta>? = null
 
     fun downloadRiver(riverUrl: String, ignoreCache: Boolean) {
-        var cache = getApplication().getMain().getRiverCache(riverUrl)
+        var cache = getMain().getRiverCache(riverUrl)
 
         if (cache != null && !ignoreCache){
             sortedNewsItems = cache!!
@@ -127,7 +127,7 @@ public class RiverActivity(): SherlockListActivity(), WithVisualModificationPane
                         var river = res.value!!
                         sortedNewsItems = river.getSortedNewsItems()
 
-                        this@RiverActivity.getApplication().getMain().setRiverCache(riverUrl, sortedNewsItems!!)
+                        this@RiverActivity.getMain().setRiverCache(riverUrl, sortedNewsItems!!)
                         RiverContentRenderer(this@RiverActivity, lang).handleNewsListing(sortedNewsItems!!)
                 }.execute(riverUrl)
             }
@@ -225,7 +225,7 @@ public class RiverActivity(): SherlockListActivity(), WithVisualModificationPane
                 if (res.isTrue()){
                     toastee("$riverName is added to your bookmark.")
 
-                    this@RiverActivity.getApplication().getMain().clearRiverBookmarksCache()
+                    this@RiverActivity.getMain().clearRiverBookmarksCache()
                     return true
                 } else{
                     toastee("Sorry, we cannot add this $riverUrl", Duration.LONG)

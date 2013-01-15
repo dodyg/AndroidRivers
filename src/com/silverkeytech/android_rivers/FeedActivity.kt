@@ -166,6 +166,7 @@ public class FeedActivity(): SherlockListActivity(), WithVisualModificationPanel
                             val currentCollection = coll[p1 - 1] //we added one extra item that was "no instruction" so the index must be deducted by 1
                             saveBookmark(currentCollection)
                         }
+                        this@FeedActivity.getMain().flags.isRssJustBookmarkAdded = true
                     }
                 })
 

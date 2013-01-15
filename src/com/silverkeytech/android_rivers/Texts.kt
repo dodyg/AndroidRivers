@@ -62,6 +62,18 @@ fun String?.isNullOrEmpty(): Boolean {
     return res
 }
 
+fun String?.limitText(maxSize : Int) : String{
+    if (this.isNullOrEmpty())
+        return ""
+    else if (this!!.size.toInt() <= maxSize)
+        return this
+    else
+    {
+        var cut = this.substring(0, maxSize - 3) + "..."
+        return cut
+    }
+}
+
 fun getFileNameFromUri(url: String): String? {
     try{
         val fileName = url.substring(url.lastIndexOf('/') + 1, url.length());

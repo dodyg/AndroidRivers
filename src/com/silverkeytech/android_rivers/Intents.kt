@@ -83,18 +83,9 @@ fun startOutlinerActivity(context: Context, outlines: ArrayList<OutlineContent>,
     context.startActivity(intent)
 }
 
-public fun shareActionIntent(context: Context, url: String): Intent {
-    var shortened = url
-
-    if (isNetworkAvailable(context)){
-        val res = googleShorten(url)
-        if (res.isTrue())
-            shortened = res.value!!
-    }
-
-    Log.d("ShareActionIntent", " " + shortened)
+public fun shareActionIntent(context: Context, title: String, url: String): Intent {
     var i = Intent(Intent.ACTION_SEND)
     i.setType("text/plain")
-    i.putExtra(Intent.EXTRA_TEXT, shortened)
+    i.putExtra(Intent.EXTRA_TEXT, "${title.limitText(PreferenceDefaults.LINK_SHARE_TITLE_MAX_LENGTH)} $url" )
     return i
 }

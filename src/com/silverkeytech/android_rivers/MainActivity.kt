@@ -240,7 +240,7 @@ public open class MainActivity(): SherlockActivity() {
                     val url = makeLocalUrl(res.value!!.id)
                     //when a collection is added as a river, bookmark it immediately
                     saveBookmarkToDb(text, url, BookmarkKind.RIVER, "en", null)
-                    getApplication().getMain().clearRiverBookmarksCache()
+                    getMain().clearRiverBookmarksCache()
 
                     toastee("Collection is successfully added")
                     this@MainActivity.refreshBookmarkCollection()
@@ -285,13 +285,13 @@ public open class MainActivity(): SherlockActivity() {
                                     if (res.isTrue()){
                                         var river = res.value!!
                                         var sortedNewsItems = river.getSortedNewsItems()
-                                        this@MainActivity.getApplication().getMain().setRiverCache(currentUrl, sortedNewsItems)
+                                        this@MainActivity.getMain().setRiverCache(currentUrl, sortedNewsItems)
 
                                         var res2 = saveBookmarkToDb(currentUrl, currentUrl, BookmarkKind.RIVER, "en", null)
 
                                         if (res2.isTrue()){
                                             toastee("$currentUrl river is successfully bookmarked", Duration.LONG)
-                                            this@MainActivity.getApplication().getMain().clearRiverBookmarksCache()
+                                            this@MainActivity.getMain().clearRiverBookmarksCache()
                                             this@MainActivity.refreshRiverBookmarks(false)
                                         } else{
                                             toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
@@ -392,7 +392,7 @@ public open class MainActivity(): SherlockActivity() {
                 return true
             }
             R.id.main_menu_download_all_rivers -> {
-                val subscriptionList = getApplication().getMain().getRiverBookmarksCache()
+                val subscriptionList = getMain().getRiverBookmarksCache()
 
                 if (subscriptionList != null){
                     val titleList = subscriptionList.body?.outline?.iterator()?.map { it.text!! }?.toArrayList()!!
@@ -473,12 +473,12 @@ public open class MainActivity(): SherlockActivity() {
 
     public fun refreshRiverBookmarks(retrieveRiversFromInternetIfNoneExisted : Boolean)
     {
-        this.getApplication().getMain().clearRiverBookmarksCache()
+        this.getMain().clearRiverBookmarksCache()
         displayRiverBookmarks(retrieveRiversFromInternetIfNoneExisted)
     }
 
     private fun displayRiverBookmarks(retrieveDefaultFromInternet: Boolean) {
-        val cache = this.getApplication().getMain().getRiverBookmarksCache()
+        val cache = this.getMain().getRiverBookmarksCache()
 
         if (cache != null){
             Log.d(TAG, "Get bookmarks from cache")
@@ -489,7 +489,7 @@ public open class MainActivity(): SherlockActivity() {
 
             if (bookmarks.body!!.outline!!.count() > 0){
                 Log.d(TAG, "Now bookmarks come from the db")
-                this.getApplication().getMain().setRiverBookmarksCache(bookmarks)
+                this.getMain().setRiverBookmarksCache(bookmarks)
                 BookmarksRenderer(this@MainActivity).handleRiversListing(bookmarks, this.getContentPref().getRiverBookmarksSorting())
             }
             else if (retrieveDefaultFromInternet){
@@ -544,7 +544,7 @@ public open class MainActivity(): SherlockActivity() {
 }
 
 fun downloadOpml(context : Activity, url: String, title: String) {
-    val cache = context.getApplication().getMain().getOpmlCache(url)
+    val cache = context.getMain().getOpmlCache(url)
 
     if (cache != null){
         startOutlinerActivity(context, cache, title, url, false)

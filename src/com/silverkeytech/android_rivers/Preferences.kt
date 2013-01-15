@@ -60,6 +60,8 @@ public class PreferenceDefaults{
 
         public val VISUAL_LIST_TEXT_SIZE: Int = 24
         public val VISUAL_THEME: Int = R.style.Theme_Sherlock_Light_DarkActionBar
+
+        public val LINK_SHARE_TITLE_MAX_LENGTH: Int = 80
     }
 }
 

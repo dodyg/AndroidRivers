@@ -30,9 +30,11 @@ import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 import java.util.ArrayList
 import com.silverkeytech.android_rivers.syndications.SyndicationFeed
+import android.app.Activity
 
-fun Application?.getMain(): MainApplication {
-    return this!! as MainApplication
+public class SharedFlags{
+    public var isRssJustBookmarkAdded : Boolean = false
+    public var isRiverJustBookmarkAdded : Boolean = false
 }
 
 public class MainApplication(): Application()
@@ -46,6 +48,8 @@ public class MainApplication(): Application()
     var syndicationCache = LruCache<String, CacheItem<SyndicationFeed>>(inMegaByte(4))
 
     var riverBookmarksCache: CacheItem<Opml>? = null
+
+    public val flags : SharedFlags = SharedFlags()
 
     public override fun onCreate() {
         Log.d(TAG, "Main Application is started")
@@ -157,4 +161,5 @@ public class MainApplication(): Application()
         riverCache.evictAll();
         opmlCache.evictAll()
     }
+
 }

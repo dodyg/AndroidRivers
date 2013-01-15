@@ -171,7 +171,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
     fun handleOpmlInclude(currentOutline: OutlineContent, expandAll: Boolean): Boolean {
         val url = currentOutline.getAttribute("url")!!
 
-        val cache = context.getApplication().getMain().getOpmlCache(url)
+        val cache = context.getMain().getOpmlCache(url)
 
         if (cache != null){
             startOutlinerActivity(context, cache, currentOutline.text, url, expandAll)
@@ -182,7 +182,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
                 res ->
                 if (res.isTrue()){
                     var outlines = res.value!!
-                    context.getApplication().getMain().setOpmlCache(url, outlines)
+                    context.getMain().setOpmlCache(url, outlines)
                     startOutlinerActivity(context, outlines, currentOutline.text, url, expandAll)
                 }
                 else{

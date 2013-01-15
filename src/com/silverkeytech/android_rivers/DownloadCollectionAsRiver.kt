@@ -68,7 +68,7 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
 
                     val sortedNewsItems = sortRiverItemMeta(result.value!!)
                     Log.d(TAG, "Total of sorted items is ${sortedNewsItems.size()}")
-                    context.getApplication().getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
+                    context.getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
                     if (callback != null)
                         callback!!(url, Result.right(sortedNewsItems))
                 }

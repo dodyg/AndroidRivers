@@ -135,7 +135,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
 
                             val sortedNewsItems = feeds.getSortedNewsItems()
 
-                            getApplication().getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
+                            getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
                             Log.d(TAG, "Download for $url is successful")
                         }
                         catch(e: Exception)
@@ -171,7 +171,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
 
                         if (list.count() > 0){
                             val sortedNewsItems = sortRiverItemMeta(list)
-                            getApplication().getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
+                            getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
                         }
                     }
                     else{
