@@ -156,7 +156,7 @@ public class FeedActivity(): SherlockListActivity(), WithVisualModificationPanel
                 dialog.setTitle("Bookmark to a collection")
 
                 val collectionTitles = coll.map { it.title }.toArray()
-                val withInstruction = arrayListOf("Skip Collection", *collectionTitles).toArray(array<String>())
+                val withInstruction = arrayListOf(getString(R.string.skip_collection), *collectionTitles).toArray(array<String>())
 
                 dialog.setItems(withInstruction, object : DialogInterface.OnClickListener{
                     public override fun onClick(p0: DialogInterface?, p1: Int) {
@@ -166,7 +166,7 @@ public class FeedActivity(): SherlockListActivity(), WithVisualModificationPanel
                             val currentCollection = coll[p1 - 1] //we added one extra item that was "no instruction" so the index must be deducted by 1
                             saveBookmark(currentCollection)
                         }
-                        this@FeedActivity.getMain().flags.isRssJustBookmarkAdded = true
+                        this@FeedActivity.getMain().flags.isRssJustBookmarked = true
                     }
                 })
 

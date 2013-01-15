@@ -65,6 +65,8 @@ public open class MainActivity(): SherlockActivity() {
         currentTheme = this.getVisualPref().getTheme()
         isOnCreate = true
         setTheme(currentTheme!!)
+        getMain().flags.reset()
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
 
@@ -90,6 +92,30 @@ public open class MainActivity(): SherlockActivity() {
                 Log.d(TAG, "Preference for download default rivers is $downloadIf")
                 displayRiverBookmarks(downloadIf)
             }
+        }
+    }
+
+    protected override fun onResume() {
+        super.onResume()
+        //skip if this event comes after onCreate
+        if (!isOnCreate){
+            Log.d(TAG, "RESUMING Current Theme $currentTheme vs ${this.getVisualPref().getTheme()}")
+            //detect if there has been any theme changes
+            if (currentTheme != null && currentTheme!! != this.getVisualPref().getTheme()){
+                Log.d(TAG, "Theme changes detected - updating theme")
+                restart()
+            } else
+            if (getMain().flags.isRssJustBookmarked && mode == MainActivityMode.RSS){
+                getMain().flags.reset()
+                displayModeContent(mode, false)
+            } else
+            if (getMain().flags.isRiverJustBookmarked && mode == MainActivityMode.RIVER){
+                getMain().flags.reset()
+                displayModeContent(mode, false)
+            }
+        }else {
+            Log.d(TAG, "RESUMING AFTER CREATION")
+            isOnCreate = false
         }
     }
 
@@ -122,23 +148,6 @@ public open class MainActivity(): SherlockActivity() {
             MainActivityMode.COLLECTION -> MainActivityMode.RSS
             MainActivityMode.RSS -> MainActivityMode.RIVER
             else -> MainActivityMode.RIVER
-        }
-    }
-
-    protected override fun onResume() {
-        super.onResume()
-        //skip if this event comes after onCreate
-        if (!isOnCreate){
-            Log.d(TAG, "RESUMING Current Theme $currentTheme vs ${this.getVisualPref().getTheme()}")
-            //detect if there has been any theme changes
-            if (currentTheme != null && currentTheme!! != this.getVisualPref().getTheme()){
-                Log.d(TAG, "Theme changes detected - updating theme")
-                restart()
-                return
-            }
-        }else {
-            Log.d(TAG, "RESUMING AFTER CREATION")
-            isOnCreate = false
         }
     }
 

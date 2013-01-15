@@ -226,6 +226,8 @@ public class RiverActivity(): SherlockListActivity(), WithVisualModificationPane
                     toastee("$riverName is added to your bookmark.")
 
                     this@RiverActivity.getMain().clearRiverBookmarksCache()
+                    this@RiverActivity.getMain().flags.isRiverJustBookmarked = true
+
                     return true
                 } else{
                     toastee("Sorry, we cannot add this $riverUrl", Duration.LONG)

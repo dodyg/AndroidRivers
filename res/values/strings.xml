@@ -12,6 +12,7 @@
     <string name="podcast">Podcast</string>
     <string name="refresh">Refresh</string>
     <string name="share">Share</string>
+    <string name="skip_collection">Skip collection</string>
     <string name="sort_asc">Sort &#x25B2;</string>
     <string name="sort_desc">Sort &#x25BC;</string>
     <string name="sort_cancel">Do not sort</string>

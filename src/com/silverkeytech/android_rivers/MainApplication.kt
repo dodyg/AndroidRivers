@@ -33,8 +33,13 @@ import com.silverkeytech.android_rivers.syndications.SyndicationFeed
 import android.app.Activity
 
 public class SharedFlags{
-    public var isRssJustBookmarkAdded : Boolean = false
-    public var isRiverJustBookmarkAdded : Boolean = false
+    public var isRssJustBookmarked: Boolean = false
+    public var isRiverJustBookmarked: Boolean = false
+
+    public fun reset(){
+        isRiverJustBookmarked = false
+        isRssJustBookmarked = false
+    }
 }
 
 public class MainApplication(): Application()
