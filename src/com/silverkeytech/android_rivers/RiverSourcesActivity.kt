@@ -23,6 +23,7 @@ import com.actionbarsherlock.app.SherlockListActivity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 import com.silverkeytech.android_rivers.db.getBookmarksFromDbByCollection
+import android.util.Log
 
 public open class RiverSourcesActivity(): SherlockListActivity() {
     class object {
@@ -36,8 +37,15 @@ public open class RiverSourcesActivity(): SherlockListActivity() {
     var sourcesTitles: List<String> ? = null
 
 
+    var currentTheme: Int? = null
+    var isOnCreate: Boolean = true
+
+
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
-        setTheme(this.getVisualPref().getTheme())
+        currentTheme = this.getVisualPref().getTheme()
+        isOnCreate = true
+        setTheme(currentTheme!!)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.river_sources)
 
@@ -53,7 +61,26 @@ public open class RiverSourcesActivity(): SherlockListActivity() {
         actionBar.setDisplayShowTitleEnabled(true)
         actionBar.setTitle("Sources of River '" + riverTitle + "'")
 
-        displayCollection()
+        displaySources()
+    }
+
+
+    protected override fun onResume() {
+        super.onResume()
+        //skip if this event comes after onCreate
+        if (!isOnCreate){
+            Log.d(TAG, "RESUMING Current Theme $currentTheme vs ${this.getVisualPref().getTheme()}")
+            //detect if there has been any theme changes
+            if (currentTheme != null && currentTheme!! != this.getVisualPref().getTheme()){
+                Log.d(TAG, "Theme changes detected - updating theme")
+                restart()
+                return
+            }
+
+        }else {
+            Log.d(TAG, "RESUMING AFTER CREATION")
+            isOnCreate = false
+        }
     }
 
 
@@ -75,11 +102,11 @@ public open class RiverSourcesActivity(): SherlockListActivity() {
         }
     }
 
-    public fun refreshCollection() {
-        displayCollection()
+    public fun refreshSources() {
+        displaySources()
     }
 
-    fun displayCollection() {
+    fun displaySources() {
         RiverSourcesRenderer(this, "en").handleListing(sourcesTitles!!, sourcesUrls!!)
     }
 }

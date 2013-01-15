@@ -44,8 +44,14 @@ public class RiverActivity(): SherlockListActivity(), WithVisualModificationPane
     var riverLanguage: String = ""
     var mode: ActionMode? = null
 
+    var currentTheme: Int? = null
+    var isOnCreate: Boolean = true
+
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
-        setTheme(this.getVisualPref().getTheme())
+        currentTheme = this.getVisualPref().getTheme()
+        isOnCreate = true
+        setTheme(currentTheme!!)
+
         super<SherlockListActivity>.onCreate(savedInstanceState)
         setContentView(R.layout.river)
 
@@ -60,6 +66,24 @@ public class RiverActivity(): SherlockListActivity(), WithVisualModificationPane
         setTitle(riverName)
 
         downloadRiver(riverUrl, false)
+    }
+
+    protected override fun onResume() {
+        super<SherlockListActivity>.onResume()
+        //skip if this event comes after onCreate
+        if (!isOnCreate){
+            Log.d(TAG, "RESUMING Current Theme $currentTheme vs ${this.getVisualPref().getTheme()}")
+            //detect if there has been any theme changes
+            if (currentTheme != null && currentTheme!! != this.getVisualPref().getTheme()){
+                Log.d(TAG, "Theme changes detected - updating theme")
+                restart()
+                return
+            }
+
+        }else {
+            Log.d(TAG, "RESUMING AFTER CREATION")
+            isOnCreate = false
+        }
     }
 
     var sortedNewsItems: List<RiverItemMeta>? = null

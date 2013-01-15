@@ -136,8 +136,6 @@ public open class MainActivity(): SherlockActivity() {
                 restart()
                 return
             }
-
-            displayModeContent(mode, false)
         }else {
             Log.d(TAG, "RESUMING AFTER CREATION")
             isOnCreate = false
