@@ -154,8 +154,8 @@ fun showRiverBookmarksQuickActionPopup(context: MainActivity, currentOutline: Ou
         pp.dismiss()
     }
 
-    val icon = x.findViewById(R.id.main_river_quick_action_delete_icon) as ImageView
-    icon.setOnClickListener {
+    val removeIcon = x.findViewById(R.id.main_river_quick_action_delete_icon) as ImageView
+    removeIcon.setOnClickListener {
         val dlg = createConfirmationDialog(context = context, message = "Are you sure about removing this River bookmark?", positive = {
             try{
                 val res = DatabaseManager.cmd().bookmark().deleteByUrl(currentOutline.url!!)
@@ -176,6 +176,52 @@ fun showRiverBookmarksQuickActionPopup(context: MainActivity, currentOutline: Ou
 
         dlg.show()
     }
+
+    val editIcon = x.findViewById(R.id.main_river_quick_action_edit_icon) as ImageView
+    editIcon.setOnClickListener {
+        val dlg = createSingleInputDialog(context, "Edit River Title", currentOutline.text, "Set title here", {
+            dlg, title ->
+                if (title.isNullOrEmpty()){
+                    context.toastee("Please enter title", Duration.LONG)
+                }
+                else {
+                    val record = DatabaseManager.query().bookmark().byUrl(currentOutline.url!!)
+
+                    val isLocalUrl = isLocalUrl(currentOutline.url!!)
+
+                    if (record.exists){
+                        record.value!!.title = title!!
+
+                        try{
+                            //perform this additional step so that when you modify a local RIVER, it updates the collection name as well
+                            if (isLocalUrl){
+                                val collectionId = extractIdFromLocalUrl(currentOutline.url!!)
+                                if (collectionId != null){
+                                    val collectionRecord = DatabaseManager.query().bookmarkCollection().byId(collectionId)
+
+                                    if (collectionRecord.exists){
+                                        collectionRecord.value!!.title = title
+                                        DatabaseManager.bookmarkCollection!!.update(collectionRecord.value!!)
+                                    }
+                                }
+                            }
+
+                            DatabaseManager.bookmark!!.update(record.value!!)
+                            context.toastee("Bookmark title is successfully modified")
+                            context.refreshRiverBookmarks(false)
+                            pp.dismiss()
+                        }catch (ex : Exception){
+                            context.toastee("Sorry, I cannot update the title of this river for the following reason ${ex.getMessage()}", Duration.LONG)
+                        }
+                    } else {
+                        context.toastee("Sorry, I cannot update the title of this river", Duration.LONG)
+                    }
+                }
+
+        })
+        dlg.show()
+    }
+
 
     val itemLocation = getLocationOnScreen(item)
     pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
