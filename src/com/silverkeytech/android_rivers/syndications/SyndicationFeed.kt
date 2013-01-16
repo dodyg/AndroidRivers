@@ -123,8 +123,6 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
             for(val i in atom!!.entry!!.iterator()){
                 val fi = SyndicationFeedItem()
                 fi.title = i.title
-                //link type "alternate"
-                Log.d("transformAtom", "Links available ${i.link?.count()}")
 
                 if (i.link!!.count() > 0){
                     val alternateLinks = i.link!!.filter { x -> !x.rel.isNullOrEmpty() && x.rel == "alternate" }

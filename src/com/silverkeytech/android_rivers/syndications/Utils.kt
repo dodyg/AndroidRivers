@@ -25,8 +25,6 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
             return Result.wrong(ex)
         }
 
-        Log.d(TAG, "Syndication XML is downloaded at ${url}")
-
         fun isAtomFeed(): Boolean {
             return mimeType!!.contains("atom") || downloadedContent!!.contains("<feed xmlns=\"http://www.w3.org/2005/Atom\">")
         }
