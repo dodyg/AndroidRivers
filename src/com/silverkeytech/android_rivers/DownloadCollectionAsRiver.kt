@@ -9,6 +9,7 @@ import com.silverkeytech.android_rivers.riverjs.accumulateList
 import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
 import com.silverkeytech.android_rivers.syndications.SyndicationFilter
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
+import java.util.Calendar
 
 public class DownloadCollectionAsRiver(it: Context?, private val collectionId: Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
     class object {
@@ -31,6 +32,8 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
     protected override fun doInBackground(vararg p0: String?): Result<List<RiverItemMeta>>? {
         val latestDate = daysBeforeNow(PreferenceDefaults.CONTENT_BOOKMARK_COLLECTION_LATEST_DATE_FILTER_IN_DAYS)
 
+        val before = System.currentTimeMillis()
+
         var list = arrayListOf<RiverItemMeta>()
         for(val url in p0){
             val res = downloadSingleFeed(url!!, SyndicationFilter(PreferenceDefaults.CONTENT_BOOKMARK_COLLECTION_MAX_ITEMS_FILTER, latestDate))
@@ -43,6 +46,12 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
                 accumulateList(list, res.value!!)
             }
         }
+
+        val after = System.currentTimeMillis()
+
+        val diff = after - before
+
+        Log.d(TAG, "It takes $diff mili seconds to complete ${p0.size} rss downloads")
 
         return Result.right(list)
     }
@@ -61,10 +70,7 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
         if (result != null){
             if (result.isTrue()){
                 try{
-                    Log.d(TAG, "Total of items before sorting is ${result.value!!.size()}")
-
                     val sortedNewsItems = sortRiverItemMeta(result.value!!)
-                    Log.d(TAG, "Total of sorted items is ${sortedNewsItems.size()}")
                     context.getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
                     if (callback != null)
                         callback!!(url, Result.right(sortedNewsItems))

@@ -158,12 +158,6 @@ fun transformXmlToRss(xml: String?): Result<Rss> {
         RssParser().parse(reader, builder)
 
         val rss = builder.build()
-
-        Log.d("RSS Transform", "Works ok ${rss.channel?.title} - ${rss.channel?.link} - ${rss.channel?.cloud?.domain} ")
-
-        for(val x in rss.channel!!.item!!.iterator())
-            Log.d("RSS Transform", "Permalink ${x.isPermalink} - Enclosure ${x.enclosure?.`type`} - ${x.enclosure?.length}")
-
         return Result.right(rss)
     }
     catch (e: Exception){
@@ -176,7 +170,6 @@ fun transformXmlToAtom(xml: String?): Result<Feed> {
 
     try{
         val feed: Feed? = XmlComponent.serial.read(javaClass<Feed>(), xml, false)
-        Log.d("Atom Transform", "Works ok")
         return Result.right(feed)
     }
     catch (e: Exception){

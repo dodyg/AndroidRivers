@@ -34,8 +34,6 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
         if (isAtomFeed()){
             var feed = transformXmlToAtom(downloadedContent)
 
-            Log.d(TAG, "Transforming XML to ATOM")
-
             if (feed.isTrue()){
                 var f = SyndicationFeed(null, feed.value, filter)
                 f.transformAtom()
@@ -45,8 +43,6 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
             }
         } else {
             var feed = transformXmlToRss(downloadedContent)
-
-            Log.d(TAG, "Transforming XML to RSS")
 
             if (feed.isTrue()){
                 var f = SyndicationFeed(feed.value, null, filter)
