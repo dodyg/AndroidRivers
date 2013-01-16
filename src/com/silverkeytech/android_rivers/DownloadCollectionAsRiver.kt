@@ -37,10 +37,18 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
         var list = arrayListOf<RiverItemMeta>()
 
         var executor = Executors.newFixedThreadPool(4)
+
+        val maximumItemFilter = when(p0.size){
+            in 0..5 -> 20
+            in 6..12 -> 15
+            in 12..20 -> 10
+            else -> 6
+        }
+
         for(val url in p0){
             executor.execute(
                 runnable {
-                    val res = downloadSingleFeed(url!!, SyndicationFilter(PreferenceDefaults.CONTENT_BOOKMARK_COLLECTION_MAX_ITEMS_FILTER, latestDate))
+                    val res = downloadSingleFeed(url!!, SyndicationFilter(maximumItemFilter, latestDate))
 
                     if (res.isFalse())
                         Log.d(TAG, "Value at ${res.exception?.getMessage()}")
