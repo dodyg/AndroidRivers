@@ -201,9 +201,8 @@ fun showPodcastQuickActionPopup(context: PodcastManagerActivity, currentPodcast:
 
     val icon = x.findViewById(R.id.main_feed_quick_action_delete_icon) as ImageView
     icon.setOnClickListener {
-        val dlg = createConfirmationDialog(context = context, message = "Are you sure about removing this River bookmark?", positive = {
+        val dlg = createConfirmationDialog(context = context, message = "Are you sure about deleting this podcast?", positive = {
             try{
-
                 var f = File(currentPodcast.localPath)
 
                 if (f.exists())

@@ -74,21 +74,11 @@ public class BookmarksRenderer(val context: MainActivity){
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val current = coll[p2]
-
-                val urls = getBookmarksUrlsFromDbByCollection(current.id)
-
-                Log.d(TAG, "Starts the process of downloading urls")
-                DownloadCollectionAsRiver(context, current.id)
-                        .executeOnCompletion { url, res ->
-                    if (res.isTrue()){
-                        Log.d(TAG, "Downloaded ${res.value?.count()} items")
-                        startRiverActivity(context, url, current.title, "en")
-                    }
-                    else {
-                        Log.d(TAG, "Downloading $current.id fails")
-                    }
-                }
-                        .execute(*urls)
+                //make the local url and delegate to riveractivity to figure out whether
+                //to use this collection data from cache or perform the arduous task of
+                //downloading and transforming rss feeds into river
+                val localUrl = makeLocalUrl(current.id)
+                startRiverActivity(context, localUrl, current.title, "en")
             }
         })
 
@@ -101,9 +91,9 @@ public class BookmarksRenderer(val context: MainActivity){
         })
     }
 
-    fun handleBookmarkCollectionListing(bookmarks: List<Bookmark>) {
+    fun handleRssListing(bookmarks: List<Bookmark>) {
         if (bookmarks.count() == 0){
-            showMessage("Your bookmarked feed will be listed here. Click on 'more news' to find more news feeds.")
+            showMessage("Your bookmarked RSS will be listed here. Click on 'more news' to find more news feeds.")
         }
         else
             showMessage("")

@@ -462,7 +462,7 @@ public open class MainActivity(): SherlockActivity() {
 
     private fun displayRssBookmarks() {
         val bookmarks = getBookmarksFromDb(BookmarkKind.RSS, SortingOrder.ASC)
-        BookmarksRenderer(this@MainActivity).handleBookmarkCollectionListing(bookmarks)
+        BookmarksRenderer(this@MainActivity).handleRssListing(bookmarks)
     }
 
     private fun displayBookmarkCollection() {
