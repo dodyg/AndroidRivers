@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Messenger
 import com.silverkeytech.android_rivers.outliner.OutlineContent
 import java.util.ArrayList
+import android.net.Uri
 
 public fun startRiverSourcesActivity(context: Context, riverTitle: String, riverUri: String, sourcesTitles: ArrayList<String>, sourcesUris: ArrayList<String>) {
     val i = Intent(context, javaClass<RiverSourcesActivity>())
@@ -86,4 +87,20 @@ public fun shareActionIntent(context: Context, title: String, url: String): Inte
     i.setType("text/plain")
     i.putExtra(Intent.EXTRA_TEXT, "${title.limitText(PreferenceDefaults.LINK_SHARE_TITLE_MAX_LENGTH)} $url")
     return i
+}
+
+public fun startOpenBrowserActivity(context: Context, url: String){
+    val i = Intent("android.intent.action.VIEW", Uri.parse(url))
+    context.startActivity(i)
+}
+
+public fun startOpenEmailActivity(context: Context, email : String, subject : String, body : String){
+    val i = Intent(Intent.ACTION_SEND)
+
+    i.setType("message/rfc822")
+    i.putExtra(android.content.Intent.EXTRA_EMAIL, array(email))
+    i.putExtra(android.content.Intent.EXTRA_SUBJECT, subject)
+    i.putExtra(android.content.Intent.EXTRA_TEXT, body)
+
+    context.startActivity(Intent.createChooser(i, "Send mail..."))
 }

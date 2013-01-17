@@ -160,8 +160,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 if (currentNewsLinkAvailable){
                     dialog.setPositiveButton(context.getString(R.string.go), object : DialogInterface.OnClickListener{
                         public override fun onClick(p0: DialogInterface?, p1: Int) {
-                            var i = Intent("android.intent.action.VIEW", Uri.parse(currentNews.item.link))
-                            context.startActivity(i)
+                            startOpenBrowserActivity(context, currentNews.item.link!!)
                             p0?.dismiss()
                         }
                     })

@@ -38,6 +38,8 @@ import com.silverkeytech.android_rivers.startOutlinerActivity
 import com.silverkeytech.android_rivers.startRiverActivity
 import com.silverkeytech.android_rivers.toastee
 import java.util.ArrayList
+import com.silverkeytech.android_rivers.startOpenBrowserActivity
+import com.silverkeytech.android_rivers.startOpenEmailActivity
 
 public open class SimpleAdapter(private val context: OutlinerActivity,
                                 private val treeStateManager: TreeStateManager<Long?>,
@@ -158,8 +160,12 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
     fun handleLink(currentOutline: OutlineContent): Boolean {
         var url = currentOutline.getAttribute("url")
         try{
-            var i = Intent("android.intent.action.VIEW", Uri.parse(url))
-            context.startActivity(i)
+            if (url!!.contains("mailto:")){
+                val email = url!!.replace("mailto:", "")
+                startOpenEmailActivity(context, email, "About Android Rivers", "")
+            }else{
+                startOpenBrowserActivity(context, url!!)
+            }
             return true
         }
         catch(e: Exception){

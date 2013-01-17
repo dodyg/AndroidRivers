@@ -123,8 +123,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                 if (currentNews.hasLink()){
                     dialog.setPositiveButton(context.getString(R.string.go), object : DialogInterface.OnClickListener{
                         public override fun onClick(p0: DialogInterface?, p1: Int) {
-                            var i = Intent("android.intent.action.VIEW", Uri.parse(currentNews.link))
-                            context.startActivity(i)
+                            startOpenBrowserActivity(context, currentNews.link!!)
                             p0?.dismiss()
                         }
                     })
