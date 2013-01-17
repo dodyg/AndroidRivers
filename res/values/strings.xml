@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="add_new_collection">Add collection</string>
+    <string name="all_rivers_successfully_downloaded">All rivers successfully downloaded</string>
     <string name="app_name">Android Rivers</string>
+    <string name="bookmark_removed">Bookmark removed</string>
     <string name="cancel">Cancel</string>
     <string name="confirmation_dialog_title">Confirmation</string>
     <string name="download_all">Download all</string>
+    <string name="edit_sources_of_collection">Edit sources of \'$collectionTitle\'</string>
+    <string name="empty_bookmark_collection_items_list">There are no items in this collection yet. You can add items to this collection when you bookmark a RSS.</string>
+    <string name="empty_rss_items_list">Your bookmarked RSS will be listed here. Click on \'more news\' to find more news feeds.</string>
+    <string name="empty_river_items_list">Your bookmarked rivers will appear here. To find more river, click on \'more news\' or add a new collection. You can also click on \'refresh\' option to download default rivers.</string>
     <string name="go">Go</string>
     <string name="help">Help</string>
     <string name="please_wait_while_loading">Please wait while loading</string>
@@ -16,6 +22,8 @@
     <string name="sort_asc">Sort &#x25B2;</string>
     <string name="sort_desc">Sort &#x25BC;</string>
     <string name="sort_cancel">Do not sort</string>
+    <string name="start_downloading_all_rivers">Start downloading all rivers</string>
+    <string name="download_starts">"Download starts"</string>
     <string name="ok">OK</string>
     <string name="yes">Yes</string>
 </resources>

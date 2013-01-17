@@ -93,7 +93,7 @@ public class BookmarksRenderer(val context: MainActivity){
 
     fun handleRssListing(bookmarks: List<Bookmark>) {
         if (bookmarks.count() == 0){
-            showMessage("Your bookmarked RSS will be listed here. Click on 'more news' to find more news feeds.")
+            showMessage(context.getString(R.string.empty_rss_items_list)!!)
         }
         else
             showMessage("")
@@ -131,7 +131,7 @@ public class BookmarksRenderer(val context: MainActivity){
         }
 
         if (outlines.count() == 0){
-            showMessage("""Your bookmarked rivers will appear here. To find more river, click on 'more news' or add a new collection. You can also click on 'refresh' option to download default rivers.""")
+            showMessage(context.getString(R.string.empty_river_items_list)!!)
         } else
             showMessage("")
 

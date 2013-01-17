@@ -53,7 +53,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
         var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
         var notification = NotificationCompat.Builder(this)
-                .setTicker("Start downloading all rivers")
+                .setTicker(this.getString(R.string.start_downloading_all_rivers))
         ?.setWhen(System.currentTimeMillis())
         ?.setContentIntent(contentIntent)
         ?.build()
@@ -63,7 +63,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
         notification!!.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.download_progress).with {
             this.setImageViewResource(R.id.download_progress_status_icon, android.R.drawable.btn_star)
             this.setProgressBar(R.id.download_progress_status_progress, 100, 0, false)
-            this.setTextViewText(R.id.download_progress_status_text, "Downloading starts")
+            this.setTextViewText(R.id.download_progress_status_text, getString(R.string.download_starts))
         }
 
         return notification!!
@@ -186,7 +186,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
         var msg: String
 
         if (errorCount == 0){
-            msg = "All rivers successfully downloaded"
+            msg = getString(R.string.all_rivers_successfully_downloaded)!!
         }
         else{
             msg = "${riverTotal - errorCount} are successfully downloaded out of ${riverTotal}"

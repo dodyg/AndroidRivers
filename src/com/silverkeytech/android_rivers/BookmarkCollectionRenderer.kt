@@ -44,7 +44,7 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
 
         if (bookmarks.count() == 0){
             var msg = context.findViewById(R.id.collection_message_tv)!! as TextView
-            msg.setText("There are no items in this collection yet. You can add items to this collection when you bookmark a RSS.")
+            msg.setText(context.getString(R.string.empty_bookmark_collection_items_list))
         }
 
         val adapter = object : ArrayAdapter<Bookmark>(context, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
@@ -122,7 +122,7 @@ fun showCollectionQuickActionPopup(context: BookmarkCollectionActivity, bookmark
             if (res.isFalse())
                 context.toastee("Error in removing this bookmark collection ${res.exception?.getMessage()}")
             else {
-                context.toastee("Bookmark removed")
+                context.toastee(context.getString(R.string.bookmark_removed)!!)
                 context.refreshCollection()
             }
         }
