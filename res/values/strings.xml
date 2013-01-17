@@ -7,7 +7,7 @@
     <string name="cancel">Cancel</string>
     <string name="confirmation_dialog_title">Confirmation</string>
     <string name="download_all">Download all</string>
-    <string name="edit_sources_of_collection">Edit sources of \'$collectionTitle\'</string>
+    <string name="edit_sources_of_collection">Edit sources of \'%1$s\'</string>
     <string name="empty_bookmark_collection_items_list">There are no items in this collection yet. You can add items to this collection when you bookmark a RSS.</string>
     <string name="empty_rss_items_list">Your bookmarked RSS will be listed here. Click on \'more news\' to find more news feeds.</string>
     <string name="empty_river_items_list">Your bookmarked rivers will appear here. To find more river, click on \'more news\' or add a new collection. You can also click on \'refresh\' option to download default rivers.</string>
