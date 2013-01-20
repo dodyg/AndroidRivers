@@ -49,13 +49,13 @@ public class DownloadService(): IntentService("DownloadService"){
     var targetSourceUrl: String? = null
 
     fun prepareNotification(title: String, filePath: String): Notification {
-        var notificationIntent = Intent(Intent.ACTION_MAIN)
+        val notificationIntent = Intent(Intent.ACTION_MAIN)
         notificationIntent.setClass(getApplicationContext(), javaClass<MainActivity>())
         notificationIntent.putExtra(Params.DOWNLOAD_LOCATION_PATH, filePath)
 
-        var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT)
+        val contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
-        var notification = NotificationCompat.Builder(this)
+        val notification = NotificationCompat.Builder(this)
                 .setTicker("Start downloading $title")
         ?.setWhen(System.currentTimeMillis())
         ?.setContentIntent(contentIntent)
@@ -92,7 +92,7 @@ public class DownloadService(): IntentService("DownloadService"){
 
         try{
             val url = URL(targetUrl)
-            var connection = url.openConnection()!!
+            val connection = url.openConnection()!!
             connection.connect()
 
             val fileLength: Int = connection.getContentLength()
@@ -103,7 +103,7 @@ public class DownloadService(): IntentService("DownloadService"){
             if (inferredName == null)
                 inferredName = generateThrowawayName() + ".mp3"
 
-            var directory = Environment.getExternalStorageDirectory()!!.getPath() + "/" + Environment.DIRECTORY_PODCASTS
+            val directory = Environment.getExternalStorageDirectory()!!.getPath() + "/" + Environment.DIRECTORY_PODCASTS
             filename = directory + "/" + inferredName
 
             notification = prepareNotification(targetTitle!!, filename)
@@ -158,7 +158,7 @@ public class DownloadService(): IntentService("DownloadService"){
                     result = Activity.RESULT_CANCELED
                 }
                 else{
-                    notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "File successfully download to $filename")
+                    notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "File successfully downloaded to $filename")
                     notification!!.contentView!!.setProgressBar(R.id.download_progress_status_progress, 100, 100, false)
                     notificationManager.notify(notificationId, notification)
                     result = Activity.RESULT_OK
@@ -182,10 +182,10 @@ public class DownloadService(): IntentService("DownloadService"){
             result = Activity.RESULT_CANCELED
         }
 
-        var extras = p0?.getExtras()
+        val extras = p0?.getExtras()
         if (extras != null){
-            var messenger = extras!!.get(Params.MESSENGER) as android.os.Messenger
-            var msg = Message.obtain()!!
+            val messenger = extras!!.get(Params.MESSENGER) as android.os.Messenger
+            val msg = Message.obtain()!!
             msg.arg1 = result
             msg.obj = filename
             try{

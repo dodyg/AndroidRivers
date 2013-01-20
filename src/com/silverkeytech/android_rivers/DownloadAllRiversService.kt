@@ -47,12 +47,12 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
     var targetTitles: List<String?> ? = null
 
     fun prepareNotification(): Notification {
-        var notificationIntent = Intent(Intent.ACTION_MAIN)
+        val notificationIntent = Intent(Intent.ACTION_MAIN)
         notificationIntent.setClass(getApplicationContext(), javaClass<MainActivity>())
 
-        var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT)
+        val contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
-        var notification = NotificationCompat.Builder(this)
+        val notification = NotificationCompat.Builder(this)
                 .setTicker(this.getString(R.string.start_downloading_all_rivers))
         ?.setWhen(System.currentTimeMillis())
         ?.setContentIntent(contentIntent)
@@ -103,7 +103,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
                 //take care of notification
                 progress = (riverNumber * 100) div riverTotal
 
-                var title = targetTitles?.get(riverNumber)
+                val title = targetTitles?.get(riverNumber)
 
                 updateText("Downloading $title ")
                 updateProgress(progress)
@@ -154,7 +154,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
 
                         val urls = getBookmarksUrlsFromDbByCollection(id)
 
-                        var list = arrayListOf<RiverItemMeta>()
+                        val list = arrayListOf<RiverItemMeta>()
                         for(val u in urls){
                             val res = downloadSingleFeed(u!!, SyndicationFilter(PreferenceDefaults.CONTENT_BOOKMARK_COLLECTION_MAX_ITEMS_FILTER, latestDate))
 
