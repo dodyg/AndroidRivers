@@ -57,7 +57,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         var currentOutline = outlines.get(id!!.toInt())
         return when (currentOutline.getType()){
             OutlineType.INCLUDE -> currentOutline.text + " #"
-            OutlineType.LINK -> currentOutline.text + " ->"
+            OutlineType.LINK -> currentOutline.text + " *"
             OutlineType.BLOGPOST -> currentOutline.text + " +"
             OutlineType.RIVER -> currentOutline.text + " ~"
             OutlineType.RSS -> currentOutline.text + " ::"

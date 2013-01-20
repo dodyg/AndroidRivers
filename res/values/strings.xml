@@ -15,6 +15,7 @@
     <string name="help">Help</string>
     <string name="please_wait_while_loading">Please wait while loading</string>
     <string name="please_wait_while_downloading_news_rivers_list">Please wait while downloading news rivers list</string>
+    <string name="please_wait_while_downloading_outlines">Please wait while downloading outlines</string>
     <string name="podcast">Podcast</string>
     <string name="refresh">Refresh</string>
     <string name="share">Share</string>
