@@ -159,6 +159,7 @@ public class DownloadService(): IntentService("DownloadService"){
                 }
                 else{
                     notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "File successfully download to $filename")
+                    notification!!.contentView!!.setProgressBar(R.id.download_progress_status_progress, 100, 100, false)
                     notificationManager.notify(notificationId, notification)
                     result = Activity.RESULT_OK
                 }
