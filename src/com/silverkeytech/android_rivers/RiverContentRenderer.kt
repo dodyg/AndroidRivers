@@ -44,11 +44,6 @@ import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 //Manage the rendering of each news item in the river list
 public class RiverContentRenderer(val context: Activity, val language: String){
     class object {
-        val STANDARD_NEWS_COLOR = android.graphics.Color.GRAY
-        val STANDARD_NEWS_IMAGE = android.graphics.Color.CYAN
-        val STANDARD_NEWS_PODCAST = android.graphics.Color.MAGENTA
-        val STANDARD_NEWS_SOURCE = android.graphics.Color.BLUE
-
         public val TAG: String = javaClass<RiverContentRenderer>().getSimpleName()
     }
 
@@ -80,16 +75,16 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                     if (currentNewsItem.item.containsEnclosure()!!){
                         var enclosure = currentNewsItem.item.enclosure!!.get(0)
                         if (isSupportedImageMime(enclosure.`type`!!)){
-                            holder?.indicator?.setBackgroundColor(STANDARD_NEWS_IMAGE)
+                            holder?.indicator?.setBackgroundColor(PreferenceDefaults.STANDARD_NEWS_IMAGE)
                         }
                         else{
-                            holder?.indicator?.setBackgroundColor(STANDARD_NEWS_PODCAST)
+                            holder?.indicator?.setBackgroundColor(PreferenceDefaults.STANDARD_NEWS_PODCAST)
                         }
                     }
                     else if (currentNewsItem.item.containsSource()!!){
-                        holder?.indicator?.setBackgroundColor(STANDARD_NEWS_SOURCE)
+                        holder?.indicator?.setBackgroundColor(PreferenceDefaults.STANDARD_NEWS_SOURCE)
                     }else{
-                        holder?.indicator?.setBackgroundColor(STANDARD_NEWS_COLOR)
+                        holder?.indicator?.setBackgroundColor(PreferenceDefaults.STANDARD_NEWS_COLOR)
                     }
                 }
 

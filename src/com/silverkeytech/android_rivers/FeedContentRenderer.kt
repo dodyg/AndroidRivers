@@ -42,11 +42,6 @@ import com.silverkeytech.android_rivers.syndications.SyndicationFeedItem
 //Manage the rendering of each news item in the river list
 public class FeedContentRenderer(val context: Activity, val language: String){
     class object {
-        val STANDARD_NEWS_COLOR = android.graphics.Color.GRAY
-        val STANDARD_NEWS_IMAGE = android.graphics.Color.CYAN
-        val STANDARD_NEWS_PODCAST = android.graphics.Color.MAGENTA
-        val STANDARD_NEWS_SOURCE = android.graphics.Color.BLUE
-
         public val TAG: String = javaClass<FeedContentRenderer>().getSimpleName()
     }
 
@@ -67,8 +62,22 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                 var currentView = convertView
                 var holder: ViewHolder?
 
-                var currentNewsItem = feedItems[position]
-                var news = currentNewsItem.toString().trim()
+                val currentNewsItem = feedItems[position]
+                val news = currentNewsItem.toString().trim()
+
+                fun showIndicator() {
+                    if (currentNewsItem.enclosure != null){
+                        val enclosure = currentNewsItem.enclosure!!
+                        if (isSupportedImageMime(enclosure.mimeType)){
+                            holder?.indicator?.setBackgroundColor(PreferenceDefaults.STANDARD_NEWS_IMAGE)
+                        }
+                        else{
+                            holder?.indicator?.setBackgroundColor(PreferenceDefaults.STANDARD_NEWS_PODCAST)
+                        }
+                    }else{
+                        holder?.indicator?.setBackgroundColor(PreferenceDefaults.STANDARD_NEWS_COLOR)
+                    }
+                }
 
                 if (currentView == null){
                     currentView = inflater.inflate(R.layout.news_item, parent, false)
@@ -82,6 +91,8 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                 }
 
                 handleForeignTextFont(context, language, holder!!.news, news, textSize.toFloat())
+
+                showIndicator()
 
                 if (news.isNullOrEmpty()){
                     currentView?.setVisibility(View.GONE)
