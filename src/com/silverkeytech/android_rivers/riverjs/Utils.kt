@@ -38,10 +38,18 @@ fun accumulateList(list: ArrayList<RiverItemMeta>, feed: SyndicationFeed) {
         if (f.hasLink())
             item.link = f.link
 
-        val link = if (feed.hasLink())
+        if (f.hasEnclosure()){
+            val enc = RiverEnclosure()
+            enc.url = f.enclosure!!.url
+            enc.`type` = f.enclosure!!.mimeType
+            enc.length = f.enclosure!!.length
+            item.enclosure = arrayListOf(enc)
+        }
+
+        val feedSourceLink = if (feed.hasLink())
             feed.link else ""
 
-        val meta = RiverItemMeta(item, RiverItemSource(feed.title, link))
+        val meta = RiverItemMeta(item, RiverItemSource(feed.title, feedSourceLink))
 
         list.add(meta)
     }
