@@ -24,7 +24,7 @@ public fun googleShorten(url: String): Result<String>
         if (code == 200){
             val reply = pst!!.body()!!
             val s = gson.fromJson(reply, javaClass<shortenDataReply>())!!
-            return Result.right(s.id!!)
+            return Result.right(s.id)
         }
         else{
             return Result.wrong<String>(null)

@@ -130,8 +130,6 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
                         fi.link = alternateLinks.first().href
 
                     //enclosure
-                    val enclosureLinks = i.link!!.filter { x -> !x.rel.isNullOrEmpty() && x.rel == "enclosure" }
-
                     if (alternateLinks.count() > 0){
                         val altLink = alternateLinks.first()
 

@@ -16,9 +16,9 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
         var mimeType: String?
         try{
             val request = httpGet(url)
-            mimeType = request?.contentType()
+            mimeType = request.contentType()
 
-            downloadedContent = request?.body()
+            downloadedContent = request.body()
         }
         catch(e: HttpRequestException){
             var ex = e.getCause()

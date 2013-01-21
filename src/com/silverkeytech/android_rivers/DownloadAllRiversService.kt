@@ -60,13 +60,13 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
 
         notification!!.icon = android.R.drawable.star_big_on
 
-        notification!!.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.download_progress).with {
+        notification.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.download_progress).with {
             this.setImageViewResource(R.id.download_progress_status_icon, android.R.drawable.btn_star)
             this.setProgressBar(R.id.download_progress_status_progress, 100, 0, false)
             this.setTextViewText(R.id.download_progress_status_text, getString(R.string.download_starts))
         }
 
-        return notification!!
+        return notification
     }
 
     protected override fun onHandleIntent(p0: Intent?) {
@@ -119,7 +119,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
                     }
                     catch(e: HttpRequestException){
                         val ex = e.getCause()
-                        Log.d(TAG, "Error while trying to download $url")
+                        Log.d(TAG, "Error while trying to download $url with error message ${ex?.getMessage()}")
 
                         updateText("Problem downloading $title ")
                         notify()

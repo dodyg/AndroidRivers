@@ -63,13 +63,13 @@ public class DownloadService(): IntentService("DownloadService"){
 
         notification!!.icon = android.R.drawable.stat_sys_download
 
-        notification!!.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.download_progress).with {
+        notification.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.download_progress).with {
             this.setImageViewResource(R.id.download_progress_status_icon, android.R.drawable.stat_sys_download_done)
             this.setProgressBar(R.id.download_progress_status_progress, 100, 0, false)
             this.setTextViewText(R.id.download_progress_status_text, "Downloading $targetTitle")
         }
 
-        return notification!!
+        return notification
     }
 
     protected override fun onHandleIntent(p0: Intent?) {
@@ -184,7 +184,7 @@ public class DownloadService(): IntentService("DownloadService"){
 
         val extras = p0?.getExtras()
         if (extras != null){
-            val messenger = extras!!.get(Params.MESSENGER) as android.os.Messenger
+            val messenger = extras.get(Params.MESSENGER) as android.os.Messenger
             val msg = Message.obtain()!!
             msg.arg1 = result
             msg.obj = filename
