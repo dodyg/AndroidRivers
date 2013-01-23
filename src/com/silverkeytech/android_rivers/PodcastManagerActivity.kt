@@ -56,7 +56,6 @@ public class PodcastManagerActivity: SherlockListActivity()
         super<SherlockListActivity>.onCreate(savedInstanceState)
         setContentView(R.layout.podcasts)
 
-
         var actionBar = getSupportActionBar()!!
         actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
         actionBar.setTitle("Podcasts")
@@ -115,6 +114,10 @@ public class PodcastManagerActivity: SherlockListActivity()
 
     public fun listPodcasts() {
         val podcast = getPodcastsFromDb(SortingOrder.DESC)
+        if (podcast.size == 0){
+            val msg = this.findViewById(R.id.podcasts_message_tv) as TextView
+            msg.setText("All the podcasts you have downloaded will be listed here.")
+        }
         renderFileListing(podcast)
     }
 
