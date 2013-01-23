@@ -18,8 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.outliner
 
-import android.content.Intent
-import android.net.Uri
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
@@ -34,12 +32,12 @@ import com.silverkeytech.android_rivers.OutlinerActivity
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.getMain
 import com.silverkeytech.android_rivers.startFeedActivity
+import com.silverkeytech.android_rivers.startOpenBrowserActivity
+import com.silverkeytech.android_rivers.startOpenEmailActivity
 import com.silverkeytech.android_rivers.startOutlinerActivity
 import com.silverkeytech.android_rivers.startRiverActivity
 import com.silverkeytech.android_rivers.toastee
 import java.util.ArrayList
-import com.silverkeytech.android_rivers.startOpenBrowserActivity
-import com.silverkeytech.android_rivers.startOpenEmailActivity
 
 public open class SimpleAdapter(private val context: OutlinerActivity,
                                 private val treeStateManager: TreeStateManager<Long?>,

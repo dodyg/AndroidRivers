@@ -9,7 +9,6 @@ import com.silverkeytech.android_rivers.riverjs.accumulateList
 import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
 import com.silverkeytech.android_rivers.syndications.SyndicationFilter
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
-import java.util.Calendar
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
@@ -47,17 +46,17 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
 
         for(val url in p0){
             executor.execute(
-                runnable {
-                    val res = downloadSingleFeed(url!!, SyndicationFilter(maximumItemFilter, latestDate))
+                    runnable {
+                        val res = downloadSingleFeed(url!!, SyndicationFilter(maximumItemFilter, latestDate))
 
-                    if (res.isFalse())
-                        Log.d(TAG, "Value at ${res.exception?.getMessage()}")
-                    else
-                    {
-                        Log.d(TAG, "Download for $url is successful")
-                        accumulateList(list, res.value!!)
+                        if (res.isFalse())
+                            Log.d(TAG, "Value at ${res.exception?.getMessage()}")
+                        else
+                        {
+                            Log.d(TAG, "Download for $url is successful")
+                            accumulateList(list, res.value!!)
+                        }
                     }
-                }
             )
         }
 
@@ -72,7 +71,7 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
             Log.d(TAG, "It takes $diff mili seconds to complete ${p0.size} rss downloads")
             return Result.right(list)
         }
-        catch(ex : InterruptedException){
+        catch(ex: InterruptedException){
             executor.shutdownNow()
             return Result.wrong<List<RiverItemMeta>>(ex)
         }

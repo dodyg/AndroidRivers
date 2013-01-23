@@ -19,7 +19,7 @@ public class TextLimiter {
 
         // Just one long word. Chop it off.
         if (end == -1)
-            return text.substring(0, max-3) + "...";
+            return text.substring(0, max - 3) + "...";
 
         // Step forward as long as textWidth allows.
         int newEnd = end;

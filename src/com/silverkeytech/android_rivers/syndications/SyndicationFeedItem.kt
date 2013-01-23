@@ -50,7 +50,7 @@ public data class SyndicationFeedItem(){
         return enclosure != null && enclosure!!.mimeType == "audio/mpeg"
     }
 
-    fun addExtension(name : String, content : String){
+    fun addExtension(name: String, content: String) {
         if (!extensions.containsKey(name))
             extensions.put(name, content)
     }

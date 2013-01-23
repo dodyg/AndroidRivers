@@ -23,7 +23,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.net.Uri
 import android.os.Handler
 import android.os.Message
 import android.os.Messenger
@@ -114,12 +113,12 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                 if (currentNews.description.isNullOrEmpty() && !currentNews.title.isNullOrEmpty())
                     msg = scrubHtml(currentNews.title)
                 else
-                    {
-                        if (language == "ar")
-                            msg = scrubHtml(currentNews.description.limitText(PreferenceDefaults.CONTENT_BODY_ARABIC_MAX_LENGTH))
-                        else
-                            msg = scrubHtml(currentNews.description.limitText(PreferenceDefaults.CONTENT_BODY_MAX_LENGTH))
-                    }
+                {
+                    if (language == "ar")
+                        msg = scrubHtml(currentNews.description.limitText(PreferenceDefaults.CONTENT_BODY_ARABIC_MAX_LENGTH))
+                    else
+                        msg = scrubHtml(currentNews.description.limitText(PreferenceDefaults.CONTENT_BODY_MAX_LENGTH))
+                }
 
                 dlg.setBackgroundColor(context.getStandardDialogBackgroundColor())
 

@@ -35,7 +35,7 @@ public class Bookmark(){
     [DatabaseField(generatedId = true, columnName = "id")]
     public var id: Int = 0
 
-    [DatabaseField(canBeNull = false, columnName = "title", width = 255, dataType = DataType.STRING )]
+    [DatabaseField(canBeNull = false, columnName = "title", width = 255, dataType = DataType.STRING)]
     public var title: String = ""
 
     [DatabaseField(canBeNull = false, uniqueIndex = true, columnName = "url", width = 550, dataType = DataType.LONG_STRING)]

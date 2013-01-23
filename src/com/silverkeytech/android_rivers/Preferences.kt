@@ -67,10 +67,10 @@ public class PreferenceDefaults{
         public val LINK_SHARE_TITLE_MAX_LENGTH: Int = 80
 
 
-        public val STANDARD_NEWS_COLOR : Int = android.graphics.Color.GRAY
-        public val STANDARD_NEWS_IMAGE : Int = android.graphics.Color.CYAN
-        public val STANDARD_NEWS_PODCAST : Int = android.graphics.Color.MAGENTA
-        public val STANDARD_NEWS_SOURCE : Int = android.graphics.Color.BLUE
+        public val STANDARD_NEWS_COLOR: Int = android.graphics.Color.GRAY
+        public val STANDARD_NEWS_IMAGE: Int = android.graphics.Color.CYAN
+        public val STANDARD_NEWS_PODCAST: Int = android.graphics.Color.MAGENTA
+        public val STANDARD_NEWS_SOURCE: Int = android.graphics.Color.BLUE
     }
 }
 

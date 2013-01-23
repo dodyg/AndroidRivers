@@ -397,7 +397,7 @@ public open class MainActivity(): SherlockActivity() {
                                     }
                                 }, negative = {
 
-                                } )
+                                })
                                 dialog.show()
                             }
                             else

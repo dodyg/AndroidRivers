@@ -23,7 +23,6 @@ import com.actionbarsherlock.app.SherlockListActivity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 import com.silverkeytech.android_rivers.db.getBookmarksFromDbByCollection
-import java.text.MessageFormat
 
 public open class BookmarkCollectionActivity(): SherlockListActivity() {
     class object {

@@ -2,10 +2,10 @@ package com.silverkeytech.android_rivers
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Messenger
 import com.silverkeytech.android_rivers.outliner.OutlineContent
 import java.util.ArrayList
-import android.net.Uri
 
 public fun startRiverSourcesActivity(context: Context, riverTitle: String, riverUri: String, sourcesTitles: ArrayList<String>, sourcesUris: ArrayList<String>) {
     val i = Intent(context, javaClass<RiverSourcesActivity>())
@@ -89,12 +89,12 @@ public fun shareActionIntent(context: Context, title: String, url: String): Inte
     return i
 }
 
-public fun startOpenBrowserActivity(context: Context, url: String){
+public fun startOpenBrowserActivity(context: Context, url: String) {
     val i = Intent("android.intent.action.VIEW", Uri.parse(url))
     context.startActivity(i)
 }
 
-public fun startOpenEmailActivity(context: Context, email : String, subject : String, body : String){
+public fun startOpenEmailActivity(context: Context, email: String, subject: String, body: String) {
     val i = Intent(Intent.ACTION_SEND)
 
     i.setType("message/rfc822")

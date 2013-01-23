@@ -125,7 +125,7 @@ public class RssBuilder(){
                 data.pubDate = pubDate
             }
 
-            public fun setExtension(name : String, content : String){
+            public fun setExtension(name: String, content: String) {
                 if (!data.extensions!!.containsKey(name))
                     data.extensions!!.put(name, content);
             }
