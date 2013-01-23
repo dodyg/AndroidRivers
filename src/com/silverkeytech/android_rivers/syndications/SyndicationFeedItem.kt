@@ -20,6 +20,7 @@ package com.silverkeytech.android_rivers.syndications
 
 import com.silverkeytech.android_rivers.isNullOrEmpty
 import java.util.Date
+import java.util.HashMap
 
 public data class SyndicationFeedItem(){
     public var title: String? = null
@@ -27,6 +28,7 @@ public data class SyndicationFeedItem(){
     public var link: String? = null
     public var pubDate: Date? = null
     public var enclosure: SyndicationFeedEnclosure? = null
+    public var extensions: HashMap<String, String> = HashMap<String, String>()
 
     fun hasTitle(): Boolean {
         return !title.isNullOrEmpty()
@@ -46,6 +48,11 @@ public data class SyndicationFeedItem(){
 
     fun isPodcast(): Boolean {
         return enclosure != null && enclosure!!.mimeType == "audio/mpeg"
+    }
+
+    fun addExtension(name : String, content : String){
+        if (!extensions.containsKey(name))
+            extensions.put(name, content)
     }
 
     public fun toString(): String {

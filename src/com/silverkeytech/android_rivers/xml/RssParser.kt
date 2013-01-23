@@ -27,7 +27,8 @@ public class RssParser{
         var parser = XMLParser<RssBuilder>(channelTitle, channelLink, channelDescription, channelPubDate,
                 channelLastBuildDate, channelDocs, channelGenerator, channelManagingEditor, channelWebMaster,
                 channelTtl, channelCloud,
-                itemTag, itemTitle, itemLink, itemDescription, itemAuthor, itemGuid, itemIsPermaLink, itemPubDate, itemEnclosure
+                itemTag, itemTitle, itemLink, itemDescription, itemAuthor, itemGuid, itemIsPermaLink, itemPubDate,
+                itemEnclosure, itemMobileAppVersion
         )
         parser.parse(input, rss)
     }
@@ -133,3 +134,7 @@ val itemEnclosure = attributeRule<RssBuilder>("/rss/channel/item/enclosure", {(a
         }
     }
 }, "url", "length", "type")
+
+val itemMobileAppVersion = textRule<RssBuilder>("/rss/channel/item/[http://rivers.silverkeytech.com/en/mobile-app-updates]version", {(text, rss) ->
+    rss.channel.item.setExtension("mobileapp:version", text)
+})

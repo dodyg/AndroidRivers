@@ -368,6 +368,49 @@ public open class MainActivity(): SherlockActivity() {
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()) {
+            R.id.main_menu_updates->{
+                DownloadFeed(this, true).executeOnComplete {
+                    res ->
+
+                    if (res.isTrue()){
+                        val feed = res.value!!
+
+                        if (feed.items.size() > 0){
+                            var showDialog = false
+                            val latest = feed.items.get(0)
+
+                            Log.d(TAG, "Extensions with ${latest.extensions.size}")
+                            if (latest.extensions.containsKey("mobileapp:version")){
+                                val version = latest.extensions.get("mobileapp:version")!!.toInt()
+                                Log.d(TAG, "Latest version $version with ${latest.extensions.size}")
+                                if (version > this.getResources()!!.getInteger(R.integer.version)){
+                                    showDialog = true
+                                }
+                            }
+
+                            if (showDialog){
+                                val msg = "${latest.title}\n${latest.description}\nDownload now?"
+                                val dialog = createConfirmationDialog(context = this, message = msg, positive = {
+                                    if (latest.hasEnclosure()){
+                                        val downloadUrl = latest.enclosure!!.url
+                                        startOpenBrowserActivity(this@MainActivity, downloadUrl)
+                                    }
+                                }, negative = {
+
+                                } )
+                                dialog.show()
+                            }
+                            else
+                                toastee("There is no current update at the moment", Duration.LONG)
+                        }
+                        else
+                            toastee("There is no current update at the moment", Duration.LONG)
+                    } else{
+                        toastee("Fail to retrieve software updates. Please try again", Duration.LONG)
+                    }
+                }.execute("http://hobieu.apphb.com/api/1/updates/androidrivers")
+                return true
+            }
             R.id.main_menu_help->{
                 downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
                 return true

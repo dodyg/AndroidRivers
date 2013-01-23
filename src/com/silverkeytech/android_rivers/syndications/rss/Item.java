@@ -21,6 +21,7 @@ package com.silverkeytech.android_rivers.syndications.rss;
 import com.silverkeytech.android_rivers.DateHelper;
 
 import java.util.Date;
+import java.util.HashMap;
 
 public class Item {
     public String title;
@@ -38,6 +39,8 @@ public class Item {
     public String pubDate;
 
     public Enclosure enclosure;
+
+    public HashMap<String, String> extensions = new HashMap<String, String>();
 
     public Date getPubDate() {
         if (pubDate == null)

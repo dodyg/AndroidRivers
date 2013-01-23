@@ -28,9 +28,9 @@ public class BookmarkQuery(private val dao: Dao<Bookmark, out Int?>){
                     .eq(BOOKMARK_KIND, kind.toString())!!
 
             if (sortByTitleOrder == SortingOrder.ASC)
-                q.orderBy(BOOKMARK_TITLE, true)
+                q.orderByRaw("$BOOKMARK_TITLE COLLATE NOCASE ASC;")
             else if (sortByTitleOrder == SortingOrder.DESC)
-                q.orderBy(BOOKMARK_TITLE, false)
+                q.orderByRaw("$BOOKMARK_TITLE COLLATE NOCASE DESC;")
 
             return QueryMany(dao.query(q.prepare()))
         }

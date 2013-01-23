@@ -97,6 +97,10 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
                         )
                         fi.enclosure = enclosure
                     }
+
+                    if (i.extensions != null)
+                        fi.extensions = i.extensions!!
+
                     items.add(fi)
                 }
             }
