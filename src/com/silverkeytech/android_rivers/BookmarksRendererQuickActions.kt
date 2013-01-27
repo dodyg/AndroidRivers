@@ -153,7 +153,7 @@ fun showRssBookmarkQuickActionPopup(context: MainActivity, currentBookmark: Book
         else {
             val dialog = AlertDialog.Builder(context)
             if (alreadyBelongsToACollection)
-                dialog.setTitle("Reassigned bookmark to collection")
+                dialog.setTitle("Reassign bookmark to collection")
             else
                 dialog.setTitle("Assign bookmark to collection")
 

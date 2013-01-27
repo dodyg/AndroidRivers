@@ -15,7 +15,8 @@
                android:layout_height="wrap_content"
                android:id="@+id/collection_quick_action_delete_icon"
                android:src="@android:drawable/ic_menu_close_clear_cancel"
-    />
+               android:layout_marginLeft="15dp"
+            />
 
     </LinearLayout>
 </RelativeLayout>

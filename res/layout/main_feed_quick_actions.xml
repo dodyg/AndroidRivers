@@ -21,6 +21,7 @@
                android:layout_height="wrap_content"
                android:id="@+id/main_feed_quick_action_edit_icon"
                android:src="@android:drawable/ic_menu_edit"
+               android:layout_marginLeft="15dp"
             />
 
     </LinearLayout>
