@@ -461,7 +461,9 @@ public open class MainActivity(): SherlockActivity() {
                 }
             }
             EXPLORE -> {
+                //sample opml subscription val tst = "http://hobieu.apphb.com/opml/xml/2cdec9b0-1beb-42ec-88b6-7231cccb0f5e"
                 downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_MORE_NEWS_SOURCE, "Get more news")
+                //downloadOpml(this, "http://hobieu.apphb.com/opml/xml/2cdec9b0-1beb-42ec-88b6-7231cccb0f5e", "Get more news")
                 return false
             }
             SWITCH_FORWARD -> {

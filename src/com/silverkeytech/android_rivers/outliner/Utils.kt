@@ -59,6 +59,10 @@ private fun traverseOutline(level: Int, outline: Outline?, list: ArrayList<Outli
                 o.putAttribute("type", outline.outlineType!!)
                 o.putAttribute("url", outline.url!!)
             }
+            else if (!outline.outlineType.isNullOrEmpty() && !outline.xmlUrl.isNullOrEmpty()){
+                o.putAttribute("type", outline.outlineType!!)
+                o.putAttribute("url", outline.xmlUrl!!)
+            }
 
             if (!outline.language.isNullOrEmpty()){
                 o.putAttribute("language", outline.language!!)
