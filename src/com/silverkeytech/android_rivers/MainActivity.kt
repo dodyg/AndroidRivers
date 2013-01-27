@@ -165,6 +165,10 @@ public open class MainActivity(): SherlockActivity() {
             val addDialog = menu.findItem(R.id.main_menu_show_add_dialog)
             val refresh = menu.findItem(R.id.main_menu_refresh)
 
+            //todo: make a configuration based to turn this on and off
+            val updates = menu.findItem(R.id.main_menu_updates)
+            updates?.setVisible(false)
+
             when(mode){
                 MainActivityMode.RIVER -> {
                     newCollection?.setVisible(false)
