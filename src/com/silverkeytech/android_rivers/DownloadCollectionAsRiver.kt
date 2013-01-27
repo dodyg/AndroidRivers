@@ -29,6 +29,8 @@ import com.silverkeytech.android_rivers.syndications.SyndicationFilter
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import java.util.Vector
+import java.util.ArrayList
 
 public class DownloadCollectionAsRiver(it: Context?, private val collectionId: Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
     class object {
@@ -51,7 +53,7 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
     protected override fun doInBackground(vararg p0: String?): Result<List<RiverItemMeta>>? {
         val latestDate = daysBeforeNow(PreferenceDefaults.CONTENT_BOOKMARK_COLLECTION_LATEST_DATE_FILTER_IN_DAYS)
         val before = System.currentTimeMillis()
-        var list = arrayListOf<RiverItemMeta>()
+        var list = Vector<RiverItemMeta>()
 
         var executor = Executors.newFixedThreadPool(4)
 
@@ -87,7 +89,7 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
             val after = System.currentTimeMillis()
             val diff = after - before
             Log.d(TAG, "It takes $diff mili seconds to complete ${p0.size} rss downloads")
-            return Result.right(list)
+            return Result.right(ArrayList(list))
         }
         catch(ex: InterruptedException){
             executor.shutdownNow()

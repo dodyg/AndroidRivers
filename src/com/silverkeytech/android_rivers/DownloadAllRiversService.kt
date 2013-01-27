@@ -37,6 +37,8 @@ import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
 import com.silverkeytech.android_rivers.syndications.SyndicationFilter
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 import java.util.Random
+import java.util.Vector
+
 
 public class DownloadAllRiversService(): IntentService("DownloadAllRiversService"){
     class object{
@@ -154,7 +156,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
 
                         val urls = getBookmarksUrlsFromDbByCollection(id)
 
-                        val list = arrayListOf<RiverItemMeta>()
+                        val list = Vector<RiverItemMeta>()
                         for(val u in urls){
                             val res = downloadSingleFeed(u!!, SyndicationFilter(PreferenceDefaults.CONTENT_BOOKMARK_COLLECTION_MAX_ITEMS_FILTER, latestDate))
 

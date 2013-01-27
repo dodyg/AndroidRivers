@@ -26,8 +26,9 @@ import com.silverkeytech.android_rivers.httpGet
 import com.silverkeytech.android_rivers.scrubJsonP
 import com.silverkeytech.android_rivers.syndications.SyndicationFeed
 import java.util.ArrayList
+import java.util.Vector
 
-fun accumulateList(list: ArrayList<RiverItemMeta>, feed: SyndicationFeed) {
+fun accumulateList(list: Vector<RiverItemMeta>, feed: SyndicationFeed) {
     for(val f in feed.items.iterator()){
         val item = RiverItem()
 
