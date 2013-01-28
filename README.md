@@ -1,4 +1,4 @@
-Android River is an Android 2.2 app that reads river of news based on RiverJS format.
+Android River is an Android 2.2 app that reads river of news based on RiverJS format. It's now version 1.0.
 
 The website for this project is at http://rivers.silverkeytech.com and it is available at Google Store http://goo.gl/kShgp
 
