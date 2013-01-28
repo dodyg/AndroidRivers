@@ -6,6 +6,7 @@ The latest build of this app is available at http://goo.gl/dxK5w. The mailing li
 
 This code is licensed under GPL version 3. Please read license.txt.
 
+I develop Android Rivers using <a href="http://kotlin.jetbrains.org/">Kotlin programming language</a>
 
 Open Source Library used:
 * [ActionBar Sherlock](http://actionbarsherlock.com/) - [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
