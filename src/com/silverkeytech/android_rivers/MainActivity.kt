@@ -155,49 +155,40 @@ public open class MainActivity(): SherlockActivity() {
 
     public override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         if (menu != null){
-            val downloadAll = menu.findItem(R.id.main_menu_download_all_rivers)
-            val newCollection = menu.findItem(R.id.main_menu_collection_add_new)
+            val downloadAll = menu.findItem(R.id.main_menu_download_all_rivers).andHide()
+            val newCollection = menu.findItem(R.id.main_menu_collection_add_new).andHide()
             val backward = menu.findItem(SWITCH_BACKWARD)
-            val sort = menu.findItem(R.id.main_menu_sort)
-            val tryout = menu.findItem(R.id.main_menu_tryout)
-            tryout?.setVisible(false)
+            val sort = menu.findItem(R.id.main_menu_sort).andHide()
+            val tryout = menu.findItem(R.id.main_menu_tryout).andHide()
 
-            val addDialog = menu.findItem(R.id.main_menu_show_add_dialog)
-            val refresh = menu.findItem(R.id.main_menu_refresh)
+            val addDialog = menu.findItem(R.id.main_menu_show_add_dialog).andHide()
+            val refresh = menu.findItem(R.id.main_menu_refresh).andHide()
+            val opmlImport = menu.findItem(R.id.main_menu_show_import_opml_dialog).andHide()
 
             //todo: make a configuration based to turn this on and off
-            val updates = menu.findItem(R.id.main_menu_updates)
-            updates?.setVisible(false)
+            val updates = menu.findItem(R.id.main_menu_updates).andHide()
 
             when(mode){
                 MainActivityMode.RIVER -> {
-                    newCollection?.setVisible(false)
-                    downloadAll?.setVisible(true)
-                    backward?.setEnabled(false)
+                    downloadAll.setVisible(true)
+                    backward!!.setEnabled(false)
                     val nextSort = nextSortCycle()
                     Log.d(TAG, "The next sort cycle from current ${this.getContentPref().getRiverBookmarksSorting()} is $nextSort")
                     setSortButtonText(sort, nextSort)
-                    sort?.setVisible(true)
-                    refresh?.setVisible(true)
-                    addDialog?.setVisible(true)
-                    addDialog?.setTitle("Add River")
+                    sort.setVisible(true)
+                    refresh.setVisible(true)
+                    addDialog.setVisible(true)
+                    addDialog.setTitle("Add River")
                 }
                 MainActivityMode.RSS -> {
-                    newCollection?.setVisible(false)
-                    downloadAll?.setVisible(false)
-                    backward?.setEnabled(true)
-                    sort?.setVisible(false)
-                    refresh?.setVisible(false)
-                    addDialog?.setVisible(true)
-                    addDialog?.setTitle("Add RSS")
+                    backward!!.setEnabled(true)
+                    addDialog.setVisible(true)
+                    addDialog.setTitle("Add RSS")
+                    opmlImport.setVisible(true)
                 }
                 MainActivityMode.COLLECTION -> {
-                    newCollection?.setVisible(true)
-                    downloadAll?.setVisible(false)
-                    backward?.setEnabled(true)
-                    sort?.setVisible(false)
-                    refresh?.setVisible(false)
-                    addDialog?.setVisible(false)
+                    newCollection.setVisible(true)
+                    backward!!.setEnabled(true)
                 }
                 else -> {
                 }

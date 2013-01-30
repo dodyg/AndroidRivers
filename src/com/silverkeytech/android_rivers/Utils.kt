@@ -26,6 +26,12 @@ import com.github.kevinsawicki.http.HttpRequest
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
+import com.actionbarsherlock.view.MenuItem
+
+public fun MenuItem?.andHide() : MenuItem{
+    this!!.setVisible(false)
+    return this!!
+}
 
 public fun OnClickListener(action: (View?) -> Unit): OnClickListener {
     return object : OnClickListener {

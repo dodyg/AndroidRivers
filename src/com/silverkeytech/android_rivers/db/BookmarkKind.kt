@@ -22,5 +22,6 @@ public enum class BookmarkKind{
     RIVER
     RSS
     LINK
+    OPML
     NONE
 }
