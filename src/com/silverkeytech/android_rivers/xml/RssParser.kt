@@ -24,7 +24,7 @@ import java.io.InputStream
 
 public class RssParser{
     public fun parse(input: InputStream, rss: RssBuilder) {
-        var parser = XMLParser<RssBuilder>(channelTitle, channelLink, channelDescription, channelPubDate,
+        var parser = XMLParser<RssBuilder>(channelTitle, channelLink, channelDescription, channelLanguage, channelPubDate,
                 channelLastBuildDate, channelDocs, channelGenerator, channelManagingEditor, channelWebMaster,
                 channelTtl, channelCloud,
                 itemTag, itemTitle, itemLink, itemDescription, itemAuthor, itemGuid, itemIsPermaLink, itemPubDate,
@@ -44,6 +44,10 @@ val channelLink = textRule<RssBuilder>("/rss/channel/link", {(text, rss) ->
 
 val channelDescription = textRule<RssBuilder>("/rss/channel/description", {(text, rss) ->
     rss.channel.setDescription(text)
+})
+
+val channelLanguage = textRule<RssBuilder>("/rss/channel/language", {(text, rss) ->
+    rss.channel.setLanguage(text)
 })
 
 val channelPubDate = textRule<RssBuilder>("/rss/channel/pubDate", {(text, rss) ->

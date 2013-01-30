@@ -92,8 +92,8 @@ fun handleForeignTextFont(context: Activity, language: String, text: TextView, c
 
     val arabicFont = Typeface.createFromAsset(context.getAssets(), "DroidKufi-Regular.ttf")
 
-    when(language){
-        "ar" -> {
+    when(language.toLowerCase()){
+        "ar", "ar-eg" -> {
             Log.d(TAG, "Switching to Arabic Font")
             text.setTypeface(arabicFont)
             text.setText(ArabicReshape.reshape(content))

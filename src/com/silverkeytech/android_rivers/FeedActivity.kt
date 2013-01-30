@@ -74,6 +74,10 @@ public class FeedActivity(): SherlockListActivity(), WithVisualModificationPanel
                 var feed = res.value!!
                 feedDateIsParseable = feed.isDateParseable
                 Log.d(TAG, "$feedUrl is parseable = $feedDateIsParseable")
+                if (!feed.language.isNullOrEmpty()){
+                    Log.d(TAG, "Obtained feed language is ${feed.language}")
+                    feedLanguage = feed.language
+                }
                 FeedContentRenderer(this, feedLanguage)
                         .handleNewsListing(feedName, feedUrl, feed.items)
             }else{
