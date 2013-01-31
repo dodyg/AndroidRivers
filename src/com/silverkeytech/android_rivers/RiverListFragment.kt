@@ -32,7 +32,23 @@ public class RiverListFragment() : SherlockListFragment() {
         displayRiverBookmarks(activity!!, true)
     }
 
+    public override fun onHiddenChanged(hidden: Boolean) {
+        Log.d(TAG, "OnHiddenChanged $hidden")
+        super<SherlockListFragment>.onHiddenChanged(hidden)
+    }
+
+    public override fun onResume() {
+        Log.d(TAG, "OnResume")
+        super<SherlockListFragment>.onResume()
+    }
+
+    public override fun onPause() {
+        Log.d(TAG, "OnPause")
+        super<SherlockListFragment>.onPause()
+    }
+
     private fun displayRiverBookmarks(activity : Activity, retrieveDefaultFromInternet: Boolean) {
         Log.d(TAG, "We are attached")
     }
+
 }
