@@ -30,7 +30,7 @@ import com.actionbarsherlock.view.MenuItem
 
 public fun MenuItem?.andHide() : MenuItem{
     this!!.setVisible(false)
-    return this!!
+    return this
 }
 
 public fun OnClickListener(action: (View?) -> Unit): OnClickListener {

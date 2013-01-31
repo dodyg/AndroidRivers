@@ -101,6 +101,7 @@ fun showCollectionQuickActionPopup(context: MainActivity, collection: BookmarkCo
     pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
 }
 
+
 fun showRssBookmarkQuickActionPopup(context: MainActivity, currentBookmark: Bookmark, item: View, list: View) {
     //overlay popup at top of clicked overview position
     val popupWidth = item.getWidth()

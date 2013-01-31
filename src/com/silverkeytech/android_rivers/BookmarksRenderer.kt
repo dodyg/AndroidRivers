@@ -176,7 +176,7 @@ public class BookmarksRenderer(val context: MainActivity){
 
     public data class ViewHolder (var name: TextView)
 
-    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?): View? {
+    public fun currentListItem(text: String, convertView: View?, parent: ViewGroup?): View? {
         var holder: ViewHolder?
 
         var vw: View? = convertView
