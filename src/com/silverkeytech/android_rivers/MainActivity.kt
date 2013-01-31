@@ -89,6 +89,7 @@ public open class MainActivity(): SherlockActivity() {
                 val downloadIf = getSetupPref().getDownloadDefaultRiversIfNecessary()
                 Log.d(TAG, "Preference for download default rivers is $downloadIf")
                 displayRiverBookmarks(downloadIf)
+
             }
         }
     }

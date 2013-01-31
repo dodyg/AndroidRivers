@@ -35,6 +35,7 @@ import com.silverkeytech.android_rivers.outlines.Outline
 import com.silverkeytech.android_rivers.outlines.sortOutlineAsc
 import com.silverkeytech.android_rivers.outlines.sortOutlineDesc
 import java.util.ArrayList
+import android.view.ViewGroup.LayoutParams
 
 public class BookmarksRenderer(val context: MainActivity){
     class object {
