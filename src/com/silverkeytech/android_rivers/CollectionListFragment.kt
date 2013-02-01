@@ -28,6 +28,13 @@ import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.getBookmarksFromDb
 import com.silverkeytech.android_rivers.db.removeItemByUrlFromBookmarkDb
 import com.silverkeytech.android_rivers.db.clearBookmarksFromCollection
+import android.content.DialogInterface
+import com.silverkeytech.android_rivers.db.BookmarkCollectionKind
+import android.widget.EditText
+import com.silverkeytech.android_rivers.db.saveBookmarkToDb
+import com.silverkeytech.android_rivers.db.addNewCollection
+import com.actionbarsherlock.view.Menu
+import com.actionbarsherlock.view.MenuInflater
 
 public class CollectionListFragment : SherlockListFragment() {
     class object {
@@ -55,6 +62,11 @@ public class CollectionListFragment : SherlockListFragment() {
     public override fun onResume() {
         Log.d(TAG, "OnResume")
         super<SherlockListFragment>.onResume()
+    }
+
+    public override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater!!.inflate(R.menu.collection_list_fragment_menu, menu)
+        super<SherlockListFragment>.onCreateOptionsMenu(menu, inflater)
     }
 
     public override fun onHiddenChanged(hidden: Boolean) {
@@ -208,4 +220,50 @@ public class CollectionListFragment : SherlockListFragment() {
         return inflater
     }
 
+    fun promptNewCollection() {
+        val dlg: View = parent!!.getLayoutInflater()!!.inflate(R.layout.collection_add_new, null)!!
+
+        //take care of color
+        dlg.setDrawingCacheBackgroundColor(parent!!.getStandardDialogBackgroundColor())
+
+        val dialog = AlertDialog.Builder(parent!!)
+        dialog.setView(dlg)
+        dialog.setTitle("Add new collection")
+
+        var input = dlg.findViewById(R.id.collection_add_new_title_et)!! as EditText
+
+        dialog.setPositiveButton("OK", object : DialogInterface.OnClickListener{
+            public override fun onClick(p0: DialogInterface?, p1: Int) {
+                val text = input.getText().toString()
+                if (text.isNullOrEmpty()){
+                    parent!!.toastee("Please enter collection title", Duration.AVERAGE)
+                    return
+                }
+
+                val res = addNewCollection(text, BookmarkCollectionKind.RIVER)
+
+                if (res.isTrue()){
+                    val url = makeLocalUrl(res.value!!.id)
+                    //when a collection is added as a river, bookmark it immediately
+                    saveBookmarkToDb(text, url, BookmarkKind.RIVER, "en", null)
+                    parent!!.getMain().clearRiverBookmarksCache()
+
+                    parent!!.toastee("Collection is successfully added")
+                    displayBookmarkCollection()
+                }
+                else{
+                    parent!!.toastee("Sorry, I have problem adding this new collection", Duration.AVERAGE)
+                }
+            }
+        })
+
+        dialog.setNegativeButton("Cancel", object : DialogInterface.OnClickListener{
+            public override fun onClick(p0: DialogInterface?, p1: Int) {
+                p0?.dismiss()
+            }
+        })
+
+        val createdDialog = dialog.create()!!
+        createdDialog.show()
+    }
 }
