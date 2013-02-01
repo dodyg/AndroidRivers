@@ -36,11 +36,40 @@ public class CollectionListFragment : SherlockListFragment() {
 
     var parent : Activity? = null
 
+    public override fun onAttach(activity: Activity?) {
+        super<SherlockListFragment>.onAttach(activity)
+        parent = activity
+    }
+
+    public override fun onCreate(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
+        super<SherlockListFragment>.onCreate(savedInstanceState)
+    }
+
     public override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val vw = inflater!!.inflate(R.layout.collection_list_fragment, container, false)
 
         return vw
     }
+
+    public override fun onResume() {
+        Log.d(TAG, "OnResume")
+        super<SherlockListFragment>.onResume()
+    }
+
+    public override fun onHiddenChanged(hidden: Boolean) {
+        Log.d(TAG, "OnHiddenChanged $hidden")
+        if (!hidden){
+            displayBookmarkCollection()
+        }
+        super<SherlockListFragment>.onHiddenChanged(hidden)
+    }
+
+    public override fun onPause() {
+        Log.d(TAG, "OnPause")
+        super<SherlockListFragment>.onPause()
+    }
+
 
     fun showMessage(msg: String) {
         val txt = getView()!!.findViewById(R.id.collection_list_fragment_message_tv) as TextView
@@ -95,28 +124,6 @@ public class CollectionListFragment : SherlockListFragment() {
         })
     }
 
-    public override fun onAttach(activity: Activity?) {
-        super<SherlockListFragment>.onAttach(activity)
-        parent = activity
-    }
-
-    public override fun onHiddenChanged(hidden: Boolean) {
-        Log.d(TAG, "OnHiddenChanged $hidden")
-        if (!hidden){
-            displayBookmarkCollection()
-        }
-        super<SherlockListFragment>.onHiddenChanged(hidden)
-    }
-
-    public override fun onResume() {
-        Log.d(TAG, "OnResume")
-        super<SherlockListFragment>.onResume()
-    }
-
-    public override fun onPause() {
-        Log.d(TAG, "OnPause")
-        super<SherlockListFragment>.onPause()
-    }
 
     fun showCollectionQuickActionPopup(context: Activity, collection: BookmarkCollection, item: View, list: View) {
         //overlay popup at top of clicked overview position

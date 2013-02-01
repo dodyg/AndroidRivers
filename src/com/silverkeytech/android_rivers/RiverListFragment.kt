@@ -35,6 +35,8 @@ import com.silverkeytech.android_rivers.outlines.Outline
 import java.util.ArrayList
 import com.silverkeytech.android_rivers.outlines.sortOutlineAsc
 import com.silverkeytech.android_rivers.outlines.sortOutlineDesc
+import com.actionbarsherlock.view.Menu
+import android.view.MenuItem
 
 public class RiverListFragment() : SherlockListFragment() {
     class object {
@@ -42,6 +44,19 @@ public class RiverListFragment() : SherlockListFragment() {
     }
 
     val DEFAULT_SUBSCRIPTION_LIST = "http://hobieu.apphb.com/api/1/default/riverssubscription"
+
+    var parent : Activity? = null
+
+    var isFirstLoad : Boolean = true
+    public override fun onAttach(activity: Activity?) {
+        super<SherlockListFragment>.onAttach(activity)
+        parent = activity
+    }
+
+    public override fun onCreate(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
+        super<SherlockListFragment>.onCreate(savedInstanceState)
+    }
 
     public override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val vw = inflater!!.inflate(R.layout.river_list_fragment, container, false)
@@ -58,24 +73,9 @@ public class RiverListFragment() : SherlockListFragment() {
         displayRiverBookmarks(downloadIf)
     }
 
-    fun showMessage(msg: String) {
-        val txt = getView()!!.findViewById(R.id.river_list_fragment_message_tv) as TextView
-        if (msg.isNullOrEmpty()){
-            txt.setVisibility(View.INVISIBLE)
-            txt.setText("")
-        }
-        else{
-            txt.setVisibility(View.VISIBLE)
-            txt.setText(msg)
-        }
-    }
-
-    var parent : Activity? = null
-
-    var isFirstLoad : Boolean = true
-    public override fun onAttach(activity: Activity?) {
-        super<SherlockListFragment>.onAttach(activity)
-        parent = activity
+    public override fun onResume() {
+        Log.d(TAG, "OnResume")
+        super<SherlockListFragment>.onResume()
     }
 
     public override fun onHiddenChanged(hidden: Boolean) {
@@ -89,14 +89,42 @@ public class RiverListFragment() : SherlockListFragment() {
         super<SherlockListFragment>.onHiddenChanged(hidden)
     }
 
-    public override fun onResume() {
-        Log.d(TAG, "OnResume")
-        super<SherlockListFragment>.onResume()
+    public override fun onContextItemSelected(item: MenuItem?): Boolean {
+        when(item!!.getItemId()) {
+            R.id.main_menu_download_all_rivers -> {
+                val subscriptionList = parent!!.getMain().getRiverBookmarksCache()
+
+                if (subscriptionList != null){
+                    val titleList = subscriptionList.body?.outline?.iterator()?.map { it.text!! }?.toArrayList()!!
+                    val urlList = subscriptionList.body?.outline?.iterator()?.map { it.url!! }?.toArrayList()!!
+
+                    startDownloadAllRiverService(parent!!, titleList, urlList)
+                    return true
+                }
+                else {
+                    parent!!.toastee("Sorry, there's nothing to download.", Duration.AVERAGE)
+                    return true
+                }
+            }
+            else -> return false
+        }
     }
 
     public override fun onPause() {
         Log.d(TAG, "OnPause")
         super<SherlockListFragment>.onPause()
+    }
+
+    fun showMessage(msg: String) {
+        val txt = getView()!!.findViewById(R.id.river_list_fragment_message_tv) as TextView
+        if (msg.isNullOrEmpty()){
+            txt.setVisibility(View.INVISIBLE)
+            txt.setText("")
+        }
+        else{
+            txt.setVisibility(View.VISIBLE)
+            txt.setText(msg)
+        }
     }
 
     private fun displayRiverBookmarks(retrieveDefaultFromInternet: Boolean) {

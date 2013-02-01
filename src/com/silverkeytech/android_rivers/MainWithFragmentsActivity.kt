@@ -39,16 +39,39 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
 
     public override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         if (menu != null){
+            val downloadAll = menu.findItem(R.id.main_menu_download_all_rivers).andHide()
+            val newCollection = menu.findItem(R.id.main_menu_collection_add_new).andHide()
             val backward = menu.findItem(SWITCH_BACKWARD)
+            val sort = menu.findItem(R.id.main_menu_sort).andHide()
+            val tryout = menu.findItem(R.id.main_menu_tryout).andHide()
+
+            val addDialog = menu.findItem(R.id.main_menu_show_add_dialog).andHide()
+            val refresh = menu.findItem(R.id.main_menu_refresh).andHide()
+            val opmlImport = menu.findItem(R.id.main_menu_show_import_opml_dialog).andHide()
+
+            //todo: make a configuration based to turn this on and off
+            val updates = menu.findItem(R.id.main_menu_updates).andHide()
 
             when(mode){
                 MainActivityMode.RIVER -> {
+                    downloadAll.setVisible(true)
                     backward!!.setEnabled(false)
+                    //val nextSort = nextSortCycle()
+                    //Log.d(TAG, "The next sort cycle from current ${this.getContentPref().getRiverBookmarksSorting()} is $nextSort")
+                    //setSortButtonText(sort, nextSort)
+                    sort.setVisible(true)
+                    refresh.setVisible(true)
+                    addDialog.setVisible(true)
+                    addDialog.setTitle("Add River")
                 }
                 MainActivityMode.RSS -> {
                     backward!!.setEnabled(true)
+                    addDialog.setVisible(true)
+                    addDialog.setTitle("Add RSS")
+                    opmlImport.setVisible(true)
                 }
                 MainActivityMode.COLLECTION -> {
+                    newCollection.setVisible(true)
                     backward!!.setEnabled(true)
                 }
                 else -> {
@@ -60,6 +83,8 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
     }
 
     public override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = getSupportMenuInflater()!!
+        inflater.inflate(R.menu.main_menu, menu)
 
         //fixed top menu
         menu?.add(0, SWITCH_BACKWARD, 0, "<")
@@ -116,6 +141,10 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
                 displayModeContent(mode, false)
                 setTitle()
                 this.supportInvalidateOptionsMenu()
+                return true
+            }
+            R.id.main_menu_help->{
+                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
                 return true
             }
             else ->
