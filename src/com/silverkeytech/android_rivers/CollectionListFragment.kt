@@ -69,6 +69,16 @@ public class CollectionListFragment : SherlockListFragment() {
         super<SherlockListFragment>.onCreateOptionsMenu(menu, inflater)
     }
 
+    public override fun onOptionsItemSelected(item: com.actionbarsherlock.view.MenuItem?): Boolean {
+        when(item!!.getItemId()) {
+            R.id.collection_list_fragment_menu_add_new -> {
+                promptNewCollection()
+                return true
+            }
+            else -> return false
+        }
+    }
+
     public override fun onHiddenChanged(hidden: Boolean) {
         Log.d(TAG, "OnHiddenChanged $hidden")
         if (!hidden){
@@ -214,6 +224,7 @@ public class CollectionListFragment : SherlockListFragment() {
 
         return vw
     }
+
 
     fun inflater(): LayoutInflater {
         val inflater: LayoutInflater = parent!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater

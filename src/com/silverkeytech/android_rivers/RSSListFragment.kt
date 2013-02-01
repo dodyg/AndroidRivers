@@ -26,6 +26,10 @@ import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.getBookmarksFromDb
 import com.silverkeytech.android_rivers.db.removeItemByUrlFromBookmarkDb
+import com.actionbarsherlock.view.Menu
+import com.actionbarsherlock.view.MenuInflater
+import com.silverkeytech.android_rivers.db.saveBookmarkToDb
+import com.actionbarsherlock.view.MenuItem
 
 public class RssListFragment() : SherlockListFragment() {
     class object {
@@ -33,6 +37,7 @@ public class RssListFragment() : SherlockListFragment() {
     }
 
     var parent : Activity? = null
+    var lastEnteredUrl: String? = ""
 
     public override fun onAttach(activity: Activity?) {
         super<SherlockListFragment>.onAttach(activity)
@@ -55,6 +60,22 @@ public class RssListFragment() : SherlockListFragment() {
         super<SherlockListFragment>.onResume()
     }
 
+    public override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater!!.inflate(R.menu.rss_list_fragment_menu, menu)
+        super<SherlockListFragment>.onCreateOptionsMenu(menu, inflater)
+
+    }
+
+    public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.getItemId()){
+            R.id.rss_list_fragment_menu_show_add_dialog -> {
+                displayAddRssDialog()
+                return false
+            }
+            else -> return false
+        }
+    }
+
     public override fun onHiddenChanged(hidden: Boolean) {
         Log.d(TAG, "OnHiddenChanged $hidden")
         if (!hidden){
@@ -63,11 +84,57 @@ public class RssListFragment() : SherlockListFragment() {
         super<SherlockListFragment>.onHiddenChanged(hidden)
     }
 
+
     public override fun onPause() {
         Log.d(TAG, "OnPause")
         super<SherlockListFragment>.onPause()
     }
 
+    fun displayAddRssDialog(){
+        val dlg = createSingleInputDialog(parent!!, "Add new RSS", lastEnteredUrl, "Set url here", {
+            dlg, url ->
+            lastEnteredUrl = url
+            Log.d(TAG, "Entered $url")
+            if (url.isNullOrEmpty()){
+                parent!!.toastee("Please enter url of the river")
+            }
+            else {
+                var currentUrl = url!!
+                if (!currentUrl.contains("http://"))
+                    currentUrl = "http://" + currentUrl
+
+                val u = safeUrlConvert(currentUrl)
+                if (u.isTrue()){
+                    DownloadFeed(parent!!, true)
+                            .executeOnComplete {
+                        res ->
+                        if (res.isTrue()){
+                            var feed = res.value!!
+
+                            val res2 = saveBookmarkToDb(feed.title, currentUrl, BookmarkKind.RSS, feed.language, null)
+
+                            if (res2.isTrue()){
+                                parent!!.toastee("$currentUrl is successfully bookmarked")
+                                displayRssBookmarks()
+                            }
+                            else{
+                                parent!!.toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
+                            }
+                        }else{
+                            parent!!.toastee("Error ${res.exception?.getMessage()}", Duration.LONG)
+                        }
+                    }
+                            .execute(currentUrl)
+                    dlg?.dismiss()
+                }else{
+                    Log.d(TAG, "RSS $currentUrl conversion generates ${u.exception?.getMessage()}")
+                    parent!!.toastee("The url you entered is not valid. Please try again", Duration.LONG)
+                }
+            }
+        })
+
+        dlg.show()
+    }
 
     fun showMessage(msg: String) {
         val txt = getView()!!.findViewById(R.id.rss_list_fragment_message_tv) as TextView

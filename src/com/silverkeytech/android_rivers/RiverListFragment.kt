@@ -38,6 +38,7 @@ import com.silverkeytech.android_rivers.outlines.sortOutlineDesc
 import com.actionbarsherlock.view.Menu
 import android.view.MenuItem
 import com.actionbarsherlock.view.MenuInflater
+import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 
 public class RiverListFragment() : SherlockListFragment() {
     class object {
@@ -47,6 +48,7 @@ public class RiverListFragment() : SherlockListFragment() {
     val DEFAULT_SUBSCRIPTION_LIST = "http://hobieu.apphb.com/api/1/default/riverssubscription"
 
     var parent : Activity? = null
+    var lastEnteredUrl: String? = ""
 
     var isFirstLoad : Boolean = true
     public override fun onAttach(activity: Activity?) {
@@ -112,6 +114,10 @@ public class RiverListFragment() : SherlockListFragment() {
                     return true
                 }
             }
+            R.id.river_list_fragment_menu_show_add_dialog ->{
+
+                return true
+            }
             else -> return false
         }
     }
@@ -131,6 +137,54 @@ public class RiverListFragment() : SherlockListFragment() {
             txt.setVisibility(View.VISIBLE)
             txt.setText(msg)
         }
+    }
+
+    private fun displayAddNewRiverDialog(){
+        val dlg = createSingleInputDialog(parent!!, "Add new river", lastEnteredUrl, "Set url here", {
+            dlg, url ->
+            lastEnteredUrl = url
+            Log.d(TAG, "Entered $url")
+            if (url.isNullOrEmpty()){
+                parent!!.toastee("Please enter url of the river")
+            }
+            else {
+                var currentUrl = url!!
+                if (!currentUrl.contains("http://"))
+                    currentUrl = "http://" + currentUrl
+
+                val u = safeUrlConvert(currentUrl)
+                if (u.isTrue()){
+                    DownloadRiverContent(parent!!, "en")
+                            .executeOnComplete {
+                        res, lang ->
+                        if (res.isTrue()){
+                            var river = res.value!!
+                            var sortedNewsItems = river.getSortedNewsItems()
+                            parent!!.getMain().setRiverCache(currentUrl, sortedNewsItems)
+
+                            var res2 = saveBookmarkToDb(currentUrl, currentUrl, BookmarkKind.RIVER, "en", null)
+
+                            if (res2.isTrue()){
+                                parent!!.toastee("$currentUrl river is successfully bookmarked", Duration.LONG)
+                                parent!!.getMain().clearRiverBookmarksCache()
+                                refreshRiverBookmarks(false)
+                            } else{
+                                parent!!.toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
+                            }
+                        }
+                        else{
+                            parent!!.toastee("$currentUrl is not a valid river", Duration.LONG)
+                        }
+                    }
+                            .execute(currentUrl)
+
+                    dlg?.dismiss()
+                }else{
+                    Log.d(TAG, "RIVER $currentUrl conversion generates ${u.exception?.getMessage()}")
+                    parent!!.toastee("The url you entered is not valid. Please try again", Duration.LONG)
+                }
+            }
+        })
     }
 
     private fun displayRiverBookmarks(retrieveDefaultFromInternet: Boolean) {
