@@ -43,7 +43,7 @@ public class CollectionListFragment : SherlockListFragment() {
     }
 
     fun showMessage(msg: String) {
-        val txt = parent!!.findView<TextView>(R.id.collection_list_fragment_message_tv)
+        val txt = getView()!!.findViewById(R.id.collection_list_fragment_message_tv) as TextView
         if (msg.isNullOrEmpty()){
             txt.setVisibility(View.INVISIBLE)
             txt.setText("")
@@ -53,7 +53,6 @@ public class CollectionListFragment : SherlockListFragment() {
             txt.setText(msg)
         }
     }
-
 
     private fun displayBookmarkCollection() {
         val coll = getBookmarkCollectionFromDb(SortingOrder.ASC)

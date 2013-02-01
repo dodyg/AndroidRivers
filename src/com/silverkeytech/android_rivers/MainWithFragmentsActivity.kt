@@ -32,7 +32,6 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
         actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
         actionBar.setDisplayShowTitleEnabled(true)
 
-
         showAndHide(showRiver = true, showRss = false, showCollection = false)
         setTitle()
     }

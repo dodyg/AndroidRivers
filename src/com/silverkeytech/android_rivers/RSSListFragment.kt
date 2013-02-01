@@ -1,39 +1,31 @@
 package com.silverkeytech.android_rivers
 
-import com.actionbarsherlock.app.SherlockListFragment
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import android.os.Bundle
-import android.view.View
-import android.util.Log
-
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
+import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.ListView
+import android.widget.PopupWindow
 import android.widget.TextView
+import com.actionbarsherlock.app.SherlockListFragment
 import com.silverkeytech.android_rivers.db.Bookmark
 import com.silverkeytech.android_rivers.db.BookmarkCollection
-import com.silverkeytech.android_rivers.outlines.Opml
-import com.silverkeytech.android_rivers.outlines.Outline
-import com.silverkeytech.android_rivers.outlines.sortOutlineAsc
-import com.silverkeytech.android_rivers.outlines.sortOutlineDesc
-import java.util.ArrayList
-import android.view.ViewGroup.LayoutParams
-import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
-import com.silverkeytech.android_rivers.db.SortingOrder
-import com.silverkeytech.android_rivers.db.getBookmarksFromDb
 import com.silverkeytech.android_rivers.db.BookmarkKind
-import android.widget.PopupWindow
-import android.widget.ImageView
-import android.app.AlertDialog
 import com.silverkeytech.android_rivers.db.DatabaseManager
-import android.view.Gravity
+import com.silverkeytech.android_rivers.db.SortingOrder
+import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
+import com.silverkeytech.android_rivers.db.getBookmarksFromDb
 import com.silverkeytech.android_rivers.db.removeItemByUrlFromBookmarkDb
-
 
 public class RssListFragment() : SherlockListFragment() {
     class object {
@@ -48,9 +40,8 @@ public class RssListFragment() : SherlockListFragment() {
         return vw
     }
 
-
     fun showMessage(msg: String) {
-        val txt = parent!!.findView<TextView>(R.id.rss_list_fragment_message_tv)
+        val txt = getView()!!.findViewById(R.id.rss_list_fragment_message_tv) as TextView
         if (msg.isNullOrEmpty()){
             txt.setVisibility(View.INVISIBLE)
             txt.setText("")
@@ -92,7 +83,6 @@ public class RssListFragment() : SherlockListFragment() {
             }
         })
     }
-
 
     public override fun onAttach(activity: Activity?) {
         super<SherlockListFragment>.onAttach(activity)
@@ -271,14 +261,4 @@ public class RssListFragment() : SherlockListFragment() {
         return inflater
     }
 
-    data class Location(val x: Int, val y: Int)
-
-    fun getLocationOnScreen(item: View): Location {
-        val loc = intArray(0, 1)
-        item.getLocationOnScreen(loc)
-        val popupX = loc[0]
-        val popupY = loc[1]
-
-        return Location(popupX, popupY)
-    }
 }
