@@ -37,6 +37,7 @@ import com.silverkeytech.android_rivers.outlines.sortOutlineAsc
 import com.silverkeytech.android_rivers.outlines.sortOutlineDesc
 import com.actionbarsherlock.view.Menu
 import android.view.MenuItem
+import com.actionbarsherlock.view.MenuInflater
 
 public class RiverListFragment() : SherlockListFragment() {
     class object {
@@ -89,9 +90,14 @@ public class RiverListFragment() : SherlockListFragment() {
         super<SherlockListFragment>.onHiddenChanged(hidden)
     }
 
-    public override fun onContextItemSelected(item: MenuItem?): Boolean {
+    public override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater!!.inflate(R.menu.river_list_fragment_menu, menu)
+        super<SherlockListFragment>.onCreateOptionsMenu(menu, inflater)
+    }
+
+    public override fun onOptionsItemSelected(item: com.actionbarsherlock.view.MenuItem?): Boolean {
         when(item!!.getItemId()) {
-            R.id.main_menu_download_all_rivers -> {
+            R.id.river_list_fragment_menu_download_all_rivers -> {
                 val subscriptionList = parent!!.getMain().getRiverBookmarksCache()
 
                 if (subscriptionList != null){
