@@ -291,7 +291,7 @@ public class TryOutActivity(): Activity()
         btn.setOnClickListener {
 
             var notificationIntent = Intent(Intent.ACTION_MAIN)
-            notificationIntent.setClass(getApplicationContext(), javaClass<MainActivity>())
+            notificationIntent.setClass(getApplicationContext(), javaClass<MainWithFragmentsActivity>())
             notificationIntent.putExtra(Params.DOWNLOAD_LOCATION_PATH, "Location PATH")
 
             var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_ONE_SHOT)

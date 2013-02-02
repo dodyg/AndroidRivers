@@ -373,7 +373,7 @@ public class RiverListFragment() : SherlockListFragment() {
         val popupWidth = item.getWidth()
         val popupHeight = item.getHeight()
 
-        val x = inflater(context).inflate(R.layout.main_river_quick_actions, null, false)!!
+        val x = inflater().inflate(R.layout.main_river_quick_actions, null, false)!!
         val pp = PopupWindow(x, popupWidth, popupHeight, true)
 
         x.setBackgroundColor(android.graphics.Color.LTGRAY)

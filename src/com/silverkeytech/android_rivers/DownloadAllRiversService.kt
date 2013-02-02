@@ -50,7 +50,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
 
     fun prepareNotification(): Notification {
         val notificationIntent = Intent(Intent.ACTION_MAIN)
-        notificationIntent.setClass(getApplicationContext(), javaClass<MainActivity>())
+        notificationIntent.setClass(getApplicationContext(), javaClass<MainWithFragmentsActivity>())
 
         val contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 

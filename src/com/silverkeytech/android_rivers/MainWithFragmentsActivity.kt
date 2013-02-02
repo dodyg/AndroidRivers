@@ -8,6 +8,14 @@ import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 import android.util.Log
 import android.app.Activity
+import android.view.View
+
+enum class MainActivityMode {
+    RIVER
+    RSS
+    COLLECTION
+    PODCASTS
+}
 
 public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
     class object {
@@ -240,4 +248,15 @@ fun downloadOpml(context: Activity, url: String, title: String) {
         }, { outline -> outline.text != "<rules>" })
                 .execute(url)
     }
+}
+
+data class Location(val x: Int, val y: Int)
+
+fun getLocationOnScreen(item: View): Location {
+    val loc = intArray(0, 1)
+    item.getLocationOnScreen(loc)
+    val popupX = loc[0]
+    val popupY = loc[1]
+
+    return Location(popupX, popupY)
 }

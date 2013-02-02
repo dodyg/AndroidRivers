@@ -50,7 +50,7 @@ public class DownloadService(): IntentService("DownloadService"){
 
     fun prepareNotification(title: String, filePath: String): Notification {
         val notificationIntent = Intent(Intent.ACTION_MAIN)
-        notificationIntent.setClass(getApplicationContext(), javaClass<MainActivity>())
+        notificationIntent.setClass(getApplicationContext(), javaClass<MainWithFragmentsActivity>())
         notificationIntent.putExtra(Params.DOWNLOAD_LOCATION_PATH, filePath)
 
         val contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT)
