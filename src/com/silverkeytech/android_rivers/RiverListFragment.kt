@@ -78,8 +78,15 @@ public class RiverListFragment() : SherlockListFragment() {
 
     public override fun onResume() {
         Log.d(TAG, "OnResume")
+
+        if (getUserVisibleHint()){
+            Log.d(TAG, "OnResume - RiverListFragment visible")
+            displayRiverBookmarks(false)
+        }
+
         super<SherlockListFragment>.onResume()
     }
+
 
     public override fun onHiddenChanged(hidden: Boolean) {
         Log.d(TAG, "OnHiddenChanged $hidden")

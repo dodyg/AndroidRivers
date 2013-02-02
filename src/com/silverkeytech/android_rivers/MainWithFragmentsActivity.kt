@@ -51,11 +51,13 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
             } else
                 if (getMain().flags.isRssJustBookmarked && mode == MainActivityMode.RSS){
                     getMain().flags.reset()
-                    showAndHide(showRiver = false, showRss = true, showCollection = false)
+                    Log.d(TAG, "RSS is just bookmarked")
+                    //it doesn't do anything at the moment - this is an artifact of old design
                 } else
                     if (getMain().flags.isRiverJustBookmarked && mode == MainActivityMode.RIVER){
                         getMain().flags.reset()
-                        showAndHide(showRiver = true, showRss = false, showCollection = false)
+                        Log.d(TAG, "River is just bookmarked")
+                        //it doesn't do anything at the moment - this is an artifact of old design
                     }
         }else {
             Log.d(TAG, "RESUMING AFTER CREATION")
