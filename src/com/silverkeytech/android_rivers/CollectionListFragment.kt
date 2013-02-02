@@ -72,7 +72,7 @@ public class CollectionListFragment : SherlockListFragment() {
     public override fun onOptionsItemSelected(item: com.actionbarsherlock.view.MenuItem?): Boolean {
         when(item!!.getItemId()) {
             R.id.collection_list_fragment_menu_add_new -> {
-                promptNewCollection()
+                showAddNewCollectionDialog()
                 return true
             }
             else -> return false
@@ -231,7 +231,7 @@ public class CollectionListFragment : SherlockListFragment() {
         return inflater
     }
 
-    fun promptNewCollection() {
+    fun showAddNewCollectionDialog() {
         val dlg: View = parent!!.getLayoutInflater()!!.inflate(R.layout.collection_add_new, null)!!
 
         //take care of color

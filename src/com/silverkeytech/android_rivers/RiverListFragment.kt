@@ -36,7 +36,7 @@ import java.util.ArrayList
 import com.silverkeytech.android_rivers.outlines.sortOutlineAsc
 import com.silverkeytech.android_rivers.outlines.sortOutlineDesc
 import com.actionbarsherlock.view.Menu
-import android.view.MenuItem
+import com.actionbarsherlock.view.MenuItem
 import com.actionbarsherlock.view.MenuInflater
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 
@@ -92,6 +92,16 @@ public class RiverListFragment() : SherlockListFragment() {
         super<SherlockListFragment>.onHiddenChanged(hidden)
     }
 
+    public override fun onPrepareOptionsMenu(menu: Menu?) {
+        if (menu != null){
+            val sort : MenuItem = menu.findItem(R.id.river_list_fragment_menu_sort)!!
+            val nextSort = nextSortCycle()
+            //Log.d(TAG, "The next sort cycle from current ${parent!!.getContentPref().getRiverBookmarksSorting()} is $nextSort")
+            setSortButtonText(sort, nextSort)
+        }
+        super<SherlockListFragment>.onPrepareOptionsMenu(menu)
+    }
+
     public override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.river_list_fragment_menu, menu)
         super<SherlockListFragment>.onCreateOptionsMenu(menu, inflater)
@@ -115,7 +125,18 @@ public class RiverListFragment() : SherlockListFragment() {
                 }
             }
             R.id.river_list_fragment_menu_show_add_dialog ->{
-
+                displayAddNewRiverDialog()
+                return true
+            }
+            R.id.river_list_fragment_menu_refresh -> {
+                refreshRiverBookmarks(true)
+                return true
+            }
+            R.id.river_list_fragment_menu_sort -> {
+                val nextSort = nextSortCycle()
+                Log.d(TAG, "The new sort is $nextSort")
+                parent!!.getContentPref().setRiverBookmarksSorting(nextSort)
+                displayRiverBookmarks(false)
                 return true
             }
             else -> return false
@@ -136,6 +157,29 @@ public class RiverListFragment() : SherlockListFragment() {
         else{
             txt.setVisibility(View.VISIBLE)
             txt.setText(msg)
+        }
+    }
+
+    fun setSortButtonText(item: MenuItem?, sort: Int) {
+        when (sort){
+            PreferenceValue.SORT_ASC -> item?.setTitle(this.getString(R.string.sort_asc))
+            PreferenceValue.SORT_DESC -> item?.setTitle(this.getString(R.string.sort_desc))
+            PreferenceValue.SORT_NONE -> item?.setTitle(this.getString(R.string.sort_cancel))
+            else -> {
+
+            }
+        }
+    }
+
+    fun nextSortCycle(): Int {
+        val sort = parent!!.getContentPref().getRiverBookmarksSorting()
+        return when (sort){
+            PreferenceValue.SORT_ASC -> PreferenceValue.SORT_DESC
+            PreferenceValue.SORT_DESC -> PreferenceValue.SORT_NONE
+            PreferenceValue.SORT_NONE -> PreferenceValue.SORT_ASC
+            else -> {
+                PreferenceValue.SORT_ASC
+            }
         }
     }
 
@@ -185,7 +229,10 @@ public class RiverListFragment() : SherlockListFragment() {
                 }
             }
         })
+
+        dlg.show()
     }
+
 
     private fun displayRiverBookmarks(retrieveDefaultFromInternet: Boolean) {
         val cache = parent!!.getMain().getRiverBookmarksCache()
