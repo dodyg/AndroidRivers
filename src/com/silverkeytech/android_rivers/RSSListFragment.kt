@@ -57,6 +57,12 @@ public class RssListFragment() : SherlockListFragment() {
 
     public override fun onResume() {
         Log.d(TAG, "OnResume")
+
+        if (getUserVisibleHint()){
+            Log.d(TAG, "OnResume - RssListFragment visible")
+            displayRssBookmarks()
+        }
+
         super<SherlockListFragment>.onResume()
     }
 
