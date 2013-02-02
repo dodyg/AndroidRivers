@@ -590,24 +590,3 @@ public open class MainActivity(): SherlockActivity() {
         }
     }
 }
-
-fun downloadOpml(context: Activity, url: String, title: String) {
-    val cache = context.getMain().getOpmlCache(url)
-
-    if (cache != null){
-        startOutlinerActivity(context, cache, title, url, false)
-    }
-    else{
-        DownloadOpml(context)
-                .executeOnProcessedCompletion({
-            res ->
-            if (res.isTrue()){
-                startOutlinerActivity(context, res.value!!, title, url, false)
-            }
-            else{
-                context.toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)
-            }
-        }, { outline -> outline.text != "<rules>" })
-                .execute(url)
-    }
-}

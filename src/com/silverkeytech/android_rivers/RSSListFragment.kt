@@ -69,7 +69,7 @@ public class RssListFragment() : SherlockListFragment() {
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
             R.id.rss_list_fragment_menu_show_add_dialog -> {
-                displayAddRssDialog()
+                displayAddNewRssDialog()
                 return false
             }
             else -> return false
@@ -90,7 +90,7 @@ public class RssListFragment() : SherlockListFragment() {
         super<SherlockListFragment>.onPause()
     }
 
-    fun displayAddRssDialog(){
+    fun displayAddNewRssDialog(){
         val dlg = createSingleInputDialog(parent!!, "Add new RSS", lastEnteredUrl, "Set url here", {
             dlg, url ->
             lastEnteredUrl = url

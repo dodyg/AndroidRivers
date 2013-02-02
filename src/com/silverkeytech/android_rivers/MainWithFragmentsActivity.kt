@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
+import android.util.Log
+import android.app.Activity
 
 public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
     class object {
@@ -34,6 +36,31 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
 
         showAndHide(showRiver = true, showRss = false, showCollection = false)
         setTitle()
+    }
+
+
+    protected override fun onResume() {
+        super.onResume()
+        //skip if this event comes after onCreate
+        if (!isOnCreate){
+            Log.d(TAG, "RESUMING Current Theme $currentTheme vs ${this.getVisualPref().getTheme()}")
+            //detect if there has been any theme changes
+            if (currentTheme != null && currentTheme!! != this.getVisualPref().getTheme()){
+                Log.d(TAG, "Theme changes detected - updating theme")
+                restart()
+            } else
+                if (getMain().flags.isRssJustBookmarked && mode == MainActivityMode.RSS){
+                    getMain().flags.reset()
+                    showAndHide(showRiver = false, showRss = true, showCollection = false)
+                } else
+                    if (getMain().flags.isRiverJustBookmarked && mode == MainActivityMode.RIVER){
+                        getMain().flags.reset()
+                        showAndHide(showRiver = true, showRss = false, showCollection = false)
+                    }
+        }else {
+            Log.d(TAG, "RESUMING AFTER CREATION")
+            isOnCreate = false
+        }
     }
 
     public override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
@@ -183,10 +210,32 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
 
 }
 
+
 fun SherlockFragmentActivity.findFragmentById(id : Int) : Fragment{
     return this.getSupportFragmentManager()!!.findFragmentById(id)!!
 }
 
 fun SherlockFragmentActivity.beginFragmentTransaction() : FragmentTransaction {
     return this.getSupportFragmentManager()!!.beginTransaction()!!
+}
+
+fun downloadOpml(context: Activity, url: String, title: String) {
+    val cache = context.getMain().getOpmlCache(url)
+
+    if (cache != null){
+        startOutlinerActivity(context, cache, title, url, false)
+    }
+    else{
+        DownloadOpml(context)
+                .executeOnProcessedCompletion({
+            res ->
+            if (res.isTrue()){
+                startOutlinerActivity(context, res.value!!, title, url, false)
+            }
+            else{
+                context.toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)
+            }
+        }, { outline -> outline.text != "<rules>" })
+                .execute(url)
+    }
 }
