@@ -88,10 +88,13 @@ public class PodcastListFragment() : SherlockListFragment() {
 
     public fun displayPodcasts() {
         val podcast = getPodcastsFromDb(SortingOrder.DESC)
-        if (podcast.size == 0){
-            val msg = getView()!!.findViewById(R.id.podcast_list_fragment_message_tv) as TextView
+        val msg = getView()!!.findViewById(R.id.podcast_list_fragment_message_tv) as TextView
+
+        if (podcast.size == 0)
             msg.setText("All the podcasts you have downloaded will be listed here.")
-        }
+        else
+            msg.setText("")
+
         renderFileListing(podcast)
     }
 
@@ -161,7 +164,7 @@ public class PodcastListFragment() : SherlockListFragment() {
         val popupWidth = item.getWidth()
         val popupHeight = item.getHeight()
 
-        val x = context.getLayoutInflater()!!.inflate(R.layout.main_feed_quick_actions, null, false)!!
+        val x = context.getLayoutInflater()!!.inflate(R.layout.podcast_quick_actions, null, false)!!
         val pp = PopupWindow(x, popupWidth, popupHeight, true)
 
         x.setBackgroundColor(android.graphics.Color.LTGRAY)
@@ -170,7 +173,7 @@ public class PodcastListFragment() : SherlockListFragment() {
             pp.dismiss()
         }
 
-        val icon = x.findViewById(R.id.main_feed_quick_action_delete_icon) as ImageView
+        val icon = x.findViewById(R.id.podcast_quick_action_delete_icon) as ImageView
         icon.setOnClickListener {
             val dlg = createConfirmationDialog(context = context, message = "Are you sure about deleting this podcast?", positive = {
                 try{
