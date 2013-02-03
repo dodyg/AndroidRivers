@@ -29,14 +29,6 @@ public fun startDownloadService(context: Context, title: String, url: String, so
     context.startService(i)
 }
 
-public fun startPodcastActivity(context: Context, downloadLocationPath: String? = null) {
-    val i = Intent(context, javaClass<PodcastManagerActivity>())
-    if (!downloadLocationPath.isNullOrEmpty())
-        i.putExtra(Params.DOWNLOAD_LOCATION_PATH, downloadLocationPath!!)
-
-    context.startActivity(i)
-}
-
 public fun startFeedActivity(context: Context, url: String, text: String, lang: String) {
     val i = Intent(context, javaClass<FeedActivity>())
     i.putExtra(Params.FEED_URL, url)
