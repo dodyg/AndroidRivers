@@ -42,7 +42,7 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
         actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
         actionBar.setDisplayShowTitleEnabled(true)
 
-        showAndHide(showRiver = true, showRss = false, showCollection = false)
+        showAndHide(showRiver = true)
         setTitle()
     }
 
@@ -79,6 +79,7 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
             menu.findItem(R.id.main_menu_updates).andHide()
 
             val backward = menu.findItem(SWITCH_BACKWARD)
+            val forward = menu.findItem(SWITCH_FORWARD)
             when(mode){
                 MainActivityMode.RIVER -> {
                     backward!!.setEnabled(false)
@@ -88,6 +89,10 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
                 }
                 MainActivityMode.COLLECTION -> {
                     backward!!.setEnabled(true)
+                }
+                MainActivityMode.PODCASTS -> {
+                    backward!!.setEnabled(true)
+                    forward!!.setEnabled(false)
                 }
                 else -> {
                 }
@@ -114,16 +119,18 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    fun showAndHide(showRiver : Boolean, showRss : Boolean, showCollection : Boolean){
+    fun showAndHide(showRiver : Boolean = false, showRss : Boolean = false, showCollection : Boolean = false, showPodcasts : Boolean = false){
         val riverFragment = this.findFragmentById(R.id.main_rivers_fragment)
         val rssFragment = this.findFragmentById(R.id.main_rss_fragment)
         val collectionFragment = this.findFragmentById(R.id.main_collection_fragment)
+        val podcastsFragment = this.findFragmentById(R.id.main_podcast_fragment)
 
         val transaction = this.beginFragmentTransaction()
 
         if (showRiver) transaction.show(riverFragment) else transaction.hide(riverFragment)
         if (showRss) transaction.show(rssFragment) else transaction.hide(rssFragment)
         if (showCollection) transaction.show(collectionFragment) else transaction.hide(collectionFragment)
+        if (showPodcasts) transaction.show(podcastsFragment) else transaction.hide(podcastsFragment)
 
         transaction.commit()
     }
@@ -134,6 +141,7 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
             MainActivityMode.RIVER -> actionBar.setTitle("Rivers")
             MainActivityMode.RSS -> actionBar.setTitle("RSS")
             MainActivityMode.COLLECTION -> actionBar.setTitle("Collections")
+            MainActivityMode.PODCASTS -> actionBar.setTitle("Podcasts")
             else -> {
             }
         }
@@ -172,21 +180,16 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
     fun displayModeContent(mode: MainActivityMode, downloadRiverBookmarksFromInternetIfNoneExisted: Boolean) {
         when(mode){
             MainActivityMode.RIVER -> {
-                showAndHide(showRiver = true, showRss = false, showCollection = false)
+                showAndHide(showRiver = true)
             }
             MainActivityMode.RSS -> {
-                showAndHide(showRiver = false, showRss = true, showCollection = false)
+                showAndHide(showRss = true)
             }
             MainActivityMode.COLLECTION ->{
-                showAndHide(showRiver = false, showRss = false, showCollection = true)
+                showAndHide(showCollection = true)
             }
             MainActivityMode.PODCASTS -> {
-                startPodcastActivity(this)
-                //we have to do this because this navigation involves two activities. Podcast activity is at the end of this navigation
-                //When you are at podcast activity, you can only go back. When you click back, it will end podcast activity
-                //and it will call the onresume event of MainActivity. Now we have to make sure that this activity is at its last state
-                //which is MainActivityMode.COLLECTION
-                this.mode = MainActivityMode.COLLECTION //this is the anchor when you return
+                showAndHide(showPodcasts = true)
             }
             else -> {
             }
@@ -208,6 +211,7 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
     fun changeModeBackward() {
         val currentMode = mode
         mode = when (currentMode){
+            MainActivityMode.PODCASTS -> MainActivityMode.COLLECTION
             MainActivityMode.COLLECTION -> MainActivityMode.RSS
             MainActivityMode.RSS -> MainActivityMode.RIVER
             else -> MainActivityMode.RIVER
