@@ -133,7 +133,7 @@ public class RssListFragment(): SherlockListFragment() {
                 val u = safeUrlConvert(currentUrl)
 
                 if (u.isTrue()){
-                    startImportOpmlSubscriptionService(parent!!, u.value!!.toString()!!)
+                    startImportOpmlSubscriptionService(parent!!, u.value!!.toString())
                 } else {
                     Log.d(TAG, "Opml download $currentUrl conversion generates ${u.exception?.getMessage()}")
                     parent!!.toastee("The url you entered is not valid. Please try again", Duration.LONG)
