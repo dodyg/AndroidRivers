@@ -25,11 +25,11 @@ import java.util.Date;
 
 
 public class Head {
-    @Element
+    @Element(required = false)
     public String title;
-    @Element
+    @Element(required = false)
     public String dateCreated;       //RFC822 time
-    @Element
+    @Element(required = false)
     public String dateModified;      //RFC822 time
     @Element(required = false)
     public String ownerName;

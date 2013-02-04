@@ -1,8 +1,26 @@
+/*
+Android Rivers is an app to read and discover news using RiverJs, RSS and OPML format.
+Copyright (C) 2012 Dody Gunawinata (dodyg@silverkeytech.com)
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>
+*/
+
 package com.silverkeytech.android_rivers
 
 import android.app.Activity
-import android.app.AlertDialog
-import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -18,32 +36,18 @@ import android.widget.ListView
 import android.widget.PopupWindow
 import android.widget.TextView
 import com.actionbarsherlock.app.SherlockListFragment
-import com.silverkeytech.android_rivers.db.Bookmark
-import com.silverkeytech.android_rivers.db.BookmarkCollection
-import com.silverkeytech.android_rivers.db.BookmarkKind
-import com.silverkeytech.android_rivers.db.DatabaseManager
-import com.silverkeytech.android_rivers.db.SortingOrder
-import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
-import com.silverkeytech.android_rivers.db.getBookmarksFromDb
-import com.silverkeytech.android_rivers.db.removeItemByUrlFromBookmarkDb
-import com.actionbarsherlock.view.Menu
-import com.actionbarsherlock.view.MenuInflater
-import com.silverkeytech.android_rivers.db.saveBookmarkToDb
-import com.actionbarsherlock.view.MenuItem
 import com.silverkeytech.android_rivers.db.Podcast
 import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.getPodcastsFromDb
 import com.silverkeytech.android_rivers.db.removePodcast
 import java.io.File
-import android.content.Intent
-import android.net.Uri
 
-public class PodcastListFragment() : SherlockListFragment() {
+public class PodcastListFragment(): SherlockListFragment() {
     class object {
         public val TAG: String = javaClass<PodcastListFragment>().getSimpleName()
     }
 
-    var parent : Activity? = null
+    var parent: Activity? = null
     var lastEnteredUrl: String? = ""
 
     public override fun onAttach(activity: Activity?) {

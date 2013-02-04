@@ -29,6 +29,12 @@ public fun startDownloadService(context: Context, title: String, url: String, so
     context.startService(i)
 }
 
+public fun startImportOpmlSubscriptionService(context: Context, url: String) {
+    val i = Intent(context, javaClass<ImportOpmlSubscriptionListService>())
+    i.putExtra(Params.OPML_SUBSCRIPTION_LIST_URI, url)
+    context.startService(i)
+}
+
 public fun startFeedActivity(context: Context, url: String, text: String, lang: String) {
     val i = Intent(context, javaClass<FeedActivity>())
     i.putExtra(Params.FEED_URL, url)

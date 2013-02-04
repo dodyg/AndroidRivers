@@ -1,14 +1,32 @@
+/*
+Android Rivers is an app to read and discover news using RiverJs, RSS and OPML format.
+Copyright (C) 2012 Dody Gunawinata (dodyg@silverkeytech.com)
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>
+*/
+
 package com.silverkeytech.android_rivers
 
-import com.actionbarsherlock.app.SherlockFragmentActivity
+import android.app.Activity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
+import android.util.Log
+import android.view.View
+import com.actionbarsherlock.app.SherlockFragmentActivity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
-import android.util.Log
-import android.app.Activity
-import android.view.View
 
 enum class MainActivityMode {
     RIVER
@@ -119,7 +137,7 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    fun showAndHide(showRiver : Boolean = false, showRss : Boolean = false, showCollection : Boolean = false, showPodcasts : Boolean = false){
+    fun showAndHide(showRiver: Boolean = false, showRss: Boolean = false, showCollection: Boolean = false, showPodcasts: Boolean = false) {
         val riverFragment = this.findFragmentById(R.id.main_rivers_fragment)
         val rssFragment = this.findFragmentById(R.id.main_rss_fragment)
         val collectionFragment = this.findFragmentById(R.id.main_collection_fragment)
@@ -225,11 +243,11 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
 }
 
 
-fun SherlockFragmentActivity.findFragmentById(id : Int) : Fragment{
+fun SherlockFragmentActivity.findFragmentById(id: Int): Fragment {
     return this.getSupportFragmentManager()!!.findFragmentById(id)!!
 }
 
-fun SherlockFragmentActivity.beginFragmentTransaction() : FragmentTransaction {
+fun SherlockFragmentActivity.beginFragmentTransaction(): FragmentTransaction {
     return this.getSupportFragmentManager()!!.beginTransaction()!!
 }
 

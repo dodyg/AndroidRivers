@@ -27,10 +27,10 @@ import com.silverkeytech.android_rivers.riverjs.accumulateList
 import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
 import com.silverkeytech.android_rivers.syndications.SyndicationFilter
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
+import java.util.ArrayList
+import java.util.Vector
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
-import java.util.Vector
-import java.util.ArrayList
 
 public class DownloadCollectionAsRiver(it: Context?, private val collectionId: Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
     class object {

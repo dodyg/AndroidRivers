@@ -39,7 +39,6 @@ import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 import java.util.Random
 import java.util.Vector
 
-
 public class DownloadAllRiversService(): IntentService("DownloadAllRiversService"){
     class object{
         public val TAG: String = javaClass<DownloadAllRiversService>().getSimpleName()

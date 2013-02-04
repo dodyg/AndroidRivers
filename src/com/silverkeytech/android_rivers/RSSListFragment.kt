@@ -1,3 +1,21 @@
+/*
+Android Rivers is an app to read and discover news using RiverJs, RSS and OPML format.
+Copyright (C) 2012 Dody Gunawinata (dodyg@silverkeytech.com)
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>
+*/
+
 package com.silverkeytech.android_rivers
 
 import android.app.Activity
@@ -18,6 +36,9 @@ import android.widget.ListView
 import android.widget.PopupWindow
 import android.widget.TextView
 import com.actionbarsherlock.app.SherlockListFragment
+import com.actionbarsherlock.view.Menu
+import com.actionbarsherlock.view.MenuInflater
+import com.actionbarsherlock.view.MenuItem
 import com.silverkeytech.android_rivers.db.Bookmark
 import com.silverkeytech.android_rivers.db.BookmarkCollection
 import com.silverkeytech.android_rivers.db.BookmarkKind
@@ -26,17 +47,14 @@ import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.getBookmarksFromDb
 import com.silverkeytech.android_rivers.db.removeItemByUrlFromBookmarkDb
-import com.actionbarsherlock.view.Menu
-import com.actionbarsherlock.view.MenuInflater
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
-import com.actionbarsherlock.view.MenuItem
 
-public class RssListFragment() : SherlockListFragment() {
+public class RssListFragment(): SherlockListFragment() {
     class object {
         public val TAG: String = javaClass<RssListFragment>().getSimpleName()
     }
 
-    var parent : Activity? = null
+    var parent: Activity? = null
     var lastEnteredUrl: String? = ""
 
     public override fun onAttach(activity: Activity?) {
@@ -78,6 +96,10 @@ public class RssListFragment() : SherlockListFragment() {
                 displayAddNewRssDialog()
                 return false
             }
+            R.id.rss_list_fragment_menu_import_opml_dialog -> {
+                displayImportOpmlDialog()
+                return false
+            }
             else -> return false
         }
     }
@@ -96,13 +118,38 @@ public class RssListFragment() : SherlockListFragment() {
         super<SherlockListFragment>.onPause()
     }
 
-    fun displayAddNewRssDialog(){
+    fun displayImportOpmlDialog() {
+        val dlg = createSingleInputDialog(parent!!, "Import subscription list", lastEnteredUrl, "Set url here", {
+            dlg, url ->
+            lastEnteredUrl = url
+            if (url.isNullOrEmpty()) {
+                parent!!.toastee("Please enter url of the OPML subscription list", Duration.LONG)
+            }
+            else {
+                var currentUrl = url!!
+                if (!currentUrl.contains("http://"))
+                    currentUrl = "http://" + currentUrl
+
+                val u = safeUrlConvert(currentUrl)
+
+                if (u.isTrue()){
+                    startImportOpmlSubscriptionService(parent!!, u.value!!.toString()!!)
+                } else {
+                    Log.d(TAG, "Opml download $currentUrl conversion generates ${u.exception?.getMessage()}")
+                    parent!!.toastee("The url you entered is not valid. Please try again", Duration.LONG)
+                }
+            }
+        })
+        dlg.show()
+    }
+
+    fun displayAddNewRssDialog() {
         val dlg = createSingleInputDialog(parent!!, "Add new RSS", lastEnteredUrl, "Set url here", {
             dlg, url ->
             lastEnteredUrl = url
             Log.d(TAG, "Entered $url")
             if (url.isNullOrEmpty()){
-                parent!!.toastee("Please enter url of the river")
+                parent!!.toastee("Please enter url of the river", Duration.LONG)
             }
             else {
                 var currentUrl = url!!
@@ -186,7 +233,7 @@ public class RssListFragment() : SherlockListFragment() {
         })
     }
 
-    fun displayRssBookmarks(){
+    fun displayRssBookmarks() {
         val bookmarks = getBookmarksFromDb(BookmarkKind.RSS, SortingOrder.ASC)
         handleRssListing(bookmarks)
     }

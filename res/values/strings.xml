@@ -24,6 +24,7 @@
     <string name="sort_desc">Sort &#x25BC;</string>
     <string name="sort_cancel">Do not sort</string>
     <string name="start_downloading_all_rivers">Start downloading all rivers</string>
+    <string name="start_importing_opml_subscription_list">Start importing OPML subscription list</string>
     <string name="download_starts">"Download starts"</string>
     <string name="ok">OK</string>
     <string name="yes">Yes</string>
