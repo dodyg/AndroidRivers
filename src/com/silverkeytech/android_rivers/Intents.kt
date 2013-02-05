@@ -44,6 +44,11 @@ public fun startFeedActivity(context: Context, url: String, text: String, lang: 
     context.startActivity(i)
 }
 
+public fun startTryoutActivity(context : Context){
+    val i = Intent(context, javaClass<TryOutActivity>())
+    context.startActivity(i)
+}
+
 public fun startRiverActivity(context: Context, url: String, text: String, lang: String) {
     val i = Intent(context, javaClass<RiverActivity>())
     i.putExtra(Params.RIVER_URL, url)

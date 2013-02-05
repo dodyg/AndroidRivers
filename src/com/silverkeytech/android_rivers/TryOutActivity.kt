@@ -48,6 +48,7 @@ import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
 import java.util.ArrayList
 import java.util.Random
+import com.silverkeytech.android_rivers.creators.getAirportCodes
 
 public class TryOutActivity(): Activity()
 {
@@ -60,6 +61,7 @@ public class TryOutActivity(): Activity()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tryout)
+        handleGetAirportCodes()
         handleInsertPodcast()
         handleBookmarkCollectionCreation()
         handleDownloadAtom()
@@ -74,6 +76,15 @@ public class TryOutActivity(): Activity()
         handleOutliner()
         handleDownloadRecursiveOpml()
         handleRiverJsWithOpmlSource()
+    }
+
+    fun handleGetAirportCodes(){
+        val btn = findView<Button>(R.id.tryout_get_airport_codes)
+
+        btn.setOnClickListener {
+            val codes = getAirportCodes(this)
+            toastee("There are ${codes.size} codes", Duration.LONG)
+        }
     }
 
     fun handleInsertPodcast() {

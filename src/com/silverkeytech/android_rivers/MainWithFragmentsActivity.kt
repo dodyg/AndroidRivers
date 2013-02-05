@@ -93,7 +93,7 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
 
     public override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         if (menu != null){
-            menu.findItem(R.id.main_menu_tryout).andHide()
+            menu.findItem(R.id.main_menu_tryout)
             menu.findItem(R.id.main_menu_updates).andHide()
 
             val backward = menu.findItem(SWITCH_BACKWARD)
@@ -185,8 +185,12 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
                 this.supportInvalidateOptionsMenu()
                 return true
             }
-            R.id.main_menu_help->{
+            R.id.main_menu_help ->{
                 downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
+                return true
+            }
+            R.id.main_menu_tryout ->{
+                startTryoutActivity(this)
                 return true
             }
             else ->
