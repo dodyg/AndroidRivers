@@ -51,7 +51,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
 
     //show and prepare the interaction for each individual news item
     fun handleNewsListing(sortedNewsItems: List<RiverItemMeta>) {
-        val textSize = context.getVisualPref().getListTextSize()
+        val textSize = 16 //context.getVisualPref().getListTextSize()
 
         //now sort it so people always have the latest news first
 
@@ -131,11 +131,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 }
 
                 //take care of color
-                var theme = context.getVisualPref().getTheme()
-                if (theme == R.style.Theme_Sherlock_Light_DarkActionBar)
-                    dlg.setBackgroundColor(android.graphics.Color.WHITE)
-                else if (theme == R.style.Theme_Sherlock)
-                    dlg.setBackgroundColor(android.graphics.Color.BLACK)
+                dlg.setBackgroundColor(context.getStandardDialogBackgroundColor())
 
                 var body = dlg.findViewById(R.id.news_details_text_tv)!! as TextView
                 handleForeignTextFont(context, language, body, msg, textSize.toFloat())

@@ -38,7 +38,7 @@ fun Activity?.getMain(): MainApplication {
 }
 
 public fun Activity.getStandardDialogBackgroundColor(): Int {
-    return android.graphics.Color.BLACK
+    return android.graphics.Color.WHITE
     /*
     val theme = this.getVisualPref().getTheme()
     if (theme == R.style.Theme_Sherlock_Light_DarkActionBar)
