@@ -18,14 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.app.Activity
+import org.holoeverywhere.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import android.view.LayoutInflater
+import org.holoeverywhere.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Adapter
@@ -37,7 +37,7 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.PopupWindow
 import android.widget.TextView
-import com.actionbarsherlock.app.SherlockListFragment
+import org.holoeverywhere.app.ListFragment
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuInflater
 import com.silverkeytech.android_rivers.db.BookmarkCollection
@@ -51,7 +51,7 @@ import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.removeItemByUrlFromBookmarkDb
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 
-public class CollectionListFragment: SherlockListFragment() {
+public class CollectionListFragment: ListFragment() {
     class object {
         public val TAG: String = javaClass<CollectionListFragment>().getSimpleName()
     }
@@ -59,13 +59,13 @@ public class CollectionListFragment: SherlockListFragment() {
     var parent: Activity? = null
 
     public override fun onAttach(activity: Activity?) {
-        super<SherlockListFragment>.onAttach(activity)
+        super<ListFragment>.onAttach(activity)
         parent = activity
     }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
-        super<SherlockListFragment>.onCreate(savedInstanceState)
+        super<ListFragment>.onCreate(savedInstanceState)
     }
 
     public override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -76,12 +76,12 @@ public class CollectionListFragment: SherlockListFragment() {
 
     public override fun onResume() {
         Log.d(TAG, "OnResume")
-        super<SherlockListFragment>.onResume()
+        super<ListFragment>.onResume()
     }
 
     public override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.collection_list_fragment_menu, menu)
-        super<SherlockListFragment>.onCreateOptionsMenu(menu, inflater)
+        super<ListFragment>.onCreateOptionsMenu(menu, inflater)
     }
 
     public override fun onOptionsItemSelected(item: com.actionbarsherlock.view.MenuItem?): Boolean {
@@ -99,12 +99,12 @@ public class CollectionListFragment: SherlockListFragment() {
         if (!hidden){
             displayBookmarkCollection()
         }
-        super<SherlockListFragment>.onHiddenChanged(hidden)
+        super<ListFragment>.onHiddenChanged(hidden)
     }
 
     public override fun onPause() {
         Log.d(TAG, "OnPause")
-        super<SherlockListFragment>.onPause()
+        super<ListFragment>.onPause()
     }
 
 
@@ -242,8 +242,7 @@ public class CollectionListFragment: SherlockListFragment() {
 
 
     fun inflater(): LayoutInflater {
-        val inflater: LayoutInflater = parent!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        return inflater
+        return this.getLayoutInflater()!!
     }
 
     fun showAddNewCollectionDialog() {

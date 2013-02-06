@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.app.Activity
+import org.holoeverywhere.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import android.view.LayoutInflater
+import org.holoeverywhere.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Adapter
@@ -34,7 +34,7 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.PopupWindow
 import android.widget.TextView
-import com.actionbarsherlock.app.SherlockListFragment
+import org.holoeverywhere.app.ListFragment
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuInflater
 import com.actionbarsherlock.view.MenuItem
@@ -50,7 +50,7 @@ import com.silverkeytech.android_rivers.outlines.sortOutlineAsc
 import com.silverkeytech.android_rivers.outlines.sortOutlineDesc
 import java.util.ArrayList
 
-public class RiverListFragment(): SherlockListFragment() {
+public class RiverListFragment(): ListFragment() {
     class object {
         public val TAG: String = javaClass<RiverListFragment>().getSimpleName()
     }
@@ -62,13 +62,13 @@ public class RiverListFragment(): SherlockListFragment() {
 
     var isFirstLoad: Boolean = true
     public override fun onAttach(activity: Activity?) {
-        super<SherlockListFragment>.onAttach(activity)
+        super<ListFragment>.onAttach(activity)
         parent = activity
     }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
-        super<SherlockListFragment>.onCreate(savedInstanceState)
+        super<ListFragment>.onCreate(savedInstanceState)
     }
 
     public override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -80,9 +80,9 @@ public class RiverListFragment(): SherlockListFragment() {
     }
 
     public override fun onStart() {
-        super<SherlockListFragment>.onStart()
+        super<ListFragment>.onStart()
 
-        val downloadIf = parent!!.getSetupPref().getDownloadDefaultRiversIfNecessary()
+        val downloadIf = true//parent!!.getSetupPref().getDownloadDefaultRiversIfNecessary()
         displayRiverBookmarks(downloadIf)
     }
 
@@ -94,7 +94,7 @@ public class RiverListFragment(): SherlockListFragment() {
             displayRiverBookmarks(false)
         }
 
-        super<SherlockListFragment>.onResume()
+        super<ListFragment>.onResume()
     }
 
 
@@ -106,7 +106,7 @@ public class RiverListFragment(): SherlockListFragment() {
         }
 
         isFirstLoad = false
-        super<SherlockListFragment>.onHiddenChanged(hidden)
+        super<ListFragment>.onHiddenChanged(hidden)
     }
 
     public override fun onPrepareOptionsMenu(menu: Menu?) {
@@ -116,12 +116,12 @@ public class RiverListFragment(): SherlockListFragment() {
             //Log.d(TAG, "The next sort cycle from current ${parent!!.getContentPref().getRiverBookmarksSorting()} is $nextSort")
             setSortButtonText(sort, nextSort)
         }
-        super<SherlockListFragment>.onPrepareOptionsMenu(menu)
+        super<ListFragment>.onPrepareOptionsMenu(menu)
     }
 
     public override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.river_list_fragment_menu, menu)
-        super<SherlockListFragment>.onCreateOptionsMenu(menu, inflater)
+        super<ListFragment>.onCreateOptionsMenu(menu, inflater)
     }
 
     public override fun onOptionsItemSelected(item: com.actionbarsherlock.view.MenuItem?): Boolean {
@@ -162,7 +162,7 @@ public class RiverListFragment(): SherlockListFragment() {
 
     public override fun onPause() {
         Log.d(TAG, "OnPause")
-        super<SherlockListFragment>.onPause()
+        super<ListFragment>.onPause()
     }
 
     fun showMessage(msg: String) {
@@ -189,7 +189,8 @@ public class RiverListFragment(): SherlockListFragment() {
     }
 
     fun nextSortCycle(): Int {
-        val sort = parent!!.getContentPref().getRiverBookmarksSorting()
+        return PreferenceValue.SORT_NONE
+        /*val sort = parent!!.getContentPref().getRiverBookmarksSorting()
         return when (sort){
             PreferenceValue.SORT_ASC -> PreferenceValue.SORT_DESC
             PreferenceValue.SORT_DESC -> PreferenceValue.SORT_NONE
@@ -197,7 +198,7 @@ public class RiverListFragment(): SherlockListFragment() {
             else -> {
                 PreferenceValue.SORT_ASC
             }
-        }
+        } */
     }
 
     private fun displayAddNewRiverDialog() {
@@ -256,7 +257,7 @@ public class RiverListFragment(): SherlockListFragment() {
 
         if (cache != null){
             Log.d(TAG, "Get bookmarks from cache")
-            handleRiversListing(cache, parent!!.getContentPref().getRiverBookmarksSorting())
+            handleRiversListing(cache,0)// parent!!.getContentPref().getRiverBookmarksSorting())
         }  else{
             Log.d(TAG, "Try to retrieve bookmarks from DB")
             val bookmarks = getBookmarksFromDbAsOpml(BookmarkKind.RIVER, SortingOrder.NONE)
@@ -264,7 +265,7 @@ public class RiverListFragment(): SherlockListFragment() {
             if (bookmarks.body!!.outline!!.count() > 0){
                 Log.d(TAG, "Now bookmarks come from the db")
                 parent!!.getMain().setRiverBookmarksCache(bookmarks)
-                handleRiversListing(bookmarks, parent!!.getContentPref().getRiverBookmarksSorting())
+                handleRiversListing(bookmarks, 0) //parent!!.getContentPref().getRiverBookmarksSorting())
             }
             else if (retrieveDefaultFromInternet){
                 Log.d(TAG, "Start downloading bookmarks from the Internet")
@@ -275,7 +276,7 @@ public class RiverListFragment(): SherlockListFragment() {
                     val res2 = saveOpmlAsBookmarks(res.value!!)
 
                     if (res2.isTrue()){
-                        handleRiversListing(res2.value!!, parent!!.getContentPref().getRiverBookmarksSorting())
+                        handleRiversListing(res2.value!!, 0)//parent!!.getContentPref().getRiverBookmarksSorting())
                         Log.d(TAG, "Bookmark data from the Internet is successfully saved")
                         parent!!.getSetupPref().setDownloadDefaultRivers(false)//we only download standard rivers from the internet by default when at setup the first time
                     }
@@ -288,7 +289,7 @@ public class RiverListFragment(): SherlockListFragment() {
             }
             else{
                 //this happen when you remove the last item from the river bookmark. So have it render an empty opml
-                handleRiversListing(Opml(), parent!!.getContentPref().getRiverBookmarksSorting())
+                handleRiversListing(Opml(), 0)//parent!!.getContentPref().getRiverBookmarksSorting())
             }
         }
     }
@@ -368,8 +369,7 @@ public class RiverListFragment(): SherlockListFragment() {
     }
 
     fun inflater(): LayoutInflater {
-        val inflater: LayoutInflater = parent!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        return inflater
+        return getLayoutInflater()!!
     }
 
     fun refreshRiverBookmarks(retrieveRiversFromInternetIfNoneExisted: Boolean)

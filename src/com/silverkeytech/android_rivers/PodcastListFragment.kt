@@ -18,13 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.app.Activity
+
+import org.holoeverywhere.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import android.view.LayoutInflater
+import org.holoeverywhere.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Adapter
@@ -35,14 +36,14 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.PopupWindow
 import android.widget.TextView
-import com.actionbarsherlock.app.SherlockListFragment
+import org.holoeverywhere.app.ListFragment
 import com.silverkeytech.android_rivers.db.Podcast
 import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.getPodcastsFromDb
 import com.silverkeytech.android_rivers.db.removePodcast
 import java.io.File
 
-public class PodcastListFragment(): SherlockListFragment() {
+public class PodcastListFragment(): ListFragment() {
     class object {
         public val TAG: String = javaClass<PodcastListFragment>().getSimpleName()
     }
@@ -51,12 +52,12 @@ public class PodcastListFragment(): SherlockListFragment() {
     var lastEnteredUrl: String? = ""
 
     public override fun onAttach(activity: Activity?) {
-        super<SherlockListFragment>.onAttach(activity)
+        super<ListFragment>.onAttach(activity)
         parent = activity
     }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
-        super<SherlockListFragment>.onCreate(savedInstanceState)
+        super<ListFragment>.onCreate(savedInstanceState)
     }
 
     public override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -72,7 +73,7 @@ public class PodcastListFragment(): SherlockListFragment() {
             displayPodcasts()
         }
 
-        super<SherlockListFragment>.onResume()
+        super<ListFragment>.onResume()
     }
 
     public override fun onHiddenChanged(hidden: Boolean) {
@@ -80,13 +81,13 @@ public class PodcastListFragment(): SherlockListFragment() {
         if (!hidden){
             displayPodcasts()
         }
-        super<SherlockListFragment>.onHiddenChanged(hidden)
+        super<ListFragment>.onHiddenChanged(hidden)
     }
 
 
     public override fun onPause() {
         Log.d(TAG, "OnPause")
-        super<SherlockListFragment>.onPause()
+        super<ListFragment>.onPause()
     }
 
 
@@ -107,7 +108,7 @@ public class PodcastListFragment(): SherlockListFragment() {
 
     //show and prepare the interaction for each individual news item
     fun renderFileListing(podcasts: List<Podcast>) {
-        val textSize = parent!!.getVisualPref().getListTextSize()
+        val textSize = 16//parent!!.getVisualPref().getListTextSize()
 
         //now sort it so people always have the latest news first
         var list = getView()!!.findViewById(android.R.id.list) as ListView

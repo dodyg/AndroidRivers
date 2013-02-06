@@ -20,11 +20,11 @@ package com.silverkeytech.android_rivers
 
 import android.os.Bundle
 import android.util.Log
-import com.actionbarsherlock.app.SherlockListActivity
+import org.holoeverywhere.app.ListActivity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 
-public open class RiverSourcesActivity(): SherlockListActivity() {
+public open class RiverSourcesActivity(): ListActivity() {
     class object {
         public val TAG: String = javaClass<RiverSourcesActivity>().getSimpleName()
     }
@@ -43,7 +43,8 @@ public open class RiverSourcesActivity(): SherlockListActivity() {
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         currentTheme = this.getVisualPref().getTheme()
         isOnCreate = true
-        setTheme(currentTheme!!)
+        //setTheme(currentTheme!!)
+        setTheme(R.style.Holo_Theme_Light)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.river_sources)
@@ -70,11 +71,11 @@ public open class RiverSourcesActivity(): SherlockListActivity() {
         if (!isOnCreate){
             Log.d(TAG, "RESUMING Current Theme $currentTheme vs ${this.getVisualPref().getTheme()}")
             //detect if there has been any theme changes
-            if (currentTheme != null && currentTheme!! != this.getVisualPref().getTheme()){
-                Log.d(TAG, "Theme changes detected - updating theme")
+        //    if (currentTheme != null && currentTheme!! != this.getVisualPref().getTheme()){
+          //      Log.d(TAG, "Theme changes detected - updating theme")
                 restart()
-                return
-            }
+            //    return
+           // }
 
         }else {
             Log.d(TAG, "RESUMING AFTER CREATION")

@@ -19,12 +19,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.os.Bundle
-import com.actionbarsherlock.app.SherlockListActivity
+import org.holoeverywhere.app.ListActivity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 import com.silverkeytech.android_rivers.db.getBookmarksFromDbByCollection
 
-public open class BookmarkCollectionActivity(): SherlockListActivity() {
+public open class BookmarkCollectionActivity(): ListActivity() {
     class object {
         public val TAG: String = javaClass<BookmarkCollectionActivity>().getSimpleName()
     }
@@ -33,7 +33,9 @@ public open class BookmarkCollectionActivity(): SherlockListActivity() {
     var collectionId: Int = 0
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
-        setTheme(this.getVisualPref().getTheme())
+        //setTheme(this.getVisualPref().getTheme())
+        setTheme(R.style.Holo_Theme_Light)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.collection)
 

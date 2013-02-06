@@ -24,7 +24,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.util.Log
 import android.view.View
-import com.actionbarsherlock.app.SherlockFragmentActivity
+import org.holoeverywhere.app.Activity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 
@@ -35,7 +35,7 @@ enum class MainActivityMode {
     PODCASTS
 }
 
-public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
+public open class MainWithFragmentsActivity(): Activity() {
     class object {
         public val TAG: String = javaClass<MainWithFragmentsActivity>().getSimpleName()
     }
@@ -48,9 +48,13 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
     var isOnCreate: Boolean = true
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
-        currentTheme = this.getVisualPref().getTheme()
+        //currentTheme = this.getVisualPref().getTheme()
+        setTheme(R.style.Holo_Theme_Light)
+
         isOnCreate = true
-        setTheme(currentTheme!!)
+        //setTheme(currentTheme!!)
+        setTheme(R.style.Holo_Theme_Light)
+
         getMain().flags.reset()
 
         super.onCreate(savedInstanceState)
@@ -69,12 +73,12 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
         super.onResume()
         //skip if this event comes after onCreate
         if (!isOnCreate){
-            Log.d(TAG, "RESUMING Current Theme $currentTheme vs ${this.getVisualPref().getTheme()}")
+            //Log.d(TAG, "RESUMING Current Theme $currentTheme vs ${this.getVisualPref().getTheme()}")
             //detect if there has been any theme changes
-            if (currentTheme != null && currentTheme!! != this.getVisualPref().getTheme()){
-                Log.d(TAG, "Theme changes detected - updating theme")
+         //   if (currentTheme != null && currentTheme!! != this.getVisualPref().getTheme()){
+           //     Log.d(TAG, "Theme changes detected - updating theme")
                 restart()
-            } else
+            /*} else
                 if (getMain().flags.isRssJustBookmarked && mode == MainActivityMode.RSS){
                     getMain().flags.reset()
                     Log.d(TAG, "RSS is just bookmarked")
@@ -85,6 +89,7 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
                         Log.d(TAG, "River is just bookmarked")
                         //it doesn't do anything at the moment - this is an artifact of old design
                     }
+                    */
         }else {
             Log.d(TAG, "RESUMING AFTER CREATION")
             isOnCreate = false
@@ -247,11 +252,11 @@ public open class MainWithFragmentsActivity(): SherlockFragmentActivity() {
 }
 
 
-fun SherlockFragmentActivity.findFragmentById(id: Int): Fragment {
+fun Activity.findFragmentById(id: Int): Fragment {
     return this.getSupportFragmentManager()!!.findFragmentById(id)!!
 }
 
-fun SherlockFragmentActivity.beginFragmentTransaction(): FragmentTransaction {
+fun Activity.beginFragmentTransaction(): FragmentTransaction {
     return this.getSupportFragmentManager()!!.beginTransaction()!!
 }
 
