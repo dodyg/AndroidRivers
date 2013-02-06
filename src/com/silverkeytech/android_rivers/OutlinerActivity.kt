@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.os.Bundle
-import com.actionbarsherlock.app.SherlockActivity
+import org.holoeverywhere.app.Activity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 import com.pl.polidea.treeview.InMemoryTreeStateManager
@@ -28,7 +28,7 @@ import com.silverkeytech.android_rivers.outliner.OutlineContent
 import com.silverkeytech.android_rivers.outliner.SimpleAdapter
 import java.util.ArrayList
 
-public class OutlinerActivity(): SherlockActivity()
+public class OutlinerActivity(): Activity()
 {
     class object {
         public val TAG: String = javaClass<OutlinerActivity>().getSimpleName()
@@ -43,7 +43,9 @@ public class OutlinerActivity(): SherlockActivity()
     var treeManager = InMemoryTreeStateManager<Long?>()
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
-        setTheme(this.getVisualPref().getTheme())
+        //setTheme(this.getVisualPref().getTheme())
+        setTheme(R.style.Holo_Theme_Light)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.outliner)
 
@@ -83,7 +85,7 @@ public class OutlinerActivity(): SherlockActivity()
         }
 
         var treeView = findView<TreeViewList>(R.id.outliner_main_tree)
-        val textSize = getVisualPref().getListTextSize()
+        val textSize = 16//getVisualPref().getListTextSize()
 
         var simpleAdapter = SimpleAdapter(this, treeManager, LEVEL_NUMBER, outlines, textSize)
         treeView.setAdapter(simpleAdapter)
@@ -163,7 +165,7 @@ public class OutlinerActivity(): SherlockActivity()
     }
 
     public override fun onBackPressed() {
-        super<SherlockActivity>.onBackPressed()
+        super<Activity>.onBackPressed()
         finish()
     }
 }
