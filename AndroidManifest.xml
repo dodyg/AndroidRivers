@@ -50,5 +50,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.silverkeytech.android_rivers.WebViewActivity" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+            </intent-filter>
+        </activity>
+
     </application>
 </manifest>

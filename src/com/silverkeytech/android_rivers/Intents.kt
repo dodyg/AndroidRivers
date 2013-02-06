@@ -76,7 +76,7 @@ public fun startCollectionActivity(context: Context, id: Int, title: String) {
 }
 
 fun startOutlinerActivity(context: Context, outlines: ArrayList<OutlineContent>, title: String, url: String?, expandAll: Boolean) {
-    var intent = Intent(Intent.ACTION_MAIN)
+    val intent = Intent(Intent.ACTION_MAIN)
     intent.setClass(context, javaClass<OutlinerActivity>())
     intent.putExtra(Params.OUTLINES_DATA, outlines)
     intent.putExtra(Params.OUTLINES_TITLE, title)
@@ -95,6 +95,13 @@ public fun shareActionIntent(context: Context, title: String, url: String): Inte
 public fun startOpenBrowserActivity(context: Context, url: String) {
     val i = Intent("android.intent.action.VIEW", Uri.parse(url))
     context.startActivity(i)
+
+    /*
+    val intent = Intent(Intent.ACTION_MAIN)
+    intent.setClass(context, javaClass<WebViewActivity>())
+    intent.putExtra(Params.BUILT_IN_BROWSER_URI, url)
+    context.startActivity(intent)
+    */
 }
 
 public fun startOpenEmailActivity(context: Context, email: String, subject: String, body: String) {

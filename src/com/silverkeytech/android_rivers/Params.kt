@@ -53,5 +53,7 @@ public class Params(){
         val RIVER_SOURCES_URIS = "RIVERS_SOURCES_URIS"
 
         val OPML_SUBSCRIPTION_LIST_URI = "OPML_SUBSCRIPTION_LIST_URI"
+
+        val BUILT_IN_BROWSER_URI = "BUILT_IN_BROWSER_URI"
     }
 }
