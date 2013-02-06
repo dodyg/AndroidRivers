@@ -8,6 +8,7 @@
       <directory url="file://$PROJECT_DIR$/TreeView/gen" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/Tests/gen" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/AndroidTests/gen" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/HoloEverywhere/gen" includeSubdirectories="true" />
     </excludeFromCompile>
     <resourceExtensions />
     <wildcardResourcePatterns>

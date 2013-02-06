@@ -1,0 +1,33 @@
+{
+    "styles": {
+        "data": {
+            "Holo.Theme": {
+                "holoTheme": "dark", 
+                "include": [
+                    "BaseDark"
+                ], 
+                "parent": "Theme.Sherlock"
+            }, 
+            "Holo.Theme.Light": {
+                "holoTheme": "light", 
+                "include": [
+                    "BaseLight"
+                ], 
+                "parent": "Theme.Sherlock.Light"
+            }, 
+            "Holo.Theme.Light.DarkActionBar": {
+                "holoTheme": "dark", 
+                "include": [
+                    "BaseLight"
+                ], 
+                "parent": "Theme.Sherlock.Light.DarkActionBar"
+            }
+        }, 
+        "include": [
+            {
+                "name": "base.json"
+            }
+        ], 
+        "output": "values-v14/styles.xml"
+    }
+}

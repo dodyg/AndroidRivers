@@ -108,11 +108,12 @@ fun handleForeignTextFont(context: Activity, language: String, text: TextView, c
 }
 
 fun handleTextColorBasedOnTheme(context: Activity, text: TextView) {
-    var theme = context.getVisualPref().getTheme()
-    if (theme == R.style.Theme_Sherlock_Light_DarkActionBar)
+    /*var theme = context.getVisualPref().getTheme()
+    if (theme == R.style.Theme_Sherlock_Light_DarkActionBar) */
         text.setTextColor(android.graphics.Color.BLACK)
-    else if (theme == R.style.Theme_Sherlock)
-        text.setTextColor(android.graphics.Color.WHITE)
+
+    /*else if (theme == R.style.Theme_Sherlock)
+        text.setTextColor(android.graphics.Color.WHITE)*/
 }
 
 val LOCAL_URL: String = "http://www.localhost/"

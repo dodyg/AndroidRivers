@@ -23,7 +23,6 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
-import com.actionbarsherlock.app.SherlockListActivity
 import com.actionbarsherlock.view.ActionMode
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
@@ -33,9 +32,10 @@ import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
+import org.holoeverywhere.app.ListActivity
 
 //Responsible of downloading, caching and viewing a news river content
-public class FeedActivity(): SherlockListActivity(), WithVisualModificationPanel
+public class FeedActivity(): ListActivity(), WithVisualModificationPanel
 {
     class object {
         public val TAG: String = javaClass<FeedActivity>().getSimpleName()
@@ -47,8 +47,9 @@ public class FeedActivity(): SherlockListActivity(), WithVisualModificationPanel
     var mode: ActionMode? = null
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
-        setTheme(this.getVisualPref().getTheme())
-        super<SherlockListActivity>.onCreate(savedInstanceState)
+        //setTheme(this.getVisualPref().getTheme())
+        setTheme(R.style.Holo_Theme_Light)
+        super<ListActivity>.onCreate(savedInstanceState)
         setContentView(R.layout.feeds)
 
         var actionBar = getSupportActionBar()!!
@@ -125,7 +126,7 @@ public class FeedActivity(): SherlockListActivity(), WithVisualModificationPanel
                 return true
             }
             RESIZE_TEXT -> {
-                mode = startActionMode(ResizeTextActionMode(this, mode))
+                //mode = startActionMode(ResizeTextActionMode(this, mode))
                 return true
             }
             R.id.feed_menu_bookmark -> {
@@ -133,7 +134,7 @@ public class FeedActivity(): SherlockListActivity(), WithVisualModificationPanel
                 return true
             }
             else ->
-                return super<SherlockListActivity>.onOptionsItemSelected(item)
+                return super<ListActivity>.onOptionsItemSelected(item)
         }
     }
 
