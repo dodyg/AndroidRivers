@@ -93,6 +93,8 @@ public class ResizeTextActionMode (private val parent: WithVisualModificationPan
         val switchText = when(parent.getActivity().getVisualPref().getTheme()){
             R.style.Theme_Sherlock -> "Light Theme"
             R.style.Theme_Sherlock_Light_DarkActionBar -> "Dark Theme"
+            R.style.Holo_Theme -> "Light Theme"
+            R.style.Holo_Theme_Light -> "Dark Theme"
             else -> ""
         }
 

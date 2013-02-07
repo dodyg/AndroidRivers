@@ -48,12 +48,10 @@ public open class MainWithFragmentsActivity(): Activity() {
     var isOnCreate: Boolean = true
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
-        //currentTheme = this.getVisualPref().getTheme()
-        setTheme(R.style.Holo_Theme_Light)
+        currentTheme = this.getVisualPref().getTheme()
 
         isOnCreate = true
-        //setTheme(currentTheme!!)
-        setTheme(R.style.Holo_Theme_Light)
+        setTheme(currentTheme!!)
 
         getMain().flags.reset()
 

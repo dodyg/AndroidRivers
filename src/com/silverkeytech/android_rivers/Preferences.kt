@@ -22,6 +22,7 @@ import org.holoeverywhere.app.Activity
 import android.content.Context
 import org.holoeverywhere.preference.SharedPreferences
 import org.holoeverywhere.preference.PreferenceManagerHelper
+import org.holoeverywhere.ThemeManager
 
 public class Preferences{
     class object{
@@ -63,7 +64,7 @@ public class PreferenceDefaults{
         public val SETUP_DOWNLOAD_DEFAULT_RIVERS: Boolean = true
 
         public val VISUAL_LIST_TEXT_SIZE: Int = 20
-        public val VISUAL_THEME: Int = R.style.Theme_Sherlock_Light_DarkActionBar
+        public val VISUAL_THEME: Int = R.style.Holo_Theme
 
         public val LINK_SHARE_TITLE_MAX_LENGTH: Int = 80
 
@@ -115,15 +116,23 @@ public class VisualPreference (public val pref: SharedPreferences){
         edit.commit()
     }
 
-    public fun getTheme(): Int = pref.getInt(Preferences.VISUAL_THEME, PreferenceDefaults.VISUAL_THEME)
+    public fun getTheme(): Int {
+        val currentTheme = pref.getInt(Preferences.VISUAL_THEME, PreferenceDefaults.VISUAL_THEME)
+
+        when (currentTheme){
+            R.style.Theme_Sherlock_Light_DarkActionBar -> return R.style.Holo_Theme_Light
+            R.style.Theme_Sherlock -> return R.style.Holo_Theme
+            else -> return currentTheme
+        }
+    }
 
     public fun switchTheme() {
         val currentTheme = getTheme()
 
         var newTheme = when(currentTheme){
-            R.style.Theme_Sherlock -> R.style.Theme_Sherlock_Light_DarkActionBar
-            R.style.Theme_Sherlock_Light_DarkActionBar -> R.style.Theme_Sherlock
-            else -> R.style.Theme_Sherlock
+            R.style.Holo_Theme -> R.style.Holo_Theme_Light
+            R.style.Holo_Theme_Light -> R.style.Holo_Theme
+            else -> R.style.Holo_Theme
         }
 
         var edit = pref.edit()!!

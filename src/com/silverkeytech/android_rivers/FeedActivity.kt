@@ -47,8 +47,7 @@ public class FeedActivity(): ListActivity(), WithVisualModificationPanel
     var mode: ActionMode? = null
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
-        //setTheme(this.getVisualPref().getTheme())
-        setTheme(R.style.Holo_Theme_Light)
+        setTheme(this.getVisualPref().getTheme())
         super<ListActivity>.onCreate(savedInstanceState)
         setContentView(R.layout.feeds)
 
@@ -126,7 +125,7 @@ public class FeedActivity(): ListActivity(), WithVisualModificationPanel
                 return true
             }
             RESIZE_TEXT -> {
-                //mode = startActionMode(ResizeTextActionMode(this, mode))
+                mode = startActionMode(ResizeTextActionMode(this, mode))
                 return true
             }
             R.id.feed_menu_bookmark -> {

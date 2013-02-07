@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.app.Activity
+import org.holoeverywhere.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
@@ -49,7 +49,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
 
     //show and prepare the interaction for each individual news item
     fun handleNewsListing(feedTitle: String, feedUrl: String, feedItems: List<SyndicationFeedItem>) {
-        val textSize = 16//context.getVisualPref().getListTextSize()
+        val textSize = context.getVisualPref().getListTextSize()
 
         //now sort it so people always have the latest news first
         var list = context.findView<ListView>(android.R.id.list)
@@ -154,7 +154,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                                     if (msg != null){
                                         val path = msg.obj as String
 
-                                        if (msg.arg1 == Activity.RESULT_OK && !path.isNullOrEmpty()){
+                                        if (msg.arg1 == android.app.Activity.RESULT_OK && !path.isNullOrEmpty()){
                                             context.toastee("File is successfully downloaded at $path", Duration.LONG)
                                             MediaScannerWrapper.scanPodcasts(context, path)
                                         }else{

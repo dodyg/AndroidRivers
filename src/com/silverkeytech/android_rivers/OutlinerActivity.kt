@@ -43,8 +43,7 @@ public class OutlinerActivity(): Activity()
     var treeManager = InMemoryTreeStateManager<Long?>()
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
-        //setTheme(this.getVisualPref().getTheme())
-        setTheme(R.style.Holo_Theme_Light)
+        setTheme(this.getVisualPref().getTheme())
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.outliner)
@@ -85,7 +84,7 @@ public class OutlinerActivity(): Activity()
         }
 
         var treeView = findView<TreeViewList>(R.id.outliner_main_tree)
-        val textSize = 16//getVisualPref().getListTextSize()
+        val textSize = getVisualPref().getListTextSize()
 
         var simpleAdapter = SimpleAdapter(this, treeManager, LEVEL_NUMBER, outlines, textSize)
         treeView.setAdapter(simpleAdapter)

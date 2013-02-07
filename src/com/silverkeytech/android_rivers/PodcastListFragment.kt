@@ -108,7 +108,7 @@ public class PodcastListFragment(): ListFragment() {
 
     //show and prepare the interaction for each individual news item
     fun renderFileListing(podcasts: List<Podcast>) {
-        val textSize = 16//parent!!.getVisualPref().getListTextSize()
+        val textSize = parent!!.getVisualPref().getListTextSize()
 
         //now sort it so people always have the latest news first
         var list = getView()!!.findViewById(android.R.id.list) as ListView
