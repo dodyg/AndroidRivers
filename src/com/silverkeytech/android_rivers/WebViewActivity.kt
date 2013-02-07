@@ -24,7 +24,7 @@ public class WebViewActivity:  SherlockActivity() {
     var uri : String? = null
     var web : WebView? = null
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
-        setTheme(this.getVisualPref().getTheme())
+        //setTheme(this.getVisualPref().getTheme())
 
         web = WebView(getApplicationContext())
         requestWindowFeature(Window.FEATURE_PROGRESS)

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.app.Activity
+import org.holoeverywhere.app.Activity
 import android.app.AlertDialog
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -243,7 +243,7 @@ public class TryOutActivity(): Activity()
                 public override fun handleMessage(msg: Message?) {
                     var path = msg!!.obj as String
 
-                    if (msg.arg1 == Activity.RESULT_OK && !path.isNullOrEmpty()){
+                    if (msg.arg1 == android.app.Activity.RESULT_OK && !path.isNullOrEmpty()){
                         toastee("File is successfully downloaded at $path")
                     }else{
                         toastee("Download failed")

@@ -18,9 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.app.Activity
+import org.holoeverywhere.app.Activity
 import android.content.Context
-import android.content.SharedPreferences
+import org.holoeverywhere.preference.SharedPreferences
+import org.holoeverywhere.preference.PreferenceManagerHelper
 
 public class Preferences{
     class object{
@@ -74,14 +75,13 @@ public class PreferenceDefaults{
     }
 }
 
-fun Activity.getContentPref(): ContentPreference =
-        ContentPreference(this.getSharedPreferences(Preferences.CONTENT, Context.MODE_PRIVATE)!!)
+fun Activity.getContentPref(): ContentPreference = ContentPreference(PreferenceManagerHelper.wrap(this, Preferences.CONTENT, Context.MODE_PRIVATE)!!)
 
 fun Activity.getSetupPref(): SetupPreference =
-        SetupPreference(this.getSharedPreferences(Preferences.SETUP, Context.MODE_PRIVATE)!!)
+        SetupPreference(PreferenceManagerHelper.wrap(this, Preferences.SETUP, Context.MODE_PRIVATE)!!)
 
 fun Activity.getVisualPref(): VisualPreference =
-        VisualPreference(this.getSharedPreferences(Preferences.VISUAL, Context.MODE_PRIVATE)!!)
+        VisualPreference(PreferenceManagerHelper.wrap(this, Preferences.VISUAL, Context.MODE_PRIVATE)!!)
 
 public class ContentPreference(public val pref: SharedPreferences){
     public fun getRiverBookmarksSorting(): Int = pref.getInt(Preferences.CONTENT_RIVER_BOOKMARKS_SORTING, PreferenceDefaults.CONTENT_RIVER_BOOKMARKS_SORTING)

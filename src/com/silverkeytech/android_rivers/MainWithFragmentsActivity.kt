@@ -73,7 +73,7 @@ public open class MainWithFragmentsActivity(): Activity() {
         super.onResume()
         //skip if this event comes after onCreate
         if (!isOnCreate){
-            //Log.d(TAG, "RESUMING Current Theme $currentTheme vs ${this.getVisualPref().getTheme()}")
+            Log.d(TAG, "RESUMING Current Theme $currentTheme vs ${this.getVisualPref().getTheme()}")
             //detect if there has been any theme changes
          //   if (currentTheme != null && currentTheme!! != this.getVisualPref().getTheme()){
            //     Log.d(TAG, "Theme changes detected - updating theme")
