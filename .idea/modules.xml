@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ActionBarSherlock/ActionBarSherlock.iml" filepath="$PROJECT_DIR$/ActionBarSherlock/ActionBarSherlock.iml" />
       <module fileurl="file://$PROJECT_DIR$/AndroidRivers.iml" filepath="$PROJECT_DIR$/AndroidRivers.iml" />
-      <module fileurl="file://$PROJECT_DIR$/HoloEverywhere/HoloEverywhere.iml" filepath="$PROJECT_DIR$/HoloEverywhere/HoloEverywhere.iml" />
     </modules>
   </component>
 </project>

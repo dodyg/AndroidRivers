@@ -75,13 +75,14 @@ public class PreferenceDefaults{
     }
 }
 
-fun Activity.getContentPref(): ContentPreference = ContentPreference(PreferenceManagerHelper.wrap(this, Preferences.CONTENT, Context.MODE_PRIVATE)!!)
+fun Activity.getContentPref(): ContentPreference =
+        ContentPreference(Pthis.getSharedPreferences(Preferences.CONTENT, Context.MODE_PRIVATE)!!)
 
 fun Activity.getSetupPref(): SetupPreference =
-        SetupPreference(PreferenceManagerHelper.wrap(this, Preferences.SETUP, Context.MODE_PRIVATE)!!)
+        SetupPreference(this.getSharedPreferences(Preferences.SETUP, Context.MODE_PRIVATE)!!)
 
 fun Activity.getVisualPref(): VisualPreference =
-        VisualPreference(PreferenceManagerHelper.wrap(this, Preferences.VISUAL, Context.MODE_PRIVATE)!!)
+        VisualPreference(this.getSharedPreferences(Preferences.VISUAL, Context.MODE_PRIVATE)!!)
 
 public class ContentPreference(public val pref: SharedPreferences){
     public fun getRiverBookmarksSorting(): Int = pref.getInt(Preferences.CONTENT_RIVER_BOOKMARKS_SORTING, PreferenceDefaults.CONTENT_RIVER_BOOKMARKS_SORTING)

@@ -9,6 +9,11 @@
       <directory url="file://$PROJECT_DIR$/Tests/gen" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/AndroidTests/gen" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/HoloEverywhere/gen" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/preferences/gen" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/../library/gen" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/slidingmenu/gen" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/addons/preferences/gen" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/addons/slidingmenu/gen" includeSubdirectories="true" />
     </excludeFromCompile>
     <resourceExtensions />
     <wildcardResourcePatterns>
