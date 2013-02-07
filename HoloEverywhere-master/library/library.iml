@@ -14,7 +14,7 @@
         <option name="USE_CUSTOM_COMPILER_MANIFEST" value="false" />
         <option name="CUSTOM_COMPILER_MANIFEST" value="" />
         <option name="APK_PATH" value="" />
-        <option name="LIBRARY_PROJECT" value="false" />
+        <option name="LIBRARY_PROJECT" value="true" />
         <option name="RUN_PROCESS_RESOURCES_MAVEN_TASK" value="true" />
         <option name="GENERATE_UNSIGNED_APK" value="false" />
         <option name="CUSTOM_DEBUG_KEYSTORE_PATH" value="" />
@@ -24,7 +24,7 @@
         <resOverlayFolders>
           <path>/res-overlay</path>
         </resOverlayFolders>
-        <includeSystemProguardFile>false</includeSystemProguardFile>
+        <includeSystemProguardFile>true</includeSystemProguardFile>
         <includeAssetsFromLibraries>false</includeAssetsFromLibraries>
         <additionalNativeLibs />
       </configuration>
@@ -38,17 +38,16 @@
     </content>
     <orderEntry type="jdk" jdkName="Android 4.1 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="KotlinRuntime" level="project" />
-    <orderEntry type="library" name="gson-2.2.2" level="project" />
-    <orderEntry type="library" name="simple-xml-2.6.7" level="project" />
-    <orderEntry type="library" name="android-support-v13" level="project" />
-    <orderEntry type="library" name="ormlite-android-4.42" level="project" />
-    <orderEntry type="library" name="ormlite-core-4.42" level="project" />
-    <orderEntry type="library" name="date4j" level="project" />
     <orderEntry type="module" module-name="ActionBarSherlock" />
-    <orderEntry type="module" module-name="library" />
-    <orderEntry type="module" module-name="preferences" />
-    <orderEntry type="module" module-name="slidingmenu" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/android-support-v13.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
 

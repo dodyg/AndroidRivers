@@ -76,7 +76,7 @@ public class PreferenceDefaults{
 }
 
 fun Activity.getContentPref(): ContentPreference =
-        ContentPreference(Pthis.getSharedPreferences(Preferences.CONTENT, Context.MODE_PRIVATE)!!)
+        ContentPreference(this.getSharedPreferences(Preferences.CONTENT, Context.MODE_PRIVATE)!!)
 
 fun Activity.getSetupPref(): SetupPreference =
         SetupPreference(this.getSharedPreferences(Preferences.SETUP, Context.MODE_PRIVATE)!!)

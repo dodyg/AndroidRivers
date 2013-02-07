@@ -14,6 +14,10 @@
       <directory url="file://$PROJECT_DIR$/slidingmenu/gen" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/addons/preferences/gen" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/addons/slidingmenu/gen" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/HoloEverywhere-master/addons/slidingmenu/gen" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/HoloEverywhere-master/addons/preferences/gen" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/HoloEverywhere-master/library/gen" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/HoloEverywhere-master/contrib/ActionBarSherlock/gen" includeSubdirectories="true" />
     </excludeFromCompile>
     <resourceExtensions />
     <wildcardResourcePatterns>
