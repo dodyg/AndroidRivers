@@ -47,7 +47,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
     }
 
     //hold the view data for the list
-    public data class ViewHolder (var news: TextView, val indicator: TextView)
+    public data class ViewHolder (val news: TextView, val source: TextView, val indicator: TextView)
 
     //show and prepare the interaction for each individual news item
     fun handleNewsListing(sortedNewsItems: List<RiverItemMeta>) {
@@ -91,6 +91,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                     currentView = inflater.inflate(R.layout.news_item, parent, false)
 
                     holder = ViewHolder(currentView!!.findViewById(R.id.news_item_text_tv) as TextView,
+                            currentView!!.findViewById(R.id.news_item_source_tv) as TextView,
                             currentView!!.findViewById(R.id.news_item_indicator_tv) as TextView)
 
                     currentView!!.setTag(holder)
@@ -100,6 +101,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 }
 
                 handleForeignTextFont(context, language, holder!!.news, news!!, textSize.toFloat())
+                handleForeignTextFont(context, language, holder!!.source, currentNewsItem.source.title!!, 11.0)
 
                 showIndicator()
 

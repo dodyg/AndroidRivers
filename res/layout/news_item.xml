@@ -6,20 +6,53 @@
                 android:paddingTop="6dp"
                 android:paddingBottom="6dp">
 
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/news_item_text_tv"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:padding="3dp"
-            android:layout_marginRight="5dp"
-    />
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                 android:id="@+id/tableLayout1"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentLeft="true"
+                 android:layout_alignParentTop="true"
+                 android:layout_marginRight="5dp"
+
+            >
+        <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/news_item_text_tv"
+                    android:padding="3dp"
+                    android:layout_weight="1"
+                    android:text="What can you do to achive the best enhacement of your life before"
+                    />
+        </TableRow>
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                >
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/news_item_source_tv"
+                    android:padding="3dp"
+                    android:text="CNN"
+                    android:textSize="11dp"
+                    />
+        </TableRow>
+
+    </TableLayout>
 
     <TextView
             android:layout_width="5dp"
             android:layout_height="fill_parent"
             android:id="@+id/news_item_indicator_tv"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:layout_weight="1"
+            android:text=" "/>
 
 </RelativeLayout>
