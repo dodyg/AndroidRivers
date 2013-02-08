@@ -81,6 +81,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                 if (currentView == null){
                     currentView = inflater.inflate(R.layout.news_item, parent, false)
 
+                    currentView!!.findViewById(R.id.news_item_source_tv)!!.setVisibility(android.view.View.GONE)
                     holder = ViewHolder(currentView!!.findViewById(R.id.news_item_text_tv) as TextView,
                             currentView!!.findViewById(R.id.news_item_indicator_tv) as TextView)
 

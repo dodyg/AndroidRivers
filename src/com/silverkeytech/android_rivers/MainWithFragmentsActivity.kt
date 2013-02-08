@@ -66,17 +66,18 @@ public open class MainWithFragmentsActivity(): Activity() {
         setTitle()
     }
 
-
     protected override fun onResume() {
         super.onResume()
         //skip if this event comes after onCreate
         if (!isOnCreate){
             Log.d(TAG, "RESUMING Current Theme $currentTheme vs ${this.getVisualPref().getTheme()}")
             //detect if there has been any theme changes
-            //   if (currentTheme != null && currentTheme!! != this.getVisualPref().getTheme()){
-            //     Log.d(TAG, "Theme changes detected - updating theme")
-            restart()
-            /*} else
+            if (currentTheme != null && currentTheme!! != this.getVisualPref().getTheme()){
+                Log.d(TAG, "Theme changes detected - updating theme")
+                restart()
+            } else {
+                showAccordingToCurrentMode()
+
                 if (getMain().flags.isRssJustBookmarked && mode == MainActivityMode.RSS){
                     getMain().flags.reset()
                     Log.d(TAG, "RSS is just bookmarked")
@@ -87,7 +88,7 @@ public open class MainWithFragmentsActivity(): Activity() {
                         Log.d(TAG, "River is just bookmarked")
                         //it doesn't do anything at the moment - this is an artifact of old design
                     }
-                    */
+            }
         }else {
             Log.d(TAG, "RESUMING AFTER CREATION")
             isOnCreate = false
@@ -154,6 +155,16 @@ public open class MainWithFragmentsActivity(): Activity() {
         if (showPodcasts) transaction.show(podcastsFragment) else transaction.hide(podcastsFragment)
 
         transaction.commit()
+    }
+
+    fun showAccordingToCurrentMode(){
+        when(mode){
+            MainActivityMode.RIVER -> showAndHide(showRiver = true)
+            MainActivityMode.RSS -> showAndHide(showRss = true)
+            MainActivityMode.COLLECTION -> showAndHide(showCollection = true)
+            MainActivityMode.PODCASTS -> showAndHide(showPodcasts = true)
+            else -> {}
+        }
     }
 
     fun setTitle() {
