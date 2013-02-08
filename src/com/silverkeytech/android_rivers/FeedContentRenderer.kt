@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import org.holoeverywhere.app.Activity
-import android.app.AlertDialog
+import org.holoeverywhere.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
