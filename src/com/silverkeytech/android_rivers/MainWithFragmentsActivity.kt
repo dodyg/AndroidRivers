@@ -73,9 +73,9 @@ public open class MainWithFragmentsActivity(): Activity() {
         if (!isOnCreate){
             Log.d(TAG, "RESUMING Current Theme $currentTheme vs ${this.getVisualPref().getTheme()}")
             //detect if there has been any theme changes
-         //   if (currentTheme != null && currentTheme!! != this.getVisualPref().getTheme()){
-           //     Log.d(TAG, "Theme changes detected - updating theme")
-                restart()
+            //   if (currentTheme != null && currentTheme!! != this.getVisualPref().getTheme()){
+            //     Log.d(TAG, "Theme changes detected - updating theme")
+            restart()
             /*} else
                 if (getMain().flags.isRssJustBookmarked && mode == MainActivityMode.RSS){
                     getMain().flags.reset()

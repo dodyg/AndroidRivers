@@ -257,7 +257,7 @@ public class RiverListFragment(): ListFragment() {
 
         if (cache != null){
             Log.d(TAG, "Get bookmarks from cache")
-            handleRiversListing(cache,0)// parent!!.getContentPref().getRiverBookmarksSorting())
+            handleRiversListing(cache, 0)// parent!!.getContentPref().getRiverBookmarksSorting())
         }  else{
             Log.d(TAG, "Try to retrieve bookmarks from DB")
             val bookmarks = getBookmarksFromDbAsOpml(BookmarkKind.RIVER, SortingOrder.NONE)

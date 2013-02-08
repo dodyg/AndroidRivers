@@ -78,7 +78,7 @@ public class TryOutActivity(): Activity()
         handleRiverJsWithOpmlSource()
     }
 
-    fun handleGetAirportCodes(){
+    fun handleGetAirportCodes() {
         val btn = findView<Button>(R.id.tryout_get_airport_codes)
 
         btn.setOnClickListener {

@@ -16,13 +16,13 @@ import android.webkit.WebViewClient
 import android.content.Intent
 
 
-public class WebViewActivity:  SherlockActivity() {
+public class WebViewActivity: SherlockActivity() {
     class object {
         public val TAG: String = javaClass<WebViewActivity>().getSimpleName()
     }
 
-    var uri : String? = null
-    var web : WebView? = null
+    var uri: String? = null
+    var web: WebView? = null
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         //setTheme(this.getVisualPref().getTheme())
 
@@ -63,10 +63,10 @@ public class WebViewActivity:  SherlockActivity() {
     }
 
 
-    var isPaused : Boolean = false
+    var isPaused: Boolean = false
 
     //ref http://www.anddev.org/other-coding-problems-f5/webviewcorethread-problem-t10234.html
-    public override fun onPause(){
+    public override fun onPause() {
         if (!isPaused){
             val pause = javaClass<WebView>().getMethod("onPause")
             pause.invoke(web)
@@ -75,7 +75,7 @@ public class WebViewActivity:  SherlockActivity() {
         super<SherlockActivity>.onPause()
     }
 
-    public override fun onResume(){
+    public override fun onResume() {
         if (isPaused){
             val resume = javaClass<WebView>().getMethod("onResume")
             resume.invoke(web)

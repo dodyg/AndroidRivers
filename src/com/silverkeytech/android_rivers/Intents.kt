@@ -44,7 +44,7 @@ public fun startFeedActivity(context: Context, url: String, text: String, lang: 
     context.startActivity(i)
 }
 
-public fun startTryoutActivity(context : Context){
+public fun startTryoutActivity(context: Context) {
     val i = Intent(context, javaClass<TryOutActivity>())
     context.startActivity(i)
 }
