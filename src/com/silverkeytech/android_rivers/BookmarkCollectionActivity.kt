@@ -19,10 +19,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.os.Bundle
-import org.holoeverywhere.app.ListActivity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 import com.silverkeytech.android_rivers.db.getBookmarksFromDbByCollection
+import org.holoeverywhere.app.ListActivity
 
 public open class BookmarkCollectionActivity(): ListActivity() {
     class object {

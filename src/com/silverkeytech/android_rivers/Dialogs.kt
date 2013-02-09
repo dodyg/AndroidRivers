@@ -18,11 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.app.Activity
-import org.holoeverywhere.app.AlertDialog
 import android.content.DialogInterface
 import android.view.View
 import android.widget.EditText
+import org.holoeverywhere.app.Activity
+import org.holoeverywhere.app.AlertDialog
 
 public fun dlgClickListener(action: (dlg: DialogInterface?, idx: Int) -> Unit): DialogInterface.OnClickListener {
     return object: DialogInterface.OnClickListener {

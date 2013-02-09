@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import org.holoeverywhere.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
@@ -32,6 +31,7 @@ import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
+import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.ListActivity
 
 //Responsible of downloading, caching and viewing a news river content

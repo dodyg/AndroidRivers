@@ -18,15 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.app.Activity
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentTransaction
 import android.util.Log
 import android.view.View
-import org.holoeverywhere.app.Activity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
+import org.holoeverywhere.app.Activity
 
 enum class MainActivityMode {
     RIVER
@@ -157,13 +154,14 @@ public open class MainWithFragmentsActivity(): Activity() {
         transaction.commit()
     }
 
-    fun showAccordingToCurrentMode(){
+    fun showAccordingToCurrentMode() {
         when(mode){
             MainActivityMode.RIVER -> showAndHide(showRiver = true)
             MainActivityMode.RSS -> showAndHide(showRss = true)
             MainActivityMode.COLLECTION -> showAndHide(showCollection = true)
             MainActivityMode.PODCASTS -> showAndHide(showPodcasts = true)
-            else -> {}
+            else -> {
+            }
         }
     }
 
@@ -258,36 +256,6 @@ public open class MainWithFragmentsActivity(): Activity() {
     val SWITCH_FORWARD: Int = 1
     val EXPLORE: Int = 2
 
-}
-
-
-fun Activity.findFragmentById(id: Int): Fragment {
-    return this.getSupportFragmentManager()!!.findFragmentById(id)!!
-}
-
-fun Activity.beginFragmentTransaction(): FragmentTransaction {
-    return this.getSupportFragmentManager()!!.beginTransaction()!!
-}
-
-fun downloadOpml(context: Activity, url: String, title: String) {
-    val cache = context.getMain().getOpmlCache(url)
-
-    if (cache != null){
-        startOutlinerActivity(context, cache, title, url, false)
-    }
-    else{
-        DownloadOpml(context)
-                .executeOnProcessedCompletion({
-            res ->
-            if (res.isTrue()){
-                startOutlinerActivity(context, res.value!!, title, url, false)
-            }
-            else{
-                context.toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)
-            }
-        }, { outline -> outline.text != "<rules>" })
-                .execute(url)
-    }
 }
 
 data class Location(val x: Int, val y: Int)

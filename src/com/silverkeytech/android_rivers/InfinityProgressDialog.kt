@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import org.holoeverywhere.app.ProgressDialog
 import android.content.Context
 import android.content.DialogInterface
+import org.holoeverywhere.app.ProgressDialog
 
 public class InfinityProgressDialog(ctx: Context, val message: String): ProgressDialog(ctx){
     {

@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import org.holoeverywhere.app.Activity
 import android.app.AlertDialog
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -37,6 +36,7 @@ import android.widget.Button
 import android.widget.RemoteViews
 import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
+import com.silverkeytech.android_rivers.creators.getAirportCodes
 import com.silverkeytech.android_rivers.db.Bookmark
 import com.silverkeytech.android_rivers.db.BookmarkCollection
 import com.silverkeytech.android_rivers.db.BookmarkCollectionKind
@@ -48,7 +48,7 @@ import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
 import java.util.ArrayList
 import java.util.Random
-import com.silverkeytech.android_rivers.creators.getAirportCodes
+import org.holoeverywhere.app.Activity
 
 public class TryOutActivity(): Activity()
 {

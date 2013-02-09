@@ -18,11 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import org.holoeverywhere.app.Activity
 import android.content.Context
+import org.holoeverywhere.app.Activity
 import org.holoeverywhere.preference.SharedPreferences
-import org.holoeverywhere.preference.PreferenceManagerHelper
-import org.holoeverywhere.ThemeManager
 
 public class Preferences{
     class object{

@@ -18,8 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.app.Activity
-import org.holoeverywhere.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Bitmap
@@ -30,6 +28,8 @@ import android.widget.ImageView
 import com.github.kevinsawicki.http.HttpRequest
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import java.io.File
+import org.holoeverywhere.app.Activity
+import org.holoeverywhere.app.AlertDialog
 
 public data class DownloadedFile(val contentType: String, val filePath: String)
 

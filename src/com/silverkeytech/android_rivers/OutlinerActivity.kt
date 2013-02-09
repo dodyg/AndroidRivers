@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.os.Bundle
-import org.holoeverywhere.app.Activity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 import com.pl.polidea.treeview.InMemoryTreeStateManager
@@ -27,6 +26,7 @@ import com.pl.polidea.treeview.TreeViewList
 import com.silverkeytech.android_rivers.outliner.OutlineContent
 import com.silverkeytech.android_rivers.outliner.SimpleAdapter
 import java.util.ArrayList
+import org.holoeverywhere.app.Activity
 
 public class OutlinerActivity(): Activity()
 {

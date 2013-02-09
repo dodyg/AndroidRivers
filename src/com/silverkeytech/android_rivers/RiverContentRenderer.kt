@@ -18,8 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import org.holoeverywhere.app.Activity
-import org.holoeverywhere.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -39,6 +37,8 @@ import android.widget.TextView
 import com.silverkeytech.android_rivers.outliner.transformFeedOpmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
 import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
+import org.holoeverywhere.app.Activity
+import org.holoeverywhere.app.AlertDialog
 
 //Manage the rendering of each news item in the river list
 public class RiverContentRenderer(val context: Activity, val language: String){

@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.xml
 
-
 import com.silverkeytech.android_rivers.creators.AirportCodeBuilder
 import com.thebuzzmedia.sjxp.XMLParser
 import java.io.InputStream

@@ -18,14 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-
-import org.holoeverywhere.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import org.holoeverywhere.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Adapter
@@ -36,12 +33,14 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.PopupWindow
 import android.widget.TextView
-import org.holoeverywhere.app.ListFragment
 import com.silverkeytech.android_rivers.db.Podcast
 import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.getPodcastsFromDb
 import com.silverkeytech.android_rivers.db.removePodcast
 import java.io.File
+import org.holoeverywhere.LayoutInflater
+import org.holoeverywhere.app.Activity
+import org.holoeverywhere.app.ListFragment
 
 public class PodcastListFragment(): ListFragment() {
     class object {

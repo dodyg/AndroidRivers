@@ -18,14 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import org.holoeverywhere.app.Activity
-import org.holoeverywhere.app.AlertDialog
-import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import org.holoeverywhere.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Adapter
@@ -37,7 +33,6 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.PopupWindow
 import android.widget.TextView
-import org.holoeverywhere.app.ListFragment
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuInflater
 import com.silverkeytech.android_rivers.db.BookmarkCollection
@@ -50,6 +45,10 @@ import com.silverkeytech.android_rivers.db.clearBookmarksFromCollection
 import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.removeItemByUrlFromBookmarkDb
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
+import org.holoeverywhere.LayoutInflater
+import org.holoeverywhere.app.Activity
+import org.holoeverywhere.app.AlertDialog
+import org.holoeverywhere.app.ListFragment
 
 public class CollectionListFragment: ListFragment() {
     class object {

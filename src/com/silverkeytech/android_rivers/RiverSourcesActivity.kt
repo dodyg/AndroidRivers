@@ -20,9 +20,9 @@ package com.silverkeytech.android_rivers
 
 import android.os.Bundle
 import android.util.Log
-import org.holoeverywhere.app.ListActivity
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
+import org.holoeverywhere.app.ListActivity
 
 public open class RiverSourcesActivity(): ListActivity() {
     class object {

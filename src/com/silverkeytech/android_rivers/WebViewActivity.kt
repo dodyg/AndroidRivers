@@ -1,22 +1,13 @@
 package com.silverkeytech.android_rivers
 
-
-import android.app.Activity
 import android.os.Bundle
-import android.util.Log
-import com.actionbarsherlock.app.SherlockActivity
-import com.actionbarsherlock.view.ActionMode
-import com.actionbarsherlock.view.Menu
-import com.actionbarsherlock.view.MenuItem
-import java.util.ArrayList
-import com.actionbarsherlock.view.Window
-import android.webkit.WebView
 import android.webkit.WebChromeClient
+import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.content.Intent
+import com.actionbarsherlock.view.Window
+import org.holoeverywhere.app.Activity
 
-
-public class WebViewActivity: SherlockActivity() {
+public class WebViewActivity: Activity() {
     class object {
         public val TAG: String = javaClass<WebViewActivity>().getSimpleName()
     }
@@ -50,7 +41,7 @@ public class WebViewActivity: SherlockActivity() {
             }
         })
 
-        super<SherlockActivity>.onCreate(savedInstanceState)
+        super<Activity>.onCreate(savedInstanceState)
         setContentView(web!!)
 
         val actionBar = getSupportActionBar()!!
@@ -72,7 +63,7 @@ public class WebViewActivity: SherlockActivity() {
             pause.invoke(web)
             web!!.pauseTimers()
         }
-        super<SherlockActivity>.onPause()
+        super<Activity>.onPause()
     }
 
     public override fun onResume() {
@@ -82,6 +73,6 @@ public class WebViewActivity: SherlockActivity() {
             web!!.resumeTimers()
             isPaused = false
         }
-        super<SherlockActivity>.onResume()
+        super<Activity>.onResume()
     }
 }

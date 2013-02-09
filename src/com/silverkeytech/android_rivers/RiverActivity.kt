@@ -17,10 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 package com.silverkeytech.android_rivers
 
-import org.holoeverywhere.app.Activity
 import android.os.Bundle
 import android.util.Log
-import org.holoeverywhere.app.ListActivity
 import com.actionbarsherlock.view.ActionMode
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
@@ -31,6 +29,8 @@ import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 import com.silverkeytech.android_rivers.riverjs.RiverItemSource
 import java.util.ArrayList
+import org.holoeverywhere.app.Activity
+import org.holoeverywhere.app.ListActivity
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity(): ListActivity(), WithVisualModificationPanel

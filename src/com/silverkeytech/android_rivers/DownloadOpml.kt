@@ -17,7 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 package com.silverkeytech.android_rivers
 
-import android.app.Activity
 import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
@@ -28,6 +27,7 @@ import com.silverkeytech.android_rivers.outliner.traverse
 import com.silverkeytech.android_rivers.outlines.Opml
 import com.silverkeytech.android_rivers.outlines.Outline
 import java.util.ArrayList
+import org.holoeverywhere.app.Activity
 
 public class DownloadOpml(it: Context?): AsyncTask<String, Int, Pair<String, Result<Opml>>>(){
     class object {
@@ -104,5 +104,27 @@ public class DownloadOpml(it: Context?): AsyncTask<String, Int, Pair<String, Res
         processedCallBack = action
         processingFilter = filter
         return this
+    }
+}
+
+
+fun downloadOpml(context: Activity, url: String, title: String) {
+    val cache = context.getMain().getOpmlCache(url)
+
+    if (cache != null){
+        startOutlinerActivity(context, cache, title, url, false)
+    }
+    else{
+        DownloadOpml(context)
+                .executeOnProcessedCompletion({
+            res ->
+            if (res.isTrue()){
+                startOutlinerActivity(context, res.value!!, title, url, false)
+            }
+            else{
+                context.toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)
+            }
+        }, { outline -> outline.text != "<rules>" })
+                .execute(url)
     }
 }

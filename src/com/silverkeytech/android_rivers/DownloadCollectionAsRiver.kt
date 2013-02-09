@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.app.Activity
 import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
@@ -31,6 +30,7 @@ import java.util.ArrayList
 import java.util.Vector
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import org.holoeverywhere.app.Activity
 
 public class DownloadCollectionAsRiver(it: Context?, private val collectionId: Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
     class object {

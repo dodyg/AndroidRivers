@@ -19,15 +19,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.app.Activity
 import android.app.Service
 import android.os.Build
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentTransaction
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
 import java.net.SocketException
 import java.net.UnknownHostException
 import org.apache.http.conn.ConnectTimeoutException
+import org.holoeverywhere.app.Activity
 
 fun Service?.getMain(): MainApplication {
     return this!!.getApplication() as MainApplication
@@ -71,6 +73,14 @@ public fun Activity.toastee(text: String, duration: Duration = Duration.QUICK, g
     t!!.show()
 }
 
+fun Activity.findFragmentById(id: Int): Fragment {
+    return this.getSupportFragmentManager()!!.findFragmentById(id)!!
+}
+
+fun Activity.beginFragmentTransaction(): FragmentTransaction {
+    return this.getSupportFragmentManager()!!.beginTransaction()!!
+}
+
 public data class ConnectivityErrorMessage(val timeoutException: String, val socketException: String, val otherException: String)
 
 public fun Activity.handleConnectivityError(e: Exception?, message: ConnectivityErrorMessage) {
@@ -80,7 +90,6 @@ public fun Activity.handleConnectivityError(e: Exception?, message: Connectivity
         this.toastee(message.socketException, Duration.AVERAGE)
     else
         this.toastee(message.otherException, Duration.AVERAGE)
-
 }
 
 public enum class Duration {

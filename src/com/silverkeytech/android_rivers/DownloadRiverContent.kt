@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.app.Activity
 import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
@@ -29,6 +28,7 @@ import com.silverkeytech.android_rivers.riverjs.RiverSite
 import com.silverkeytech.android_rivers.riverjs.downloadSingleRiver
 import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
 import java.util.ArrayList
+import org.holoeverywhere.app.Activity
 
 //Responsible for handling a river js downloading and display in asynchronous way
 public class DownloadRiverContent(it: Context?, val language: String): AsyncTask<String, Int, Result<River>>(){
