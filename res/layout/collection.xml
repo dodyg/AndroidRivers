@@ -8,7 +8,9 @@
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/collection_message_tv"/>
+            android:id="@+id/collection_message_tv"
+            android:padding="@dimen/message_padding"
+            />
 
     <ListView
             android:layout_width="fill_parent"

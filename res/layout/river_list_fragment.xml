@@ -8,8 +8,9 @@
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="River List"
-            android:id="@+id/river_list_fragment_message_tv"/>
+            android:id="@+id/river_list_fragment_message_tv"
+            android:padding="@dimen/message_padding"
+            />
 
     <ListView
             android:layout_width="fill_parent"

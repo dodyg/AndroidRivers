@@ -41,16 +41,17 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
     }
 
     fun handleListing(bookmarks: List<Bookmark>) {
+        val textSize = context.getVisualPref().getListTextSize()
 
         if (bookmarks.count() == 0){
             var msg = context.findViewById(R.id.collection_message_tv)!! as TextView
-            msg.setText(context.getString(R.string.empty_bookmark_collection_items_list))
+            handleFontResize(msg, context.getString(R.string.empty_bookmark_collection_items_list)!!, textSize.toFloat())
         }
 
         val adapter = object : ArrayAdapter<Bookmark>(context, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 val text = bookmarks[position].toString()
-                return currentListItem(text, convertView, parent)
+                return currentListItem(text, convertView, parent, textSize.toFloat())
             }
         }
 
@@ -75,7 +76,7 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
 
     public data class ViewHolder (var name: TextView)
 
-    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?): View? {
+    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?, textSize: Float): View? {
         var holder: ViewHolder?
 
         var vw: View? = convertView
@@ -84,13 +85,12 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
             vw = inflater().inflate(android.R.layout.simple_list_item_1, parent, false)
 
             holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
-            holder!!.name.setText(text)
             vw!!.setTag(holder)
         }else{
             holder = vw!!.getTag() as ViewHolder
-            holder!!.name.setText(text)
         }
 
+        handleFontResize(holder!!.name, text, textSize)
         return vw
     }
 

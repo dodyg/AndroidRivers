@@ -102,9 +102,14 @@ fun handleForeignTextFont(context: Activity, language: String, text: TextView, c
         }
         else -> {
             text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
-            text.setText(content);
+            text.setText(content)
         }
     }
+}
+
+fun handleFontResize(text: TextView, content : String, textSize : Float){
+    text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+    text.setText(content)
 }
 
 fun handleTextColorBasedOnTheme(context: Activity, text: TextView) {

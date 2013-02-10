@@ -21,6 +21,7 @@ package com.silverkeytech.android_rivers
 import android.content.Context
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.preference.SharedPreferences
+import android.util.Log
 
 public class Preferences{
     class object{
@@ -84,15 +85,25 @@ fun Activity.getVisualPref(): VisualPreference =
         VisualPreference(this.getSharedPreferences(Preferences.VISUAL, Context.MODE_PRIVATE)!!)
 
 public class ContentPreference(public val pref: SharedPreferences){
+    class object {
+        public val TAG: String = javaClass<ContentPreference>().getSimpleName()
+    }
+
     public fun getRiverBookmarksSorting(): Int = pref.getInt(Preferences.CONTENT_RIVER_BOOKMARKS_SORTING, PreferenceDefaults.CONTENT_RIVER_BOOKMARKS_SORTING)
     public fun setRiverBookmarksSorting(sort: Int) {
         var edit = pref.edit()!!
         edit.putInt(Preferences.CONTENT_RIVER_BOOKMARKS_SORTING, sort)
         edit.commit()
+        Log.d(TAG, "Saving bookmark sorting value $sort")
+
     }
 }
 
 public class SetupPreference(public val pref: SharedPreferences){
+    class object {
+        public val TAG: String = javaClass<SetupPreference>().getSimpleName()
+    }
+
     public fun getDownloadDefaultRiversIfNecessary(): Boolean =
             pref.getBoolean(Preferences.SETUP_DOWNLOAD_DEFAULT_RIVERS, PreferenceDefaults.SETUP_DOWNLOAD_DEFAULT_RIVERS)
 
@@ -100,10 +111,15 @@ public class SetupPreference(public val pref: SharedPreferences){
         val edit = pref.edit()!!
         edit.putBoolean(Preferences.SETUP_DOWNLOAD_DEFAULT_RIVERS, yes)
         edit.commit()
+        Log.d(TAG, "Saving Download Default Rivers $yes")
     }
 }
 
 public class VisualPreference (public val pref: SharedPreferences){
+    class object {
+        public val TAG: String = javaClass<VisualPreference>().getSimpleName()
+    }
+
     public fun getListTextSize(): Int = pref.getInt(Preferences.VISUAL_LIST_TEXT_SIZE, PreferenceDefaults.VISUAL_LIST_TEXT_SIZE)
     public fun setListTextSize(size: Int) {
         if (size < 12 || size > 30) //http://developer.android.com/design/style/typography.html
@@ -112,6 +128,7 @@ public class VisualPreference (public val pref: SharedPreferences){
         var edit = pref.edit()!!
         edit.putInt(Preferences.VISUAL_LIST_TEXT_SIZE, size)
         edit.commit()
+        Log.d(TAG, "Saving list text size $size")
     }
 
     public fun getTheme(): Int {
@@ -136,5 +153,6 @@ public class VisualPreference (public val pref: SharedPreferences){
         var edit = pref.edit()!!
         edit.putInt(Preferences.VISUAL_THEME, newTheme)
         edit.commit()
+        Log.d(TAG, "Switch theme $newTheme")
     }
 }

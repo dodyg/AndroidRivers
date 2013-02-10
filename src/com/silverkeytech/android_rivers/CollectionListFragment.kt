@@ -114,8 +114,9 @@ public class CollectionListFragment: ListFragment() {
             txt.setText("")
         }
         else{
+            val textSize = parent!!.getVisualPref().getListTextSize()
             txt.setVisibility(View.VISIBLE)
-            txt.setText(msg)
+            handleFontResize(txt, msg, textSize.toFloat())
         }
     }
 
@@ -131,10 +132,12 @@ public class CollectionListFragment: ListFragment() {
         else
             showMessage("")
 
+        val textSize = parent!!.getVisualPref().getListTextSize()
+
         val adapter = object : ArrayAdapter<BookmarkCollection>(parent!!, android.R.layout.simple_list_item_1, android.R.id.text1, coll){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 val text = coll[position].toString()
-                return currentListItem(text, convertView, parent)
+                return currentListItem(text, convertView, parent, textSize.toFloat())
             }
         }
 
@@ -220,7 +223,7 @@ public class CollectionListFragment: ListFragment() {
 
     public data class ViewHolder (var name: TextView)
 
-    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?): View? {
+    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?, textSize: Float): View? {
         var holder: ViewHolder?
 
         var vw: View? = convertView
@@ -235,6 +238,8 @@ public class CollectionListFragment: ListFragment() {
             holder = vw!!.getTag() as ViewHolder
             holder!!.name.setText(text)
         }
+
+        handleFontResize(holder!!.name, text, textSize)
 
         return vw
     }

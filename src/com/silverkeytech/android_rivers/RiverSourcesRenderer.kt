@@ -36,10 +36,12 @@ public class RiverSourcesRenderer(val context: RiverSourcesActivity, val languag
 
     fun handleListing(sourcesTitles: List<String>, sourcesUris: List<String>) {
 
+        val textSize = context.getVisualPref().getListTextSize()
+
         val adapter = object : ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, android.R.id.text1, sourcesTitles){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 val text = sourcesTitles[position].toString()
-                return currentListItem(text, convertView, parent)
+                return currentListItem(text, convertView, parent, textSize.toFloat())
             }
         }
 
@@ -56,21 +58,20 @@ public class RiverSourcesRenderer(val context: RiverSourcesActivity, val languag
 
     public data class ViewHolder (var name: TextView)
 
-    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?): View? {
+    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?, textSize : Float): View? {
         var holder: ViewHolder?
 
         var vw: View? = convertView
 
         if (vw == null){
             vw = inflater().inflate(android.R.layout.simple_list_item_1, parent, false)
-
             holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
-            holder!!.name.setText(text)
             vw!!.setTag(holder)
         }else{
             holder = vw!!.getTag() as ViewHolder
-            holder!!.name.setText(text)
         }
+
+        handleFontResize(holder!!.name, text, textSize)
 
         return vw
     }

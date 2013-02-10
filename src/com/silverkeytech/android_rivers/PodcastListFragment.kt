@@ -89,15 +89,26 @@ public class PodcastListFragment(): ListFragment() {
         super<ListFragment>.onPause()
     }
 
+    fun showMessage(msg: String) {
+        val txt = getView()!!.findViewById(R.id.podcast_list_fragment_message_tv) as TextView
+        if (msg.isNullOrEmpty()){
+            txt.setVisibility(View.INVISIBLE)
+            txt.setText("")
+        }
+        else{
+            val textSize = parent!!.getVisualPref().getListTextSize()
+            txt.setVisibility(View.VISIBLE)
+            handleFontResize(txt, msg, textSize.toFloat())
+        }
+    }
 
     public fun displayPodcasts() {
         val podcast = getPodcastsFromDb(SortingOrder.DESC)
-        val msg = getView()!!.findViewById(R.id.podcast_list_fragment_message_tv) as TextView
 
         if (podcast.size == 0)
-            msg.setText("All the podcasts you have downloaded will be listed here.")
+            showMessage("All the podcasts you have downloaded will be listed here.")
         else
-            msg.setText("")
+            showMessage("")
 
         renderFileListing(podcast)
     }
@@ -107,11 +118,11 @@ public class PodcastListFragment(): ListFragment() {
 
     //show and prepare the interaction for each individual news item
     fun renderFileListing(podcasts: List<Podcast>) {
-        val textSize = parent!!.getVisualPref().getListTextSize()
-
         //now sort it so people always have the latest news first
         var list = getView()!!.findViewById(android.R.id.list) as ListView
         var inflater: LayoutInflater = parent!!.getLayoutInflater()!!
+
+        val textSize = parent!!.getVisualPref().getListTextSize()
 
         var adapter = object : ArrayAdapter<Podcast>(parent!!, android.R.layout.simple_list_item_1, android.R.id.text1, podcasts) {
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
@@ -125,18 +136,18 @@ public class PodcastListFragment(): ListFragment() {
                 if (currentView == null){
                     currentView = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
                     holder = ViewHolder(currentView!!.findViewById(android.R.id.text1) as TextView)
-                    holder!!.podcastName.setText(text)
                     currentView!!.setTag(holder)
                 }else{
                     holder = currentView?.getTag() as ViewHolder
-                    holder!!.podcastName.setText(text)
                 }
 
                 if (text.isNullOrEmpty()){
                     currentView?.setVisibility(View.GONE)
                 }   else{
                     currentView?.setVisibility(View.VISIBLE)
+                    handleFontResize(holder!!.podcastName, text, textSize.toFloat())
                 }
+
                 return currentView
             }
         }

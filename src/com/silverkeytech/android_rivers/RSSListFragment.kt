@@ -118,7 +118,7 @@ public class RssListFragment(): ListFragment() {
     }
 
     fun displayImportOpmlDialog() {
-        val dlg = createSingleInputDialog(parent!!, "Import subscription list", lastEnteredUrl, "Set url here", {
+        val dlg = createSingleInputDialog(parent!!, "Import subscription list", "", "Set url here", {
             dlg, url ->
             lastEnteredUrl = url
             if (url.isNullOrEmpty()) {
@@ -143,7 +143,7 @@ public class RssListFragment(): ListFragment() {
     }
 
     fun displayAddNewRssDialog() {
-        val dlg = createSingleInputDialog(parent!!, "Add new RSS", lastEnteredUrl, "Set url here", {
+        val dlg = createSingleInputDialog(parent!!, "Add new RSS", "", "Set url here", {
             dlg, url ->
             lastEnteredUrl = url
             Log.d(TAG, "Entered $url")
@@ -195,8 +195,9 @@ public class RssListFragment(): ListFragment() {
             txt.setText("")
         }
         else{
+            val textSize = parent!!.getVisualPref().getListTextSize()
             txt.setVisibility(View.VISIBLE)
-            txt.setText(msg)
+            handleFontResize(txt, msg, textSize.toFloat())
         }
     }
 
@@ -207,10 +208,12 @@ public class RssListFragment(): ListFragment() {
         else
             showMessage("")
 
+        val textSize = parent!!.getVisualPref().getListTextSize()
+
         val adapter = object : ArrayAdapter<Bookmark>(parent, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 val text = bookmarks[position].toString()
-                return currentListItem(text, convertView, parent)
+                return currentListItem(text, convertView, parent, textSize.toFloat())
             }
         }
 
@@ -257,7 +260,7 @@ public class RssListFragment(): ListFragment() {
                 try{
                     val res = removeItemByUrlFromBookmarkDb(currentBookmark.url)
                     if (res.isFalse())
-                        context.toastee("Error in removing this bookmark ${res.exception?.getMessage()}")
+                        context.toastee("We have problem in removing this bookmark")
                     else {
                         context.toastee("Bookmark removed")
                         displayRssBookmarks()
@@ -279,11 +282,11 @@ public class RssListFragment(): ListFragment() {
             var coll = getBookmarkCollectionFromDb(sortByTitleOrder = SortingOrder.ASC)
 
             if (coll.size == 0){
-                context.toastee("Please create a collection before assigning a bookmark to it")
+                context.toastee("Please create a collection before assigning a bookmark to it", Duration.LONG)
                 pp.dismiss()
             }
             else if (coll.size == 1 && alreadyBelongsToACollection){
-                context.toastee("This RSS already belongs to a collection and there is no other collection to reassign it to")
+                context.toastee("This RSS already belongs to a collection and there is no other collection to reassign it to", Duration.LONG)
                 pp.dismiss()
             }
             else {
@@ -362,21 +365,20 @@ public class RssListFragment(): ListFragment() {
 
     public data class ViewHolder (var name: TextView)
 
-    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?): View? {
+    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?, textSize: Float): View? {
         var holder: ViewHolder?
 
         var vw: View? = convertView
 
         if (vw == null){
             vw = inflater().inflate(android.R.layout.simple_list_item_1, parent, false)
-
             holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
-            holder!!.name.setText(text)
             vw!!.setTag(holder)
         }else{
             holder = vw!!.getTag() as ViewHolder
-            holder!!.name.setText(text)
         }
+
+        handleFontResize(holder!!.name, text, textSize)
 
         return vw
     }
