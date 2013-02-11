@@ -127,8 +127,6 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                 handleForeignTextFont(context, language, body, msg, textSize.toFloat())
                 handleTextColorBasedOnTheme(context, body)
 
-                var source = dlg.findViewById(R.id.feed_details_source_tv)!! as TextView
-
                 dialog.setView(dlg)
 
                 if (currentNews.hasLink()){

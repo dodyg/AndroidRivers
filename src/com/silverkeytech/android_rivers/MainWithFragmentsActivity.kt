@@ -204,14 +204,14 @@ public open class MainWithFragmentsActivity(): Activity() {
             }
             SWITCH_FORWARD -> {
                 changeModeForward()
-                displayModeContent(mode, false)
+                displayModeContent(mode)
                 setTitle()
                 this.supportInvalidateOptionsMenu()
                 return true
             }
             SWITCH_BACKWARD -> {
                 changeModeBackward()
-                displayModeContent(mode, false)
+                displayModeContent(mode)
                 setTitle()
                 this.supportInvalidateOptionsMenu()
                 return true
@@ -229,7 +229,7 @@ public open class MainWithFragmentsActivity(): Activity() {
         }
     }
 
-    fun displayModeContent(mode: MainActivityMode, downloadRiverBookmarksFromInternetIfNoneExisted: Boolean) {
+    fun displayModeContent(mode: MainActivityMode) {
         when(mode){
             MainActivityMode.RIVER -> {
                 showAndHide(showRiver = true)

@@ -89,7 +89,6 @@ public class ImportOpmlSubscriptionListService: IntentService("ImportOpmlSubscri
         notify()
 
         var progress: Int
-        var errorCount = 0
 
         fun traverseOutline(outline: Outline?, process: (Outline?) -> Unit) {
             if (outline != null){
@@ -131,7 +130,7 @@ public class ImportOpmlSubscriptionListService: IntentService("ImportOpmlSubscri
             updateText("OPML subscription list import is completed")
         }
         catch(e: HttpRequestException){
-            var ex = e.getCause()
+            Log.d(TAG, "Error in importing ${e.getCause()}")
             updateText("There is a problem in completing OPML subscription import")
         }
     }

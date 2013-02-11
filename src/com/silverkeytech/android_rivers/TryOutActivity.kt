@@ -423,8 +423,7 @@ public class TryOutActivity(): Activity()
                     req = HttpRequest.get(url)?.body()
                 }
                 catch(e: HttpRequestException){
-                    var ex = e.getCause()
-                    Log.d(TAG, "Error in downloading OPML $url")
+                    Log.d(TAG, "Error in downloading OPML $url ${e.getCause}")
                     toastee("Error in downloading OPML from $url")
                 }
 
