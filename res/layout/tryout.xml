@@ -8,6 +8,20 @@
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:text="Post RSS"
+            android:id="@+id/tryout_post_rss"/>
+
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Ping RSS Cloud"
+            android:id="@+id/tryout_ping_rss_cloud"/>
+
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:text="Get Airport Codes"
             android:id="@+id/tryout_get_airport_codes"/>
 
