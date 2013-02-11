@@ -24,6 +24,10 @@ import android.view.View
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 import org.holoeverywhere.app.Activity
+import com.slidingmenu.lib.SlidingMenu
+import org.holoeverywhere.addon.SlidingMenu.SlidingMenuA
+
+import android.support.v4.app._HoloActivity
 
 enum class MainActivityMode {
     RIVER
@@ -46,7 +50,6 @@ public open class MainWithFragmentsActivity(): Activity() {
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         currentTheme = this.getVisualPref().getTheme()
-
         isOnCreate = true
         setTheme(currentTheme!!)
 
@@ -61,7 +64,23 @@ public open class MainWithFragmentsActivity(): Activity() {
 
         showAndHide(showRiver = true)
         setTitle()
+
+//        //sliding menu setup
+//        val slidingMenuAddon = requireSlidingMenu()
+//        val slidingMenu = slidingMenuAddon.getSlidingMenu()!!
+//        slidingMenuAddon.setBehindContentView(makeMenuView(savedInstanceState))
+//        slidingMenuAddon.setSlidingActionBarEnabled(true)
+//        slidingMenu.setEnabled(true)
+//        slidingMenu.setBehindWidth(200)
+//
+//        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN)
     }
+/*
+    protected override fun onCreateConfig(savedInstanceState: Bundle?): _HoloActivity.Holo? {
+        val config = super.onCreateConfig(savedInstanceState);
+        config!!.requireSlidingMenu = true;
+        return config;
+    }*/
 
     protected override fun onResume() {
         super.onResume()
@@ -210,7 +229,6 @@ public open class MainWithFragmentsActivity(): Activity() {
         }
     }
 
-
     fun displayModeContent(mode: MainActivityMode, downloadRiverBookmarksFromInternetIfNoneExisted: Boolean) {
         when(mode){
             MainActivityMode.RIVER -> {
@@ -256,6 +274,13 @@ public open class MainWithFragmentsActivity(): Activity() {
     val SWITCH_FORWARD: Int = 1
     val EXPLORE: Int = 2
 
+    fun requireSlidingMenu(): SlidingMenuA {
+        return requireAddon(javaClass<org.holoeverywhere.addon.SlidingMenu>())!!.activity(this)!!
+    }
+
+    fun makeMenuView(savedInstanceState : Bundle?) : View  {
+        return getLayoutInflater()!!.inflate(R.layout.main_slide_menu)!!
+    }
 }
 
 data class Location(val x: Int, val y: Int)

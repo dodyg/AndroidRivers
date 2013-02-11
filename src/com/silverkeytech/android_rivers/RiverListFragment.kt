@@ -49,6 +49,7 @@ import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.ListFragment
 
+
 public class RiverListFragment(): ListFragment() {
     class object {
         public val TAG: String = javaClass<RiverListFragment>().getSimpleName()

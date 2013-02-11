@@ -24,7 +24,7 @@
         <resOverlayFolders>
           <path>/res-overlay</path>
         </resOverlayFolders>
-        <includeSystemProguardFile>false</includeSystemProguardFile>
+        <includeSystemProguardFile>true</includeSystemProguardFile>
         <includeAssetsFromLibraries>false</includeAssetsFromLibraries>
         <additionalNativeLibs />
       </configuration>
@@ -44,7 +44,6 @@
     <orderEntry type="library" name="android-support-v13" level="project" />
     <orderEntry type="library" name="ormlite-android-4.42" level="project" />
     <orderEntry type="library" name="ormlite-core-4.42" level="project" />
-    <orderEntry type="library" name="date4j" level="project" />
     <orderEntry type="module" module-name="ActionBarSherlock" />
     <orderEntry type="module" module-name="library" />
     <orderEntry type="module" module-name="preferences" />

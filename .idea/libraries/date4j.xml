@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="date4j">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/date4j.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
