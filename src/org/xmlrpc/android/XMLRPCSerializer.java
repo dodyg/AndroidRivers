@@ -45,6 +45,9 @@ class XMLRPCSerializer {
 
     @SuppressWarnings("unchecked")
     static void serialize(XmlSerializer serializer, Object object) throws IOException {
+        if (object == null)
+            return;
+
         // check for scalar types:
         if (object instanceof Integer || object instanceof Short || object instanceof Byte) {
             serializer.startTag(null, TYPE_I4).text(object.toString()).endTag(null, TYPE_I4);

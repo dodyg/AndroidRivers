@@ -50,6 +50,11 @@ import java.util.ArrayList
 import java.util.Random
 import org.holoeverywhere.app.Activity
 import org.xmlrpc.android.XMLRPCClient
+import com.silverkeytech.android_rivers.meta_weblog.Blog
+import com.silverkeytech.android_rivers.meta_weblog.simplePost
+import com.silverkeytech.android_rivers.meta_weblog.linkPost
+import com.silverkeytech.android_rivers.meta_weblog.statusPost
+import com.silverkeytech.android_rivers.meta_weblog.imageLinkPost
 
 public class TryOutActivity(): Activity()
 {
@@ -85,14 +90,13 @@ public class TryOutActivity(): Activity()
         val btn = findView<Button>(R.id.tryout_post_rss)
 
         btn.setOnClickListener {
-            val rpc = XMLRPCClient("http://rpc.rsscloud.org:5337/RPC2", "", "")
 
-            val xmlPayload ="""<?xml version="1.0" ?><rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel xmlns:microblog="http://microblog.reallysimple.org/"><title>dody gunawinata</title><link>http://hobieu.apphb.com/f/dody-gunawinata</link><description /><lastBuildDate>Mon, 24 Dec 2012 18:30:43 Z</lastBuildDate><generator>HobiHobi</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><ttl>10</ttl><item><guid isPermaLink="false">http://hobieu.apphb.com/f/dody-gunawinata/634919706431841952</guid><description>Minesweep AI</description><pubDate>Mon, 24 Dec 2012 18:30:41 Z</pubDate><link>http://goo.gl/KHC2t</link><microblog:linkFull>http://www.reddit.com/r/programming/comments/15c4e1/how_to_write_your_own_minesweeper_ai_very/</microblog:linkFull></item><item><guid isPermaLink="false">http://hobieu.apphb.com/f/dody-gunawinata/634861776911899891</guid><description>I love these quotes by Dalai Lama</description><pubDate>Thu, 18 Oct 2012 17:21:30 Z</pubDate><link>http://goo.gl/e04KI</link><microblog:linkFull>http://www.huffingtonpost.com/2012/10/18/dalai-lama-brown-university-profanity_n_1979958.html#slide=more236354</microblog:linkFull></item><item><guid isPermaLink="false">http://hobieu.apphb.com/f/dody-gunawinata/634848693260185096</guid><description>I love Lous C.K</description><pubDate>Wed, 03 Oct 2012 13:55:25 Z</pubDate><link>http://goo.gl/QUk22</link><microblog:linkFull>http://www.youtube.com/watch?v=WrN9Ncl8kFk&amp;feature=related</microblog:linkFull></item><item><guid isPermaLink="false">http://hobieu.apphb.com/f/dody-gunawinata/634848138538088978</guid><description>I spend way too much time on programming nowadays but I can't help it.</description><pubDate>Tue, 02 Oct 2012 22:30:53 Z</pubDate></item><item><guid isPermaLink="false">http://hobieu.apphb.com/f/dody-gunawinata/634846977106356439</guid><description>The guardian likes Life of Pi. I couldn't finish the book.</description><pubDate>Mon, 01 Oct 2012 14:15:09 Z</pubDate><link>http://goo.gl/Pkwmv</link><microblog:linkFull>http://www.guardian.co.uk/film/2012/sep/30/life-of-pi-review-film</microblog:linkFull></item><item><guid isPermaLink="false">http://hobieu.apphb.com/f/dody-gunawinata/634846818776498335</guid><description>Please do not invite me to weddings anymore. Most of the time I cannot get appointment to the European or US embassy to get visa. It's quite depressing :(</description><pubDate>Mon, 01 Oct 2012 09:51:17 Z</pubDate></item></channel></rss>
-            """
-
-            val res = rpc.call("rssCloud.saveRss", "username", "password", xmlPayload )
-            Log.d(TAG, "Return content $res")
-
+            //val post = imageLinkPost("Sunrise", "http://fitdeck.com/Portals/24254/images/Sunrise.jpg")
+            //val post = statusPost("Wow, the pope resigned. The last time was hundreds of years ago")
+            val post = linkPost("Android Rivers 1.08 is launched", "http://goo.gl/kShgp")
+            //val post = simplePost("Greetings from Cairo Taher ${DateHelper.Now()} ", "There is no fighting today")
+            val blg = Blog(null, "username", "passwords")
+            blg.newPost(post)
         }
     }
 
@@ -423,7 +427,7 @@ public class TryOutActivity(): Activity()
                     req = HttpRequest.get(url)?.body()
                 }
                 catch(e: HttpRequestException){
-                    Log.d(TAG, "Error in downloading OPML $url ${e.getCause}")
+                    Log.d(TAG, "Error in downloading OPML $url ${e.getCause()}")
                     toastee("Error in downloading OPML from $url")
                 }
 
