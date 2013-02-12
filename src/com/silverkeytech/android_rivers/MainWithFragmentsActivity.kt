@@ -21,6 +21,7 @@ package com.silverkeytech.android_rivers
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import com.actionbarsherlock.app.ActionBar
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 import org.holoeverywhere.app.Activity
@@ -39,6 +40,7 @@ enum class MainActivityMode {
 public open class MainWithFragmentsActivity(): Activity() {
     class object {
         public val TAG: String = javaClass<MainWithFragmentsActivity>().getSimpleName()
+        public val REPLACEMENT_HOME_ID : Int = 16908332
     }
 
     val DEFAULT_SUBSCRIPTION_LIST = "http://hobieu.apphb.com/api/1/default/riverssubscription"
@@ -47,6 +49,14 @@ public open class MainWithFragmentsActivity(): Activity() {
 
     var currentTheme: Int? = null
     var isOnCreate: Boolean = true
+
+    fun getSlidingIconBasedOnTheme(theme : Int) : Int{
+        return when (theme){
+            R.style.Holo_Theme -> R.drawable.abs__ic_menu_moreoverflow_normal_holo_dark
+            R.style.Holo_Theme_Light -> R.drawable.abs__ic_menu_moreoverflow_holo_light
+            else -> R.drawable.abs__ic_menu_moreoverflow_normal_holo_dark
+        }
+    }
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         currentTheme = this.getVisualPref().getTheme()
@@ -58,29 +68,28 @@ public open class MainWithFragmentsActivity(): Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_with_fragments)
 
-        var actionBar = getSupportActionBar()!!
-        actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
-        actionBar.setDisplayShowTitleEnabled(true)
+        var actionBar: ActionBar = getSupportActionBar()!!
+        actionBar.setIcon(getSlidingIconBasedOnTheme(getSlidingIconBasedOnTheme(currentTheme!!)))
 
         showAndHide(showRiver = true)
         setTitle()
 
-//        //sliding menu setup
-//        val slidingMenuAddon = requireSlidingMenu()
-//        val slidingMenu = slidingMenuAddon.getSlidingMenu()!!
-//        slidingMenuAddon.setBehindContentView(makeMenuView(savedInstanceState))
-//        slidingMenuAddon.setSlidingActionBarEnabled(true)
-//        slidingMenu.setEnabled(true)
-//        slidingMenu.setBehindWidth(200)
-//
-//        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN)
+        //sliding menu setup
+        val slidingMenuAddon = requireSlidingMenu()
+        val slidingMenu = slidingMenuAddon.getSlidingMenu()!!
+        slidingMenuAddon.setBehindContentView(makeMenuView(savedInstanceState))
+        slidingMenuAddon.setSlidingActionBarEnabled(true)
+        slidingMenu.setEnabled(true)
+        slidingMenu.setBehindWidth(computeSideMenuWidth())
+        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN)
+        slidingMenu.setSlidingEnabled(true)
     }
-/*
+
     protected override fun onCreateConfig(savedInstanceState: Bundle?): _HoloActivity.Holo? {
         val config = super.onCreateConfig(savedInstanceState);
         config!!.requireSlidingMenu = true;
         return config;
-    }*/
+    }
 
     protected override fun onResume() {
         super.onResume()
@@ -151,7 +160,7 @@ public open class MainWithFragmentsActivity(): Activity() {
         menu?.add(0, SWITCH_FORWARD, 0, ">")
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
-        menu?.add(0, EXPLORE, 0, "MORE NEWS")
+        menu?.add(0, EXPLORE, 0, "+")
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
         return super.onCreateOptionsMenu(menu)
@@ -198,6 +207,10 @@ public open class MainWithFragmentsActivity(): Activity() {
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()) {
+            REPLACEMENT_HOME_ID ->{
+                requireSlidingMenu().toggle()
+                return true
+            }
             EXPLORE -> {
                 downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_MORE_NEWS_SOURCE, "Get more news")
                 return true
@@ -280,6 +293,10 @@ public open class MainWithFragmentsActivity(): Activity() {
 
     fun makeMenuView(savedInstanceState : Bundle?) : View  {
         return getLayoutInflater()!!.inflate(R.layout.main_slide_menu)!!
+    }
+
+    fun computeSideMenuWidth() : Int{
+        return getResources()!!.getFraction(R.dimen.sliding_menu_width, getResources()!!.getDisplayMetrics()!!.widthPixels, 1).toInt()
     }
 }
 

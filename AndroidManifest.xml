@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.silverkeytech.android_rivers"
-          android:versionCode="3"
-          android:versionName="1.08">
+          android:versionCode="4"
+          android:versionName="1.09">
     <uses-sdk android:minSdkVersion="8"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -21,39 +21,18 @@
         </activity>
 
         <activity android:name="com.silverkeytech.android_rivers.RiverActivity" android:configChanges="keyboardHidden|orientation">
-            <intent-filter>
-            </intent-filter>
         </activity>
-
         <activity android:name="com.silverkeytech.android_rivers.FeedActivity" android:configChanges="keyboardHidden|orientation">
-            <intent-filter>
-            </intent-filter>
         </activity>
-
         <activity android:name="com.silverkeytech.android_rivers.TryOutActivity" android:configChanges="keyboardHidden|orientation" android:launchMode="singleTop">
-            <intent-filter>
-            </intent-filter>
         </activity>
-
         <activity android:name="com.silverkeytech.android_rivers.OutlinerActivity" android:configChanges="keyboardHidden|orientation">
-            <intent-filter>
-            </intent-filter>
         </activity>
-
         <activity android:name="com.silverkeytech.android_rivers.BookmarkCollectionActivity" android:configChanges="keyboardHidden|orientation">
-            <intent-filter>
-            </intent-filter>
         </activity>
-
         <activity android:name="com.silverkeytech.android_rivers.RiverSourcesActivity" android:configChanges="keyboardHidden|orientation">
-            <intent-filter>
-            </intent-filter>
         </activity>
-
         <activity android:name="com.silverkeytech.android_rivers.WebViewActivity" android:configChanges="keyboardHidden|orientation">
-            <intent-filter>
-            </intent-filter>
         </activity>
-
     </application>
 </manifest>
