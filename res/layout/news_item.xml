@@ -51,6 +51,7 @@
             android:id="@+id/news_item_indicator_tv"
             android:layout_alignParentRight="true"
             android:gravity="fill_vertical"
+            android:layout_weight="1"
             android:layout_centerVertical="true"/>
 
 </RelativeLayout>

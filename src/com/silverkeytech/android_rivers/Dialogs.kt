@@ -23,6 +23,14 @@ import android.view.View
 import android.widget.EditText
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.AlertDialog
+import org.holoeverywhere.app.Dialog
+import org.holoeverywhere.widget.Button
+import android.view.Window
+import android.widget.LinearLayout
+import android.view.ViewGroup
+import android.widget.LinearLayout.LayoutParams
+import org.holoeverywhere.widget.TextView
+import android.util.TypedValue
 
 public fun dlgClickListener(action: (dlg: DialogInterface?, idx: Int) -> Unit): DialogInterface.OnClickListener {
     return object: DialogInterface.OnClickListener {
@@ -30,6 +38,41 @@ public fun dlgClickListener(action: (dlg: DialogInterface?, idx: Int) -> Unit): 
             action(p0, p1)
         }
     }
+}
+
+public data class DialogBtn(public val text : String, public val action : (Dialog) -> Unit)
+
+public fun createFlexibleContentDialog(context: Activity, content : View, buttons : Array<DialogBtn>) :  Dialog{
+
+    val dlg: View = context.getLayoutInflater()!!.inflate(R.layout.dialog_flex_content, null)!!
+    val contentParam = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0)
+
+    val dialog = Dialog(context)
+    dialog.setContentView(dlg, contentParam)
+
+    val contentLayout = dlg.findViewById(R.id.dialog4_content) as LinearLayout
+    contentLayout.addView(content, contentParam)
+    contentLayout.setOnClickListener {
+        dialog.dismiss()
+    }
+
+    val btnParam = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0)
+    btnParam.setMargins(0,0,0,0)
+
+    val buttonLayout = dlg.findViewById(R.id.dialog_flex_content_buttons) as LinearLayout
+    for(val e:DialogBtn in buttons.iterator()){
+        val b = Button(context)
+        b.setText(e.text)
+        b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12.0)
+        b.setOnClickListener {
+            e.action(dialog)
+        }
+
+        buttonLayout.addView(b, btnParam)
+    }
+
+    dialog.setCanceledOnTouchOutside(true)
+    return dialog
 }
 
 //Create a popup dialog with one text for url submission. Then provide the given url via a callback called 'action'

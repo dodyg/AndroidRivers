@@ -137,6 +137,7 @@ public class VisualPreference (public val pref: SharedPreferences){
         when (currentTheme){
             R.style.Theme_Sherlock_Light_DarkActionBar -> return R.style.Holo_Theme_Light
             R.style.Theme_Sherlock -> return R.style.Holo_Theme
+            R.style.Theme_Sherlock_Light -> return R.style.Holo_Theme_Light
             else -> return currentTheme
         }
     }

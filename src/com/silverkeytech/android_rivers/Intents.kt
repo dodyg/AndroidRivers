@@ -85,6 +85,10 @@ fun startOutlinerActivity(context: Context, outlines: ArrayList<OutlineContent>,
     context.startActivity(intent)
 }
 
+/*   http://stackoverflow.com/questions/11752081/is-there-any-way-to-query-an-specific-type-of-intent-filter-capable-apps
+           http://stackoverflow.com/questions/3935009/how-to-open-gmail-compose-when-a-button-is-clicked-in-android-app
+*/
+
 public fun shareActionIntent(context: Context, title: String, url: String): Intent {
     var i = Intent(Intent.ACTION_SEND)
     i.setType("text/plain")

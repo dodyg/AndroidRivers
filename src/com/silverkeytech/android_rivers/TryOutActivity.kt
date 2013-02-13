@@ -55,6 +55,7 @@ import com.silverkeytech.android_rivers.meta_weblog.simplePost
 import com.silverkeytech.android_rivers.meta_weblog.linkPost
 import com.silverkeytech.android_rivers.meta_weblog.statusPost
 import com.silverkeytech.android_rivers.meta_weblog.imageLinkPost
+import org.holoeverywhere.widget.TextView
 
 public class TryOutActivity(): Activity()
 {
@@ -67,6 +68,7 @@ public class TryOutActivity(): Activity()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tryout)
+        handleDialog4()
         handlePost()
         handlePing()
         handleGetAirportCodes()
@@ -86,6 +88,37 @@ public class TryOutActivity(): Activity()
         handleRiverJsWithOpmlSource()
     }
 
+    fun handleDialog4(){
+        val btn = findView<Button>(R.id.tryout_dialog_4)
+
+        val msg = """* Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */"""
+
+        btn.setOnClickListener {
+
+            val cnt = this.getLayoutInflater()!!.inflate(R.layout.news_details, null)!!
+            //take care of color
+            cnt.setDrawingCacheBackgroundColor(this.getStandardDialogBackgroundColor())
+
+            val main = cnt.findViewById(R.id.news_details_text_tv) as TextView
+            main.setText(msg)
+            val src = cnt.findViewById(R.id.news_details_source_tv) as TextView
+            src.setText("CNN>COM")
+
+            val dlg = createFlexibleContentDialog(context = this, content = cnt, buttons = array(
+                    DialogBtn("Go", { (d) ->  d.dismiss()}),
+                    DialogBtn("Share", { (d) ->  d.dismiss()}),
+                    DialogBtn("Podcast", { (d) ->  d.dismiss()}),
+                    DialogBtn("Blog", { (d) ->  d.dismiss()}))
+            )
+
+            dlg.show()
+        }
+    }
     fun handlePost(){
         val btn = findView<Button>(R.id.tryout_post_rss)
 

@@ -39,6 +39,7 @@ import com.silverkeytech.android_rivers.outliner.traverse
 import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.AlertDialog
+import java.util.ArrayList
 
 //Manage the rendering of each news item in the river list
 public class RiverContentRenderer(val context: Activity, val language: String){
@@ -118,8 +119,6 @@ public class RiverContentRenderer(val context: Activity, val language: String){
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val currentNews = sortedNewsItems.get(p2);
 
-                var dialog = AlertDialog.Builder(context)
-
                 var dlg: View = inflater.inflate(R.layout.news_details, null)!!
                 var msg: String
 
@@ -143,43 +142,35 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 handleForeignTextFont(context, language, source, scrubHtml(currentNews.source.title), 11.toFloat())
                 handleTextColorBasedOnTheme(context, body)
 
-                dialog.setView(dlg)
-
                 val currentLink = currentNews.item.link
                 val currentNewsLinkAvailable: Boolean = !currentLink.isNullOrEmpty() && currentLink!!.trim().indexOf("http") == 0
 
+                val buttons = ArrayList<DialogBtn>()
                 //check for go link
                 if (currentNewsLinkAvailable){
-                    dialog.setPositiveButton(context.getString(R.string.go), object : DialogInterface.OnClickListener{
-                        public override fun onClick(p0: DialogInterface?, p1: Int) {
+                    buttons.add(DialogBtn(context.getString(R.string.go)!!, { dlg ->
                             startOpenBrowserActivity(context, currentNews.item.link!!)
-                            p0?.dismiss()
-                        }
-                    })
+                            dlg.dismiss()
+                        }))
 
-                    dialog.setNeutralButton(context.getString(R.string.share), object : DialogInterface.OnClickListener{
-                        public override fun onClick(p0: DialogInterface?, p1: Int) {
+                    buttons.add(DialogBtn(context.getString(R.string.share)!!, { dlg ->
                             var intent = shareActionIntent(context, currentNews.item.title!!, currentNews.item.link!!)
                             context.startActivity(Intent.createChooser(intent, "Share link"))
-                        }
-                    })
+                        }))
                 }
 
                 //check for image enclosure
                 if (currentNews.item.containsEnclosure()!!){
                     var enclosure = currentNews.item.enclosure!!.get(0)
                     if (isSupportedImageMime(enclosure.`type`!!)){
-                        dialog.setNegativeButton("Image", object : DialogInterface.OnClickListener{
-                            public override fun onClick(p0: DialogInterface?, p1: Int) {
+                        buttons.add(DialogBtn("Image",  { dlg ->
                                 Log.d(TAG, "I am downloading a ${enclosure.url} with type ${enclosure.`type`}")
                                 DownloadImage(context).execute(enclosure.url)
-                            }
-                        })
+                        }))
                     }
                     //assume podcast
                     else {
-                        dialog.setNegativeButton(context.getString(R.string.podcast), object : DialogInterface.OnClickListener{
-                            public override fun onClick(p0: DialogInterface?, p1: Int) {
+                        buttons.add(DialogBtn(context.getString(R.string.podcast)!!,  { dlg ->
                                 var messenger = Messenger(object : Handler(){
                                     public override fun handleMessage(msg: Message?) {
                                         if (msg != null){
@@ -200,16 +191,12 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                                 startDownloadService(context, currentNews.item.title!!, enclosure.url!!,
                                         currentNews.source.title!!, currentNews.source.uri!!, currentNews.item.body!!,
                                         messenger)
-
-                            }
-                        })
+                        }))
                     }
                 }
                 else if (currentNews.item.containsSource()!!){
-                    dialog.setNeutralButton("Outlines", object : DialogInterface.OnClickListener{
-                        public override fun onClick(p0: DialogInterface?, p1: Int) {
+                    buttons.add(DialogBtn("Outlines", { dlg ->
                             try{
-
                                 val feedOpml = currentNews.item.source!!.get(0).opml!!
 
                                 var opml = transformFeedOpmlToOpml(feedOpml)
@@ -230,17 +217,10 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                             catch(e: Exception){
                                 context.toastee("Error in processing opml source ${e.getMessage()}")
                             }
-
-                        }
-                    })
+                    }))
                 }
 
-                var createdDialog = dialog.create()!!
-                createdDialog.setCanceledOnTouchOutside(true)
-                dlg.setOnClickListener {
-                    createdDialog.dismiss()
-                }
-
+                var createdDialog = createFlexibleContentDialog(context,  dlg, buttons.toArray(array<DialogBtn>()))
                 createdDialog.show()
             }
         })

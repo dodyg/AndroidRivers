@@ -8,6 +8,12 @@
     <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:text="Show Dialog 4"
+            android:id="@+id/tryout_dialog_4"/>
+
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:text="Post RSS"
             android:id="@+id/tryout_post_rss"/>
 

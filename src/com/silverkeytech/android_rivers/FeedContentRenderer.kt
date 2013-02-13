@@ -37,6 +37,7 @@ import android.widget.TextView
 import com.silverkeytech.android_rivers.syndications.SyndicationFeedItem
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.AlertDialog
+import java.util.ArrayList
 
 //Manage the rendering of each news item in the river list
 public class FeedContentRenderer(val context: Activity, val language: String){
@@ -106,7 +107,6 @@ public class FeedContentRenderer(val context: Activity, val language: String){
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val currentNews = feedItems.get(p2);
-                var dialog = AlertDialog.Builder(context)
 
                 var dlg: View = inflater.inflate(R.layout.feed_details, null)!!
                 var msg: String
@@ -127,27 +127,22 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                 handleForeignTextFont(context, language, body, msg, textSize.toFloat())
                 handleTextColorBasedOnTheme(context, body)
 
-                dialog.setView(dlg)
+                val buttons = ArrayList<DialogBtn>()
 
                 if (currentNews.hasLink()){
-                    dialog.setPositiveButton(context.getString(R.string.go), object : DialogInterface.OnClickListener{
-                        public override fun onClick(p0: DialogInterface?, p1: Int) {
+                    buttons.add(DialogBtn(context.getString(R.string.go)!!, { dlg ->
                             startOpenBrowserActivity(context, currentNews.link!!)
-                            p0?.dismiss()
-                        }
-                    })
+                            dlg.dismiss()
+                    }))
 
-                    dialog.setNeutralButton(context.getString(R.string.share), object : DialogInterface.OnClickListener{
-                        public override fun onClick(p0: DialogInterface?, p1: Int) {
+                    buttons.add(DialogBtn(context.getString(R.string.share)!!, { dlg ->
                             var intent = shareActionIntent(context, currentNews.title!!, currentNews.link!!)
                             context.startActivity(Intent.createChooser(intent, "Share link"))
-                        }
-                    })
+                    }))
                 }
 
                 if (currentNews.isPodcast()){
-                    dialog.setNegativeButton(context.getString(R.string.podcast), object : DialogInterface.OnClickListener{
-                        public override fun onClick(p0: DialogInterface?, p1: Int) {
+                    buttons.add(DialogBtn(context.getString(R.string.podcast)!!,  { dlg ->
                             var messenger = Messenger(object : Handler(){
                                 public override fun handleMessage(msg: Message?) {
                                     if (msg != null){
@@ -168,16 +163,10 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                             startDownloadService(context, currentNews.title!!, currentNews.enclosure!!.url,
                                     feedTitle, feedUrl, currentNews.description!!,
                                     messenger)
-                        }
-                    })
+                    }))
                 }
 
-                var createdDialog = dialog.create()!!
-                createdDialog.setCanceledOnTouchOutside(true)
-                dlg.setOnClickListener {
-                    createdDialog.dismiss()
-                }
-
+                var createdDialog = createFlexibleContentDialog(context, dlg, buttons.toArray(array<DialogBtn>()))
                 createdDialog.show()
             }
         })

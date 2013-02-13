@@ -115,6 +115,12 @@ public class RiverListFragment(): ListFragment() {
             val nextSort = nextSortCycle()
             Log.d(TAG, "The next sort cycle from current ${parent!!.getContentPref().getRiverBookmarksSorting()} is $nextSort")
             setSortButtonText(sort, nextSort)
+
+            val refresh = menu.findItem(R.id.river_list_fragment_menu_refresh)!!
+            val list = getView()!!.findViewById(android.R.id.list) as ListView
+
+            if (list.getCount() != 0)
+                refresh.setVisible(false)
         }
         super<ListFragment>.onPrepareOptionsMenu(menu)
     }
