@@ -31,6 +31,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout.LayoutParams
 import org.holoeverywhere.widget.TextView
 import android.util.TypedValue
+import kotlin.dom.addClass
+import java.util.ArrayList
 
 public fun dlgClickListener(action: (dlg: DialogInterface?, idx: Int) -> Unit): DialogInterface.OnClickListener {
     return object: DialogInterface.OnClickListener {
@@ -105,9 +107,59 @@ public fun createSingleInputDialog(context: Activity, title: String, defaultInpu
         dlg?.dismiss()
     })
 
+
     val createdDialog = dialog.create()!!
     return createdDialog
 }
+
+public fun createFlexibleInputDialog(context: Activity, title: String, inputs : Array<DialogInput>, action: (DialogInterface?, Array<DialogInput>) -> Unit)  : AlertDialog{
+    val dlg: View = context.getLayoutInflater()!!.inflate(R.layout.dialog_single_input, null)!!
+
+    val dialog = AlertDialog.Builder(context)
+    dialog.setView(dlg)
+    dialog.setTitle(title)
+
+    val container = dlg.findViewById(R.id.dialog_flex_input_container) as LinearLayout
+    val editParam = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0)
+
+    val edits = ArrayList<EditText>()
+
+    for(val i in inputs){
+        val t = EditText(context)
+        t.setHint(i.hint)
+        if (!i.defaultInput.isNullOrEmpty())
+            t.setText(i.defaultInput)
+
+        edits.add(t)
+        container.addView(t, editParam)
+    }
+
+
+    dialog.setPositiveButton(context.getString(R.string.ok), dlgClickListener {
+        dlg, idx ->
+
+            //retrieve values
+            var i = 0
+            for (val inp in inputs){
+                val t = edits.get(i)
+                inp.value = t.getText().toString()
+                i++
+            }
+
+            action(dlg, inputs)
+    })
+
+    dialog.setNegativeButton(context.getString(R.string.cancel), dlgClickListener {
+        dlg, idx ->
+        dlg?.dismiss()
+    })
+
+    return dialog.create()!!
+}
+
+public class DialogInput(val hint : String, val defaultInput : String?, var value : String?){
+}
+
 
 //Create a simple confirmation dialog for dangerous operation such as removal/delete operation. It handles both positive and negative choice.
 //The dialog box is automatically closed in either situation

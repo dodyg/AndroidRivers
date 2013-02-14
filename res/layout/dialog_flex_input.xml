@@ -4,13 +4,8 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:id="@+id/main_slide_menu_layout"
+              android:id="@+id/dialog_flex_input_container"
         >
 
-    <ListView  android:layout_width="fill_parent"
-               android:layout_height="wrap_content"
-               android:id="@+id/main_slide_menu_navigation"
-            >
-    </ListView>
 
 </LinearLayout>

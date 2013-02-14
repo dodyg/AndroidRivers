@@ -29,6 +29,7 @@ import com.slidingmenu.lib.SlidingMenu
 import org.holoeverywhere.addon.SlidingMenu.SlidingMenuA
 
 import android.support.v4.app._HoloActivity
+import org.holoeverywhere.ArrayAdapter
 
 enum class MainActivityMode {
     RIVER
@@ -36,6 +37,7 @@ enum class MainActivityMode {
     COLLECTION
     PODCASTS
 }
+
 
 public open class MainWithFragmentsActivity(): Activity() {
     class object {
@@ -69,7 +71,8 @@ public open class MainWithFragmentsActivity(): Activity() {
         setContentView(R.layout.main_with_fragments)
 
         var actionBar: ActionBar = getSupportActionBar()!!
-        actionBar.setIcon(getSlidingIconBasedOnTheme(getSlidingIconBasedOnTheme(currentTheme!!)))
+        //actionBar.setIcon(getSlidingIconBasedOnTheme(getSlidingIconBasedOnTheme(currentTheme!!)))
+        actionBar.setDisplayShowHomeEnabled(false)
 
         showAndHide(showRiver = true)
         setTitle()
@@ -77,12 +80,22 @@ public open class MainWithFragmentsActivity(): Activity() {
         //sliding menu setup
         val slidingMenuAddon = requireSlidingMenu()
         val slidingMenu = slidingMenuAddon.getSlidingMenu()!!
-        slidingMenuAddon.setBehindContentView(makeMenuView(savedInstanceState))
+        val slidingMenuView = makeMenuView(savedInstanceState)
+        slidingMenuAddon.setBehindContentView(slidingMenuView)
+        fillSlidingMenuNavigation(getMainNavigationItems(), slidingMenuView,  { item -> handleSideNavigationItemClick(item)})
         slidingMenuAddon.setSlidingActionBarEnabled(true)
         slidingMenu.setEnabled(true)
         slidingMenu.setBehindWidth(computeSideMenuWidth())
         slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN)
         slidingMenu.setSlidingEnabled(true)
+    }
+
+    fun handleSideNavigationItemClick(item : NavItem){
+        when (item.id){
+            SLIDE_MENU_TRY_OUT ->
+                startTryoutActivity(this)
+            else -> { }
+        }
     }
 
     protected override fun onCreateConfig(savedInstanceState: Bundle?): _HoloActivity.Holo? {
@@ -122,7 +135,6 @@ public open class MainWithFragmentsActivity(): Activity() {
 
     public override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         if (menu != null){
-            menu.findItem(R.id.main_menu_tryout)
             menu.findItem(R.id.main_menu_updates).andHide()
 
             val backward = menu.findItem(SWITCH_BACKWARD)
@@ -154,6 +166,9 @@ public open class MainWithFragmentsActivity(): Activity() {
         inflater.inflate(R.menu.main_fragments_menu, menu)
 
         //fixed top menu
+        menu?.add(0, REPLACEMENT_HOME_ID, 0, ":")
+        ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+
         menu?.add(0, SWITCH_BACKWARD, 0, "<")
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
@@ -231,10 +246,6 @@ public open class MainWithFragmentsActivity(): Activity() {
             }
             R.id.main_menu_help ->{
                 downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
-                return true
-            }
-            R.id.main_menu_tryout ->{
-                startTryoutActivity(this)
                 return true
             }
             else ->
