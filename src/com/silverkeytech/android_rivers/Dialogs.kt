@@ -33,6 +33,23 @@ import org.holoeverywhere.widget.TextView
 import android.util.TypedValue
 import kotlin.dom.addClass
 import java.util.ArrayList
+import android.text.TextWatcher
+import android.text.Editable
+
+
+public fun textValidator(action : (String?) -> Unit) : TextWatcher{
+    return object :  TextWatcher {
+        public override fun afterTextChanged(p0: Editable?) {
+            action(p0.toString())
+        }
+
+        public override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        public override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+    }
+}
 
 public fun dlgClickListener(action: (dlg: DialogInterface?, idx: Int) -> Unit): DialogInterface.OnClickListener {
     return object: DialogInterface.OnClickListener {
@@ -113,7 +130,7 @@ public fun createSingleInputDialog(context: Activity, title: String, defaultInpu
 }
 
 public fun createFlexibleInputDialog(context: Activity, title: String, inputs : Array<DialogInput>, action: (DialogInterface?, Array<DialogInput>) -> Unit)  : AlertDialog{
-    val dlg: View = context.getLayoutInflater()!!.inflate(R.layout.dialog_single_input, null)!!
+    val dlg: View = context.getLayoutInflater()!!.inflate(R.layout.dialog_flex_input, null)!!
 
     val dialog = AlertDialog.Builder(context)
     dialog.setView(dlg)
@@ -126,9 +143,13 @@ public fun createFlexibleInputDialog(context: Activity, title: String, inputs : 
 
     for(val i in inputs){
         val t = EditText(context)
+        t.setInputType(i.inputType)
         t.setHint(i.hint)
         if (!i.defaultInput.isNullOrEmpty())
             t.setText(i.defaultInput)
+
+        if (i.validator != null)
+            t.addTextChangedListener(i.validator)
 
         edits.add(t)
         container.addView(t, editParam)
@@ -157,7 +178,8 @@ public fun createFlexibleInputDialog(context: Activity, title: String, inputs : 
     return dialog.create()!!
 }
 
-public class DialogInput(val hint : String, val defaultInput : String?, var value : String?){
+public data class DialogInput(val inputType : Int, val hint : String, val defaultInput : String?, val validator : TextWatcher?){
+    public var value : String? = null
 }
 
 

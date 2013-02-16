@@ -11,18 +11,24 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
 import java.util.ArrayList
+import android.util.TypedValue
 
 data class NavItem (val id : Int, val text : String, val icon : Int)
 
 public data class ViewHolder (var name: TextView)
 
+public val SLIDE_MENU_READ : Int = 0
+public val SLIDE_MENU_WRITE : Int = 1
+public val SLIDE_MENU_DONATE : Int = 2
+public val SLIDE_MENU_PRAISE : Int = 3
 public val SLIDE_MENU_TRY_OUT : Int = 4
+
 fun getMainNavigationItems() : ArrayList<NavItem> {
     val navs = arrayListOf(
-            NavItem(id = 0, text = "Home", icon = 0),
-            NavItem(id = 1, text = "Write", icon = 0),
-            NavItem(id = 2, text = "Donate", icon = 0),
-            NavItem(id = 3, text = "Praise", icon = 0),
+            NavItem(id = SLIDE_MENU_READ, text = "Read", icon = 0),
+            NavItem(id = SLIDE_MENU_WRITE, text = "Write", icon = 0),
+            NavItem(id = SLIDE_MENU_DONATE, text = "Donate", icon = 0),
+            NavItem(id = SLIDE_MENU_PRAISE, text = "Praise", icon = 0),
             NavItem(id = SLIDE_MENU_TRY_OUT, text = "Try Out", icon = 0)
     )
     return navs
@@ -35,7 +41,7 @@ fun fillSlidingMenuNavigation(navs : List<NavItem>, view : View, onClick : (NavI
     val adapter = object : ArrayAdapter<NavItem>(view.getContext()!!, R.layout.slide_menu_item, navs){
         public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
             val text = navs[position].text
-            return currentListItem(inflater, text, convertView, parent, 14.0)
+            return currentListItem(inflater, text, convertView, parent, 18.0)
         }
     }
 
@@ -63,6 +69,7 @@ private fun currentListItem(inflater : LayoutInflater, text: String, convertView
     }
 
     holder!!.name.setText(text)
+    holder!!.name.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize )
 
     return vw
 }

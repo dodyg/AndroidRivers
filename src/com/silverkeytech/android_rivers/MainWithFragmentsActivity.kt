@@ -28,6 +28,8 @@ import org.holoeverywhere.app.Activity
 import com.slidingmenu.lib.SlidingMenu
 import org.holoeverywhere.addon.SlidingMenu.SlidingMenuA
 
+import com.silverkeytech.android_rivers.meta_weblog.showBlogConfigurationDialog
+
 import android.support.v4.app._HoloActivity
 import org.holoeverywhere.ArrayAdapter
 
@@ -94,6 +96,14 @@ public open class MainWithFragmentsActivity(): Activity() {
         when (item.id){
             SLIDE_MENU_TRY_OUT ->
                 startTryoutActivity(this)
+            SLIDE_MENU_WRITE ->{
+                showBlogConfigurationDialog(this){
+                    res ->
+                        if (res.get(0).value.isNullOrEmpty()){
+                            toastee("Please enter server")
+                        }
+                }
+            }
             else -> { }
         }
     }
