@@ -10,14 +10,16 @@ import org.holoeverywhere.app.Activity
 import com.silverkeytech.android_rivers.MULTI_LINE_INPUT
 import com.silverkeytech.android_rivers.PASSWORD_INPUT
 import com.silverkeytech.android_rivers.NORMAL_INPUT
+import com.silverkeytech.android_rivers.PRIVATE_BLOG_PASSWORD
+import com.silverkeytech.android_rivers.PRIVATE_BLOG_USERNAME
 
 public fun showPostBlogDialog(context: Activity, onOK : (res: Array<DialogInput>) -> Unit){
     val inputs = array(DialogInput(MULTI_LINE_INPUT, "Post", "", null))
 
     val dlg = createFlexibleInputDialog(context, "Write", inputs) {
         d, res ->
-        onOK(res)
-        d?.dismiss()
+            onOK(res)
+            d?.dismiss()
     }
     dlg.show()
 }
@@ -29,13 +31,13 @@ public fun showBlogConfigurationDialog(context: Activity, onOK: (res: Array<Dial
             context.toastee("Server is required", Duration.LONG)
         }
     }),
-            DialogInput(NORMAL_INPUT, "Username", "username", textValidator() {
+            DialogInput(NORMAL_INPUT, "Username", PRIVATE_BLOG_USERNAME, textValidator() {
                 str ->
                 if (str.isNullOrEmpty()){
                     context.toastee("Username is required", Duration.LONG)
                 }
             }),
-            DialogInput(PASSWORD_INPUT, "Password", "password", textValidator() {
+            DialogInput(PASSWORD_INPUT, "Password", PRIVATE_BLOG_PASSWORD , textValidator() {
                 str ->
                 if (str.isNullOrEmpty()){
                     context.toastee("Password is required", Duration.LONG)
