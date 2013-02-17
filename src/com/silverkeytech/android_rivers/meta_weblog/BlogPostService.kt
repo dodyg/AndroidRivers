@@ -24,6 +24,7 @@ import com.silverkeytech.android_rivers.Params
 import com.silverkeytech.android_rivers.with
 import com.silverkeytech.android_rivers.R
 import java.util.HashMap
+import com.silverkeytech.android_rivers.isNullOrEmpty
 
 public class BlogPostService(): IntentService("DownloadService"){
     class object{
@@ -69,10 +70,23 @@ public class BlogPostService(): IntentService("DownloadService"){
         val password = config!!.get(Params.BLOG_PASSWORD)!!
 
         val postContent = post!!.get(Params.POST_CONTENT)!!
+        val postLink = post!!.get(Params.POST_LINK)
+
 
         val blg = Blog(null, server, username, password)
-        val pst = statusPost(postContent)
-        blg.newPost(pst)
+
+        if (postLink.isNullOrEmpty()){
+            val content = postContent
+
+            val pst = statusPost(content)
+            blg.newPost(pst)
+
+        }
+        else {
+            val pst = linkPost(postContent, postLink!!)
+            blg.newPost(pst)
+        }
+
 
         //val notification = prepareNotification("Posting blog")
 

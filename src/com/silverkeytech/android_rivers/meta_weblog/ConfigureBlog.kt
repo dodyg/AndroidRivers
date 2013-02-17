@@ -24,6 +24,18 @@ public fun showPostBlogDialog(context: Activity, onOK : (res: Array<DialogInput>
     dlg.show()
 }
 
+public fun showPostBlogDialogWithContent(context: Activity, content : String, onOK : (res: Array<DialogInput>) -> Unit){
+    val inputs = array(DialogInput(MULTI_LINE_INPUT, "Post", content, null))
+
+    val dlg = createFlexibleInputDialog(context, "Write", inputs) {
+        d, res ->
+        onOK(res)
+        d?.dismiss()
+    }
+    dlg.show()
+}
+
+
 public fun showBlogConfigurationDialog(context: Activity, onOK: (res: Array<DialogInput>) -> Unit) {
     val inputs = array(DialogInput(NORMAL_INPUT, "Server", "androidrivers.wordpress.com", textValidator() {
         str ->

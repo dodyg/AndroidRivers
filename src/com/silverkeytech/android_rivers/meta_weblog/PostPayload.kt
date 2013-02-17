@@ -64,7 +64,7 @@ public fun simplePost(title : String, description : String) : PostPayload{
 
 public fun linkPost(description : String, link : String) : PostPayload{
     val payload = PostPayload()
-    payload.description = "$description <a href=\"$link\">link</a>"
+    payload.description = "<a href=\"$link\">$description</a>"
     payload.wp_post_format = PostFormat.LINK
     return payload
 }
