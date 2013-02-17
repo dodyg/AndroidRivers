@@ -22,8 +22,8 @@ public fun startRiverSourcesActivity(context: Context, riverTitle: String, river
 
 public fun startBlogPostingService(context: Context, config : HashMap<String, String>, post : HashMap<String, String>){
     val i = Intent(context, javaClass<BlogPostService>())
-    i.putExtra("config", config)
-    i.putExtra("post", post)
+    i.putExtra(Params.BLOG_CONFIGURATION, config)
+    i.putExtra(Params.BLOG_PAYLOAD, post)
     context.startService(i)
 }
 

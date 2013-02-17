@@ -33,10 +33,10 @@ public class BlogPostService(): IntentService("DownloadService"){
     var config : HashMap<String,String>? = null
     var post : HashMap<String, String>? = null
 
-    fun prepareNotification(title: String, filePath: String): Notification {
+    fun prepareNotification(title: String): Notification {
         val notificationIntent = Intent(Intent.ACTION_MAIN)
         notificationIntent.setClass(getApplicationContext(), javaClass<MainWithFragmentsActivity>())
-        notificationIntent.putExtra(Params.DOWNLOAD_LOCATION_PATH, filePath)
+        //notificationIntent.putExtra(Params.DOWNLOAD_LOCATION_PATH, filePath)
 
         val contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
@@ -62,11 +62,19 @@ public class BlogPostService(): IntentService("DownloadService"){
         config = p0!!.getSerializableExtra(Params.BLOG_CONFIGURATION)!! as HashMap<String, String>
         post = p0!!.getSerializableExtra(Params.BLOG_PAYLOAD)!!  as HashMap<String, String>
 
-        Log.d(TAG, " Server is ${config?.get("server")}")
-//        targetTitle = p0?.getStringExtra(Params.DOWNLOAD_TITLE)
-//        targetUrl = p0?.getStringExtra(Params.DOWNLOAD_URL)
-//        targetSourceTitle = p0?.getStringExtra(Params.DOWNLOAD_SOURCE_TITLE)
-//        targetSourceUrl = p0?.getStringExtra(Params.DOWNLOAD_SOURCE_URL)
+        Log.d(TAG, " Server is ${config?.get(Params.BLOG_SERVER)}")
+
+        val server = config!!.get(Params.BLOG_SERVER)!!
+        val username = config!!.get(Params.BLOG_USERNAME)!!
+        val password = config!!.get(Params.BLOG_PASSWORD)!!
+
+        val postContent = post!!.get(Params.POST_CONTENT)!!
+
+        val blg = Blog(null, server, username, password)
+        val pst = statusPost(postContent)
+        blg.newPost(pst)
+
+        //val notification = prepareNotification("Posting blog")
 
     }
 
