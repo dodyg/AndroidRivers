@@ -29,13 +29,13 @@ public fun showBlogConfigurationDialog(context: Activity, onOK: (res: Array<Dial
             context.toastee("Server is required", Duration.LONG)
         }
     }),
-            DialogInput(NORMAL_INPUT, "Username", "dody@nomadlife.org", textValidator() {
+            DialogInput(NORMAL_INPUT, "Username", "username", textValidator() {
                 str ->
                 if (str.isNullOrEmpty()){
                     context.toastee("Username is required", Duration.LONG)
                 }
             }),
-            DialogInput(PASSWORD_INPUT, "Password", "loveira", textValidator() {
+            DialogInput(PASSWORD_INPUT, "Password", "password", textValidator() {
                 str ->
                 if (str.isNullOrEmpty()){
                     context.toastee("Password is required", Duration.LONG)

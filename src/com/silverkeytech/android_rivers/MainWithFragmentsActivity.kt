@@ -113,9 +113,9 @@ public open class MainWithFragmentsActivity(): Activity() {
                                 //blg.newPost(pst)
 
                                 startBlogPostingService(this@MainWithFragmentsActivity,
-                                        hashMapOf("server" to "https://androidrivers.wordpress.com/xmlrpc.php",
-                                        "username" to username, "password" to password),
-                                        hashMapOf("body" to post))
+                                        hashMapOf(Params.BLOG_SERVER to "https://androidrivers.wordpress.com/xmlrpc.php",
+                                        Params.BLOG_USERNAME to username, Params.BLOG_PASSWORD to password),
+                                        hashMapOf(Params.POST_CONTENT to post))
                         }
                 }
             }

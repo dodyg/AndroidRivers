@@ -59,8 +59,8 @@ public class BlogPostService(): IntentService("DownloadService"){
     }
 
     protected override fun onHandleIntent(p0: Intent?) {
-        config = p0!!.getSerializableExtra("config")!! as HashMap<String, String>
-        post = p0!!.getSerializableExtra("post")!!  as HashMap<String, String>
+        config = p0!!.getSerializableExtra(Params.BLOG_CONFIGURATION)!! as HashMap<String, String>
+        post = p0!!.getSerializableExtra(Params.BLOG_PAYLOAD)!!  as HashMap<String, String>
 
         Log.d(TAG, " Server is ${config?.get("server")}")
 //        targetTitle = p0?.getStringExtra(Params.DOWNLOAD_TITLE)
