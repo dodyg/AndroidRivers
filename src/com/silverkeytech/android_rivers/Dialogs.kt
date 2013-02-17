@@ -35,7 +35,12 @@ import kotlin.dom.addClass
 import java.util.ArrayList
 import android.text.TextWatcher
 import android.text.Editable
+import android.text.InputType
+import android.view.Gravity
 
+public val PASSWORD_INPUT : Int =   InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+public val NORMAL_INPUT : Int = InputType.TYPE_TEXT_VARIATION_NORMAL
+public val MULTI_LINE_INPUT : Int = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE
 
 public fun textValidator(action : (String?) -> Unit) : TextWatcher{
     return object :  TextWatcher {
@@ -150,6 +155,13 @@ public fun createFlexibleInputDialog(context: Activity, title: String, inputs : 
 
         if (i.validator != null)
             t.addTextChangedListener(i.validator)
+
+        if (i.inputType == MULTI_LINE_INPUT){
+            t.setMinLines(8)
+            t.setMaxLines(10)
+            t.setSingleLine(false)
+            t.setGravity(Gravity.TOP or Gravity.LEFT)
+        }
 
         edits.add(t)
         container.addView(t, editParam)

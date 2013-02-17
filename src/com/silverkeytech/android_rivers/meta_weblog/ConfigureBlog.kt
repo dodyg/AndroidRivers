@@ -7,10 +7,20 @@ import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.textValidator
 import com.silverkeytech.android_rivers.toastee
 import org.holoeverywhere.app.Activity
-import android.text.InputType
+import com.silverkeytech.android_rivers.MULTI_LINE_INPUT
+import com.silverkeytech.android_rivers.PASSWORD_INPUT
+import com.silverkeytech.android_rivers.NORMAL_INPUT
 
-val PASSWORD_INPUT : Int =   InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-val NORMAL_INPUT : Int = InputType.TYPE_TEXT_VARIATION_NORMAL
+public fun showPostBlogDialog(context: Activity, onOK : (res: Array<DialogInput>) -> Unit){
+    val inputs = array(DialogInput(MULTI_LINE_INPUT, "Post", "", null))
+
+    val dlg = createFlexibleInputDialog(context, "Write", inputs) {
+        d, res ->
+        onOK(res)
+        d?.dismiss()
+    }
+    dlg.show()
+}
 
 public fun showBlogConfigurationDialog(context: Activity, onOK: (res: Array<DialogInput>) -> Unit) {
     val inputs = array(DialogInput(NORMAL_INPUT, "Server", "androidrivers.wordpress.com", textValidator() {

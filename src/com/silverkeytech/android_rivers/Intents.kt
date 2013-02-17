@@ -6,6 +6,8 @@ import android.net.Uri
 import android.os.Messenger
 import com.silverkeytech.android_rivers.outliner.OutlineContent
 import java.util.ArrayList
+import com.silverkeytech.android_rivers.meta_weblog.BlogPostService
+import java.util.HashMap
 
 public fun startRiverSourcesActivity(context: Context, riverTitle: String, riverUri: String, sourcesTitles: ArrayList<String>, sourcesUris: ArrayList<String>) {
     val i = Intent(context, javaClass<RiverSourcesActivity>())
@@ -18,8 +20,15 @@ public fun startRiverSourcesActivity(context: Context, riverTitle: String, river
     context.startActivity(i)
 }
 
+public fun startBlogPostingService(context: Context, config : HashMap<String, String>, post : HashMap<String, String>){
+    val i = Intent(context, javaClass<BlogPostService>())
+    i.putExtra("config", config)
+    i.putExtra("post", post)
+    context.startService(i)
+}
+
 public fun startDownloadService(context: Context, title: String, url: String, sourceTitle: String, sourceUrl: String, description: String, messenger: Messenger) {
-    var i = Intent(context, javaClass<DownloadService>())
+    val i = Intent(context, javaClass<DownloadService>())
     i.putExtra(Params.DOWNLOAD_TITLE, title)
     i.putExtra(Params.DOWNLOAD_URL, url)
     i.putExtra(Params.DOWNLOAD_SOURCE_TITLE, sourceTitle)

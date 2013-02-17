@@ -29,9 +29,12 @@ import com.slidingmenu.lib.SlidingMenu
 import org.holoeverywhere.addon.SlidingMenu.SlidingMenuA
 
 import com.silverkeytech.android_rivers.meta_weblog.showBlogConfigurationDialog
+import com.silverkeytech.android_rivers.meta_weblog.showPostBlogDialog
 
 import android.support.v4.app._HoloActivity
 import org.holoeverywhere.ArrayAdapter
+import com.silverkeytech.android_rivers.meta_weblog.Blog
+import com.silverkeytech.android_rivers.meta_weblog.statusPost
 
 enum class MainActivityMode {
     RIVER
@@ -99,14 +102,28 @@ public open class MainWithFragmentsActivity(): Activity() {
             SLIDE_MENU_WRITE ->{
                 showBlogConfigurationDialog(this){
                     res ->
-                        if (res.get(0).value.isNullOrEmpty()){
-                            toastee("Please enter server")
+                        showPostBlogDialog(this@MainWithFragmentsActivity){
+                            res2 ->
+                                val username = res.get(1).value!!
+                                val password = res.get(2).value!!
+                                val post = res2.get(0).value!!
+                                Log.d(TAG, "Username $username - Password $password - Post content $post")
+                                val blg = Blog(null, "https://androidrivers.wordpress.com/xmlrpc.php", username, password)
+                                //val pst = statusPost(post)
+                                //blg.newPost(pst)
+
+                                startBlogPostingService(this@MainWithFragmentsActivity,
+                                        hashMapOf("server" to "https://androidrivers.wordpress.com/xmlrpc.php",
+                                        "username" to username, "password" to password),
+                                        hashMapOf("body" to post))
                         }
                 }
             }
             else -> { }
         }
     }
+
+
 
     protected override fun onCreateConfig(savedInstanceState: Bundle?): _HoloActivity.Holo? {
         val config = super.onCreateConfig(savedInstanceState);

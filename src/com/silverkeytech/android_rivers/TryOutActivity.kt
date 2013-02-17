@@ -128,7 +128,7 @@ public class TryOutActivity(): Activity()
             //val post = statusPost("Wow, the pope resigned. The last time was hundreds of years ago")
             val post = linkPost("Android Rivers 1.08 is launched", "http://goo.gl/kShgp")
             //val post = simplePost("Greetings from Cairo Taher ${DateHelper.Now()} ", "There is no fighting today")
-            val blg = Blog(null, "username", "passwords")
+            val blg = Blog(null, "https://androidrivers.wordpress.com/xmlrpc.php", "username", "passwords")
             blg.newPost(post)
         }
     }
