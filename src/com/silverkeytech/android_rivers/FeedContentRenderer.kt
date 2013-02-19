@@ -86,12 +86,14 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                     holder = ViewHolder(currentView!!.findViewById(R.id.news_item_text_tv) as TextView,
                             currentView!!.findViewById(R.id.news_item_indicator_tv) as TextView)
 
+                    handleForeignTextStyle(context, language, holder!!.news, textSize.toFloat())
+
                     currentView!!.setTag(holder)
                 }else{
                     holder = currentView?.getTag() as ViewHolder
                 }
 
-                handleForeignTextFont(context, language, holder!!.news, news, textSize.toFloat())
+                handleForeignText(language, holder!!.news, news)
 
                 showIndicator()
 

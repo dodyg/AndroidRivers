@@ -60,7 +60,6 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
         return this
     }
 
-
     //Download river data in a thread
     protected override fun doInBackground(vararg p0: String?): Result<River>? {
         url = p0.get(0)!!
@@ -86,7 +85,6 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
             }else{
                 if (rawCallback != null)
                     rawCallback!!(result, language)
-
             }
         }
     }

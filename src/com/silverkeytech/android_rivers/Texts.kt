@@ -31,7 +31,8 @@ import java.net.URL
 import java.util.UUID
 
 fun scrubJsonP(text: String): String {
-    val rep = text.replace("onGetRiverStream (", "").trimTrailing(")")
+    val rep = text.replaceAll("onGetRiverStream(\\s*)\\(", "").trimTrailing(")")
+    Log.d("scrubJsonP", rep)
     return rep
 }
 
@@ -106,6 +107,35 @@ fun handleForeignTextFont(context: Activity, language: String, text: TextView, c
         }
     }
 }
+
+var arabicFont : Typeface? = null
+fun handleForeignTextStyle(context: Activity, language: String, text: TextView, textSize: Float) {
+    when(language.toLowerCase()){
+        "ar", "ar-eg" -> {
+            if (arabicFont == null)
+                arabicFont = Typeface.createFromAsset(context.getAssets(), "DroidKufi-Regular.ttf")
+            text.setTypeface(arabicFont)
+            text.setGravity(Gravity.RIGHT)
+            text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize - 4.toFloat())
+        }
+        else -> {
+            text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+        }
+    }
+}
+
+fun handleForeignText(language: String, text: TextView, content : String){
+
+    when(language.toLowerCase()){
+        "ar", "ar-eg" -> {
+            text.setText(ArabicReshape.reshape(content))
+        }
+        else -> {
+            text.setText(content)
+        }
+    }
+}
+
 
 fun handleFontResize(text: TextView, content : String, textSize : Float){
     text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)

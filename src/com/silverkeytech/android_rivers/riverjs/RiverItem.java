@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class RiverItem {
+    public Integer index;
     public String id;
     public String title;
     public String body;

@@ -35,6 +35,7 @@ import android.support.v4.app._HoloActivity
 import org.holoeverywhere.ArrayAdapter
 import com.silverkeytech.android_rivers.meta_weblog.Blog
 import com.silverkeytech.android_rivers.meta_weblog.statusPost
+import com.silverkeytech.android_rivers.creators.createGoogleNewsCreatorDialog
 
 enum class MainActivityMode {
     RIVER
@@ -42,7 +43,6 @@ enum class MainActivityMode {
     COLLECTION
     PODCASTS
 }
-
 
 public open class MainWithFragmentsActivity(): Activity() {
     class object {
@@ -75,7 +75,7 @@ public open class MainWithFragmentsActivity(): Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_with_fragments)
 
-        var actionBar: ActionBar = getSupportActionBar()!!
+        val actionBar: ActionBar = getSupportActionBar()!!
         //actionBar.setIcon(getSlidingIconBasedOnTheme(getSlidingIconBasedOnTheme(currentTheme!!)))
         actionBar.setDisplayShowHomeEnabled(false)
 
@@ -119,11 +119,17 @@ public open class MainWithFragmentsActivity(): Activity() {
                         }
                 }
             }
+            SLIDE_MENU_GOOGLE_NEWS ->{
+                val gDialog = createGoogleNewsCreatorDialog(this) { url, title, lang ->
+                    Log.d(TAG, "$url")
+                    startFeedActivity(this, url, title,lang)
+                }
+
+                gDialog.show()
+            }
             else -> { }
         }
     }
-
-
 
     protected override fun onCreateConfig(savedInstanceState: Bundle?): _HoloActivity.Holo? {
         val config = super.onCreateConfig(savedInstanceState);

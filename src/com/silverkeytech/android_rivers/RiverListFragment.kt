@@ -209,7 +209,7 @@ public class RiverListFragment(): ListFragment() {
     }
 
     private fun displayAddNewRiverDialog() {
-        val dlg = createSingleInputDialog(parent!!, "Add new river", "", "Set url here", {
+        val dlg = createSingleInputDialog(parent!!, "Add new river", "http://news.southernbread.org/river.js", "Set url here", {
             dlg, url ->
             lastEnteredUrl = url
             Log.d(TAG, "Entered $url")

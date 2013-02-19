@@ -26,5 +26,6 @@ public class RiverSite {
     public String feedTitle;
     public String feedDescription;
     public String whenLastUpdate;
+    public Integer itemIndex;
     public ArrayList<RiverItem> item;
 }

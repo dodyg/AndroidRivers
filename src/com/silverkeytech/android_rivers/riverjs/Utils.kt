@@ -26,6 +26,7 @@ import com.silverkeytech.android_rivers.httpGet
 import com.silverkeytech.android_rivers.scrubJsonP
 import com.silverkeytech.android_rivers.syndications.SyndicationFeed
 import java.util.Vector
+import android.util.Log
 
 fun accumulateList(list: Vector<RiverItemMeta>, feed: SyndicationFeed) {
     for(val f in feed.items.iterator()){
@@ -94,6 +95,7 @@ fun downloadSingleRiver(url: String): Result<River> {
     }
     catch(e: Exception)
     {
+        Log.d("downloadSingleRiver", "${e.getMessage()} ${e.getCause()?.getMessage()}")
         return Result.wrong(e)
     }
 }

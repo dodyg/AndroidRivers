@@ -98,14 +98,17 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                             currentView!!.findViewById(R.id.news_item_source_tv) as TextView,
                             currentView!!.findViewById(R.id.news_item_indicator_tv) as TextView)
 
+                    handleForeignTextStyle(context, language, holder!!.news, textSize.toFloat())
+                    handleForeignTextStyle(context, language, holder!!.source, 11.0)
+
                     currentView!!.setTag(holder)
                 }else{
                     holder = currentView?.getTag() as ViewHolder
                     Log.d(TAG, "List View reused")
                 }
 
-                handleForeignTextFont(context, language, holder!!.news, news!!, textSize.toFloat())
-                handleForeignTextFont(context, language, holder!!.source, currentNewsItem.source.title!!, 11.0)
+                handleForeignText(language, holder!!.news, news!!)
+                handleForeignText(language, holder!!.source, currentNewsItem.source.title!!)
 
                 showIndicator()
 
