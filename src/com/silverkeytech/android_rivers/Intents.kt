@@ -9,6 +9,12 @@ import java.util.ArrayList
 import com.silverkeytech.android_rivers.meta_weblog.BlogPostService
 import java.util.HashMap
 import com.silverkeytech.android_rivers.creators.GoogleNewsSearchActivity
+import com.silverkeytech.android_rivers.creators.KayakFlightDealsActivity
+
+public fun startKayakFlightDealsActivity(context: Context){
+    val i = Intent(context, javaClass<KayakFlightDealsActivity>())
+    context.startActivity(i)
+}
 
 public fun startGoogleNewsSearchActivity(context: Context){
     val i = Intent(context, javaClass<GoogleNewsSearchActivity>())

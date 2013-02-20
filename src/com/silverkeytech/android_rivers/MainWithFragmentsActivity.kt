@@ -120,6 +120,9 @@ public open class MainWithFragmentsActivity(): Activity() {
             SLIDE_MENU_GOOGLE_NEWS ->{
                 startGoogleNewsSearchActivity(this@MainWithFragmentsActivity)
             }
+            SLIDE_MENU_KAYAK_DEALS ->{
+                startKayakFlightDealsActivity(this@MainWithFragmentsActivity)
+            }
             else -> { }
         }
     }
