@@ -49,11 +49,11 @@ public class FeedContentRenderer(val context: Activity, val language: String){
     public data class ViewHolder (var news: TextView, val indicator: TextView)
 
     //show and prepare the interaction for each individual news item
-    fun handleNewsListing(feedTitle: String, feedUrl: String, feedItems: List<SyndicationFeedItem>) {
+    fun handleNewsListing(listViewId : Int, feedTitle: String, feedUrl: String, feedItems: List<SyndicationFeedItem>) {
         val textSize = context.getVisualPref().getListTextSize()
 
         //now sort it so people always have the latest news first
-        var list = context.findView<ListView>(android.R.id.list)
+        var list = context.findView<ListView>(listViewId)
 
         var inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 

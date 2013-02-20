@@ -21,6 +21,10 @@
             </intent-filter>
         </activity>
 
+
+        <activity android:name="com.silverkeytech.android_rivers.creators.GoogleNewsSearchActivity" android:configChanges="keyboardHidden|orientation">
+        </activity>
+
         <activity android:name="com.silverkeytech.android_rivers.RiverActivity" android:configChanges="keyboardHidden|orientation">
         </activity>
         <activity android:name="com.silverkeytech.android_rivers.FeedActivity" android:configChanges="keyboardHidden|orientation">

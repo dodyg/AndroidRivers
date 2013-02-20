@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <Spinner
+            android:id="@+id/google_news_search_region"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    <EditText
+            android:id="@+id/google_news_search_term"
+            android:layout_width="match_parent"
+            android:inputType="text"
+            android:layout_height="wrap_content">
+        <requestFocus />
+    </EditText>
+
+    <LinearLayout android:orientation="horizontal"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+
+    <Button android:id="@+id/google_news_search_go_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Search" />
+
+
+    <Button android:id="@+id/google_news_search_bookmark_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Bookmark" />
+    </LinearLayout>
+    <ListView android:id="@+id/google_news_search_results_lv"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" />
+</LinearLayout>

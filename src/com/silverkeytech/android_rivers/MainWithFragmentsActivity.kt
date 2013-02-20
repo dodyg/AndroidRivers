@@ -34,8 +34,6 @@ import com.silverkeytech.android_rivers.meta_weblog.showPostBlogDialog
 import android.support.v4.app._HoloActivity
 import org.holoeverywhere.ArrayAdapter
 import com.silverkeytech.android_rivers.meta_weblog.Blog
-import com.silverkeytech.android_rivers.meta_weblog.statusPost
-import com.silverkeytech.android_rivers.creators.createGoogleNewsCreatorDialog
 
 enum class MainActivityMode {
     RIVER
@@ -120,12 +118,7 @@ public open class MainWithFragmentsActivity(): Activity() {
                 }
             }
             SLIDE_MENU_GOOGLE_NEWS ->{
-                val gDialog = createGoogleNewsCreatorDialog(this) { url, title, lang ->
-                    Log.d(TAG, "$url")
-                    startFeedActivity(this, url, title,lang)
-                }
-
-                gDialog.show()
+                startGoogleNewsSearchActivity(this@MainWithFragmentsActivity)
             }
             else -> { }
         }

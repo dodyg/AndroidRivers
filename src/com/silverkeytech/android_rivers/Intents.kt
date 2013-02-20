@@ -8,6 +8,12 @@ import com.silverkeytech.android_rivers.outliner.OutlineContent
 import java.util.ArrayList
 import com.silverkeytech.android_rivers.meta_weblog.BlogPostService
 import java.util.HashMap
+import com.silverkeytech.android_rivers.creators.GoogleNewsSearchActivity
+
+public fun startGoogleNewsSearchActivity(context: Context){
+    val i = Intent(context, javaClass<GoogleNewsSearchActivity>())
+    context.startActivity(i)
+}
 
 public fun startRiverSourcesActivity(context: Context, riverTitle: String, riverUri: String, sourcesTitles: ArrayList<String>, sourcesUris: ArrayList<String>) {
     val i = Intent(context, javaClass<RiverSourcesActivity>())

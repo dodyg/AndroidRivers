@@ -79,7 +79,7 @@ public class FeedActivity(): ListActivity(), WithVisualModificationPanel
                     feedLanguage = feed.language
                 }
                 FeedContentRenderer(this, feedLanguage)
-                        .handleNewsListing(feedName, feedUrl, feed.items)
+                        .handleNewsListing(android.R.id.list, feedName, feedUrl, feed.items)
             }else{
                 toastee("Error ${res.exception?.getMessage()}", Duration.LONG)
             }

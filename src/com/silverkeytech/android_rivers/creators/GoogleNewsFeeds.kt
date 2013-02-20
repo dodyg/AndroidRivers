@@ -32,55 +32,6 @@ import android.util.Log
 
 data class EditionAndLanguage(val edition : String, val lang : String)
 
-//Create a popup dialog with one text for url submission. Then provide the given url via a callback called 'action'
-public fun createGoogleNewsCreatorDialog(context: Activity, onOK : (url : String, title : String, lang : String) -> Unit): AlertDialog {
-    val dlg: View = context.getLayoutInflater()!!.inflate(R.layout.dialog_gnews_creator, null)!!
-
-    //take care of color
-    val dialog = AlertDialog.Builder(context)
-    dialog.setView(dlg)
-    dialog.setTitle("Google News Search")
-
-    val searchTerm = dlg.findViewById(R.id.dialog_gnews_creator_search)!! as EditText
-    searchTerm.setHint("Optional search term")
-    searchTerm.setFocusableInTouchMode(true)
-    searchTerm.requestFocus()
-
-    val regionList = dlg.findViewById(R.id.dialog_gnews_creator_region)!! as Spinner
-
-    val maps = getEditionsAndLanguages()
-    val listName = maps.iterator().map { x -> x.key }.toArrayList<String>().sort()
-
-
-    val  adapter = ArrayAdapter<String>(context, org.holoeverywhere.R.layout.simple_spinner_item, listName);
-    adapter.setDropDownViewResource(org.holoeverywhere.R.layout.simple_spinner_dropdown_item);
-    regionList.setAdapter(adapter);
-
-    dialog.setPositiveButton(context.getString(R.string.ok), dlgClickListener {
-        dlg, idx ->
-            val position = regionList.getSelectedItemPosition()
-            val key = listName.get(position)
-            val info = maps[key]!!
-            var rss = "https://news.google.com/news/feeds?cf=all&ned=${info.edition}&hl=${info.lang}&output=rss"
-            val search = searchTerm.getText()?.toString()
-            if (!search.isNullOrEmpty()){
-                rss +="&q=${java.net.URLEncoder.encode(search!!, "UTF-8")}"
-            }
-
-            val title = if (search.isNullOrEmpty()) key else search!!
-
-            Log.d("googleNewsFeedDialog","Rss - $rss")
-        onOK(rss, title, info.lang)
-    })
-
-    dialog.setNegativeButton(context.getString(R.string.cancel), dlgClickListener {
-        dlg, idx ->
-            dlg?.dismiss()
-    })
-
-    val createdDialog = dialog.create()!!
-    return createdDialog
-}
 
 fun getEditionsAndLanguages() : HashMap<String, EditionAndLanguage>{
     return hashMapOf(
