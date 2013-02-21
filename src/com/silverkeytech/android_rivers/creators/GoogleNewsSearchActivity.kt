@@ -47,15 +47,13 @@ public class GoogleNewsSearchActivity () : Activity(){
 
         val searchTerm = findViewById(R.id.google_news_search_term)!! as EditText
         searchTerm.setHint("Optional search term")
-        searchTerm.setFocusableInTouchMode(true)
-        searchTerm.requestFocus()
 
         val regionList = findViewById(R.id.google_news_search_region)!! as Spinner
 
         val maps = getEditionsAndLanguages()
         val listName = maps.iterator().map { x -> x.key }.toArrayList<String>().sort()
 
-        val  adapter = ArrayAdapter<String>(this, org.holoeverywhere.R.layout.simple_spinner_item, listName);
+        val adapter = ArrayAdapter<String>(this, org.holoeverywhere.R.layout.simple_spinner_item, listName);
         adapter.setDropDownViewResource(org.holoeverywhere.R.layout.simple_spinner_dropdown_item);
         regionList.setAdapter(adapter);
 

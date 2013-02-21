@@ -50,6 +50,7 @@ public class KayakFlightDealsActivity () : Activity(){
         val names = airportCodes.iterator().map { x -> x.name }.toArrayList()
 
         val completion = AirportAutoComplete.getUI(this, R.id.kayak_flight_deals_area, names)!!
+        completion.setHint("Enter city name")
 
         val bookmark = findViewById(R.id.kayak_flight_deals_bookmark_btn)!! as Button
         bookmark.setEnabled(false)

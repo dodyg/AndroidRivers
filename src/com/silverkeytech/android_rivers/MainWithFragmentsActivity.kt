@@ -177,10 +177,10 @@ public open class MainWithFragmentsActivity(): Activity() {
                 }
                 MainActivityMode.COLLECTION -> {
                     backward!!.setEnabled(true)
+                    forward!!.setEnabled(false)
                 }
                 MainActivityMode.PODCASTS -> {
                     backward!!.setEnabled(true)
-                    forward!!.setEnabled(false)
                 }
                 else -> {
                 }
@@ -306,8 +306,8 @@ public open class MainWithFragmentsActivity(): Activity() {
         val currentMode = mode
         mode = when (currentMode){
             MainActivityMode.RIVER -> MainActivityMode.RSS
-            MainActivityMode.RSS -> MainActivityMode.COLLECTION
-            MainActivityMode.COLLECTION -> MainActivityMode.PODCASTS
+            MainActivityMode.RSS -> MainActivityMode.PODCASTS
+            MainActivityMode.PODCASTS -> MainActivityMode.COLLECTION
             else -> MainActivityMode.RIVER
         }
     }
@@ -316,8 +316,8 @@ public open class MainWithFragmentsActivity(): Activity() {
     fun changeModeBackward() {
         val currentMode = mode
         mode = when (currentMode){
-            MainActivityMode.PODCASTS -> MainActivityMode.COLLECTION
-            MainActivityMode.COLLECTION -> MainActivityMode.RSS
+            MainActivityMode.COLLECTION -> MainActivityMode.PODCASTS
+            MainActivityMode.PODCASTS -> MainActivityMode.RSS
             MainActivityMode.RSS -> MainActivityMode.RIVER
             else -> MainActivityMode.RIVER
         }
