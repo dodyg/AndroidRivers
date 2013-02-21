@@ -41,7 +41,7 @@ public class Bookmark(){
     [DatabaseField(canBeNull = false, uniqueIndex = true, columnName = "url", width = 550, dataType = DataType.LONG_STRING)]
     public var url: String = ""
 
-    [DatabaseField(canBeNull = false, columnName = "language", width = 2, dataType = DataType.STRING)]
+    [DatabaseField(canBeNull = false, columnName = "language", width = 8, dataType = DataType.STRING)]
     public var language: String = "en"
 
     [DatabaseField(canBeNull = false, columnName = "kind")]

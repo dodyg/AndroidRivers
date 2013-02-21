@@ -24,6 +24,9 @@ import org.holoeverywhere.widget.EditText
 import org.holoeverywhere.widget.Spinner
 import java.util.ArrayList
 import android.widget.ArrayAdapter
+import com.silverkeytech.android_rivers.addBookmarkOption
+import com.silverkeytech.android_rivers.saveBookmark
+import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 
 public class KayakFlightDealsActivity () : Activity(){
     class object {
@@ -50,12 +53,15 @@ public class KayakFlightDealsActivity () : Activity(){
         val names = airportCodes.iterator().map { x -> x.name }.toArrayList()
 
         val completion = AirportAutoComplete.getUI(this, R.id.kayak_flight_deals_area, names)!!
-        completion.setHint("Enter city name")
 
         val bookmark = findViewById(R.id.kayak_flight_deals_bookmark_btn)!! as Button
         bookmark.setEnabled(false)
         bookmark.setOnClickListener{
-            addBookmarkOption()
+            addBookmarkOption(this, feedDateIsParseable){
+                collection ->
+                    saveBookmark(this, feedName, feedUrl, feedLanguage, collection)
+                    bookmark.setEnabled(false)
+            }
         }
 
         val go = findViewById(R.id.kayak_flight_deals_go_btn)!! as Button
@@ -86,7 +92,7 @@ public class KayakFlightDealsActivity () : Activity(){
                             feedLanguage = feed.language
                         }
 
-                        if (feed.items.size > 0)
+                        if (feed.items.size > 0  && !checkIfUrlAlreadyBookmarked(feedUrl))
                             bookmark.setEnabled(true)
                         else
                             bookmark.setEnabled(false)
@@ -98,61 +104,6 @@ public class KayakFlightDealsActivity () : Activity(){
                     }
                 }.execute(feedUrl)
             }
-        }
-    }
-
-    //Note: This is a duplication with FeedActivity
-    fun saveBookmark(collection: BookmarkCollection?) {
-        val res = saveBookmarkToDb(feedName, feedUrl, BookmarkKind.RSS, feedLanguage, collection)
-
-        if (res.isTrue()){
-            if (collection == null)
-                toastee("$feedName is bookmarked.")
-            else
-                toastee("$feedName is bookmarked to your ${collection.title} collection.")
-        }
-        else {
-            toastee("Sorry, I cannot bookmark $feedUrl", Duration.LONG)
-        }
-    }
-
-    //Note: This is a duplication with FeedActivity
-    fun addBookmarkOption() {
-        var coll = getBookmarkCollectionFromDb(sortByTitleOrder = SortingOrder.ASC)
-
-        if (!coll.isEmpty()){
-            if (feedDateIsParseable){
-                val dialog = AlertDialog.Builder(this)
-                dialog.setTitle("Bookmark to a collection")
-
-                val collectionTitles = coll.map { it.title }.toArray()
-                val withInstruction = arrayListOf(getString(R.string.skip_collection), *collectionTitles).toArray(array<String>())
-
-                dialog.setItems(withInstruction, object : DialogInterface.OnClickListener{
-                    public override fun onClick(p0: DialogInterface?, p1: Int) {
-                        if (p1 == 0) {
-                            //skip adding bookmark to collection. Just add to RSS bookmark
-                            saveBookmark(null)
-                        } else {
-                            val currentCollection = coll[p1 - 1] //we added one extra item that was "no instruction" so the index must be deducted by 1
-                            saveBookmark(currentCollection)
-                        }
-                    }
-                })
-
-                var createdDialog = dialog.create()!!
-                createdDialog.setCanceledOnTouchOutside(true)
-                createdDialog.setCancelable(true)
-                createdDialog.show()
-            }
-            else{
-                toastee("This feed's date cannot be determined so it is bookmarked without collection immediately", Duration.LONG)
-                saveBookmark(null)
-            }
-
-        } else {
-            //no collection is available so save it straight to bookmark
-            saveBookmark(null)
         }
     }
 }
