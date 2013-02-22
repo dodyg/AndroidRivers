@@ -78,7 +78,7 @@ public class OutlinerActivity(): Activity()
         var treeBuilder = TreeBuilder(manager)
 
         var counter = 0
-        for(val e in outlines){
+        for(e in outlines){
             treeBuilder.sequentiallyAddNextNode(counter.toLong(), e.level)
             counter++
         }
@@ -92,7 +92,7 @@ public class OutlinerActivity(): Activity()
 
     fun collapseOutlines(manager: InMemoryTreeStateManager<Long?>, outlines: ArrayList<OutlineContent>) {
         var counter = 0
-        for(val e in outlines){
+        for(e in outlines){
             if (e.level == 0){
                 manager.collapseChildren(counter.toLong())
             }
@@ -102,7 +102,7 @@ public class OutlinerActivity(): Activity()
 
     fun expandOutlines(manager: InMemoryTreeStateManager<Long?>, outlines: ArrayList<OutlineContent>) {
         var counter = 0
-        for(val e in outlines){
+        for(e in outlines){
             if (e.level == 0){
                 manager.expandEverythingBelow(counter.toLong())
             }

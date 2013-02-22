@@ -65,7 +65,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
                 var itemCounter = 0
                 val maxSize = filter?.maximumSize
                 val oldestDate = filter?.oldestDate
-                for(val i in channel.item!!.iterator()){
+                for(i in channel.item!!.iterator()){
                     itemCounter++
 
                     //stop processing if there's a limit on how many items to be processed
@@ -124,7 +124,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
 
             feedType = SyndicationFeedType.ATOM
 
-            for(val i in atom!!.entry!!.iterator()){
+            for(i in atom!!.entry!!.iterator()){
                 val fi = SyndicationFeedItem()
                 fi.title = i.title
 

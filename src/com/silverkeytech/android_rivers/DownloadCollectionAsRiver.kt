@@ -64,7 +64,7 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
             else -> 6
         }
 
-        for(val url in p0){
+        for(url in p0){
             executor.execute(
                     runnable {
                         val res = downloadSingleFeed(url!!, SyndicationFilter(maximumItemFilter, latestDate))

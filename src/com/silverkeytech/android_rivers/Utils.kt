@@ -66,7 +66,7 @@ fun imageMimeTypeToFileExtension (mimeType: String): String {
     }
 }
 
-fun isSupportedImageMime(val mimeType: String): Boolean {
+fun isSupportedImageMime(mimeType: String): Boolean {
     return when (mimeType){
         "image/gif" -> true
         "image/jpeg" -> true

@@ -43,7 +43,7 @@ public class Database (context: Context): OrmLiteSqliteOpenHelper(context, Datab
         Log.d(TAG, "Old version $oldVersion and new version $newVersion")
         if (newVersion > oldVersion){
             var migrator = SchemaMigration(p0!!)
-            for(val current in oldVersion..(newVersion - 1)){
+            for(current in oldVersion..(newVersion - 1)){
                 val res = migrator.migrate(current)
                 if (res)
                     Log.d(TAG, "Performing upgrade for version $current successful")

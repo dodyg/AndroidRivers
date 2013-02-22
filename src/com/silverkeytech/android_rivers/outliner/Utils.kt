@@ -42,7 +42,7 @@ fun Opml.traverse (filter: ((Outline) -> Boolean)? = null, depthLimit: Int = 12)
     var list = ArrayList<OutlineContent>()
 
     var level = 0
-    for (val o in this.body?.outline?.iterator())    {
+    for (o in this.body?.outline?.iterator())    {
         traverseOutline(level, o, list, filter, depthLimit)
     }
     return list
@@ -81,7 +81,7 @@ private fun traverseOutline(level: Int, outline: Outline?, list: ArrayList<Outli
             var lvl = level
             lvl++
 
-            for(val ox in outline.outline?.iterator()){
+            for(ox in outline.outline?.iterator()){
                 traverseOutline(lvl, ox, list, filter, depthLimit)
             }
         }
@@ -116,7 +116,7 @@ fun transformFeedOpmlToOpml(feedOpml: RiverOpml): Result<Opml> {
         outline.language = feedOutline.language
         outline.outlineType = feedOutline.outlineType
 
-        for(var fo in feedOutline.outline!!.iterator()){
+        for(fo in feedOutline.outline!!.iterator()){
             var outl = Outline()
             traverseFeedOpml(outl, fo)
             outline.outline!!.add(outl)
@@ -138,7 +138,7 @@ fun transformFeedOpmlToOpml(feedOpml: RiverOpml): Result<Opml> {
 
         if (feedOpml.body != null){
             var body = Body()
-            for(var fo in feedOpml.body!!.outline!!.iterator()){
+            for(fo in feedOpml.body!!.outline!!.iterator()){
                 var outline = Outline()
                 traverseFeedOpml(outline, fo)
                 body.outline!!.add(outline)

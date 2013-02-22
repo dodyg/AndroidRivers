@@ -84,7 +84,7 @@ public fun createFlexibleContentDialog(context: Activity, content : View, button
     btnParam.setMargins(0,0,0,0)
 
     val buttonLayout = dlg.findViewById(R.id.dialog_flex_content_buttons) as LinearLayout
-    for(val e:DialogBtn in buttons.iterator()){
+    for(e:DialogBtn in buttons.iterator()){
         val b = Button(context)
         b.setText(e.text)
         b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12.0)
@@ -146,7 +146,7 @@ public fun createFlexibleInputDialog(context: Activity, title: String, inputs : 
 
     val edits = ArrayList<EditText>()
 
-    for(val i in inputs){
+    for(i in inputs){
         val t = EditText(context)
         t.setInputType(i.inputType)
         t.setHint(i.hint)
@@ -173,7 +173,7 @@ public fun createFlexibleInputDialog(context: Activity, title: String, inputs : 
 
             //retrieve values
             var i = 0
-            for (val inp in inputs){
+            for (inp in inputs){
                 val t = edits.get(i)
                 inp.value = t.getText().toString()
                 i++

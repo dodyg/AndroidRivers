@@ -23,12 +23,12 @@ public class None(){
 public data class Result<T: Any>(p1: T?, p2: Exception? = null){
     class object{
         //return True result
-        fun right<T: Any>(val value: T?): Result<T> {
+        fun right<T: Any>(value: T?): Result<T> {
             return Result<T>(value)
         }
 
         //return false result
-        fun wrong<T: Any>(val exception: Exception?): Result<T> {
+        fun wrong<T: Any>(exception: Exception?): Result<T> {
             return Result<T>(null, exception)
         }
     }

@@ -97,7 +97,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
             notificationManager.notify(notificationId, notification)
         }
 
-        for(val url in targetUrls?.iterator()){
+        for(url in targetUrls?.iterator()){
             if (url != null){
                 var successful = false
 
@@ -156,7 +156,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
                         val urls = getBookmarksUrlsFromDbByCollection(id)
 
                         val list = Vector<RiverItemMeta>()
-                        for(val u in urls){
+                        for(u in urls){
                             val res = downloadSingleFeed(u!!, SyndicationFilter(PreferenceDefaults.CONTENT_BOOKMARK_COLLECTION_MAX_ITEMS_FILTER, latestDate))
 
                             if (res.isFalse())

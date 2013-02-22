@@ -94,7 +94,7 @@ public class ImportOpmlSubscriptionListService: IntentService("ImportOpmlSubscri
             if (outline != null){
                 process(outline)
             }
-            for(val ln in outline?.outline?.iterator())
+            for(ln in outline?.outline?.iterator())
                 traverseOutline(ln, process)
         }
 

@@ -29,7 +29,7 @@ import java.util.Vector
 import android.util.Log
 
 fun accumulateList(list: Vector<RiverItemMeta>, feed: SyndicationFeed) {
-    for(val f in feed.items.iterator()){
+    for(f in feed.items.iterator()){
         val item = RiverItem()
 
         item.title = f.title

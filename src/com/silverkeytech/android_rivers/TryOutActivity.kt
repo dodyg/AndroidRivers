@@ -197,7 +197,7 @@ public class TryOutActivity(): Activity()
 
             var bookmarks = DatabaseManager.query().bookmark().all()
 
-            for(val b in bookmarks.values!!.iterator()){
+            for(b in bookmarks.values!!.iterator()){
                 Log.d(TAG, "Bookmark ${b.title} - ${b.collection?.id}")
             }
         }

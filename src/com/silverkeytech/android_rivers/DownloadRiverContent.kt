@@ -95,7 +95,7 @@ fun River.getSortedNewsItems(): List<RiverItemMeta> {
     var newsItems = ArrayList<RiverItemMeta>()
 
     var river = this
-    for(val f : RiverSite? in river.updatedFeeds?.updatedFeed?.iterator()){
+    for(f : RiverSite? in river.updatedFeeds?.updatedFeed?.iterator()){
         if (f != null){
             f.item?.forEach{
                 if (it != null) {

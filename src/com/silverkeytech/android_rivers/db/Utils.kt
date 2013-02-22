@@ -78,7 +78,7 @@ public fun clearBookmarksFromCollection(collectionId: Int): Result<None> {
     try{
         val bookmarks = getBookmarksFromDbByCollection(collectionId)
         if (bookmarks.count() > 0){
-            for(val bk in bookmarks){
+            for(bk in bookmarks){
                 val b = DatabaseManager.query().bookmark().byUrl(bk.url)
                 //double check to make sure that the bookmark really exists
                 if (b.exists){
@@ -187,7 +187,7 @@ public fun getBookmarksFromDbAsOpml(kind: BookmarkKind, sortByTitleOrder: Sortin
     var bookmarks = DatabaseManager.query().bookmark().byKind(kind, sortByTitleOrder)
 
     if (bookmarks.exist){
-        for(val b in bookmarks.values?.iterator()){
+        for(b in bookmarks.values?.iterator()){
             var o = Outline()
             o.text = b.title
             o.url = b.url
@@ -202,7 +202,7 @@ public fun saveOpmlAsBookmarks(opml: Opml): Result<Opml> {
     try{
         val bkDao = DatabaseManager.bookmark!!
 
-        for(val o in opml.body!!.outline!!.iterator()){
+        for(o in opml.body!!.outline!!.iterator()){
             val b = Bookmark()
             b.title = o.text!!
             b.url = o.url!!

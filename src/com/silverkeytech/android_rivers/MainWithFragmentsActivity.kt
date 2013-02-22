@@ -106,9 +106,6 @@ public open class MainWithFragmentsActivity(): Activity() {
                                 val password = res.get(2).value!!
                                 val post = res2.get(0).value!!
                                 Log.d(TAG, "Username $username - Password $password - Post content $post")
-                                val blg = Blog(null, "https://androidrivers.wordpress.com/xmlrpc.php", username, password)
-                                //val pst = statusPost(post)
-                                //blg.newPost(pst)
 
                                 startBlogPostingService(this@MainWithFragmentsActivity,
                                         hashMapOf(Params.BLOG_SERVER to "https://androidrivers.wordpress.com/xmlrpc.php",
