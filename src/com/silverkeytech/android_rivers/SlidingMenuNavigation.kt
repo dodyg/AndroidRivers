@@ -27,13 +27,13 @@ public val SLIDE_MENU_KAYAK_DEALS : Int = 6
 
 fun getMainNavigationItems() : ArrayList<NavItem> {
     val navs = arrayListOf(
-            NavItem(id = SLIDE_MENU_READ, text = "Read", icon = 0),
+            //NavItem(id = SLIDE_MENU_READ, text = "Read", icon = 0),
             NavItem(id = SLIDE_MENU_GOOGLE_NEWS, text = "Google News", icon = 0),
-            NavItem(id = SLIDE_MENU_KAYAK_DEALS, text ="Flight Deals", icon = 0),
-            NavItem(id = SLIDE_MENU_WRITE, text = "Write", icon = 0),
-            NavItem(id = SLIDE_MENU_DONATE, text = "Donate", icon = 0),
-            NavItem(id = SLIDE_MENU_PRAISE, text = "Praise", icon = 0),
-            NavItem(id = SLIDE_MENU_TRY_OUT, text = "Try Out", icon = 0)
+            NavItem(id = SLIDE_MENU_KAYAK_DEALS, text ="Flight Deals", icon = 0)
+            //NavItem(id = SLIDE_MENU_WRITE, text = "Write", icon = 0),
+            //NavItem(id = SLIDE_MENU_DONATE, text = "Donate", icon = 0),
+            //NavItem(id = SLIDE_MENU_PRAISE, text = "Praise", icon = 0),
+            //NavItem(id = SLIDE_MENU_TRY_OUT, text = "Try Out", icon = 0)
     )
     return navs
 }

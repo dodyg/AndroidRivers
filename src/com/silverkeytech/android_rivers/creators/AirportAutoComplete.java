@@ -11,6 +11,7 @@ public class AirportAutoComplete {
         AutoCompleteTextView completion = (AutoCompleteTextView) context.findViewById(uiId);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, org.holoeverywhere.R.layout.simple_dropdown_item_1line, names);
         completion.setAdapter(adapter);
+        completion.setHint("Please enter city and country name");
         return completion;
     }
 }
