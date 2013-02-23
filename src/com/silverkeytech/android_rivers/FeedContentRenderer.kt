@@ -139,7 +139,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                     }))
 
                     buttons.add(DialogBtn(context.getString(R.string.share)!!, { dlg ->
-                            var intent = shareActionIntent(context, currentNews.title!!, currentNews.link!!)
+                            var intent = shareActionIntent(currentNews.title!!, currentNews.link!!)
                             context.startActivity(Intent.createChooser(intent, "Share link"))
                     }))
                 }
@@ -166,6 +166,8 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                             startDownloadService(context, currentNews.title!!, currentNews.enclosure!!.url,
                                     feedTitle, feedUrl, currentNews.description!!,
                                     messenger)
+
+                            dlg.dismiss()
                     }))
                 }
 

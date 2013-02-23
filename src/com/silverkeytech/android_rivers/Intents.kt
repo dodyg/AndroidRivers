@@ -128,7 +128,7 @@ fun startOutlinerActivity(context: Context, outlines: ArrayList<OutlineContent>,
            http://stackoverflow.com/questions/3935009/how-to-open-gmail-compose-when-a-button-is-clicked-in-android-app
 */
 
-public fun shareActionIntent(context: Context, title: String, url: String): Intent {
+public fun shareActionIntent(title: String, url: String): Intent {
     var i = Intent(Intent.ACTION_SEND)
     i.setType("text/plain")
     i.putExtra(Intent.EXTRA_TEXT, "${title.limitText(PreferenceDefaults.LINK_SHARE_TITLE_MAX_LENGTH)} $url")

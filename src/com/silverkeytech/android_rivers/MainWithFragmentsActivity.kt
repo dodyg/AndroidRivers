@@ -35,6 +35,7 @@ import android.support.v4.app._HoloActivity
 import org.holoeverywhere.ArrayAdapter
 import com.silverkeytech.android_rivers.meta_weblog.Blog
 import java.util.Random
+import android.content.Intent
 
 enum class MainActivityMode {
     RIVER
@@ -122,7 +123,7 @@ public open class MainWithFragmentsActivity(): Activity() {
                 startKayakFlightDealsActivity(this@MainWithFragmentsActivity)
             }
             SLIDE_MENU_PRAISE ->{
-                shareActionIntent(this@MainWithFragmentsActivity, getSpreadText(), "http://goo.gl/kShgp")
+                startActivity(Intent.createChooser(shareActionIntent(getSpreadText(), "http://goo.gl/kShgp"), "Spread Android Rivers") )
             }
 
             else -> { }

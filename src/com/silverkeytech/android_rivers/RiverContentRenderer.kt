@@ -162,7 +162,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                         }))
 
                     buttons.add(DialogBtn(context.getString(R.string.share)!!, { dlg ->
-                            var intent = shareActionIntent(context, currentNews.item.title!!, currentNews.item.link!!)
+                            var intent = shareActionIntent(currentNews.item.title!!, currentNews.item.link!!)
                             context.startActivity(Intent.createChooser(intent, "Share link"))
                         }))
                 }
@@ -199,6 +199,8 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                                 startDownloadService(context, currentNews.item.title!!, enclosure.url!!,
                                         currentNews.source.title!!, currentNews.source.uri!!, currentNews.item.body!!,
                                         messenger)
+
+                                dlg.dismiss()
                         }))
                     }
                 }
@@ -229,28 +231,28 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 }
 
                 //add blog button
-                buttons.add(DialogBtn("Blog", {
-                    dlg ->
-                    showBlogConfigurationDialog(context){
-                        res ->
-                        showPostBlogDialogWithContent(context, "${currentNews.item.title}"){
-                            res2 ->
-                            val username = res.get(1).value!!
-                            val password = res.get(2).value!!
-                            val post = res2.get(0).value!!
-                            Log.d(TAG, "Username $username - Password $password - Post content $post")
-
-                            val contentMap =  hashMapOf(Params.POST_CONTENT to post)
-                            if (currentNewsLinkAvailable)
-                                contentMap.put(Params.POST_LINK, currentNews.item.link!!)
-
-                            startBlogPostingService(context,
-                                    hashMapOf(Params.BLOG_SERVER to "https://androidrivers.wordpress.com/xmlrpc.php",
-                                            Params.BLOG_USERNAME to username, Params.BLOG_PASSWORD to password),
-                                    contentMap)
-                        }
-                    }
-                }))
+//                buttons.add(DialogBtn("Blog", {
+//                    dlg ->
+//                    showBlogConfigurationDialog(context){
+//                        res ->
+//                        showPostBlogDialogWithContent(context, "${currentNews.item.title}"){
+//                            res2 ->
+//                            val username = res.get(1).value!!
+//                            val password = res.get(2).value!!
+//                            val post = res2.get(0).value!!
+//                            Log.d(TAG, "Username $username - Password $password - Post content $post")
+//
+//                            val contentMap =  hashMapOf(Params.POST_CONTENT to post)
+//                            if (currentNewsLinkAvailable)
+//                                contentMap.put(Params.POST_LINK, currentNews.item.link!!)
+//
+//                            startBlogPostingService(context,
+//                                    hashMapOf(Params.BLOG_SERVER to "https://androidrivers.wordpress.com/xmlrpc.php",
+//                                            Params.BLOG_USERNAME to username, Params.BLOG_PASSWORD to password),
+//                                    contentMap)
+//                        }
+//                    }
+//                }))
 
                 var createdDialog = createFlexibleContentDialog(context,  dlg, buttons.toArray(array<DialogBtn>()))
                 createdDialog.show()
