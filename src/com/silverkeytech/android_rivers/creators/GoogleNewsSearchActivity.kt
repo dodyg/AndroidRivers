@@ -72,7 +72,7 @@ public class GoogleNewsSearchActivity () : Activity(){
         val regionList = findViewById(R.id.google_news_search_region)!! as Spinner
 
         val maps = getEditionsAndLanguages()
-        val listName = maps.iterator().map { x -> x.key }.toArrayList<String>().sort()
+        val listName = maps.iterator().map { x -> x.key }.toArrayList<String>()
 
         val adapter = ArrayAdapter<String>(this, org.holoeverywhere.R.layout.simple_spinner_item, listName);
         adapter.setDropDownViewResource(org.holoeverywhere.R.layout.simple_spinner_dropdown_item);

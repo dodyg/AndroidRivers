@@ -141,11 +141,13 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 dlg.setBackgroundColor(context.getStandardDialogBackgroundColor())
 
                 var body = dlg.findViewById(R.id.news_details_text_tv)!! as TextView
-                handleForeignTextFont(context, language, body, msg, textSize.toFloat())
+                handleForeignText(language, body, msg)
+                handleForeignTextStyle(context, language, body, textSize.toFloat())
                 handleTextColorBasedOnTheme(context, body)
 
                 var source = dlg.findViewById(R.id.news_details_source_tv)!! as TextView
-                handleForeignTextFont(context, language, source, scrubHtml(currentNews.source.title), 11.toFloat())
+                handleForeignText(language, body, msg)
+                handleForeignTextStyle(context, language, body, textSize.toFloat())
                 handleTextColorBasedOnTheme(context, body)
 
                 val currentLink = currentNews.item.link

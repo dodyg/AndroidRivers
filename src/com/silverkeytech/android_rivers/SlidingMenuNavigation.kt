@@ -1,3 +1,21 @@
+/*
+Android Rivers is an app to read and discover news using RiverJs, RSS and OPML format.
+Copyright (C) 2012 Dody Gunawinata (dodyg@silverkeytech.com)
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>
+*/
+
 package com.silverkeytech.android_rivers
 
 import android.content.Context
@@ -29,10 +47,10 @@ fun getMainNavigationItems() : ArrayList<NavItem> {
     val navs = arrayListOf(
             //NavItem(id = SLIDE_MENU_READ, text = "Read", icon = 0),
             NavItem(id = SLIDE_MENU_GOOGLE_NEWS, text = "Google News", icon = 0),
-            NavItem(id = SLIDE_MENU_KAYAK_DEALS, text ="Flight Deals", icon = 0)
+            NavItem(id = SLIDE_MENU_KAYAK_DEALS, text ="Flight Deals", icon = 0),
             //NavItem(id = SLIDE_MENU_WRITE, text = "Write", icon = 0),
             //NavItem(id = SLIDE_MENU_DONATE, text = "Donate", icon = 0),
-            //NavItem(id = SLIDE_MENU_PRAISE, text = "Praise", icon = 0),
+            NavItem(id = SLIDE_MENU_PRAISE, text = "Spread", icon = 0)
             //NavItem(id = SLIDE_MENU_TRY_OUT, text = "Try Out", icon = 0)
     )
     return navs

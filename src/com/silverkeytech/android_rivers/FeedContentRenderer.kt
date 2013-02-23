@@ -126,7 +126,8 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                 dlg.setBackgroundColor(context.getStandardDialogBackgroundColor())
 
                 var body = dlg.findViewById(R.id.feed_details_text_tv)!! as TextView
-                handleForeignTextFont(context, language, body, msg, textSize.toFloat())
+                handleForeignText(language, body, msg)
+                handleForeignTextStyle(context, language, body, textSize.toFloat())
                 handleTextColorBasedOnTheme(context, body)
 
                 val buttons = ArrayList<DialogBtn>()

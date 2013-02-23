@@ -34,6 +34,7 @@ import com.silverkeytech.android_rivers.meta_weblog.showPostBlogDialog
 import android.support.v4.app._HoloActivity
 import org.holoeverywhere.ArrayAdapter
 import com.silverkeytech.android_rivers.meta_weblog.Blog
+import java.util.Random
 
 enum class MainActivityMode {
     RIVER
@@ -120,7 +121,26 @@ public open class MainWithFragmentsActivity(): Activity() {
             SLIDE_MENU_KAYAK_DEALS ->{
                 startKayakFlightDealsActivity(this@MainWithFragmentsActivity)
             }
+            SLIDE_MENU_PRAISE ->{
+                shareActionIntent(this@MainWithFragmentsActivity, getSpreadText(), "http://goo.gl/kShgp")
+            }
+
             else -> { }
+        }
+    }
+
+    fun getSpreadText() : String{
+        val i = Random(153.toLong()).nextInt(6)
+        return when(i){
+            0 -> "Android Rivers is awesome"
+            1 -> "Get check out this free news reader"
+            2 -> "Download Android Rivers"
+            3 -> "Try out this amazing news app"
+            4 -> "Android Rivers is great"
+            5 -> "Anxiety free news reader"
+            else -> {
+                "Check out this free podcast client for Android"
+            }
         }
     }
 

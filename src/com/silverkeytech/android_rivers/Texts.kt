@@ -88,26 +88,6 @@ fun generateThrowawayName(): String {
     return name.substring(0, 6)
 }
 
-fun handleForeignTextFont(context: Activity, language: String, text: TextView, content: String, textSize: Float) {
-    val TAG = "handleText"
-
-    val arabicFont = Typeface.createFromAsset(context.getAssets(), "DroidKufi-Regular.ttf")
-
-    when(language.toLowerCase()){
-        "ar", "ar-eg" -> {
-            Log.d(TAG, "Switching to Arabic Font")
-            text.setTypeface(arabicFont)
-            text.setText(ArabicReshape.reshape(content))
-            text.setGravity(Gravity.RIGHT)
-            text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize - 4.toFloat())
-        }
-        else -> {
-            text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
-            text.setText(content)
-        }
-    }
-}
-
 var arabicFont : Typeface? = null
 fun handleForeignTextStyle(context: Activity, language: String, text: TextView, textSize: Float) {
     when(language.toLowerCase()){
@@ -117,6 +97,9 @@ fun handleForeignTextStyle(context: Activity, language: String, text: TextView, 
             text.setTypeface(arabicFont)
             text.setGravity(Gravity.RIGHT)
             text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize - 4.toFloat())
+        }
+        "iw", "he" ->{ //hebrew
+            text.setGravity(Gravity.RIGHT)
         }
         else -> {
             text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
