@@ -129,68 +129,16 @@ public class FeedActivity(): ListActivity(), WithVisualModificationPanel
                 return true
             }
             R.id.feed_menu_bookmark -> {
-                addBookmarkOption()
+                addBookmarkOption(this, feedDateIsParseable){
+                    collection ->
+                        saveBookmark(this, feedName, feedUrl, feedLanguage, collection)
+                }
                 return true
             }
             else ->
                 return super<ListActivity>.onOptionsItemSelected(item)
         }
     }
-
-    fun saveBookmark(collection: BookmarkCollection?) {
-        val res = saveBookmarkToDb(feedName, feedUrl, BookmarkKind.RSS, feedLanguage, collection)
-
-        if (res.isTrue()){
-            if (collection == null)
-                toastee("$feedName is bookmarked.")
-            else
-                toastee("$feedName is bookmarked to your ${collection.title} collection.")
-        }
-        else {
-            toastee("Sorry, I cannot bookmark $feedUrl", Duration.LONG)
-        }
-    }
-
-    fun addBookmarkOption() {
-        var coll = getBookmarkCollectionFromDb(sortByTitleOrder = SortingOrder.ASC)
-
-        if (!coll.isEmpty()){
-            if (feedDateIsParseable){
-                val dialog = AlertDialog.Builder(this)
-                dialog.setTitle("Bookmark to a collection")
-
-                val collectionTitles = coll.map { it.title }.toArray()
-                val withInstruction = arrayListOf(getString(R.string.skip_collection), *collectionTitles).toArray(array<String>())
-
-                dialog.setItems(withInstruction, object : DialogInterface.OnClickListener{
-                    public override fun onClick(p0: DialogInterface?, p1: Int) {
-                        if (p1 == 0) {
-                            //skip adding bookmark to collection. Just add to RSS bookmark
-                            saveBookmark(null)
-                        } else {
-                            val currentCollection = coll[p1 - 1] //we added one extra item that was "no instruction" so the index must be deducted by 1
-                            saveBookmark(currentCollection)
-                        }
-                        this@FeedActivity.getMain().flags.isRssJustBookmarked = true
-                    }
-                })
-
-                var createdDialog = dialog.create()!!
-                createdDialog.setCanceledOnTouchOutside(true)
-                createdDialog.setCancelable(true)
-                createdDialog.show()
-            }
-            else{
-                toastee("This feed's date cannot be determined so it is bookmarked without collection immediately", Duration.LONG)
-                saveBookmark(null)
-            }
-
-        } else {
-            //no collection is available so save it straight to bookmark
-            saveBookmark(null)
-        }
-    }
-
 
     override fun getActivity(): Activity {
         return this

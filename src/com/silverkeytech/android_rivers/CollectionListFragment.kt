@@ -106,7 +106,6 @@ public class CollectionListFragment: ListFragment() {
         super<ListFragment>.onPause()
     }
 
-
     fun showMessage(msg: String) {
         val txt = getView()!!.findViewById(R.id.collection_list_fragment_message_tv) as TextView
         if (msg.isNullOrEmpty()){
@@ -162,7 +161,6 @@ public class CollectionListFragment: ListFragment() {
             }
         })
     }
-
 
     fun showCollectionQuickActionPopup(context: Activity, collection: BookmarkCollection, item: View, list: View) {
         //overlay popup at top of clicked overview position
@@ -243,7 +241,6 @@ public class CollectionListFragment: ListFragment() {
 
         return vw
     }
-
 
     fun inflater(): LayoutInflater {
         return this.getLayoutInflater()!!
