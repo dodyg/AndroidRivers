@@ -125,7 +125,17 @@ public open class MainWithFragmentsActivity(): Activity() {
             SLIDE_MENU_PRAISE ->{
                 startActivity(Intent.createChooser(shareActionIntent(getSpreadText(), "http://goo.gl/kShgp"), "Spread Android Rivers") )
             }
-
+            SLIDE_MENU_FEEDBACK ->{
+                val prompt = createSingleInputDialog(this@MainWithFragmentsActivity, "Make this better!", "", "Give your feedback here") {
+                    dlg, feedback ->
+                        if (feedback.isNullOrEmpty()){
+                            toastee("Please write your feedback")
+                        }else{
+                            startOpenEmailActivity(this@MainWithFragmentsActivity, "dodyg@silverkeytech.com", "Make this better!", feedback!!)
+                        }
+                }
+                prompt.show()
+            }
             else -> { }
         }
     }

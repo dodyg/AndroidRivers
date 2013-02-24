@@ -107,7 +107,6 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
             }
         })
 
-
         return viewLayout
     }
 
@@ -129,7 +128,6 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
 
     fun handleOpmlZoom(currentOutline: OutlineContent, currentPosition: Int): Boolean {
         var idx = currentPosition + 1
-
         var childList = ArrayList<OutlineContent>()
 
         //root level
@@ -151,7 +149,6 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
             return true
 
         startOutlinerActivity(context, childList, currentOutline.text, null, true)
-
         return true
     }
 
