@@ -42,6 +42,14 @@ import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.ListFragment
 
+import android.content.Intent
+import android.content.ServiceConnection
+import android.content.ComponentName
+import android.os.IBinder
+import android.content.Intent
+import android.content.Context
+
+
 public class PodcastListFragment(): ListFragment() {
     class object {
         public val TAG: String = javaClass<PodcastListFragment>().getSimpleName()
@@ -62,6 +70,12 @@ public class PodcastListFragment(): ListFragment() {
     public override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val vw = inflater!!.inflate(R.layout.podcast_list_fragment, container, false)
         return vw
+    }
+
+    public override fun onStart(){
+        super<ListFragment>.onStart()
+        Log.d(TAG, "OnStart")
+        doBindService()
     }
 
     public override fun onResume() {
@@ -87,6 +101,11 @@ public class PodcastListFragment(): ListFragment() {
     public override fun onPause() {
         Log.d(TAG, "OnPause")
         super<ListFragment>.onPause()
+    }
+
+    public override fun onStop(){
+        super<ListFragment>.onStop()
+        doBindService()
     }
 
     fun showMessage(msg: String) {
@@ -158,6 +177,11 @@ public class PodcastListFragment(): ListFragment() {
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val currentPodcast = podcasts[p2]
 
+                //val i = Intent(getActivity(), javaClass<PodcastPlayerService>())
+                //i.putExtra(Params.PODCAST_TITLE, currentPodcast.title)
+                //i.putExtra(Params.PODCAST_PATH, Uri.fromFile(File(currentPodcast.localPath)).toString())
+                //getSupportActivity()!!.startService(i)
+
                 var playIntent = Intent()
                 playIntent.setAction(android.content.Intent.ACTION_VIEW);
                 playIntent.setDataAndType(Uri.fromFile(File(currentPodcast.localPath)), "audio/*");
@@ -220,4 +244,32 @@ public class PodcastListFragment(): ListFragment() {
         pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
     }
 
+
+    private var isPlayerBound : Boolean = false
+    var player : PodcastPlayerService? = null
+
+    val serviceConnection = object : ServiceConnection{
+        public override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {
+            player = ( p1 as PodcastPlayerService.ServiceBinder ).getService()
+            isPlayerBound = true
+            Log.d(TAG, "Player Service connected")
+        }
+
+        public override fun onServiceDisconnected(p0: ComponentName?) {
+            player = null
+            isPlayerBound = false
+            Log.d(TAG, "Player Service disconnected")
+        }
+    }
+
+    fun doBindService(){
+        val i = Intent(getActivity(), javaClass<PodcastPlayerService>())
+        getActivity()!!.bindService(i, serviceConnection, Context.BIND_AUTO_CREATE)
+    }
+
+    fun doUnbindService(){
+        if (isPlayerBound){
+            getActivity()!!.unbindService(serviceConnection)
+        }
+    }
 }

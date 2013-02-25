@@ -66,5 +66,8 @@ public class Params(){
         val POST_CONTENT = "POST_CONTENT"
         val POST_TITLE = "POST_TITLE"
         val POST_LINK = "POST_LINK"
+
+        val PODCAST_TITLE = "PODCAST_TITLE"
+        val PODCAST_PATH = "PODCAST_PATH"
     }
 }
