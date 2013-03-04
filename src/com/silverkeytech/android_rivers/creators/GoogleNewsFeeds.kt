@@ -106,7 +106,7 @@ fun getEditionsAndLanguages() : TreeMap<String, EditionAndLanguage>{
             "한국 (Korea)" to EditionAndLanguage("kr", "kr"),
             "中国 (China)" to EditionAndLanguage("cn", "zh-CN"),
             "台灣 (Taiwan)" to EditionAndLanguage("tw", "zh-TW"),
-            "日本 (Japan)" to EditionAndLanguage("jp", "jp"),
+            //"日本 (Japan)" to EditionAndLanguage("jp", "jp"),
             "香港 (Hong Kong)" to EditionAndLanguage("hk", "zh-TW")
     )
 
