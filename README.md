@@ -15,3 +15,5 @@ Open Source Library used:
 * [http-request](https://github.com/kevinsawicki/http-request)
 * [Simple XML](http://simple.sourceforge.net/)
 * [Simple Java Xml Parser](https://github.com/thebuzzmedia/simple-java-xml-parser)
+* [Scribe-Java](https://github.com/fernandezpablo85/scribe-java)
+* [HoloEverywhere](https://github.com/ChristopheVersieux/HoloEverywhere)

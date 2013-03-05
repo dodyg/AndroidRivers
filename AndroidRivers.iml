@@ -48,6 +48,7 @@
     <orderEntry type="module" module-name="library" />
     <orderEntry type="module" module-name="preferences" />
     <orderEntry type="module" module-name="slidingmenu" />
+    <orderEntry type="library" name="scribe-1.3.3" level="project" />
   </component>
 </module>
 
