@@ -48,6 +48,9 @@ import android.content.ComponentName
 import android.os.IBinder
 import android.content.Intent
 import android.content.Context
+import org.holoeverywhere.app.Dialog
+import android.app.Dialog
+import org.holoeverywhere.widget.Button
 
 
 public class PodcastListFragment(): ListFragment() {
@@ -177,15 +180,25 @@ public class PodcastListFragment(): ListFragment() {
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val currentPodcast = podcasts[p2]
 
-                //val i = Intent(getActivity(), javaClass<PodcastPlayerService>())
-                //i.putExtra(Params.PODCAST_TITLE, currentPodcast.title)
-                //i.putExtra(Params.PODCAST_PATH, Uri.fromFile(File(currentPodcast.localPath)).toString())
-                //getSupportActivity()!!.startService(i)
+                if (!isPodcastPlayerPlaying()){
+                    val i = Intent(getActivity(), javaClass<PodcastPlayerService>())
+                    i.putExtra(Params.PODCAST_TITLE, currentPodcast.title)
+                    i.putExtra(Params.PODCAST_PATH, Uri.fromFile(File(currentPodcast.localPath)).toString())
+                    getSupportActivity()!!.startService(i)
 
-                var playIntent = Intent()
-                playIntent.setAction(android.content.Intent.ACTION_VIEW);
-                playIntent.setDataAndType(Uri.fromFile(File(currentPodcast.localPath)), "audio/*");
-                startActivity(playIntent)
+                    val dlg = createPodcastPlayerDialog(title = currentPodcast.title.limitText(30), isNewTrack = true)
+                    dlg.show()
+
+                } else {
+                    val dlg = createPodcastPlayerDialog(title = currentPodcast.title.limitText(30), isNewTrack = false)
+                    dlg.show()
+                }
+
+
+//                var playIntent = Intent()
+//                playIntent.setAction(android.content.Intent.ACTION_VIEW);
+//                playIntent.setDataAndType(Uri.fromFile(File(currentPodcast.localPath)), "audio/*");
+//                startActivity(playIntent)
             }
         })
 
@@ -244,6 +257,12 @@ public class PodcastListFragment(): ListFragment() {
         pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
     }
 
+    fun isPodcastPlayerPlaying() : Boolean{
+        if (player != null && player!!.isPlaying()){
+            return true
+        } else
+            return false
+    }
 
     private var isPlayerBound : Boolean = false
     var player : PodcastPlayerService? = null
@@ -272,4 +291,50 @@ public class PodcastListFragment(): ListFragment() {
             getActivity()!!.unbindService(serviceConnection)
         }
     }
+
+    public fun createPodcastPlayerDialog(title : String, isNewTrack : Boolean) :  Dialog{
+        val dlg: View = this.getSupportActivity()!!.getLayoutInflater()!!.inflate(R.layout.dialog_podcast_player, null)!!
+
+        val dialog = Dialog(this.getSupportActivity())
+        dialog.setContentView(dlg)
+        dialog.setTitle(title)
+
+        val close = dialog.findViewById(R.id.dialog_podcast_player_stop_btn) as Button
+        close.setOnClickListener {
+            v ->
+                if (player != null)
+                    player!!.stopMusic()
+
+                dialog.dismiss()
+        }
+
+        val multi = dialog.findViewById(R.id.dialog_podcast_player_multi_btn) as Button
+        multi.setOnClickListener {
+            v ->
+                if (player != null){
+                    if (player!!.isPlaying()){
+                        player!!.pauseMusic()
+                        multi.setText("Play")
+                    }
+                    else
+                        {
+                            player!!.resumeMusic()
+                            multi.setText("Pause")
+                        }
+                }
+        }
+
+
+        if (isNewTrack)
+            multi.setText("Pause")
+        else
+            if (player != null && player!!.isPlaying())
+                multi.setText("Pause")
+        else
+            multi.setText("Play")
+
+        dialog.setCanceledOnTouchOutside(true)
+        return dialog
+    }
+
 }
