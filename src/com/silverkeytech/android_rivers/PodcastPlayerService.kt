@@ -30,7 +30,6 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         public val TAG: String = javaClass<PodcastPlayerService>().getSimpleName()
     }
 
-
     private val binder: IBinder = ServiceBinder()
     private var mPlayer: MediaPlayer? = null
     private var length: Int = 0

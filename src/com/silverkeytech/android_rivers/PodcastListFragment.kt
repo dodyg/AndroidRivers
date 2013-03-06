@@ -193,12 +193,6 @@ public class PodcastListFragment(): ListFragment() {
                     val dlg = createPodcastPlayerDialog(title = currentPodcast.title.limitText(30), isNewTrack = false)
                     dlg.show()
                 }
-
-
-//                var playIntent = Intent()
-//                playIntent.setAction(android.content.Intent.ACTION_VIEW);
-//                playIntent.setDataAndType(Uri.fromFile(File(currentPodcast.localPath)), "audio/*");
-//                startActivity(playIntent)
             }
         })
 
