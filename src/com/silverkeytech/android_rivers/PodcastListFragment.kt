@@ -357,6 +357,7 @@ public class PodcastListFragment(): ListFragment() {
                         progressText.setText("$progress")
                         player!!.seekToPosition(positionAtPlayer)
                         player!!.resumeMusic()
+                        multi.setText("Play")
                         Log.d(TAG, "Resume position at $positionAtPlayer from tottal $duration at progress $progress")
                     }
                 }
