@@ -377,16 +377,16 @@ public class TryOutActivity(): Activity()
 
             notification!!.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.notification_download_progress)
 
-            notification!!.contentView!!.setImageViewResource(R.id.download_progress_status_icon, android.R.drawable.btn_star);
-            notification!!.contentView!!.setProgressBar(R.id.download_progress_status_progress, 100, 10, false)
-            notification!!.contentView!!.setTextViewText(R.id.download_progress_status_text, "Download in progress")
+            notification!!.contentView!!.setImageViewResource(R.id.notification_download_progress_status_icon, android.R.drawable.btn_star);
+            notification!!.contentView!!.setProgressBar(R.id.notification_download_progress_status_progress, 100, 10, false)
+            notification!!.contentView!!.setTextViewText(R.id.notification_download_progress_status_text, "Download in progress")
 
             var nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             nm.notify(counter, notification)
 
             var thread = Thread(runnable{
                 for(i in 11..100){
-                    notification!!.contentView!!.setProgressBar(R.id.download_progress_status_progress, 100, i, false)
+                    notification!!.contentView!!.setProgressBar(R.id.notification_download_progress_status_progress, 100, i, false)
                     nm.notify(counter, notification)
 
                     Log.d(TAG, "We are progressing $i / 100")

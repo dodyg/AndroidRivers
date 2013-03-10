@@ -75,11 +75,11 @@ public class ImportOpmlSubscriptionListService: IntentService("ImportOpmlSubscri
         var notification = prepareNotification()
 
         fun updateText(msg: String) {
-            notification.contentView!!.setTextViewText(R.id.download_progress_status_text, msg)
+            notification.contentView!!.setTextViewText(R.id.notification_download_progress_status_text, msg)
         }
 
         fun updateProgress(sofar: Int) {
-            notification.contentView!!.setProgressBar(R.id.download_progress_status_progress, 100, sofar, false)
+            notification.contentView!!.setProgressBar(R.id.notification_download_progress_status_progress, 100, sofar, false)
         }
         fun notify() {
             notificationManager.notify(notificationId, notification)

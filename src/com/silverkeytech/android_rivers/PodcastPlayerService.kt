@@ -66,32 +66,33 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         return notification
     }
 
-    val notificationId = Random().nextLong().toInt()
+    private val notificationId = Random().nextLong().toInt()
+    private var notification : Notification? = null
+    private var notificationManager : NotificationManager? = null
+    private var podcastTitle : String? = null
+    private var podcastPath : String? = null
 
-    fun updateText(notification : Notification, msg: String) {
-        notification.contentView!!.setTextViewText(R.id.download_progress_status_text, msg)
+    fun updateText(msg: String) {
+        notification!!.contentView!!.setTextViewText(R.id.notification_podcast_player_status_text, msg)
+        notificationManager!!.notify(notificationId, notification)
     }
 
     var audioManager : AudioManager? = null
 
     //http://developer.android.com/training/managing-audio/audio-focus.html
     public override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        val podcastTitle = intent!!.getStringExtra(Params.PODCAST_TITLE)
-        val podcastPath = intent.getStringExtra(Params.PODCAST_PATH)
-
-        val notification = prepareNotification()
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
+        podcastTitle = intent!!.getStringExtra(Params.PODCAST_TITLE)
+        podcastPath = intent.getStringExtra(Params.PODCAST_PATH)
+        notification = prepareNotification()
+        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
         val result = audioManager?.requestAudioFocus(this, AudioManager.STREAM_MUSIC,AudioManager.AUDIOFOCUS_GAIN);
 
         if (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-            updateText(notification, "Sorry, I cannot play $podcastTitle at this moment")
-            notificationManager.notify(notificationId, notification)
+            updateText("Sorry, I cannot play $podcastTitle at this moment")
         }
         else{
-            updateText(notification, "Playing $podcastTitle")
-            notificationManager.notify(notificationId, notification)
+            updateText("Playing $podcastTitle")
 
             mediaPlayer = MediaPlayer.create(this, Uri.parse(podcastPath))
             mediaPlayer?.setOnErrorListener(this)
@@ -101,8 +102,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
 
             mediaPlayer!!.setOnCompletionListener(object: MediaPlayer.OnCompletionListener{
                 public override fun onCompletion(p0: MediaPlayer?) {
-                    updateText(notification, "Podcast completed")
-                    notificationManager.notify(notificationId, notification)
+                    updateText("Podcast completed")
                 }
             })
         }
