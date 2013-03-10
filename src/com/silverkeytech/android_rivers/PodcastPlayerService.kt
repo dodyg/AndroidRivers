@@ -103,6 +103,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
 
     //http://developer.android.com/training/managing-audio/audio-focus.html
     public override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        Log.d(TAG, "Starting Podcast Player Service")
         podcastTitle = intent!!.getStringExtra(Params.PODCAST_TITLE)
         podcastPath = intent.getStringExtra(Params.PODCAST_PATH)
         notification = prepareNotification()
@@ -127,10 +128,33 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
                     updateText("Podcast completed")
                 }
             })
+
+            progressThread = Thread(progress)
         }
+
+        progressThread?.start()
 
         return super<Service>.onStartCommand(intent, flags, startId)
     }
+
+    private var isUpdateProgress : Boolean = true
+
+    private val progress : Runnable = object : Runnable{
+        public override fun run() {
+            try{
+                while (isPlaying() && isUpdateProgress){
+                    Thread.sleep(500)
+                    Log.d(TAG, "Current position ${mediaPlayer!!.getCurrentPosition()}")
+                }
+                Log.d(TAG, "Music is not playing anymore")
+            }
+            catch(e : Exception){
+                Log.d(TAG, "Exception in progress thread ${e.getMessage()}")
+            }
+        }
+    }
+
+    private var progressThread : Thread? = null
 
     public override fun onAudioFocusChange(p0: Int) {
         if (p0 == AUDIOFOCUS_LOSS_TRANSIENT){
@@ -156,6 +180,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
             mediaPlayer!!.pause()
             length = mediaPlayer!!.getCurrentPosition()
             updateText("$podcastTitle is paused")
+            Log.d(TAG, "$podcastTitle is paused")
         }
     }
 
@@ -165,6 +190,9 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
             mediaPlayer?.seekTo(length)
             mediaPlayer?.start()
             updateText("Playing $podcastTitle")
+            Log.d(TAG, "Resume Playing $podcastTitle")
+            progressThread = Thread(progress)
+            progressThread?.start()
         }
     }
 
@@ -173,6 +201,9 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         mediaPlayer?.release()
         updateText("$podcastTitle is stopped")
         mediaPlayer = null
+        isUpdateProgress = false
+        Log.d(TAG, "Stop playing $podcastTitle and Stopping service")
+        this.stopSelf()
     }
 
     public fun getCurrentPosition(): Int?{
