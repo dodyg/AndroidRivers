@@ -42,15 +42,20 @@ import android.media.AudioManager.OnAudioFocusChangeListener
 import android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT
 import android.media.AudioManager.AUDIOFOCUS_GAIN
 import android.media.AudioManager.AUDIOFOCUS_LOSS
+import android.os.Handler
+import android.os.Message
+import android.os.Bundle
 
 public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener, OnAudioFocusChangeListener {
     class object{
         public val TAG: String = javaClass<PodcastPlayerService>().getSimpleName()
+        public val CURRENT_POSITION : String = "CURRENT_POSITION"
+        public val TOTAL_DURATION : String = "TOTAL_DURATION"
     }
 
     private val binder: IBinder = ServiceBinder()
     private var mediaPlayer: MediaPlayer? = null
-    private var length: Int = 0
+    private var lastPlayPosition: Int = 0
 
 
     inner class ServiceBinder(): Binder() {
@@ -145,6 +150,15 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
                 while (isPlaying() && isUpdateProgress){
                     Thread.sleep(500)
                     Log.d(TAG, "Current position ${mediaPlayer!!.getCurrentPosition()}")
+
+                    if (progressHandler != null){
+                        val msg = Message()
+                        val bundle = Bundle()
+                        bundle.putInt(PodcastPlayerService.CURRENT_POSITION, mediaPlayer!!.getCurrentPosition())
+                        bundle.putInt(PodcastPlayerService.TOTAL_DURATION, mediaPlayer!!.getDuration())
+                        msg.setData(bundle)
+                        progressHandler!!.sendMessage(msg)
+                    }
                 }
                 Log.d(TAG, "Music is not playing anymore")
             }
@@ -154,6 +168,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         }
     }
 
+    public var progressHandler: Handler? = null
     private var progressThread : Thread? = null
 
     public override fun onAudioFocusChange(p0: Int) {
@@ -178,7 +193,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
     public fun pauseMusic(): Unit {
         if (mediaPlayer!!.isPlaying()){
             mediaPlayer!!.pause()
-            length = mediaPlayer!!.getCurrentPosition()
+            lastPlayPosition = mediaPlayer!!.getCurrentPosition()
             updateText("$podcastTitle is paused")
             Log.d(TAG, "$podcastTitle is paused")
         }
@@ -187,7 +202,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
     public fun resumeMusic(): Unit {
         if (!mediaPlayer!!.isPlaying())
         {
-            mediaPlayer?.seekTo(length)
+            mediaPlayer?.seekTo(lastPlayPosition)
             mediaPlayer?.start()
             updateText("Playing $podcastTitle")
             Log.d(TAG, "Resume Playing $podcastTitle")
@@ -210,9 +225,12 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         return mediaPlayer?.getCurrentPosition()
     }
 
+    public fun getPodcastLength() : Int?{
+        return mediaPlayer?.getDuration()
+    }
+
     public fun seekToPosition(pos : Int){
-        if (mediaPlayer != null)
-            mediaPlayer!!.seekTo(pos)
+        lastPlayPosition = pos
     }
 
     public override fun onDestroy(): Unit {

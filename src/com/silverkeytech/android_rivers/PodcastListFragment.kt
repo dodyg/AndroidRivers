@@ -47,6 +47,10 @@ import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.ListFragment
 import org.holoeverywhere.widget.Button
+import org.holoeverywhere.widget.SeekBar
+import android.os.Handler
+import android.os.Message
+import android.os.Bundle
 
 public class PodcastListFragment(): ListFragment() {
     class object {
@@ -319,7 +323,6 @@ public class PodcastListFragment(): ListFragment() {
             }
         }
 
-
         if (isNewTrack)
             multi.setText("Pause")
         else
@@ -328,7 +331,52 @@ public class PodcastListFragment(): ListFragment() {
             else
                 multi.setText("Play")
 
+        val progress = dialog.findViewById(R.id.dialog_podcast_player_progress_sb) as SeekBar
+        player!!.progressHandler = createHandler(progress)
+
+        progress.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            public override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            public override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            public override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser){
+                    val duration = player?.getPodcastLength()
+                    val currentPosition = player?.getCurrentPosition()
+
+                    if (isPodcastPlayerPlaying()){
+                        player!!.pauseMusic()
+                    }
+
+                    if (duration != null && currentPosition != null){
+                        val positionAtPlayer = (progress * duration) div 100
+                        player!!.seekToPosition(positionAtPlayer)
+                        player!!.resumeMusic()
+                        Log.d(TAG, "Resume position at $positionAtPlayer from tottal $duration at progress $progress")
+                    }
+                }
+            }
+        })
+
         dialog.setCanceledOnTouchOutside(true)
         return dialog
+    }
+
+    fun createHandler(progressBar : SeekBar): Handler{
+        val h = object: Handler() {
+            public override fun handleMessage(msg: Message?) {
+                if (msg != null){
+                    val data = msg.getData()!!
+                    val duration = data.getInt(PodcastPlayerService.TOTAL_DURATION)
+                    val currentPosition = data.getInt(PodcastPlayerService.CURRENT_POSITION)
+                    val progress = (currentPosition * 100) div duration
+                    progressBar.setProgress(progress.toInt())
+                }
+            }
+
+        }
+        return h
     }
 }
