@@ -1,3 +1,21 @@
+/*
+Android Rivers is an app to read and discover news using RiverJs, RSS and OPML format.
+Copyright (C) 2012 Dody Gunawinata (dodyg@silverkeytech.com)
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>
+*/
+
 package com.silverkeytech.android_rivers
 
 import android.app.Service
@@ -34,6 +52,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
     private var mediaPlayer: MediaPlayer? = null
     private var length: Int = 0
 
+
     inner class ServiceBinder(): Binder() {
         fun getService(): PodcastPlayerService? {
             return this@PodcastPlayerService
@@ -51,7 +70,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         val contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
         val notification = NotificationCompat.Builder(this)
-                .setTicker("Start playing Podcast")
+                .setTicker("Playing $podcastTitle")
         ?.setWhen(System.currentTimeMillis())
         ?.setContentIntent(contentIntent)
         ?.build()
@@ -69,7 +88,10 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
     private val notificationId = Random().nextLong().toInt()
     private var notification : Notification? = null
     private var notificationManager : NotificationManager? = null
-    private var podcastTitle : String? = null
+    public var podcastTitle : String? = null
+        get () = $podcastTitle
+        private set (value : String?) = $podcastTitle = value
+
     private var podcastPath : String? = null
 
     fun updateText(msg: String) {
@@ -133,6 +155,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         if (mediaPlayer!!.isPlaying()){
             mediaPlayer!!.pause()
             length = mediaPlayer!!.getCurrentPosition()
+            updateText("$podcastTitle is paused")
         }
     }
 
@@ -141,13 +164,24 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         {
             mediaPlayer?.seekTo(length)
             mediaPlayer?.start()
+            updateText("Playing $podcastTitle")
         }
     }
 
     public fun stopMusic(): Unit {
         mediaPlayer?.stop()
         mediaPlayer?.release()
+        updateText("$podcastTitle is stopped")
         mediaPlayer = null
+    }
+
+    public fun getCurrentPosition(): Int?{
+        return mediaPlayer?.getCurrentPosition()
+    }
+
+    public fun seekToPosition(pos : Int){
+        if (mediaPlayer != null)
+            mediaPlayer!!.seekTo(pos)
     }
 
     public override fun onDestroy(): Unit {

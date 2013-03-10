@@ -36,8 +36,8 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
         public val TAG: String = javaClass<DownloadRiverContent>().getSimpleName()
     }
 
-    var context: Activity = it!! as Activity
-    var dialog: InfinityProgressDialog = InfinityProgressDialog(context, context.getString(R.string.please_wait_while_loading)!!)
+    val context: Activity = it!! as Activity
+    val dialog: InfinityProgressDialog = InfinityProgressDialog(context, context.getString(R.string.please_wait_while_loading)!!)
 
     //Prepare stuff before execution
     protected override fun onPreExecute() {
@@ -51,7 +51,6 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
     }
 
     var url: String = ""
-
 
     var rawCallback: ((Result<River>, String) -> Unit)? = null
 
@@ -71,7 +70,7 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
 
     //Once the thread is done.
     protected override fun onPostExecute(result: Result<River>?) {
-        dialog.dismiss();
+        dialog.dismiss()
         if (result == null)
             context.toastee("Sorry, we cannot process this feed because the operation is cancelled", Duration.AVERAGE)
         else {
@@ -92,9 +91,9 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
 
 //Take all the news items from several different feeds and combine them into one.
 fun River.getSortedNewsItems(): List<RiverItemMeta> {
-    var newsItems = ArrayList<RiverItemMeta>()
+    val newsItems = ArrayList<RiverItemMeta>()
 
-    var river = this
+    val river = this
     for(f : RiverSite? in river.updatedFeeds?.updatedFeed?.iterator()){
         if (f != null){
             f.item?.forEach{

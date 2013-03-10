@@ -185,7 +185,7 @@ public class PodcastListFragment(): ListFragment() {
                     dlg.show()
 
                 } else {
-                    val dlg = createPodcastPlayerDialog(title = currentPodcast.title.limitText(30), isNewTrack = false)
+                    val dlg = createPodcastPlayerDialog(title = currentlyPlayedPodcastTitle().limitText(30), isNewTrack = false)
                     dlg.show()
                 }
             }
@@ -251,6 +251,13 @@ public class PodcastListFragment(): ListFragment() {
             return true
         } else
             return false
+    }
+
+    fun currentlyPlayedPodcastTitle(): String? {
+        if (player != null && player!!.isPlaying()){
+            return player!!.podcastTitle
+        } else
+            return null
     }
 
     private var isPlayerBound: Boolean = false
