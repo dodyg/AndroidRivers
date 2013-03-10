@@ -18,9 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
+import android.app.Dialog
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
 import android.net.Uri
 import android.os.Bundle
+import android.os.IBinder
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -41,17 +46,7 @@ import java.io.File
 import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.ListFragment
-
-import android.content.Intent
-import android.content.ServiceConnection
-import android.content.ComponentName
-import android.os.IBinder
-import android.content.Intent
-import android.content.Context
-import org.holoeverywhere.app.Dialog
-import android.app.Dialog
 import org.holoeverywhere.widget.Button
-
 
 public class PodcastListFragment(): ListFragment() {
     class object {
@@ -75,7 +70,7 @@ public class PodcastListFragment(): ListFragment() {
         return vw
     }
 
-    public override fun onStart(){
+    public override fun onStart() {
         super<ListFragment>.onStart()
         Log.d(TAG, "OnStart")
         doBindService()
@@ -100,13 +95,12 @@ public class PodcastListFragment(): ListFragment() {
         super<ListFragment>.onHiddenChanged(hidden)
     }
 
-
     public override fun onPause() {
         Log.d(TAG, "OnPause")
         super<ListFragment>.onPause()
     }
 
-    public override fun onStop(){
+    public override fun onStop() {
         super<ListFragment>.onStop()
         doBindService()
     }
@@ -117,7 +111,7 @@ public class PodcastListFragment(): ListFragment() {
             txt.setVisibility(View.INVISIBLE)
             txt.setText("")
         }
-        else{
+        else {
             val textSize = parent!!.getVisualPref().getListTextSize()
             txt.setVisibility(View.VISIBLE)
             handleFontResize(txt, msg, textSize.toFloat())
@@ -141,31 +135,32 @@ public class PodcastListFragment(): ListFragment() {
     //show and prepare the interaction for each individual news item
     fun renderFileListing(podcasts: List<Podcast>) {
         //now sort it so people always have the latest news first
-        var list = getView()!!.findViewById(android.R.id.list) as ListView
-        var inflater: LayoutInflater = parent!!.getLayoutInflater()!!
+        val list = getView()!!.findViewById(android.R.id.list) as ListView
+        val inflater: LayoutInflater = parent!!.getLayoutInflater()!!
 
         val textSize = parent!!.getVisualPref().getListTextSize()
 
-        var adapter = object : ArrayAdapter<Podcast>(parent!!, android.R.layout.simple_list_item_1, android.R.id.text1, podcasts) {
+        val adapter = object : ArrayAdapter<Podcast>(parent!!, android.R.layout.simple_list_item_1, android.R.id.text1, podcasts) {
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 var currentView = convertView
                 var holder: ViewHolder?
 
-                var currentPodcast = podcasts[position]
-
-                var text = currentPodcast.title
+                val currentPodcast = podcasts[position]
+                val text = currentPodcast.title
 
                 if (currentView == null){
                     currentView = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
                     holder = ViewHolder(currentView!!.findViewById(android.R.id.text1) as TextView)
                     currentView!!.setTag(holder)
-                }else{
+                }
+                else {
                     holder = currentView?.getTag() as ViewHolder
                 }
 
                 if (text.isNullOrEmpty()){
                     currentView?.setVisibility(View.GONE)
-                }   else{
+                }
+                else {
                     currentView?.setVisibility(View.VISIBLE)
                     handleFontResize(holder!!.podcastName, text, textSize.toFloat())
                 }
@@ -251,15 +246,15 @@ public class PodcastListFragment(): ListFragment() {
         pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
     }
 
-    fun isPodcastPlayerPlaying() : Boolean{
+    fun isPodcastPlayerPlaying(): Boolean {
         if (player != null && player!!.isPlaying()){
             return true
         } else
             return false
     }
 
-    private var isPlayerBound : Boolean = false
-    var player : PodcastPlayerService? = null
+    private var isPlayerBound: Boolean = false
+    private var player: PodcastPlayerService? = null
 
     val serviceConnection = object : ServiceConnection{
         public override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {
@@ -275,18 +270,18 @@ public class PodcastListFragment(): ListFragment() {
         }
     }
 
-    fun doBindService(){
+    fun doBindService() {
         val i = Intent(getActivity(), javaClass<PodcastPlayerService>())
         getActivity()!!.bindService(i, serviceConnection, Context.BIND_AUTO_CREATE)
     }
 
-    fun doUnbindService(){
+    fun doUnbindService() {
         if (isPlayerBound){
             getActivity()!!.unbindService(serviceConnection)
         }
     }
 
-    public fun createPodcastPlayerDialog(title : String, isNewTrack : Boolean) :  Dialog{
+    public fun createPodcastPlayerDialog(title: String, isNewTrack: Boolean): Dialog {
         val dlg: View = this.getSupportActivity()!!.getLayoutInflater()!!.inflate(R.layout.dialog_podcast_player, null)!!
 
         val dialog = Dialog(this.getSupportActivity())
@@ -296,26 +291,25 @@ public class PodcastListFragment(): ListFragment() {
         val close = dialog.findViewById(R.id.dialog_podcast_player_stop_btn) as Button
         close.setOnClickListener {
             v ->
-                if (player != null)
-                    player!!.stopMusic()
+            if (player != null)
+                player!!.stopMusic()
 
-                dialog.dismiss()
+            dialog.dismiss()
         }
 
         val multi = dialog.findViewById(R.id.dialog_podcast_player_multi_btn) as Button
         multi.setOnClickListener {
             v ->
-                if (player != null){
-                    if (player!!.isPlaying()){
-                        player!!.pauseMusic()
-                        multi.setText("Play")
-                    }
-                    else
-                        {
-                            player!!.resumeMusic()
-                            multi.setText("Pause")
-                        }
+            if (player != null) {
+                if (player!!.isPlaying()){
+                    player!!.pauseMusic()
+                    multi.setText("Play")
                 }
+                else {
+                    player!!.resumeMusic()
+                    multi.setText("Pause")
+                }
+            }
         }
 
 
@@ -324,11 +318,10 @@ public class PodcastListFragment(): ListFragment() {
         else
             if (player != null && player!!.isPlaying())
                 multi.setText("Pause")
-        else
-            multi.setText("Play")
+            else
+                multi.setText("Play")
 
         dialog.setCanceledOnTouchOutside(true)
         return dialog
     }
-
 }

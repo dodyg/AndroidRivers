@@ -3,18 +3,18 @@
                 android:layout_width="fill_parent" android:layout_height="fill_parent"
                 android:padding="5dp">
 
-    <ImageView android:id="@+id/download_progress_status_icon"
+    <ImageView android:id="@+id/notification_download_progress_status_icon"
                android:layout_width="wrap_content" android:layout_height="fill_parent"
                android:layout_alignParentLeft="true"/>
 
     <RelativeLayout android:layout_width="fill_parent"
-                    android:layout_height="fill_parent" android:layout_toRightOf="@id/download_progress_status_icon">
+                    android:layout_height="fill_parent" android:layout_toRightOf="@id/notification_download_progress_status_icon">
 
-        <TextView android:id="@+id/download_progress_status_text" android:layout_width="fill_parent"
+        <TextView android:id="@+id/notification_download_progress_status_text" android:layout_width="fill_parent"
                   android:layout_height="wrap_content" android:layout_alignParentTop="true" />
-        <ProgressBar android:id="@+id/download_progress_status_progress"
+        <ProgressBar android:id="@+id/notification_download_progress_status_progress"
                      android:layout_width="fill_parent" android:layout_height="wrap_content"
-                     android:layout_below="@id/download_progress_status_text"
+                     android:layout_below="@id/notification_download_progress_status_text"
                      android:progressDrawable="@android:drawable/progress_horizontal"
                      android:indeterminate="false" android:indeterminateOnly="false" />
     </RelativeLayout>

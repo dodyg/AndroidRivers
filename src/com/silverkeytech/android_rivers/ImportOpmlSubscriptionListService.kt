@@ -57,10 +57,10 @@ public class ImportOpmlSubscriptionListService: IntentService("ImportOpmlSubscri
 
         notification!!.icon = android.R.drawable.star_big_on
 
-        notification.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.download_progress).with {
-            this.setImageViewResource(R.id.download_progress_status_icon, android.R.drawable.btn_star)
-            this.setProgressBar(R.id.download_progress_status_progress, 100, 0, false)
-            this.setTextViewText(R.id.download_progress_status_text, getString(R.string.download_starts))
+        notification.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.notification_download_progress).with {
+            this.setImageViewResource(R.id.notification_download_progress_status_icon, android.R.drawable.btn_star)
+            this.setProgressBar(R.id.notification_download_progress_status_progress, 100, 0, false)
+            this.setTextViewText(R.id.notification_download_progress_status_text, getString(R.string.download_starts))
         }
 
         return notification

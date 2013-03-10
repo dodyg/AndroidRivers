@@ -50,10 +50,10 @@ public class BlogPostService(): IntentService("DownloadService"){
 
         notification!!.icon = android.R.drawable.stat_sys_download
 
-        notification.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.download_progress).with {
-            this.setImageViewResource(R.id.download_progress_status_icon, android.R.drawable.stat_sys_download_done)
-            this.setProgressBar(R.id.download_progress_status_progress, 100, 0, false)
-            this.setTextViewText(R.id.download_progress_status_text, "Posting")
+        notification.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.notification_download_progress).with {
+            this.setImageViewResource(R.id.notification_download_progress_status_icon, android.R.drawable.stat_sys_download_done)
+            this.setProgressBar(R.id.notification_download_progress_status_progress, 100, 0, false)
+            this.setTextViewText(R.id.notification_download_progress_status_text, "Posting")
         }
 
         return notification

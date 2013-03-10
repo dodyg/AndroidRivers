@@ -31,7 +31,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
     }
 
     private val binder: IBinder = ServiceBinder()
-    private var mPlayer: MediaPlayer? = null
+    private var mediaPlayer: MediaPlayer? = null
     private var length: Int = 0
 
     inner class ServiceBinder(): Binder() {
@@ -58,10 +58,9 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
 
         notification!!.icon = android.R.drawable.star_big_on
 
-        notification.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.download_progress).with {
-            this.setImageViewResource(R.id.download_progress_status_icon, android.R.drawable.btn_star)
-            this.setProgressBar(R.id.download_progress_status_progress, 100, 100, true)
-            this.setTextViewText(R.id.download_progress_status_text, getString(R.string.download_starts))
+        notification.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.notification_podcast_player).with {
+            this.setImageViewResource(R.id.notification_podcast_player_status_icon, android.R.drawable.btn_star)
+            this.setTextViewText(R.id.notification_podcast_player_status_text, getString(R.string.download_starts))
         }
 
         return notification
@@ -94,13 +93,13 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
             updateText(notification, "Playing $podcastTitle")
             notificationManager.notify(notificationId, notification)
 
-            mPlayer = MediaPlayer.create(this, Uri.parse(podcastPath))
-            mPlayer?.setOnErrorListener(this)
-            mPlayer?.setLooping(false)
-            mPlayer?.setVolume(100.0, 100.0)
-            mPlayer?.start()
+            mediaPlayer = MediaPlayer.create(this, Uri.parse(podcastPath))
+            mediaPlayer?.setOnErrorListener(this)
+            mediaPlayer?.setLooping(false)
+            mediaPlayer?.setVolume(100.0, 100.0)
+            mediaPlayer?.start()
 
-            mPlayer!!.setOnCompletionListener(object: MediaPlayer.OnCompletionListener{
+            mediaPlayer!!.setOnCompletionListener(object: MediaPlayer.OnCompletionListener{
                 public override fun onCompletion(p0: MediaPlayer?) {
                     updateText(notification, "Podcast completed")
                     notificationManager.notify(notificationId, notification)
@@ -124,57 +123,55 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
     }
 
     public fun isPlaying() : Boolean{
-        if (mPlayer != null)
-            return mPlayer!!.isPlaying()
+        if (mediaPlayer != null)
+            return mediaPlayer!!.isPlaying()
         else
             return false
     }
 
     public fun pauseMusic(): Unit {
-        if (mPlayer!!.isPlaying()){
-            mPlayer!!.pause()
-            length = mPlayer!!.getCurrentPosition()
+        if (mediaPlayer!!.isPlaying()){
+            mediaPlayer!!.pause()
+            length = mediaPlayer!!.getCurrentPosition()
         }
     }
 
     public fun resumeMusic(): Unit {
-        if (!mPlayer!!.isPlaying())
+        if (!mediaPlayer!!.isPlaying())
         {
-            mPlayer?.seekTo(length)
-            mPlayer?.start()
+            mediaPlayer?.seekTo(length)
+            mediaPlayer?.start()
         }
     }
 
     public fun stopMusic(): Unit {
-        mPlayer?.stop()
-        mPlayer?.release()
-        mPlayer = null
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
     }
 
     public override fun onDestroy(): Unit {
         super<Service>.onDestroy()
-        if (mPlayer != null){
+        if (mediaPlayer != null){
             try {
-                mPlayer!!.stop()
-                mPlayer!!.release()
+                mediaPlayer!!.stop()
+                mediaPlayer!!.release()
             }
             finally {
-                mPlayer = null
+                mediaPlayer = null
             }
         }
     }
 
     public override fun onError(mp: MediaPlayer?, what: Int, extra: Int): Boolean {
         Toast.makeText(this, "Music player failed", Toast.LENGTH_SHORT)?.show()
-        if (mPlayer != null){
-            try
-            {
-                mPlayer!!.stop()
-                mPlayer!!.release()
+        if (mediaPlayer != null){
+            try {
+                mediaPlayer!!.stop()
+                mediaPlayer!!.release()
             }
-            finally
-            {
-                mPlayer = null
+            finally {
+                mediaPlayer = null
             }
         }
         return false

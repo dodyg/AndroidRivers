@@ -375,7 +375,7 @@ public class TryOutActivity(): Activity()
             ?.setContentIntent(contentIntent)
             ?.build()
 
-            notification!!.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.download_progress)
+            notification!!.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.notification_download_progress)
 
             notification!!.contentView!!.setImageViewResource(R.id.download_progress_status_icon, android.R.drawable.btn_star);
             notification!!.contentView!!.setProgressBar(R.id.download_progress_status_progress, 100, 10, false)

@@ -46,17 +46,17 @@ public fun View.setOnClickListener(action: (View?) -> Unit): Unit {
 }
 
 public fun parseRFC3339DateFormat(dt: String): java.util.Date? {
-    try{
+    try {
         val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
         val dts = dt.replaceAll("([\\+\\-]\\d\\d):(\\d\\d)", "$1$2")
         return formatter.parse(dts)
-    }catch (e: Exception) {
+    } catch (e: Exception) {
         return null;
     }
 }
 
 fun imageMimeTypeToFileExtension (mimeType: String): String {
-    return when(mimeType){
+    return when(mimeType) {
         "image/gif" -> ".gif"
         "image/jpeg" -> ".jpg"
         "image/pjpeg" -> ".jpg"
@@ -67,7 +67,7 @@ fun imageMimeTypeToFileExtension (mimeType: String): String {
 }
 
 fun isSupportedImageMime(mimeType: String): Boolean {
-    return when (mimeType){
+    return when (mimeType) {
         "image/gif" -> true
         "image/jpeg" -> true
         "image/pjpeg" -> true
