@@ -332,10 +332,12 @@ public class PodcastListFragment(): ListFragment() {
                 multi.setText("Play")
 
         val progress = dialog.findViewById(R.id.dialog_podcast_player_progress_sb) as SeekBar
-        player!!.progressHandler = createHandler(progress)
+        val progressText = dialog.findViewById(R.id.dialog_podcast_player_progress_tv) as TextView
+        player!!.progressHandler = createHandler(progress, progressText)
 
         progress.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             public override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
             }
 
             public override fun onStopTrackingTouch(seekBar: SeekBar?) {
@@ -352,6 +354,7 @@ public class PodcastListFragment(): ListFragment() {
 
                     if (duration != null && currentPosition != null){
                         val positionAtPlayer = (progress * duration) div 100
+                        progressText.setText("$progress")
                         player!!.seekToPosition(positionAtPlayer)
                         player!!.resumeMusic()
                         Log.d(TAG, "Resume position at $positionAtPlayer from tottal $duration at progress $progress")
@@ -364,7 +367,7 @@ public class PodcastListFragment(): ListFragment() {
         return dialog
     }
 
-    fun createHandler(progressBar : SeekBar): Handler{
+    fun createHandler(progressBar : SeekBar, progressText : TextView): Handler{
         val h = object: Handler() {
             public override fun handleMessage(msg: Message?) {
                 if (msg != null){
@@ -373,6 +376,7 @@ public class PodcastListFragment(): ListFragment() {
                     val currentPosition = data.getInt(PodcastPlayerService.CURRENT_POSITION)
                     val progress = (currentPosition * 100) div duration
                     progressBar.setProgress(progress.toInt())
+                    progressText.setText("$progress")
                 }
             }
 
