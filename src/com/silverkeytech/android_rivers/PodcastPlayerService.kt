@@ -133,11 +133,8 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
                     updateText("Podcast completed")
                 }
             })
-
-            progressThread = Thread(progress)
         }
 
-        progressThread?.start()
 
         return super<Service>.onStartCommand(intent, flags, startId)
     }
@@ -168,8 +165,15 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         }
     }
 
-    public var progressHandler: Handler? = null
+    private var progressHandler: Handler? = null
     private var progressThread : Thread? = null
+
+    public fun setProgressHandler(handler : Handler?){
+        progressHandler = handler
+        progressThread?.interrupt()
+        progressThread = Thread(progress)
+        progressThread?.start()
+    }
 
     public override fun onAudioFocusChange(p0: Int) {
         if (p0 == AUDIOFOCUS_LOSS_TRANSIENT){
