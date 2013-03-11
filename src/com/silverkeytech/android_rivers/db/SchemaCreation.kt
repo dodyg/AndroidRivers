@@ -38,7 +38,6 @@ public class SchemaCreation(val db: SQLiteDatabase){
     }
 
     private fun create3(): Boolean {
-        create1()
         create2()
         try{
             Log.d(TAG, "OnUpgrade(1): Create collection Table")
