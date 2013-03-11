@@ -74,6 +74,20 @@ fun String?.limitText(maxSize: Int): String {
     }
 }
 
+fun rightPadding(text: String, sizeTarget : Int): String{
+    if (text.length() < sizeTarget){
+        var spaces = StringBuffer()
+        val diff = sizeTarget - text.length()
+
+        for(i in 0..diff)
+            spaces.append(' ')
+
+        return text + spaces
+    }else
+        return text
+}
+
+
 fun getFileNameFromUri(url: String): String? {
     try{
         val fileName = url.substring(url.lastIndexOf('/') + 1, url.length());

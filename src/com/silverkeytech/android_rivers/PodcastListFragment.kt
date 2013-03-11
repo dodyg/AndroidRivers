@@ -51,6 +51,7 @@ import org.holoeverywhere.widget.SeekBar
 import android.os.Handler
 import android.os.Message
 import android.os.Bundle
+import android.widget.LinearLayout
 
 public class PodcastListFragment(): ListFragment() {
     class object {
@@ -294,10 +295,11 @@ public class PodcastListFragment(): ListFragment() {
 
     public fun createPodcastPlayerDialog(title: String, isNewTrack: Boolean): Dialog {
         val dlg: View = this.getSupportActivity()!!.getLayoutInflater()!!.inflate(R.layout.dialog_podcast_player, null)!!
+        val contentParam = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0)
 
         val dialog = Dialog(this.getSupportActivity())
-        dialog.setContentView(dlg)
-        dialog.setTitle(title)
+        dialog.setContentView(dlg, contentParam)
+        dialog.setTitle(rightPadding(title, 25))
 
         val close = dialog.findViewById(R.id.dialog_podcast_player_stop_btn) as Button
         close.setOnClickListener {
@@ -380,7 +382,8 @@ public class PodcastListFragment(): ListFragment() {
                     val currentPosition = data.getInt(PodcastPlayerService.CURRENT_POSITION)
                     val progress = (currentPosition * 100) div duration
                     progressBar.setProgress(progress.toInt())
-                    progressText.setText("Handler progress $progress")
+                    progressText.setText("$progress")
+                    Log.d(TAG, "Progress Handler $progress")
                 }
             }
 

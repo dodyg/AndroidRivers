@@ -133,8 +133,11 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
                     updateText("Podcast completed")
                 }
             })
+
+            progressThread = Thread(progress)
         }
 
+        progressThread?.start()
 
         return super<Service>.onStartCommand(intent, flags, startId)
     }
@@ -144,6 +147,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
     private val progress : Runnable = object : Runnable{
         public override fun run() {
             try{
+                Log.d(TAG, "Music progress update starts")
                 while (isPlaying() && isUpdateProgress){
                     Thread.sleep(500)
                     Log.d(TAG, "Current position ${mediaPlayer!!.getCurrentPosition()}")
@@ -157,7 +161,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
                         progressHandler!!.sendMessage(msg)
                     }
                 }
-                Log.d(TAG, "Music is not playing anymore")
+                Log.d(TAG, "Music progress update stops")
             }
             catch(e : Exception){
                 Log.d(TAG, "Exception in progress thread ${e.getMessage()}")
@@ -170,9 +174,6 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
 
     public fun setProgressHandler(handler : Handler?){
         progressHandler = handler
-        progressThread?.interrupt()
-        progressThread = Thread(progress)
-        progressThread?.start()
     }
 
     public override fun onAudioFocusChange(p0: Int) {
@@ -200,6 +201,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
             lastPlayPosition = mediaPlayer!!.getCurrentPosition()
             updateText("$podcastTitle is paused")
             Log.d(TAG, "$podcastTitle is paused")
+            isUpdateProgress = false
         }
     }
 
@@ -210,6 +212,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
             mediaPlayer?.start()
             updateText("Playing $podcastTitle")
             Log.d(TAG, "Resume Playing $podcastTitle")
+            isUpdateProgress = true
             progressThread = Thread(progress)
             progressThread?.start()
         }
