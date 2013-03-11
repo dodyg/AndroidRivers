@@ -125,7 +125,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
             mediaPlayer = MediaPlayer.create(this, Uri.parse(podcastPath))
             mediaPlayer?.setOnErrorListener(this)
             mediaPlayer?.setLooping(false)
-            mediaPlayer?.setVolume(100.0, 100.0)
+            //mediaPlayer?.setVolume(100.0, 100.0)
             mediaPlayer?.start()
 
             mediaPlayer!!.setOnCompletionListener(object: MediaPlayer.OnCompletionListener{

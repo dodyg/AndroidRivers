@@ -314,22 +314,22 @@ public class PodcastListFragment(): ListFragment() {
             if (player != null) {
                 if (player!!.isPlaying()){
                     player!!.pauseMusic()
-                    multi.setText("Play")
+                    multi.setText(this@PodcastListFragment.getString(R.string.play))
                 }
                 else {
                     player!!.resumeMusic()
-                    multi.setText("Pause")
+                    multi.setText(this@PodcastListFragment.getString(R.string.pause))
                 }
             }
         }
 
         if (isNewTrack)
-            multi.setText("Pause")
+            multi.setText(this@PodcastListFragment.getString(R.string.pause))
         else
             if (player != null && player!!.isPlaying())
-                multi.setText("Pause")
+                multi.setText(this@PodcastListFragment.getString(R.string.pause))
             else
-                multi.setText("Play")
+                multi.setText(this@PodcastListFragment.getString(R.string.play))
 
         val progress = dialog.findViewById(R.id.dialog_podcast_player_progress_sb) as SeekBar
         val progressText = dialog.findViewById(R.id.dialog_podcast_player_progress_tv) as TextView
@@ -337,10 +337,11 @@ public class PodcastListFragment(): ListFragment() {
 
         progress.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             public override fun onStartTrackingTouch(seekBar: SeekBar?) {
-
+                //dg: not implemented by design
             }
 
             public override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                //dg: not implemented by design
             }
 
             public override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -357,7 +358,7 @@ public class PodcastListFragment(): ListFragment() {
                         progressText.setText("$progress")
                         player!!.seekToPosition(positionAtPlayer)
                         player!!.resumeMusic()
-                        multi.setText("Play")
+                        multi.setText(this@PodcastListFragment.getString(R.string.pause))
                         Log.d(TAG, "Resume position at $positionAtPlayer from tottal $duration at progress $progress")
                     }
                 }
