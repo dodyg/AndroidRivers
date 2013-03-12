@@ -142,15 +142,12 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         return super<Service>.onStartCommand(intent, flags, startId)
     }
 
-    private var isUpdateProgress : Boolean = true
-
     private val progress : Runnable = object : Runnable{
         public override fun run() {
             try{
-                Log.d(TAG, "Music progress update starts")
-                while (isPlaying() && isUpdateProgress){
+                Log.d(TAG, "Music progress update trying to start with isPlaying ${isPlaying()}")
+                while (isPlaying()){
                     Thread.sleep(500)
-                    Log.d(TAG, "Current position ${mediaPlayer!!.getCurrentPosition()}")
 
                     if (progressHandler != null){
                         val msg = Message()
@@ -208,7 +205,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
             lastPlayPosition = mediaPlayer!!.getCurrentPosition()
             updateText("$podcastTitle is paused")
             Log.d(TAG, "$podcastTitle is paused")
-            isUpdateProgress = false
+            stopProgressThread()
         }
     }
 
@@ -219,10 +216,18 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
             mediaPlayer?.start()
             updateText("Playing $podcastTitle")
             Log.d(TAG, "Resume Playing $podcastTitle")
-            isUpdateProgress = true
-            progressThread = Thread(progress)
-            progressThread?.start()
+            restartProgressThread()
         }
+    }
+
+    private fun restartProgressThread(){
+        progressThread?.interrupt()
+        progressThread = Thread(progress)
+        progressThread?.start()
+    }
+
+    private fun stopProgressThread(){
+        progressThread?.interrupt()
     }
 
     public fun stopMusic(): Unit {
@@ -230,7 +235,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         mediaPlayer?.release()
         updateText("$podcastTitle is stopped")
         mediaPlayer = null
-        isUpdateProgress = false
+        stopProgressThread()
         Log.d(TAG, "Stop playing $podcastTitle and Stopping service")
         this.stopSelf()
     }
