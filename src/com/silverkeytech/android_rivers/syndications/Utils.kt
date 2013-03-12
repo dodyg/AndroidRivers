@@ -30,23 +30,35 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
         }
 
         if (isAtomFeed()){
+            val before = System.currentTimeMillis()
             var feed = transformXmlToAtom(downloadedContent)
+            val after = System.currentTimeMillis()
+            Log.d(TAG, "Time to parse XML to ATOM  is ${after - before} with feed ${feed.value?.entry?.size()} items")
             Log.d(TAG, "$url is an ATOM Feed")
             if (feed.isTrue()){
+                val beforeTransform = System.currentTimeMillis()
                 var f = SyndicationFeed(null, feed.value, filter)
                 f.transformAtom()
+                val afterTransform = System.currentTimeMillis()
+                Log.d(TAG, "Time to transform ATOM Raw is ${afterTransform - beforeTransform}")
                 Log.d(TAG, "ATOM parsing with ${f.items.size()} items at url ${f.link}")
                 return Result.right(f)
             } else{
                 return Result.wrong(feed.exception)
             }
         } else {
+            val before = System.currentTimeMillis()
             var feed = transformXmlToRss(downloadedContent)
+            val after = System.currentTimeMillis()
+            Log.d(TAG, "Time to parse XML to RSS  is ${after - before} with ${feed.value?.channel?.item?.size()} items")
             Log.d(TAG, "$url is a RSS Feed")
 
             if (feed.isTrue()){
+                val beforeTransform = System.currentTimeMillis()
                 var f = SyndicationFeed(feed.value, null, filter)
                 f.transformRss()
+                val afterTransform = System.currentTimeMillis()
+                Log.d(TAG, "Time to transform RSS Raw is ${afterTransform - beforeTransform}")
                 Log.d(TAG, "RSS parsing with ${f.items.size()} items at url ${f.link}")
                 return Result.right(f)
             } else{
