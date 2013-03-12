@@ -124,7 +124,18 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
 
             feedType = SyndicationFeedType.ATOM
 
+            var itemCounter = 0
+            val maxSize = filter?.maximumSize
+
             for(i in atom!!.entry!!.iterator()){
+                itemCounter++
+
+                //stop processing if there's a limit on how many items to be processed
+                if (maxSize != null && itemCounter > maxSize){
+                    Log.d(TAG, "Max size of limit reached at $itemCounter")
+                    break
+                }
+
                 val fi = SyndicationFeedItem()
                 fi.title = i.title
 
