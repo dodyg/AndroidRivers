@@ -1,0 +1,713 @@
+Code,AreaID,      URL,Site Name,State/Province,*Main Category*
+aaa,172,http://annarbor.craigslist.org,ann arbor,Michigan,*US*
+abb,471,http://abbotsford.craigslist.ca,fraser valley,British Columbia,*Canada*
+abi,364,http://abilene.craigslist.org,abilene,Texas,*US*
+abq,50,http://albuquerque.craigslist.org,albuquerque,New Mexico,*US*
+abr,682,http://nesd.craigslist.org,northeast SD,South Dakota,*US*
+aby,637,http://albanyga.craigslist.org,albany,Georgia,*US*
+abz,318,http://aberdeen.craigslist.co.uk,aberdeen,United Kingdom,*Europe*
+aca,512,http://acapulco.craigslist.com.mx,acapulco,Mexico,*Latin America and Caribbean*
+acc,575,http://accra.craigslist.org,ghana,Ghana,*Africa*
+add,576,http://addisababa.craigslist.org,ethiopia,Ethiopia,*Africa*
+adl,68,http://adelaide.craigslist.com.au,adelaide,Australia,*Oceania*
+aex,644,http://cenla.craigslist.org,central louisiana,Louisiana,*US*
+agp,539,http://malaga.craigslist.es,malaga,Spain,*Europe*
+ahn,258,http://athensga.craigslist.org,athens,Georgia,*US*
+akl,69,http://auckland.craigslist.org,auckland,New Zealand,*Oceania*
+alb,59,http://albany.craigslist.org,albany,New York,*US*
+alc,533,http://alicante.craigslist.es,alicante,Spain,*Europe*
+alt,167,http://allentown.craigslist.org,lehigh valley,Pennsylvania,*US*
+ama,269,http://amarillo.craigslist.org,amarillo,Texas,*US*
+amd,450,http://ahmedabad.craigslist.co.in,ahmedabad,India,"*Asia, Pacific and Middle East*"
+ame,445,http://ames.craigslist.org,ames,Iowa,*US*
+ams,82,http://amsterdam.craigslist.org,amsterdam / randstad,Netherlands,*Europe*
+anb,559,http://gadsden.craigslist.org,gadsden-anniston,Alabama,*US*
+anc,51,http://anchorage.craigslist.org,anchorage / mat-su,Alaska,*US*
+anp,460,http://annapolis.craigslist.org,annapolis,Maryland,*US*
+aoo,355,http://altoona.craigslist.org,altoona-johnstown,Pennsylvania,*US*
+app,243,http://appleton.craigslist.org,appleton-oshkosh-FDL,Wisconsin,*US*
+ash,171,http://asheville.craigslist.org,asheville,North Carolina,*US*
+ath,144,http://athens.craigslist.gr,greece,Greece,*Europe*
+atl,14,http://atlanta.craigslist.org,atlanta,Georgia,*US*
+aub,372,http://auburn.craigslist.org,auburn,Alabama,*US*
+aug,256,http://augusta.craigslist.org,augusta,Georgia,*US*
+aus,15,http://austin.craigslist.org,austin,Texas,*US*
+avp,276,http://scranton.craigslist.org,scranton / wilkes-barre,Pennsylvania,*US*
+bak,63,http://bakersfield.craigslist.org,bakersfield,California,*US*
+bal,34,http://baltimore.craigslist.org,baltimore,Maryland,*US*
+bar,83,http://barcelona.craigslist.es,barcelona,Spain,*Europe*
+bbi,612,http://bhubaneswar.craigslist.co.in,bhubaneswar,India,"*Asia, Pacific and Middle East*"
+bcd,606,http://bacolod.craigslist.com.ph,bacolod,Philippines,"*Asia, Pacific and Middle East*"
+bcs,406,http://bajasur.craigslist.com.mx,baja california sur,Mexico,*Latin America and Caribbean*
+bel,483,http://belleville.craigslist.ca,belleville,Ontario,*Canada*
+ber,108,http://berlin.craigslist.de,berlin,Germany,*Europe*
+bey,296,http://beirut.craigslist.org,"beirut, lebanon",Lebanon,"*Asia, Pacific and Middle East*"
+bfd,626,http://brantford.craigslist.ca,brantford-woodstock,Ontario,*Canada*
+bff,669,http://scottsbluff.craigslist.org,scottsbluff / panhandle,Nebraska,*US*
+bgd,588,http://baghdad.craigslist.org,iraq,Iraq,"*Asia, Pacific and Middle East*"
+bgl,295,http://bangladesh.craigslist.org,bangladesh,Bangladesh,"*Asia, Pacific and Middle East*"
+bgm,248,http://binghamton.craigslist.org,binghamton,New York,*US*
+bhm,127,http://bham.craigslist.org,birmingham,Alabama,*US*
+bhx,72,http://birmingham.craigslist.co.uk,birmingham / west mids,United Kingdom,*Europe*
+bil,657,http://billings.craigslist.org,billings,Montana,*US*
+bio,535,http://bilbao.craigslist.es,bilbao,Spain,*Europe*
+bis,666,http://bismarck.craigslist.org,bismarck,North Dakota,*US*
+bji,663,http://bemidji.craigslist.org,bemidji,Minnesota,*US*
+bjx,431,http://guanajuato.craigslist.com.mx,guanajuato,Mexico,*Latin America and Caribbean*
+bkk,156,http://bangkok.craigslist.co.th,thailand,Thailand,"*Asia, Pacific and Middle East*"
+blf,115,http://belfast.craigslist.co.uk,belfast,United Kingdom,*Europe*
+blg,396,http://bologna.craigslist.it,bologna,Italy,*Europe*
+blg,342,http://bgky.craigslist.org,bowling green,Kentucky,*US*
+bli,217,http://bellingham.craigslist.org,bellingham,Washington,*US*
+bln,344,http://bn.craigslist.org,bloomington-normal,Illinois,*US*
+bmg,229,http://bloomington.craigslist.org,bloomington,Indiana,*US*
+bnc,446,http://boone.craigslist.org,boone,North Carolina,*US*
+bnd,233,http://bend.craigslist.org,bend,Oregon,*US*
+bne,66,http://brisbane.craigslist.com.au,brisbane,Australia,*Oceania*
+bng,84,http://bangalore.craigslist.co.in,bangalore,India,"*Asia, Pacific and Middle East*"
+bod,412,http://bordeaux.craigslist.org,bordeaux,France,*Europe*
+bog,393,http://colombia.craigslist.org,colombia,Colombia,*Latin America and Caribbean*
+boi,52,http://boise.craigslist.org,boise,Idaho,*US*
+bos,4,http://boston.craigslist.org,boston,Massachusetts,*US*
+bou,319,http://boulder.craigslist.org,boulder,Colorado,*US*
+bpt,264,http://beaumont.craigslist.org,beaumont / port arthur,Texas,*US*
+brd,664,http://brainerd.craigslist.org,brainerd,Minnesota,*US*
+bri,398,http://brighton.craigslist.co.uk,brighton,United Kingdom,*Europe*
+brl,93,http://burlington.craigslist.org,vermont,Vermont,*US*
+brm,522,http://bremen.craigslist.de,bremen,Germany,*Europe*
+brn,529,http://bern.craigslist.ch,bern,Switzerland,*Europe*
+bro,266,http://brownsville.craigslist.org,brownsville,Texas,*US*
+brr,389,http://barrie.craigslist.ca,barrie,Ontario,*Canada*
+brs,117,http://bristol.craigslist.co.uk,bristol,United Kingdom,*Europe*
+bru,109,http://brussels.craigslist.org,belgium,Belgium,*Europe*
+bsb,514,http://brasilia.craigslist.org,brasilia,Brazil,*Latin America and Caribbean*
+bsl,528,http://basel.craigslist.ch,basel,Switzerland,*Europe*
+btc,628,http://battlecreek.craigslist.org,battle creek,Michigan,*US*
+bth,494,http://bath.craigslist.co.uk,bath,United Kingdom,*Europe*
+btm,661,http://butte.craigslist.org,butte,Montana,*US*
+btr,199,http://batonrouge.craigslist.org,baton rouge,Louisiana,*US*
+bud,153,http://budapest.craigslist.org,budapest,Hungary,*Europe*
+bue,114,http://buenosaires.craigslist.org,buenos aires,Argentina,*Latin America and Caribbean*
+buf,40,http://buffalo.craigslist.org,buffalo,New York,*US*
+buh,574,http://bucharest.craigslist.org,romania,Romania,*Europe*
+bwk,570,http://brunswick.craigslist.org,brunswick,Georgia,*US*
+bzn,658,http://bozeman.craigslist.org,bozeman,Montana,*US*
+cae,101,http://columbia.craigslist.org,columbia,South Carolina,*US*
+cai,162,http://cairo.craigslist.org,egypt,Egypt,*Africa*
+cak,251,http://akroncanton.craigslist.org,akron / canton,Ohio,*US*
+cam,312,http://cambridge.craigslist.co.uk,"cambridge, UK",United Kingdom,*Europe*
+can,409,http://guangzhou.craigslist.com.cn,guangzhou,China,"*Asia, Pacific and Middle East*"
+cap,239,http://capecod.craigslist.org,cape cod / islands,Massachusetts,*US*
+cas,580,http://casablanca.craigslist.org,morocco,Morocco,*Africa*
+cat,451,http://catskills.craigslist.org,catskills,New York,*US*
+cbd,345,http://carbondale.craigslist.org,southern illinois,Illinois,*US*
+cbg,705,http://chambersburg.craigslist.org,cumberland valley,Pennsylvania,*US*
+cbo,621,http://cariboo.craigslist.ca,cariboo,British Columbia,*Canada*
+cbr,489,http://canberra.craigslist.com.au,canberra,Australia,*Oceania*
+ccs,178,http://caracas.craigslist.org,venezuela,Venezuela,*Latin America and Caribbean*
+cdo,604,http://cdo.craigslist.com.ph,cagayan de oro,Philippines,"*Asia, Pacific and Middle East*"
+cdz,536,http://cadiz.craigslist.es,cadiz,Spain,*Europe*
+ceb,548,http://cebu.craigslist.com.ph,cebu,Philippines,"*Asia, Pacific and Middle East*"
+ced,340,http://cedarrapids.craigslist.org,cedar rapids,Iowa,*US*
+cfl,639,http://cfl.craigslist.org,heartland florida,Florida,*US*
+cgn,313,http://cologne.craigslist.de,cologne,Germany,*Europe*
+cha,41,http://charlotte.craigslist.org,charlotte,North Carolina,*US*
+chc,187,http://chico.craigslist.org,chico,California,*US*
+che,182,http://chennai.craigslist.co.in,chennai (madras),India,"*Asia, Pacific and Middle East*"
+chh,505,http://chihuahua.craigslist.com.mx,chihuahua,Mexico,*Latin America and Caribbean*
+chi,11,http://chicago.craigslist.org,chicago,Illinois,*US*
+chk,484,http://chatham.craigslist.ca,chatham-kent,Ontario,*Canada*
+chl,701,http://chillicothe.craigslist.org,chillicothe,Ohio,*US*
+chm,190,http://chambana.craigslist.org,champaign urbana,Illinois,*US*
+chq,452,http://chautauqua.craigslist.org,chautauqua,New York,*US*
+chr,301,http://christchurch.craigslist.org,christchurch,New Zealand,*Oceania*
+chs,128,http://charleston.craigslist.org,charleston,South Carolina,*US*
+cht,220,http://chattanooga.craigslist.org,chattanooga,Tennessee,*US*
+cin,35,http://cincinnati.craigslist.org,cincinnati,Ohio,*US*
+cjs,511,http://juarez.craigslist.com.mx,ciudad juarez,Mexico,*Latin America and Caribbean*
+ckg,601,http://chongqing.craigslist.com.cn,chongqing,China,"*Asia, Pacific and Middle East*"
+ckv,465,http://clarksville.craigslist.org,clarksville,Tennessee,*US*
+cle,27,http://cleveland.craigslist.org,cleveland,Ohio,*US*
+clg,77,http://calgary.craigslist.ca,calgary,Alberta,*Canada*
+cmu,434,http://centralmich.craigslist.org,central michigan,Michigan,*US*
+cmx,473,http://comoxvalley.craigslist.ca,comox valley,British Columbia,*Canada*
+cnf,513,http://belohorizonte.craigslist.org,belo horizonte,Brazil,*Latin America and Caribbean*
+cnj,349,http://cnj.craigslist.org,central NJ,New Jersey,*US*
+cns,592,http://cairns.craigslist.com.au,cairns,Australia,*Oceania*
+cok,410,http://kerala.craigslist.co.in,kerala,India,"*Asia, Pacific and Middle East*"
+col,42,http://columbus.craigslist.org,columbus,Ohio,*US*
+coo,670,http://cookeville.craigslist.org,cookeville,Tennessee,*US*
+cop,107,http://copenhagen.craigslist.org,copenhagen,Denmark,*Europe*
+cor,321,http://oregoncoast.craigslist.org,oregon coast,Oregon,*US*
+cos,210,http://cosprings.craigslist.org,colorado springs,Colorado,*US*
+cou,222,http://columbiamo.craigslist.org,columbia / jeff city,Missouri,*US*
+cov,495,http://coventry.craigslist.co.uk,coventry,United Kingdom,*Europe*
+cpt,136,http://capetown.craigslist.co.za,cape town,South Africa,*Africa*
+crb,299,http://caribbean.craigslist.org,caribbean islands,*Latin America and Caribbean*
+cri,179,http://costarica.craigslist.org,costa rica,Costa Rica,*Latin America and Caribbean*
+crk,608,http://pampanga.craigslist.com.ph,pampanga,Philippines,"*Asia, Pacific and Middle East*"
+crp,265,http://corpuschristi.craigslist.org,corpus christi,Texas,*US*
+crv,350,http://corvallis.craigslist.org,corvallis/albany,Oregon,*US*
+crw,439,http://charlestonwv.craigslist.org,charleston,West Virginia,*US*
+csd,681,http://csd.craigslist.org,pierre / central SD,South Dakota,*US*
+csg,343,http://columbusga.craigslist.org,columbus,Georgia,*US*
+cst,326,http://collegestation.craigslist.org,college station,Texas,*US*
+ctu,602,http://chengdu.craigslist.com.cn,chengdu,China,"*Asia, Pacific and Middle East*"
+cvn,653,http://clovis.craigslist.org,clovis / portales,New Mexico,*US*
+cwb,517,http://curitiba.craigslist.org,curitiba,Brazil,*Latin America and Caribbean*
+cym,116,http://cardiff.craigslist.co.uk,cardiff / wales,United Kingdom,*Europe*
+dab,238,http://daytona.craigslist.org,daytona beach,Florida,*US*
+dal,21,http://dallas.craigslist.org,dallas / fort worth,Texas,*US*
+day,131,http://dayton.craigslist.org,dayton / springfield,Ohio,*US*
+dbq,362,http://dubuque.craigslist.org,dubuque,Iowa,*US*
+dby,496,http://derby.craigslist.co.uk,derby,United Kingdom,*Europe*
+del,86,http://delhi.craigslist.co.in,delhi,India,"*Asia, Pacific and Middle East*"
+den,13,http://denver.craigslist.org,denver,Colorado,*US*
+det,22,http://detroit.craigslist.org,detroit metro,Michigan,*US*
+dhn,467,http://dothan.craigslist.org,dothan,Alabama,*US*
+dil,569,http://decatur.craigslist.org,decatur,Illinois,*US*
+dlc,600,http://dalian.craigslist.com.cn,dalian,China,"*Asia, Pacific and Middle East*"
+dlh,255,http://duluth.craigslist.org,duluth / superior,Minnesota,*US*
+dlw,193,http://delaware.craigslist.org,delaware,Delaware,*US*
+dnd,498,http://dundee.craigslist.co.uk,dundee,United Kingdom,*Europe*
+dnv,367,http://danville.craigslist.org,danville,Virginia,*US*
+drs,521,http://dresden.craigslist.de,dresden,Germany,*Europe*
+drt,647,http://delrio.craigslist.org,del rio / eagle pass,Texas,*US*
+drw,491,http://darwin.craigslist.com.au,darwin,Australia,*Oceania*
+dsm,98,http://desmoines.craigslist.org,des moines,Iowa,*US*
+dub,74,http://dublin.craigslist.org,dublin,Ireland,*Europe*
+dud,594,http://dunedin.craigslist.co.nz,dunedin,New Zealand,*Oceania*
+dur,303,http://durban.craigslist.co.za,durban,South Africa,*Africa*
+dus,418,http://dusseldorf.craigslist.de,dusseldorf,Germany,*Europe*
+dvc,399,http://devon.craigslist.co.uk,devon & cornwall,United Kingdom,*Europe*
+dvo,547,http://davaocity.craigslist.com.ph,davao city,Philippines,"*Asia, Pacific and Middle East*"
+eau,242,http://eauclaire.craigslist.org,eau claire,Wisconsin,*US*
+eco,713,http://eastco.craigslist.org,eastern CO,Colorado,*US*
+edi,75,http://edinburgh.craigslist.co.uk,edinburgh,United Kingdom,*Europe*
+edm,78,http://edmonton.craigslist.ca,edmonton,Alberta,*Canada*
+eid,424,http://eastidaho.craigslist.org,east idaho,Idaho,*US*
+eky,674,http://eastky.craigslist.org,eastern kentucky,Kentucky,*US*
+elk,652,http://elko.craigslist.org,elko,Nevada,*US*
+elm,453,http://elmira.craigslist.org,elmira-corning,New York,*US*
+elp,132,http://elpaso.craigslist.org,el paso,Texas,*US*
+eml,400,http://eastmids.craigslist.co.uk,east midlands,United Kingdom,*Europe*
+ena,678,http://kenai.craigslist.org,kenai peninsula,Alaska,*US*
+enc,335,http://eastnc.craigslist.org,eastern NC,North Carolina,*US*
+end,650,http://enid.craigslist.org,northwest OK,Oklahoma,*US*
+eor,322,http://eastoregon.craigslist.org,east oregon,Oregon,*US*
+eri,275,http://erie.craigslist.org,erie,Pennsylvania,*US*
+esh,328,http://easternshore.craigslist.org,eastern shore,Maryland,*US*
+ess,523,http://essen.craigslist.de,essen / ruhr,Germany,*Europe*
+esx,497,http://essex.craigslist.co.uk,essex,United Kingdom,*Europe*
+etx,308,http://easttexas.craigslist.org,tyler / east TX,Texas,*US*
+eug,94,http://eugene.craigslist.org,eugene,Oregon,*US*
+ew,227,http://evansville.craigslist.org,evansville,Indiana,*US*
+ewv,444,http://martinsburg.craigslist.org,eastern panhandle,West Virginia,*US*
+ezf,457,http://fredericksburg.craigslist.org,fredericksburg,Virginia,*US*
+fai,677,http://fairbanks.craigslist.org,fairbanks,Alaska,*US*
+far,435,http://fargo.craigslist.org,fargo / moorhead,North Dakota,*US*
+fay,273,http://fayetteville.craigslist.org,fayetteville,North Carolina,*US*
+fca,662,http://kalispell.craigslist.org,kalispell,Montana,*US*
+fdk,633,http://frederick.craigslist.org,frederick,Maryland,*US*
+fgl,685,http://fingerlakes.craigslist.org,finger lakes,New York,*US*
+fhu,468,http://sierravista.craigslist.org,sierra vista,Arizona,*US*
+flg,244,http://flagstaff.craigslist.org,flagstaff / sedona,Arizona,*US*
+flo,464,http://florencesc.craigslist.org,florence,South Carolina,*US*
+flr,152,http://florence.craigslist.it,florence / tuscany,Italy,*Europe*
+fmc,477,http://ftmcmurray.craigslist.ca,ft mcmurray,Alberta,*Canada*
+fmy,125,http://fortmyers.craigslist.org,ft myers / SW florida,Florida,*US*
+fnm,568,http://farmington.craigslist.org,farmington,New Mexico,*US*
+fnt,259,http://flint.craigslist.org,flint,Michigan,*US*
+fra,141,http://frankfurt.craigslist.de,frankfurt,Germany,*Europe*
+fre,43,http://fresno.craigslist.org,fresno / madera,California,*US*
+fro,542,http://faro.craigslist.pt,faro / algarve,Portugal,*Europe*
+fsd,679,http://siouxfalls.craigslist.org,sioux falls / SE SD,South Dakota,*US*
+fsm,358,http://fortsmith.craigslist.org,fort smith,Arkansas,*US*
+ftc,287,http://fortcollins.craigslist.org,fort collins / north CO,Colorado,*US*
+ftd,693,http://fortdodge.craigslist.org,fort dodge,Iowa,*US*
+ftl,518,http://fortaleza.craigslist.org,fortaleza,Brazil,*Latin America and Caribbean*
+fuk,503,http://fukuoka.craigslist.jp,fukuoka,Japan,"*Asia, Pacific and Middle East*"
+fwa,226,http://fortwayne.craigslist.org,fort wayne,Indiana,*US*
+fyv,293,http://fayar.craigslist.org,fayetteville,Arkansas,*US*
+gbo,61,http://greensboro.craigslist.org,greensboro,North Carolina,*US*
+gdl,404,http://guadalajara.craigslist.com.mx,guadalajara,Mexico,*Latin America and Caribbean*
+gen,531,http://genoa.craigslist.it,genoa,Italy,*Europe*
+gfk,667,http://grandforks.craigslist.org,grand forks,North Dakota,*US*
+gfl,686,http://glensfalls.craigslist.org,glens falls,New York,*US*
+gil,432,http://grandisland.craigslist.org,grand island,Nebraska,*US*
+gjt,320,http://westslope.craigslist.org,western slope,Colorado,*US*
+gla,73,http://glasgow.craigslist.co.uk,glasgow,United Kingdom,*Europe*
+gld,373,http://goldcountry.craigslist.org,gold country,California,*US*
+gls,470,http://galveston.craigslist.org,galveston,Texas,*US*
+gnb,525,http://grenoble.craigslist.org,grenoble,France,*Europe*
+gnv,219,http://gainesville.craigslist.org,gainesville,Florida,*US*
+goa,430,http://goa.craigslist.co.in,goa,India,"*Asia, Pacific and Middle East*"
+gph,482,http://guelph.craigslist.ca,guelph,Ontario,*Canada*
+gpt,230,http://gulfport.craigslist.org,gulfport / biloxi,Mississippi,*US*
+grb,241,http://greenbay.craigslist.org,green bay,Wisconsin,*US*
+grk,327,http://killeen.craigslist.org,killeen / temple / ft hood,Texas,*US*
+grr,129,http://grandrapids.craigslist.org,grand rapids,Michigan,*US*
+grx,538,http://granada.craigslist.es,granada,Spain,*Europe*
+gsp,253,http://greenville.craigslist.org,greenville / upstate,South Carolina,*US*
+gtf,660,http://greatfalls.craigslist.org,great falls,Montana,*US*
+gua,585,http://guatemala.craigslist.org,guatemala,Guatemala,*Latin America and Caribbean*
+gum,245,http://micronesia.craigslist.org,guam-micronesia,Territories    ,*US*
+gum,245,http://micronesia.craigslist.org,guam-micronesia,??Guam,"*Asia, Pacific and Middle East*"
+gva,146,http://geneva.craigslist.ch,geneva,Switzerland,*Europe*
+haj,417,http://hannover.craigslist.de,hannover,Germany,*Europe*
+ham,140,http://hamburg.craigslist.de,hamburg,Germany,*Europe*
+hat,619,http://hat.craigslist.ca,medicine hat,Alberta,*Canada*
+hba,490,http://hobart.craigslist.com.au,tasmania,Australia,*Oceania*
+hdb,519,http://heidelberg.craigslist.de,heidelberg,Germany,*Europe*
+hel,145,http://helsinki.craigslist.fi,finland,Denmark,*Europe*
+hez,642,http://natchez.craigslist.org,southwest MS,Mississippi,*US*
+hfa,391,http://haifa.craigslist.org,haifa,Israel and Palestine,"*Asia, Pacific and Middle East*"
+hfx,174,http://halifax.craigslist.ca,halifax,Nova Scotia,*Canada*
+hgh,500,http://hangzhou.craigslist.com.cn,hangzhou,China,"*Asia, Pacific and Middle East*"
+hhi,353,http://hiltonhead.craigslist.org,hilton head,South Carolina,*US*
+hij,504,http://hiroshima.craigslist.jp,hiroshima,Japan,"*Asia, Pacific and Middle East*"
+hky,462,http://hickory.craigslist.org,hickory / lenoir,North Carolina,*US*
+hkz,87,http://hongkong.craigslist.hk,hong kong,Hong Kong,"*Asia, Pacific and Middle East*"
+hld,630,http://holland.craigslist.org,holland,Michigan,*US*
+hln,659,http://helena.craigslist.org,helena,Montana,*US*
+hmb,189,http://humboldt.craigslist.org,humboldt county,California,*US*
+hml,213,http://hamilton.craigslist.ca,hamilton-burlington,Ontario,*Canada*
+hnf,709,http://hanford.craigslist.org,hanford-corcoran,California,*US*
+hnl,28,http://honolulu.craigslist.org,hawaii,Hawaii,*US*
+hou,23,http://houston.craigslist.org,houston,Texas,*US*
+hpr,595,http://pretoria.craigslist.co.za,pretoria,South Africa,*Africa*
+hrm,506,http://hermosillo.craigslist.com.mx,hermosillo,Mexico,*Latin America and Caribbean*
+hrs,166,http://harrisburg.craigslist.org,harrisburg,Pennsylvania,*US*
+hsv,231,http://huntsville.craigslist.org,huntsville / decatur,Alabama,*US*
+htf,44,http://hartford.craigslist.org,hartford,Connecticut,*US*
+hts,442,http://huntington.craigslist.org,huntington-ashland,West Virginia,*US*
+hud,249,http://hudsonvalley.craigslist.org,hudson valley,New York,*US*
+hum,643,http://houma.craigslist.org,houma,Louisiana,*US*
+hvn,168,http://newhaven.craigslist.org,new haven,Connecticut,*US*
+hyd,183,http://hyderabad.craigslist.co.in,hyderabad,India,"*Asia, Pacific and Middle East*"
+iac,339,http://iowacity.craigslist.org,iowa city,Iowa,*US*
+ibz,534,http://baleares.craigslist.es,baleares,Spain,*Europe*
+idr,549,http://indore.craigslist.co.in,indore,India,"*Asia, Pacific and Middle East*"
+ilo,605,http://iloilo.craigslist.com.ph,iloilo,Philippines,"*Asia, Pacific and Middle East*"
+imp,455,http://imperial.craigslist.org,imperial county,California,*US*
+ind,45,http://indianapolis.craigslist.org,indianapolis,Indiana,*US*
+inl,104,http://inlandempire.craigslist.org,inland empire,California,*US*
+isp,250,http://longisland.craigslist.org,long island,New York,*US*
+ist,148,http://istanbul.craigslist.com.tr,turkey,Turkey,*Europe*
+ith,201,http://ithaca.craigslist.org,ithaca,New York,*US*
+ixc,610,http://chandigarh.craigslist.co.in,chandigarh,India,"*Asia, Pacific and Middle East*"
+jai,550,http://jaipur.craigslist.co.in,jaipur,India,"*Asia, Pacific and Middle East*"
+jan,134,http://jackson.craigslist.org,jackson,Mississippi,*US*
+jax,80,http://jacksonville.craigslist.org,jacksonville,Florida,*US*
+jbr,425,http://jonesboro.craigslist.org,jonesboro,Arkansas,*US*
+jfn,700,http://ashtabula.craigslist.org,ashtabula,Ohio,*US*
+jkt,157,http://jakarta.craigslist.org,indonesia,Indonesia,"*Asia, Pacific and Middle East*"
+jln,423,http://joplin.craigslist.org,joplin,Missouri,*US*
+jnb,185,http://johannesburg.craigslist.co.za,johannesburg,South Africa,*Africa*
+jnu,676,http://juneau.craigslist.org,southeast alaska,Alaska,*US*
+jrs,161,http://jerusalem.craigslist.org,jerusalem,Israel and Palestine,"*Asia, Pacific and Middle East*"
+jvl,553,http://janesville.craigslist.org,janesville,Wisconsin,*US*
+jxn,426,http://jxn.craigslist.org,jackson,Michigan,*US*
+jxt,558,http://jacksontn.craigslist.org,jackson ,Tennessee,*US*
+jys,561,http://jerseyshore.craigslist.org,jersey shore,New Jersey,*US*
+kbp,583,http://ukraine.craigslist.org,ukraine,Ukraine,*Europe*
+kch,214,http://kitchener.craigslist.ca,kitchener-waterloo-cambridge,Ontario,*Canada*
+kel,380,http://kelowna.craigslist.ca,kelowna / okanagan,British Columbia,*Canada*
+ken,493,http://kent.craigslist.co.uk,kent,United Kingdom,*Europe*
+key,330,http://keys.craigslist.org,florida keys,Florida,*US*
+klf,675,http://klamath.craigslist.org,klamath falls,Oregon,*US*
+klt,618,http://kaiserslautern.craigslist.de,kaiserslautern,Germany,*Europe*
+kml,381,http://kamloops.craigslist.ca,kamloops,British Columbia,*Canada*
+kng,385,http://kingston.craigslist.ca,kingston,Ontario,*Canada*
+knx,202,http://knoxville.craigslist.org,knoxville,Tennessee,*US*
+kol,184,http://kolkata.craigslist.co.in,kolkata (calcutta),India,"*Asia, Pacific and Middle East*"
+koo,474,http://cranbrook.craigslist.ca,kootenays,British Columbia,*Canada*
+kpr,324,http://kpr.craigslist.org,kennewick-pasco-richland,Washington,*US*
+krk,696,http://kirksville.craigslist.org,kirksville,Missouri,*US*
+ksc,30,http://kansascity.craigslist.org,kansas city,Missouri,*US*
+kwi,577,http://kuwait.craigslist.org,kuwait,Kuwait,"*Asia, Pacific and Middle East*"
+kzo,261,http://kalamazoo.craigslist.org,kalamazoo,Michigan,*US*
+laf,360,http://tippecanoe.craigslist.org,lafayette / west lafayette,Indiana,*US*
+lal,376,http://lakeland.craigslist.org,lakeland,Florida,*US*
+lan,212,http://lansing.craigslist.org,lansing,Michigan,*US*
+lau,615,http://lausanne.craigslist.ch,lausanne,Switzerland,*Europe*
+law,422,http://lawton.craigslist.org,lawton,Oklahoma,*US*
+lax,7,http://losangeles.craigslist.org,los angeles,California,*US*
+lbb,267,http://lubbock.craigslist.org,lubbock,Texas,*US*
+lbf,668,http://northplatte.craigslist.org,north platte,Nebraska,*US*
+lcq,638,http://lakecity.craigslist.org,north central FL,Florida,*US*
+lcr,334,http://lascruces.craigslist.org,las cruces,New Mexico,*US*
+ldn,24,http://london.craigslist.co.uk,london,United Kingdom,*Europe*
+lds,123,http://leeds.craigslist.co.uk,leeds,United Kingdom,*Europe*
+lej,520,http://leipzig.craigslist.de,leipzig,Germany,*Europe*
+lex,133,http://lexington.craigslist.org,lexington,Kentucky,*US*
+lft,283,http://lafayette.craigslist.org,lafayette,Louisiana,*US*
+lgu,448,http://logan.craigslist.org,logan,Utah,*US*
+lil,413,http://lille.craigslist.org,lille,France,*Europe*
+lim,159,http://lima.craigslist.org,peru,Peru,*Latin America and Caribbean*
+lis,540,http://lisbon.craigslist.pt,lisbon,Portugal,*Europe*
+lit,100,http://littlerock.craigslist.org,little rock,Arkansas,*US*
+liv,118,http://liverpool.craigslist.co.uk,liverpool,United Kingdom,*Europe*
+lkc,284,http://lakecharles.craigslist.org,lake charles,Louisiana,*US*
+lko,611,http://lucknow.craigslist.co.in,lucknow,India,"*Asia, Pacific and Middle East*"
+lma,437,http://limaohio.craigslist.org,lima / findlay,Ohio,*US*
+lnk,282,http://lincoln.craigslist.org,lincoln,Nebraska,*US*
+lns,279,http://lancaster.craigslist.org,lancaster,Pennsylvania,*US*
+lon,234,http://londonon.craigslist.ca,london,Ontario,*Canada*
+lou,58,http://louisville.craigslist.org,louisville,Kentucky,*US*
+loz,695,http://loz.craigslist.org,lake of the ozarks,Missouri,*US*
+lpb,578,http://lapaz.craigslist.org,bolivia,Bolivia,*Latin America and Caribbean*
+lrd,271,http://laredo.craigslist.org,laredo,Texas,*US*
+lse,363,http://lacrosse.craigslist.org,la crosse,Wisconsin,*US*
+lsl,698,http://lasalle.craigslist.org,la salle co,Illinois,*US*
+lth,476,http://lethbridge.craigslist.ca,lethbridge,Alberta,*Canada*
+lux,544,http://luxembourg.craigslist.org,luxembourg,Luxembourg,*Europe*
+lvg,26,http://lasvegas.craigslist.org,las vegas,Nevada,*US*
+lwr,347,http://lawrence.craigslist.org,lawrence,Kansas,*US*
+lws,654,http://lewiston.craigslist.org,lewiston / clarkston,Idaho,*US*
+lyn,366,http://lynchburg.craigslist.org,lynchburg,Virginia,*US*
+lys,150,http://lyon.craigslist.org,lyon,France,*Europe*
+mad,165,http://madison.craigslist.org,madison,Wisconsin,*US*
+man,71,http://manchester.craigslist.co.uk,manchester,United Kingdom,*Europe*
+mbs,260,http://saginaw.craigslist.org,saginaw-midland-baycity,Michigan,*US*
+mca,263,http://mcallen.craigslist.org,mcallen / edinburg,Texas,*US*
+mcn,257,http://macon.craigslist.org,macon / warner robins,Georgia,*US*
+mdd,110,http://madrid.craigslist.es,madrid,Spain,*Europe*
+mdo,454,http://mendocino.craigslist.org,mendocino county,California,*US*
+mdv,706,http://meadville.craigslist.org,meadville,Pennsylvania,*US*
+mei,641,http://meridian.craigslist.org,meridian,Mississippi,*US*
+mel,65,http://melbourne.craigslist.com.au,melbourne,Australia,*Oceania*
+mem,46,http://memphis.craigslist.org,memphis,Tennessee,*US*
+mer,285,http://merced.craigslist.org,merced,California,*US*
+mex,91,http://mexicocity.craigslist.com.mx,mexico city,Mexico,*Latin America and Caribbean*
+mfd,436,http://mansfield.craigslist.org,mansfield,Ohio,*US*
+mfr,216,http://medford.craigslist.org,medford-ashland,Oregon,*US*
+mga,586,http://managua.craigslist.org,nicaragua,Nicaragua,*Latin America and Caribbean*
+mgm,207,http://montgomery.craigslist.org,montgomery,Alabama,*US*
+mhk,428,http://ksu.craigslist.org,manhattan,Kansas,*US*
+mhv,565,http://mohave.craigslist.org,mohave county,Arizona,*US*
+mia,20,http://fortlauderdale.craigslist.org,fort lauderdale,Florida,*US*
+mia,20,http://miami.craigslist.org,south florida,Florida,*US*
+mia,20,http://westpalmbeach.craigslist.org,west palm beach,Florida,*US*
+mil,47,http://milwaukee.craigslist.org,milwaukee,Wisconsin,*US*
+min,19,http://minneapolis.craigslist.org,minneapolis / st paul,Minnesota,*US*
+mkg,554,http://muskegon.craigslist.org,muskegon,Michigan,*US*
+mkt,421,http://mankato.craigslist.org,mankato,Minnesota,*US*
+mlb,331,http://spacecoast.craigslist.org,space coast,Florida,*US*
+mli,307,http://quadcities.craigslist.org,quad cities,Iowa,*US*
+mlk,655,http://moseslake.craigslist.org,moses lake,Washington,*US*
+mlu,563,http://monroemi.craigslist.org,monroe,Louisiana,*US*
+mly,297,http://malaysia.craigslist.org,malaysia,Malaysia,"*Asia, Pacific and Middle East*"
+mml,665,http://marshall.craigslist.org,southwest MN,Minnesota,*US*
+mne,169,http://maine.craigslist.org,maine,Maine,*US*
+mnl,90,http://manila.craigslist.com.ph,manila,Philippines,"*Asia, Pacific and Middle East*"
+mnr,629,http://monroe.craigslist.org,monroe,Michigan,*US*
+mnt,192,http://montana.craigslist.org,montana (old),Montana,*US*
+mob,200,http://mobile.craigslist.org,mobile,Alabama,*US*
+mod,96,http://modesto.craigslist.org,modesto,California,*US*
+mon,49,http://montreal.craigslist.ca,montreal,Quebec,*Canada*
+mos,137,http://moscow.craigslist.org,moscow,Russian Federation,*Europe*
+mpl,524,http://montpellier.craigslist.org,montpellier,France,*Europe*
+mrs,149,http://marseilles.craigslist.org,marseille,France,*Europe*
+msc,692,http://masoncity.craigslist.org,mason city,Iowa,*US*
+msl,560,http://shoals.craigslist.org,florence / muscle shoals,Alabama,*US*
+mso,656,http://missoula.craigslist.org,missoula,Montana,*US*
+mtb,102,http://monterey.craigslist.org,monterey bay,California,*US*
+mto,699,http://mattoon.craigslist.org,mattoon-charleston,Illinois,*US*
+mty,408,http://monterrey.craigslist.com.mx,monterrey,Mexico,*Latin America and Caribbean*
+muc,142,http://munich.craigslist.de,munich,Germany,*Europe*
+mum,85,http://mumbai.craigslist.co.in,mumbai,India,"*Asia, Pacific and Middle East*"
+mun,361,http://muncie.craigslist.org,muncie / anderson,Indiana,*US*
+mvd,543,http://montevideo.craigslist.org,montevideo,Uruguay,*Latin America and Caribbean*
+mvw,461,http://skagit.craigslist.org,skagit / island / SJI,Washington,*US*
+mxp,111,http://milan.craigslist.it,milan,Italy,*Europe*
+myr,254,http://myrtlebeach.craigslist.org,myrtle beach,South Carolina,*US*
+mzt,509,http://mazatlan.craigslist.com.mx,mazatlan,Mexico,*Latin America and Caribbean*
+nap,151,http://naples.craigslist.it,napoli / campania,Italy,*Europe*
+nbo,582,http://kenya.craigslist.org,kenya,Kenya,*Africa*
+nbw,379,http://newbrunswick.craigslist.ca,new brunswick,New Brunswick,*Canada*
+nce,306,http://cotedazur.craigslist.org,nice / cote d'azur,France,*Europe*
+ncl,163,http://newcastle.craigslist.co.uk,newcastle / NE england,United Kingdom,*Europe*
+nct,354,http://nwct.craigslist.org,northwest CT,Connecticut,*US*
+ndk,196,http://nd.craigslist.org,north dakota,North Dakota,*US*
+nfk,48,http://norfolk.craigslist.org,hampton roads,Virginia,*US*
+nfl,305,http://newfoundland.craigslist.ca,st john's,Newfoundland and Labrador,*Canada*
+ngo,501,http://nagoya.craigslist.jp,nagoya,Japan,"*Asia, Pacific and Middle East*"
+nhm,198,http://nh.craigslist.org,new hampshire,New Hampshire,*US*
+njy,170,http://newjersey.craigslist.org,north jersey,New Jersey,*US*
+nkg,599,http://nanjing.craigslist.com.cn,nanjing,China,"*Asia, Pacific and Middle East*"
+nlo,281,http://newlondon.craigslist.org,eastern CT,Connecticut,*US*
+nmi,309,http://nmi.craigslist.org,northern michigan,Michigan,*US*
+nmo,382,http://nanaimo.craigslist.ca,nanaimo,British Columbia,*Canada*
+nms,375,http://northmiss.craigslist.org,north mississippi,Mississippi,*US*
+nor,31,http://neworleans.craigslist.org,new orleans,Louisiana,*US*
+not,492,http://nottingham.craigslist.co.uk,nottingham,United Kingdom,*Europe*
+nph,703,http://tuscarawas.craigslist.org,tuscarawas co,Ohio,*US*
+nsc,386,http://niagara.craigslist.ca,niagara region,Ontario,*Canada*
+nsh,32,http://nashville.craigslist.org,nashville,Tennessee,*US*
+nte,415,http://loire.craigslist.org,loire valley,France,*Europe*
+ntl,591,http://ntl.craigslist.com.au,"newcastle, NSW",Australia,*Oceania*
+nue,614,http://nuremberg.craigslist.de,nuremberg,Germany,*Europe*
+nwg,636,http://nwga.craigslist.org,northwest GA,Georgia,*US*
+nwh,402,http://norwich.craigslist.co.uk,east anglia,United Kingdom,*Europe*
+nwi,631,http://northernwi.craigslist.org,northern WI,Wisconsin,*US*
+nwk,688,http://nwks.craigslist.org,northwest KS,Kansas,*US*
+nyc,3,http://newyork.craigslist.org,new york city,New York,*US*
+oaj,634,http://onslow.craigslist.org,jacksonville,North Carolina,*US*
+oax,510,http://oaxaca.craigslist.com.mx,oaxaca,Mexico,*Latin America and Caribbean*
+obx,336,http://outerbanks.craigslist.org,outer banks,North Carolina,*US*
+oca,333,http://ocala.craigslist.org,ocala,Florida,*US*
+och,645,http://nacogdoches.craigslist.org,deep east texas,Texas,*US*
+odm,268,http://odessa.craigslist.org,odessa / midland,Texas,*US*
+ogd,351,http://ogden.craigslist.org,ogden-clearfield,Utah,*US*
+ohu,438,http://athensohio.craigslist.org,athens,Ohio,*US*
+oka,429,http://okinawa.craigslist.jp,okinawa,Japan,"*Asia, Pacific and Middle East*"
+okc,54,http://oklahomacity.craigslist.org,oklahoma city,Oklahoma,*US*
+okk,672,http://kokomo.craigslist.org,kokomo,Indiana,*US*
+okv,711,http://winchester.craigslist.org,winchester,Virginia,*US*
+olp,466,http://olympic.craigslist.org,olympic peninsula,Washington,*US*
+oma,55,http://omaha.craigslist.org,omaha / council bluffs,Nebraska,*US*
+onh,684,http://oneonta.craigslist.org,oneonta,New York,*US*
+ool,590,http://goldcoast.craigslist.com.au,gold coast,Australia,*Oceania*
+orc,103,http://orangecounty.craigslist.org,orange county,California,*US*
+orl,39,http://orlando.craigslist.org,orlando,Florida,*US*
+osa,120,http://osaka.craigslist.jp,osaka-kobe-kyoto,Japan,"*Asia, Pacific and Middle East*"
+osl,105,http://oslo.craigslist.org,norway,Norway,*Europe*
+osu,433,http://stillwater.craigslist.org,stillwater,Oklahoma,*US*
+ott,76,http://ottawa.craigslist.ca,ottawa-hull-gatineau,Ontario,*Canada*
+otu,691,http://ottumwa.craigslist.org,southeast IA,Iowa,*US*
+ovf,211,http://oxford.craigslist.co.uk,oxford,United Kingdom,*Europe*
+owb,673,http://owensboro.craigslist.org,owensboro,Kentucky,*US*
+ows,487,http://owensound.craigslist.ca,owen sound,Ontario,*Canada*
+oxr,208,http://ventura.craigslist.org,ventura county,California,*US*
+pak,294,http://pakistan.craigslist.org,pakistan,Pakistan,"*Asia, Pacific and Middle East*"
+pal,551,http://ramallah.craigslist.org,west bank,Israel and Palestine,"*Asia, Pacific and Middle East*"
+pan,298,http://panama.craigslist.org,panama,Panama,*Latin America and Caribbean*
+par,81,http://paris.craigslist.org,paris,France,*Europe*
+pax,620,http://peace.craigslist.ca,peace river country,Alberta,*Canada*
+pbl,508,http://puebla.craigslist.com.mx,puebla,Mexico,*Latin America and Caribbean*
+pdx,9,http://portland.craigslist.org,portland,Oregon,*US*
+peg,530,http://perugia.craigslist.it,perugia,Italy,*Europe*
+pei,304,http://pei.craigslist.ca,prince edward island,Prince Edward Island,*Canada*
+pek,154,http://beijing.craigslist.com.cn,beijing,China,"*Asia, Pacific and Middle East*"
+per,67,http://perth.craigslist.com.au,perth,Australia,*Oceania*
+pfn,562,http://panamacity.craigslist.org,panama city,Florida,*US*
+pgp,515,http://portoalegre.craigslist.org,porto alegre,Brazil,*Latin America and Caribbean*
+phi,17,http://philadelphia.craigslist.org,philadelphia,Pennsylvania,*US*
+phn,555,http://porthuron.craigslist.org,port huron,Michigan,*US*
+phx,18,http://phoenix.craigslist.org,phoenix,Arizona,*US*
+pia,224,http://peoria.craigslist.org,peoria,Illinois,*US*
+pit,33,http://pittsburgh.craigslist.org,pittsburgh,Pennsylvania,*US*
+pkb,441,http://parkersburg.craigslist.org,parkersburg-marietta,West Virginia,*US*
+plb,338,http://plattsburgh.craigslist.org,plattsburgh-adirondacks,New York,*US*
+plm,368,http://pullman.craigslist.org,pullman / moscow,Washington,*US*
+png,317,http://pune.craigslist.co.in,pune,India,"*Asia, Pacific and Middle East*"
+pns,203,http://pensacola.craigslist.org,pensacola,Florida,*US*
+poc,356,http://poconos.craigslist.org,poconos,Pennsylvania,*US*
+prc,419,http://prescott.craigslist.org,prescott,Arizona,*US*
+prg,138,http://prague.craigslist.cz,prague,Czech Republic,*Europe*
+pri,180,http://puertorico.craigslist.org,puerto rico,Territories    ,*US*
+pri,180,http://puertorico.craigslist.org,puerto rico,Puerto Rico,*Latin America and Caribbean*
+prv,38,http://providence.craigslist.org,rhode island,Rhode Island,*US*
+psl,332,http://treasure.craigslist.org,treasure coast,Florida,*US*
+psp,209,http://palmsprings.craigslist.org,palm springs,California,*US*
+psu,277,http://pennstate.craigslist.org,state college,Pennsylvania,*US*
+ptd,683,http://potsdam.craigslist.org,potsdam-canton-massena,New York,*US*
+pto,541,http://porto.craigslist.pt,porto,Portugal,*Europe*
+pub,315,http://pueblo.craigslist.org,pueblo,Colorado,*US*
+pvr,407,http://pv.craigslist.com.mx,puerto vallarta,Mexico,*Latin America and Caribbean*
+pvu,292,http://provo.craigslist.org,provo / orem,Utah,*US*
+qbc,175,http://quebec.craigslist.ca,quebec city,Quebec,*Canada*
+qcy,697,http://quincy.craigslist.org,western IL,Illinois,*US*
+qui,545,http://quito.craigslist.org,ecuador,Ecuador,*Latin America and Caribbean*
+rac,552,http://racine.craigslist.org,kenosha-racine,Wisconsin,*US*
+ral,36,http://raleigh.craigslist.org,raleigh / durham / CH,North Carolina,*US*
+rap,680,http://rapidcity.craigslist.org,rapid city / west SD,South Dakota,*US*
+rbg,459,http://roseburg.craigslist.org,roseburg,Oregon,*US*
+rck,288,http://rockies.craigslist.org,high rockies,Colorado,*US*
+rcs,126,http://rochester.craigslist.org,rochester,New York,*US*
+rdd,188,http://redding.craigslist.org,redding,California,*US*
+rea,278,http://reading.craigslist.org,reading,Pennsylvania,*US*
+rec,516,http://recife.craigslist.org,recife,Brazil,*Latin America and Caribbean*
+red,475,http://reddeer.craigslist.ca,red deer,Alberta,*Canada*
+reg,478,http://regina.craigslist.ca,regina,Saskatchewan,*Canada*
+rfd,223,http://rockford.craigslist.org,rockford,Illinois,*US*
+ric,60,http://richmond.craigslist.org,richmond,Virginia,*US*
+rin,671,http://richmondin.craigslist.org,richmond,Indiana,*US*
+rio,139,http://rio.craigslist.org,rio de janeiro,Brazil,*Latin America and Caribbean*
+rkv,579,http://reykjavik.craigslist.org,reykjavik,Iceland,*Europe*
+rmn,316,http://rmn.craigslist.org,rochester,Minnesota,*US*
+rno,92,http://reno.craigslist.org,reno / tahoe,Nevada,*US*
+rns,526,http://rennes.craigslist.org,brittany,France,*Europe*
+roa,289,http://roanoke.craigslist.org,roanoke,Virginia,*US*
+rom,121,http://rome.craigslist.it,rome,Italy,*Europe*
+rou,527,http://rouen.craigslist.org,normandy,France,*Europe*
+row,420,http://roswell.craigslist.org,roswell / carlsbad,New Mexico,*US*
+sac,12,http://sacramento.craigslist.org,sacramento,California,*US*
+saf,218,http://santafe.craigslist.org,santa fe / taos,New Mexico,*US*
+sal,587,http://elsalvador.craigslist.org,el salvador,El Salvador,*Latin America and Caribbean*
+sat,53,http://sanantonio.craigslist.org,san antonio,Texas,*US*
+sav,205,http://savannah.craigslist.org,savannah / hinesville,Georgia,*US*
+sba,62,http://santabarbara.craigslist.org,santa barbara,California,*US*
+sbm,571,http://sheboygan.craigslist.org,sheboygan,Wisconsin,*US*
+sbn,228,http://southbend.craigslist.org,south bend / michiana,Indiana,*US*
+scl,158,http://santiago.craigslist.org,chile,Chile,*Latin America and Caribbean*
+sdj,596,http://sendai.craigslist.jp,sendai,Japan,"*Asia, Pacific and Middle East*"
+sdk,195,http://sd.craigslist.org,south dakota,South Dakota,*US*
+sdo,8,http://sandiego.craigslist.org,san diego,California,*US*
+sdq,617,http://santodomingo.craigslist.org,dominican republic,Dominican Republic,*Latin America and Caribbean*
+sea,2,http://seattle.craigslist.org,seattle-tacoma,Washington,*US*
+sek,689,http://seks.craigslist.org,southeast KS,Kansas,*US*
+sel,119,http://seoul.craigslist.co.kr,seoul,Korea,"*Asia, Pacific and Middle East*"
+sev,395,http://sevilla.craigslist.es,sevilla,Spain,*Europe*
+sfo,1,http://sfbay.craigslist.org,san francisco bay area,California,*US*
+sgf,221,http://springfield.craigslist.org,springfield,Missouri,*US*
+sgy,480,http://saguenay.craigslist.ca,saguenay,Quebec,*Canada*
+sha,135,http://shanghai.craigslist.com.cn,shanghai,China,"*Asia, Pacific and Middle East*"
+shb,390,http://sherbrooke.craigslist.ca,sherbrooke,Quebec,*Canada*
+shd,447,http://harrisonburg.craigslist.org,harrisonburg,Virginia,*US*
+she,598,http://shenyang.craigslist.com.cn,shenyang,China,"*Asia, Pacific and Middle East*"
+shf,401,http://sheffield.craigslist.co.uk,sheffield,United Kingdom,*Europe*
+shv,206,http://shreveport.craigslist.org,shreveport,Louisiana,*US*
+sic,311,http://sicily.craigslist.it,sicilia,Italy,*Europe*
+sjt,646,http://sanangelo.craigslist.org,san angelo,Texas,*US*
+ske,623,http://skeena.craigslist.ca,skeena-bulkley,British Columbia,*Canada*
+skt,176,http://saskatoon.craigslist.ca,saskatoon,Saskatchewan,*Canada*
+sky,573,http://sandusky.craigslist.org,sandusky,Ohio,*US*
+slc,56,http://saltlakecity.craigslist.org,salt lake city,Utah,*US*
+sle,232,http://salem.craigslist.org,salem,Oregon,*US*
+slo,191,http://slo.craigslist.org,san luis obispo,California,*US*
+sma,378,http://southcoast.craigslist.org,south coast,Massachusetts,*US*
+smd,556,http://smd.craigslist.org,southern maryland,Maryland,*US*
+smo,566,http://semo.craigslist.org,southeast missouri,Missouri,*US*
+smx,710,http://santamaria.craigslist.org,santa maria,California,*US*
+sng,89,http://singapore.craigslist.com.sg,singapore,Singapore,"*Asia, Pacific and Middle East*"
+snj,286,http://southjersey.craigslist.org,south jersey,New Jersey,*US*
+sns,690,http://salina.craigslist.org,salina,Kansas,*US*
+sof,584,http://bulgaria.craigslist.org,bulgaria,Bulgaria,*Europe*
+soo,485,http://soo.craigslist.ca,sault ste marie,Ontario,*Canada*
+sou,403,http://hampshire.craigslist.co.uk,hampshire,United Kingdom,*Europe*
+sow,651,http://showlow.craigslist.org,show low,Arizona,*US*
+spi,225,http://springfieldil.craigslist.org,springfield,Illinois,*US*
+spk,95,http://spokane.craigslist.org,spokane / coeur d'alene,Washington,*US*
+spo,113,http://saopaulo.craigslist.org,sao paulo,Brazil,*Latin America and Caribbean*
+spp,502,http://sapporo.craigslist.jp,sapporo,Japan,"*Asia, Pacific and Middle East*"
+srd,532,http://sardinia.craigslist.it,sardinia,Italy,*Europe*
+srn,486,http://sarnia.craigslist.ca,sarnia,Ontario,*Canada*
+srq,237,http://sarasota.craigslist.org,sarasota-bradenton,Florida,*US*
+ssa,392,http://salvador.craigslist.org,"salvador, bahia",Brazil,*Latin America and Caribbean*
+ssk,708,http://siskiyou.craigslist.org,siskiyou county,California,*US*
+ssn,707,http://susanville.craigslist.org,susanville,California,*US*
+stc,369,http://stcloud.craigslist.org,st cloud,Minnesota,*US*
+stg,352,http://stgeorge.craigslist.org,st george,Utah,*US*
+sth,106,http://stockholm.craigslist.se,sweden,Sweden,*Europe*
+stj,694,http://stjoseph.craigslist.org,st joseph,Missouri,*US*
+stk,97,http://stockton.craigslist.org,stockton,California,*US*
+stl,29,http://stlouis.craigslist.org,st louis,Missouri,*US*
+stp,143,http://stpetersburg.craigslist.org,st petersburg,Russian Federation,*Europe*
+str,416,http://stuttgart.craigslist.de,stuttgart,Germany,*Europe*
+sud,384,http://sudbury.craigslist.ca,sudbury,Ontario,*Canada*
+sun,622,http://sunshine.craigslist.ca,sunshine coast,British Columbia,*Canada*
+sux,341,http://siouxcity.craigslist.org,sioux city,Iowa,*US*
+svt,613,http://surat.craigslist.co.in,surat surat,India,"*Asia, Pacific and Middle East*"
+swk,687,http://swks.craigslist.org,southwest KS,Kansas,*US*
+swm,572,http://swmi.craigslist.org,southwest michigan,Michigan,*US*
+swv,632,http://swv.craigslist.org,southern WV,West Virginia,*US*
+sxb,414,http://strasbourg.craigslist.org,strasbourg,France,*Europe*
+syd,64,http://sydney.craigslist.com.au,sydney,Australia,*Oceania*
+syr,130,http://syracuse.craigslist.org,syracuse,New York,*US*
+szx,499,http://shenzhen.craigslist.com.cn,shenzhen,China,"*Asia, Pacific and Middle East*"
+tal,186,http://tallahassee.craigslist.org,tallahassee,Florida,*US*
+tbr,635,http://statesboro.craigslist.org,statesboro,Georgia,*US*
+tby,387,http://thunderbay.craigslist.ca,thunder bay,Ontario,*Canada*
+tfn,537,http://canarias.craigslist.es,canarias,Spain,*Europe*
+tha,348,http://terrehaute.craigslist.org,terre haute,Indiana,*US*
+thb,627,http://thumb.craigslist.org,the thumb,Michigan,*US*
+tij,181,http://tijuana.craigslist.com.mx,tijuana,Mexico,*Latin America and Caribbean*
+tls,411,http://toulouse.craigslist.org,toulouse,France,*Europe*
+tlv,160,http://telaviv.craigslist.org,tel aviv,Israel and Palestine,"*Asia, Pacific and Middle East*"
+toc,488,http://territories.craigslist.ca,territories,Northwest Territories,*Canada*
+tok,88,http://tokyo.craigslist.jp,tokyo,Japan,"*Asia, Pacific and Middle East*"
+tol,204,http://toledo.craigslist.org,toledo,Ohio,*US*
+tor,25,http://toronto.craigslist.ca,toronto,Ontario,*Canada*
+tpa,37,http://tampa.craigslist.org,tampa bay area,Florida,*US*
+tpk,280,http://topeka.craigslist.org,topeka,Kansas,*US*
+trh,589,http://tehran.craigslist.org,iran,Iran,"*Asia, Pacific and Middle East*"
+tri,323,http://tricities.craigslist.org,tri-cities,Tennessee,*US*
+trn,397,http://torino.craigslist.it,torino,Italy,*Europe*
+trs,479,http://troisrivieres.craigslist.ca,trois-rivieres,Quebec,*Canada*
+tsc,371,http://tuscaloosa.craigslist.org,tuscaloosa,Alabama,*US*
+tsu,449,http://sanmarcos.craigslist.org,san marcos,Texas,*US*
+tts,704,http://twintiers.craigslist.org,twin tiers NY/PA,New York,*US*
+tul,70,http://tulsa.craigslist.org,tulsa,Oklahoma,*US*
+tun,581,http://tunis.craigslist.org,tunisia,Tunisia,*Africa*
+tus,57,http://tucson.craigslist.org,tucson,Arizona,*US*
+twd,155,http://taipei.craigslist.com.tw,taiwan,Taiwan,"*Asia, Pacific and Middle East*"
+twf,469,http://twinfalls.craigslist.org,twin falls,Idaho,*US*
+txk,359,http://texarkana.craigslist.org,texarkana,Arkansas,*US*
+txm,649,http://texoma.craigslist.org,texoma,Texas,*US*
+uae,215,http://dubai.craigslist.org,united arab emirates,United Arab Emirates,"*Asia, Pacific and Middle East*"
+usm,374,http://hattiesburg.craigslist.org,hattiesburg,Mississippi,*US*
+ust,557,http://staugustine.craigslist.org,st augustine,Florida,*US*
+uti,247,http://utica.craigslist.org,utica-rome-oneida,New York,*US*
+uva,290,http://charlottesville.craigslist.org,charlottesville,Virginia,*US*
+val,394,http://valencia.craigslist.es,valencia,Spain,*Europe*
+van,16,http://vancouver.craigslist.ca,vancouver,British Columbia,*Canada*
+vaw,712,http://swva.craigslist.org,southwest VA,Virginia,*US*
+vcc,481,http://cornwall.craigslist.ca,cornwall,Ontario,*Canada*
+vce,310,http://venice.craigslist.it,venice / veneto,Italy,*Europe*
+vcz,507,http://veracruz.craigslist.com.mx,veracruz,Mexico,*Latin America and Caribbean*
+vic,177,http://victoria.craigslist.ca,victoria,British Columbia,*Canada*
+vie,122,http://vienna.craigslist.at,vienna,Austria,*Europe*
+vis,346,http://visalia.craigslist.org,visalia-tulare,California,*US*
+vld,427,http://valdosta.craigslist.org,valdosta,Georgia,*US*
+vpi,291,http://blacksburg.craigslist.org,new river valley,Virginia,*US*
+vrg,616,http://virgin.craigslist.org,U.S. virgin islands,Territories    ,*US*
+vrg,616,http://virgin.craigslist.org,virgin islands,"Virgin Islands, U.S.",*Latin America and Caribbean*
+vtn,314,http://vietnam.craigslist.org,vietnam,Vietnam,"*Asia, Pacific and Middle East*"
+vtx,564,http://victoriatx.craigslist.org,victoria,Texas,*US*
+wau,458,http://wausau.craigslist.org,wausau,Wisconsin,*US*
+waw,147,http://warsaw.craigslist.pl,poland,Poland,*Europe*
+wco,270,http://waco.craigslist.org,waco,Texas,*US*
+wdc,10,http://washingtondc.craigslist.org,washington,District of Columbia,*US*
+wen,325,http://wenatchee.craigslist.org,wenatchee,Washington,*US*
+whh,625,http://whitehorse.craigslist.ca,whitehorse,Yukon Territory,*Canada*
+whi,472,http://whistler.craigslist.ca,whistler,British Columbia,*Canada*
+whl,443,http://wheeling.craigslist.org,northern panhandle,West Virginia,*US*
+wic,99,http://wichita.craigslist.org,wichita,Kansas,*US*
+win,79,http://winnipeg.craigslist.ca,winnipeg,Manitoba,*Canada*
+wky,377,http://westky.craigslist.org,western KY,Kentucky,*US*
+wll,302,http://wellington.craigslist.org,wellington,New Zealand,*Oceania*
+wlo,567,http://waterloo.craigslist.org,waterloo / cedar falls,Iowa,*US*
+wma,173,http://westernmass.craigslist.org,western massachusetts,Massachusetts,*US*
+wmd,329,http://westmd.craigslist.org,western maryland,Maryland,*US*
+wnc,274,http://wilmington.craigslist.org,wilmington,North Carolina,*US*
+wnp,609,http://naga.craigslist.com.ph,bicol region,Philippines,"*Asia, Pacific and Middle East*"
+wol,593,http://wollongong.craigslist.com.au,wollongong,Australia,*Oceania*
+wor,240,http://worcester.craigslist.org,worcester / central MA,Massachusetts,*US*
+wpt,463,http://williamsport.craigslist.org,williamsport,Pennsylvania,*US*
+wsl,272,http://winstonsalem.craigslist.org,winston-salem,North Carolina,*US*
+wsr,235,http://windsor.craigslist.ca,windsor,Ontario,*Canada*
+wtf,365,http://wichitafalls.craigslist.org,wichita falls,Texas,*US*
+wtn,337,http://watertown.craigslist.org,watertown,New York,*US*
+wtx,648,http://bigbend.craigslist.org,southwest TX,Texas,*US*
+wuh,597,http://wuhan.craigslist.com.cn,wuhan,China,"*Asia, Pacific and Middle East*"
+wva,194,http://wv.craigslist.org,west virginia (old),West Virginia,*US*
+wvu,440,http://morgantown.craigslist.org,morgantown,West Virginia,*US*
+wyo,197,http://wyoming.craigslist.org,wyoming,Wyoming,*US*
+xiy,603,http://xian.craigslist.com.cn,xi'an,China,"*Asia, Pacific and Middle East*"
+yak,246,http://yakima.craigslist.org,yakima,Washington,*US*
+ybs,456,http://yubasutter.craigslist.org,yuba-sutter,California,*US*
+ykf,624,http://yellowknife.craigslist.ca,yellowknife,Northwest Territories,*Canada*
+yng,252,http://youngstown.craigslist.org,youngstown,Ohio,*US*
+ypq,388,http://peterborough.craigslist.ca,peterborough,Ontario,*Canada*
+yps,640,http://okaloosa.craigslist.org,okaloosa / walton,Florida,*US*
+yrk,357,http://york.craigslist.org,york,Pennsylvania,*US*
+yuc,405,http://yucatan.craigslist.com.mx,yucatan,Mexico,*Latin America and Caribbean*
+yum,370,http://yuma.craigslist.org,yuma,Arizona,*US*
+yup,262,http://up.craigslist.org,upper peninsula,Michigan,*US*
+yxs,383,http://princegeorge.craigslist.ca,prince george,British Columbia,*Canada*
+zag,546,http://zagreb.craigslist.org,croatia,Croatia,*Europe*
+zam,607,http://zamboanga.craigslist.com.ph,zamboanga,Philippines,"*Asia, Pacific and Middle East*"
+zur,112,http://zurich.craigslist.ch,zurich,Switzerland,*Europe*
+zyl,702,http://zanesville.craigslist.org,zanesville / cambridge,Ohio,*US*

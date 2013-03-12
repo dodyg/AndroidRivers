@@ -180,17 +180,22 @@ public class PodcastListFragment(): ListFragment() {
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val currentPodcast = podcasts[p2]
 
-                if (!isPodcastPlayerPlaying()){
+                Log.d(TAG, "Is podcast player paused ${isPodcastPlayerPaused()}")
+
+                if (!isPodcastPlayerPlaying() && !isPodcastPlayerPaused()){
                     val i = Intent(getActivity(), javaClass<PodcastPlayerService>())
                     i.putExtra(Params.PODCAST_TITLE, currentPodcast.title)
                     i.putExtra(Params.PODCAST_PATH, Uri.fromFile(File(currentPodcast.localPath)).toString())
                     getSupportActivity()!!.startService(i)
 
-                    val dlg = createPodcastPlayerDialog(title = currentPodcast.title.limitText(30), isNewTrack = true)
+                    val dlg = createPodcastPlayerDialog(title = currentPodcast.title.limitText(30),
+                            isNewTrack = true, currentPosition = null, podcastLength = null)
                     dlg.show()
 
                 } else {
-                    val dlg = createPodcastPlayerDialog(title = currentlyPlayedPodcastTitle().limitText(30), isNewTrack = false)
+                    val dlg = createPodcastPlayerDialog(title = currentlyPlayedPodcastTitle().limitText(30),
+                            isNewTrack = false, currentPosition = player?.getCurrentPosition(),
+                            podcastLength = player?.getPodcastLength())
                     dlg.show()
                 }
             }
@@ -258,8 +263,15 @@ public class PodcastListFragment(): ListFragment() {
             return false
     }
 
+    fun isPodcastPlayerPaused(): Boolean {
+        if (player != null && player!!.isPaused())
+            return true
+        else
+            return false
+    }
+
     fun currentlyPlayedPodcastTitle(): String? {
-        if (player != null && player!!.isPlaying()){
+        if (player != null && (player!!.isPlaying() || player!!.isPaused())){
             return player!!.podcastTitle
         } else
             return null
@@ -293,7 +305,7 @@ public class PodcastListFragment(): ListFragment() {
         }
     }
 
-    public fun createPodcastPlayerDialog(title: String, isNewTrack: Boolean): Dialog {
+    public fun createPodcastPlayerDialog(title: String, isNewTrack: Boolean, currentPosition: Int?, podcastLength: Int?): Dialog {
         val dlg: View = this.getSupportActivity()!!.getLayoutInflater()!!.inflate(R.layout.dialog_podcast_player, null)!!
         val contentParam = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0)
 
@@ -334,12 +346,18 @@ public class PodcastListFragment(): ListFragment() {
             else
                 multi.setText(this@PodcastListFragment.getString(R.string.play))
 
-        val progress = dialog.findViewById(R.id.dialog_podcast_player_progress_sb) as SeekBar
+        val progressBar = dialog.findViewById(R.id.dialog_podcast_player_progress_sb) as SeekBar
         val progressText = dialog.findViewById(R.id.dialog_podcast_player_progress_tv) as TextView
 
-        player!!.setProgressHandler(createHandler(progress, progressText))
+        if (currentPosition != null && podcastLength != null){
+            val prg = calculateProgress(currentPosition!!, podcastLength!!)
+            progressText.setText("$prg")
+            progressBar.setProgress(prg)
+        }
 
-        progress.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+        player!!.setProgressHandler(createHandler(progressBar, progressText))
+
+        progressBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             public override fun onStartTrackingTouch(seekBar: SeekBar?) {
                 //dg: not implemented by design
             }
@@ -351,13 +369,13 @@ public class PodcastListFragment(): ListFragment() {
             public override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser){
                     val duration = player?.getPodcastLength()
-                    val currentPosition = player?.getCurrentPosition()
+                    val pos = player?.getCurrentPosition()
 
                     if (isPodcastPlayerPlaying()){
                         player!!.pauseMusic()
                     }
 
-                    if (duration != null && currentPosition != null){
+                    if (duration != null && pos != null){
                         val positionAtPlayer = (progress * duration) div 100
                         progressText.setText("$progress")
                         player!!.seekToPosition(positionAtPlayer)
@@ -380,14 +398,17 @@ public class PodcastListFragment(): ListFragment() {
                     val data = msg.getData()!!
                     val duration = data.getInt(PodcastPlayerService.TOTAL_DURATION)
                     val currentPosition = data.getInt(PodcastPlayerService.CURRENT_POSITION)
-                    val progress = (currentPosition * 100) div duration
-                    progressBar.setProgress(progress.toInt())
+                    val progress = calculateProgress(currentPosition, duration)
+                    progressBar.setProgress(progress)
                     progressText.setText("$progress")
                     Log.d(TAG, "Progress Handler $progress")
                 }
             }
-
         }
         return h
     }
+}
+
+fun calculateProgress(current : Int, total : Int) : Int{
+    return (current * 100) div total
 }

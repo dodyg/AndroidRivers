@@ -195,6 +195,13 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
             return false
     }
 
+    public fun isPaused() : Boolean {
+        if (mediaPlayer != null)
+            return !mediaPlayer!!.isPlaying() && mediaPlayer!!.getCurrentPosition() != 0
+        else
+            return false
+    }
+
     public fun pauseMusic(): Unit {
         if (mediaPlayer!!.isPlaying()){
             mediaPlayer!!.pause()
