@@ -57,7 +57,6 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
     private var mediaPlayer: MediaPlayer? = null
     private var lastPlayPosition: Int = 0
 
-
     inner class ServiceBinder(): Binder() {
         fun getService(): PodcastPlayerService? {
             return this@PodcastPlayerService
@@ -138,7 +137,6 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         }
 
         progressThread?.start()
-
         return super<Service>.onStartCommand(intent, flags, startId)
     }
 
@@ -210,8 +208,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
     }
 
     public fun resumeMusic(): Unit {
-        if (!mediaPlayer!!.isPlaying())
-        {
+        if (!mediaPlayer!!.isPlaying()){
             mediaPlayer?.seekTo(lastPlayPosition)
             mediaPlayer?.start()
             updateText("Playing $podcastTitle")

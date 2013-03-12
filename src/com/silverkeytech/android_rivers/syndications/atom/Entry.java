@@ -32,7 +32,7 @@ public class Entry {
     @Element
     public String id;
 
-    @Element
+    @Element(required = false)
     public String title;
 
     @Element

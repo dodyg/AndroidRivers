@@ -26,25 +26,28 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
         }
 
         fun isAtomFeed(): Boolean {
-            return mimeType!!.contains("atom") || downloadedContent!!.contains("<feed xmlns=\"http://www.w3.org/2005/Atom\">")
+            return mimeType!!.contains("atom") || downloadedContent!!.contains("<feed ")//the space is important so it doesn't confuse with feedburner tag
         }
 
         if (isAtomFeed()){
             var feed = transformXmlToAtom(downloadedContent)
-
+            Log.d(TAG, "$url is an ATOM Feed")
             if (feed.isTrue()){
                 var f = SyndicationFeed(null, feed.value, filter)
                 f.transformAtom()
+                Log.d(TAG, "ATOM parsing with ${f.items.size()} items at url ${f.link}")
                 return Result.right(f)
             } else{
                 return Result.wrong(feed.exception)
             }
         } else {
             var feed = transformXmlToRss(downloadedContent)
+            Log.d(TAG, "$url is a RSS Feed")
 
             if (feed.isTrue()){
                 var f = SyndicationFeed(feed.value, null, filter)
                 f.transformRss()
+                Log.d(TAG, "RSS parsing with ${f.items.size()} items at url ${f.link}")
                 return Result.right(f)
             } else{
                 return Result.wrong(feed.exception)

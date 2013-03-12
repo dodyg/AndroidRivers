@@ -350,7 +350,7 @@ public class PodcastListFragment(): ListFragment() {
         val progressText = dialog.findViewById(R.id.dialog_podcast_player_progress_tv) as TextView
 
         if (currentPosition != null && podcastLength != null){
-            val prg = calculateProgress(currentPosition!!, podcastLength!!)
+            val prg = calculateProgress(currentPosition, podcastLength)
             progressText.setText("$prg")
             progressBar.setProgress(prg)
         }

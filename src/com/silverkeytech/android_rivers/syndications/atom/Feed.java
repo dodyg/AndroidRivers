@@ -35,7 +35,7 @@ public class Feed {
     @Element
     public String title;
 
-    @Element
+    @Element(required = false) //out of spec but otherwise Kottke won't parse
     public String updated;
 
     //recommended optional elements
