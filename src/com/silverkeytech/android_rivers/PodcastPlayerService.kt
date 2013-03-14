@@ -178,12 +178,20 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         progressHandler = handler
     }
 
+    private var isPausedDueToAudioFocusLoss = false
+
     public override fun onAudioFocusChange(p0: Int) {
         if (p0 == AUDIOFOCUS_LOSS_TRANSIENT){
-            this.pauseMusic()
+            if (isPlaying())                       {
+                this.pauseMusic()
+                isPausedDueToAudioFocusLoss = true
+            }
         }
         else if (p0 == AudioManager.AUDIOFOCUS_GAIN) {
-            this.resumeMusic()
+            if (isPaused() && isPausedDueToAudioFocusLoss){
+                this.resumeMusic()
+                isPausedDueToAudioFocusLoss = false
+            }
         } else if (p0 == AudioManager.AUDIOFOCUS_LOSS) {
             audioManager?.abandonAudioFocus(this)
             this.stopMusic()
