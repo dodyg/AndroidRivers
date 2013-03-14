@@ -73,6 +73,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
 
         val contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
+
         val notification = NotificationCompat.Builder(this)
                 .setTicker("Playing $podcastTitle")
         ?.setWhen(System.currentTimeMillis())
@@ -115,28 +116,34 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
         val result = audioManager?.requestAudioFocus(this, AudioManager.STREAM_MUSIC,AudioManager.AUDIOFOCUS_GAIN);
 
-        if (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-            updateText("Sorry, I cannot play $podcastTitle at this moment")
+        try{
+            if (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                updateText("Sorry, I cannot play $podcastTitle at this moment")
+            }
+            else{
+                updateText("Playing $podcastTitle")
+
+                mediaPlayer = MediaPlayer.create(this, Uri.parse(podcastPath))
+                mediaPlayer?.setOnErrorListener(this)
+                mediaPlayer?.setLooping(false)
+                //mediaPlayer?.setVolume(100.0, 100.0)
+                mediaPlayer?.start()
+
+                mediaPlayer!!.setOnCompletionListener(object: MediaPlayer.OnCompletionListener{
+                    public override fun onCompletion(p0: MediaPlayer?) {
+                        updateText("Podcast completed")
+                    }
+                })
+
+                progressThread = Thread(progress)
+            }
+
+            progressThread?.start()
         }
-        else{
-            updateText("Playing $podcastTitle")
-
-            mediaPlayer = MediaPlayer.create(this, Uri.parse(podcastPath))
-            mediaPlayer?.setOnErrorListener(this)
-            mediaPlayer?.setLooping(false)
-            //mediaPlayer?.setVolume(100.0, 100.0)
-            mediaPlayer?.start()
-
-            mediaPlayer!!.setOnCompletionListener(object: MediaPlayer.OnCompletionListener{
-                public override fun onCompletion(p0: MediaPlayer?) {
-                    updateText("Podcast completed")
-                }
-            })
-
-            progressThread = Thread(progress)
+        catch(e : Exception){
+            Log.d(TAG, "Exception in starting PodcastPlayerService ${e.getMessage()}")
         }
 
-        progressThread?.start()
         return super<Service>.onStartCommand(intent, flags, startId)
     }
 
@@ -198,43 +205,68 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
     }
 
     public fun pauseMusic(): Unit {
-        if (mediaPlayer!!.isPlaying()){
-            mediaPlayer!!.pause()
-            lastPlayPosition = mediaPlayer!!.getCurrentPosition()
-            updateText("$podcastTitle is paused")
-            Log.d(TAG, "$podcastTitle is paused")
-            stopProgressThread()
+        try{
+            if (mediaPlayer!!.isPlaying()){
+                mediaPlayer!!.pause()
+                lastPlayPosition = mediaPlayer!!.getCurrentPosition()
+                updateText("$podcastTitle is paused")
+                Log.d(TAG, "$podcastTitle is paused")
+                stopProgressThread()
+            }
+        }
+        catch (e : Exception){
+            Log.d(TAG, "Pause music throws ${e.getMessage()}")
         }
     }
 
     public fun resumeMusic(): Unit {
-        if (!mediaPlayer!!.isPlaying()){
-            mediaPlayer?.seekTo(lastPlayPosition)
-            mediaPlayer?.start()
-            updateText("Playing $podcastTitle")
-            Log.d(TAG, "Resume Playing $podcastTitle")
-            restartProgressThread()
+        try{
+            if (!mediaPlayer!!.isPlaying()){
+                mediaPlayer?.seekTo(lastPlayPosition)
+                mediaPlayer?.start()
+                updateText("Playing $podcastTitle")
+                Log.d(TAG, "Resume Playing $podcastTitle")
+                restartProgressThread()
+            }
+        }
+        catch (e : Exception){
+            Log.d(TAG, "Resume music throws ${e.getMessage()}")
         }
     }
 
     private fun restartProgressThread(){
-        progressThread?.interrupt()
-        progressThread = Thread(progress)
-        progressThread?.start()
+        try{
+            progressThread?.interrupt()
+            progressThread = Thread(progress)
+            progressThread?.start()
+        }
+        catch (e : Exception){
+            Log.d(TAG, "Restart Progress Thread throws ${e.getMessage()}")
+        }
     }
 
     private fun stopProgressThread(){
-        progressThread?.interrupt()
+        try{
+            progressThread?.interrupt()
+        }
+        catch (e : Exception){
+            Log.d(TAG, "Stop Progress Thread throws ${e.getMessage()}")
+        }
     }
 
     public fun stopMusic(): Unit {
-        mediaPlayer?.stop()
-        mediaPlayer?.release()
-        updateText("$podcastTitle is stopped")
-        mediaPlayer = null
-        stopProgressThread()
-        Log.d(TAG, "Stop playing $podcastTitle and Stopping service")
-        this.stopSelf()
+        try{
+            mediaPlayer?.stop()
+            mediaPlayer?.release()
+            updateText("$podcastTitle is stopped")
+            mediaPlayer = null
+            stopProgressThread()
+            Log.d(TAG, "Stop playing $podcastTitle and Stopping service")
+            this.stopSelf()
+        }
+        catch (e : Exception){
+            Log.d(TAG, "Stop Music throws ${e.getMessage()}")
+        }
     }
 
     public fun getCurrentPosition(): Int?{
