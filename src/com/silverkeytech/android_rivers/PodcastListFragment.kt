@@ -188,12 +188,14 @@ public class PodcastListFragment(): ListFragment() {
                     i.putExtra(Params.PODCAST_PATH, Uri.fromFile(File(currentPodcast.localPath)).toString())
                     getSupportActivity()!!.startService(i)
 
-                    val dlg = createPodcastPlayerDialog(title = currentPodcast.title.limitText(30),
+                    val dlg = createPodcastPlayerDialog(
+                            title = currentPodcast.title.limitText(this@PodcastListFragment.getResources()!!.getInteger(R.integer.podcast_player_title_limit)),
                             isNewTrack = true, currentPosition = null, podcastLength = null)
                     dlg.show()
 
                 } else {
-                    val dlg = createPodcastPlayerDialog(title = currentlyPlayedPodcastTitle().limitText(30),
+                    val dlg = createPodcastPlayerDialog(
+                            title = currentlyPlayedPodcastTitle().limitText(this@PodcastListFragment.getResources()!!.getInteger(R.integer.podcast_player_title_limit)),
                             isNewTrack = false, currentPosition = player?.getCurrentPosition(),
                             podcastLength = player?.getPodcastLength())
                     dlg.show()
@@ -311,7 +313,7 @@ public class PodcastListFragment(): ListFragment() {
 
         val dialog = Dialog(this.getSupportActivity())
         dialog.setContentView(dlg, contentParam)
-        dialog.setTitle(rightPadding(title, 25))
+        dialog.setTitle(rightPadding(title, this.getResources()!!.getInteger(R.integer.podcast_player_title_limit)))
 
         val close = dialog.findViewById(R.id.dialog_podcast_player_stop_btn) as Button
         close.setOnClickListener {

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="version">103</integer>
+    <integer name="podcast_player_title_limit">40</integer>
 </resources>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="podcast_player_title_limit">50</integer>
+</resources>

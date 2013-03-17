@@ -27,6 +27,9 @@ import com.github.kevinsawicki.http.HttpRequest
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
+import org.holoeverywhere.app.Fragment
+import android.os.Build
+
 
 public fun MenuItem?.andHide(): MenuItem {
     this!!.setVisible(false)
@@ -110,6 +113,10 @@ fun isNetworkAvailable(context: Context): Boolean {
     val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val activeNetworkInfo = connectivityManager.getActiveNetworkInfo()
     return activeNetworkInfo != null
+}
+
+fun isModernAndroid(): Boolean {
+    return Build.VERSION.SDK_INT >= 14 //Build.VERSION_CODES.ICE_CREAM_SANDWICH
 }
 
 /*
