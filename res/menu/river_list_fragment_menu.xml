@@ -12,6 +12,6 @@
             />
 
     <item android:id="@+id/river_list_fragment_menu_show_add_dialog"
-          android:title="Add"
+          android:title="Add River Url"
             />
 </menu>
