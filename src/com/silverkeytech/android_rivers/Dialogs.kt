@@ -72,6 +72,7 @@ public fun createFlexibleContentDialog(context: Activity, content : View, button
     val contentParam = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0)
 
     val dialog = Dialog(context)
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
     dialog.setContentView(dlg, contentParam)
 
     val contentLayout = dlg.findViewById(R.id.dialog4_content) as LinearLayout
