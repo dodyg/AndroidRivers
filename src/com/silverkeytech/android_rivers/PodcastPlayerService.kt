@@ -45,6 +45,8 @@ import android.media.AudioManager.AUDIOFOCUS_LOSS
 import android.os.Handler
 import android.os.Message
 import android.os.Bundle
+import android.content.res.Resources
+
 
 public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener, OnAudioFocusChangeListener {
     class object{
@@ -80,12 +82,18 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         ?.setContentIntent(contentIntent)
         ?.build()
 
-        notification!!.icon = android.R.drawable.star_big_on
+        //workaround on grey background on Android 4.03   https://code.google.com/p/android/issues/detail?id=23863&thanks=23863&ts=1325611036
+        val id = Resources.getSystem()!!.getIdentifier("status_bar_latest_event_content", "id", "android")
+        notification!!.contentView?.removeAllViews(id)
 
-        notification.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.notification_podcast_player).with {
+        notification.icon = android.R.drawable.star_big_on
+
+        val remote = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.notification_podcast_player).with {
             this.setImageViewResource(R.id.notification_podcast_player_status_icon, android.R.drawable.btn_star)
             this.setTextViewText(R.id.notification_podcast_player_status_text, getString(R.string.download_starts))
         }
+
+        notification.contentView!!.addView(id, remote)
 
         return notification
     }

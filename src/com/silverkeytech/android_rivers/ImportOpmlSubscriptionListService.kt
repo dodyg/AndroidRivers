@@ -35,6 +35,8 @@ import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outlines.Outline
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 import java.util.Random
+import android.content.res.Resources
+
 
 public class ImportOpmlSubscriptionListService: IntentService("ImportOpmlSubscriptionListService"){
     class object{
@@ -55,13 +57,20 @@ public class ImportOpmlSubscriptionListService: IntentService("ImportOpmlSubscri
         ?.setContentIntent(contentIntent)
         ?.build()
 
-        notification!!.icon = android.R.drawable.star_big_on
 
-        notification.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.notification_download_progress).with {
-            this.setImageViewResource(R.id.notification_download_progress_status_icon, android.R.drawable.btn_star)
+        //workaround on grey background on Android 4.03   https://code.google.com/p/android/issues/detail?id=23863&thanks=23863&ts=1325611036
+        val id = Resources.getSystem()!!.getIdentifier("status_bar_latest_event_content", "id", "android")
+        notification!!.contentView?.removeAllViews(id)
+
+        notification.icon = android.R.drawable.stat_sys_download
+
+        val remote = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.notification_download_progress).with {
+            this.setImageViewResource(R.id.notification_download_progress_status_icon, android.R.drawable.stat_sys_download_done)
             this.setProgressBar(R.id.notification_download_progress_status_progress, 100, 0, false)
             this.setTextViewText(R.id.notification_download_progress_status_text, getString(R.string.download_starts))
         }
+
+        notification.contentView!!.addView(id, remote)
 
         return notification
     }

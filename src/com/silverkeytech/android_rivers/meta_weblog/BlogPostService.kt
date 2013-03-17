@@ -43,6 +43,7 @@ import com.silverkeytech.android_rivers.with
 import com.silverkeytech.android_rivers.R
 import java.util.HashMap
 import com.silverkeytech.android_rivers.isNullOrEmpty
+import android.content.res.Resources
 
 public class BlogPostService(): IntentService("DownloadService"){
     class object{
@@ -65,14 +66,19 @@ public class BlogPostService(): IntentService("DownloadService"){
         ?.setContentIntent(contentIntent)
         ?.build()
 
+        //workaround on grey background on Android 4.03   https://code.google.com/p/android/issues/detail?id=23863&thanks=23863&ts=1325611036
+        val id = Resources.getSystem()!!.getIdentifier("status_bar_latest_event_content", "id", "android")
+        notification!!.contentView?.removeAllViews(id)
 
-        notification!!.icon = android.R.drawable.stat_sys_download
+        notification.icon = android.R.drawable.stat_sys_download
 
-        notification.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.notification_download_progress).with {
+        val remote = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.notification_download_progress).with {
             this.setImageViewResource(R.id.notification_download_progress_status_icon, android.R.drawable.stat_sys_download_done)
             this.setProgressBar(R.id.notification_download_progress_status_progress, 100, 0, false)
             this.setTextViewText(R.id.notification_download_progress_status_text, "Posting")
         }
+
+        notification.contentView!!.addView(id, remote)
 
         return notification
     }

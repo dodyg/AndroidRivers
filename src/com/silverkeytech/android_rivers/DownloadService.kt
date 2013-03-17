@@ -37,6 +37,7 @@ import java.io.BufferedInputStream
 import java.io.FileOutputStream
 import java.net.URL
 import java.util.Random
+import android.content.res.Resources
 
 public class DownloadService(): IntentService("DownloadService"){
     class object{
@@ -61,13 +62,19 @@ public class DownloadService(): IntentService("DownloadService"){
         ?.setContentIntent(contentIntent)
         ?.build()
 
-        notification!!.icon = android.R.drawable.stat_sys_download
+        //workaround on grey background on Android 4.03   https://code.google.com/p/android/issues/detail?id=23863&thanks=23863&ts=1325611036
+        val id = Resources.getSystem()!!.getIdentifier("status_bar_latest_event_content", "id", "android")
+        notification!!.contentView?.removeAllViews(id)
 
-        notification.contentView = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.notification_download_progress).with {
+        notification.icon = android.R.drawable.stat_sys_download
+
+        val remote = RemoteViews(getApplicationContext()!!.getPackageName(), R.layout.notification_download_progress).with {
             this.setImageViewResource(R.id.notification_download_progress_status_icon, android.R.drawable.stat_sys_download_done)
             this.setProgressBar(R.id.notification_download_progress_status_progress, 100, 0, false)
             this.setTextViewText(R.id.notification_download_progress_status_text, "Downloading $targetTitle")
         }
+
+        notification.contentView!!.addView(id, remote)
 
         return notification
     }
