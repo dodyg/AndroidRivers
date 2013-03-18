@@ -144,32 +144,41 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                     }))
                 }
 
+                if (currentNews.hasEnclosure()){
+                    var enclosure = currentNews.enclosure!!
+                    if (isSupportedImageMime(enclosure.mimeType)){
+                        buttons.add(DialogBtn("Image",  { dlg ->
+                            Log.d(TAG, "I am downloading a ${enclosure.url} with type ${enclosure.mimeType}")
+                            DownloadImage(context).execute(enclosure.url)
+                        }))
+                    }
+                    else
+                    if (currentNews.isPodcast()){
+                        buttons.add(DialogBtn(context.getString(R.string.podcast)!!,  { dlg ->
+                                var messenger = Messenger(object : Handler(){
+                                    public override fun handleMessage(msg: Message?) {
+                                        if (msg != null){
+                                            val path = msg.obj as String
 
-                if (currentNews.isPodcast()){
-                    buttons.add(DialogBtn(context.getString(R.string.podcast)!!,  { dlg ->
-                            var messenger = Messenger(object : Handler(){
-                                public override fun handleMessage(msg: Message?) {
-                                    if (msg != null){
-                                        val path = msg.obj as String
-
-                                        if (msg.arg1 == android.app.Activity.RESULT_OK && !path.isNullOrEmpty()){
-                                            context.toastee("File is successfully downloaded at $path", Duration.LONG)
-                                            MediaScannerWrapper.scanPodcasts(context, path)
+                                            if (msg.arg1 == android.app.Activity.RESULT_OK && !path.isNullOrEmpty()){
+                                                context.toastee("File is successfully downloaded at $path", Duration.LONG)
+                                                MediaScannerWrapper.scanPodcasts(context, path)
+                                            }else{
+                                                context.toastee("Download failed", Duration.LONG)
+                                            }
                                         }else{
-                                            context.toastee("Download failed", Duration.LONG)
+                                            Log.d(TAG, "handleMessage returns null, which is very weird")
                                         }
-                                    }else{
-                                        Log.d(TAG, "handleMessage returns null, which is very weird")
                                     }
-                                }
-                            })
+                                })
 
-                            startDownloadService(context, currentNews.title!!, currentNews.enclosure!!.url,
-                                    feedTitle, feedUrl, currentNews.description!!,
-                                    messenger)
+                                startDownloadService(context, currentNews.title!!, currentNews.enclosure!!.url,
+                                        feedTitle, feedUrl, currentNews.description!!,
+                                        messenger)
 
-                            dlg.dismiss()
-                    }))
+                                dlg.dismiss()
+                        }))
+                    }
                 }
 
                 var createdDialog = createFlexibleContentDialog(context, dlg, buttons.toArray(array<DialogBtn>()))
