@@ -15,6 +15,7 @@ public class DateHelper {
     public final static String ISO8601_NOMS = "yyyy-MM-dd'T'HH:mm:ssZ";
     public final static String RFC822 = "EEE, dd MMM yyyy HH:mm:ss Z";
     public final static String SIMPLE = "MM/dd/yyyy hh:mm:ss a";
+    public final static String NO_SPACES = "dd MMM yyyy HH:mm:ss Z";
 
     public static String format(String format, Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat(format);

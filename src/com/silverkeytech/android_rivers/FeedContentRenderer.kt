@@ -144,6 +144,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                     }))
                 }
 
+
                 if (currentNews.isPodcast()){
                     buttons.add(DialogBtn(context.getString(R.string.podcast)!!,  { dlg ->
                             var messenger = Messenger(object : Handler(){

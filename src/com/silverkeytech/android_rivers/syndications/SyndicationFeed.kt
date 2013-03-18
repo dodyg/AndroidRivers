@@ -50,8 +50,10 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
     fun transformRss()
     {
         if (rss != null){
-            isDateParseable = verifyRssFeedForDateFitness(rss!!)
-            Log.d(TAG, "isDateParseable is $isDateParseable")
+            val (parseable, dateFormat) = verifyRssFeedForDateFitness(rss!!)
+            isDateParseable = parseable
+
+            Log.d(TAG, "isDateParseable is $isDateParseable with date format $dateFormat")
             val channel = rss!!.channel
             if (channel != null){
                 title = if (channel.title.isNullOrEmpty()) "" else channel.title!!
@@ -79,7 +81,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
                     fi.description = scrubHtml(i.description)
                     //the date parsing is exception heavy. Don't do it over a loop. Better verify it first.
                     if (isDateParseable)                                                  {
-                        fi.pubDate = i.getPubDate()
+                        fi.pubDate = i.getPubDateInFormat(dateFormat)
                         if (oldestDate != null && fi.pubDate!!.compareTo(oldestDate) == -1){
                             Log.d(TAG, "Oldest item limit reached at ${fi.pubDate}")
                             break

@@ -18,10 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.syndications.rss;
 
+import android.util.Log;
 import com.silverkeytech.android_rivers.DateHelper;
 
 import java.util.Date;
 import java.util.HashMap;
+import com.silverkeytech.android_rivers.syndications.ParsedDateFormat;
+import com.silverkeytech.android_rivers.syndications.RssDate;
 
 public class Item {
     public String title;
@@ -42,13 +45,57 @@ public class Item {
 
     public HashMap<String, String> extensions = new HashMap<String, String>();
 
-    public Date getPubDate() {
+    public RssDate getPubDate() {
         if (pubDate == null)
-            return null;
+            return new RssDate(ParsedDateFormat.MISSING, null);
+
+        if (pubDate.endsWith("Z")){
+            try{
+                //Z means whatever time zone so we put it at GMT
+                return new RssDate(ParsedDateFormat.ISO8601_NOMS, DateHelper.parseISO8601NoMilliseconds(pubDate.replaceAll("Z$", "+0000")));
+            }catch(Exception e){
+                Log.d("RSSItem", "Error parsing " + pubDate + " in ISO8601_NOMS Modified Z");
+            }
+        }
 
         try {
-            return DateHelper.parseRFC822(pubDate);
+            return new RssDate(ParsedDateFormat.RFC822, DateHelper.parseRFC822(pubDate));
         } catch (Exception e) {
+            Log.d("RSSItem", "Error parsing " + pubDate + " in RFC822");
+        }
+
+        try {
+            return new RssDate(ParsedDateFormat.ISO8601_NOMS, DateHelper.parseISO8601NoMilliseconds(pubDate));
+        } catch (Exception e){
+            Log.d("RSSItem", "Error parsing " + pubDate + " in ISO8601_NOMS");
+        }
+
+        try{
+            return new RssDate(ParsedDateFormat.NO_SPACES, DateHelper.parse(DateHelper.NO_SPACES, pubDate));
+        } catch (Exception e){
+            Log.d("RSSItem", "Error parsing " + pubDate + " in NO_SPACES");
+        }
+
+        return new RssDate(ParsedDateFormat.UNKNOWN, null);
+    }
+
+    public Date getPubDateInFormat(ParsedDateFormat status){
+        try{
+            if (status == ParsedDateFormat.RFC822)
+                return DateHelper.parseRFC822(pubDate);
+            else
+            if (status == ParsedDateFormat.ISO8601_NOMS){
+                if (pubDate.endsWith("Z"))
+                    return DateHelper.parseISO8601NoMilliseconds(pubDate.replaceAll("Z$", "+0000"));
+                else
+                    return DateHelper.parseISO8601NoMilliseconds(pubDate);
+            }
+            else if (status == ParsedDateFormat.NO_SPACES)
+                return DateHelper.parse(DateHelper.NO_SPACES, pubDate);
+            else
+                return null;
+        }
+        catch (Exception e) {
             return null;
         }
     }

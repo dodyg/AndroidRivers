@@ -75,7 +75,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                     news = ""
 
                 fun showIndicator() {
-                    if (currentNewsItem.item.containsEnclosure()!!){
+                    if (currentNewsItem.item.hasEnclosure()!!){
                         var enclosure = currentNewsItem.item.enclosure!!.get(0)
                         if (isSupportedImageMime(enclosure.`type`!!)){
                             holder?.indicator?.setBackgroundColor(PreferenceDefaults.STANDARD_NEWS_IMAGE)
@@ -84,7 +84,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                             holder?.indicator?.setBackgroundColor(PreferenceDefaults.STANDARD_NEWS_PODCAST)
                         }
                     }
-                    else if (currentNewsItem.item.containsSource()!!){
+                    else if (currentNewsItem.item.hasSource()!!){
                         holder?.indicator?.setBackgroundColor(PreferenceDefaults.STANDARD_NEWS_SOURCE)
                     }else{
                         holder?.indicator?.setBackgroundColor(PreferenceDefaults.STANDARD_NEWS_COLOR)
@@ -168,7 +168,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 }
 
                 //check for image enclosure
-                if (currentNews.item.containsEnclosure()!!){
+                if (currentNews.item.hasEnclosure()!!){
                     var enclosure = currentNews.item.enclosure!!.get(0)
                     if (isSupportedImageMime(enclosure.`type`!!)){
                         buttons.add(DialogBtn("Image",  { dlg ->
@@ -204,7 +204,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                         }))
                     }
                 }
-                else if (currentNews.item.containsSource()!!){
+                else if (currentNews.item.hasSource()!!){
                     buttons.add(DialogBtn("Outlines", { dlg ->
                             try{
                                 val feedOpml = currentNews.item.source!!.get(0).opml!!

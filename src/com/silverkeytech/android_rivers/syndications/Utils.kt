@@ -8,6 +8,7 @@ import com.silverkeytech.android_rivers.outliner.transformXmlToAtom
 import com.silverkeytech.android_rivers.outliner.transformXmlToRss
 import com.silverkeytech.android_rivers.syndications.atom.Feed
 import com.silverkeytech.android_rivers.syndications.rss.Rss
+import java.util.Date
 
 fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<SyndicationFeed> {
     val TAG = "downloadFeed"
@@ -94,21 +95,36 @@ public fun verifyAtomFeedForDateFitness(f: Feed): Boolean {
     }
 }
 
+public enum class ParsedDateFormat{
+    RFC822
+    UNKNOWN
+    MISSING
+    ISO8601_NOMS
+    NO_SPACES
+}
+
+public data class RssDate(public val status : ParsedDateFormat, public val date : Date?){
+    public val isValid : Boolean
+        get() = status != ParsedDateFormat.UNKNOWN && status != ParsedDateFormat.MISSING
+}
+
 //verify that this rss feed ate are parseable. Thsi is necessary for merging syndication date
-public fun verifyRssFeedForDateFitness(r: Rss): Boolean {
+public fun verifyRssFeedForDateFitness(r: Rss): Pair<Boolean, ParsedDateFormat?> {
     try
     {
         if (r.channel?.item == null || r.channel!!.item!!.size() == 0)
-            return false
+            return Pair(false, null)
 
         val i = r.channel!!.item!!.get(0)
 
-        if (i.getPubDate() == null)
-            return false
+        val pubDate = i.getPubDate()!!
 
-        return true
+        if (pubDate.isValid)
+            return Pair(true, pubDate.status)
+        else
+            return Pair(false, null)
     }
     catch (e: Exception){
-        return false
+        return Pair(false, null)
     }
 }

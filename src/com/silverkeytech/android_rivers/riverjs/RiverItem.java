@@ -49,11 +49,11 @@ public class RiverItem {
         }
     }
 
-    public Boolean containsEnclosure() {
+    public Boolean hasEnclosure() {
         return enclosure != null && !enclosure.isEmpty();
     }
 
-    public Boolean containsSource() {
+    public Boolean hasSource() {
         return source != null && source.size() > 0;
     }
 
