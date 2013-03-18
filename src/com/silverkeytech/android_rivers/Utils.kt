@@ -106,7 +106,10 @@ fun futureTimeFromNowInMilies(seconds: Int): Long {
 }
 
 fun httpGet(url: String): HttpRequest {
-    return HttpRequest.get(url)!!.acceptGzipEncoding()!!.uncompress(true)!!
+    return HttpRequest.get(url)!!
+            .acceptCharset(HttpRequest.CHARSET_UTF8)!!
+            .acceptGzipEncoding()!!
+            .uncompress(true)!!
 }
 
 fun isNetworkAvailable(context: Context): Boolean {

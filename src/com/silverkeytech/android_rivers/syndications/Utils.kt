@@ -9,6 +9,8 @@ import com.silverkeytech.android_rivers.outliner.transformXmlToRss
 import com.silverkeytech.android_rivers.syndications.atom.Feed
 import com.silverkeytech.android_rivers.syndications.rss.Rss
 import java.util.Date
+import com.github.kevinsawicki.http.HttpRequest
+
 
 fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<SyndicationFeed> {
     val TAG = "downloadFeed"
@@ -18,8 +20,7 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
         try{
             val request = httpGet(url)
             mimeType = request.contentType()
-
-            downloadedContent = request.body()
+            downloadedContent = request.body()!!
         }
         catch(e: HttpRequestException){
             var ex = e.getCause()

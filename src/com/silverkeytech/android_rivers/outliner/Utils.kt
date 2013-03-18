@@ -160,8 +160,8 @@ fun transformXmlToRss(xml: String?): Result<Rss> {
         val builder = RssBuilder()
         val reader = ByteArrayInputStream(xml!!.getBytes())
         RssParser().parse(reader, builder)
-
         val rss = builder.build()
+        reader.close()
         return Result.right(rss)
     }
     catch (e: Exception){

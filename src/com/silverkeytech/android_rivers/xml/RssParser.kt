@@ -30,7 +30,7 @@ public class RssParser{
                 itemTag, itemTitle, itemLink, itemDescription, itemAuthor, itemGuid, itemIsPermaLink, itemPubDate,
                 itemEnclosure, itemMobileAppVersion
         )
-        parser.parse(input, rss)
+        parser.parse(input, "UTF-8", rss)
     }
 }
 
