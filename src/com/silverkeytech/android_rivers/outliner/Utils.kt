@@ -32,7 +32,7 @@ import com.silverkeytech.android_rivers.scrubHtml
 import com.silverkeytech.news_engine.syndications.atom.Feed
 import com.silverkeytech.news_engine.syndications.rss.Rss
 import com.silverkeytech.news_engine.syndications.rss.RssBuilder
-import com.silverkeytech.news_engine.xml.RssParser
+import com.silverkeytech.news_engine.syndications.rss.RssParser
 import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 import java.io.ByteArrayInputStream
 import java.util.ArrayList
