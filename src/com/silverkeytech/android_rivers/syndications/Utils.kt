@@ -109,6 +109,7 @@ public data class RssDate(public val status : ParsedDateFormat, public val date 
         get() = status != ParsedDateFormat.UNKNOWN && status != ParsedDateFormat.MISSING
 }
 
+
 //verify that this rss feed ate are parseable. Thsi is necessary for merging syndication date
 public fun verifyRssFeedForDateFitness(r: Rss): Pair<Boolean, ParsedDateFormat?> {
     try
