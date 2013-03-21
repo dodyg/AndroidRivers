@@ -21,11 +21,11 @@ import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
-import com.silverkeytech.android_rivers.outliner.OutlineContent
+import com.silverkeytech.news_engine.outliner.OutlineContent
 import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
-import com.silverkeytech.android_rivers.outlines.Opml
-import com.silverkeytech.android_rivers.outlines.Outline
+import com.silverkeytech.news_engine.outlines.Opml
+import com.silverkeytech.news_engine.outlines.Outline
 import java.util.ArrayList
 import org.holoeverywhere.app.Activity
 

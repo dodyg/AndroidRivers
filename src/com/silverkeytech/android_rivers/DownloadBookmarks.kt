@@ -24,7 +24,7 @@ import android.os.AsyncTask
 import android.util.Log
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
-import com.silverkeytech.android_rivers.outlines.Opml
+import com.silverkeytech.news_engine.outlines.Opml
 import org.holoeverywhere.app.Activity
 
 public class DownloadBookmarks(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<Opml>>(){

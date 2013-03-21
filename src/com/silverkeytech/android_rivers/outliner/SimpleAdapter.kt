@@ -38,6 +38,8 @@ import com.silverkeytech.android_rivers.startOutlinerActivity
 import com.silverkeytech.android_rivers.startRiverActivity
 import com.silverkeytech.android_rivers.toastee
 import java.util.ArrayList
+import com.silverkeytech.news_engine.outliner.OutlineContent
+import com.silverkeytech.news_engine.outliner.OutlineType
 
 public open class SimpleAdapter(private val context: OutlinerActivity,
                                 private val treeStateManager: TreeStateManager<Long?>,

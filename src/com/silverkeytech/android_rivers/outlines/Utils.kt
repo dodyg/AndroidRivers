@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.outlines
 
+import com.silverkeytech.news_engine.outlines.Outline
+
 
 fun sortOutlineDesc(outlines: List<Outline>): List<Outline> {
     var sortedOutlines = outlines.sort(

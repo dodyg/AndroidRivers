@@ -34,7 +34,7 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
-import com.silverkeytech.android_rivers.syndications.SyndicationFeedItem
+import com.silverkeytech.news_engine.syndications.SyndicationFeedItem
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.AlertDialog
 import java.util.ArrayList

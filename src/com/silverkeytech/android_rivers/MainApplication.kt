@@ -25,10 +25,10 @@ import android.support.v4.util.LruCache
 import android.util.Log
 import com.silverkeytech.android_rivers.db.Database
 import com.silverkeytech.android_rivers.db.DatabaseManager
-import com.silverkeytech.android_rivers.outliner.OutlineContent
-import com.silverkeytech.android_rivers.outlines.Opml
-import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
-import com.silverkeytech.android_rivers.syndications.SyndicationFeed
+import com.silverkeytech.news_engine.outliner.OutlineContent
+import com.silverkeytech.news_engine.outlines.Opml
+import com.silverkeytech.news_engine.riverjs.RiverItemMeta
+import com.silverkeytech.news_engine.syndications.SyndicationFeed
 import java.util.ArrayList
 
 public class SharedFlags{

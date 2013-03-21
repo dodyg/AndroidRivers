@@ -36,7 +36,7 @@ import android.widget.ListView
 import android.widget.TextView
 import com.silverkeytech.android_rivers.outliner.transformFeedOpmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
-import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
+import com.silverkeytech.news_engine.riverjs.RiverItemMeta
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.AlertDialog
 import java.util.ArrayList

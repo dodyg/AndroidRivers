@@ -22,7 +22,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Messenger
-import com.silverkeytech.android_rivers.outliner.OutlineContent
+import com.silverkeytech.news_engine.outliner.OutlineContent
 import java.util.ArrayList
 import com.silverkeytech.android_rivers.meta_weblog.BlogPostService
 import java.util.HashMap

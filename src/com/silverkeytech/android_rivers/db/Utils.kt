@@ -20,9 +20,9 @@ package com.silverkeytech.android_rivers.db
 import com.silverkeytech.android_rivers.None
 import com.silverkeytech.android_rivers.Result
 import com.silverkeytech.android_rivers.isNullOrEmpty
-import com.silverkeytech.android_rivers.outlines.Body
-import com.silverkeytech.android_rivers.outlines.Opml
-import com.silverkeytech.android_rivers.outlines.Outline
+import com.silverkeytech.news_engine.outlines.Body
+import com.silverkeytech.news_engine.outlines.Opml
+import com.silverkeytech.news_engine.outlines.Outline
 
 public fun removePodcast (id: Int): Result<None> {
     return DatabaseManager.cmd().podcast().deleteById(id)

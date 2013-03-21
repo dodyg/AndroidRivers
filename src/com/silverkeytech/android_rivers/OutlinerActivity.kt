@@ -23,7 +23,7 @@ import com.actionbarsherlock.view.MenuItem
 import com.pl.polidea.treeview.InMemoryTreeStateManager
 import com.pl.polidea.treeview.TreeBuilder
 import com.pl.polidea.treeview.TreeViewList
-import com.silverkeytech.android_rivers.outliner.OutlineContent
+import com.silverkeytech.news_engine.outliner.OutlineContent
 import com.silverkeytech.android_rivers.outliner.SimpleAdapter
 import java.util.ArrayList
 import org.holoeverywhere.app.Activity

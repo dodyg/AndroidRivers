@@ -21,8 +21,8 @@ package com.silverkeytech.android_rivers
 import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
-import com.silverkeytech.android_rivers.syndications.SyndicationFeed
-import com.silverkeytech.android_rivers.syndications.SyndicationFilter
+import com.silverkeytech.news_engine.syndications.SyndicationFeed
+import com.silverkeytech.news_engine.syndications.SyndicationFilter
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 import org.holoeverywhere.app.Activity
 

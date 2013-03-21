@@ -40,8 +40,8 @@ import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.getBookmarksFromDbAsOpml
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import com.silverkeytech.android_rivers.db.saveOpmlAsBookmarks
-import com.silverkeytech.android_rivers.outlines.Opml
-import com.silverkeytech.android_rivers.outlines.Outline
+import com.silverkeytech.news_engine.outlines.Opml
+import com.silverkeytech.news_engine.outlines.Outline
 import com.silverkeytech.android_rivers.outlines.sortOutlineAsc
 import com.silverkeytech.android_rivers.outlines.sortOutlineDesc
 import java.util.ArrayList

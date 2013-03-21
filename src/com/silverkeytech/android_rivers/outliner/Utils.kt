@@ -22,20 +22,21 @@ import android.util.Log
 import com.silverkeytech.android_rivers.Result
 import com.silverkeytech.android_rivers.XmlComponent
 import com.silverkeytech.android_rivers.isNullOrEmpty
-import com.silverkeytech.android_rivers.outlines.Body
-import com.silverkeytech.android_rivers.outlines.Head
-import com.silverkeytech.android_rivers.outlines.Opml
-import com.silverkeytech.android_rivers.outlines.Outline
-import com.silverkeytech.android_rivers.riverjs.RiverOpml
-import com.silverkeytech.android_rivers.riverjs.RiverOpmlOutline
+import com.silverkeytech.news_engine.outlines.Body
+import com.silverkeytech.news_engine.outlines.Head
+import com.silverkeytech.news_engine.outlines.Opml
+import com.silverkeytech.news_engine.outlines.Outline
+import com.silverkeytech.news_engine.riverjs.RiverOpml
+import com.silverkeytech.news_engine.riverjs.RiverOpmlOutline
 import com.silverkeytech.android_rivers.scrubHtml
-import com.silverkeytech.android_rivers.syndications.atom.Feed
-import com.silverkeytech.android_rivers.syndications.rss.Rss
-import com.silverkeytech.android_rivers.syndications.rss.RssBuilder
-import com.silverkeytech.android_rivers.xml.RssParser
+import com.silverkeytech.news_engine.syndications.atom.Feed
+import com.silverkeytech.news_engine.syndications.rss.Rss
+import com.silverkeytech.news_engine.syndications.rss.RssBuilder
+import com.silverkeytech.news_engine.xml.RssParser
 import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 import java.io.ByteArrayInputStream
 import java.util.ArrayList
+import com.silverkeytech.news_engine.outliner.OutlineContent
 
 //do an in order traversal so we can flatten it up to be used by outliner
 fun Opml.traverse (filter: ((Outline) -> Boolean)? = null, depthLimit: Int = 12): ArrayList<OutlineContent> {
