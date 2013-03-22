@@ -185,7 +185,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
     private var progressHandler: Handler? = null
     private var progressThread : Thread? = null
 
-    public fun setProgressHandler(handler : Handler?){
+    public fun assignProgressHandler(handler : Handler?){
         progressHandler = handler
     }
 
