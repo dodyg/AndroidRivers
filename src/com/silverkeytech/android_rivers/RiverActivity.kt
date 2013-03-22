@@ -175,13 +175,14 @@ public class RiverActivity(): ListActivity(), WithVisualModificationPanel
         return true
     }
 
+    //Collect river sources into a list and make sure they are unique (based on the source uris)
     fun collectRiverSources() {
         if (sortedNewsItems != null && sortedNewsItems!!.size() > 0){
             val distinct = ArrayList<RiverItemSource>();
             var itm = sortedNewsItems!!.get(0).source
-            distinct.add(itm)
             sortedNewsItems!!.map { x -> x.source }.sortBy { x -> x.uri!! }.forEach { x ->
-                if (itm.uri != x.uri){
+                if (itm.uri != x.uri && !distinct.any { y -> y.uri == x.uri }){
+                    Log.d("River Sources Collection", "${itm.uri}")
                     distinct.add(itm)
                     itm = x
                 }
