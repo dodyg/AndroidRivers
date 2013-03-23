@@ -20,6 +20,7 @@
       <directory url="file://$PROJECT_DIR$/HoloEverywhere-master/contrib/ActionBarSherlock/gen" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/Test/gen" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/NewsEngine/gen" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/NewsEngineTests/gen" includeSubdirectories="true" />
     </excludeFromCompile>
     <resourceExtensions />
     <wildcardResourcePatterns>
