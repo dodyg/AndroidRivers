@@ -64,7 +64,7 @@ public class XMLParser<T> {
      * <p/>
      * This is <code>false</code> by default.
      */
-    public static final Boolean DEBUG = Boolean.getBoolean("sjxp.debug");
+    public static Boolean DEBUG = Boolean.getBoolean("sjxp.debug");
 
     /**
      * Flag used to indicate if this parser should be namespace-aware by setting
@@ -86,7 +86,7 @@ public class XMLParser<T> {
      * <p/>
      * This is <code>true</code> by default.
      */
-    public static final Boolean ENABLE_NAMESPACES = (System
+    public static Boolean ENABLE_NAMESPACES = (System
             .getProperty("sjxp.namespaces") == null ? Boolean.TRUE : Boolean
             .getBoolean("sjxp.namespaces"));
 
@@ -621,7 +621,7 @@ public class XMLParser<T> {
         location.push(xpp.getName(), xpp.getNamespace());
 
         if (DEBUG)
-            log("START_TAG: %s", location);
+            log("START_TAG: %s %s:%s", location, xpp.getNamespace(), xpp.getName());
 
         // Get the rules for the current path
         List<IRule<T>> tagRuleList = tagRuleMap.get(location
