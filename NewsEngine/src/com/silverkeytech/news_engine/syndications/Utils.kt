@@ -1,10 +1,10 @@
 package com.silverkeytech.news_engine.syndications
 
-import android.util.Log
 import com.silverkeytech.news_engine.syndications.atom.Feed
 import java.util.Date
 import com.silverkeytech.news_engine.syndications.rss.Rss
-
+import com.silverkeytech.news_engine.DateHelper
+import com.silverkeytech.news_engine.log
 
 public enum class ParsedDateFormat{
     RFC822
@@ -17,6 +17,50 @@ public enum class ParsedDateFormat{
 public data class RssDate(public val status : ParsedDateFormat, public val date : Date?){
     public val isValid : Boolean
         get() = status != ParsedDateFormat.UNKNOWN && status != ParsedDateFormat.MISSING
+}
+
+public fun parseDate(date : String?) : RssDate{
+    if (date == null)
+        return RssDate(ParsedDateFormat.MISSING, null)
+
+    if (date.endsWith("Z")!!)
+    {
+        try
+        {
+            return RssDate(ParsedDateFormat.ISO8601_NOMS, DateHelper.parseISO8601NoMilliseconds(date.replaceAll("Z$", "+0000")))
+        }
+        catch (e : Exception) {
+            log("RdfRssItem", "Error parsing " + date + " in ISO8601_NOMS Modified Z")
+        }
+
+    }
+
+    try
+    {
+        return RssDate(ParsedDateFormat.RFC822, DateHelper.parseRFC822(date))
+    }
+    catch (e : Exception) {
+        log("RdfRssItem", "Error parsing " + date + " in RFC822")
+    }
+
+    try
+    {
+        return RssDate(ParsedDateFormat.ISO8601_NOMS, DateHelper.parseISO8601NoMilliseconds(date))
+    }
+    catch (e : Exception) {
+        log("RdfRssItem", "Error parsing " + date + " in ISO8601_NOMS")
+    }
+
+    try
+    {
+        return RssDate(ParsedDateFormat.NO_SPACES, DateHelper.parse(DateHelper.NO_SPACES, date))
+    }
+    catch (e : Exception) {
+        log("RdfRssItem", "Error parsing " + date + " in NO_SPACES")
+    }
+
+    return RssDate(ParsedDateFormat.UNKNOWN, null)
+
 }
 
 //verify that this rss feed ate are parseable. Thsi is necessary for merging syndication date

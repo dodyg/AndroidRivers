@@ -22,6 +22,7 @@ import android.util.Log;
 import com.silverkeytech.news_engine.DateHelper;
 import com.silverkeytech.news_engine.syndications.ParsedDateFormat;
 import com.silverkeytech.news_engine.syndications.RssDate;
+import com.silverkeytech.news_engine.syndications.SyndicationsPackage;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -46,37 +47,7 @@ public class Item {
     public HashMap<String, String> extensions = new HashMap<String, String>();
 
     public RssDate getPubDate() {
-        if (pubDate == null)
-            return new RssDate(ParsedDateFormat.MISSING, null);
-
-        if (pubDate.endsWith("Z")){
-            try{
-                //Z means whatever time zone so we put it at GMT
-                return new RssDate(ParsedDateFormat.ISO8601_NOMS, DateHelper.parseISO8601NoMilliseconds(pubDate.replaceAll("Z$", "+0000")));
-            }catch(Exception e){
-                Log.d("RSSItem", "Error parsing " + pubDate + " in ISO8601_NOMS Modified Z");
-            }
-        }
-
-        try {
-            return new RssDate(ParsedDateFormat.RFC822, DateHelper.parseRFC822(pubDate));
-        } catch (Exception e) {
-            Log.d("RSSItem", "Error parsing " + pubDate + " in RFC822");
-        }
-
-        try {
-            return new RssDate(ParsedDateFormat.ISO8601_NOMS, DateHelper.parseISO8601NoMilliseconds(pubDate));
-        } catch (Exception e){
-            Log.d("RSSItem", "Error parsing " + pubDate + " in ISO8601_NOMS");
-        }
-
-        try{
-            return new RssDate(ParsedDateFormat.NO_SPACES, DateHelper.parse(DateHelper.NO_SPACES, pubDate));
-        } catch (Exception e){
-            Log.d("RSSItem", "Error parsing " + pubDate + " in NO_SPACES");
-        }
-
-        return new RssDate(ParsedDateFormat.UNKNOWN, null);
+        return SyndicationsPackage.parseDate(pubDate);
     }
 
     public Date getPubDateInFormat(ParsedDateFormat status){
