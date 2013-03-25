@@ -18,13 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.news_engine.syndications
 
-import android.util.Log
 import com.silverkeytech.news_engine.isNullOrEmpty
 import com.silverkeytech.news_engine.scrubHtml
 import com.silverkeytech.news_engine.syndications.atom.ContentElement
 import com.silverkeytech.news_engine.syndications.atom.Feed
 import com.silverkeytech.news_engine.syndications.rss.Rss
 import java.util.ArrayList
+import com.silverkeytech.news_engine.log
 
 public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, val filter: SyndicationFilter? = null){
     class object{
@@ -53,7 +53,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
             val (parseable, dateFormat) = verifyRssFeedForDateFitness(rss!!)
             isDateParseable = parseable
 
-            Log.d(TAG, "isDateParseable is $isDateParseable with date format $dateFormat")
+            log(TAG, "isDateParseable is $isDateParseable with date format $dateFormat")
             val channel = rss!!.channel
             if (channel != null){
                 title = if (channel.title.isNullOrEmpty()) "" else channel.title!!
@@ -74,7 +74,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
 
                     //stop processing if there's a limit on how many items to be processed
                     if (maxSize != null && itemCounter > maxSize){
-                        Log.d(TAG, "Max size of limit reached at $itemCounter")
+                        log(TAG, "Max size of limit reached at $itemCounter")
                         break
                     }
 
@@ -85,7 +85,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
                     if (isDateParseable)                                                  {
                         fi.pubDate = i.getPubDateInFormat(dateFormat)
                         if (oldestDate != null && fi.pubDate!!.compareTo(oldestDate) == -1){
-                            Log.d(TAG, "Oldest item limit reached at ${fi.pubDate}")
+                            log(TAG, "Oldest item limit reached at ${fi.pubDate}")
                             break
                         }
                     }
@@ -114,7 +114,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
     fun transformAtom() {
         if (atom != null){
             isDateParseable = verifyAtomFeedForDateFitness(atom!!)
-            Log.d(TAG, "isDateParseable is $isDateParseable")
+            log(TAG, "isDateParseable is $isDateParseable")
 
             title = if (atom!!.title.isNullOrEmpty()) "" else atom!!.title!!
 
@@ -136,7 +136,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
 
                 //stop processing if there's a limit on how many items to be processed
                 if (maxSize != null && itemCounter > maxSize){
-                    Log.d(TAG, "Max size of limit reached at $itemCounter")
+                    log(TAG, "Max size of limit reached at $itemCounter")
                     break
                 }
 

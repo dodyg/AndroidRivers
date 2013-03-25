@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="xpp3-1.1.4c">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/NewsEngineTests/libs/xpp3-1.1.4c.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

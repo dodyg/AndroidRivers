@@ -3,7 +3,7 @@ package com.silverkeytech.news_engine.syndications.rss_rdf
 import java.util.Date
 
 public class DublinCore(){
-    public var date: Date? = null
+    public var date: String? = null
     public var language: String? = null
     public var rights: String? = null
     public var source: String? = null

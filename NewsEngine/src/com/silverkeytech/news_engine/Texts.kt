@@ -35,24 +35,6 @@ fun scrubJsonP(text: String): String {
     return rep
 }
 
-fun scrubHtml(text: String?): String {
-    if (text.isNullOrEmpty())
-        return ""
-    else {
-        val spanned = android.text.Html.fromHtml(text!!.trim()) as SpannableStringBuilder
-        val spannedObjects = spanned.getSpans(0, spanned.length(), javaClass<Any>())!!
-
-        for(i in 0..(spannedObjects.size - 1)){
-            if (spannedObjects[i] is ImageSpan){
-                val img = spannedObjects[i] as ImageSpan
-                spanned.replace(spanned.getSpanStart(img), spanned.getSpanEnd(img), "")
-            }
-        }
-
-        return spanned.toString()
-    }
-}
-
 
 fun String?.isNullOrEmpty(): Boolean {
     val res = this == null || this.trim().length() == 0

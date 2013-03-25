@@ -9,9 +9,21 @@ import com.silverkeytech.news_engine.syndications.rss.RssBuilder
 import java.io.ByteArrayInputStream
 import com.silverkeytech.news_engine.syndications.rss.RssParser
 import com.silverkeytech.news_engine.syndications.atom.Feed
+import com.silverkeytech.news_engine.syndications.rss_rdf.Rdf
+import com.silverkeytech.news_engine.syndications.rss_rdf.RdfRssBuilder
+import com.silverkeytech.news_engine.syndications.rss_rdf.RdfRssParser
 
 fun plog(msg : String){
     System.out.println(msg)
+}
+
+fun downloadRawFeed(url : String) : String{
+    val request = HttpRequest
+            .get(url)!!
+            .acceptGzipEncoding()!!
+            .uncompress(true)!!
+
+    return request.body()!!
 }
 
 fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<SyndicationFeed> {
@@ -69,6 +81,22 @@ fun transformXmlToRss(xml: String?): Result<Rss> {
         val builder = RssBuilder()
         val reader = ByteArrayInputStream(xml!!.getBytes())
         RssParser().parse(reader, builder)
+        val rss = builder.build()
+        reader.close()
+        return Result.right(rss)
+    }
+    catch (e: Exception){
+        return Result.wrong(e)
+    }
+}
+
+
+fun transformXmlToRdfRss(xml: String?): Result<Rdf> {
+
+    try{
+        val builder = RdfRssBuilder()
+        val reader = ByteArrayInputStream(xml!!.getBytes())
+        RdfRssParser().parse(reader, builder)
         val rss = builder.build()
         reader.close()
         return Result.right(rss)
