@@ -51,23 +51,6 @@ public class Item {
     }
 
     public Date getPubDateInFormat(ParsedDateFormat status){
-        try{
-            if (status == ParsedDateFormat.RFC822)
-                return DateHelper.parseRFC822(pubDate);
-            else
-            if (status == ParsedDateFormat.ISO8601_NOMS){
-                if (pubDate.endsWith("Z"))
-                    return DateHelper.parseISO8601NoMilliseconds(pubDate.replaceAll("Z$", "+0000"));
-                else
-                    return DateHelper.parseISO8601NoMilliseconds(pubDate);
-            }
-            else if (status == ParsedDateFormat.NO_SPACES)
-                return DateHelper.parse(DateHelper.NO_SPACES, pubDate);
-            else
-                return null;
-        }
-        catch (Exception e) {
-            return null;
-        }
+        return SyndicationsPackage.getDateInFormat(status, pubDate);
     }
 }

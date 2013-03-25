@@ -7,6 +7,7 @@ import com.silverkeytech.news_engine.syndications.ParsedDateFormat
 import com.silverkeytech.news_engine.DateHelper
 import com.silverkeytech.news_engine.log
 import com.silverkeytech.news_engine.syndications.parseDate
+import com.silverkeytech.news_engine.syndications.getDateInFormat
 
 public class DublinCore(){
     public var date: String? = null
@@ -20,5 +21,8 @@ public class DublinCore(){
 
     public fun getDate() : RssDate {
         return parseDate(date)
+    }
+    public fun geDateInFormat(status : ParsedDateFormat) : Date? {
+        return getDateInFormat(status, date!!)
     }
 }

@@ -27,6 +27,8 @@ fun downloadRawFeed(url : String) : String{
 }
 
 fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<SyndicationFeed> {
+
+    com.silverkeytech.news_engine.log = { (tag, str) -> plog(str) }
     val TAG = "downloadFeed"
     try{
         var downloadedContent: String?

@@ -29,7 +29,7 @@ import com.silverkeytech.news_engine.syndications.rss_rdf.Rdf
 
 public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, public val rdf: Rdf?, val filter: SyndicationFilter? = null){
     class object{
-        public val TAG: String = javaClass<SyndicationFeed>().getSimpleName()!!
+        public val TAG: String = javaClass<SyndicationFeed>().getSimpleName()
     }
 
     public var title: String = ""
@@ -198,23 +198,38 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
 
     public fun transformRdf(){
         if (rdf != null){
-            isDateParseable = false
+            val (parseable, dateFormat) = verifyRdfFeedForDateFitness(rdf!!)
+            isDateParseable = parseable
 
             title = if (rdf!!.channel.title.isNullOrEmpty()) "" else rdf!!.channel.title!!
             link = if (rdf!!.channel.link.isNullOrEmpty()) "" else rdf!!.channel.link!!
             feedType = SyndicationFeedType.RDF
 
-
             var itemCounter = 0
             val maxSize = filter?.maximumSize
+            val oldestDate = filter?.oldestDate
 
             for(i in rdf!!.item){
                 itemCounter ++
+
+                //stop processing if there's a limit on how many items to be processed
+                if (maxSize != null && itemCounter > maxSize){
+                    log(TAG, "Max size of limit reached at $itemCounter")
+                    break
+                }
 
                 val fi = SyndicationFeedItem()
                 fi.title = i.title
                 fi.link = i.link
                 fi.description = i.description
+
+                if (isDateParseable)                                                  {
+                    fi.pubDate = i.dc.geDateInFormat(dateFormat!!)
+                    if (oldestDate != null && fi.pubDate!!.compareTo(oldestDate) == -1){
+                        log(TAG, "Oldest item limit reached at ${fi.pubDate}")
+                        break
+                    }
+                }
 
                 items.add(fi)
             }

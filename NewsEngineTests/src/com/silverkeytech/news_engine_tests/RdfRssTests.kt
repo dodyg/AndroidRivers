@@ -12,6 +12,8 @@ public class RdfRssTest{
         val feed = download.value!!
         plog("Size of download ${feed.items.size()}")
         Assert.assertTrue(feed.items.size() > 0)
+        plog("Is date parseable ${feed.isDateParseable}")
+        plog("Date of first item ${feed.items.get(0).pubDate}")
     }
 
     [Test]
