@@ -37,6 +37,9 @@ import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 import java.io.ByteArrayInputStream
 import java.util.ArrayList
 import com.silverkeytech.news_engine.outliner.OutlineContent
+import com.silverkeytech.news_engine.syndications.rss_rdf.RdfRssBuilder
+import com.silverkeytech.news_engine.syndications.rss_rdf.RdfRssParser
+import com.silverkeytech.news_engine.syndications.rss_rdf.Rdf
 
 //do an in order traversal so we can flatten it up to be used by outliner
 fun Opml.traverse (filter: ((Outline) -> Boolean)? = null, depthLimit: Int = 12): ArrayList<OutlineContent> {
@@ -179,6 +182,20 @@ fun transformXmlToAtom(xml: String?): Result<Feed> {
     }
     catch (e: Exception){
         Log.d("Atom Transform", "Exception ${e.getMessage()}")
+        return Result.wrong(e)
+    }
+}
+
+fun transformXmlToRdfRss(xml: String?): Result<Rdf> {
+    try{
+        val builder = RdfRssBuilder()
+        val reader = ByteArrayInputStream(xml!!.getBytes())
+        RdfRssParser().parse(reader, builder)
+        val rss = builder.build()
+        reader.close()
+        return Result.right(rss)
+    }
+    catch (e: Exception){
         return Result.wrong(e)
     }
 }

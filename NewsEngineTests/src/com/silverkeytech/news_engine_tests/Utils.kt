@@ -48,20 +48,35 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
             return mimeType!!.contains("atom") || downloadedContent!!.contains("<feed ")//the space is important so it doesn't confuse with feedburner tag
         }
 
+        fun isRdfFeed(): Boolean{
+            return downloadedContent!!.contains("<rdf:RDF")
+        }
+
         if (isAtomFeed()){
             var feed = transformXmlToAtom(downloadedContent)
             if (feed.isTrue()){
-                var f = SyndicationFeed(null, feed.value, filter)
+                var f = SyndicationFeed(null, feed.value, null, filter)
                 f.transformAtom()
                 return Result.right(f)
             } else{
                 return Result.wrong(feed.exception)
             }
-        } else {
+        }
+        else if (isRdfFeed()){
+            val feed = transformXmlToRdfRss(downloadedContent)
+            if (feed.isTrue()){
+                var f = SyndicationFeed(null, null, feed.value, filter)
+                f.transformRdf()
+                return Result.right(f)
+            }
+            else
+                return Result.wrong(feed.exception)
+        }
+        else {
             var feed = transformXmlToRss(downloadedContent)
 
             if (feed.isTrue()){
-                var f = SyndicationFeed(feed.value, null, filter)
+                var f = SyndicationFeed(feed.value, null, null, filter)
                 f.transformRss()
                 val afterTransform = System.currentTimeMillis()
                 return Result.right(f)

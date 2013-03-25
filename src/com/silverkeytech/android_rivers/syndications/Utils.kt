@@ -12,6 +12,7 @@ import java.util.Date
 import com.github.kevinsawicki.http.HttpRequest
 import com.silverkeytech.news_engine.syndications.SyndicationFilter
 import com.silverkeytech.news_engine.syndications.SyndicationFeed
+import com.silverkeytech.android_rivers.outliner.transformXmlToRdfRss
 
 
 fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<SyndicationFeed> {
@@ -33,6 +34,10 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
             return mimeType!!.contains("atom") || downloadedContent!!.contains("<feed ")//the space is important so it doesn't confuse with feedburner tag
         }
 
+        fun isRdfFeed(): Boolean{
+            return downloadedContent!!.contains("<rdf:RDF ")
+        }
+
         if (isAtomFeed()){
             val before = System.currentTimeMillis()
             var feed = transformXmlToAtom(downloadedContent)
@@ -41,7 +46,7 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
             Log.d(TAG, "$url is an ATOM Feed")
             if (feed.isTrue()){
                 val beforeTransform = System.currentTimeMillis()
-                var f = SyndicationFeed(null, feed.value, filter)
+                var f = SyndicationFeed(null, feed.value, null, filter)
                 f.transformAtom()
                 val afterTransform = System.currentTimeMillis()
                 Log.d(TAG, "Time to transform ATOM Raw is ${afterTransform - beforeTransform}")
@@ -50,7 +55,19 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
             } else{
                 return Result.wrong(feed.exception)
             }
-        } else {
+        }
+        else if (isRdfFeed()){
+            val feed = transformXmlToRdfRss(downloadedContent)
+            if (feed.isTrue()){
+                var f = SyndicationFeed(null, null, feed.value, filter)
+                f.transformRdf()
+                Log.d(TAG, "RDF transformation")
+                return Result.right(f)
+            }
+            else
+                return Result.wrong(feed.exception)
+        }
+        else {
             val before = System.currentTimeMillis()
             var feed = transformXmlToRss(downloadedContent)
             val after = System.currentTimeMillis()
@@ -59,7 +76,7 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
 
             if (feed.isTrue()){
                 val beforeTransform = System.currentTimeMillis()
-                var f = SyndicationFeed(feed.value, null, filter)
+                var f = SyndicationFeed(feed.value, null, null, filter)
                 f.transformRss()
                 val afterTransform = System.currentTimeMillis()
                 Log.d(TAG, "Time to transform RSS Raw is ${afterTransform - beforeTransform}")

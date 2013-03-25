@@ -4,13 +4,15 @@ import com.silverkeytech.news_engine.syndications.rss_rdf.RdfRssBuilder
 import java.io.InputStream
 import com.thebuzzmedia.sjxp.XMLParser
 import com.silverkeytech.news_engine.xml.textRule
+import com.silverkeytech.news_engine.xml.tagRule
 
 public class RdfRssParser{
     public fun parse(input: InputStream, rss: RdfRssBuilder) {
-        XMLParser.DEBUG = true
-        XMLParser.ENABLE_NAMESPACES = false
+        XMLParser.DEBUG = false
         var parser = XMLParser<RdfRssBuilder>(channelTitle, channelLink, channelDescription, channelDcLanguage,
-                channelDcRights, channelDcPublisher, channelDcCreator, channelDcSource, channelDcTitle)
+                channelDcRights, channelDcPublisher, channelDcCreator, channelDcSource, channelDcTitle,
+                itemTag, itemTitle, itemLink, itemDescription,
+                itemDcDate, itemDcLanguage, itemDcRights, itemDcSource, itemDcTitle)
         parser.parse(input, "UTF-8", rss)
     }
 }
@@ -55,7 +57,42 @@ val channelDcTitle = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$dc]title
     rss.channel.setDcTitle(text)
 })
 
+val itemTag = tagRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item", {(isStartTag, rss) ->
+    if (isStartTag)
+        rss.channel.startItem()
+    else
+        rss.channel.endItem()
+})
 
+val itemTitle = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$ns]title",  {(text, rss) ->
+    rss.channel.item.setTitle(text)
+})
 
+val itemLink = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$ns]link",  {(text, rss) ->
+    rss.channel.item.setLink(text)
+})
 
+val itemDescription = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$ns]description",  {(text, rss) ->
+    rss.channel.item.setDescription(text)
+})
+
+val itemDcDate = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$dc]date",  {(text, rss) ->
+    rss.channel.item.setDcDate(text)
+})
+
+val itemDcLanguage = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$dc]language",  {(text, rss) ->
+    rss.channel.item.setDcLanguage(text)
+})
+
+val itemDcRights = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$dc]rights",  {(text, rss) ->
+    rss.channel.item.setDcRights(text)
+})
+
+val itemDcSource = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$dc]source",  {(text, rss) ->
+    rss.channel.item.setDcSource(text)
+})
+
+val itemDcTitle = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$dc]title",  {(text, rss) ->
+    rss.channel.item.setDcTitle(text)
+})
 

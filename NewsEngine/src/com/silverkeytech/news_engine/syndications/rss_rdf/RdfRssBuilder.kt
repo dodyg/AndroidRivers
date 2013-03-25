@@ -96,5 +96,9 @@ public class RdfRssBuilder(){
         public fun setDcSource(source : String){
             data.dc.source = source
         }
+
+        public fun setDcTitle(title : String){
+            data.dc.title = title
+        }
     }
 }

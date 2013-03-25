@@ -86,7 +86,7 @@ public class XMLParser<T> {
      * <p/>
      * This is <code>true</code> by default.
      */
-    public static Boolean ENABLE_NAMESPACES = (System
+    public static final Boolean ENABLE_NAMESPACES = (System
             .getProperty("sjxp.namespaces") == null ? Boolean.TRUE : Boolean
             .getBoolean("sjxp.namespaces"));
 

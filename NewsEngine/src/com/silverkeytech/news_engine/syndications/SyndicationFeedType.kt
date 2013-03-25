@@ -22,4 +22,5 @@ public enum class SyndicationFeedType{
     NONE
     ATOM
     RSS
+    RDF
 }
