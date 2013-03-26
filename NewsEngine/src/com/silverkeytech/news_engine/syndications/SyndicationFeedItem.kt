@@ -22,7 +22,6 @@ import java.util.Date
 import java.util.HashMap
 import com.silverkeytech.news_engine.isNullOrEmpty
 
-
 public data class SyndicationFeedItem(){
     public var title: String? = null
     public var description: String? = null

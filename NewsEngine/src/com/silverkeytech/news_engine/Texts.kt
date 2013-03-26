@@ -18,15 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.news_engine
 
-import android.app.Activity
-import android.graphics.Typeface
-import android.text.SpannableStringBuilder
-import android.text.style.ImageSpan
 import android.util.Log
-import android.util.TypedValue
-import android.view.Gravity
-import android.widget.TextView
-import java.net.URL
 import java.util.UUID
 
 fun scrubJsonP(text: String): String {
@@ -42,7 +34,7 @@ fun String?.isNullOrEmpty(): Boolean {
 }
 
 
-fun rightPadding(text: String, sizeTarget : Int): String{
+fun rightPadding(text: String, sizeTarget: Int): String {
     if (text.length() < sizeTarget){
         var spaces = StringBuffer()
         val diff = sizeTarget - text.length()

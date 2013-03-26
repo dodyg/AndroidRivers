@@ -19,11 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.news_engine.syndications.rss_rdf
 
 import java.util.Date
-
 import com.silverkeytech.news_engine.syndications.RssDate
 import com.silverkeytech.news_engine.syndications.ParsedDateFormat
-import com.silverkeytech.news_engine.DateHelper
-import com.silverkeytech.news_engine.log
 import com.silverkeytech.news_engine.syndications.parseDate
 import com.silverkeytech.news_engine.syndications.getDateInFormat
 
@@ -37,10 +34,10 @@ public class DublinCore(){
     public var creator: String? = null
     public var subject: String? = null
 
-    public fun getDate() : RssDate {
+    public fun getDate(): RssDate {
         return parseDate(date)
     }
-    public fun geDateInFormat(status : ParsedDateFormat) : Date? {
+    public fun geDateInFormat(status: ParsedDateFormat): Date? {
         return getDateInFormat(status, date!!)
     }
 }

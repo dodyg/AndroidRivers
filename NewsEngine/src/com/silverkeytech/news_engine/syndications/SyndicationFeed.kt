@@ -196,7 +196,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
         }
     }
 
-    public fun transformRdf(){
+    public fun transformRdf() {
         if (rdf != null){
             val (parseable, dateFormat) = verifyRdfFeedForDateFitness(rdf!!)
             isDateParseable = parseable
@@ -210,7 +210,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
             val oldestDate = filter?.oldestDate
 
             for(i in rdf!!.item){
-                itemCounter ++
+                itemCounter++
 
                 //stop processing if there's a limit on how many items to be processed
                 if (maxSize != null && itemCounter > maxSize){

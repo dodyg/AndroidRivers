@@ -18,8 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.news_engine.syndications.rss;
 
-import android.util.Log;
-import com.silverkeytech.news_engine.DateHelper;
 import com.silverkeytech.news_engine.syndications.ParsedDateFormat;
 import com.silverkeytech.news_engine.syndications.RssDate;
 import com.silverkeytech.news_engine.syndications.SyndicationsPackage;
@@ -50,7 +48,7 @@ public class Item {
         return SyndicationsPackage.parseDate(pubDate);
     }
 
-    public Date getPubDateInFormat(ParsedDateFormat status){
+    public Date getPubDateInFormat(ParsedDateFormat status) {
         return SyndicationsPackage.getDateInFormat(status, pubDate);
     }
 }

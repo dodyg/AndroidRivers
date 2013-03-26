@@ -16,12 +16,12 @@ public enum class ParsedDateFormat{
     ISO8601_NOMS_NO_TZ
 }
 
-public data class RssDate(public val status : ParsedDateFormat, public val date : Date?){
-    public val isValid : Boolean
+public data class RssDate(public val status: ParsedDateFormat, public val date: Date?){
+    public val isValid: Boolean
         get() = status != ParsedDateFormat.UNKNOWN && status != ParsedDateFormat.MISSING
 }
 
-public fun parseDate(date : String?) : RssDate{
+public fun parseDate(date: String?): RssDate {
     if (date == null)
         return RssDate(ParsedDateFormat.MISSING, null)
 
@@ -31,7 +31,7 @@ public fun parseDate(date : String?) : RssDate{
         {
             return RssDate(ParsedDateFormat.ISO8601_NOMS, DateHelper.parseISO8601NoMilliseconds(date.replaceAll("Z$", "+0000")))
         }
-        catch (e : Exception) {
+        catch (e: Exception) {
             log("RdfRssItem", "Error parsing " + date + " in ISO8601_NOMS Modified Z")
         }
 
@@ -41,7 +41,7 @@ public fun parseDate(date : String?) : RssDate{
     {
         return RssDate(ParsedDateFormat.RFC822, DateHelper.parseRFC822(date))
     }
-    catch (e : Exception) {
+    catch (e: Exception) {
         log("RdfRssItem", "Error parsing " + date + " in RFC822")
     }
 
@@ -49,7 +49,7 @@ public fun parseDate(date : String?) : RssDate{
     {
         return RssDate(ParsedDateFormat.ISO8601_NOMS, DateHelper.parseISO8601NoMilliseconds(date))
     }
-    catch (e : Exception) {
+    catch (e: Exception) {
         log("RdfRssItem", "Error parsing " + date + " in ISO8601_NOMS")
     }
 
@@ -57,7 +57,7 @@ public fun parseDate(date : String?) : RssDate{
     {
         return RssDate(ParsedDateFormat.ISO8601_NOMS_NO_TZ, DateHelper.parse(DateHelper.ISO8601_NOMS_NO_TZ, date))
     }
-    catch (e : Exception) {
+    catch (e: Exception) {
         log("RdfRssItem", "Error parsing " + date + " in ISO8601_NOMS_GENERAL_TZ")
     }
 
@@ -65,7 +65,7 @@ public fun parseDate(date : String?) : RssDate{
     {
         return RssDate(ParsedDateFormat.NO_SPACES, DateHelper.parse(DateHelper.NO_SPACES, date))
     }
-    catch (e : Exception) {
+    catch (e: Exception) {
         log("RdfRssItem", "Error parsing " + date + " in NO_SPACES")
     }
 
@@ -73,7 +73,7 @@ public fun parseDate(date : String?) : RssDate{
 
 }
 
-public fun getDateInFormat(status : ParsedDateFormat, date : String) : Date? {
+public fun getDateInFormat(status: ParsedDateFormat, date: String): Date? {
     try
     {
         if (status == ParsedDateFormat.RFC822)
@@ -86,15 +86,15 @@ public fun getDateInFormat(status : ParsedDateFormat, date : String) : Date? {
                 else
                     return DateHelper.parseISO8601NoMilliseconds(date)
             }
-                else if (status == ParsedDateFormat.ISO8601_NOMS_NO_TZ)
-                    return DateHelper.parse(DateHelper.ISO8601_NOMS_NO_TZ, date)
+            else if (status == ParsedDateFormat.ISO8601_NOMS_NO_TZ)
+                return DateHelper.parse(DateHelper.ISO8601_NOMS_NO_TZ, date)
             else
                 if (status == ParsedDateFormat.NO_SPACES)
                     return DateHelper.parse(DateHelper.NO_SPACES, date)
                 else
                     return null
     }
-    catch (e : Exception) {
+    catch (e: Exception) {
         return null
     }
 }
@@ -122,7 +122,7 @@ public fun verifyRssFeedForDateFitness(r: Rss): Pair<Boolean, ParsedDateFormat?>
     }
 }
 
-public fun verifyRdfFeedForDateFitness(r: Rdf): Pair<Boolean, ParsedDateFormat?>{
+public fun verifyRdfFeedForDateFitness(r: Rdf): Pair<Boolean, ParsedDateFormat?> {
     try{
         if (r.item.size() == 0)
             return Pair(false, null)

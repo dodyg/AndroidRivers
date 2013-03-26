@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.news_engine.syndications.rss
 
-import com.silverkeytech.news_engine.syndications.rss.RssBuilder
 import com.thebuzzmedia.sjxp.XMLParser
 import java.io.InputStream
 import com.silverkeytech.news_engine.xml.textRule
