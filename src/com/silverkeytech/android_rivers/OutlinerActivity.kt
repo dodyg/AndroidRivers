@@ -142,7 +142,7 @@ public class OutlinerActivity(): Activity()
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
-            R.id.outliner_menu_help ->{
+            R.id.outliner_menu_help -> {
                 downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
                 return true
             }
@@ -154,7 +154,7 @@ public class OutlinerActivity(): Activity()
                 collapseOutlines(treeManager, outlinesData!!)
                 return true
             }
-            R.id.outliner_menu_expand ->{
+            R.id.outliner_menu_expand -> {
                 expandOutlines(treeManager, outlinesData!!)
                 return true
             }

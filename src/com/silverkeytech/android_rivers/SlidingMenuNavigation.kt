@@ -31,24 +31,24 @@ import android.widget.TextView
 import java.util.ArrayList
 import android.util.TypedValue
 
-data class NavItem (val id : Int, val text : String, val icon : Int)
+data class NavItem (val id: Int, val text: String, val icon: Int)
 
 public data class ViewHolder (var name: TextView)
 
-public val SLIDE_MENU_READ : Int = 0
-public val SLIDE_MENU_WRITE : Int = 1
-public val SLIDE_MENU_DONATE : Int = 2
-public val SLIDE_MENU_PRAISE : Int = 3
-public val SLIDE_MENU_TRY_OUT : Int = 4
-public val SLIDE_MENU_GOOGLE_NEWS : Int = 5
-public val SLIDE_MENU_KAYAK_DEALS : Int = 6
-public val SLIDE_MENU_FEEDBACK : Int = 7
+public val SLIDE_MENU_READ: Int = 0
+public val SLIDE_MENU_WRITE: Int = 1
+public val SLIDE_MENU_DONATE: Int = 2
+public val SLIDE_MENU_PRAISE: Int = 3
+public val SLIDE_MENU_TRY_OUT: Int = 4
+public val SLIDE_MENU_GOOGLE_NEWS: Int = 5
+public val SLIDE_MENU_KAYAK_DEALS: Int = 6
+public val SLIDE_MENU_FEEDBACK: Int = 7
 
-fun getMainNavigationItems() : ArrayList<NavItem> {
+fun getMainNavigationItems(): ArrayList<NavItem> {
     val navs = arrayListOf(
             //NavItem(id = SLIDE_MENU_READ, text = "Read", icon = 0),
             NavItem(id = SLIDE_MENU_GOOGLE_NEWS, text = "Google News", icon = 0),
-            NavItem(id = SLIDE_MENU_KAYAK_DEALS, text ="Flight Deals", icon = 0),
+            NavItem(id = SLIDE_MENU_KAYAK_DEALS, text = "Flight Deals", icon = 0),
             //NavItem(id = SLIDE_MENU_WRITE, text = "Write", icon = 0),
             //NavItem(id = SLIDE_MENU_DONATE, text = "Donate", icon = 0),
             NavItem(id = SLIDE_MENU_PRAISE, text = "Spread Android Rivers", icon = 0),
@@ -58,7 +58,7 @@ fun getMainNavigationItems() : ArrayList<NavItem> {
     return navs
 }
 
-fun fillSlidingMenuNavigation(navs : List<NavItem>, view : View, onClick : (NavItem) -> Unit){
+fun fillSlidingMenuNavigation(navs: List<NavItem>, view: View, onClick: (NavItem) -> Unit) {
 
     val inflater: LayoutInflater = view.getContext()!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -79,7 +79,7 @@ fun fillSlidingMenuNavigation(navs : List<NavItem>, view : View, onClick : (NavI
     })
 }
 
-private fun currentListItem(inflater : LayoutInflater, text: String, convertView: View?, parent: ViewGroup?, textSize : Float): View? {
+private fun currentListItem(inflater: LayoutInflater, text: String, convertView: View?, parent: ViewGroup?, textSize: Float): View? {
     var holder: ViewHolder?
 
     var vw: View? = convertView
@@ -93,7 +93,7 @@ private fun currentListItem(inflater : LayoutInflater, text: String, convertView
     }
 
     holder!!.name.setText(text)
-    holder!!.name.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize )
+    holder!!.name.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
 
     return vw
 }

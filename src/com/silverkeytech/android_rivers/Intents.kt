@@ -29,12 +29,12 @@ import java.util.HashMap
 import com.silverkeytech.android_rivers.creators.GoogleNewsSearchActivity
 import com.silverkeytech.android_rivers.creators.KayakFlightDealsActivity
 
-public fun startKayakFlightDealsActivity(context: Context){
+public fun startKayakFlightDealsActivity(context: Context) {
     val i = Intent(context, javaClass<KayakFlightDealsActivity>())
     context.startActivity(i)
 }
 
-public fun startGoogleNewsSearchActivity(context: Context){
+public fun startGoogleNewsSearchActivity(context: Context) {
     val i = Intent(context, javaClass<GoogleNewsSearchActivity>())
     context.startActivity(i)
 }
@@ -50,7 +50,7 @@ public fun startRiverSourcesActivity(context: Context, riverTitle: String, river
     context.startActivity(i)
 }
 
-public fun startBlogPostingService(context: Context, config : HashMap<String, String>, post : HashMap<String, String>){
+public fun startBlogPostingService(context: Context, config: HashMap<String, String>, post: HashMap<String, String>) {
     val i = Intent(context, javaClass<BlogPostService>())
     i.putExtra(Params.BLOG_CONFIGURATION, config)
     i.putExtra(Params.BLOG_PAYLOAD, post)

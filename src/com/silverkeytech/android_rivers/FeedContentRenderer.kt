@@ -19,7 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Handler
 import android.os.Message
@@ -36,7 +35,6 @@ import android.widget.ListView
 import android.widget.TextView
 import com.silverkeytech.news_engine.syndications.SyndicationFeedItem
 import org.holoeverywhere.app.Activity
-import org.holoeverywhere.app.AlertDialog
 import java.util.ArrayList
 
 //Manage the rendering of each news item in the river list
@@ -49,7 +47,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
     public data class ViewHolder (var news: TextView, val indicator: TextView)
 
     //show and prepare the interaction for each individual news item
-    fun handleNewsListing(listViewId : Int, feedTitle: String, feedUrl: String, feedItems: List<SyndicationFeedItem>) {
+    fun handleNewsListing(listViewId: Int, feedTitle: String, feedUrl: String, feedItems: List<SyndicationFeedItem>) {
         val textSize = context.getVisualPref().getListTextSize()
 
         //now sort it so people always have the latest news first
@@ -134,27 +132,27 @@ public class FeedContentRenderer(val context: Activity, val language: String){
 
                 if (currentNews.hasLink()){
                     buttons.add(DialogBtn(context.getString(R.string.go)!!, { dlg ->
-                            startOpenBrowserActivity(context, currentNews.link!!)
-                            dlg.dismiss()
+                        startOpenBrowserActivity(context, currentNews.link!!)
+                        dlg.dismiss()
                     }))
 
                     buttons.add(DialogBtn(context.getString(R.string.share)!!, { dlg ->
-                            var intent = shareActionIntent(currentNews.title!!, currentNews.link!!)
-                            context.startActivity(Intent.createChooser(intent, "Share link"))
+                        var intent = shareActionIntent(currentNews.title!!, currentNews.link!!)
+                        context.startActivity(Intent.createChooser(intent, "Share link"))
                     }))
                 }
 
                 if (currentNews.hasEnclosure()){
                     var enclosure = currentNews.enclosure!!
                     if (isSupportedImageMime(enclosure.mimeType)){
-                        buttons.add(DialogBtn("Image",  { dlg ->
+                        buttons.add(DialogBtn("Image", { dlg ->
                             Log.d(TAG, "I am downloading a ${enclosure.url} with type ${enclosure.mimeType}")
                             DownloadImage(context).execute(enclosure.url)
                         }))
                     }
                     else
-                    if (currentNews.isPodcast()){
-                        buttons.add(DialogBtn(context.getString(R.string.podcast)!!,  { dlg ->
+                        if (currentNews.isPodcast()){
+                            buttons.add(DialogBtn(context.getString(R.string.podcast)!!, { dlg ->
                                 var messenger = Messenger(object : Handler(){
                                     public override fun handleMessage(msg: Message?) {
                                         if (msg != null){
@@ -177,8 +175,8 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                                         messenger)
 
                                 dlg.dismiss()
-                        }))
-                    }
+                            }))
+                        }
                 }
 
                 var createdDialog = createFlexibleContentDialog(context, dlg, buttons.toArray(array<DialogBtn>()))

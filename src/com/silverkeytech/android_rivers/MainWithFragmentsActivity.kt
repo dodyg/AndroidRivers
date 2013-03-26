@@ -27,13 +27,9 @@ import com.actionbarsherlock.view.MenuItem
 import org.holoeverywhere.app.Activity
 import com.slidingmenu.lib.SlidingMenu
 import org.holoeverywhere.addon.SlidingMenu.SlidingMenuA
-
 import com.silverkeytech.android_rivers.meta_weblog.showBlogConfigurationDialog
 import com.silverkeytech.android_rivers.meta_weblog.showPostBlogDialog
-
 import android.support.v4.app._HoloActivity
-import org.holoeverywhere.ArrayAdapter
-import com.silverkeytech.android_rivers.meta_weblog.Blog
 import java.util.Random
 import android.content.Intent
 
@@ -47,7 +43,7 @@ enum class MainActivityMode {
 public open class MainWithFragmentsActivity(): Activity() {
     class object {
         public val TAG: String = javaClass<MainWithFragmentsActivity>().getSimpleName()
-        public val REPLACEMENT_HOME_ID : Int = 16908332
+        public val REPLACEMENT_HOME_ID: Int = 16908332
     }
 
     val DEFAULT_SUBSCRIPTION_LIST = "http://hobieu.apphb.com/api/1/default/riverssubscription"
@@ -57,7 +53,7 @@ public open class MainWithFragmentsActivity(): Activity() {
     var currentTheme: Int? = null
     var isOnCreate: Boolean = true
 
-    fun getSlidingIconBasedOnTheme(theme : Int) : Int{
+    fun getSlidingIconBasedOnTheme(theme: Int): Int {
         return when (theme){
             R.style.Holo_Theme -> R.drawable.abs__ic_menu_moreoverflow_normal_holo_dark
             R.style.Holo_Theme_Light -> R.drawable.abs__ic_menu_moreoverflow_holo_light
@@ -87,7 +83,7 @@ public open class MainWithFragmentsActivity(): Activity() {
         val slidingMenu = slidingMenuAddon.getSlidingMenu()!!
         val slidingMenuView = makeMenuView(savedInstanceState)
         slidingMenuAddon.setBehindContentView(slidingMenuView)
-        fillSlidingMenuNavigation(getMainNavigationItems(), slidingMenuView,  { item -> handleSideNavigationItemClick(item)})
+        fillSlidingMenuNavigation(getMainNavigationItems(), slidingMenuView, { item -> handleSideNavigationItemClick(item) })
         slidingMenuAddon.setSlidingActionBarEnabled(true)
         slidingMenu.setEnabled(true)
         slidingMenu.setBehindWidth(computeSideMenuWidth())
@@ -95,52 +91,53 @@ public open class MainWithFragmentsActivity(): Activity() {
         slidingMenu.setSlidingEnabled(true)
     }
 
-    fun handleSideNavigationItemClick(item : NavItem){
+    fun handleSideNavigationItemClick(item: NavItem) {
         when (item.id){
             SLIDE_MENU_TRY_OUT ->
                 startTryoutActivity(this)
-            SLIDE_MENU_WRITE ->{
-                showBlogConfigurationDialog(this){
+            SLIDE_MENU_WRITE -> {
+                showBlogConfigurationDialog(this) {
                     res ->
-                        showPostBlogDialog(this@MainWithFragmentsActivity){
-                            res2 ->
-                                val username = res.get(1).value!!
-                                val password = res.get(2).value!!
-                                val post = res2.get(0).value!!
-                                Log.d(TAG, "Username $username - Password $password - Post content $post")
+                    showPostBlogDialog(this@MainWithFragmentsActivity) {
+                        res2 ->
+                        val username = res.get(1).value!!
+                        val password = res.get(2).value!!
+                        val post = res2.get(0).value!!
+                        Log.d(TAG, "Username $username - Password $password - Post content $post")
 
-                                startBlogPostingService(this@MainWithFragmentsActivity,
-                                        hashMapOf(Params.BLOG_SERVER to "https://androidrivers.wordpress.com/xmlrpc.php",
+                        startBlogPostingService(this@MainWithFragmentsActivity,
+                                hashMapOf(Params.BLOG_SERVER to "https://androidrivers.wordpress.com/xmlrpc.php",
                                         Params.BLOG_USERNAME to username, Params.BLOG_PASSWORD to password),
-                                        hashMapOf(Params.POST_CONTENT to post))
-                        }
+                                hashMapOf(Params.POST_CONTENT to post))
+                    }
                 }
             }
-            SLIDE_MENU_GOOGLE_NEWS ->{
+            SLIDE_MENU_GOOGLE_NEWS -> {
                 startGoogleNewsSearchActivity(this@MainWithFragmentsActivity)
             }
-            SLIDE_MENU_KAYAK_DEALS ->{
+            SLIDE_MENU_KAYAK_DEALS -> {
                 startKayakFlightDealsActivity(this@MainWithFragmentsActivity)
             }
-            SLIDE_MENU_PRAISE ->{
-                startActivity(Intent.createChooser(shareActionIntent(getSpreadText(), "http://goo.gl/kShgp"), "Spread Android Rivers") )
+            SLIDE_MENU_PRAISE -> {
+                startActivity(Intent.createChooser(shareActionIntent(getSpreadText(), "http://goo.gl/kShgp"), "Spread Android Rivers"))
             }
-            SLIDE_MENU_FEEDBACK ->{
+            SLIDE_MENU_FEEDBACK -> {
                 val prompt = createSingleInputDialog(this@MainWithFragmentsActivity, "Make this better!", "", "Give your feedback here") {
                     dlg, feedback ->
-                        if (feedback.isNullOrEmpty()){
-                            toastee("Please write your feedback")
-                        }else{
-                            startOpenEmailActivity(this@MainWithFragmentsActivity, "dodyg@silverkeytech.com", "Make this better!", feedback!!)
-                        }
+                    if (feedback.isNullOrEmpty()){
+                        toastee("Please write your feedback")
+                    }else{
+                        startOpenEmailActivity(this@MainWithFragmentsActivity, "dodyg@silverkeytech.com", "Make this better!", feedback!!)
+                    }
                 }
                 prompt.show()
             }
-            else -> { }
+            else -> {
+            }
         }
     }
 
-    fun getSpreadText() : String{
+    fun getSpreadText(): String {
         val i = Random(153.toLong()).nextInt(6)
         return when(i){
             0 -> "Android Rivers is awesome"
@@ -279,7 +276,7 @@ public open class MainWithFragmentsActivity(): Activity() {
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()) {
-            REPLACEMENT_HOME_ID ->{
+            REPLACEMENT_HOME_ID -> {
                 requireSlidingMenu().toggle()
                 return true
             }
@@ -301,7 +298,7 @@ public open class MainWithFragmentsActivity(): Activity() {
                 this.supportInvalidateOptionsMenu()
                 return true
             }
-            R.id.main_menu_help ->{
+            R.id.main_menu_help -> {
                 downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
                 return true
             }
@@ -318,7 +315,7 @@ public open class MainWithFragmentsActivity(): Activity() {
             MainActivityMode.RSS -> {
                 showAndHide(showRss = true)
             }
-            MainActivityMode.COLLECTION ->{
+            MainActivityMode.COLLECTION -> {
                 showAndHide(showCollection = true)
             }
             MainActivityMode.PODCASTS -> {
@@ -359,11 +356,11 @@ public open class MainWithFragmentsActivity(): Activity() {
         return requireAddon(javaClass<org.holoeverywhere.addon.SlidingMenu>())!!.activity(this)!!
     }
 
-    fun makeMenuView(savedInstanceState : Bundle?) : View  {
+    fun makeMenuView(savedInstanceState: Bundle?): View {
         return getLayoutInflater()!!.inflate(R.layout.main_slide_menu)!!
     }
 
-    fun computeSideMenuWidth() : Int{
+    fun computeSideMenuWidth(): Int {
         return getResources()!!.getFraction(R.dimen.sliding_menu_width, getResources()!!.getDisplayMetrics()!!.widthPixels, 1).toInt()
     }
 }

@@ -60,8 +60,8 @@ public class MainApplication(): Application()
         super<Application>.onCreate()
 
         //initialize newsengine module logging system
-        com.silverkeytech.news_engine.log = { (tag, log) -> Log.d(tag, log)}
-        com.silverkeytech.news_engine.scrubHtml ={ str -> scrubHtml(str) }
+        com.silverkeytech.news_engine.log = {(tag, log) -> Log.d(tag, log) }
+        com.silverkeytech.news_engine.scrubHtml = { str -> scrubHtml(str) }
 
         val path = this.getApplicationContext()!!.getDatabasePath(Database.DATABASE_NAME)!!
         Log.d(TAG, "My location ${path.canonicalPath}")

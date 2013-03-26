@@ -27,9 +27,7 @@ import com.github.kevinsawicki.http.HttpRequest
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
-import org.holoeverywhere.app.Fragment
 import android.os.Build
-
 
 public fun MenuItem?.andHide(): MenuItem {
     this!!.setVisible(false)

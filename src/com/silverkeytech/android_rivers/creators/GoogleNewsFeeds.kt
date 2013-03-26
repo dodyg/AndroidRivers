@@ -18,22 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.creators
 
-import android.view.View
-import org.holoeverywhere.ArrayAdapter
-import android.widget.EditText
-import com.silverkeytech.android_rivers.R
-import com.silverkeytech.android_rivers.dlgClickListener
-import com.silverkeytech.android_rivers.isNullOrEmpty
 import java.util.TreeMap
-import org.holoeverywhere.app.Activity
-import org.holoeverywhere.app.AlertDialog
-import org.holoeverywhere.widget.Spinner
-import android.util.Log
 
-data class EditionAndLanguage(val edition : String, val lang : String)
+data class EditionAndLanguage(val edition: String, val lang: String)
 
 
-fun getEditionsAndLanguages() : TreeMap<String, EditionAndLanguage>{
+fun getEditionsAndLanguages(): TreeMap<String, EditionAndLanguage> {
     val mp = TreeMap<String, EditionAndLanguage>()
     mp.putAll(
             "Argentina" to EditionAndLanguage("es_ar", "es"),

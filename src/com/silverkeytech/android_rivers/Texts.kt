@@ -74,7 +74,7 @@ fun String?.limitText(maxSize: Int): String {
     }
 }
 
-fun rightPadding(text: String, sizeTarget : Int): String{
+fun rightPadding(text: String, sizeTarget: Int): String {
     if (text.length() < sizeTarget){
         var spaces = StringBuffer()
         val diff = sizeTarget - text.length()
@@ -102,7 +102,7 @@ fun generateThrowawayName(): String {
     return name.substring(0, 6)
 }
 
-var arabicFont : Typeface? = null
+var arabicFont: Typeface? = null
 fun handleForeignTextStyle(context: Activity, language: String, text: TextView, textSize: Float) {
     when(language.toLowerCase()){
         "ar", "ar-eg" -> {
@@ -112,7 +112,8 @@ fun handleForeignTextStyle(context: Activity, language: String, text: TextView, 
             text.setGravity(Gravity.RIGHT)
             text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize - 4.toFloat())
         }
-        "iw", "he" ->{ //hebrew
+        "iw", "he" -> {
+            //hebrew
             text.setGravity(Gravity.RIGHT)
         }
         else -> {
@@ -121,7 +122,7 @@ fun handleForeignTextStyle(context: Activity, language: String, text: TextView, 
     }
 }
 
-fun handleForeignText(language: String, text: TextView, content : String){
+fun handleForeignText(language: String, text: TextView, content: String) {
 
     when(language.toLowerCase()){
         "ar", "ar-eg" -> {
@@ -134,7 +135,7 @@ fun handleForeignText(language: String, text: TextView, content : String){
 }
 
 
-fun handleFontResize(text: TextView, content : String, textSize : Float){
+fun handleFontResize(text: TextView, content: String, textSize: Float) {
     text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
     text.setText(content)
 }

@@ -58,7 +58,7 @@ public class RiverSourcesRenderer(val context: RiverSourcesActivity, val languag
 
     public data class ViewHolder (var name: TextView)
 
-    fun currentListItem(inflater : LayoutInflater, text: String, convertView: View?, parent: ViewGroup?, textSize : Float): View? {
+    fun currentListItem(inflater: LayoutInflater, text: String, convertView: View?, parent: ViewGroup?, textSize: Float): View? {
         var holder: ViewHolder?
 
         var vw: View? = convertView

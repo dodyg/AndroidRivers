@@ -49,7 +49,6 @@ import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.ListFragment
 
-
 public class RiverListFragment(): ListFragment() {
     class object {
         public val TAG: String = javaClass<RiverListFragment>().getSimpleName()
@@ -147,7 +146,7 @@ public class RiverListFragment(): ListFragment() {
                     return true
                 }
             }
-            R.id.river_list_fragment_menu_show_add_dialog ->{
+            R.id.river_list_fragment_menu_show_add_dialog -> {
                 displayAddNewRiverDialog()
                 return true
             }
@@ -358,7 +357,7 @@ public class RiverListFragment(): ListFragment() {
 
     public data class ViewHolder (var name: TextView)
 
-    public fun currentListItem(text: String, convertView: View?, parent: ViewGroup?, textSize : Float): View? {
+    public fun currentListItem(text: String, convertView: View?, parent: ViewGroup?, textSize: Float): View? {
         var holder: ViewHolder?
 
         var vw: View? = convertView

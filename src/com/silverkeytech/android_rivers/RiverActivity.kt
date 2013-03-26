@@ -203,12 +203,12 @@ public class RiverActivity(): ListActivity(), WithVisualModificationPanel
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
-            R.id.river_menu_sources->{
+            R.id.river_menu_sources -> {
                 collectRiverSources()
                 return false
             }
 
-            R.id.river_menu_help ->{
+            R.id.river_menu_help -> {
                 downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
                 return true
             }

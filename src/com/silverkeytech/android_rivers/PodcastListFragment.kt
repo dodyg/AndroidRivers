@@ -24,7 +24,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.net.Uri
-import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
 import android.view.Gravity
@@ -393,7 +392,7 @@ public class PodcastListFragment(): ListFragment() {
         return dialog
     }
 
-    fun createHandler(progressBar : SeekBar, progressText : TextView): Handler{
+    fun createHandler(progressBar: SeekBar, progressText: TextView): Handler {
         val h = object: Handler() {
             public override fun handleMessage(msg: Message?) {
                 if (msg != null){
@@ -411,6 +410,6 @@ public class PodcastListFragment(): ListFragment() {
     }
 }
 
-fun calculateProgress(current : Int, total : Int) : Int{
+fun calculateProgress(current: Int, total: Int): Int {
     return (current * 100) div total
 }

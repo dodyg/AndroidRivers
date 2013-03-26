@@ -20,7 +20,6 @@ package com.silverkeytech.android_rivers.outlines
 
 import com.silverkeytech.news_engine.outlines.Outline
 
-
 fun sortOutlineDesc(outlines: List<Outline>): List<Outline> {
     var sortedOutlines = outlines.sort(
             comparator {(p1: Outline, p2: Outline) ->

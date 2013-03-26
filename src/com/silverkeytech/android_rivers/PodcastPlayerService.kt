@@ -51,8 +51,8 @@ import android.content.res.Resources
 public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener, OnAudioFocusChangeListener {
     class object{
         public val TAG: String = javaClass<PodcastPlayerService>().getSimpleName()
-        public val CURRENT_POSITION : String = "CURRENT_POSITION"
-        public val TOTAL_DURATION : String = "TOTAL_DURATION"
+        public val CURRENT_POSITION: String = "CURRENT_POSITION"
+        public val TOTAL_DURATION: String = "TOTAL_DURATION"
     }
 
     private val binder: IBinder = ServiceBinder()
@@ -102,20 +102,20 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
     }
 
     private val notificationId = Random().nextLong().toInt()
-    private var notification : Notification? = null
-    private var notificationManager : NotificationManager? = null
-    public var podcastTitle : String? = null
+    private var notification: Notification? = null
+    private var notificationManager: NotificationManager? = null
+    public var podcastTitle: String? = null
         get () = $podcastTitle
-        private set (value : String?) = $podcastTitle = value
+        private set (value: String?) = $podcastTitle = value
 
-    private var podcastPath : String? = null
+    private var podcastPath: String? = null
 
     fun updateText(msg: String) {
         notification!!.contentView!!.setTextViewText(R.id.notification_podcast_player_status_text, msg)
         notificationManager!!.notify(notificationId, notification)
     }
 
-    var audioManager : AudioManager? = null
+    var audioManager: AudioManager? = null
 
     //http://developer.android.com/training/managing-audio/audio-focus.html
     public override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -125,7 +125,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         notification = prepareNotification()
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        val result = audioManager?.requestAudioFocus(this, AudioManager.STREAM_MUSIC,AudioManager.AUDIOFOCUS_GAIN);
+        val result = audioManager?.requestAudioFocus(this, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
 
         try{
             if (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
@@ -151,14 +151,14 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
 
             progressThread?.start()
         }
-        catch(e : Exception){
+        catch(e: Exception){
             Log.d(TAG, "Exception in starting PodcastPlayerService ${e.getMessage()}")
         }
 
         return super<Service>.onStartCommand(intent, flags, startId)
     }
 
-    private val progress : Runnable = object : Runnable{
+    private val progress: Runnable = object : Runnable{
         public override fun run() {
             try{
                 Log.d(TAG, "Music progress update trying to start with isPlaying ${isPlaying()}")
@@ -176,16 +176,16 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
                 }
                 Log.d(TAG, "Music progress update stops")
             }
-            catch(e : Exception){
+            catch(e: Exception){
                 Log.d(TAG, "Exception in progress thread ${e.getMessage()}")
             }
         }
     }
 
     private var progressHandler: Handler? = null
-    private var progressThread : Thread? = null
+    private var progressThread: Thread? = null
 
-    public fun assignProgressHandler(handler : Handler?){
+    public fun assignProgressHandler(handler: Handler?) {
         progressHandler = handler
     }
 
@@ -209,14 +209,14 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         }
     }
 
-    public fun isPlaying() : Boolean{
+    public fun isPlaying(): Boolean {
         if (mediaPlayer != null)
             return mediaPlayer!!.isPlaying()
         else
             return false
     }
 
-    public fun isPaused() : Boolean {
+    public fun isPaused(): Boolean {
         if (mediaPlayer != null)
             return !mediaPlayer!!.isPlaying() && mediaPlayer!!.getCurrentPosition() != 0
         else
@@ -233,7 +233,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
                 stopProgressThread()
             }
         }
-        catch (e : Exception){
+        catch (e: Exception){
             Log.d(TAG, "Pause music throws ${e.getMessage()}")
         }
     }
@@ -248,27 +248,27 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
                 restartProgressThread()
             }
         }
-        catch (e : Exception){
+        catch (e: Exception){
             Log.d(TAG, "Resume music throws ${e.getMessage()}")
         }
     }
 
-    private fun restartProgressThread(){
+    private fun restartProgressThread() {
         try{
             progressThread?.interrupt()
             progressThread = Thread(progress)
             progressThread?.start()
         }
-        catch (e : Exception){
+        catch (e: Exception){
             Log.d(TAG, "Restart Progress Thread throws ${e.getMessage()}")
         }
     }
 
-    private fun stopProgressThread(){
+    private fun stopProgressThread() {
         try{
             progressThread?.interrupt()
         }
-        catch (e : Exception){
+        catch (e: Exception){
             Log.d(TAG, "Stop Progress Thread throws ${e.getMessage()}")
         }
     }
@@ -283,20 +283,20 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
             Log.d(TAG, "Stop playing $podcastTitle and Stopping service")
             this.stopSelf()
         }
-        catch (e : Exception){
+        catch (e: Exception){
             Log.d(TAG, "Stop Music throws ${e.getMessage()}")
         }
     }
 
-    public fun getCurrentPosition(): Int?{
+    public fun getCurrentPosition(): Int? {
         return mediaPlayer?.getCurrentPosition()
     }
 
-    public fun getPodcastLength() : Int?{
+    public fun getPodcastLength(): Int? {
         return mediaPlayer?.getDuration()
     }
 
-    public fun seekToPosition(pos : Int){
+    public fun seekToPosition(pos: Int) {
         lastPlayPosition = pos
     }
 

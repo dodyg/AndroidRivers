@@ -83,12 +83,12 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
                 var currentOutline = outlines.get(currentPosition)
 
                 when(currentOutline.getType()){
-                    OutlineType.INCLUDE ->  handleOpmlInclude(currentOutline, false)
+                    OutlineType.INCLUDE -> handleOpmlInclude(currentOutline, false)
                     OutlineType.BLOGPOST -> handleOpmlInclude(currentOutline, true)
                     OutlineType.LINK -> handleLink(currentOutline)
                     OutlineType.RIVER -> handleRiver(currentOutline)
                     OutlineType.RSS -> handleRss(currentOutline)
-                    else ->{
+                    else -> {
                         val id = treeNodeInfo.getId()!!
                         Log.d(TAG, "Clicked on id $id")
                         if (treeNodeInfo.isExpanded())

@@ -51,8 +51,8 @@ public class BlogPostService(): IntentService("DownloadService"){
         public val TAG: String = javaClass<BlogPostService>().getSimpleName()
     }
 
-    var config : HashMap<String,String>? = null
-    var post : HashMap<String, String>? = null
+    var config: HashMap<String, String>? = null
+    var post: HashMap<String, String>? = null
 
     fun prepareNotification(title: String): Notification {
         val notificationIntent = Intent(Intent.ACTION_MAIN)

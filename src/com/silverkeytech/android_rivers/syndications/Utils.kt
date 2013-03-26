@@ -6,14 +6,9 @@ import com.silverkeytech.android_rivers.Result
 import com.silverkeytech.android_rivers.httpGet
 import com.silverkeytech.android_rivers.outliner.transformXmlToAtom
 import com.silverkeytech.android_rivers.outliner.transformXmlToRss
-import com.silverkeytech.news_engine.syndications.atom.Feed
-import com.silverkeytech.news_engine.syndications.rss.Rss
-import java.util.Date
-import com.github.kevinsawicki.http.HttpRequest
 import com.silverkeytech.news_engine.syndications.SyndicationFilter
 import com.silverkeytech.news_engine.syndications.SyndicationFeed
 import com.silverkeytech.android_rivers.outliner.transformXmlToRdfRss
-
 
 fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<SyndicationFeed> {
     val TAG = "downloadFeed"
@@ -34,7 +29,7 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
             return mimeType!!.contains("atom") || downloadedContent!!.contains("<feed ")//the space is important so it doesn't confuse with feedburner tag
         }
 
-        fun isRdfFeed(): Boolean{
+        fun isRdfFeed(): Boolean {
             return downloadedContent!!.contains("<rdf:RDF ")
         }
 
