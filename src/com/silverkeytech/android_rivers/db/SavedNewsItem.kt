@@ -19,7 +19,7 @@ public val SAVED_NEWS_ITEM_DATE_CREATED: String = "date_created"
 [DatabaseTable]
 public class SavedNewsItem(){
 
-    [DatabaseField(generatedId = true, columnName = SAVED_NEWS_ITEM_ID)]
+    [DatabaseField(generatedId = true, columnName = "id")]
     public var id: Int = 0
 
     [DatabaseField(canBeNull = false, columnName = "title", width = 255, dataType = DataType.STRING)]

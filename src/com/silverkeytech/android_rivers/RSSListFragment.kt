@@ -47,6 +47,7 @@ import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.ListFragment
+import android.graphics.Paint
 
 public class RssListFragment(): ListFragment() {
     class object {
@@ -213,7 +214,8 @@ public class RssListFragment(): ListFragment() {
         val adapter = object : ArrayAdapter<Bookmark>(parent, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 val text = bookmarks[position].toString()
-                return currentListItem(text, convertView, parent, textSize.toFloat())
+                val inCollection = bookmarks[position].collection != null
+                return currentListItem(text, convertView, parent, textSize.toFloat(), inCollection)
             }
         }
 
@@ -363,9 +365,9 @@ public class RssListFragment(): ListFragment() {
     }
 
 
-    public data class ViewHolder (var name: TextView)
+    public data class ViewHolder (public var name: TextView)
 
-    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?, textSize: Float): View? {
+    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?, textSize: Float, inCollection : Boolean): View? {
         var holder: ViewHolder?
 
         var vw: View? = convertView
@@ -378,7 +380,10 @@ public class RssListFragment(): ListFragment() {
             holder = vw!!.getTag() as ViewHolder
         }
 
-        handleFontResize(holder!!.name, text, textSize)
+        if (inCollection)
+            handleFontResize(holder!!.name, "$text \u2248", textSize)
+        else
+            handleFontResize(holder!!.name, text, textSize)
 
         return vw
     }
