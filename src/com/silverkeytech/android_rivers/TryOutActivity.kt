@@ -53,6 +53,7 @@ import org.xmlrpc.android.XMLRPCClient
 import com.silverkeytech.android_rivers.meta_weblog.Blog
 import com.silverkeytech.android_rivers.meta_weblog.linkPost
 import org.holoeverywhere.widget.TextView
+import com.silverkeytech.android_rivers.creators.getCraigsListCities
 
 public class TryOutActivity(): Activity()
 {
@@ -65,6 +66,7 @@ public class TryOutActivity(): Activity()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tryout)
+        handleCraigsListCities()
         handleDialog4()
         handlePost()
         handlePing()
@@ -83,6 +85,20 @@ public class TryOutActivity(): Activity()
         handleOutliner()
         handleDownloadRecursiveOpml()
         handleRiverJsWithOpmlSource()
+    }
+
+    fun handleCraigsListCities() {
+        val btn = findView<Button>(R.id.tryout_craigslist_cities)
+
+        btn.setOnClickListener {
+            val cities = getCraigsListCities(this)
+
+            Log.d(TAG, "Cities in ${cities.size()}")
+
+            for(x in cities){
+                Log.d(TAG, "${x.toString()}")
+            }
+        }
     }
 
     fun handleDialog4() {

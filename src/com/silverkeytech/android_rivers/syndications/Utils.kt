@@ -30,7 +30,7 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
         }
 
         fun isRdfFeed(): Boolean {
-            return downloadedContent!!.contains("<rdf:RDF ")
+            return downloadedContent!!.contains("<rdf:RDF")
         }
 
         if (isAtomFeed()){
@@ -53,6 +53,7 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
         }
         else if (isRdfFeed()){
             val feed = transformXmlToRdfRss(downloadedContent)
+            Log.d(TAG, "$url Feed is a RDF RSS")
             if (feed.isTrue()){
                 var f = SyndicationFeed(null, null, feed.value, filter)
                 f.transformRdf()
@@ -67,7 +68,7 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
             var feed = transformXmlToRss(downloadedContent)
             val after = System.currentTimeMillis()
             Log.d(TAG, "Time to parse XML to RSS  is ${after - before} with ${feed.value?.channel?.item?.size()} items")
-            Log.d(TAG, "$url is a RSS Feed")
+            Log.d(TAG, "$url is a RSS Feed because isRdfFeed is ${isRdfFeed()}")
 
             if (feed.isTrue()){
                 val beforeTransform = System.currentTimeMillis()

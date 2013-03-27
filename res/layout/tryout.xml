@@ -4,6 +4,11 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent">
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Craigslist Cities"
+            android:id="@+id/tryout_craigslist_cities"/>
 
     <Button
             android:layout_width="fill_parent"

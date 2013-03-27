@@ -66,7 +66,7 @@ public class FeedActivity(): ListActivity(), WithVisualModificationPanel
             if (res.isTrue()){
                 var feed = res.value!!
                 feedDateIsParseable = feed.isDateParseable
-                Log.d(TAG, "$feedUrl is parseable = $feedDateIsParseable")
+                Log.d(TAG, "$feedUrl is parseable = $feedDateIsParseable with items ${feed.items.size}")
                 if (!feed.language.isNullOrEmpty()){
                     Log.d(TAG, "Obtained feed language is ${feed.language}")
                     feedLanguage = feed.language

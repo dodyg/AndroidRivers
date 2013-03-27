@@ -48,6 +48,7 @@ public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String,
     protected override fun doInBackground(p0: Array<String?>): Result<SyndicationFeed>? {
         try{
             val url = p0[0]!!
+            Log.d(TAG, "Downloading url $url")
 
             val cache = context.getMain().getSyndicationCache(url)
             if (cache != null && !ignoreCache){

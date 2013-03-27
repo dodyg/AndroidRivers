@@ -144,7 +144,7 @@ public class RssListFragment(): ListFragment() {
     }
 
     fun displayAddNewRssDialog() {
-        val dlg = createSingleInputDialog(parent!!, "Add new RSS", "", "Set url here", {
+        val dlg = createSingleInputDialog(parent!!, "Add new RSS", "http://bloomington.craigslist.org/apa/index.rss", "Set url here", {
             dlg, url ->
             lastEnteredUrl = url
             Log.d(TAG, "Entered $url")
