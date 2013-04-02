@@ -35,12 +35,12 @@ public data class CraigsListCity(
     }
 }
 
-public class CraigsListCityParser{
-    public fun parse(input: InputStream) : ArrayList<CraigsListCity>{
+public abstract class LineParser<T>{
+    public fun parse(input: InputStream) : ArrayList<T>{
         val r = BufferedReader(InputStreamReader(input))
         var x = r.readLine()
 
-        val list = ArrayList<CraigsListCity>()
+        val list = ArrayList<T>()
 
         while (x != null) {
             val city = parseLine(x!!)
@@ -51,7 +51,11 @@ public class CraigsListCityParser{
         return list
     }
 
-    private fun parseLine(text : String) : CraigsListCity{
+    protected abstract fun parseLine(text: String): T
+}
+
+public class CraigsListCityParser : LineParser<CraigsListCity>(){
+    protected override fun parseLine(text : String) : CraigsListCity{
         val sections = text.split(",")
         val code = sections[0].trim()
         val areaId = sections[1].trim()
@@ -68,3 +72,27 @@ public class CraigsListCityParser{
     }
 }
 
+public data class CraigsListCategory(
+        public val code : String,
+        public val name : String
+){
+    public fun toString() : String{
+        return "$code - $name"
+    }
+}
+
+public class CraigsListCategoryParser : LineParser<CraigsListCategory>(){
+
+    protected override fun parseLine(text: String): CraigsListCategory {
+        val sections = text.split(",")
+        val code = sections[0].trim()
+        var name = ""
+        for (i in 1..(sections.size -1)){
+            name += "${sections[i].trim()}"
+        }
+
+        name = name.trim().replaceAll("[,]+$", "");//trim the last character at the end
+
+        return CraigsListCategory(code, name)
+    }
+}

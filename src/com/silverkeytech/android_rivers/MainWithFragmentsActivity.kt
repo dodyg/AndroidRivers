@@ -337,7 +337,7 @@ public open class MainWithFragmentsActivity(): Activity() {
         }
     }
 
-    //this is one directional bacwkward
+    //this is one directional backward
     fun changeModeBackward() {
         val currentMode = mode
         mode = when (currentMode){
