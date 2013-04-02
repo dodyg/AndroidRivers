@@ -998,7 +998,7 @@ com.actionbarsherlock.ActionBarSherlock$Implementation:
     public static final int DEFAULT_DPI
 com.actionbarsherlock.BuildConfig
 com.actionbarsherlock.R:
-    10:3420:public R()
+    10:3421:public R()
 com.actionbarsherlock.R$anim
 com.actionbarsherlock.R$attr:
     23:23:public R$attr()
@@ -1011,17 +1011,17 @@ com.actionbarsherlock.R$drawable
 com.actionbarsherlock.R$id:
     2610:2610:public R$id()
 com.actionbarsherlock.R$integer:
-    2868:2868:public R$integer()
+    2869:2869:public R$integer()
 com.actionbarsherlock.R$interpolator
 com.actionbarsherlock.R$layout:
-    2890:2890:public R$layout()
+    2891:2891:public R$layout()
 com.actionbarsherlock.R$menu
 com.actionbarsherlock.R$raw
 com.actionbarsherlock.R$string:
-    3022:3022:public R$string()
+    3023:3023:public R$string()
 com.actionbarsherlock.R$style
 com.actionbarsherlock.R$styleable:
-    3420:3420:public R$styleable()
+    3421:3421:public R$styleable()
 com.actionbarsherlock.R$xml
 com.actionbarsherlock.app.ActionBar:
     public static final int NAVIGATION_MODE_STANDARD
@@ -1963,6 +1963,1019 @@ com.github.kevinsawicki.http.HttpRequest$HttpRequestException:
 com.github.kevinsawicki.http.HttpRequest$RequestOutputStream:
     686:689:public HttpRequest$RequestOutputStream(java.io.OutputStream,java.lang.String,int)
     673:673:static synthetic java.nio.charset.CharsetEncoder access$200(com.github.kevinsawicki.http.HttpRequest$RequestOutputStream)
+com.google.gson.DefaultDateTypeAdapter
+com.google.gson.FieldAttributes:
+    53:53:public java.lang.Class getDeclaringClass()
+    60:60:public java.lang.String getName()
+    80:80:public java.lang.reflect.Type getDeclaredType()
+    100:100:public java.lang.Class getDeclaredClass()
+    111:111:public java.lang.annotation.Annotation getAnnotation(java.lang.Class)
+    121:121:public java.util.Collection getAnnotations()
+    135:135:public boolean hasModifier(int)
+    146:146:java.lang.Object get(java.lang.Object)
+    155:155:boolean isSynthetic()
+com.google.gson.Gson:
+    static final boolean DEFAULT_JSON_NON_EXECUTABLE
+    private static final java.lang.String JSON_NON_EXECUTABLE_PREFIX
+    455:458:public com.google.gson.JsonElement toJsonTree(java.lang.Object)
+    478:480:public com.google.gson.JsonElement toJsonTree(java.lang.Object,java.lang.reflect.Type)
+    497:500:public java.lang.String toJson(java.lang.Object)
+    519:521:public java.lang.String toJson(java.lang.Object,java.lang.reflect.Type)
+    539:544:public void toJson(java.lang.Object,java.lang.Appendable)
+    564:569:public void toJson(java.lang.Object,java.lang.reflect.Type,java.lang.Appendable)
+    578:594:public void toJson(java.lang.Object,java.lang.reflect.Type,com.google.gson.stream.JsonWriter)
+    604:606:public java.lang.String toJson(com.google.gson.JsonElement)
+    619:624:public void toJson(com.google.gson.JsonElement,java.lang.Appendable)
+    631:639:private com.google.gson.stream.JsonWriter newJsonWriter(java.io.Writer)
+    647:662:public void toJson(com.google.gson.JsonElement,com.google.gson.stream.JsonWriter)
+    733:736:public java.lang.Object fromJson(java.io.Reader,java.lang.Class)
+    832:833:public java.lang.Object fromJson(com.google.gson.JsonElement,java.lang.Class)
+    856:859:public java.lang.Object fromJson(com.google.gson.JsonElement,java.lang.reflect.Type)
+com.google.gson.Gson$2:
+    131:131:public java.lang.Object deserialize(com.google.gson.JsonElement,java.lang.reflect.Type)
+com.google.gson.Gson$3:
+    137:137:public com.google.gson.JsonElement serialize(java.lang.Object)
+    140:140:public com.google.gson.JsonElement serialize(java.lang.Object,java.lang.reflect.Type)
+com.google.gson.GsonBuilder
+com.google.gson.JsonArray:
+    61:62:public void addAll(com.google.gson.JsonArray)
+    70:70:public int size()
+    92:92:public com.google.gson.JsonElement get(int)
+    154:157:public java.math.BigDecimal getAsBigDecimal()
+    171:174:public java.math.BigInteger getAsBigInteger()
+    187:190:public float getAsFloat()
+    227:230:public byte getAsByte()
+    235:238:public char getAsCharacter()
+    251:254:public short getAsShort()
+com.google.gson.JsonDeserializationContext:
+    public abstract java.lang.Object deserialize(com.google.gson.JsonElement,java.lang.reflect.Type)
+com.google.gson.JsonDeserializer
+com.google.gson.JsonElement:
+    130:133:public com.google.gson.JsonNull getAsJsonNull()
+    211:211:public float getAsFloat()
+    251:251:public byte getAsByte()
+    265:265:public char getAsCharacter()
+    279:279:public java.math.BigDecimal getAsBigDecimal()
+    293:293:public java.math.BigInteger getAsBigInteger()
+    306:306:public short getAsShort()
+com.google.gson.JsonIOException:
+    private static final long serialVersionUID
+    33:34:public JsonIOException(java.lang.String,java.lang.Throwable)
+com.google.gson.JsonObject:
+    68:68:public com.google.gson.JsonElement remove(java.lang.String)
+    79:80:public void addProperty(java.lang.String,java.lang.String)
+    90:91:public void addProperty(java.lang.String,java.lang.Number)
+    101:102:public void addProperty(java.lang.String,java.lang.Boolean)
+    112:113:public void addProperty(java.lang.String,java.lang.Character)
+    122:122:private com.google.gson.JsonElement createJsonElement(java.lang.Object)
+    142:142:public boolean has(java.lang.String)
+    152:156:public com.google.gson.JsonElement get(java.lang.String)
+    166:166:public com.google.gson.JsonPrimitive getAsJsonPrimitive(java.lang.String)
+    176:176:public com.google.gson.JsonArray getAsJsonArray(java.lang.String)
+    186:186:public com.google.gson.JsonObject getAsJsonObject(java.lang.String)
+com.google.gson.JsonParseException:
+    static final long serialVersionUID
+com.google.gson.JsonParser
+com.google.gson.JsonPrimitive:
+    74:76:public JsonPrimitive(java.lang.Character)
+    84:86:JsonPrimitive(java.lang.Object)
+    199:199:public java.math.BigDecimal getAsBigDecimal()
+    210:210:public java.math.BigInteger getAsBigInteger()
+    222:222:public float getAsFloat()
+    244:244:public short getAsShort()
+    260:260:public byte getAsByte()
+    265:265:public char getAsCharacter()
+com.google.gson.JsonSerializationContext:
+    public abstract com.google.gson.JsonElement serialize(java.lang.Object)
+    public abstract com.google.gson.JsonElement serialize(java.lang.Object,java.lang.reflect.Type)
+com.google.gson.JsonSerializer
+com.google.gson.JsonStreamParser
+com.google.gson.JsonSyntaxException:
+    private static final long serialVersionUID
+com.google.gson.LongSerializationPolicy:
+    public abstract com.google.gson.JsonElement serialize(java.lang.Long)
+com.google.gson.LongSerializationPolicy$1:
+    36:36:public com.google.gson.JsonElement serialize(java.lang.Long)
+com.google.gson.LongSerializationPolicy$2:
+    47:47:public com.google.gson.JsonElement serialize(java.lang.Long)
+com.google.gson.TreeTypeAdapter
+com.google.gson.TreeTypeAdapter$1
+com.google.gson.TreeTypeAdapter$SingleTypeFactory
+com.google.gson.TypeAdapter:
+    141:143:public final void toJson(java.io.Writer,java.lang.Object)
+    186:186:public final com.google.gson.TypeAdapter nullSafe()
+    215:217:public final java.lang.String toJson(java.lang.Object)
+    255:256:public final java.lang.Object fromJson(java.io.Reader)
+    269:269:public final java.lang.Object fromJson(java.lang.String)
+    280:283:public final java.lang.Object fromJsonTree(com.google.gson.JsonElement)
+com.google.gson.TypeAdapter$1
+com.google.gson.internal.$Gson$Preconditions:
+    32:32:public $Gson$Preconditions()
+com.google.gson.internal.$Gson$Types:
+    45:45:private $Gson$Types()
+com.google.gson.internal.$Gson$Types$GenericArrayTypeImpl:
+    private static final long serialVersionUID
+com.google.gson.internal.$Gson$Types$ParameterizedTypeImpl:
+    private static final long serialVersionUID
+com.google.gson.internal.$Gson$Types$WildcardTypeImpl:
+    private static final long serialVersionUID
+com.google.gson.internal.Excluder:
+    private static final double IGNORE_VERSIONS
+    70:72:public com.google.gson.internal.Excluder withVersion(double)
+    76:81:public varargs com.google.gson.internal.Excluder withModifiers(int[])
+    85:87:public com.google.gson.internal.Excluder disableInnerClassSerialization()
+    91:93:public com.google.gson.internal.Excluder excludeFieldsWithoutExposeAnnotation()
+    98:108:public com.google.gson.internal.Excluder withExclusionStrategy(com.google.gson.ExclusionStrategy,boolean,boolean)
+com.google.gson.internal.Primitives:
+    32:32:private Primitives()
+    80:80:public static boolean isWrapperType(java.lang.reflect.Type)
+    113:115:public static java.lang.Class unwrap(java.lang.Class)
+com.google.gson.internal.Streams:
+    35:79:public Streams()
+    40:60:public static com.google.gson.JsonElement parse(com.google.gson.stream.JsonReader)
+    72:72:public static java.io.Writer writerForAppendable(java.lang.Appendable)
+com.google.gson.internal.Streams$1
+com.google.gson.internal.Streams$AppendableWriter
+com.google.gson.internal.Streams$AppendableWriter$CurrentWrite
+com.google.gson.internal.StringMap:
+    private static final int MINIMUM_CAPACITY
+    private static final int MAXIMUM_CAPACITY
+com.google.gson.internal.bind.JsonTreeReader:
+    53:55:public JsonTreeReader(com.google.gson.JsonElement)
+com.google.gson.internal.bind.JsonTreeWriter:
+    163:167:public com.google.gson.stream.JsonWriter value(double)
+com.google.gson.internal.bind.TypeAdapters:
+    58:58:private TypeAdapters()
+    760:760:public static com.google.gson.TypeAdapterFactory newFactory(com.google.gson.reflect.TypeToken,com.google.gson.TypeAdapter)
+com.google.gson.internal.bind.TypeAdapters$23:
+    private static final java.lang.String YEAR
+    private static final java.lang.String MONTH
+    private static final java.lang.String DAY_OF_MONTH
+    private static final java.lang.String HOUR_OF_DAY
+    private static final java.lang.String MINUTE
+    private static final java.lang.String SECOND
+com.google.gson.internal.bind.TypeAdapters$27
+com.google.gson.reflect.TypeToken:
+    112:112:public boolean isAssignableFrom(java.lang.Class)
+    123:140:public boolean isAssignableFrom(java.lang.reflect.Type)
+    153:153:public boolean isAssignableFrom(com.google.gson.reflect.TypeToken)
+    161:178:private static boolean isAssignableFrom(java.lang.reflect.Type,java.lang.reflect.GenericArrayType)
+    188:231:private static boolean isAssignableFrom(java.lang.reflect.Type,java.lang.reflect.ParameterizedType,java.util.Map)
+    240:250:private static boolean typeEquals(java.lang.reflect.ParameterizedType,java.lang.reflect.ParameterizedType,java.util.Map)
+    257:265:private static varargs java.lang.AssertionError buildUnexpectedTypeError(java.lang.reflect.Type,java.lang.Class[])
+    273:273:private static boolean matches(java.lang.reflect.Type,java.lang.reflect.Type,java.util.Map)
+com.google.gson.stream.JsonReader:
+    private static final java.lang.String TRUE
+    private static final java.lang.String FALSE
+com.google.gson.stream.JsonWriter:
+    206:213:public final void setIndent(java.lang.String)
+    246:247:public final void setHtmlSafe(boolean)
+    254:254:public final boolean isHtmlSafe()
+    262:263:public final void setSerializeNulls(boolean)
+    447:453:public com.google.gson.stream.JsonWriter value(double)
+com.google.gson.stream.MalformedJsonException:
+    private static final long serialVersionUID
+    33:37:public MalformedJsonException(java.lang.String,java.lang.Throwable)
+    39:43:public MalformedJsonException(java.lang.Throwable)
+com.j256.ormlite.android.AndroidCompiledStatement:
+    45:45:public int getColumnCount()
+    49:49:public java.lang.String getColumnName(int)
+    74:77:public int runExecute()
+    92:96:public void closeQuietly()
+    144:144:public void setQueryTimeout(long)
+com.j256.ormlite.android.AndroidConnectionSource:
+    39:42:public AndroidConnectionSource(android.database.sqlite.SQLiteDatabase)
+    96:97:public void closeQuietly()
+    104:104:public boolean isOpen()
+com.j256.ormlite.android.AndroidDatabaseConnection:
+    42:42:public boolean isAutoCommitSupported()
+    47:52:public boolean isAutoCommit()
+    61:71:public void setAutoCommit(boolean)
+    75:79:public java.sql.Savepoint setSavePoint(java.lang.String)
+    87:87:public boolean isReadWrite()
+    92:102:public void commit(java.sql.Savepoint)
+    107:116:public void rollback(java.sql.Savepoint)
+    119:119:public int executeStatement(java.lang.String,int)
+    212:228:public long queryForLong(java.lang.String,java.lang.Object[],com.j256.ormlite.field.FieldType[])
+    235:240:public void close()
+    244:248:public void closeQuietly()
+    252:256:public boolean isClosed()
+    261:270:public boolean isTableExists(java.lang.String)
+com.j256.ormlite.android.AndroidDatabaseConnection$OurSavePoint
+com.j256.ormlite.android.AndroidDatabaseResults:
+    private static final int MIN_NUM_COLUMN_NAMES_MAP
+    56:57:public AndroidDatabaseResults(android.database.Cursor,boolean,com.j256.ormlite.dao.ObjectCache)
+    64:69:public java.lang.String[] getColumnNames()
+    81:81:public boolean last()
+    85:85:public boolean previous()
+    89:89:public boolean moveRelative(int)
+    93:93:public boolean moveAbsolute(int)
+    100:100:public int getCount()
+    107:107:public int getPosition()
+    189:189:public java.io.InputStream getBlobStream(int)
+    205:206:public void close()
+    209:210:public void closeQuietly()
+    216:216:public android.database.Cursor getRawCursor()
+com.j256.ormlite.android.AndroidLog
+com.j256.ormlite.android.AndroidLog$1
+com.j256.ormlite.android.DatabaseTableConfigUtil:
+    private static final int COLUMN_NAME
+    private static final int DATA_TYPE
+    private static final int DEFAULT_VALUE
+    private static final int WIDTH
+    private static final int CAN_BE_NULL
+    private static final int ID
+    private static final int GENERATED_ID
+    private static final int GENERATED_ID_SEQUENCE
+    private static final int FOREIGN
+    private static final int USE_GET_SET
+    private static final int UNKNOWN_ENUM_NAME
+    private static final int THROW_IF_NULL
+    private static final int PERSISTED
+    private static final int FORMAT
+    private static final int UNIQUE
+    private static final int UNIQUE_COMBO
+    private static final int INDEX
+    private static final int UNIQUE_INDEX
+    private static final int INDEX_NAME
+    private static final int UNIQUE_INDEX_NAME
+    private static final int FOREIGN_AUTO_REFRESH
+    private static final int MAX_FOREIGN_AUTO_REFRESH_LEVEL
+    private static final int PERSISTER_CLASS
+    private static final int ALLOW_GENERATED_ID_INSERT
+    private static final int COLUMN_DEFINITON
+    private static final int FOREIGN_AUTO_CREATE
+    private static final int VERSION
+    private static final int FOREIGN_COLUMN_NAME
+    29:402:public DatabaseTableConfigUtil()
+    67:67:public static int getWorkedC()
+com.j256.ormlite.android.apptools.OpenHelperManager:
+    private static final java.lang.String HELPER_CLASS_RESOURCE_NAME
+    51:56:public static synchronized void setOpenHelperClass(java.lang.Class)
+    64:65:public static synchronized void setHelper(com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper)
+    74:75:public static synchronized com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper getHelper(android.content.Context,java.lang.Class)
+    112:113:public static void release()
+com.j256.ormlite.android.apptools.OrmLiteBaseActivity:
+    35:45:public com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper getHelper()
+    53:53:public com.j256.ormlite.support.ConnectionSource getConnectionSource()
+com.j256.ormlite.android.apptools.OrmLiteBaseActivityGroup:
+    32:42:public com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper getHelper()
+    50:50:public com.j256.ormlite.support.ConnectionSource getConnectionSource()
+com.j256.ormlite.android.apptools.OrmLiteBaseListActivity:
+    26:36:public com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper getHelper()
+    44:44:public com.j256.ormlite.support.ConnectionSource getConnectionSource()
+com.j256.ormlite.android.apptools.OrmLiteBaseService:
+    private volatile com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper helper
+    25:35:public com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper getHelper()
+    43:43:public com.j256.ormlite.support.ConnectionSource getConnectionSource()
+    48:53:public void onCreate()
+    57:60:public void onDestroy()
+    74:75:protected com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper getHelperInternal(android.content.Context)
+    88:90:protected void releaseHelper(com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper)
+com.j256.ormlite.android.apptools.OrmLiteBaseTabActivity:
+    26:36:public com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper getHelper()
+    44:44:public com.j256.ormlite.support.ConnectionSource getConnectionSource()
+com.j256.ormlite.android.apptools.OrmLiteConfigUtil
+com.j256.ormlite.android.apptools.OrmLiteConfigUtil$1
+com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper:
+    54:55:public OrmLiteSqliteOpenHelper(android.content.Context,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int,int)
+    65:66:public OrmLiteSqliteOpenHelper(android.content.Context,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int,java.io.File)
+    77:96:public OrmLiteSqliteOpenHelper(android.content.Context,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int,java.io.InputStream)
+    226:226:public boolean isOpen()
+    255:260:public com.j256.ormlite.dao.RuntimeExceptionDao getRuntimeExceptionDao(java.lang.Class)
+    270:274:private static java.io.InputStream openFileId(android.content.Context,int)
+    279:285:private static java.io.InputStream openFile(java.io.File)
+com.j256.ormlite.dao.BaseDaoImpl:
+    92:93:protected BaseDaoImpl(java.lang.Class)
+    218:223:public java.lang.Object queryForId(java.lang.Object)
+    243:243:public java.util.List queryForEq(java.lang.String,java.lang.Object)
+    252:253:public com.j256.ormlite.stmt.UpdateBuilder updateBuilder()
+    267:267:public java.util.List queryForMatching(java.lang.Object)
+    271:271:public java.util.List queryForMatchingArgs(java.lang.Object)
+    275:275:public java.util.List queryForFieldValues(java.util.Map)
+    279:279:public java.util.List queryForFieldValuesArgs(java.util.Map)
+    283:291:public java.lang.Object queryForSameId(java.lang.Object)
+    315:323:public java.lang.Object createIfNotExists(java.lang.Object)
+    328:338:public com.j256.ormlite.dao.Dao$CreateOrUpdateStatus createOrUpdate(java.lang.Object)
+    358:367:public int updateId(java.lang.Object,java.lang.Object)
+    373:378:public int update(com.j256.ormlite.stmt.PreparedUpdate)
+    383:397:public int refresh(java.lang.Object)
+    418:427:public int deleteById(java.lang.Object)
+    433:442:public int delete(java.util.Collection)
+    448:457:public int deleteIds(java.util.Collection)
+    487:488:public com.j256.ormlite.dao.CloseableWrappedIterable getWrappedIterable()
+    503:504:public com.j256.ormlite.dao.CloseableWrappedIterable getWrappedIterable(com.j256.ormlite.stmt.PreparedQuery)
+    519:523:public void closeLastIterator()
+    536:540:public varargs com.j256.ormlite.dao.GenericRawResults queryRaw(java.lang.String,java.lang.String[])
+    546:550:public varargs com.j256.ormlite.dao.GenericRawResults queryRaw(java.lang.String,com.j256.ormlite.dao.RawRowMapper,java.lang.String[])
+    556:560:public varargs com.j256.ormlite.dao.GenericRawResults queryRaw(java.lang.String,com.j256.ormlite.field.DataType[],java.lang.String[])
+    565:572:public varargs long queryRawValue(java.lang.String,java.lang.String[])
+    577:584:public varargs int executeRaw(java.lang.String,java.lang.String[])
+    589:596:public int executeRawNoArgs(java.lang.String)
+    601:608:public varargs int updateRaw(java.lang.String,java.lang.String[])
+    613:624:public java.lang.Object callBatchTasks(java.util.concurrent.Callable)
+    629:630:public java.lang.String objectToString(java.lang.Object)
+    634:643:public boolean objectsEqual(java.lang.Object,java.lang.Object)
+    647:654:public java.lang.Object extractId(java.lang.Object)
+    662:668:public com.j256.ormlite.field.FieldType findForeignFieldType(java.lang.Class)
+    672:672:public boolean isUpdatable()
+    676:681:public boolean isTableExists()
+    686:691:public long countOf()
+    696:705:public long countOf(com.j256.ormlite.stmt.PreparedQuery)
+    710:716:public com.j256.ormlite.dao.ForeignCollection getEmptyForeignCollection(java.lang.String)
+    720:740:public void setObjectCache(boolean)
+    743:760:public void setObjectCache(com.j256.ormlite.dao.ObjectCache)
+    763:763:public com.j256.ormlite.dao.ObjectCache getObjectCache()
+    767:770:public void clearObjectCache()
+    783:783:public java.lang.Object mapSelectStarRow(com.j256.ormlite.support.DatabaseResults)
+    787:787:public com.j256.ormlite.stmt.GenericRowMapper getSelectStarRowMapper()
+    791:791:public com.j256.ormlite.dao.RawRowMapper getRawRowMapper()
+    795:799:public boolean idExists(java.lang.Object)
+    804:806:public com.j256.ormlite.support.DatabaseConnection startThreadConnection()
+    810:812:public void endThreadConnection(com.j256.ormlite.support.DatabaseConnection)
+    815:821:public void setAutoCommit(boolean)
+    824:825:public void setAutoCommit(com.j256.ormlite.support.DatabaseConnection,boolean)
+    828:832:public boolean isAutoCommit()
+    837:837:public boolean isAutoCommit(com.j256.ormlite.support.DatabaseConnection)
+    841:842:public void commit(com.j256.ormlite.support.DatabaseConnection)
+    845:846:public void rollBack(com.j256.ormlite.support.DatabaseConnection)
+    853:855:public void setObjectFactory(com.j256.ormlite.table.ObjectFactory)
+    861:861:public com.j256.ormlite.table.DatabaseTableConfig getTableConfig()
+    872:872:public com.j256.ormlite.support.ConnectionSource getConnectionSource()
+    876:877:public void setConnectionSource(com.j256.ormlite.support.ConnectionSource)
+    884:885:public void setTableConfig(com.j256.ormlite.table.DatabaseTableConfig)
+    942:960:private java.util.List queryForMatching(java.lang.Object,boolean)
+    965:979:private java.util.List queryForFieldValues(java.util.Map,boolean)
+    56:56:static synthetic com.j256.ormlite.dao.CloseableIterator access$100(com.j256.ormlite.dao.BaseDaoImpl,int)
+    56:56:static synthetic com.j256.ormlite.dao.CloseableIterator access$200(com.j256.ormlite.dao.BaseDaoImpl,com.j256.ormlite.stmt.PreparedQuery,int)
+com.j256.ormlite.dao.BaseDaoImpl$2
+com.j256.ormlite.dao.BaseDaoImpl$3
+com.j256.ormlite.dao.BaseForeignCollection:
+    private static final long serialVersionUID
+    public abstract boolean remove(java.lang.Object)
+    public abstract boolean removeAll(java.util.Collection)
+    157:160:public int update(java.lang.Object)
+    165:168:public int refresh(java.lang.Object)
+com.j256.ormlite.dao.CloseableIterator:
+    public abstract void closeQuietly()
+    public abstract com.j256.ormlite.support.DatabaseResults getRawResults()
+    public abstract java.lang.Object first()
+    public abstract java.lang.Object previous()
+    public abstract java.lang.Object current()
+    public abstract java.lang.Object nextThrow()
+    public abstract java.lang.Object moveRelative(int)
+com.j256.ormlite.dao.CloseableWrappedIterable:
+    public abstract void close()
+com.j256.ormlite.dao.CloseableWrappedIterableImpl
+com.j256.ormlite.dao.Dao:
+    public abstract java.lang.Object queryForId(java.lang.Object)
+    public abstract java.util.List queryForEq(java.lang.String,java.lang.Object)
+    public abstract java.util.List queryForMatching(java.lang.Object)
+    public abstract java.util.List queryForMatchingArgs(java.lang.Object)
+    public abstract java.util.List queryForFieldValues(java.util.Map)
+    public abstract java.util.List queryForFieldValuesArgs(java.util.Map)
+    public abstract java.lang.Object queryForSameId(java.lang.Object)
+    public abstract com.j256.ormlite.stmt.UpdateBuilder updateBuilder()
+    public abstract java.lang.Object createIfNotExists(java.lang.Object)
+    public abstract com.j256.ormlite.dao.Dao$CreateOrUpdateStatus createOrUpdate(java.lang.Object)
+    public abstract int updateId(java.lang.Object,java.lang.Object)
+    public abstract int update(com.j256.ormlite.stmt.PreparedUpdate)
+    public abstract int refresh(java.lang.Object)
+    public abstract int deleteById(java.lang.Object)
+    public abstract int delete(java.util.Collection)
+    public abstract int deleteIds(java.util.Collection)
+    public abstract com.j256.ormlite.dao.CloseableIterator iterator()
+    public abstract com.j256.ormlite.dao.CloseableIterator iterator(int)
+    public abstract com.j256.ormlite.dao.CloseableIterator iterator(com.j256.ormlite.stmt.PreparedQuery,int)
+    public abstract com.j256.ormlite.dao.CloseableWrappedIterable getWrappedIterable()
+    public abstract com.j256.ormlite.dao.CloseableWrappedIterable getWrappedIterable(com.j256.ormlite.stmt.PreparedQuery)
+    public abstract void closeLastIterator()
+    public varargs abstract com.j256.ormlite.dao.GenericRawResults queryRaw(java.lang.String,java.lang.String[])
+    public varargs abstract com.j256.ormlite.dao.GenericRawResults queryRaw(java.lang.String,com.j256.ormlite.dao.RawRowMapper,java.lang.String[])
+    public varargs abstract com.j256.ormlite.dao.GenericRawResults queryRaw(java.lang.String,com.j256.ormlite.field.DataType[],java.lang.String[])
+    public varargs abstract long queryRawValue(java.lang.String,java.lang.String[])
+    public varargs abstract int executeRaw(java.lang.String,java.lang.String[])
+    public abstract int executeRawNoArgs(java.lang.String)
+    public varargs abstract int updateRaw(java.lang.String,java.lang.String[])
+    public abstract java.lang.Object callBatchTasks(java.util.concurrent.Callable)
+    public abstract java.lang.String objectToString(java.lang.Object)
+    public abstract boolean objectsEqual(java.lang.Object,java.lang.Object)
+    public abstract java.lang.Object extractId(java.lang.Object)
+    public abstract com.j256.ormlite.field.FieldType findForeignFieldType(java.lang.Class)
+    public abstract boolean isUpdatable()
+    public abstract boolean isTableExists()
+    public abstract long countOf()
+    public abstract long countOf(com.j256.ormlite.stmt.PreparedQuery)
+    public abstract com.j256.ormlite.dao.ForeignCollection getEmptyForeignCollection(java.lang.String)
+    public abstract void setObjectCache(boolean)
+    public abstract void setObjectCache(com.j256.ormlite.dao.ObjectCache)
+    public abstract com.j256.ormlite.dao.ObjectCache getObjectCache()
+    public abstract void clearObjectCache()
+    public abstract java.lang.Object mapSelectStarRow(com.j256.ormlite.support.DatabaseResults)
+    public abstract com.j256.ormlite.stmt.GenericRowMapper getSelectStarRowMapper()
+    public abstract com.j256.ormlite.dao.RawRowMapper getRawRowMapper()
+    public abstract boolean idExists(java.lang.Object)
+    public abstract com.j256.ormlite.support.DatabaseConnection startThreadConnection()
+    public abstract void endThreadConnection(com.j256.ormlite.support.DatabaseConnection)
+    public abstract void setAutoCommit(boolean)
+    public abstract void setAutoCommit(com.j256.ormlite.support.DatabaseConnection,boolean)
+    public abstract boolean isAutoCommit()
+    public abstract boolean isAutoCommit(com.j256.ormlite.support.DatabaseConnection)
+    public abstract void commit(com.j256.ormlite.support.DatabaseConnection)
+    public abstract void rollBack(com.j256.ormlite.support.DatabaseConnection)
+    public abstract com.j256.ormlite.support.ConnectionSource getConnectionSource()
+    public abstract void setObjectFactory(com.j256.ormlite.table.ObjectFactory)
+com.j256.ormlite.dao.Dao$CreateOrUpdateStatus
+com.j256.ormlite.dao.DaoManager:
+    109:116:public static synchronized com.j256.ormlite.dao.Dao lookupDao(com.j256.ormlite.support.ConnectionSource,java.lang.Class)
+    138:148:public static synchronized com.j256.ormlite.dao.Dao lookupDao(com.j256.ormlite.support.ConnectionSource,com.j256.ormlite.table.DatabaseTableConfig)
+    190:201:public static synchronized void registerDaoWithTableConfig(com.j256.ormlite.support.ConnectionSource,com.j256.ormlite.dao.Dao)
+    207:212:public static synchronized void clearCache()
+    234:244:public static synchronized void addCachedDatabaseConfigs(java.util.Collection)
+com.j256.ormlite.dao.EagerForeignCollection:
+    private static final long serialVersionUID
+    137:137:public com.j256.ormlite.dao.CloseableWrappedIterable getWrappedIterable()
+    142:142:public void close()
+    146:146:public void closeLastIterator()
+    149:149:public boolean isEager()
+    233:237:public int updateAll()
+    241:245:public int refreshAll()
+    249:250:public int refreshCollection()
+com.j256.ormlite.dao.EagerForeignCollection$1:
+    56:60:public java.lang.Object first()
+    69:73:public java.lang.Object nextThrow()
+    77:83:public java.lang.Object current()
+    87:91:public java.lang.Object previous()
+    95:99:public java.lang.Object moveRelative(int)
+    124:124:public void closeQuietly()
+    127:127:public com.j256.ormlite.support.DatabaseResults getRawResults()
+com.j256.ormlite.dao.ForeignCollection:
+    public abstract com.j256.ormlite.dao.CloseableIterator iteratorThrow()
+    public abstract com.j256.ormlite.dao.CloseableWrappedIterable getWrappedIterable()
+    public abstract void closeLastIterator()
+    public abstract boolean isEager()
+    public abstract int update(java.lang.Object)
+    public abstract int updateAll()
+    public abstract int refresh(java.lang.Object)
+    public abstract int refreshAll()
+    public abstract int refreshCollection()
+com.j256.ormlite.dao.GenericRawResults
+com.j256.ormlite.dao.LazyForeignCollection:
+    private static final long serialVersionUID
+    79:79:public com.j256.ormlite.dao.CloseableWrappedIterable getWrappedIterable()
+    94:98:public void closeLastIterator()
+    101:101:public boolean isEager()
+    268:268:public int updateAll()
+    272:272:public int refreshAll()
+    277:277:public int refreshCollection()
+com.j256.ormlite.dao.LazyForeignCollection$1
+com.j256.ormlite.dao.LruObjectCache
+com.j256.ormlite.dao.LruObjectCache$LimitedLinkedHashMap
+com.j256.ormlite.dao.ObjectCache:
+    public abstract void registerClass(java.lang.Class)
+    public abstract java.lang.Object updateId(java.lang.Class,java.lang.Object,java.lang.Object)
+    public abstract void clear(java.lang.Class)
+    public abstract void clearAll()
+    public abstract int size(java.lang.Class)
+    public abstract int sizeAll()
+com.j256.ormlite.dao.RawRowMapper
+com.j256.ormlite.dao.ReferenceObjectCache:
+    29:31:public ReferenceObjectCache(boolean)
+    37:37:public static com.j256.ormlite.dao.ReferenceObjectCache makeWeakCache()
+    44:44:public static com.j256.ormlite.dao.ReferenceObjectCache makeSoftCache()
+    48:53:public synchronized void registerClass(java.lang.Class)
+    87:91:public void clear(java.lang.Class)
+    107:118:public java.lang.Object updateId(java.lang.Class,java.lang.Object,java.lang.Object)
+    122:126:public int size(java.lang.Class)
+    131:135:public int sizeAll()
+    142:146:public void cleanNullReferences(java.lang.Class)
+    152:155:public void cleanNullReferencesAll()
+    158:164:private void cleanMap(java.util.Map)
+com.j256.ormlite.dao.RuntimeExceptionDao
+com.j256.ormlite.db.BaseDatabaseType:
+    protected java.sql.Driver driver
+    protected abstract java.lang.String getDriverClassName()
+    39:49:public void loadDriver()
+    52:53:public void setDriver(java.sql.Driver)
+    57:160:public void appendColumnArg(java.lang.String,java.lang.StringBuilder,com.j256.ormlite.field.FieldType,java.util.List,java.util.List,java.util.List,java.util.List)
+    169:174:protected void appendStringType(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,int)
+    183:184:protected void appendLongStringType(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,int)
+    193:194:protected void appendDateType(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,int)
+    203:204:protected void appendBooleanType(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,int)
+    213:214:protected void appendCharType(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,int)
+    223:224:protected void appendByteType(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,int)
+    233:234:protected void appendShortType(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,int)
+    243:244:private void appendIntegerType(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,int)
+    250:251:protected void appendLongType(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,int)
+    260:261:private void appendFloatType(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,int)
+    270:271:private void appendDoubleType(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,int)
+    280:281:protected void appendByteArrayType(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,int)
+    290:291:protected void appendSerializableType(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,int)
+    300:301:protected void appendBigDecimalNumericType(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,int)
+    307:312:private void appendDefaultValue(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,java.lang.Object)
+    322:322:protected void configureGeneratedIdSequence(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,java.util.List,java.util.List,java.util.List)
+    335:335:protected void configureGeneratedId(java.lang.String,java.lang.StringBuilder,com.j256.ormlite.field.FieldType,java.util.List,java.util.List,java.util.List,java.util.List)
+    348:348:protected void configureId(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,java.util.List,java.util.List,java.util.List)
+    352:370:public void addPrimaryKeySql(com.j256.ormlite.field.FieldType[],java.util.List,java.util.List,java.util.List,java.util.List)
+    377:377:protected boolean generatedIdSqlAtEnd()
+    382:398:public void addUniqueComboSql(com.j256.ormlite.field.FieldType[],java.util.List,java.util.List,java.util.List,java.util.List)
+    402:402:public void dropColumnArg(com.j256.ormlite.field.FieldType,java.util.List,java.util.List)
+    422:422:public java.lang.String getCommentLinePrefix()
+    435:435:public boolean isVarcharFieldWidthSupported()
+    443:443:public boolean isOffsetSqlSupported()
+    468:468:public void appendCreateTableSuffix(java.lang.StringBuilder)
+    471:471:public boolean isCreateTableReturnsZero()
+    475:475:public boolean isCreateTableReturnsNegative()
+    483:483:public boolean isNestedSavePointsSupported()
+    487:487:public java.lang.String getPingStatement()
+    491:491:public boolean isBatchUseTransaction()
+    495:495:public boolean isTruncateSupported()
+    499:499:public boolean isCreateIfNotExistsSupported()
+    503:503:public boolean isCreateIndexIfNotExistsSupported()
+    511:511:public boolean isAllowGeneratedIdInsertSupported()
+    531:531:private void appendCanBeNull(java.lang.StringBuilder,com.j256.ormlite.field.FieldType)
+    538:543:private void addSingleUnique(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,java.util.List,java.util.List)
+com.j256.ormlite.db.BaseDatabaseType$1
+com.j256.ormlite.db.BaseDatabaseType$BooleanNumberFieldConverter:
+    570:570:public java.lang.Object resultStringToJava(com.j256.ormlite.field.FieldType,java.lang.String,int)
+com.j256.ormlite.db.BaseSqliteDatabaseType:
+    29:34:protected void appendLongType(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,int)
+    44:50:protected void configureGeneratedId(java.lang.String,java.lang.StringBuilder,com.j256.ormlite.field.FieldType,java.util.List,java.util.List,java.util.List,java.util.List)
+    54:54:protected boolean generatedIdSqlAtEnd()
+    59:59:public boolean isVarcharFieldWidthSupported()
+    65:65:public boolean isCreateTableReturnsZero()
+    70:70:public boolean isCreateIfNotExistsSupported()
+com.j256.ormlite.db.DatabaseType:
+    public abstract boolean isDatabaseUrlThisType(java.lang.String,java.lang.String)
+    public abstract void loadDriver()
+    public abstract void setDriver(java.sql.Driver)
+    public abstract void appendColumnArg(java.lang.String,java.lang.StringBuilder,com.j256.ormlite.field.FieldType,java.util.List,java.util.List,java.util.List,java.util.List)
+    public abstract void addPrimaryKeySql(com.j256.ormlite.field.FieldType[],java.util.List,java.util.List,java.util.List,java.util.List)
+    public abstract void addUniqueComboSql(com.j256.ormlite.field.FieldType[],java.util.List,java.util.List,java.util.List,java.util.List)
+    public abstract void dropColumnArg(com.j256.ormlite.field.FieldType,java.util.List,java.util.List)
+    public abstract java.lang.String getCommentLinePrefix()
+    public abstract boolean isVarcharFieldWidthSupported()
+    public abstract boolean isOffsetSqlSupported()
+    public abstract void appendCreateTableSuffix(java.lang.StringBuilder)
+    public abstract boolean isCreateTableReturnsZero()
+    public abstract boolean isCreateTableReturnsNegative()
+    public abstract boolean isNestedSavePointsSupported()
+    public abstract java.lang.String getPingStatement()
+    public abstract boolean isBatchUseTransaction()
+    public abstract boolean isTruncateSupported()
+    public abstract boolean isCreateIfNotExistsSupported()
+    public abstract boolean isCreateIndexIfNotExistsSupported()
+    public abstract boolean isAllowGeneratedIdInsertSupported()
+    public abstract java.lang.String getDatabaseName()
+com.j256.ormlite.db.SqliteAndroidDatabaseType:
+    29:29:public void loadDriver()
+    33:33:public boolean isDatabaseUrlThisType(java.lang.String,java.lang.String)
+    39:39:protected java.lang.String getDriverClassName()
+    43:43:public java.lang.String getDatabaseName()
+    49:50:protected void appendDateType(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,int)
+    55:56:protected void appendBooleanType(java.lang.StringBuilder,com.j256.ormlite.field.FieldType,int)
+    71:71:public boolean isNestedSavePointsSupported()
+    76:76:public boolean isBatchUseTransaction()
+com.j256.ormlite.field.DataPersister:
+    public abstract boolean isEscapedDefaultValue()
+    public abstract int getDefaultWidth()
+    public abstract boolean dataIsEqual(java.lang.Object,java.lang.Object)
+com.j256.ormlite.field.DataPersisterManager:
+    44:46:private DataPersisterManager()
+    53:61:public static varargs void registerDataPersisters(com.j256.ormlite.field.DataPersister[])
+    67:68:public static void clear()
+com.j256.ormlite.field.DatabaseField:
+    public static final java.lang.String DEFAULT_STRING
+    public static final int NO_MAX_FOREIGN_AUTO_REFRESH_LEVEL_SPECIFIED
+    public static final int DEFAULT_MAX_FOREIGN_AUTO_REFRESH_LEVEL
+com.j256.ormlite.field.DatabaseFieldConfig:
+    private static final int DEFAULT_MAX_EAGER_FOREIGN_COLLECTION_LEVEL
+    public static final boolean DEFAULT_CAN_BE_NULL
+    public static final boolean DEFAULT_FOREIGN_COLLECTION_ORDER_ASCENDING
+    78:100:public DatabaseFieldConfig(java.lang.String,java.lang.String,com.j256.ormlite.field.DataType,java.lang.String,int,boolean,boolean,boolean,java.lang.String,boolean,com.j256.ormlite.table.DatabaseTableConfig,boolean,java.lang.Enum,boolean,java.lang.String,boolean,java.lang.String,java.lang.String,boolean,int,int)
+    128:128:public com.j256.ormlite.field.DataType getDataType()
+    168:168:public int getWidth()
+    179:179:public boolean isCanBeNull()
+    239:240:public void setForeignTableConfig(com.j256.ormlite.table.DatabaseTableConfig)
+    286:286:public boolean isUnique()
+    294:294:public boolean isUniqueCombo()
+    302:302:public boolean isIndex()
+    310:313:public java.lang.String getIndexName(java.lang.String)
+    321:321:public boolean isUniqueIndex()
+    329:332:public java.lang.String getUniqueIndexName(java.lang.String)
+    380:381:public void setForeignCollectionMaxEagerLevel(int)
+    388:389:public void setMaxEagerForeignCollectionLevel(int)
+    396:397:public void setForeignCollectionMaxEagerForeignCollectionLevel(int)
+    400:400:public java.lang.String getForeignCollectionColumnName()
+    416:417:public void setForeignCollectionOrderColumn(java.lang.String)
+    420:421:public void setForeignCollectionOrderColumnName(java.lang.String)
+    428:429:public void setForeignCollectionOrderAscending(boolean)
+    440:441:public void setForeignCollectionForeignColumnName(java.lang.String)
+    444:445:public void setForeignCollectionForeignFieldName(java.lang.String)
+    464:464:public java.lang.String getColumnDefinition()
+    690:693:private java.lang.String findIndexName(java.lang.String)
+com.j256.ormlite.field.DatabaseFieldConfigLoader
+com.j256.ormlite.field.FieldConverter:
+    public abstract java.lang.Object sqlArgToJava(com.j256.ormlite.field.FieldType,java.lang.Object,int)
+    public abstract java.lang.Object resultStringToJava(com.j256.ormlite.field.FieldType,java.lang.String,int)
+com.j256.ormlite.field.FieldType:
+    public static final java.lang.String FOREIGN_ID_FIELD_SUFFIX
+    404:404:public java.lang.String getTableName()
+    442:442:public int getWidth()
+    446:446:public boolean isCanBeNull()
+    640:643:public java.lang.Object convertStringToJavaField(java.lang.String,int)
+    684:684:public boolean isUnique()
+    688:688:public boolean isUniqueCombo()
+    692:692:public java.lang.String getIndexName()
+    696:696:public java.lang.String getUniqueIndexName()
+    703:703:public boolean isEscapedDefaultValue()
+    834:834:public java.lang.String getColumnDefinition()
+com.j256.ormlite.field.ForeignCollectionField:
+    public static final int MAX_EAGER_LEVEL
+com.j256.ormlite.field.types.BaseDataType:
+    public abstract java.lang.Object parseDefaultString(com.j256.ormlite.field.FieldType,java.lang.String)
+    public abstract java.lang.Object resultToSqlArg(com.j256.ormlite.field.FieldType,com.j256.ormlite.support.DatabaseResults,int)
+    99:99:public boolean isEscapedDefaultValue()
+    131:131:public int getDefaultWidth()
+    135:140:public boolean dataIsEqual(java.lang.Object,java.lang.Object)
+    153:153:public java.lang.Object resultStringToJava(com.j256.ormlite.field.FieldType,java.lang.String,int)
+com.j256.ormlite.field.types.BigDecimalNumericType:
+    34:35:protected BigDecimalNumericType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+com.j256.ormlite.field.types.BigDecimalStringType:
+    35:36:protected BigDecimalStringType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+    71:71:public int getDefaultWidth()
+com.j256.ormlite.field.types.BigIntegerType:
+    34:35:protected BigIntegerType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+    70:70:public int getDefaultWidth()
+com.j256.ormlite.field.types.BooleanType:
+    26:27:protected BooleanType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+com.j256.ormlite.field.types.ByteArrayType:
+    31:32:protected ByteArrayType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+    56:61:public boolean dataIsEqual(java.lang.Object,java.lang.Object)
+    67:67:public java.lang.Object resultStringToJava(com.j256.ormlite.field.FieldType,java.lang.String,int)
+com.j256.ormlite.field.types.ByteType:
+    26:27:protected ByteType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+com.j256.ormlite.field.types.CharType:
+    27:28:protected CharType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+com.j256.ormlite.field.types.DateLongType:
+    36:37:protected DateLongType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+    72:72:public java.lang.Object resultStringToJava(com.j256.ormlite.field.FieldType,java.lang.String,int)
+com.j256.ormlite.field.types.DateStringType:
+    38:39:protected DateStringType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+    88:88:public int getDefaultWidth()
+    93:93:public java.lang.Object resultStringToJava(com.j256.ormlite.field.FieldType,java.lang.String,int)
+com.j256.ormlite.field.types.DateTimeType:
+    37:38:protected DateTimeType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+com.j256.ormlite.field.types.DoubleType:
+    26:27:protected DoubleType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+com.j256.ormlite.field.types.EnumIntegerType:
+    33:34:protected EnumIntegerType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+    88:88:public java.lang.Object resultStringToJava(com.j256.ormlite.field.FieldType,java.lang.String,int)
+com.j256.ormlite.field.types.EnumStringType:
+    34:35:protected EnumStringType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+    83:83:public int getDefaultWidth()
+    88:88:public java.lang.Object resultStringToJava(com.j256.ormlite.field.FieldType,java.lang.String,int)
+com.j256.ormlite.field.types.FloatType:
+    26:27:protected FloatType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+com.j256.ormlite.field.types.IntType:
+    26:27:protected IntType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+com.j256.ormlite.field.types.LongStringType:
+    26:27:protected LongStringType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+    36:36:public int getDefaultWidth()
+com.j256.ormlite.field.types.LongType:
+    26:27:protected LongType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+com.j256.ormlite.field.types.SerializableType:
+    43:44:protected SerializableType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+    130:130:public java.lang.Object resultStringToJava(com.j256.ormlite.field.FieldType,java.lang.String,int)
+com.j256.ormlite.field.types.ShortType:
+    26:27:protected ShortType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+com.j256.ormlite.field.types.SqlDateType:
+    36:37:protected SqlDateType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+    58:58:public java.lang.Object resultStringToJava(com.j256.ormlite.field.FieldType,java.lang.String,int)
+com.j256.ormlite.field.types.StringBytesType:
+    private static final java.lang.String DEFAULT_STRING_BYTES_CHARSET_NAME
+    34:35:protected StringBytesType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+    83:83:public java.lang.Object resultStringToJava(com.j256.ormlite.field.FieldType,java.lang.String,int)
+com.j256.ormlite.field.types.StringType:
+    44:44:public int getDefaultWidth()
+com.j256.ormlite.field.types.TimeStampType:
+    29:30:protected TimeStampType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+com.j256.ormlite.field.types.UuidType:
+    34:35:protected UuidType(com.j256.ormlite.field.SqlType,java.lang.Class[])
+    86:86:public int getDefaultWidth()
+com.j256.ormlite.logger.LocalLog:
+    public static final java.lang.String LOCAL_LOG_LEVEL_PROPERTY
+    public static final java.lang.String LOCAL_LOG_FILE_PROPERTY
+    public static final java.lang.String LOCAL_LOG_PROPERTIES_FILE
+    138:139:void flush()
+com.j256.ormlite.logger.Logger:
+    private static final java.lang.String ARG_STRING
+    43:44:public void trace(java.lang.String)
+    75:76:public void trace(java.lang.String,java.lang.Object[])
+    82:83:public void trace(java.lang.Throwable,java.lang.String)
+    89:90:public void trace(java.lang.Throwable,java.lang.String,java.lang.Object)
+    96:97:public void trace(java.lang.Throwable,java.lang.String,java.lang.Object,java.lang.Object)
+    103:104:public void trace(java.lang.Throwable,java.lang.String,java.lang.Object,java.lang.Object,java.lang.Object)
+    114:115:public void trace(java.lang.Throwable,java.lang.String,java.lang.Object[])
+    121:122:public void debug(java.lang.String)
+    160:161:public void debug(java.lang.Throwable,java.lang.String)
+    167:168:public void debug(java.lang.Throwable,java.lang.String,java.lang.Object)
+    174:175:public void debug(java.lang.Throwable,java.lang.String,java.lang.Object,java.lang.Object)
+    181:182:public void debug(java.lang.Throwable,java.lang.String,java.lang.Object,java.lang.Object,java.lang.Object)
+    192:193:public void debug(java.lang.Throwable,java.lang.String,java.lang.Object[])
+    206:207:public void info(java.lang.String,java.lang.Object)
+    213:214:public void info(java.lang.String,java.lang.Object,java.lang.Object)
+    220:221:public void info(java.lang.String,java.lang.Object,java.lang.Object,java.lang.Object)
+    227:228:public void info(java.lang.String,java.lang.Object[])
+    234:235:public void info(java.lang.Throwable,java.lang.String)
+    241:242:public void info(java.lang.Throwable,java.lang.String,java.lang.Object)
+    248:249:public void info(java.lang.Throwable,java.lang.String,java.lang.Object,java.lang.Object)
+    255:256:public void info(java.lang.Throwable,java.lang.String,java.lang.Object,java.lang.Object,java.lang.Object)
+    262:263:public void info(java.lang.Throwable,java.lang.String,java.lang.Object[])
+    269:270:public void warn(java.lang.String)
+    276:277:public void warn(java.lang.String,java.lang.Object)
+    283:284:public void warn(java.lang.String,java.lang.Object,java.lang.Object)
+    290:291:public void warn(java.lang.String,java.lang.Object,java.lang.Object,java.lang.Object)
+    297:298:public void warn(java.lang.String,java.lang.Object[])
+    311:312:public void warn(java.lang.Throwable,java.lang.String,java.lang.Object)
+    318:319:public void warn(java.lang.Throwable,java.lang.String,java.lang.Object,java.lang.Object)
+    325:326:public void warn(java.lang.Throwable,java.lang.String,java.lang.Object,java.lang.Object,java.lang.Object)
+    332:333:public void warn(java.lang.Throwable,java.lang.String,java.lang.Object[])
+    367:368:public void error(java.lang.String,java.lang.Object[])
+    374:375:public void error(java.lang.Throwable,java.lang.String)
+    381:382:public void error(java.lang.Throwable,java.lang.String,java.lang.Object)
+    388:389:public void error(java.lang.Throwable,java.lang.String,java.lang.Object,java.lang.Object)
+    409:410:public void fatal(java.lang.String)
+    416:417:public void fatal(java.lang.String,java.lang.Object)
+    423:424:public void fatal(java.lang.String,java.lang.Object,java.lang.Object)
+    430:431:public void fatal(java.lang.String,java.lang.Object,java.lang.Object,java.lang.Object)
+    437:438:public void fatal(java.lang.String,java.lang.Object[])
+    444:445:public void fatal(java.lang.Throwable,java.lang.String)
+    451:452:public void fatal(java.lang.Throwable,java.lang.String,java.lang.Object)
+    458:459:public void fatal(java.lang.Throwable,java.lang.String,java.lang.Object,java.lang.Object)
+    465:466:public void fatal(java.lang.Throwable,java.lang.String,java.lang.Object,java.lang.Object,java.lang.Object)
+    472:473:public void fatal(java.lang.Throwable,java.lang.String,java.lang.Object[])
+    479:480:public void log(com.j256.ormlite.logger.Log$Level,java.lang.String)
+    486:487:public void log(com.j256.ormlite.logger.Log$Level,java.lang.String,java.lang.Object)
+    493:494:public void log(com.j256.ormlite.logger.Log$Level,java.lang.String,java.lang.Object,java.lang.Object)
+    500:501:public void log(com.j256.ormlite.logger.Log$Level,java.lang.String,java.lang.Object,java.lang.Object,java.lang.Object)
+    507:508:public void log(com.j256.ormlite.logger.Log$Level,java.lang.String,java.lang.Object[])
+    514:515:public void log(com.j256.ormlite.logger.Log$Level,java.lang.Throwable,java.lang.String)
+    521:522:public void log(com.j256.ormlite.logger.Log$Level,java.lang.Throwable,java.lang.String,java.lang.Object)
+    528:529:public void log(com.j256.ormlite.logger.Log$Level,java.lang.Throwable,java.lang.String,java.lang.Object,java.lang.Object)
+    535:536:public void log(com.j256.ormlite.logger.Log$Level,java.lang.Throwable,java.lang.String,java.lang.Object,java.lang.Object,java.lang.Object)
+    542:543:public void log(com.j256.ormlite.logger.Log$Level,java.lang.Throwable,java.lang.String,java.lang.Object[])
+com.j256.ormlite.logger.LoggerFactory:
+    17:18:private LoggerFactory()
+com.j256.ormlite.misc.BaseDaoEnabled:
+    34:37:public int create()
+    44:47:public int refresh()
+    54:57:public int update()
+    64:67:public int updateId(java.lang.Object)
+    74:77:public int delete()
+    85:91:public java.lang.String objectToString()
+    98:101:public java.lang.Object extractId()
+    108:111:public boolean objectsEqual(java.lang.Object)
+    128:128:public com.j256.ormlite.dao.Dao getDao()
+    132:135:private void checkForDao()
+com.j256.ormlite.misc.JavaxPersistence:
+    21:21:public JavaxPersistence()
+com.j256.ormlite.misc.SqlExceptionUtil:
+    15:16:private SqlExceptionUtil()
+com.j256.ormlite.misc.TransactionManager
+com.j256.ormlite.misc.VersionUtils:
+    private static final java.lang.String CORE_VERSION_FILE
+    private static final java.lang.String JDBC_VERSION_FILE
+    private static final java.lang.String ANDROID_VERSION_FILE
+    36:39:public static final void checkCoreVersusJdbcVersions()
+    54:55:static void setCoreVersionFile(java.lang.String)
+    61:62:static void setJdbcVersionFile(java.lang.String)
+    68:69:static void setAndroidVersionFile(java.lang.String)
+    75:76:static void setThrownOnErrors(boolean)
+    107:107:private static java.lang.String readJdbcVersion()
+com.j256.ormlite.stmt.ArgumentHolder:
+    public abstract java.lang.String getColumnName()
+    public abstract void setMetaInfo(java.lang.String)
+    public abstract void setMetaInfo(com.j256.ormlite.field.FieldType)
+com.j256.ormlite.stmt.BaseArgumentHolder:
+    23:25:public BaseArgumentHolder(java.lang.String)
+    27:29:public BaseArgumentHolder(com.j256.ormlite.field.SqlType)
+    public abstract void setValue(java.lang.Object)
+    44:44:public java.lang.String getColumnName()
+com.j256.ormlite.stmt.DeleteBuilder:
+    40:40:public int delete()
+    46:47:public void clear()
+com.j256.ormlite.stmt.NullArgHolder
+com.j256.ormlite.stmt.PreparedStmt:
+    public abstract com.j256.ormlite.stmt.StatementBuilder$StatementType getType()
+    public abstract void setArgumentHolderValue(int,java.lang.Object)
+com.j256.ormlite.stmt.QueryBuilder:
+    69:70:void enableInnerQuery()
+    76:79:int getSelectColumnCount()
+    87:90:java.util.List getSelectColumns()
+    113:119:public varargs com.j256.ormlite.stmt.QueryBuilder selectColumns(java.lang.String[])
+    127:133:public com.j256.ormlite.stmt.QueryBuilder selectColumns(java.lang.Iterable)
+    141:147:public varargs com.j256.ormlite.stmt.QueryBuilder selectRaw(java.lang.String[])
+    159:168:public com.j256.ormlite.stmt.QueryBuilder groupBy(java.lang.String)
+    175:176:public com.j256.ormlite.stmt.QueryBuilder groupByRaw(java.lang.String)
+    211:213:public com.j256.ormlite.stmt.QueryBuilder distinct()
+    221:221:public com.j256.ormlite.stmt.QueryBuilder limit(int)
+    228:229:public com.j256.ormlite.stmt.QueryBuilder limit(java.lang.Long)
+    237:237:public com.j256.ormlite.stmt.QueryBuilder offset(int)
+    251:255:public com.j256.ormlite.stmt.QueryBuilder offset(java.lang.Long)
+    263:264:public com.j256.ormlite.stmt.QueryBuilder setCountOf(boolean)
+    271:272:public com.j256.ormlite.stmt.QueryBuilder having(java.lang.String)
+    281:284:public com.j256.ormlite.stmt.QueryBuilder join(com.j256.ormlite.stmt.QueryBuilder)
+    296:299:public com.j256.ormlite.stmt.QueryBuilder leftJoin(com.j256.ormlite.stmt.QueryBuilder)
+    306:306:public java.util.List query()
+    313:313:public java.lang.Object queryForFirst()
+    320:320:public java.lang.String[] queryRawFirst()
+    327:327:public com.j256.ormlite.dao.CloseableIterator iterator()
+    332:350:public void clear()
+    417:417:protected boolean shouldPrependTableNameToColumns()
+    431:449:private void matchJoinedFields(com.j256.ormlite.stmt.QueryBuilder)
+    454:456:private void addSelectColumnToList(java.lang.String)
+    32:32:static synthetic com.j256.ormlite.field.FieldType[] access$000(com.j256.ormlite.stmt.QueryBuilder)
+com.j256.ormlite.stmt.QueryBuilder$InternalQueryBuilderWrapper
+com.j256.ormlite.stmt.RawResultsImpl
+com.j256.ormlite.stmt.RawRowMapperImpl
+com.j256.ormlite.stmt.SelectArg:
+    31:33:public SelectArg(java.lang.String,java.lang.Object)
+    36:38:public SelectArg(com.j256.ormlite.field.SqlType,java.lang.Object)
+    40:42:public SelectArg(java.lang.Object)
+com.j256.ormlite.stmt.SelectIterator:
+    108:115:public java.lang.Object first()
+    120:127:public java.lang.Object previous()
+    132:138:public java.lang.Object current()
+    187:194:public java.lang.Object moveRelative(int)
+    260:260:public com.j256.ormlite.support.DatabaseResults getRawResults()
+com.j256.ormlite.stmt.StatementBuilder:
+    63:64:public void setWhere(com.j256.ormlite.stmt.Where)
+    93:94:public java.lang.String prepareStatementString()
+    101:102:public void clear()
+    160:160:protected boolean shouldPrependTableNameToColumns()
+    185:185:com.j256.ormlite.stmt.StatementBuilder$StatementType getType()
+com.j256.ormlite.stmt.StatementBuilder$StatementType:
+    233:233:public boolean isOkForExecute()
+com.j256.ormlite.stmt.StatementExecutor:
+    private com.j256.ormlite.stmt.mapped.MappedQueryForId mappedQueryForId
+    private com.j256.ormlite.stmt.mapped.MappedUpdateId mappedUpdateId
+    private com.j256.ormlite.stmt.mapped.MappedRefresh mappedRefresh
+    private java.lang.String countStarQuery
+    private java.lang.String ifExistsQuery
+    private com.j256.ormlite.field.FieldType[] ifExistsFieldTypes
+    private com.j256.ormlite.dao.RawRowMapper rawRowMapper
+    81:84:public java.lang.Object queryForId(com.j256.ormlite.support.DatabaseConnection,java.lang.Object,com.j256.ormlite.dao.ObjectCache)
+    120:128:public long queryForCountStar(com.j256.ormlite.support.DatabaseConnection)
+    135:144:public long queryForLong(com.j256.ormlite.support.DatabaseConnection,com.j256.ormlite.stmt.PreparedStmt)
+    153:170:public long queryForLong(com.j256.ormlite.support.DatabaseConnection,java.lang.String,java.lang.String[])
+    209:210:public com.j256.ormlite.stmt.GenericRowMapper getSelectStarRowMapper()
+    217:220:public com.j256.ormlite.dao.RawRowMapper getRawRowMapper()
+    253:274:public com.j256.ormlite.dao.GenericRawResults queryRaw(com.j256.ormlite.support.ConnectionSource,java.lang.String,java.lang.String[],com.j256.ormlite.dao.ObjectCache)
+    284:305:public com.j256.ormlite.dao.GenericRawResults queryRaw(com.j256.ormlite.support.ConnectionSource,java.lang.String,com.j256.ormlite.dao.RawRowMapper,java.lang.String[],com.j256.ormlite.dao.ObjectCache)
+    315:336:public com.j256.ormlite.dao.GenericRawResults queryRaw(com.j256.ormlite.support.ConnectionSource,java.lang.String,com.j256.ormlite.field.DataType[],java.lang.String[],com.j256.ormlite.dao.ObjectCache)
+    345:356:public int updateRaw(com.j256.ormlite.support.DatabaseConnection,java.lang.String,java.lang.String[])
+    364:365:public int executeRawNoArgs(com.j256.ormlite.support.DatabaseConnection,java.lang.String)
+    372:383:public int executeRaw(com.j256.ormlite.support.DatabaseConnection,java.lang.String,java.lang.String[])
+    412:415:public int updateId(com.j256.ormlite.support.DatabaseConnection,java.lang.Object,java.lang.Object,com.j256.ormlite.dao.ObjectCache)
+    422:426:public int update(com.j256.ormlite.support.DatabaseConnection,com.j256.ormlite.stmt.PreparedUpdate)
+    435:438:public int refresh(com.j256.ormlite.support.DatabaseConnection,java.lang.Object,com.j256.ormlite.dao.ObjectCache)
+    455:458:public int deleteById(com.j256.ormlite.support.DatabaseConnection,java.lang.Object,com.j256.ormlite.dao.ObjectCache)
+    467:467:public int deleteObjects(com.j256.ormlite.support.DatabaseConnection,java.util.Collection,com.j256.ormlite.dao.ObjectCache)
+    476:476:public int deleteIds(com.j256.ormlite.support.DatabaseConnection,java.util.Collection,com.j256.ormlite.dao.ObjectCache)
+    496:525:public java.lang.Object callBatchTasks(com.j256.ormlite.support.DatabaseConnection,boolean,java.util.concurrent.Callable)
+    540:549:public boolean ifExists(com.j256.ormlite.support.DatabaseConnection,java.lang.Object)
+    553:556:private void assignStatementArguments(com.j256.ormlite.support.CompiledStatement,java.lang.String[])
+com.j256.ormlite.stmt.StatementExecutor$ObjectArrayRowMapper
+com.j256.ormlite.stmt.StatementExecutor$UserObjectRowMapper
+com.j256.ormlite.stmt.ThreadLocalSelectArg
+com.j256.ormlite.stmt.ThreadLocalSelectArg$ValueWrapper
+com.j256.ormlite.stmt.UpdateBuilder
+com.j256.ormlite.stmt.Where:
+    private static final int START_CLAUSE_SIZE
+    152:153:public com.j256.ormlite.stmt.Where and()
+    168:172:public varargs com.j256.ormlite.stmt.Where and(com.j256.ormlite.stmt.Where,com.j256.ormlite.stmt.Where,com.j256.ormlite.stmt.Where[])
+    185:193:public com.j256.ormlite.stmt.Where and(int)
+    200:201:public com.j256.ormlite.stmt.Where between(java.lang.String,java.lang.Object,java.lang.Object)
+    217:219:public com.j256.ormlite.stmt.Where ge(java.lang.String,java.lang.Object)
+    226:228:public com.j256.ormlite.stmt.Where gt(java.lang.String,java.lang.Object)
+    235:236:public com.j256.ormlite.stmt.Where in(java.lang.String,java.lang.Iterable)
+    243:244:public com.j256.ormlite.stmt.Where notIn(java.lang.String,java.lang.Iterable)
+    251:251:public varargs com.j256.ormlite.stmt.Where in(java.lang.String,java.lang.Object[])
+    258:258:public varargs com.j256.ormlite.stmt.Where notIn(java.lang.String,java.lang.Object[])
+    272:272:public com.j256.ormlite.stmt.Where in(java.lang.String,com.j256.ormlite.stmt.QueryBuilder)
+    279:279:public com.j256.ormlite.stmt.Where notIn(java.lang.String,com.j256.ormlite.stmt.QueryBuilder)
+    291:293:public com.j256.ormlite.stmt.Where exists(com.j256.ormlite.stmt.QueryBuilder)
+    300:301:public com.j256.ormlite.stmt.Where isNull(java.lang.String)
+    308:309:public com.j256.ormlite.stmt.Where isNotNull(java.lang.String)
+    316:318:public com.j256.ormlite.stmt.Where le(java.lang.String,java.lang.Object)
+    325:327:public com.j256.ormlite.stmt.Where lt(java.lang.String,java.lang.Object)
+    334:336:public com.j256.ormlite.stmt.Where like(java.lang.String,java.lang.Object)
+    343:345:public com.j256.ormlite.stmt.Where ne(java.lang.String,java.lang.Object)
+    352:353:public com.j256.ormlite.stmt.Where not()
+    360:361:public com.j256.ormlite.stmt.Where not(com.j256.ormlite.stmt.Where)
+    368:369:public com.j256.ormlite.stmt.Where or()
+    384:388:public varargs com.j256.ormlite.stmt.Where or(com.j256.ormlite.stmt.Where,com.j256.ormlite.stmt.Where,com.j256.ormlite.stmt.Where[])
+    401:409:public com.j256.ormlite.stmt.Where or(int)
+    416:420:public com.j256.ormlite.stmt.Where idEq(java.lang.Object)
+    427:432:public com.j256.ormlite.stmt.Where idEq(com.j256.ormlite.dao.Dao,java.lang.Object)
+    448:459:public varargs com.j256.ormlite.stmt.Where raw(java.lang.String,com.j256.ormlite.stmt.ArgumentHolder[])
+    467:468:public com.j256.ormlite.stmt.Where rawComparison(java.lang.String,java.lang.String,java.lang.Object)
+    482:485:public java.util.List query()
+    493:496:public com.j256.ormlite.dao.CloseableIterator iterator()
+    504:509:public com.j256.ormlite.stmt.Where clear()
+    516:518:public java.lang.String getStatement()
+    551:561:private varargs com.j256.ormlite.stmt.Where in(boolean,java.lang.String,java.lang.Object[])
+    565:574:private com.j256.ormlite.stmt.Where in(boolean,java.lang.String,com.j256.ormlite.stmt.QueryBuilder)
+    579:588:private com.j256.ormlite.stmt.query.Clause[] buildClauseArray(com.j256.ormlite.stmt.Where[],java.lang.String)
+    592:598:private void addNeedsFuture(com.j256.ormlite.stmt.query.NeedsFutureClause)
+    631:638:private com.j256.ormlite.stmt.query.Clause pop(java.lang.String)
+com.j256.ormlite.stmt.mapped.MappedDelete:
+    63:75:public int deleteById(com.j256.ormlite.support.DatabaseConnection,java.lang.Object,com.j256.ormlite.dao.ObjectCache)
+com.j256.ormlite.stmt.mapped.MappedDeleteCollection
+com.j256.ormlite.stmt.mapped.MappedPreparedStmt:
+    60:60:public com.j256.ormlite.stmt.StatementBuilder$StatementType getType()
+    64:72:public void setArgumentHolderValue(int,java.lang.Object)
+com.j256.ormlite.stmt.mapped.MappedRefresh
+com.j256.ormlite.stmt.mapped.MappedUpdateId
+com.j256.ormlite.stmt.query.BaseComparison:
+    private static final java.lang.String NUMBER_CHARACTERS
+    50:50:public java.lang.String getColumnName()
+com.j256.ormlite.stmt.query.Between
+com.j256.ormlite.stmt.query.Comparison:
+    public abstract java.lang.String getColumnName()
+    public abstract void appendOperation(java.lang.StringBuilder)
+    public abstract void appendValue(com.j256.ormlite.db.DatabaseType,java.lang.StringBuilder,java.util.List)
+com.j256.ormlite.stmt.query.Exists
+com.j256.ormlite.stmt.query.In
+com.j256.ormlite.stmt.query.InSubQuery
+com.j256.ormlite.stmt.query.IsNotNull
+com.j256.ormlite.stmt.query.IsNull
+com.j256.ormlite.stmt.query.ManyClause
+com.j256.ormlite.stmt.query.Not
+com.j256.ormlite.stmt.query.Raw
+com.j256.ormlite.stmt.query.SetExpression
+com.j256.ormlite.stmt.query.SetValue
+com.j256.ormlite.stmt.query.SimpleComparison:
+    public static final java.lang.String EQUAL_TO_OPERATION
+    public static final java.lang.String GREATER_THAN_OPERATION
+    public static final java.lang.String GREATER_THAN_EQUAL_TO_OPERATION
+    public static final java.lang.String LESS_THAN_OPERATION
+    public static final java.lang.String LESS_THAN_EQUAL_TO_OPERATION
+    public static final java.lang.String LIKE_OPERATION
+    public static final java.lang.String NOT_EQUAL_TO_OPERATION
+    12:12:public bridge synthetic java.lang.String getColumnName()
+com.j256.ormlite.support.BaseConnectionSource:
+    41:48:protected boolean isSavedConnection(com.j256.ormlite.support.DatabaseConnection)
+com.j256.ormlite.support.CompiledStatement:
+    public abstract int getColumnCount()
+    public abstract java.lang.String getColumnName(int)
+    public abstract int runExecute()
+    public abstract void closeQuietly()
+    public abstract void setQueryTimeout(long)
+com.j256.ormlite.support.ConnectionSource:
+    public abstract void close()
+    public abstract void closeQuietly()
+    public abstract boolean isOpen()
+com.j256.ormlite.support.DatabaseConnection:
+    public static final int DEFAULT_RESULT_FLAGS
+    public abstract boolean isAutoCommitSupported()
+    public abstract boolean isAutoCommit()
+    public abstract void setAutoCommit(boolean)
+    public abstract java.sql.Savepoint setSavePoint(java.lang.String)
+    public abstract void commit(java.sql.Savepoint)
+    public abstract void rollback(java.sql.Savepoint)
+    public abstract int executeStatement(java.lang.String,int)
+    public abstract com.j256.ormlite.support.CompiledStatement compileStatement(java.lang.String,com.j256.ormlite.stmt.StatementBuilder$StatementType,com.j256.ormlite.field.FieldType[])
+    public abstract long queryForLong(java.lang.String,java.lang.Object[],com.j256.ormlite.field.FieldType[])
+    public abstract void close()
+    public abstract void closeQuietly()
+    public abstract boolean isClosed()
+    public abstract boolean isTableExists(java.lang.String)
+com.j256.ormlite.support.DatabaseResults:
+    public abstract java.lang.String[] getColumnNames()
+    public abstract boolean previous()
+    public abstract boolean last()
+    public abstract boolean moveRelative(int)
+    public abstract boolean moveAbsolute(int)
+    public abstract java.io.InputStream getBlobStream(int)
+    public abstract void close()
+    public abstract void closeQuietly()
+com.j256.ormlite.table.DatabaseTableConfig:
+    39:40:public DatabaseTableConfig(java.lang.Class,java.util.List)
+    61:67:public void initialize()
+    75:76:public void setDataClass(java.lang.Class)
+    86:87:public void setTableName(java.lang.String)
+    90:91:public void setFieldConfigs(java.util.List)
+    117:117:public java.util.List getFieldConfigs()
+    133:134:public void setConstructor(java.lang.reflect.Constructor)
+com.j256.ormlite.table.DatabaseTableConfigLoader
+com.j256.ormlite.table.TableInfo:
+    166:166:public java.lang.reflect.Constructor getConstructor()
+    173:183:public java.lang.String objectToString(java.lang.Object)
+    213:213:public boolean isUpdatable()
+    235:240:public boolean hasColumnName(java.lang.String)
+com.j256.ormlite.table.TableUtils
 com.pl.polidea.treeview.AbstractTreeViewAdapter:
     55:55:protected com.pl.polidea.treeview.TreeStateManager getManager()
 com.pl.polidea.treeview.InMemoryTreeNode:
@@ -2126,9 +3139,9 @@ com.silverkeytech.android_rivers.Android_riversPackage$src$Texts$334953815:
     public static final java.lang.String getLOCAL_URL()
 com.silverkeytech.android_rivers.Android_riversPackage$src$UrlShortener$2000422318
 com.silverkeytech.android_rivers.Android_riversPackage$src$Utils$2068592044:
-    52:52:public static final java.util.Date parseRFC3339DateFormat(java.lang.String)
-    87:89:public static final java.util.Date hoursBeforeNow(int)
-    116:118:public static final boolean isNetworkAvailable(android.content.Context)
+    50:50:public static final java.util.Date parseRFC3339DateFormat(java.lang.String)
+    85:87:public static final java.util.Date hoursBeforeNow(int)
+    114:116:public static final boolean isNetworkAvailable(android.content.Context)
     public static void <clinit>()
 com.silverkeytech.android_rivers.BookmarkCollectionActivity:
     public final java.lang.String getCollectionTitle()
@@ -2300,7 +3313,7 @@ com.silverkeytech.android_rivers.MainWithFragmentsActivity:
     public final void setCurrentTheme(java.lang.Integer)
     public final boolean getIsOnCreate()
     public final void setIsOnCreate(boolean)
-    61:61:public final int getSlidingIconBasedOnTheme(int)
+    57:57:public final int getSlidingIconBasedOnTheme(int)
     public final int getSWITCH_BACKWARD()
     public final int getSWITCH_FORWARD()
     public final int getEXPLORE()
@@ -2342,7 +3355,7 @@ com.silverkeytech.android_rivers.PodcastListFragment:
     private final com.silverkeytech.android_rivers.PodcastPlayerService getPlayer()
     private final void setPlayer(com.silverkeytech.android_rivers.PodcastPlayerService)
     public final android.content.ServiceConnection getServiceConnection()
-    305:306:public final void doUnbindService()
+    304:305:public final void doUnbindService()
     static bridge synthetic boolean getIsPlayerBound$b$1(com.silverkeytech.android_rivers.PodcastListFragment)
 com.silverkeytech.android_rivers.PodcastListFragment$ViewHolder:
     public final void setPodcastName(android.widget.TextView)
@@ -2382,7 +3395,7 @@ com.silverkeytech.android_rivers.PreferenceValue:
 com.silverkeytech.android_rivers.Preferences:
     public Preferences()
 com.silverkeytech.android_rivers.R:
-    10:3420:public R()
+    10:3421:public R()
 com.silverkeytech.android_rivers.R$anim
 com.silverkeytech.android_rivers.R$attr
 com.silverkeytech.android_rivers.R$bool
@@ -2394,19 +3407,19 @@ com.silverkeytech.android_rivers.R$drawable:
 com.silverkeytech.android_rivers.R$id:
     2610:2610:public R$id()
 com.silverkeytech.android_rivers.R$integer:
-    2868:2868:public R$integer()
+    2869:2869:public R$integer()
 com.silverkeytech.android_rivers.R$interpolator
 com.silverkeytech.android_rivers.R$layout:
-    2890:2890:public R$layout()
+    2891:2891:public R$layout()
 com.silverkeytech.android_rivers.R$menu:
-    3003:3003:public R$menu()
+    3004:3004:public R$menu()
 com.silverkeytech.android_rivers.R$raw
 com.silverkeytech.android_rivers.R$string:
-    3022:3022:public R$string()
+    3023:3023:public R$string()
 com.silverkeytech.android_rivers.R$style:
-    3130:3130:public R$style()
+    3131:3131:public R$style()
 com.silverkeytech.android_rivers.R$styleable:
-    3420:3420:public R$styleable()
+    3421:3421:public R$styleable()
 com.silverkeytech.android_rivers.R$xml
 com.silverkeytech.android_rivers.ResizeTextActionMode:
     public final int getINCREASE_SIZE()
@@ -2478,7 +3491,7 @@ com.silverkeytech.android_rivers.RssListFragment$ViewHolder:
     public final com.silverkeytech.android_rivers.RssListFragment$ViewHolder copy(android.widget.TextView)
     public static synthetic com.silverkeytech.android_rivers.RssListFragment$ViewHolder copy$default(com.silverkeytech.android_rivers.RssListFragment$ViewHolder,android.widget.TextView,int)
 com.silverkeytech.android_rivers.SetupPreference:
-    108:108:public final boolean getDownloadDefaultRiversIfNecessary()
+    110:110:public final boolean getDownloadDefaultRiversIfNecessary()
     public final org.holoeverywhere.preference.SharedPreferences getPref()
 com.silverkeytech.android_rivers.SharedFlags:
     public final void setIsRssJustBookmarked(boolean)
@@ -2516,9 +3529,17 @@ com.silverkeytech.android_rivers.creators.AirportCodeBuilder:
     public final java.util.ArrayList getList()
     public final com.silverkeytech.android_rivers.creators.AirportCode getItem()
     public final void setItem(com.silverkeytech.android_rivers.creators.AirportCode)
+com.silverkeytech.android_rivers.creators.CraigsListCity:
+    public final java.lang.String component1()
+    public final java.lang.String component2()
+    public final java.lang.String component3()
+    public final java.lang.String component4()
+    public final java.lang.String component5()
+    public final com.silverkeytech.android_rivers.creators.CraigsListCity copy(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    public static synthetic com.silverkeytech.android_rivers.creators.CraigsListCity copy$default(com.silverkeytech.android_rivers.creators.CraigsListCity,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int)
 com.silverkeytech.android_rivers.creators.CreatorsPackage
 com.silverkeytech.android_rivers.creators.CreatorsPackage$src$Utils$-759144619:
-    35:39:public static final java.lang.String getStringFromAsset(android.content.Context,java.lang.String)
+    43:47:public static final java.lang.String getStringFromAsset(android.content.Context,java.lang.String)
 com.silverkeytech.android_rivers.creators.EditionAndLanguage:
     public final java.lang.String component1()
     public final java.lang.String component2()
@@ -2573,6 +3594,7 @@ com.silverkeytech.android_rivers.db.DbPackage$src$Podcast$1232245963:
     public static final java.lang.String getPODCAST_MIME_TYPE()
     public static final java.lang.String getPODCAST_LENGTH()
     public static final java.lang.String getPODCAST_DESCRIPTION()
+com.silverkeytech.android_rivers.db.DbPackage$src$SavedNewsItem$593943810
 com.silverkeytech.android_rivers.db.DbPackage$src$Utils$-1832633858:
     public static void <clinit>()
 com.silverkeytech.android_rivers.db.Podcast:
@@ -2601,6 +3623,7 @@ com.silverkeytech.android_rivers.db.QueryOne:
     public final java.lang.Exception getException()
     private final java.lang.Object getItem()
     private final java.lang.Exception getE()
+com.silverkeytech.android_rivers.db.SavedNewsItem
 com.silverkeytech.android_rivers.db.SchemaCreation:
     public final android.database.sqlite.SQLiteDatabase getDb()
 com.silverkeytech.android_rivers.db.SchemaMigration:
@@ -2627,8 +3650,8 @@ com.silverkeytech.android_rivers.meta_weblog.Meta_weblogPackage$showPostBlogDial
 com.silverkeytech.android_rivers.meta_weblog.Meta_weblogPackage$src$ConfigureBlog$848066311:
     28:35:public static final void showPostBlogDialogWithContent(org.holoeverywhere.app.Activity,java.lang.String,jet.Function1)
 com.silverkeytech.android_rivers.meta_weblog.Meta_weblogPackage$src$PostPayload$177003041:
-    59:62:public static final com.silverkeytech.android_rivers.meta_weblog.PostPayload simplePost(java.lang.String,java.lang.String)
-    80:84:public static final com.silverkeytech.android_rivers.meta_weblog.PostPayload imageLinkPost(java.lang.String,java.lang.String)
+    58:61:public static final com.silverkeytech.android_rivers.meta_weblog.PostPayload simplePost(java.lang.String,java.lang.String)
+    79:83:public static final com.silverkeytech.android_rivers.meta_weblog.PostPayload imageLinkPost(java.lang.String,java.lang.String)
 com.silverkeytech.android_rivers.meta_weblog.PostPayload:
     private java.lang.String wp_slug
     private java.lang.Boolean publish
@@ -2676,7 +3699,7 @@ com.silverkeytech.android_rivers.riverjs.RiverjsPackage
 com.silverkeytech.android_rivers.shortenData
 com.silverkeytech.android_rivers.shortenDataReply
 com.silverkeytech.android_rivers.syndications.SyndicationsPackage:
-    18:18:public static synthetic com.silverkeytech.android_rivers.Result downloadSingleFeed$default(java.lang.String,com.silverkeytech.news_engine.syndications.SyndicationFilter,int)
+    13:13:public static synthetic com.silverkeytech.android_rivers.Result downloadSingleFeed$default(java.lang.String,com.silverkeytech.news_engine.syndications.SyndicationFilter,int)
 com.silverkeytech.android_rivers.xml.XmlPackage
 com.silverkeytech.android_rivers.xml.XmlPackage$attributeRule$1
 com.silverkeytech.android_rivers.xml.XmlPackage$src$Utils$-1003806511:
@@ -2710,14 +3733,14 @@ com.silverkeytech.news_engine.News_enginePackage:
     1:1:public static final boolean isLocalUrl(java.lang.String)
     1:1:public static final java.lang.Integer extractIdFromLocalUrl(java.lang.String)
 com.silverkeytech.news_engine.News_enginePackage$src$Texts$-448889899:
-    33:35:public static final java.lang.String scrubJsonP(java.lang.String)
-    46:46:public static final java.lang.String rightPadding(java.lang.String,int)
-    60:60:public static final java.lang.String getFileNameFromUri(java.lang.String)
-    69:70:public static final java.lang.String generateThrowawayName()
+    25:27:public static final java.lang.String scrubJsonP(java.lang.String)
+    38:38:public static final java.lang.String rightPadding(java.lang.String,int)
+    52:52:public static final java.lang.String getFileNameFromUri(java.lang.String)
+    61:62:public static final java.lang.String generateThrowawayName()
     public static final java.lang.String getLOCAL_URL()
-    75:76:public static final java.lang.String makeLocalUrl(int)
-    79:79:public static final boolean isLocalUrl(java.lang.String)
-    82:82:public static final java.lang.Integer extractIdFromLocalUrl(java.lang.String)
+    67:68:public static final java.lang.String makeLocalUrl(int)
+    71:71:public static final boolean isLocalUrl(java.lang.String)
+    74:74:public static final java.lang.Integer extractIdFromLocalUrl(java.lang.String)
 com.silverkeytech.news_engine.R
 com.silverkeytech.news_engine.R$anim
 com.silverkeytech.news_engine.R$attr
@@ -2813,7 +3836,7 @@ com.silverkeytech.news_engine.syndications.SyndicationFeedEnclosure:
     public static synthetic com.silverkeytech.news_engine.syndications.SyndicationFeedEnclosure copy$default(com.silverkeytech.news_engine.syndications.SyndicationFeedEnclosure,java.lang.String,int,java.lang.String,int)
 com.silverkeytech.news_engine.syndications.SyndicationFeedItem:
     public final java.util.HashMap getExtensions()
-    55:56:public final void addExtension(java.lang.String,java.lang.String)
+    54:55:public final void addExtension(java.lang.String,java.lang.String)
     public final com.silverkeytech.news_engine.syndications.SyndicationFeedItem copy()
 com.silverkeytech.news_engine.syndications.SyndicationFilter:
     public final java.lang.Integer component1()
@@ -2916,7 +3939,7 @@ com.slidingmenu.lib.CustomViewBehind:
     private static final int MARGIN_THRESHOLD
 com.slidingmenu.lib.MenuInterface
 com.slidingmenu.lib.R:
-    10:3420:public R()
+    10:3421:public R()
 com.slidingmenu.lib.R$anim
 com.slidingmenu.lib.R$attr
 com.slidingmenu.lib.R$bool
@@ -2928,13 +3951,13 @@ com.slidingmenu.lib.R$id:
 com.slidingmenu.lib.R$integer
 com.slidingmenu.lib.R$interpolator
 com.slidingmenu.lib.R$layout:
-    2890:2890:public R$layout()
+    2891:2891:public R$layout()
 com.slidingmenu.lib.R$menu
 com.slidingmenu.lib.R$raw
 com.slidingmenu.lib.R$string
 com.slidingmenu.lib.R$style
 com.slidingmenu.lib.R$styleable:
-    3420:3420:public R$styleable()
+    3421:3421:public R$styleable()
 com.slidingmenu.lib.R$xml
 com.slidingmenu.lib.SlidingMenu:
     private static final java.lang.String TAG
@@ -3163,9 +4186,9 @@ kotlin.KotlinPackage:
     1:1:public static final java.util.Iterator withIndices(boolean[])
     1:1:public static final java.util.List sortBy(boolean[],jet.Function1)
     1:1:public static final void appendString(boolean[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    354:354:public static synthetic void appendString$default(boolean[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    359:359:public static synthetic void appendString$default(boolean[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final java.lang.String makeString(boolean[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    373:373:public static synthetic java.lang.String makeString$default(boolean[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    378:378:public static synthetic java.lang.String makeString$default(boolean[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final boolean all(long[],jet.Function1)
     1:1:public static final boolean any(long[],jet.Function1)
     1:1:public static final int count(long[],jet.Function1)
@@ -3204,9 +4227,9 @@ kotlin.KotlinPackage:
     1:1:public static final java.util.Iterator withIndices(long[])
     1:1:public static final java.util.List sortBy(long[],jet.Function1)
     1:1:public static final void appendString(long[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    354:354:public static synthetic void appendString$default(long[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    359:359:public static synthetic void appendString$default(long[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final java.lang.String makeString(long[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    373:373:public static synthetic java.lang.String makeString$default(long[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    378:378:public static synthetic java.lang.String makeString$default(long[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final boolean all(short[],jet.Function1)
     1:1:public static final boolean any(short[],jet.Function1)
     1:1:public static final int count(short[],jet.Function1)
@@ -3245,9 +4268,9 @@ kotlin.KotlinPackage:
     1:1:public static final java.util.Iterator withIndices(short[])
     1:1:public static final java.util.List sortBy(short[],jet.Function1)
     1:1:public static final void appendString(short[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    354:354:public static synthetic void appendString$default(short[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    359:359:public static synthetic void appendString$default(short[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final java.lang.String makeString(short[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    373:373:public static synthetic java.lang.String makeString$default(short[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    378:378:public static synthetic java.lang.String makeString$default(short[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final boolean all(double[],jet.Function1)
     1:1:public static final boolean any(double[],jet.Function1)
     1:1:public static final int count(double[],jet.Function1)
@@ -3286,9 +4309,9 @@ kotlin.KotlinPackage:
     1:1:public static final java.util.Iterator withIndices(double[])
     1:1:public static final java.util.List sortBy(double[],jet.Function1)
     1:1:public static final void appendString(double[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    354:354:public static synthetic void appendString$default(double[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    359:359:public static synthetic void appendString$default(double[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final java.lang.String makeString(double[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    373:373:public static synthetic java.lang.String makeString$default(double[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    378:378:public static synthetic java.lang.String makeString$default(double[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final jet.ByteProgression downTo(byte,byte)
     1:1:public static final jet.CharProgression downTo(byte,char)
     1:1:public static final jet.ShortProgression downTo(byte,short)
@@ -3376,9 +4399,9 @@ kotlin.KotlinPackage:
     1:1:public static final java.util.Iterator withIndices(char[])
     1:1:public static final java.util.List sortBy(char[],jet.Function1)
     1:1:public static final void appendString(char[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    354:354:public static synthetic void appendString$default(char[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    359:359:public static synthetic void appendString$default(char[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final java.lang.String makeString(char[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    373:373:public static synthetic java.lang.String makeString$default(char[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    378:378:public static synthetic java.lang.String makeString$default(char[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final boolean all(int[],jet.Function1)
     1:1:public static final boolean any(int[],jet.Function1)
     1:1:public static final int count(int[],jet.Function1)
@@ -3417,9 +4440,9 @@ kotlin.KotlinPackage:
     1:1:public static final java.util.Iterator withIndices(int[])
     1:1:public static final java.util.List sortBy(int[],jet.Function1)
     1:1:public static final void appendString(int[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    354:354:public static synthetic void appendString$default(int[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    359:359:public static synthetic void appendString$default(int[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final java.lang.String makeString(int[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    373:373:public static synthetic java.lang.String makeString$default(int[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    378:378:public static synthetic java.lang.String makeString$default(int[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final boolean all(byte[],jet.Function1)
     1:1:public static final boolean any(byte[],jet.Function1)
     1:1:public static final int count(byte[],jet.Function1)
@@ -3458,9 +4481,9 @@ kotlin.KotlinPackage:
     1:1:public static final java.util.Iterator withIndices(byte[])
     1:1:public static final java.util.List sortBy(byte[],jet.Function1)
     1:1:public static final void appendString(byte[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    354:354:public static synthetic void appendString$default(byte[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    359:359:public static synthetic void appendString$default(byte[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final java.lang.String makeString(byte[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    373:373:public static synthetic java.lang.String makeString$default(byte[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    378:378:public static synthetic java.lang.String makeString$default(byte[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final boolean all(float[],jet.Function1)
     1:1:public static final boolean any(float[],jet.Function1)
     1:1:public static final int count(float[],jet.Function1)
@@ -3499,9 +4522,9 @@ kotlin.KotlinPackage:
     1:1:public static final java.util.Iterator withIndices(float[])
     1:1:public static final java.util.List sortBy(float[],jet.Function1)
     1:1:public static final void appendString(float[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    354:354:public static synthetic void appendString$default(float[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    359:359:public static synthetic void appendString$default(float[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final java.lang.String makeString(float[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    373:373:public static synthetic java.lang.String makeString$default(float[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    378:378:public static synthetic java.lang.String makeString$default(float[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final boolean all(java.lang.Iterable,jet.Function1)
     1:1:public static final int count(java.lang.Iterable,jet.Function1)
     1:1:public static final java.util.Collection filterTo(java.lang.Iterable,java.util.Collection,jet.Function1)
@@ -3509,7 +4532,6 @@ kotlin.KotlinPackage:
     1:1:public static final java.util.Collection filterNotNullTo(java.lang.Iterable,java.util.Collection)
     1:1:public static final kotlin.Pair partition(java.lang.Iterable,jet.Function1)
     1:1:public static final java.util.Collection mapTo(java.lang.Iterable,java.util.Collection,jet.Function1)
-    1:1:public static final java.util.List flatMap(java.lang.Iterable,jet.Function1)
     1:1:public static final java.util.Collection flatMapTo(java.lang.Iterable,java.util.Collection,jet.Function1)
     1:1:public static final java.lang.Object fold(java.lang.Iterable,java.lang.Object,jet.Function2)
     1:1:public static final java.lang.Object reduce(java.lang.Iterable,jet.Function2)
@@ -3527,9 +4549,9 @@ kotlin.KotlinPackage:
     1:1:public static final java.util.SortedSet toSortedSet(java.lang.Iterable)
     1:1:public static final java.util.Iterator withIndices(java.lang.Iterable)
     1:1:public static final void appendString(java.lang.Iterable,java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    266:266:public static synthetic void appendString$default(java.lang.Iterable,java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    264:264:public static synthetic void appendString$default(java.lang.Iterable,java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final java.lang.String makeString(java.lang.Iterable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    285:285:public static synthetic java.lang.String makeString$default(java.lang.Iterable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    283:283:public static synthetic java.lang.String makeString$default(java.lang.Iterable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final java.util.Iterator filter(java.util.Iterator,jet.Function1)
     1:1:public static final java.util.Iterator filterNot(java.util.Iterator,jet.Function1)
     1:1:public static final java.util.Iterator filterNotNull(java.util.Iterator)
@@ -3581,11 +4603,12 @@ kotlin.KotlinPackage:
     1:1:public static final java.util.Iterator withIndices(java.lang.Object[])
     1:1:public static final java.util.List sortBy(java.lang.Object[],jet.Function1)
     1:1:public static final void appendString(java.lang.Object[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    381:381:public static synthetic void appendString$default(java.lang.Object[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    386:386:public static synthetic void appendString$default(java.lang.Object[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final java.lang.String makeString(java.lang.Object[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    400:400:public static synthetic java.lang.String makeString$default(java.lang.Object[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    405:405:public static synthetic java.lang.String makeString$default(java.lang.Object[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final java.util.List filterNot(java.util.Collection,jet.Function1)
     1:1:public static final java.util.List filterNotNull(java.util.Collection)
+    1:1:public static final java.util.List flatMap(java.util.Collection,jet.Function1)
     1:1:public static final java.util.List take(java.util.Collection,int)
     1:1:public static final java.util.List takeWhile(java.util.Collection,jet.Function1)
     1:1:public static final java.util.Collection requireNoNulls(java.util.Collection)
@@ -3601,7 +4624,6 @@ kotlin.KotlinPackage:
     1:1:public static final java.util.Collection filterNotNullTo(java.util.Iterator,java.util.Collection)
     1:1:public static final kotlin.Pair partition(java.util.Iterator,jet.Function1)
     1:1:public static final java.util.Collection mapTo(java.util.Iterator,java.util.Collection,jet.Function1)
-    1:1:public static final java.util.List flatMap(java.util.Iterator,jet.Function1)
     1:1:public static final java.util.Collection flatMapTo(java.util.Iterator,java.util.Collection,jet.Function1)
     1:1:public static final java.lang.Object fold(java.util.Iterator,java.lang.Object,jet.Function2)
     1:1:public static final java.lang.Object reduce(java.util.Iterator,jet.Function2)
@@ -3620,9 +4642,9 @@ kotlin.KotlinPackage:
     1:1:public static final java.util.Iterator withIndices(java.util.Iterator)
     1:1:public static final java.util.List sortBy(java.util.Iterator,jet.Function1)
     1:1:public static final void appendString(java.util.Iterator,java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    266:266:public static synthetic void appendString$default(java.util.Iterator,java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    264:264:public static synthetic void appendString$default(java.util.Iterator,java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final java.lang.String makeString(java.util.Iterator,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    285:285:public static synthetic java.lang.String makeString$default(java.util.Iterator,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    283:283:public static synthetic java.lang.String makeString$default(java.util.Iterator,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     1:1:public static final java.util.Iterator filterIsInstance(java.util.Iterator,java.lang.Class)
     1:1:public static final java.lang.Object[] getEmptyArray()
     1:1:public static final kotlin.ImmutableArrayList getEmptyImmutableArrayList()
@@ -3796,7 +4818,6 @@ kotlin.KotlinPackage:
     1:1:public static final char[] toCharArray(java.lang.String)
     1:1:public static final java.util.List toCharList(java.lang.String)
     1:1:public static final varargs java.lang.String format(java.lang.String,java.lang.String,java.lang.Object[])
-    1:1:public static final java.lang.String[] split(java.lang.String,java.lang.String)
     1:1:public static final java.lang.String[] split(java.lang.String,char)
     1:1:public static final boolean startsWith(java.lang.String,java.lang.String)
     1:1:public static final boolean startsWith(java.lang.String,java.lang.String,int)
@@ -4134,7 +5155,6 @@ kotlin.KotlinPackage$src$StringsJVM$230392736:
     35:35:public static final char[] toCharArray(java.lang.String)
     37:37:public static final java.util.List toCharList(java.lang.String)
     39:39:public static final varargs java.lang.String format(java.lang.String,java.lang.String,java.lang.Object[])
-    41:41:public static final java.lang.String[] split(java.lang.String,java.lang.String)
     43:43:public static final java.lang.String[] split(java.lang.String,char)
     49:49:public static final boolean startsWith(java.lang.String,java.lang.String)
     51:51:public static final boolean startsWith(java.lang.String,java.lang.String,int)
@@ -4233,137 +5253,136 @@ kotlin.KotlinPackage$src$StringsJVM$230392736:
 kotlin.KotlinPackage$src$Tuples$1000080692:
     public static void <clinit>()
 kotlin.KotlinPackage$src$_Arrays$-140523820:
-    9:10:public static final boolean all(java.lang.Object[],jet.Function1)
-    17:18:public static final boolean any(java.lang.Object[],jet.Function1)
-    25:27:public static final int count(java.lang.Object[],jet.Function1)
-    34:35:public static final java.lang.Object find(java.lang.Object[],jet.Function1)
-    42:42:public static final java.util.List filter(java.lang.Object[],jet.Function1)
-    49:50:public static final java.util.Collection filterTo(java.lang.Object[],java.util.Collection,jet.Function1)
-    57:57:public static final java.util.List filterNot(java.lang.Object[],jet.Function1)
-    64:65:public static final java.util.Collection filterNotTo(java.lang.Object[],java.util.Collection,jet.Function1)
-    72:72:public static final java.util.List filterNotNull(java.lang.Object[])
-    79:80:public static final java.util.Collection filterNotNullTo(java.lang.Object[],java.util.Collection)
-    87:96:public static final kotlin.Pair partition(java.lang.Object[],jet.Function1)
-    103:103:public static final java.util.List map(java.lang.Object[],jet.Function1)
-    111:113:public static final java.util.Collection mapTo(java.lang.Object[],java.util.Collection,jet.Function1)
-    120:120:public static final java.util.List flatMap(java.lang.Object[],jet.Function1)
-    127:131:public static final java.util.Collection flatMapTo(java.lang.Object[],java.util.Collection,jet.Function1)
-    138:138:public static final void forEach(java.lang.Object[],jet.Function1)
-    145:147:public static final java.lang.Object fold(java.lang.Object[],java.lang.Object,jet.Function2)
-    154:161:public static final java.lang.Object foldRight(java.lang.Object[],java.lang.Object,jet.Function2)
-    169:179:public static final java.lang.Object reduce(java.lang.Object[],jet.Function2)
-    187:197:public static final java.lang.Object reduceRight(java.lang.Object[],jet.Function2)
-    204:204:public static final java.util.Map groupBy(java.lang.Object[],jet.Function1)
-    208:213:public static final java.util.Map groupByTo(java.lang.Object[],java.util.Map,jet.Function1)
-    220:220:public static final java.util.List drop(java.lang.Object[],int)
-    227:227:public static final java.util.List dropWhile(java.lang.Object[],jet.Function1)
-    234:243:public static final java.util.List dropWhileTo(java.lang.Object[],java.util.List,jet.Function1)
-    250:250:public static final java.util.List take(java.lang.Object[],int)
-    257:257:public static final java.util.List takeWhile(java.lang.Object[],jet.Function1)
-    264:265:public static final java.util.Collection takeWhileTo(java.lang.Object[],java.util.Collection,jet.Function1)
-    280:282:public static final java.util.List reverse(java.lang.Object[])
-    289:289:public static final java.util.LinkedList toLinkedList(java.lang.Object[])
-    296:296:public static final java.util.List toList(java.lang.Object[])
-    303:303:public static final java.util.Set toSet(java.lang.Object[])
-    310:310:public static final java.util.SortedSet toSortedSet(java.lang.Object[])
-    317:322:public static final java.lang.Object[] requireNoNulls(java.lang.Object[])
-    329:332:public static final java.util.List plus(java.lang.Object[],java.lang.Object)
-    339:344:public static final java.util.List plus(java.lang.Object[],java.util.Iterator)
-    351:351:public static final java.util.List plus(java.lang.Object[],java.lang.Iterable)
-    358:358:public static final java.util.Iterator withIndices(java.lang.Object[])
-    366:373:public static final java.util.List sortBy(java.lang.Object[],jet.Function1)
-    382:392:public static final void appendString(java.lang.Object[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    381:381:public static synthetic void appendString$default(java.lang.Object[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
-    401:403:public static final java.lang.String makeString(java.lang.Object[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    400:400:public static synthetic java.lang.String makeString$default(java.lang.Object[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    14:15:public static final boolean all(java.lang.Object[],jet.Function1)
+    22:23:public static final boolean any(java.lang.Object[],jet.Function1)
+    30:32:public static final int count(java.lang.Object[],jet.Function1)
+    39:40:public static final java.lang.Object find(java.lang.Object[],jet.Function1)
+    47:47:public static final java.util.List filter(java.lang.Object[],jet.Function1)
+    54:55:public static final java.util.Collection filterTo(java.lang.Object[],java.util.Collection,jet.Function1)
+    62:62:public static final java.util.List filterNot(java.lang.Object[],jet.Function1)
+    69:70:public static final java.util.Collection filterNotTo(java.lang.Object[],java.util.Collection,jet.Function1)
+    77:77:public static final java.util.List filterNotNull(java.lang.Object[])
+    84:85:public static final java.util.Collection filterNotNullTo(java.lang.Object[],java.util.Collection)
+    92:101:public static final kotlin.Pair partition(java.lang.Object[],jet.Function1)
+    108:108:public static final java.util.List map(java.lang.Object[],jet.Function1)
+    116:118:public static final java.util.Collection mapTo(java.lang.Object[],java.util.Collection,jet.Function1)
+    125:125:public static final java.util.List flatMap(java.lang.Object[],jet.Function1)
+    132:136:public static final java.util.Collection flatMapTo(java.lang.Object[],java.util.Collection,jet.Function1)
+    143:143:public static final void forEach(java.lang.Object[],jet.Function1)
+    150:152:public static final java.lang.Object fold(java.lang.Object[],java.lang.Object,jet.Function2)
+    159:166:public static final java.lang.Object foldRight(java.lang.Object[],java.lang.Object,jet.Function2)
+    174:184:public static final java.lang.Object reduce(java.lang.Object[],jet.Function2)
+    192:202:public static final java.lang.Object reduceRight(java.lang.Object[],jet.Function2)
+    209:209:public static final java.util.Map groupBy(java.lang.Object[],jet.Function1)
+    213:218:public static final java.util.Map groupByTo(java.lang.Object[],java.util.Map,jet.Function1)
+    225:225:public static final java.util.List drop(java.lang.Object[],int)
+    232:232:public static final java.util.List dropWhile(java.lang.Object[],jet.Function1)
+    239:248:public static final java.util.List dropWhileTo(java.lang.Object[],java.util.List,jet.Function1)
+    255:255:public static final java.util.List take(java.lang.Object[],int)
+    262:262:public static final java.util.List takeWhile(java.lang.Object[],jet.Function1)
+    269:270:public static final java.util.Collection takeWhileTo(java.lang.Object[],java.util.Collection,jet.Function1)
+    285:287:public static final java.util.List reverse(java.lang.Object[])
+    294:294:public static final java.util.LinkedList toLinkedList(java.lang.Object[])
+    301:301:public static final java.util.List toList(java.lang.Object[])
+    308:308:public static final java.util.Set toSet(java.lang.Object[])
+    315:315:public static final java.util.SortedSet toSortedSet(java.lang.Object[])
+    322:327:public static final java.lang.Object[] requireNoNulls(java.lang.Object[])
+    334:337:public static final java.util.List plus(java.lang.Object[],java.lang.Object)
+    344:349:public static final java.util.List plus(java.lang.Object[],java.util.Iterator)
+    356:356:public static final java.util.List plus(java.lang.Object[],java.lang.Iterable)
+    363:363:public static final java.util.Iterator withIndices(java.lang.Object[])
+    371:378:public static final java.util.List sortBy(java.lang.Object[],jet.Function1)
+    387:397:public static final void appendString(java.lang.Object[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
+    386:386:public static synthetic void appendString$default(java.lang.Object[],java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    406:408:public static final java.lang.String makeString(java.lang.Object[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
+    405:405:public static synthetic java.lang.String makeString$default(java.lang.Object[],java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     public static void <clinit>()
 kotlin.KotlinPackage$src$_BooleanArrays$-1123353794
 kotlin.KotlinPackage$src$_ByteArrays$1191131948
 kotlin.KotlinPackage$src$_CharArrays$225951902
 kotlin.KotlinPackage$src$_Collections$241734283:
-    16:16:public static final java.util.List filterNot(java.util.Collection,jet.Function1)
-    23:23:public static final java.util.List filterNotNull(java.util.Collection)
-    37:37:public static final java.util.List take(java.util.Collection,int)
-    44:44:public static final java.util.List takeWhile(java.util.Collection,jet.Function1)
-    51:56:public static final java.util.Collection requireNoNulls(java.util.Collection)
-    63:66:public static final java.util.List plus(java.util.Collection,java.lang.Object)
-    73:78:public static final java.util.List plus(java.util.Collection,java.util.Iterator)
-    85:85:public static final java.util.List plus(java.util.Collection,java.lang.Iterable)
+    21:21:public static final java.util.List filterNot(java.util.Collection,jet.Function1)
+    28:28:public static final java.util.List filterNotNull(java.util.Collection)
+    42:42:public static final java.util.List flatMap(java.util.Collection,jet.Function1)
+    49:49:public static final java.util.List take(java.util.Collection,int)
+    56:56:public static final java.util.List takeWhile(java.util.Collection,jet.Function1)
+    63:68:public static final java.util.Collection requireNoNulls(java.util.Collection)
+    75:78:public static final java.util.List plus(java.util.Collection,java.lang.Object)
+    85:90:public static final java.util.List plus(java.util.Collection,java.util.Iterator)
+    97:97:public static final java.util.List plus(java.util.Collection,java.lang.Iterable)
     public static void <clinit>()
 kotlin.KotlinPackage$src$_DoubleArrays$-817700669
 kotlin.KotlinPackage$src$_DownTo$-1720942991
 kotlin.KotlinPackage$src$_FloatArrays$771614154
 kotlin.KotlinPackage$src$_IntArrays$-534742057
 kotlin.KotlinPackage$src$_Iterables$1268520095:
-    9:10:public static final boolean all(java.lang.Iterable,jet.Function1)
-    25:27:public static final int count(java.lang.Iterable,jet.Function1)
-    50:51:public static final java.util.Collection filterNotTo(java.lang.Iterable,java.util.Collection,jet.Function1)
-    58:59:public static final java.util.Collection filterNotNullTo(java.lang.Iterable,java.util.Collection)
-    66:75:public static final kotlin.Pair partition(java.lang.Iterable,jet.Function1)
-    92:92:public static final java.util.List flatMap(java.lang.Iterable,jet.Function1)
-    99:103:public static final java.util.Collection flatMapTo(java.lang.Iterable,java.util.Collection,jet.Function1)
-    117:119:public static final java.lang.Object fold(java.lang.Iterable,java.lang.Object,jet.Function2)
-    127:137:public static final java.lang.Object reduce(java.lang.Iterable,jet.Function2)
-    144:144:public static final java.util.Map groupBy(java.lang.Iterable,jet.Function1)
-    148:153:public static final java.util.Map groupByTo(java.lang.Iterable,java.util.Map,jet.Function1)
-    160:160:public static final java.util.List drop(java.lang.Iterable,int)
-    167:167:public static final java.util.List dropWhile(java.lang.Iterable,jet.Function1)
-    174:183:public static final java.util.List dropWhileTo(java.lang.Iterable,java.util.List,jet.Function1)
-    190:191:public static final java.util.Collection takeWhileTo(java.lang.Iterable,java.util.Collection,jet.Function1)
-    206:208:public static final java.util.List reverse(java.lang.Iterable)
-    215:215:public static final java.util.LinkedList toLinkedList(java.lang.Iterable)
-    222:222:public static final java.util.List toList(java.lang.Iterable)
-    229:229:public static final java.util.Set toSet(java.lang.Iterable)
-    236:236:public static final java.util.SortedSet toSortedSet(java.lang.Iterable)
-    243:243:public static final java.util.Iterator withIndices(java.lang.Iterable)
-    267:277:public static final void appendString(java.lang.Iterable,java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    266:266:public static synthetic void appendString$default(java.lang.Iterable,java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
-    286:288:public static final java.lang.String makeString(java.lang.Iterable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    285:285:public static synthetic java.lang.String makeString$default(java.lang.Iterable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    14:15:public static final boolean all(java.lang.Iterable,jet.Function1)
+    30:32:public static final int count(java.lang.Iterable,jet.Function1)
+    55:56:public static final java.util.Collection filterNotTo(java.lang.Iterable,java.util.Collection,jet.Function1)
+    63:64:public static final java.util.Collection filterNotNullTo(java.lang.Iterable,java.util.Collection)
+    71:80:public static final kotlin.Pair partition(java.lang.Iterable,jet.Function1)
+    97:101:public static final java.util.Collection flatMapTo(java.lang.Iterable,java.util.Collection,jet.Function1)
+    115:117:public static final java.lang.Object fold(java.lang.Iterable,java.lang.Object,jet.Function2)
+    125:135:public static final java.lang.Object reduce(java.lang.Iterable,jet.Function2)
+    142:142:public static final java.util.Map groupBy(java.lang.Iterable,jet.Function1)
+    146:151:public static final java.util.Map groupByTo(java.lang.Iterable,java.util.Map,jet.Function1)
+    158:158:public static final java.util.List drop(java.lang.Iterable,int)
+    165:165:public static final java.util.List dropWhile(java.lang.Iterable,jet.Function1)
+    172:181:public static final java.util.List dropWhileTo(java.lang.Iterable,java.util.List,jet.Function1)
+    188:189:public static final java.util.Collection takeWhileTo(java.lang.Iterable,java.util.Collection,jet.Function1)
+    204:206:public static final java.util.List reverse(java.lang.Iterable)
+    213:213:public static final java.util.LinkedList toLinkedList(java.lang.Iterable)
+    220:220:public static final java.util.List toList(java.lang.Iterable)
+    227:227:public static final java.util.Set toSet(java.lang.Iterable)
+    234:234:public static final java.util.SortedSet toSortedSet(java.lang.Iterable)
+    241:241:public static final java.util.Iterator withIndices(java.lang.Iterable)
+    265:275:public static final void appendString(java.lang.Iterable,java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
+    264:264:public static synthetic void appendString$default(java.lang.Iterable,java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    284:286:public static final java.lang.String makeString(java.lang.Iterable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
+    283:283:public static synthetic java.lang.String makeString$default(java.lang.Iterable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     public static void <clinit>()
 kotlin.KotlinPackage$src$_Iterators$161610395:
-    9:9:public static final java.util.Iterator filter(java.util.Iterator,jet.Function1)
-    16:16:public static final java.util.Iterator filterNot(java.util.Iterator,jet.Function1)
-    23:23:public static final java.util.Iterator filterNotNull(java.util.Iterator)
-    37:37:public static final java.util.Iterator flatMap(java.util.Iterator,jet.Function1)
-    44:44:public static final java.util.Iterator requireNoNulls(java.util.Iterator)
-    53:54:public static final java.util.Iterator take(java.util.Iterator,int)
-    61:61:public static final java.util.Iterator takeWhile(java.util.Iterator,jet.Function1)
-    68:68:public static final java.util.Iterator plus(java.util.Iterator,java.lang.Object)
-    75:75:public static final java.util.Iterator plus(java.util.Iterator,java.util.Iterator)
-    82:82:public static final java.util.Iterator plus(java.util.Iterator,java.lang.Iterable)
+    14:14:public static final java.util.Iterator filter(java.util.Iterator,jet.Function1)
+    21:21:public static final java.util.Iterator filterNot(java.util.Iterator,jet.Function1)
+    28:28:public static final java.util.Iterator filterNotNull(java.util.Iterator)
+    42:42:public static final java.util.Iterator flatMap(java.util.Iterator,jet.Function1)
+    49:49:public static final java.util.Iterator requireNoNulls(java.util.Iterator)
+    58:59:public static final java.util.Iterator take(java.util.Iterator,int)
+    66:66:public static final java.util.Iterator takeWhile(java.util.Iterator,jet.Function1)
+    73:73:public static final java.util.Iterator plus(java.util.Iterator,java.lang.Object)
+    80:80:public static final java.util.Iterator plus(java.util.Iterator,java.util.Iterator)
+    87:87:public static final java.util.Iterator plus(java.util.Iterator,java.lang.Iterable)
     public static void <clinit>()
 kotlin.KotlinPackage$src$_IteratorsCommon$-2125876816:
-    9:10:public static final boolean all(java.util.Iterator,jet.Function1)
-    17:18:public static final boolean any(java.util.Iterator,jet.Function1)
-    25:27:public static final int count(java.util.Iterator,jet.Function1)
-    34:35:public static final java.lang.Object find(java.util.Iterator,jet.Function1)
-    42:43:public static final java.util.Collection filterTo(java.util.Iterator,java.util.Collection,jet.Function1)
-    50:51:public static final java.util.Collection filterNotTo(java.util.Iterator,java.util.Collection,jet.Function1)
-    58:59:public static final java.util.Collection filterNotNullTo(java.util.Iterator,java.util.Collection)
-    66:75:public static final kotlin.Pair partition(java.util.Iterator,jet.Function1)
-    83:85:public static final java.util.Collection mapTo(java.util.Iterator,java.util.Collection,jet.Function1)
-    92:92:public static final java.util.List flatMap(java.util.Iterator,jet.Function1)
-    99:103:public static final java.util.Collection flatMapTo(java.util.Iterator,java.util.Collection,jet.Function1)
-    117:119:public static final java.lang.Object fold(java.util.Iterator,java.lang.Object,jet.Function2)
-    127:137:public static final java.lang.Object reduce(java.util.Iterator,jet.Function2)
-    144:144:public static final java.util.Map groupBy(java.util.Iterator,jet.Function1)
-    148:153:public static final java.util.Map groupByTo(java.util.Iterator,java.util.Map,jet.Function1)
-    160:160:public static final java.util.List drop(java.util.Iterator,int)
-    167:167:public static final java.util.List dropWhile(java.util.Iterator,jet.Function1)
-    174:183:public static final java.util.List dropWhileTo(java.util.Iterator,java.util.List,jet.Function1)
-    190:191:public static final java.util.Collection takeWhileTo(java.util.Iterator,java.util.Collection,jet.Function1)
-    206:208:public static final java.util.List reverse(java.util.Iterator)
-    215:215:public static final java.util.LinkedList toLinkedList(java.util.Iterator)
-    222:222:public static final java.util.List toList(java.util.Iterator)
-    229:229:public static final java.util.Set toSet(java.util.Iterator)
-    236:236:public static final java.util.SortedSet toSortedSet(java.util.Iterator)
-    243:243:public static final java.util.Iterator withIndices(java.util.Iterator)
-    251:258:public static final java.util.List sortBy(java.util.Iterator,jet.Function1)
-    267:277:public static final void appendString(java.util.Iterator,java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    266:266:public static synthetic void appendString$default(java.util.Iterator,java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
-    286:288:public static final java.lang.String makeString(java.util.Iterator,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
-    285:285:public static synthetic java.lang.String makeString$default(java.util.Iterator,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    14:15:public static final boolean all(java.util.Iterator,jet.Function1)
+    22:23:public static final boolean any(java.util.Iterator,jet.Function1)
+    30:32:public static final int count(java.util.Iterator,jet.Function1)
+    39:40:public static final java.lang.Object find(java.util.Iterator,jet.Function1)
+    47:48:public static final java.util.Collection filterTo(java.util.Iterator,java.util.Collection,jet.Function1)
+    55:56:public static final java.util.Collection filterNotTo(java.util.Iterator,java.util.Collection,jet.Function1)
+    63:64:public static final java.util.Collection filterNotNullTo(java.util.Iterator,java.util.Collection)
+    71:80:public static final kotlin.Pair partition(java.util.Iterator,jet.Function1)
+    88:90:public static final java.util.Collection mapTo(java.util.Iterator,java.util.Collection,jet.Function1)
+    97:101:public static final java.util.Collection flatMapTo(java.util.Iterator,java.util.Collection,jet.Function1)
+    115:117:public static final java.lang.Object fold(java.util.Iterator,java.lang.Object,jet.Function2)
+    125:135:public static final java.lang.Object reduce(java.util.Iterator,jet.Function2)
+    142:142:public static final java.util.Map groupBy(java.util.Iterator,jet.Function1)
+    146:151:public static final java.util.Map groupByTo(java.util.Iterator,java.util.Map,jet.Function1)
+    158:158:public static final java.util.List drop(java.util.Iterator,int)
+    165:165:public static final java.util.List dropWhile(java.util.Iterator,jet.Function1)
+    172:181:public static final java.util.List dropWhileTo(java.util.Iterator,java.util.List,jet.Function1)
+    188:189:public static final java.util.Collection takeWhileTo(java.util.Iterator,java.util.Collection,jet.Function1)
+    204:206:public static final java.util.List reverse(java.util.Iterator)
+    213:213:public static final java.util.LinkedList toLinkedList(java.util.Iterator)
+    220:220:public static final java.util.List toList(java.util.Iterator)
+    227:227:public static final java.util.Set toSet(java.util.Iterator)
+    234:234:public static final java.util.SortedSet toSortedSet(java.util.Iterator)
+    241:241:public static final java.util.Iterator withIndices(java.util.Iterator)
+    249:256:public static final java.util.List sortBy(java.util.Iterator,jet.Function1)
+    265:275:public static final void appendString(java.util.Iterator,java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
+    264:264:public static synthetic void appendString$default(java.util.Iterator,java.lang.Appendable,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
+    284:286:public static final java.lang.String makeString(java.util.Iterator,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String)
+    283:283:public static synthetic java.lang.String makeString$default(java.util.Iterator,java.lang.String,java.lang.String,java.lang.String,int,java.lang.String,int)
     public static void <clinit>()
 kotlin.KotlinPackage$src$_LongArrays$-1234978760
 kotlin.KotlinPackage$src$_ShortArrays$-815470678
@@ -4394,7 +5413,6 @@ kotlin.concurrent.FunctionalList$object
 kotlin.concurrent.FunctionalList$object$Empty
 kotlin.concurrent.FunctionalList$object$Standard
 kotlin.concurrent.FunctionalQueue
-kotlin.dom$outerHTML$1
 kotlin.dom.CloseableEventListener
 kotlin.dom.DomPackage
 kotlin.dom.DomPackage$childElements$1
@@ -4404,6 +5422,7 @@ kotlin.dom.DomPackage$childElements$4
 kotlin.dom.DomPackage$get$1
 kotlin.dom.DomPackage$get$2
 kotlin.dom.DomPackage$mouseEventHandler$1
+kotlin.dom.DomPackage$outerHTML$1
 kotlin.dom.DomPackage$src$Dom$-134944934
 kotlin.dom.DomPackage$src$DomEvents$-83974847
 kotlin.dom.DomPackage$src$DomEventsJVM$-1242592628
@@ -4413,7 +5432,6 @@ kotlin.dom.EventListenerHandler
 kotlin.dom.NextSiblingIterator
 kotlin.dom.NodeListAsList
 kotlin.dom.PreviousSiblingIterator
-kotlin.io$stdin$1
 kotlin.io.IoPackage:
     1:1:public static final void recurse(java.io.File,jet.Function1)
     1:1:public static final java.io.File getDirectory(java.io.File)
@@ -4531,6 +5549,7 @@ kotlin.io.IoPackage$src$Files$-73569807:
     205:206:public static final java.io.File[] listFiles(java.io.File,jet.Function1)
     public static void <clinit>()
 kotlin.io.IoPackage$src$JIO$1272795896
+kotlin.io.IoPackage$stdin$1
 kotlin.io.IoPackage$useLines$1
 kotlin.io.IoPackage$writeBytes$1
 kotlin.io.LineIterator

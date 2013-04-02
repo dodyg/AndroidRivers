@@ -52,8 +52,8 @@ fun getMainNavigationItems(): ArrayList<NavItem> {
             //NavItem(id = SLIDE_MENU_WRITE, text = "Write", icon = 0),
             //NavItem(id = SLIDE_MENU_DONATE, text = "Donate", icon = 0),
             NavItem(id = SLIDE_MENU_PRAISE, text = "Spread Android Rivers", icon = 0),
-            NavItem(id = SLIDE_MENU_FEEDBACK, text = "Make This Better!", icon = 0),
-            NavItem(id = SLIDE_MENU_TRY_OUT, text = "Try Out", icon = 0)
+            NavItem(id = SLIDE_MENU_FEEDBACK, text = "Make This Better!", icon = 0)
+            //NavItem(id = SLIDE_MENU_TRY_OUT, text = "Try Out", icon = 0)
     )
     return navs
 }

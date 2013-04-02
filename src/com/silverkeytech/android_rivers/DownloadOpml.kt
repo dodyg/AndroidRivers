@@ -79,7 +79,7 @@ public class DownloadOpml(it: Context?): AsyncTask<String, Int, Pair<String, Res
                         val processed = opml.traverse(processingFilter)
                         Log.d(TAG, "Length of opml outlines ${opml.body?.outline?.get(0)?.outline?.size} compared to processed outlines ${processed.size}")
 
-                        context.getMain().setOpmlCache(result.first, processed)
+                        context.getMain().setOpmlCache(result.first, processed, PreferenceDefaults.OPML_NEWS_SOURCES_LISTING_CACHE_IN_MINUTES)
                         val res = Result.right(processed)
                         processedCallBack!!(res)
                     }catch (e: Exception){

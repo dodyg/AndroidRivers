@@ -67,6 +67,8 @@ public class PreferenceDefaults{
 
         public val LINK_SHARE_TITLE_MAX_LENGTH: Int = 80
 
+        public val OPML_NEWS_SOURCES_LISTING_CACHE_IN_MINUTES: Int = 60 * 24
+
 
         public val STANDARD_NEWS_COLOR: Int = android.graphics.Color.GRAY
         public val STANDARD_NEWS_IMAGE: Int = android.graphics.Color.CYAN
