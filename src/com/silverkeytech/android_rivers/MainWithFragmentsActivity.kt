@@ -118,6 +118,9 @@ public open class MainWithFragmentsActivity(): Activity() {
             SLIDE_MENU_KAYAK_DEALS -> {
                 startKayakFlightDealsActivity(this@MainWithFragmentsActivity)
             }
+            SLIDE_MENU_CRAIGSLIST_LISTING -> {
+                startCraigslistListingActivity(this@MainWithFragmentsActivity)
+            }
             SLIDE_MENU_PRAISE -> {
                 startActivity(Intent.createChooser(shareActionIntent(getSpreadText(), "http://goo.gl/kShgp"), "Spread Android Rivers"))
             }

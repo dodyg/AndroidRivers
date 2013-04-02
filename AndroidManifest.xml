@@ -22,6 +22,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.silverkeytech.android_rivers.creators.CraigslistListingActivity" android:configChanges="keyboardHidden|orientation">
+        </activity>
         <activity android:name="com.silverkeytech.android_rivers.creators.KayakFlightDealsActivity" android:configChanges="keyboardHidden|orientation">
         </activity>
         <activity android:name="com.silverkeytech.android_rivers.creators.GoogleNewsSearchActivity" android:configChanges="keyboardHidden|orientation">
