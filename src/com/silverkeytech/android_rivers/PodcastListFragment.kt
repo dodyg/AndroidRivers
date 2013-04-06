@@ -356,11 +356,7 @@ public class PodcastListFragment(): ListFragment() {
             progressBar.setProgress(prg)
         }
 
-<<<<<<< HEAD
         player!!.progressHandler = createHandler(progressBar, progressText)
-=======
-        player!!.assignProgressHandler(createHandler(progressBar, progressText))
->>>>>>> RSS-1.0
 
         progressBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             public override fun onStartTrackingTouch(seekBar: SeekBar?) {
