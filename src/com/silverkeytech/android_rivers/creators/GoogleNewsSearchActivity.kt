@@ -55,12 +55,12 @@ public class GoogleNewsSearchActivity (): Activity(){
         var actionBar = getSupportActionBar()!!
         actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
 
-        setTitle("Google News Finder")
+        setTitle(this.getString(R.string.title_google_news))
 
         //handle UI
 
         val searchTerm = findViewById(R.id.google_news_search_term)!! as EditText
-        searchTerm.setHint("Optional search term")
+        searchTerm.setHint(this.getString(R.string.optional_search_term))
 
         val regionList = findViewById(R.id.google_news_search_region)!! as Spinner
 

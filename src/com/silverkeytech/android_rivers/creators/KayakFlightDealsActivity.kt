@@ -52,7 +52,7 @@ public class KayakFlightDealsActivity (): Activity(){
         var actionBar = getSupportActionBar()!!
         actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
 
-        setTitle("Kayak.com Flight Deals")
+        setTitle(this.getString(R.string.title_kayak_flight_deals))
 
         //handle UI
         val airportCodes = getAirportCodes(this)

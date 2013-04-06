@@ -38,7 +38,7 @@ public class CraigslistListingActivity (): Activity(){
         var actionBar = getSupportActionBar()!!
         actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
 
-        setTitle("Craigslist")
+        setTitle(this.getString(R.string.title_craigslist))
 
         //handle UI
 
@@ -57,8 +57,59 @@ public class CraigslistListingActivity (): Activity(){
         val categoryList = findViewById(R.id.craigslist_listing_category)!! as Spinner
         categoryList.setAdapter(adapter)
 
+
+        val bookmark = findViewById(R.id.craigslist_listing_bookmark_btn)!! as Button
+        bookmark.setEnabled(false)
+
+        bookmark.setOnClickListener{
+            addBookmarkOption(this, feedDateIsParseable) {
+                collection ->
+                saveBookmark(this, feedName, feedUrl, feedLanguage, collection)
+                bookmark.setEnabled(false)
+            }
+        }
+
         val go = findViewById(R.id.craigslist_listing__go_btn)!! as Button
         go.setOnClickListener {
+
+            val input = completion.getText().toString()
+
+            if (input.isNullOrEmpty()){
+                toastee("Please enter a city location")
+            }else{
+                feedName = "$input Craigslist"
+
+                val specificCode = cities.find { x -> x.location == input.trim() }?.code
+                val code = if (specificCode != null) specificCode else ""
+
+                //get selected categories
+                val catPosition = categoryList.getSelectedItemPosition()
+                val categoryCode = categories.get(catPosition).code
+
+                feedUrl = "http://$code.craigslist.com/$categoryCode/rss.xml"
+
+                DownloadFeed(this, false)
+                        .executeOnComplete {
+                    res ->
+                    if (res.isTrue()){
+                        val feed = res.value!!
+                        feedDateIsParseable = feed.isDateParseable
+                        if (!feed.language.isNullOrEmpty()){
+                            feedLanguage = feed.language
+                        }
+
+                        if (feed.items.size > 0 && !checkIfUrlAlreadyBookmarked(feedUrl))
+                            bookmark.setEnabled(true)
+                        else
+                            bookmark.setEnabled(false)
+
+                        FeedContentRenderer(this, feedLanguage)
+                                .handleNewsListing(R.id.craigslist_listing_results_lv, feedName, feedUrl, feed.items)
+                    }else{
+                        toastee("Error ${res.exception?.getMessage()}", Duration.LONG)
+                    }
+                }.execute(feedUrl)
+            }
         }
     }
 }
