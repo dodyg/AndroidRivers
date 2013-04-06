@@ -22,19 +22,25 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Messenger
-import com.silverkeytech.android_rivers.outliner.OutlineContent
+import com.silverkeytech.news_engine.outliner.OutlineContent
 import java.util.ArrayList
 import com.silverkeytech.android_rivers.meta_weblog.BlogPostService
 import java.util.HashMap
 import com.silverkeytech.android_rivers.creators.GoogleNewsSearchActivity
 import com.silverkeytech.android_rivers.creators.KayakFlightDealsActivity
+import com.silverkeytech.android_rivers.creators.CraigslistListingActivity
 
-public fun startKayakFlightDealsActivity(context: Context){
+public fun startCraigslistListingActivity(context: Context){
+    val i = Intent(context, javaClass<CraigslistListingActivity>())
+    context.startActivity(i)
+}
+
+public fun startKayakFlightDealsActivity(context: Context) {
     val i = Intent(context, javaClass<KayakFlightDealsActivity>())
     context.startActivity(i)
 }
 
-public fun startGoogleNewsSearchActivity(context: Context){
+public fun startGoogleNewsSearchActivity(context: Context) {
     val i = Intent(context, javaClass<GoogleNewsSearchActivity>())
     context.startActivity(i)
 }
@@ -50,7 +56,7 @@ public fun startRiverSourcesActivity(context: Context, riverTitle: String, river
     context.startActivity(i)
 }
 
-public fun startBlogPostingService(context: Context, config : HashMap<String, String>, post : HashMap<String, String>){
+public fun startBlogPostingService(context: Context, config: HashMap<String, String>, post: HashMap<String, String>) {
     val i = Intent(context, javaClass<BlogPostService>())
     i.putExtra(Params.BLOG_CONFIGURATION, config)
     i.putExtra(Params.BLOG_PAYLOAD, post)

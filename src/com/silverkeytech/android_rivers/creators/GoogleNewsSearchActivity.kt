@@ -18,19 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers.creators
 
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import com.silverkeytech.android_rivers.DownloadFeed
 import com.silverkeytech.android_rivers.Duration
 import com.silverkeytech.android_rivers.FeedContentRenderer
 import com.silverkeytech.android_rivers.R
-import com.silverkeytech.android_rivers.db.BookmarkCollection
-import com.silverkeytech.android_rivers.db.BookmarkKind
-import com.silverkeytech.android_rivers.db.SortingOrder
-import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
-import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import com.silverkeytech.android_rivers.getVisualPref
 import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.setOnClickListener
@@ -44,7 +37,7 @@ import com.silverkeytech.android_rivers.addBookmarkOption
 import com.silverkeytech.android_rivers.saveBookmark
 import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 
-public class GoogleNewsSearchActivity () : Activity(){
+public class GoogleNewsSearchActivity (): Activity(){
     class object {
         public val TAG: String = javaClass<GoogleNewsSearchActivity>().getSimpleName()
     }
@@ -62,12 +55,12 @@ public class GoogleNewsSearchActivity () : Activity(){
         var actionBar = getSupportActionBar()!!
         actionBar.setDisplayShowHomeEnabled(false) //hide the app icon.
 
-        setTitle("Google News Finder")
+        setTitle(this.getString(R.string.title_google_news))
 
         //handle UI
 
         val searchTerm = findViewById(R.id.google_news_search_term)!! as EditText
-        searchTerm.setHint("Optional search term")
+        searchTerm.setHint(this.getString(R.string.optional_search_term))
 
         val regionList = findViewById(R.id.google_news_search_region)!! as Spinner
 
@@ -81,10 +74,10 @@ public class GoogleNewsSearchActivity () : Activity(){
         val bookmark = findViewById(R.id.google_news_search_bookmark_btn)!! as Button
         bookmark.setEnabled(false)
         bookmark.setOnClickListener{
-            addBookmarkOption(this, feedDateIsParseable){
+            addBookmarkOption(this, feedDateIsParseable) {
                 collection ->
-                    saveBookmark(this, feedName, feedUrl, feedLanguage, collection)
-                    bookmark.setEnabled(false)
+                saveBookmark(this, feedName, feedUrl, feedLanguage, collection)
+                bookmark.setEnabled(false)
             }
         }
 
@@ -96,7 +89,7 @@ public class GoogleNewsSearchActivity () : Activity(){
             feedUrl = "https://news.google.com/news/feeds?cf=all&ned=${info.edition}&hl=${info.lang}&output=rss"
             val search = searchTerm.getText()?.toString()
             if (!search.isNullOrEmpty()){
-                feedUrl +="&q=${java.net.URLEncoder.encode(search!!, "UTF-8")}"
+                feedUrl += "&q=${java.net.URLEncoder.encode(search!!, "UTF-8")}"
             }
 
             Log.d(TAG, "Downloading $feedUrl")

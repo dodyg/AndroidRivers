@@ -21,10 +21,10 @@ package com.silverkeytech.android_rivers
 import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
-import com.silverkeytech.android_rivers.riverjs.River
-import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
-import com.silverkeytech.android_rivers.riverjs.RiverItemSource
-import com.silverkeytech.android_rivers.riverjs.RiverSite
+import com.silverkeytech.news_engine.riverjs.River
+import com.silverkeytech.news_engine.riverjs.RiverItemMeta
+import com.silverkeytech.news_engine.riverjs.RiverItemSource
+import com.silverkeytech.news_engine.riverjs.RiverSite
 import com.silverkeytech.android_rivers.riverjs.downloadSingleRiver
 import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
 import java.util.ArrayList

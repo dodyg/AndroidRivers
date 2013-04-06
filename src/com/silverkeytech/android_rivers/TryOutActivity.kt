@@ -51,11 +51,10 @@ import java.util.Random
 import org.holoeverywhere.app.Activity
 import org.xmlrpc.android.XMLRPCClient
 import com.silverkeytech.android_rivers.meta_weblog.Blog
-import com.silverkeytech.android_rivers.meta_weblog.simplePost
 import com.silverkeytech.android_rivers.meta_weblog.linkPost
-import com.silverkeytech.android_rivers.meta_weblog.statusPost
-import com.silverkeytech.android_rivers.meta_weblog.imageLinkPost
 import org.holoeverywhere.widget.TextView
+import com.silverkeytech.android_rivers.creators.getCraigsListCities
+import com.silverkeytech.android_rivers.creators.getCraigsListCategories
 
 public class TryOutActivity(): Activity()
 {
@@ -68,6 +67,7 @@ public class TryOutActivity(): Activity()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tryout)
+        handleCraigsListCitiesAndCategories()
         handleDialog4()
         handlePost()
         handlePing()
@@ -88,7 +88,27 @@ public class TryOutActivity(): Activity()
         handleRiverJsWithOpmlSource()
     }
 
-    fun handleDialog4(){
+    fun handleCraigsListCitiesAndCategories() {
+        val btn = findView<Button>(R.id.tryout_craigslist_cities)
+
+        btn.setOnClickListener {
+            val cities = getCraigsListCities(this)
+
+            Log.d(TAG, "Cities in ${cities.size()}")
+
+            for(x in cities){
+                Log.d(TAG, "${x.toString()}")
+            }
+
+            var categories = getCraigsListCategories(this)
+
+            for(x in categories){
+                Log.d(TAG, "${x.toString()}")
+            }
+        }
+    }
+
+    fun handleDialog4() {
         val btn = findView<Button>(R.id.tryout_dialog_4)
 
         val msg = """* Unless required by applicable law or agreed to in writing, software
@@ -110,16 +130,16 @@ public class TryOutActivity(): Activity()
             src.setText("CNN>COM")
 
             val dlg = createFlexibleContentDialog(context = this, content = cnt, buttons = array(
-                    DialogBtn("Go", { (d) ->  d.dismiss()}),
-                    DialogBtn("Share", { (d) ->  d.dismiss()}),
-                    DialogBtn("Podcast", { (d) ->  d.dismiss()}),
-                    DialogBtn("Blog", { (d) ->  d.dismiss()}))
+                    DialogBtn("Go", {(d) -> d.dismiss() }),
+                    DialogBtn("Share", {(d) -> d.dismiss() }),
+                    DialogBtn("Podcast", {(d) -> d.dismiss() }),
+                    DialogBtn("Blog", {(d) -> d.dismiss() }))
             )
 
             dlg.show()
         }
     }
-    fun handlePost(){
+    fun handlePost() {
         val btn = findView<Button>(R.id.tryout_post_rss)
 
         btn.setOnClickListener {
@@ -133,12 +153,12 @@ public class TryOutActivity(): Activity()
         }
     }
 
-    fun handlePing(){
+    fun handlePing() {
         val btn = findView<Button>(R.id.tryout_ping_rss_cloud)
 
         btn.setOnClickListener {
             val rpc = XMLRPCClient("http://rpc.rsscloud.org:5337/RPC2", "", "")
-            val res = rpc.call("rssCloud.ping", "http://rivers.silverkeytech.com/blogs/android-rivers/rss.xml" )
+            val res = rpc.call("rssCloud.ping", "http://rivers.silverkeytech.com/blogs/android-rivers/rss.xml")
             Log.d(TAG, "Return content $res")
         }
     }

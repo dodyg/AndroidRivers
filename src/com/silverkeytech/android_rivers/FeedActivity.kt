@@ -18,19 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import com.actionbarsherlock.view.ActionMode
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
-import com.silverkeytech.android_rivers.db.BookmarkCollection
-import com.silverkeytech.android_rivers.db.BookmarkKind
-import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
-import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
-import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.ListActivity
 
@@ -73,7 +66,7 @@ public class FeedActivity(): ListActivity(), WithVisualModificationPanel
             if (res.isTrue()){
                 var feed = res.value!!
                 feedDateIsParseable = feed.isDateParseable
-                Log.d(TAG, "$feedUrl is parseable = $feedDateIsParseable")
+                Log.d(TAG, "$feedUrl is parseable = $feedDateIsParseable with items ${feed.items.size}")
                 if (!feed.language.isNullOrEmpty()){
                     Log.d(TAG, "Obtained feed language is ${feed.language}")
                     feedLanguage = feed.language
@@ -129,9 +122,9 @@ public class FeedActivity(): ListActivity(), WithVisualModificationPanel
                 return true
             }
             R.id.feed_menu_bookmark -> {
-                addBookmarkOption(this, feedDateIsParseable){
+                addBookmarkOption(this, feedDateIsParseable) {
                     collection ->
-                        saveBookmark(this, feedName, feedUrl, feedLanguage, collection)
+                    saveBookmark(this, feedName, feedUrl, feedLanguage, collection)
                 }
                 return true
             }

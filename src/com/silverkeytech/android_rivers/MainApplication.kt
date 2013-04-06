@@ -25,10 +25,10 @@ import android.support.v4.util.LruCache
 import android.util.Log
 import com.silverkeytech.android_rivers.db.Database
 import com.silverkeytech.android_rivers.db.DatabaseManager
-import com.silverkeytech.android_rivers.outliner.OutlineContent
-import com.silverkeytech.android_rivers.outlines.Opml
-import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
-import com.silverkeytech.android_rivers.syndications.SyndicationFeed
+import com.silverkeytech.news_engine.outliner.OutlineContent
+import com.silverkeytech.news_engine.outlines.Opml
+import com.silverkeytech.news_engine.riverjs.RiverItemMeta
+import com.silverkeytech.news_engine.syndications.SyndicationFeed
 import java.util.ArrayList
 
 public class SharedFlags{
@@ -58,6 +58,10 @@ public class MainApplication(): Application()
     public override fun onCreate() {
         Log.d(TAG, "Main Application is started")
         super<Application>.onCreate()
+
+        //initialize newsengine module logging system
+        com.silverkeytech.news_engine.log = {(tag, log) -> Log.d(tag, log) }
+        com.silverkeytech.news_engine.scrubHtml = { str -> scrubHtml(str) }
 
         val path = this.getApplicationContext()!!.getDatabasePath(Database.DATABASE_NAME)!!
         Log.d(TAG, "My location ${path.canonicalPath}")

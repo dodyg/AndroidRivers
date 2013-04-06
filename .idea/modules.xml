@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HoloEverywhere-master/contrib/ActionBarSherlock/ActionBarSherlock.iml" filepath="$PROJECT_DIR$/HoloEverywhere-master/contrib/ActionBarSherlock/ActionBarSherlock.iml" />
       <module fileurl="file://$PROJECT_DIR$/AndroidRivers.iml" filepath="$PROJECT_DIR$/AndroidRivers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NewsEngine/NewsEngine.iml" filepath="$PROJECT_DIR$/NewsEngine/NewsEngine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NewsEngineTests/NewsEngineTests.iml" filepath="$PROJECT_DIR$/NewsEngineTests/NewsEngineTests.iml" />
       <module fileurl="file://$PROJECT_DIR$/HoloEverywhere-master/library/library.iml" filepath="$PROJECT_DIR$/HoloEverywhere-master/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/HoloEverywhere-master/addons/preferences/preferences.iml" filepath="$PROJECT_DIR$/HoloEverywhere-master/addons/preferences/preferences.iml" />
       <module fileurl="file://$PROJECT_DIR$/HoloEverywhere-master/addons/slidingmenu/slidingmenu.iml" filepath="$PROJECT_DIR$/HoloEverywhere-master/addons/slidingmenu/slidingmenu.iml" />

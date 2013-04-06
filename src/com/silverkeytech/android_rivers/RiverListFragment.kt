@@ -40,15 +40,14 @@ import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.getBookmarksFromDbAsOpml
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import com.silverkeytech.android_rivers.db.saveOpmlAsBookmarks
-import com.silverkeytech.android_rivers.outlines.Opml
-import com.silverkeytech.android_rivers.outlines.Outline
+import com.silverkeytech.news_engine.outlines.Opml
+import com.silverkeytech.news_engine.outlines.Outline
 import com.silverkeytech.android_rivers.outlines.sortOutlineAsc
 import com.silverkeytech.android_rivers.outlines.sortOutlineDesc
 import java.util.ArrayList
 import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.ListFragment
-
 
 public class RiverListFragment(): ListFragment() {
     class object {
@@ -147,7 +146,7 @@ public class RiverListFragment(): ListFragment() {
                     return true
                 }
             }
-            R.id.river_list_fragment_menu_show_add_dialog ->{
+            R.id.river_list_fragment_menu_show_add_dialog -> {
                 displayAddNewRiverDialog()
                 return true
             }
@@ -209,7 +208,7 @@ public class RiverListFragment(): ListFragment() {
     }
 
     private fun displayAddNewRiverDialog() {
-        val dlg = createSingleInputDialog(parent!!, "Add new river", "http://news.southernbread.org/river.js", "Set url here", {
+        val dlg = createSingleInputDialog(parent!!, "Add new river", "", "Set url here", {
             dlg, url ->
             lastEnteredUrl = url
             Log.d(TAG, "Entered $url")
@@ -358,7 +357,7 @@ public class RiverListFragment(): ListFragment() {
 
     public data class ViewHolder (var name: TextView)
 
-    public fun currentListItem(text: String, convertView: View?, parent: ViewGroup?, textSize : Float): View? {
+    public fun currentListItem(text: String, convertView: View?, parent: ViewGroup?, textSize: Float): View? {
         var holder: ViewHolder?
 
         var vw: View? = convertView

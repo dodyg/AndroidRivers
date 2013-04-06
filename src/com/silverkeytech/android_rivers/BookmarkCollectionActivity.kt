@@ -60,7 +60,7 @@ public open class BookmarkCollectionActivity(): ListActivity() {
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
-            R.id.collection_menu_help ->{
+            R.id.collection_menu_help -> {
                 downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
                 return true
             }

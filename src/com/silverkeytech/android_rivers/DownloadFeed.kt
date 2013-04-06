@@ -21,8 +21,8 @@ package com.silverkeytech.android_rivers
 import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
-import com.silverkeytech.android_rivers.syndications.SyndicationFeed
-import com.silverkeytech.android_rivers.syndications.SyndicationFilter
+import com.silverkeytech.news_engine.syndications.SyndicationFeed
+import com.silverkeytech.news_engine.syndications.SyndicationFilter
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 import org.holoeverywhere.app.Activity
 
@@ -48,6 +48,7 @@ public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String,
     protected override fun doInBackground(p0: Array<String?>): Result<SyndicationFeed>? {
         try{
             val url = p0[0]!!
+            Log.d(TAG, "Downloading url $url")
 
             val cache = context.getMain().getSyndicationCache(url)
             if (cache != null && !ignoreCache){

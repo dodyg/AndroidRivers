@@ -26,8 +26,8 @@ import com.silverkeytech.android_rivers.db.BookmarkKind
 import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 import com.silverkeytech.android_rivers.db.getBookmarksUrlsFromDbByCollection
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
-import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
-import com.silverkeytech.android_rivers.riverjs.RiverItemSource
+import com.silverkeytech.news_engine.riverjs.RiverItemMeta
+import com.silverkeytech.news_engine.riverjs.RiverItemSource
 import java.util.ArrayList
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.ListActivity
@@ -175,13 +175,14 @@ public class RiverActivity(): ListActivity(), WithVisualModificationPanel
         return true
     }
 
+    //Collect river sources into a list and make sure they are unique (based on the source uris)
     fun collectRiverSources() {
         if (sortedNewsItems != null && sortedNewsItems!!.size() > 0){
             val distinct = ArrayList<RiverItemSource>();
             var itm = sortedNewsItems!!.get(0).source
-            distinct.add(itm)
             sortedNewsItems!!.map { x -> x.source }.sortBy { x -> x.uri!! }.forEach { x ->
-                if (itm.uri != x.uri){
+                if (itm.uri != x.uri && !distinct.any { y -> y.uri == x.uri }){
+                    Log.d("River Sources Collection", "${itm.uri}")
                     distinct.add(itm)
                     itm = x
                 }
@@ -202,12 +203,12 @@ public class RiverActivity(): ListActivity(), WithVisualModificationPanel
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
-            R.id.river_menu_sources->{
+            R.id.river_menu_sources -> {
                 collectRiverSources()
                 return false
             }
 
-            R.id.river_menu_help ->{
+            R.id.river_menu_help -> {
                 downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
                 return true
             }

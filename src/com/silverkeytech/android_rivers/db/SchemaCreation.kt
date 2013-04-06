@@ -40,7 +40,7 @@ public class SchemaCreation(val db: SQLiteDatabase){
     private fun create3(): Boolean {
         create2()
         try{
-            Log.d(TAG, "OnUpgrade(1): Create collection Table")
+            Log.d(TAG, "OnCreate(3): Create podcast Table")
             db.execSQL("""
                           CREATE TABLE `podcast`
                           (
@@ -66,7 +66,7 @@ public class SchemaCreation(val db: SQLiteDatabase){
     private fun create2(): Boolean {
         create1()
         try{
-            Log.d(TAG, "OnUpgrade(1): Create collection Table")
+            Log.d(TAG, "OnCreate(2): Create bookmark_collection Table")
             db.execSQL("""
                           CREATE TABLE `bookmark_collection`
                           (

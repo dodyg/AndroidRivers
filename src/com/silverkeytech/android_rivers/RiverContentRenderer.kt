@@ -19,7 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Handler
 import android.os.Message
@@ -36,13 +35,9 @@ import android.widget.ListView
 import android.widget.TextView
 import com.silverkeytech.android_rivers.outliner.transformFeedOpmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
-import com.silverkeytech.android_rivers.riverjs.RiverItemMeta
+import com.silverkeytech.news_engine.riverjs.RiverItemMeta
 import org.holoeverywhere.app.Activity
-import org.holoeverywhere.app.AlertDialog
 import java.util.ArrayList
-import com.silverkeytech.android_rivers.meta_weblog.showBlogConfigurationDialog
-import com.silverkeytech.android_rivers.meta_weblog.showPostBlogDialogWithContent
-import com.silverkeytech.android_rivers.meta_weblog.Blog
 
 //Manage the rendering of each news item in the river list
 public class RiverContentRenderer(val context: Activity, val language: String){
@@ -157,104 +152,104 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 //check for go link
                 if (currentNewsLinkAvailable){
                     buttons.add(DialogBtn(context.getString(R.string.go)!!, { dlg ->
-                            startOpenBrowserActivity(context, currentNews.item.link!!)
-                            dlg.dismiss()
-                        }))
+                        startOpenBrowserActivity(context, currentNews.item.link!!)
+                        dlg.dismiss()
+                    }))
 
                     buttons.add(DialogBtn(context.getString(R.string.share)!!, { dlg ->
-                            var intent = shareActionIntent(currentNews.item.title!!, currentNews.item.link!!)
-                            context.startActivity(Intent.createChooser(intent, "Share link"))
-                        }))
+                        var intent = shareActionIntent(currentNews.item.title!!, currentNews.item.link!!)
+                        context.startActivity(Intent.createChooser(intent, "Share link"))
+                    }))
                 }
 
                 //check for image enclosure
                 if (currentNews.item.hasEnclosure()!!){
                     var enclosure = currentNews.item.enclosure!!.get(0)
                     if (isSupportedImageMime(enclosure.`type`!!)){
-                        buttons.add(DialogBtn("Image",  { dlg ->
-                                Log.d(TAG, "I am downloading a ${enclosure.url} with type ${enclosure.`type`}")
-                                DownloadImage(context).execute(enclosure.url)
+                        buttons.add(DialogBtn("Image", { dlg ->
+                            Log.d(TAG, "I am downloading a ${enclosure.url} with type ${enclosure.`type`}")
+                            DownloadImage(context).execute(enclosure.url)
                         }))
                     }
                     //assume podcast
                     else {
-                        buttons.add(DialogBtn(context.getString(R.string.podcast)!!,  { dlg ->
-                                var messenger = Messenger(object : Handler(){
-                                    public override fun handleMessage(msg: Message?) {
-                                        if (msg != null){
-                                            val path = msg.obj as String
+                        buttons.add(DialogBtn(context.getString(R.string.podcast)!!, { dlg ->
+                            var messenger = Messenger(object : Handler(){
+                                public override fun handleMessage(msg: Message?) {
+                                    if (msg != null){
+                                        val path = msg.obj as String
 
-                                            if (msg.arg1 == android.app.Activity.RESULT_OK && !path.isNullOrEmpty()){
-                                                context.toastee("File is successfully downloaded at $path", Duration.LONG)
-                                                MediaScannerWrapper.scanPodcasts(context, path)
-                                            }else{
-                                                context.toastee("Sorry, I cannot download podcast ${currentNews.item.title}", Duration.LONG)
-                                            }
+                                        if (msg.arg1 == android.app.Activity.RESULT_OK && !path.isNullOrEmpty()){
+                                            context.toastee("File is successfully downloaded at $path", Duration.LONG)
+                                            MediaScannerWrapper.scanPodcasts(context, path)
                                         }else{
-                                            Log.d(TAG, "handleMessage returns null, which is very weird")
+                                            context.toastee("Sorry, I cannot download podcast ${currentNews.item.title}", Duration.LONG)
                                         }
+                                    }else{
+                                        Log.d(TAG, "handleMessage returns null, which is very weird")
                                     }
-                                })
+                                }
+                            })
 
-                                startDownloadService(context, currentNews.item.title!!, enclosure.url!!,
-                                        currentNews.source.title!!, currentNews.source.uri!!, currentNews.item.body!!,
-                                        messenger)
+                            startDownloadService(context, currentNews.item.title!!, enclosure.url!!,
+                                    currentNews.source.title!!, currentNews.source.uri!!, currentNews.item.body!!,
+                                    messenger)
 
-                                dlg.dismiss()
+                            dlg.dismiss()
                         }))
                     }
                 }
                 else if (currentNews.item.hasSource()!!){
                     buttons.add(DialogBtn("Outlines", { dlg ->
-                            try{
-                                val feedOpml = currentNews.item.source!!.get(0).opml!!
+                        try{
+                            val feedOpml = currentNews.item.source!!.get(0).opml!!
 
-                                var opml = transformFeedOpmlToOpml(feedOpml)
+                            var opml = transformFeedOpmlToOpml(feedOpml)
 
-                                if (opml.isTrue()){
-                                    val outlines = opml.value!!.traverse()
-                                    val title = if (opml.value!!.head!!.title.isNullOrEmpty())
-                                        "Opml Comment"
-                                    else
-                                        opml.value!!.head!!.title
+                            if (opml.isTrue()){
+                                val outlines = opml.value!!.traverse()
+                                val title = if (opml.value!!.head!!.title.isNullOrEmpty())
+                                    "Opml Comment"
+                                else
+                                    opml.value!!.head!!.title
 
-                                    startOutlinerActivity(context, outlines, title!!, null, true)
-                                }
-                                else{
-                                    Log.d(TAG, "Error in transformation feedopml to opml ${opml.exception?.getMessage()}")
-                                }
+                                startOutlinerActivity(context, outlines, title!!, null, true)
                             }
-                            catch(e: Exception){
-                                context.toastee("Error in processing opml source ${e.getMessage()}")
+                            else{
+                                Log.d(TAG, "Error in transformation feedopml to opml ${opml.exception?.getMessage()}")
                             }
+                        }
+                        catch(e: Exception){
+                            context.toastee("Error in processing opml source ${e.getMessage()}")
+                        }
                     }))
                 }
 
                 //add blog button
-//                buttons.add(DialogBtn("Blog", {
-//                    dlg ->
-//                    showBlogConfigurationDialog(context){
-//                        res ->
-//                        showPostBlogDialogWithContent(context, "${currentNews.item.title}"){
-//                            res2 ->
-//                            val username = res.get(1).value!!
-//                            val password = res.get(2).value!!
-//                            val post = res2.get(0).value!!
-//                            Log.d(TAG, "Username $username - Password $password - Post content $post")
-//
-//                            val contentMap =  hashMapOf(Params.POST_CONTENT to post)
-//                            if (currentNewsLinkAvailable)
-//                                contentMap.put(Params.POST_LINK, currentNews.item.link!!)
-//
-//                            startBlogPostingService(context,
-//                                    hashMapOf(Params.BLOG_SERVER to "https://androidrivers.wordpress.com/xmlrpc.php",
-//                                            Params.BLOG_USERNAME to username, Params.BLOG_PASSWORD to password),
-//                                    contentMap)
-//                        }
-//                    }
-//                }))
+                //                buttons.add(DialogBtn("Blog", {
+                //                    dlg ->
+                //                    showBlogConfigurationDialog(context){
+                //                        res ->
+                //                        showPostBlogDialogWithContent(context, "${currentNews.item.title}"){
+                //                            res2 ->
+                //                            val username = res.get(1).value!!
+                //                            val password = res.get(2).value!!
+                //                            val post = res2.get(0).value!!
+                //                            Log.d(TAG, "Username $username - Password $password - Post content $post")
+                //
+                //                            val contentMap =  hashMapOf(Params.POST_CONTENT to post)
+                //                            if (currentNewsLinkAvailable)
+                //                                contentMap.put(Params.POST_LINK, currentNews.item.link!!)
+                //
+                //                            startBlogPostingService(context,
+                //                                    hashMapOf(Params.BLOG_SERVER to "https://androidrivers.wordpress.com/xmlrpc.php",
+                //                                            Params.BLOG_USERNAME to username, Params.BLOG_PASSWORD to password),
+                //                                    contentMap)
+                //                        }
+                //                    }
+                //                }))
 
-                var createdDialog = createFlexibleContentDialog(context,  dlg, buttons.toArray(array<DialogBtn>()))
+                var createdDialog = createFlexibleContentDialog(context, dlg, buttons.toArray(array<DialogBtn>()))
                 createdDialog.show()
             }
         })

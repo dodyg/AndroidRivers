@@ -19,17 +19,20 @@
 #   public *;
 #}
 
--injars      lib
 
--dontobfuscate
 -dontpreverify
+-dontobfuscate
+-dontoptimize
 
 -dontwarn kotlin.**
 -dontwarn com.silverkeytech.android_rivers.**
+-dontwarn com.silverkeytech.news_engine.**
 -dontwarn org.w3c.dom.events.*
 -dontwarn javax.xml.stream.*
 -dontwarn javax.xml.stream.events.*
 -keep class org.holoeverywhere.preference.*
+-keep class org.holoeverywhere.*
+-keep class android.database.sqlite.*
 
 
 -keep public class * extends android.app.Activity
@@ -40,6 +43,7 @@
 -keep public class * extends org.holoeverywhere.app.Activity
 -keep public class * extends org.holoeverywhere.app.ListFragment
 -keep public class * extends android.app.Fragment
+
 
 -keep public class * extends android.view.View {
     public <init>(android.content.Context);

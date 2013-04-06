@@ -23,7 +23,7 @@ import com.actionbarsherlock.view.MenuItem
 import com.pl.polidea.treeview.InMemoryTreeStateManager
 import com.pl.polidea.treeview.TreeBuilder
 import com.pl.polidea.treeview.TreeViewList
-import com.silverkeytech.android_rivers.outliner.OutlineContent
+import com.silverkeytech.news_engine.outliner.OutlineContent
 import com.silverkeytech.android_rivers.outliner.SimpleAdapter
 import java.util.ArrayList
 import org.holoeverywhere.app.Activity
@@ -142,7 +142,7 @@ public class OutlinerActivity(): Activity()
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
-            R.id.outliner_menu_help ->{
+            R.id.outliner_menu_help -> {
                 downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
                 return true
             }
@@ -154,7 +154,7 @@ public class OutlinerActivity(): Activity()
                 collapseOutlines(treeManager, outlinesData!!)
                 return true
             }
-            R.id.outliner_menu_expand ->{
+            R.id.outliner_menu_expand -> {
                 expandOutlines(treeManager, outlinesData!!)
                 return true
             }

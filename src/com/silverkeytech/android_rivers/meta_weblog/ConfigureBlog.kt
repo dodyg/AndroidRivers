@@ -13,18 +13,18 @@ import com.silverkeytech.android_rivers.NORMAL_INPUT
 import com.silverkeytech.android_rivers.PRIVATE_BLOG_PASSWORD
 import com.silverkeytech.android_rivers.PRIVATE_BLOG_USERNAME
 
-public fun showPostBlogDialog(context: Activity, onOK : (res: Array<DialogInput>) -> Unit){
+public fun showPostBlogDialog(context: Activity, onOK: (res: Array<DialogInput>) -> Unit) {
     val inputs = array(DialogInput(MULTI_LINE_INPUT, "Post", "", null))
 
     val dlg = createFlexibleInputDialog(context, "Write", inputs) {
         d, res ->
-            onOK(res)
-            d?.dismiss()
+        onOK(res)
+        d?.dismiss()
     }
     dlg.show()
 }
 
-public fun showPostBlogDialogWithContent(context: Activity, content : String, onOK : (res: Array<DialogInput>) -> Unit){
+public fun showPostBlogDialogWithContent(context: Activity, content: String, onOK: (res: Array<DialogInput>) -> Unit) {
     val inputs = array(DialogInput(MULTI_LINE_INPUT, "Post", content, null))
 
     val dlg = createFlexibleInputDialog(context, "Write", inputs) {
@@ -49,7 +49,7 @@ public fun showBlogConfigurationDialog(context: Activity, onOK: (res: Array<Dial
                     context.toastee("Username is required", Duration.LONG)
                 }
             }),
-            DialogInput(PASSWORD_INPUT, "Password", PRIVATE_BLOG_PASSWORD , textValidator() {
+            DialogInput(PASSWORD_INPUT, "Password", PRIVATE_BLOG_PASSWORD, textValidator() {
                 str ->
                 if (str.isNullOrEmpty()){
                     context.toastee("Password is required", Duration.LONG)

@@ -20,30 +20,16 @@ package com.silverkeytech.android_rivers
 
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.os.Bundle
 import android.util.Log
-import com.silverkeytech.android_rivers.DownloadFeed
-import com.silverkeytech.android_rivers.Duration
-import com.silverkeytech.android_rivers.FeedContentRenderer
-import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.db.BookmarkCollection
 import com.silverkeytech.android_rivers.db.BookmarkKind
 import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
-import com.silverkeytech.android_rivers.getVisualPref
-import com.silverkeytech.android_rivers.isNullOrEmpty
-import com.silverkeytech.android_rivers.setOnClickListener
-import com.silverkeytech.android_rivers.toastee
-import org.holoeverywhere.ArrayAdapter
 import org.holoeverywhere.app.Activity
-import org.holoeverywhere.widget.Button
-import org.holoeverywhere.widget.EditText
-import org.holoeverywhere.widget.Spinner
-
 
 //Note: This is a duplication with FeedActivity
-fun saveBookmark(context: Activity, feedName : String, feedUrl : String, feedLanguage : String, collection: BookmarkCollection?) {
+fun saveBookmark(context: Activity, feedName: String, feedUrl: String, feedLanguage: String, collection: BookmarkCollection?) {
     Log.d("saveBookmark", "Name = '$feedName' - Url = '$feedUrl' - Language = '$feedLanguage'")
 
     val res = saveBookmarkToDb(feedName, feedUrl, BookmarkKind.RSS, feedLanguage, collection)
@@ -62,7 +48,7 @@ fun saveBookmark(context: Activity, feedName : String, feedUrl : String, feedLan
 
 
 //Note: This is a duplication with FeedActivity
-fun addBookmarkOption(context: Activity, feedDateIsParseable : Boolean, bookmark : (BookmarkCollection?) -> Unit) {
+fun addBookmarkOption(context: Activity, feedDateIsParseable: Boolean, bookmark: (BookmarkCollection?) -> Unit) {
     var coll = getBookmarkCollectionFromDb(sortByTitleOrder = SortingOrder.ASC)
 
     if (!coll.isEmpty()){
