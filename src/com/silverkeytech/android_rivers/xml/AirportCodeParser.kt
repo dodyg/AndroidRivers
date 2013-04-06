@@ -25,7 +25,7 @@ import java.io.InputStream
 public class AirportCodeParser{
     public fun parse(input: InputStream, airportCodes: AirportCodeBuilder) {
         var parser = XMLParser<AirportCodeBuilder>(airportTag, airportName, airportCode)
-        parser.parse(input, "UTF-8", airportCodes)
+        parser.parse(input, airportCodes)
     }
 }
 
