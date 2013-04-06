@@ -77,16 +77,14 @@ public class CraigslistListingActivity (): Activity(){
             if (input.isNullOrEmpty()){
                 toastee("Please enter a city location")
             }else{
-                feedName = "$input Craigslist"
-
-                val specificCode = cities.find { x -> x.location == input.trim() }?.code
-                val code = if (specificCode != null) specificCode else ""
+                val chosenCityUrl = cities.find { x -> x.location == input.trim() }?.url
+                val cityUrl = if (chosenCityUrl != null) chosenCityUrl else ""
 
                 //get selected categories
                 val catPosition = categoryList.getSelectedItemPosition()
                 val categoryCode = categories.get(catPosition).code
 
-                feedUrl = "http://$code.craigslist.com/$categoryCode/rss.xml"
+                feedUrl = "$cityUrl/$categoryCode/index.rss"
 
                 DownloadFeed(this, false)
                         .executeOnComplete {
@@ -97,6 +95,8 @@ public class CraigslistListingActivity (): Activity(){
                         if (!feed.language.isNullOrEmpty()){
                             feedLanguage = feed.language
                         }
+
+                        feedName = feed.title
 
                         if (feed.items.size > 0 && !checkIfUrlAlreadyBookmarked(feedUrl))
                             bookmark.setEnabled(true)
