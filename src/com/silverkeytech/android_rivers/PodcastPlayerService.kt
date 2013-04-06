@@ -182,9 +182,12 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         }
     }
 
-    public var progressHandler: Handler? = null
-    
-    private var progressThread : Thread? = null    
+    private var progressHandler: Handler? = null
+    private var progressThread : Thread? = null
+
+    public fun setProgressHandler(handler : Handler?){
+        progressHandler = handler
+    }
 
     private var isPausedDueToAudioFocusLoss = false
 
