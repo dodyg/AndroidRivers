@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.silverkeytech.android_rivers"
           android:versionCode="6"
-          android:versionName="1.11">
-    <uses-sdk android:minSdkVersion="8"/>
+          android:versionName="1.12">
+    <uses-sdk android:minSdkVersion="9"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
