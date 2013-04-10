@@ -86,7 +86,7 @@ public class GoogleNewsSearchActivity (): Activity(){
             val position = regionList.getSelectedItemPosition()
             val key = listName.get(position)
             val info = maps[key]!!
-            feedUrl = "https://news.google.com/news/feeds?cf=all&ned=${info.edition}&hl=${info.lang}&output=rss"
+            feedUrl = "https://news.google.com/news/feeds?cf=all&ned=${info.edition}&hl=${info.lang}&output=rss&num=50"
             val search = searchTerm.getText()?.toString()
             if (!search.isNullOrEmpty()){
                 feedUrl += "&q=${java.net.URLEncoder.encode(search!!, "UTF-8")}"
