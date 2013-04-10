@@ -32,13 +32,14 @@ import com.google.gson.Gson
 import com.silverkeytech.android_rivers.db.getBookmarksUrlsFromDbByCollection
 import com.silverkeytech.news_engine.riverjs.River
 import com.silverkeytech.news_engine.riverjs.RiverItemMeta
-import com.silverkeytech.android_rivers.riverjs.accumulateList
-import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
 import com.silverkeytech.news_engine.syndications.SyndicationFilter
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 import java.util.Random
 import java.util.Vector
 import android.content.res.Resources
+import com.silverkeytech.news_engine.riverjs.accumulateList
+import com.silverkeytech.news_engine.riverjs.sortRiverItemMeta
+import com.silverkeytech.news_engine.riverjs.getSortedNewsItems
 
 
 public class DownloadAllRiversService(): IntentService("DownloadAllRiversService"){

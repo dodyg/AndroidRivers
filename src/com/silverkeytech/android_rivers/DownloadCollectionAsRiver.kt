@@ -22,8 +22,8 @@ import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
 import com.silverkeytech.news_engine.riverjs.RiverItemMeta
-import com.silverkeytech.android_rivers.riverjs.accumulateList
-import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
+import com.silverkeytech.news_engine.riverjs.accumulateList
+import com.silverkeytech.news_engine.riverjs.sortRiverItemMeta
 import com.silverkeytech.news_engine.syndications.SyndicationFilter
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 import java.util.ArrayList

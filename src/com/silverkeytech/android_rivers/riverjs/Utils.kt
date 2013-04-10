@@ -33,55 +33,6 @@ import com.silverkeytech.news_engine.riverjs.RiverItemSource
 import com.silverkeytech.news_engine.riverjs.River
 import com.silverkeytech.news_engine.riverjs.RiverItem
 
-fun accumulateList(list: Vector<RiverItemMeta>, feed: SyndicationFeed) {
-    for(f in feed.items.iterator()){
-        val item = RiverItem()
-
-        item.title = f.title
-        item.body = f.description
-        item.pubDate = DateHelper.formatRFC822(f.pubDate!!)
-
-        if (f.hasLink())
-            item.link = f.link
-
-        if (f.hasEnclosure()){
-            val enc = RiverEnclosure()
-            enc.url = f.enclosure!!.url
-            enc.`type` = f.enclosure!!.mimeType
-            enc.length = f.enclosure!!.length
-            item.enclosure = arrayListOf(enc)
-        }
-
-        val feedSourceLink = if (feed.hasLink())
-            feed.link else ""
-
-        val meta = RiverItemMeta(item, RiverItemSource(feed.title, feedSourceLink))
-
-        list.add(meta)
-    }
-}
-
-fun sortRiverItemMeta(newsItems: List<RiverItemMeta>): List<RiverItemMeta> {
-    var sortedNewsItems = newsItems.filter { x -> x.item.isPublicationDate()!! }.sort(
-            comparator {(p1: RiverItemMeta, p2: RiverItemMeta) ->
-                val date1 = p1.item.getPublicationDate()
-                val date2 = p2.item.getPublicationDate()
-
-                if (date1 != null && date2 != null) {
-                    date1.compareTo(date2) * -1
-                } else if (date1 == null && date2 == null) {
-                    0
-                } else if (date1 == null) {
-                    -1
-                } else {
-                    1
-                }
-            })
-
-    return sortedNewsItems
-}
-
-
 fun downloadSingleRiver(url: String): Result<River> {
     var req: String?
     try{

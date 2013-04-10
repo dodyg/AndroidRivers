@@ -48,6 +48,7 @@ import java.util.ArrayList
 import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.ListFragment
+import com.silverkeytech.news_engine.riverjs.getSortedNewsItems
 
 public class RiverListFragment(): ListFragment() {
     class object {

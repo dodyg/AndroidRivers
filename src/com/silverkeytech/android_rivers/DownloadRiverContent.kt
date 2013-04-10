@@ -22,13 +22,8 @@ import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
 import com.silverkeytech.news_engine.riverjs.River
-import com.silverkeytech.news_engine.riverjs.RiverItemMeta
-import com.silverkeytech.news_engine.riverjs.RiverItemSource
-import com.silverkeytech.news_engine.riverjs.RiverSite
-import com.silverkeytech.android_rivers.riverjs.downloadSingleRiver
-import com.silverkeytech.android_rivers.riverjs.sortRiverItemMeta
-import java.util.ArrayList
 import org.holoeverywhere.app.Activity
+import com.silverkeytech.android_rivers.riverjs.downloadSingleRiver
 
 //Responsible for handling a river js downloading and display in asynchronous way
 public class DownloadRiverContent(it: Context?, val language: String): AsyncTask<String, Int, Result<River>>(){
@@ -87,23 +82,4 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
             }
         }
     }
-}
-
-//Take all the news items from several different feeds and combine them into one.
-fun River.getSortedNewsItems(): List<RiverItemMeta> {
-    val newsItems = ArrayList<RiverItemMeta>()
-
-    val river = this
-    for(f : RiverSite? in river.updatedFeeds?.updatedFeed?.iterator()){
-        if (f != null){
-            f.item?.forEach{
-                if (it != null) {
-                    newsItems.add(RiverItemMeta(it, RiverItemSource(f.feedTitle, f.feedUrl)))
-                }
-            }
-        }
-    }
-
-    val sortedNewsItems = sortRiverItemMeta(newsItems)
-    return sortedNewsItems
 }

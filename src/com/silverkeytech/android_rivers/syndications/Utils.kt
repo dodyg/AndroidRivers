@@ -9,6 +9,10 @@ import com.silverkeytech.android_rivers.outliner.transformXmlToRss
 import com.silverkeytech.news_engine.syndications.SyndicationFilter
 import com.silverkeytech.news_engine.syndications.SyndicationFeed
 import com.silverkeytech.android_rivers.outliner.transformXmlToRdfRss
+import com.silverkeytech.news_engine.riverjs.RiverItemMeta
+import com.silverkeytech.news_engine.riverjs.River
+import com.silverkeytech.news_engine.riverjs.RiverSite
+import java.util.ArrayList
 
 fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<SyndicationFeed> {
     val TAG = "downloadFeed"
@@ -88,3 +92,4 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
         return Result.wrong(e)
     }
 }
+

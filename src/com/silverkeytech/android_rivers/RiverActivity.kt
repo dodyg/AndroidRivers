@@ -28,6 +28,7 @@ import com.silverkeytech.android_rivers.db.getBookmarksUrlsFromDbByCollection
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import com.silverkeytech.news_engine.riverjs.RiverItemMeta
 import com.silverkeytech.news_engine.riverjs.RiverItemSource
+import com.silverkeytech.news_engine.riverjs.getSortedNewsItems
 import java.util.ArrayList
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.ListActivity
