@@ -93,6 +93,9 @@ fun eliminateDuplicates(newsItems: List<RiverItemMeta>): List<RiverItemMeta> {
         comparisonItem = currentItem
     }
 
+    //add the last item
+    list.add(comparisonItem)
+
     return list
 }
 
