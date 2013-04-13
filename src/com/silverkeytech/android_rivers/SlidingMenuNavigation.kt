@@ -43,7 +43,7 @@ public val SLIDE_MENU_TRY_OUT: Int = 4
 public val SLIDE_MENU_GOOGLE_NEWS: Int = 5
 public val SLIDE_MENU_KAYAK_DEALS: Int = 6
 public val SLIDE_MENU_FEEDBACK: Int = 7
-public val SLIDE_MENU_CRAIGSLIST_LISTING : Int = 8
+public val SLIDE_MENU_CRAIGSLIST_LISTING: Int = 8
 
 fun getMainNavigationItems(): ArrayList<NavItem> {
     val navs = arrayListOf(

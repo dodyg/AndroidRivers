@@ -47,7 +47,6 @@ import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.ListFragment
-import android.graphics.Paint
 
 public class RssListFragment(): ListFragment() {
     class object {
@@ -367,7 +366,7 @@ public class RssListFragment(): ListFragment() {
 
     public data class ViewHolder (public var name: TextView)
 
-    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?, textSize: Float, inCollection : Boolean): View? {
+    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?, textSize: Float, inCollection: Boolean): View? {
         var holder: ViewHolder?
 
         var vw: View? = convertView

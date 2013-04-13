@@ -22,15 +22,14 @@ import android.content.Context
 import com.silverkeytech.android_rivers.xml.AirportCodeParser
 import java.util.ArrayList
 
-
-public fun getCraigsListCities(context: Context): ArrayList<CraigsListCity>{
+public fun getCraigsListCities(context: Context): ArrayList<CraigsListCity> {
     val csv = context.getAssets()!!.open("craigslist_cities")!!
     val cities = CraigsListCityParser().parse(csv)
     csv.close()
     return cities
 }
 
-public fun getCraigsListCategories(context: Context): ArrayList<CraigsListCategory>{
+public fun getCraigsListCategories(context: Context): ArrayList<CraigsListCategory> {
     val csv = context.getAssets()!!.open("craigslist_categories")!!
     val categories = CraigsListCategoryParser().parse(csv)
     csv.close()

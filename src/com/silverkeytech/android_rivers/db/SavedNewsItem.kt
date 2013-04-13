@@ -25,10 +25,10 @@ public class SavedNewsItem(){
     [DatabaseField(canBeNull = false, columnName = "title", width = 255, dataType = DataType.STRING)]
     public var title: String = ""
 
-    [DatabaseField(canBeNull = true,  columnName = "excerpt", width = 550, dataType = DataType.LONG_STRING)]
+    [DatabaseField(canBeNull = true, columnName = "excerpt", width = 550, dataType = DataType.LONG_STRING)]
     public var excerpt: String = ""
 
-    [DatabaseField(canBeNull = true,  columnName = "content", width = 550, dataType = DataType.LONG_STRING)]
+    [DatabaseField(canBeNull = true, columnName = "content", width = 550, dataType = DataType.LONG_STRING)]
     public var content: String = ""
 
     [DatabaseField(canBeNull = false, uniqueIndex = true, columnName = "url", width = 550, dataType = DataType.LONG_STRING)]

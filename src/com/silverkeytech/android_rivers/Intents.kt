@@ -30,7 +30,7 @@ import com.silverkeytech.android_rivers.creators.GoogleNewsSearchActivity
 import com.silverkeytech.android_rivers.creators.KayakFlightDealsActivity
 import com.silverkeytech.android_rivers.creators.CraigslistListingActivity
 
-public fun startCraigslistListingActivity(context: Context){
+public fun startCraigslistListingActivity(context: Context) {
     val i = Intent(context, javaClass<CraigslistListingActivity>())
     context.startActivity(i)
 }

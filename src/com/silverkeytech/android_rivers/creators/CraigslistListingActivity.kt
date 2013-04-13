@@ -1,8 +1,6 @@
 package com.silverkeytech.android_rivers.creators
 
-
 import android.os.Bundle
-import android.util.Log
 import com.silverkeytech.android_rivers.DownloadFeed
 import com.silverkeytech.android_rivers.Duration
 import com.silverkeytech.android_rivers.FeedContentRenderer
@@ -14,7 +12,6 @@ import com.silverkeytech.android_rivers.toastee
 import org.holoeverywhere.ArrayAdapter
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.widget.Button
-import org.holoeverywhere.widget.EditText
 import org.holoeverywhere.widget.Spinner
 import com.silverkeytech.android_rivers.addBookmarkOption
 import com.silverkeytech.android_rivers.saveBookmark
@@ -49,7 +46,7 @@ public class CraigslistListingActivity (): Activity(){
 
         //categories
         var categories = getCraigsListCategories(this)
-        val categoryNames = categories.iterator().map { x -> x.name}.toArrayList<String>()
+        val categoryNames = categories.iterator().map { x -> x.name }.toArrayList<String>()
 
         val adapter = ArrayAdapter<String>(this, org.holoeverywhere.R.layout.simple_spinner_item, categoryNames)
         adapter.setDropDownViewResource(org.holoeverywhere.R.layout.simple_spinner_dropdown_item)

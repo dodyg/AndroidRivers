@@ -20,18 +20,11 @@ package com.silverkeytech.android_rivers.riverjs
 
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.google.gson.Gson
-import com.silverkeytech.android_rivers.DateHelper
 import com.silverkeytech.android_rivers.Result
 import com.silverkeytech.android_rivers.httpGet
 import com.silverkeytech.android_rivers.scrubJsonP
-import com.silverkeytech.news_engine.syndications.SyndicationFeed
-import java.util.Vector
 import android.util.Log
-import com.silverkeytech.news_engine.riverjs.RiverItemMeta
-import com.silverkeytech.news_engine.riverjs.RiverEnclosure
-import com.silverkeytech.news_engine.riverjs.RiverItemSource
 import com.silverkeytech.news_engine.riverjs.River
-import com.silverkeytech.news_engine.riverjs.RiverItem
 
 fun downloadSingleRiver(url: String): Result<River> {
     var req: String?
