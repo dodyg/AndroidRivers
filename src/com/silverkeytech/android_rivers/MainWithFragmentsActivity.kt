@@ -115,6 +115,9 @@ public open class MainWithFragmentsActivity(): Activity() {
             SLIDE_MENU_GOOGLE_NEWS -> {
                 startGoogleNewsSearchActivity(this@MainWithFragmentsActivity)
             }
+            SLIDE_MENU_FARGO_LATEST_100 -> {
+                downloadOpml(this, "http://fargo.io/blogUpdates.opml", "Fargo Latest 100")
+            }
             SLIDE_MENU_KAYAK_DEALS -> {
                 startKayakFlightDealsActivity(this@MainWithFragmentsActivity)
             }

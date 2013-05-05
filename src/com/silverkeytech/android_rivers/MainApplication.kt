@@ -70,7 +70,8 @@ public class MainApplication(): Application()
         //  path.delete()// for development only
 
         if (true){
-            var db = this.openOrCreateDatabase(Database.DATABASE_NAME, Context.MODE_PRIVATE, null)
+            val db = this.openOrCreateDatabase(Database.DATABASE_NAME, Context.MODE_PRIVATE, null)
+
             db?.close()
             Log.d(TAG, "Create DB")
         }else{

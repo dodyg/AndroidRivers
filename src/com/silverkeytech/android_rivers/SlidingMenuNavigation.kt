@@ -44,11 +44,13 @@ public val SLIDE_MENU_GOOGLE_NEWS: Int = 5
 public val SLIDE_MENU_KAYAK_DEALS: Int = 6
 public val SLIDE_MENU_FEEDBACK: Int = 7
 public val SLIDE_MENU_CRAIGSLIST_LISTING: Int = 8
+public val SLIDE_MENU_FARGO_LATEST_100: Int = 9
 
 fun getMainNavigationItems(): ArrayList<NavItem> {
     val navs = arrayListOf(
             //NavItem(id = SLIDE_MENU_READ, text = "Read", icon = 0),
             NavItem(id = SLIDE_MENU_GOOGLE_NEWS, text = "Google News", icon = 0),
+            NavItem(id = SLIDE_MENU_FARGO_LATEST_100, text = "Fargo Latest 100", icon = 0),
             NavItem(id = SLIDE_MENU_KAYAK_DEALS, text = "Flight Deals", icon = 0),
             NavItem(id = SLIDE_MENU_CRAIGSLIST_LISTING, text = "Craigslist", icon = 0),
             //NavItem(id = SLIDE_MENU_WRITE, text = "Write", icon = 0),
