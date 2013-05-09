@@ -28,6 +28,6 @@ public class Opml {
     public Head head;
     @Element
     public Body body;
-    @Attribute
+    @Attribute(required = false)
     public String version;
 }

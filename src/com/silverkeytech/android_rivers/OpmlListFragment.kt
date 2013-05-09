@@ -31,6 +31,13 @@ import org.holoeverywhere.app.ListFragment
 import com.silverkeytech.android_rivers.db.BookmarkKind
 import android.widget.TextView
 import com.silverkeytech.android_rivers.db.SortingOrder
+import com.silverkeytech.android_rivers.db.Bookmark
+import com.silverkeytech.android_rivers.db.BookmarkCollection
+import com.silverkeytech.android_rivers.db.BookmarkKind
+import com.silverkeytech.android_rivers.db.DatabaseManager
+import com.silverkeytech.android_rivers.db.SortingOrder
+import com.silverkeytech.android_rivers.db.removeItemByUrlFromBookmarkDb
+import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 
 
 public class OpmlListFragment(): ListFragment() {
@@ -88,19 +95,18 @@ public class OpmlListFragment(): ListFragment() {
         super<ListFragment>.onHiddenChanged(hidden)
     }
 
-    public override fun onPrepareOptionsMenu(menu: Menu?) {
-        if (menu != null){
-            }
-        super<ListFragment>.onPrepareOptionsMenu(menu)
-    }
-
     public override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater!!.inflate(R.menu.river_list_fragment_menu, menu)
+        inflater!!.inflate(R.menu.opml_list_fragment_menu, menu)
         super<ListFragment>.onCreateOptionsMenu(menu, inflater)
     }
 
+
     public override fun onOptionsItemSelected(item: com.actionbarsherlock.view.MenuItem?): Boolean {
         when(item!!.getItemId()) {
+            R.id.opml_list_fragment_menu_show_add_dialog -> {
+                displayAddNewOpmlDialog()
+                return false
+            }
             else -> return false
         }
     }
@@ -134,14 +140,13 @@ public class OpmlListFragment(): ListFragment() {
 
     public data class ViewHolder (var podcastName: TextView)
 
-
-    fun displayAddNewRssDialog() {
-        val dlg = createSingleInputDialog(parent!!, "Add new RSS", "", "Set url here", {
+    fun displayAddNewOpmlDialog() {
+        val dlg = createSingleInputDialog(parent!!, "Add new OPML", lastEnteredUrl , "Set url here", {
             dlg, url ->
             lastEnteredUrl = url
             Log.d(TAG, "Entered $url")
             if (url.isNullOrEmpty()){
-                parent!!.toastee("Please enter url of the river", Duration.LONG)
+                parent!!.toastee("Please enter url of the OPML", Duration.LONG)
             }
             else {
                 var currentUrl = url!!
@@ -150,6 +155,31 @@ public class OpmlListFragment(): ListFragment() {
 
                 val u = safeUrlConvert(currentUrl)
                 if (u.isTrue()){
+                    DownloadOpml(parent)
+                            .executeOnRawCompletion({
+                        res ->
+                        if (res.isTrue()){
+                            val opml = res.value
+
+                            val title = opml?.head?.title ?: "No Title"
+                            val language = "en"
+
+                            val res2 = saveBookmarkToDb(title, currentUrl, BookmarkKind.OPML, language, null)
+
+                            if (res2.isTrue()){
+                                parent!!.toastee("$currentUrl is successfully bookmarked")
+                                displayOpmlList()
+                            }
+                            else{
+                                parent!!.toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
+                            }
+                        }
+                        else{
+                            parent!!.toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)
+                        }
+                    })
+                            .execute(currentUrl)
+
 //                    DownloadFeed(parent!!, true)
 //                            .executeOnComplete {
 //                        res ->
