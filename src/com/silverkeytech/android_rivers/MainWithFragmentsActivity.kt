@@ -38,6 +38,7 @@ enum class MainActivityMode {
     RSS
     COLLECTION
     PODCASTS
+    OPML
 }
 
 public open class MainWithFragmentsActivity(): Activity() {
@@ -197,25 +198,26 @@ public open class MainWithFragmentsActivity(): Activity() {
         if (menu != null){
             menu.findItem(R.id.main_menu_updates).andHide()
 
-            val backward = menu.findItem(SWITCH_BACKWARD)
-            val forward = menu.findItem(SWITCH_FORWARD)
-            when(mode){
-                MainActivityMode.RIVER -> {
-                    backward!!.setEnabled(false)
-                }
-                MainActivityMode.RSS -> {
-                    backward!!.setEnabled(true)
-                }
-                MainActivityMode.COLLECTION -> {
-                    backward!!.setEnabled(true)
-                    forward!!.setEnabled(false)
-                }
-                MainActivityMode.PODCASTS -> {
-                    backward!!.setEnabled(true)
-                }
-                else -> {
-                }
-            }
+            menu.findItem(SWITCH_BACKWARD)?.setEnabled(true)
+            menu.findItem(SWITCH_FORWARD)?.setEnabled(true)
+
+//            when(mode){
+//                MainActivityMode.RIVER -> {
+//                    backward!!.setEnabled(false)
+//                }
+//                MainActivityMode.RSS -> {
+//                    backward!!.setEnabled(true)
+//                }
+//                MainActivityMode.COLLECTION -> {
+//                    backward!!.setEnabled(true)
+//                    forward!!.setEnabled(false)
+//                }
+//                MainActivityMode.PODCASTS -> {
+//                    backward!!.setEnabled(true)
+//                }
+//                else -> {
+//                }
+//            }
         }
 
         return super.onPrepareOptionsMenu(menu)
@@ -241,11 +243,14 @@ public open class MainWithFragmentsActivity(): Activity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    fun showAndHide(showRiver: Boolean = false, showRss: Boolean = false, showCollection: Boolean = false, showPodcasts: Boolean = false) {
+    fun showAndHide(showRiver: Boolean = false, showRss: Boolean = false,
+                    showCollection: Boolean = false, showPodcasts: Boolean = false,
+                    showOpml : Boolean = false) {
         val riverFragment = this.findFragmentById(R.id.main_rivers_fragment)
         val rssFragment = this.findFragmentById(R.id.main_rss_fragment)
         val collectionFragment = this.findFragmentById(R.id.main_collection_fragment)
         val podcastsFragment = this.findFragmentById(R.id.main_podcast_fragment)
+        val opmlFragment = this.findFragmentById(R.id.main_opml_fragment)
 
         val transaction = this.beginFragmentTransaction()
 
@@ -253,6 +258,7 @@ public open class MainWithFragmentsActivity(): Activity() {
         if (showRss) transaction.show(rssFragment) else transaction.hide(rssFragment)
         if (showCollection) transaction.show(collectionFragment) else transaction.hide(collectionFragment)
         if (showPodcasts) transaction.show(podcastsFragment) else transaction.hide(podcastsFragment)
+        if (showOpml) transaction.show(opmlFragment) else transaction.hide(opmlFragment)
 
         transaction.commit()
     }
@@ -263,6 +269,7 @@ public open class MainWithFragmentsActivity(): Activity() {
             MainActivityMode.RSS -> showAndHide(showRss = true)
             MainActivityMode.COLLECTION -> showAndHide(showCollection = true)
             MainActivityMode.PODCASTS -> showAndHide(showPodcasts = true)
+            MainActivityMode.OPML -> showAndHide(showOpml = true)
             else -> {
             }
         }
@@ -275,6 +282,7 @@ public open class MainWithFragmentsActivity(): Activity() {
             MainActivityMode.RSS -> actionBar.setTitle("RSS")
             MainActivityMode.COLLECTION -> actionBar.setTitle("Collections")
             MainActivityMode.PODCASTS -> actionBar.setTitle("Podcasts")
+            MainActivityMode.OPML -> actionBar.setTitle("OPMLs")
             else -> {
             }
         }
@@ -327,29 +335,36 @@ public open class MainWithFragmentsActivity(): Activity() {
             MainActivityMode.PODCASTS -> {
                 showAndHide(showPodcasts = true)
             }
+            MainActivityMode.OPML -> {
+                showAndHide(showOpml = true)
+            }
             else -> {
             }
         }
     }
 
-    //this is one directional forward
+    //this is two directional forward
     fun changeModeForward() {
         val currentMode = mode
         mode = when (currentMode){
             MainActivityMode.RIVER -> MainActivityMode.RSS
             MainActivityMode.RSS -> MainActivityMode.PODCASTS
             MainActivityMode.PODCASTS -> MainActivityMode.COLLECTION
+            MainActivityMode.COLLECTION -> MainActivityMode.OPML
+            MainActivityMode.OPML -> MainActivityMode.RIVER
             else -> MainActivityMode.RIVER
         }
     }
 
-    //this is one directional backward
+    //this is two directional backward
     fun changeModeBackward() {
         val currentMode = mode
         mode = when (currentMode){
+            MainActivityMode.OPML -> MainActivityMode.COLLECTION
             MainActivityMode.COLLECTION -> MainActivityMode.PODCASTS
             MainActivityMode.PODCASTS -> MainActivityMode.RSS
             MainActivityMode.RSS -> MainActivityMode.RIVER
+            MainActivityMode.RIVER -> MainActivityMode.OPML
             else -> MainActivityMode.RIVER
         }
     }

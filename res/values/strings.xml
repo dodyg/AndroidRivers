@@ -10,8 +10,9 @@
     <string name="download_starts">"Download starts"</string>
     <string name="edit_sources_of_collection">Edit sources of \'%1$s\'</string>
     <string name="empty_bookmark_collection_items_list">There are no items in this collection yet. You can add items to this collection when you bookmark a RSS.</string>
-    <string name="empty_rss_items_list">Your bookmarked RSS will be listed here. Click on \'more news\' to find more news feeds.</string>
-    <string name="empty_river_items_list">Your bookmarked rivers will appear here. To find more river, click on \'more news\' or add a new collection. You can also click on \'refresh\' option to download default rivers.</string>
+    <string name="empty_rss_items_list">Your bookmarked RSS will be listed here. Click on \'+\' to find more news feeds or add a new RSS url.</string>
+    <string name="empty_river_items_list">Your bookmarked rivers will appear here. To find more river, click on \'+\' or add a new collection. You can also click on \'refresh\' option to download default rivers.</string>
+    <string name="empty_opml_items_list">Your bookmarked OPML will be listed here. To find more OPML, click on \'+\' or add a new OPML url.</string>
     <string name="go">Go</string>
     <string name="help">Help</string>
     <string name="optional_search_term">Optional search term</string>
