@@ -136,7 +136,7 @@ public class CollectionListFragment: ListFragment() {
         val adapter = object : ArrayAdapter<BookmarkCollection>(parent!!, android.R.layout.simple_list_item_1, android.R.id.text1, coll){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 val text = coll[position].toString()
-                return currentListItem(text, convertView, parent, textSize.toFloat())
+                return currentTextViewItem(text, convertView, parent, textSize.toFloat(), false, this@CollectionListFragment.getLayoutInflater()!!)
             }
         }
 
@@ -219,32 +219,6 @@ public class CollectionListFragment: ListFragment() {
         pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
     }
 
-    public data class ViewHolder (var name: TextView)
-
-    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?, textSize: Float): View? {
-        var holder: ViewHolder?
-
-        var vw: View? = convertView
-
-        if (vw == null){
-            vw = inflater().inflate(android.R.layout.simple_list_item_1, parent, false)
-
-            holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
-            holder!!.name.setText(text)
-            vw!!.setTag(holder)
-        }else{
-            holder = vw!!.getTag() as ViewHolder
-            holder!!.name.setText(text)
-        }
-
-        handleFontResize(holder!!.name, text, textSize)
-
-        return vw
-    }
-
-    fun inflater(): LayoutInflater {
-        return this.getLayoutInflater()!!
-    }
 
     fun showAddNewCollectionDialog() {
         val dlg: View = parent!!.getLayoutInflater()!!.inflate(R.layout.collection_add_new, null)!!

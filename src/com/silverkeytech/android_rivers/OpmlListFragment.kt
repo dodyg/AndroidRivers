@@ -38,6 +38,14 @@ import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.removeItemByUrlFromBookmarkDb
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
+import android.widget.Adapter
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.ListView
+import android.widget.PopupWindow
+import android.widget.TextView
 
 
 public class OpmlListFragment(): ListFragment() {
@@ -100,7 +108,6 @@ public class OpmlListFragment(): ListFragment() {
         super<ListFragment>.onCreateOptionsMenu(menu, inflater)
     }
 
-
     public override fun onOptionsItemSelected(item: com.actionbarsherlock.view.MenuItem?): Boolean {
         when(item!!.getItemId()) {
             R.id.opml_list_fragment_menu_show_add_dialog -> {
@@ -119,10 +126,34 @@ public class OpmlListFragment(): ListFragment() {
     private fun displayOpmlList(){
         val opmls = getBookmarksFromDb(BookmarkKind.OPML, SortingOrder.ASC)
 
-        if (opmls.size == 0)
+        handleOpmlListing(opmls)
+    }
+
+    fun handleOpmlListing(bookmarks: List<Bookmark>) {
+
+        if (bookmarks.size == 0)
             showMessage(parent!!.getString(R.string.empty_opml_items_list)!!)
         else
             showMessage("")
+
+        val textSize = parent!!.getVisualPref().getListTextSize()
+
+        val adapter = object : ArrayAdapter<Bookmark>(parent, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
+            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
+                val text = bookmarks[position].toString()
+                return currentTextViewItem(text, convertView, parent, textSize.toFloat(), false, this@OpmlListFragment.getLayoutInflater()!!)
+            }
+        }
+
+        val list = getView()!!.findViewById(android.R.id.list) as ListView
+        list.setAdapter(adapter)
+        list.setOnItemClickListener(object : OnItemClickListener{
+            public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
+                val bookmark = bookmarks.get(p2)
+                startFeedActivity(parent!!, bookmark.url, bookmark.title, bookmark.language)
+            }
+        })
+
     }
 
     private fun showMessage(msg: String) {
@@ -137,8 +168,6 @@ public class OpmlListFragment(): ListFragment() {
             handleFontResize(txt, msg, textSize.toFloat())
         }
     }
-
-    public data class ViewHolder (var podcastName: TextView)
 
     fun displayAddNewOpmlDialog() {
         val dlg = createSingleInputDialog(parent!!, "Add new OPML", lastEnteredUrl , "Set url here", {

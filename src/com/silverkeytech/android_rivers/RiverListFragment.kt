@@ -325,7 +325,7 @@ public class RiverListFragment(): ListFragment() {
         val adapter = object : ArrayAdapter<Outline>(parent!!, android.R.layout.simple_list_item_1, android.R.id.text1, outlines){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 val text = outlines[position].toString()
-                return currentListItem(text!!, convertView, parent, textSize.toFloat())
+                return currentTextViewItem(text!!, convertView, parent, textSize.toFloat(), false, this@RiverListFragment.getLayoutInflater()!!)
             }
         }
 
@@ -355,32 +355,6 @@ public class RiverListFragment(): ListFragment() {
         })
     }
 
-
-    public data class ViewHolder (var name: TextView)
-
-    public fun currentListItem(text: String, convertView: View?, parent: ViewGroup?, textSize: Float): View? {
-        var holder: ViewHolder?
-
-        var vw: View? = convertView
-
-        if (vw == null){
-            vw = inflater().inflate(android.R.layout.simple_list_item_1, parent, false)
-
-            holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
-            vw!!.setTag(holder)
-        }else{
-            holder = vw!!.getTag() as ViewHolder
-        }
-
-        handleFontResize(holder!!.name, text, textSize)
-
-        return vw
-    }
-
-    fun inflater(): LayoutInflater {
-        return getLayoutInflater()!!
-    }
-
     fun refreshRiverBookmarks(retrieveRiversFromInternetIfNoneExisted: Boolean)
     {
         parent.getMain().clearRiverBookmarksCache()
@@ -392,7 +366,7 @@ public class RiverListFragment(): ListFragment() {
         val popupWidth = item.getWidth()
         val popupHeight = item.getHeight()
 
-        val x = inflater().inflate(R.layout.main_river_quick_actions, null, false)!!
+        val x = this.getLayoutInflater()!!.inflate(R.layout.main_river_quick_actions, null, false)!!
         val pp = PopupWindow(x, popupWidth, popupHeight, true)
 
         x.setBackgroundColor(android.graphics.Color.LTGRAY)

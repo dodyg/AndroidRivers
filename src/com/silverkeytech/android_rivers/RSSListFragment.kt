@@ -214,7 +214,7 @@ public class RssListFragment(): ListFragment() {
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 val text = bookmarks[position].toString()
                 val inCollection = bookmarks[position].collection != null
-                return currentListItem(text, convertView, parent, textSize.toFloat(), inCollection)
+                return currentTextViewItem(text, convertView, parent, textSize.toFloat(), inCollection, this@RssListFragment.getLayoutInflater()!!)
             }
         }
 
@@ -363,31 +363,4 @@ public class RssListFragment(): ListFragment() {
         pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
     }
 
-
-    public data class ViewHolder (public var name: TextView)
-
-    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?, textSize: Float, inCollection: Boolean): View? {
-        var holder: ViewHolder?
-
-        var vw: View? = convertView
-
-        if (vw == null){
-            vw = inflater().inflate(android.R.layout.simple_list_item_1, parent, false)
-            holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
-            vw!!.setTag(holder)
-        }else{
-            holder = vw!!.getTag() as ViewHolder
-        }
-
-        if (inCollection)
-            handleFontResize(holder!!.name, "$text \u2248", textSize)
-        else
-            handleFontResize(holder!!.name, text, textSize)
-
-        return vw
-    }
-
-    fun inflater(): LayoutInflater {
-        return this.getLayoutInflater()!!
-    }
 }

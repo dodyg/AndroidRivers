@@ -146,30 +146,9 @@ public class PodcastListFragment(): ListFragment() {
 
         val adapter = object : ArrayAdapter<Podcast>(parent!!, android.R.layout.simple_list_item_1, android.R.id.text1, podcasts) {
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-                var currentView = convertView
-                var holder: ViewHolder?
-
                 val currentPodcast = podcasts[position]
                 val text = currentPodcast.title
-
-                if (currentView == null){
-                    currentView = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
-                    holder = ViewHolder(currentView!!.findViewById(android.R.id.text1) as TextView)
-                    currentView!!.setTag(holder)
-                }
-                else {
-                    holder = currentView?.getTag() as ViewHolder
-                }
-
-                if (text.isNullOrEmpty()){
-                    currentView?.setVisibility(View.GONE)
-                }
-                else {
-                    currentView?.setVisibility(View.VISIBLE)
-                    handleFontResize(holder!!.podcastName, text, textSize.toFloat())
-                }
-
-                return currentView
+                return currentTextViewItem(text, convertView, parent, textSize.toFloat(), false, this@PodcastListFragment.getLayoutInflater()!!)
             }
         }
 
