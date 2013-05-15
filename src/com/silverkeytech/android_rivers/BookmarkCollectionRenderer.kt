@@ -116,20 +116,26 @@ fun showCollectionQuickActionPopup(context: BookmarkCollectionActivity, bookmark
 
     val icon = x.findViewById(R.id.collection_quick_action_delete_icon) as ImageView
     icon.setOnClickListener {
-        try{
-            var res = removeBookmarkFromCollection(bookmark.collection!!.id, bookmark.id)
+        val dlg = createConfirmationDialog(context = context, message = "Are you sure about removing this collection bookmark?", positive = {
+            try{
+                var res = removeBookmarkFromCollection(bookmark.collection!!.id, bookmark.id)
 
-            if (res.isFalse())
-                context.toastee("Error in removing this bookmark collection ${res.exception?.getMessage()}")
-            else {
-                context.toastee(context.getString(R.string.bookmark_removed)!!)
-                context.refreshCollection()
+                if (res.isFalse())
+                    context.toastee("Error in removing this collection bookmark  ${res.exception?.getMessage()}")
+                else {
+                    context.toastee(context.getString(R.string.bookmark_removed)!!)
+                    context.refreshCollection()
+                }
             }
-        }
-        catch(e: Exception){
-            context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
-        }
-        pp.dismiss()
+            catch(e: Exception){
+                context.toastee("Error in trying to remove this collection bookmark ${e.getMessage()}")
+            }
+            pp.dismiss()
+        }, negative = {
+            pp.dismiss()
+        })
+
+        dlg.show()
     }
 
     val itemLocation = getLocationOnScreen(item)
