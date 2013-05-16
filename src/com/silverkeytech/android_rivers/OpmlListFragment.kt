@@ -28,15 +28,9 @@ import com.silverkeytech.android_rivers.db.getBookmarksFromDb
 import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.ListFragment
-import com.silverkeytech.android_rivers.db.BookmarkKind
-import android.widget.TextView
-import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.Bookmark
-import com.silverkeytech.android_rivers.db.BookmarkCollection
 import com.silverkeytech.android_rivers.db.BookmarkKind
-import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.db.SortingOrder
-import com.silverkeytech.android_rivers.db.removeItemByUrlFromBookmarkDb
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import android.widget.Adapter
 import android.widget.AdapterView
@@ -46,7 +40,8 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.PopupWindow
 import android.widget.TextView
-
+import android.view.Gravity
+import com.silverkeytech.android_rivers.db.DatabaseManager
 
 public class OpmlListFragment(): ListFragment() {
     class object {
@@ -154,6 +149,58 @@ public class OpmlListFragment(): ListFragment() {
             }
         })
 
+        list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
+            public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
+                val bookmark = bookmarks.get(p2)
+                showPodcastQuickActionPopup(parent!!, bookmark, p1!!, list)
+                return true
+            }
+        })
+    }
+
+    fun showPodcastQuickActionPopup(context: Activity, current: Bookmark, item: View, list: View) {
+        //overlay popup at top of clicked overview position
+        val popupWidth = item.getWidth()
+        val popupHeight = item.getHeight()
+
+        val x = context.getLayoutInflater()!!.inflate(R.layout.opml_quick_actions, null, false)!!
+        val pp = PopupWindow(x, popupWidth, popupHeight, true)
+
+        x.setBackgroundColor(android.graphics.Color.LTGRAY)
+
+        x.setOnClickListener {
+            pp.dismiss()
+        }
+
+        val icon = x.findViewById(R.id.opml_quick_action_delete_icon) as ImageView
+        icon.setOnClickListener {
+            val dlg = createConfirmationDialog(context = context, message = "Are you sure about deleting this OPML bookmark?", positive = {
+                try{
+                    val res = removeBookmark(current.url)
+                    if (res.isFalse())
+                        context.toastee("Error in removing this OPML bookmark ${res.exception?.getMessage()}")
+                    else {
+                        context.toastee("OPML bookmark removed")
+                        displayOpmlList()
+                    }
+                }
+                catch(e: Exception){
+                    context.toastee("Error in trying to remove this bookmark ${e.getMessage()}")
+                }
+                pp.dismiss()
+            }, negative = {
+                pp.dismiss()
+            })
+
+            dlg.show()
+        }
+
+        val itemLocation = getLocationOnScreen(item)
+        pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
+    }
+
+    public fun removeBookmark (url: String): Result<None> {
+        return DatabaseManager.cmd().bookmark().deleteByUrl(url)
     }
 
     private fun showMessage(msg: String) {
