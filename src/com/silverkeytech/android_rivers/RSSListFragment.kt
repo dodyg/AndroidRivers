@@ -117,10 +117,14 @@ public class RssListFragment(): ListFragment() {
         super<ListFragment>.onPause()
     }
 
-    fun displayImportOpmlDialog() {
-        val dlg = createSingleInputDialog(parent!!, "Import subscription list", "", "Set url here", {
+    fun displayImportOpmlDialog(){
+        val (hasClip, uri) = this.tryGetUriFromClipboard()
+
+        if (hasClip)
+            lastEnteredUrl = uri
+
+        val dlg = createSingleInputDialog(parent!!, "Import subscription list", lastEnteredUrl, "Set url here", {
             dlg, url ->
-            lastEnteredUrl = url
             if (url.isNullOrEmpty()) {
                 parent!!.toastee("Please enter url of the OPML subscription list", Duration.LONG)
             }
@@ -134,6 +138,7 @@ public class RssListFragment(): ListFragment() {
                 if (u.isTrue()){
                     startImportOpmlSubscriptionService(parent!!, u.value!!.toString())
                 } else {
+                    lastEnteredUrl = url
                     Log.d(TAG, "Opml download $currentUrl conversion generates ${u.exception?.getMessage()}")
                     parent!!.toastee("The url you entered is not valid. Please try again", Duration.LONG)
                 }
@@ -143,7 +148,12 @@ public class RssListFragment(): ListFragment() {
     }
 
     fun displayAddNewRssDialog() {
-        val dlg = createSingleInputDialog(parent!!, "Add new RSS", "", "Set url here", {
+        val (hasClip, uri) = this.tryGetUriFromClipboard()
+
+        if (hasClip)
+            lastEnteredUrl = uri
+
+        val dlg = createSingleInputDialog(parent!!, "Add new RSS", lastEnteredUrl, "Set url here", {
             dlg, url ->
             lastEnteredUrl = url
             Log.d(TAG, "Entered $url")
@@ -179,6 +189,7 @@ public class RssListFragment(): ListFragment() {
                             .execute(currentUrl)
                     dlg?.dismiss()
                 }else{
+                    lastEnteredUrl = url
                     Log.d(TAG, "RSS $currentUrl conversion generates ${u.exception?.getMessage()}")
                     parent!!.toastee("The url you entered is not valid. Please try again", Duration.LONG)
                 }

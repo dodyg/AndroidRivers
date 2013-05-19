@@ -209,10 +209,13 @@ public class RiverListFragment(): ListFragment() {
     }
 
     private fun displayAddNewRiverDialog() {
-        val dlg = createSingleInputDialog(parent!!, "Add new river", "", "Set url here", {
+        val (hasClip, uri) = this.tryGetUriFromClipboard()
+
+        if (hasClip)
+            lastEnteredUrl = uri
+
+        val dlg = createSingleInputDialog(parent!!, "Add new river", lastEnteredUrl, "Set url here", {
             dlg, url ->
-            lastEnteredUrl = url
-            Log.d(TAG, "Entered $url")
             if (url.isNullOrEmpty()){
                 parent!!.toastee("Please enter url of the river")
             }
@@ -249,6 +252,7 @@ public class RiverListFragment(): ListFragment() {
 
                     dlg?.dismiss()
                 }else{
+                    lastEnteredUrl = url
                     Log.d(TAG, "RIVER $currentUrl conversion generates ${u.exception?.getMessage()}")
                     parent!!.toastee("The url you entered is not valid. Please try again", Duration.LONG)
                 }

@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.android_rivers
 
-import android.content.Context
 import android.net.ConnectivityManager
 import android.view.View
 import android.view.View.OnClickListener
@@ -28,6 +27,26 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import android.os.Build
+import android.content.Context
+import android.text.ClipboardManager
+import android.support.v4.app.Fragment
+import android.app.Activity
+import android.webkit.URLUtil
+
+fun Fragment.tryGetUriFromClipboard() : Pair<Boolean, String?> {
+    val res = this.getActivity()!!.tryGetUriFromClipboard()
+    return res
+}
+
+fun Activity.tryGetUriFromClipboard() : Pair<Boolean, String?> {
+    val clipboard = this.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    if (clipboard.hasText()){
+        val text = clipboard.getText().toString()
+        if (URLUtil.isValidUrl(text))
+            return Pair(true, text.toString())
+    }
+    return Pair(true, null)
+}
 
 public fun MenuItem?.andHide(): MenuItem {
     this!!.setVisible(false)
@@ -118,5 +137,6 @@ fun isNetworkAvailable(context: Context): Boolean {
 fun isModernAndroid(): Boolean {
     return Build.VERSION.SDK_INT >= 14 //Build.VERSION_CODES.ICE_CREAM_SANDWICH
 }
+
 
 

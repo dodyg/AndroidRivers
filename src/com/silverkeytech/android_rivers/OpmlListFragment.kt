@@ -31,7 +31,6 @@ import org.holoeverywhere.app.ListFragment
 import com.silverkeytech.android_rivers.db.Bookmark
 import com.silverkeytech.android_rivers.db.BookmarkKind
 import com.silverkeytech.android_rivers.db.SortingOrder
-import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
@@ -42,6 +41,7 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import android.view.Gravity
 import com.silverkeytech.android_rivers.db.DatabaseManager
+import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 
 public class OpmlListFragment(): ListFragment() {
     class object {
@@ -216,11 +216,15 @@ public class OpmlListFragment(): ListFragment() {
         }
     }
 
+
     fun displayAddNewOpmlDialog() {
+        val (hasClip, uri) = this.tryGetUriFromClipboard()
+
+        if (hasClip)
+            lastEnteredUrl = uri
+
         val dlg = createSingleInputDialog(parent!!, "Add new OPML", lastEnteredUrl , "Set url here", {
             dlg, url ->
-            lastEnteredUrl = url
-            Log.d(TAG, "Entered $url")
             if (url.isNullOrEmpty()){
                 parent!!.toastee("Please enter url of the OPML", Duration.LONG)
             }
@@ -255,29 +259,9 @@ public class OpmlListFragment(): ListFragment() {
                         }
                     })
                             .execute(currentUrl)
-
-//                    DownloadFeed(parent!!, true)
-//                            .executeOnComplete {
-//                        res ->
-//                        if (res.isTrue()){
-//                            var feed = res.value!!
-//
-//                            val res2 = saveBookmarkToDb(feed.title, currentUrl, BookmarkKind.RSS, feed.language, null)
-//
-//                            if (res2.isTrue()){
-//                                parent!!.toastee("$currentUrl is successfully bookmarked")
-//                                displayRssBookmarks()
-//                            }
-//                            else{
-//                                parent!!.toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
-//                            }
-//                        }else{
-//                            parent!!.toastee("Error ${res.exception?.getMessage()}", Duration.LONG)
-//                        }
-//                    }
-//                            .execute(currentUrl)
                     dlg?.dismiss()
                 }else{
+                    lastEnteredUrl = url
                     Log.d(TAG, "RSS $currentUrl conversion generates ${u.exception?.getMessage()}")
                     parent!!.toastee("The url you entered is not valid. Please try again", Duration.LONG)
                 }
