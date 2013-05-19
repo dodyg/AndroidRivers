@@ -48,12 +48,13 @@ fun Activity.tryGetUriFromClipboard() : Pair<Boolean, String?> {
     return Pair(true, null)
 }
 
+
 public fun MenuItem?.andHide(): MenuItem {
     this!!.setVisible(false)
     return this
 }
 
-public fun OnClickListener(action: (View?) -> Unit): OnClickListener {
+public fun onClickListener(action: (View?) -> Unit): OnClickListener {
     return object : OnClickListener {
         public override fun onClick(p0: View?) {
             action(p0)
@@ -62,7 +63,7 @@ public fun OnClickListener(action: (View?) -> Unit): OnClickListener {
 }
 
 public fun View.setOnClickListener(action: (View?) -> Unit): Unit {
-    setOnClickListener(OnClickListener(action))
+    setOnClickListener(onClickListener(action))
 }
 
 public fun parseRFC3339DateFormat(dt: String): java.util.Date? {

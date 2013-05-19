@@ -98,8 +98,22 @@ public fun createFlexibleContentDialog(context: Activity, content: View, buttons
     return dialog
 }
 
+
+//This is a holder for AlertDialog with support for a neutral button that does not dismiss automatically
+public class AlertDialogWithNeutralButton (val dlg : AlertDialog, val btnTitle : String, val resetAction : (() -> Unit)) {
+    public fun show(){
+        dlg.show()
+
+        val neutral = dlg.getButton(DialogInterface.BUTTON_NEUTRAL)!!
+        neutral.setText(btnTitle)
+        neutral.setOnClickListener(onClickListener {
+            resetAction()
+        })
+    }
+}
+
 //Create a popup dialog with one text for url submission. Then provide the given url via a callback called 'action'
-public fun createSingleInputDialog(context: Activity, title: String, defaultInput: String?, inputHint: String, action: (DialogInterface?, String?) -> Unit): AlertDialog {
+public fun createSingleInputDialog(context: Activity, title: String, defaultInput: String?, inputHint: String, action: (DialogInterface?, String?) -> Unit): AlertDialogWithNeutralButton {
     val dlg: View = context.getLayoutInflater()!!.inflate(R.layout.dialog_single_input, null)!!
 
     //take care of color
@@ -128,8 +142,15 @@ public fun createSingleInputDialog(context: Activity, title: String, defaultInpu
         dlg?.dismiss()
     })
 
+    dialog.setNeutralButton("Clear", dlgClickListener {
+        dlg, idx ->
+            //deliberately empty
+    })
 
-    val createdDialog = dialog.create()!!
+    val createdDialog = AlertDialogWithNeutralButton(dialog.create()!!, context.getString(R.string.clear)!!) {
+        inputUrl.setText("")
+    }
+
     return createdDialog
 }
 
