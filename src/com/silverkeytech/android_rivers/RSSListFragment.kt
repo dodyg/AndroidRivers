@@ -183,6 +183,7 @@ public class RssListFragment(): ListFragment() {
                                 parent!!.toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
                             }
                         }else{
+                            lastEnteredUrl = url
                             parent!!.toastee("Error ${res.exception?.getMessage()}", Duration.LONG)
                         }
                     }

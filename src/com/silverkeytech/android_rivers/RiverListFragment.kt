@@ -245,6 +245,7 @@ public class RiverListFragment(): ListFragment() {
                             }
                         }
                         else{
+                            lastEnteredUrl = url
                             parent!!.toastee("$currentUrl is not a valid river", Duration.LONG)
                         }
                     }

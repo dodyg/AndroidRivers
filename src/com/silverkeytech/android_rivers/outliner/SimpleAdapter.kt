@@ -53,7 +53,6 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
     }
 
     private open fun getDescription(id: Long?): String? {
-        //val hierarchy: Array<Int?>? = getManager()?.getHierarchyDescription(id)
         var currentOutline = outlines.get(id!!.toInt())
         return when (currentOutline.getType()){
             OutlineType.INCLUDE -> currentOutline.text + " #"

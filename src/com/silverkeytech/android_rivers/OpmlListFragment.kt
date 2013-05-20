@@ -255,6 +255,7 @@ public class OpmlListFragment(): ListFragment() {
                             }
                         }
                         else{
+                            lastEnteredUrl = url
                             parent!!.toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)
                         }
                     })

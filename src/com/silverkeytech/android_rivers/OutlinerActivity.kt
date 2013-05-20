@@ -77,9 +77,9 @@ public class OutlinerActivity(): Activity()
 
         var treeBuilder = TreeBuilder(manager)
 
-        var counter = 0
+        var counter : Long = 0
         for(e in outlines){
-            treeBuilder.sequentiallyAddNextNode(counter.toLong(), e.level)
+            treeBuilder.sequentiallyAddNextNode(counter, e.level)
             counter++
         }
 
@@ -91,20 +91,20 @@ public class OutlinerActivity(): Activity()
     }
 
     fun collapseOutlines(manager: InMemoryTreeStateManager<Long?>, outlines: ArrayList<OutlineContent>) {
-        var counter = 0
+        var counter : Long = 0
         for(e in outlines){
             if (e.level == 0){
-                manager.collapseChildren(counter.toLong())
+                manager.collapseChildren(counter)
             }
             counter++
         }
     }
 
     fun expandOutlines(manager: InMemoryTreeStateManager<Long?>, outlines: ArrayList<OutlineContent>) {
-        var counter = 0
+        var counter : Long = 0
         for(e in outlines){
             if (e.level == 0){
-                manager.expandEverythingBelow(counter.toLong())
+                manager.expandEverythingBelow(counter)
             }
             counter++
         }
@@ -134,7 +134,7 @@ public class OutlinerActivity(): Activity()
                 this.getMain().setOpmlCache(url, res.value!!)
             }
             else{
-                toastee("Downloading url fails becaue of ${res.exception?.getMessage()}", Duration.LONG)
+                toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)
             }
         }, { outline -> outline.text != "<rules>" })
                 .execute(url)
