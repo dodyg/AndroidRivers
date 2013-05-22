@@ -35,6 +35,7 @@ public class Preferences{
         public val VISUAL_LIST_TEXT_SIZE: String = "PREFERENCE_VISUAL_LIST_TEXT_SIZE"
         public val VISUAL_THEME: String = "PREFERENCE_VISUAL_THEME"
 
+        public val STORED: String = "STORED"
         public val STORED_KAYAK_CITY: String = "STORED_KAYAK_CITY"
         public val STORED_GOOGLE_NEWS_COUNTRY: String = "STORED_GOOGLE_NEWS_COUNTRY"
         public val STORED_CRAIGS_LIST_CITY: String = "STORED_CRAIGS_LIST_CITY"
@@ -89,6 +90,9 @@ fun Activity.getSetupPref(): SetupPreference =
 
 fun Activity.getVisualPref(): VisualPreference =
         VisualPreference(this.getSharedPreferences(Preferences.VISUAL, Context.MODE_PRIVATE)!!)
+
+fun Activity.getStoredPref(): StoredPreference =
+        StoredPreference(this.getSharedPreferences(Preferences.STORED, Context.MODE_PRIVATE)!!)
 
 public class StoredPreference(public val pref: SharedPreferences){
     class object {

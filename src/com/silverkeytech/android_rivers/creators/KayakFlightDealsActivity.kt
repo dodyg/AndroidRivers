@@ -33,6 +33,7 @@ import org.holoeverywhere.widget.Button
 import com.silverkeytech.android_rivers.addBookmarkOption
 import com.silverkeytech.android_rivers.saveBookmark
 import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
+import com.silverkeytech.android_rivers.getStoredPref
 
 public class KayakFlightDealsActivity (): Activity(){
     class object {
@@ -59,6 +60,11 @@ public class KayakFlightDealsActivity (): Activity(){
         val names = airportCodes.iterator().map { x -> x.name }.toArrayList()
 
         val completion = AirportAutoComplete.getUI(this, R.id.kayak_flight_deals_area, names)!!
+
+        //if there's a previous working city stored in preference, load it up
+        val cityPref = this.getStoredPref().kayakCity
+        if (cityPref != "")
+            completion.setText(cityPref)
 
         val bookmark = findViewById(R.id.kayak_flight_deals_bookmark_btn)!! as Button
         bookmark.setEnabled(false)
@@ -96,6 +102,10 @@ public class KayakFlightDealsActivity (): Activity(){
                         if (!feed.language.isNullOrEmpty()){
                             feedLanguage = feed.language
                         }
+
+                        //If the feed is correct, keep the city name
+                        if (feed.items.size > 0)
+                            this@KayakFlightDealsActivity.getStoredPref().kayakCity = input.trim()
 
                         if (feed.items.size > 0 && !checkIfUrlAlreadyBookmarked(feedUrl))
                             bookmark.setEnabled(true)
