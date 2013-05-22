@@ -15,6 +15,7 @@ import org.holoeverywhere.widget.Button
 import org.holoeverywhere.widget.Spinner
 import com.silverkeytech.android_rivers.addBookmarkOption
 import com.silverkeytech.android_rivers.saveBookmark
+import com.silverkeytech.android_rivers.getStoredPref
 import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 
 public class CraigslistListingActivity (): Activity(){
@@ -44,6 +45,10 @@ public class CraigslistListingActivity (): Activity(){
         val cityNames = cities.iterator().map { x -> x.location }.toArrayList<String>()
         val completion = CityAutoComplete.getUI(this, R.id.craigslist_listing_city, cityNames)!!
 
+        var storedCity = this.getStoredPref().craigsListCity
+        if (storedCity != "")
+            completion.setText(storedCity)
+
         //categories
         var categories = getCraigsListCategories(this)
         val categoryNames = categories.iterator().map { x -> x.name }.toArrayList<String>()
@@ -53,7 +58,6 @@ public class CraigslistListingActivity (): Activity(){
 
         val categoryList = findViewById(R.id.craigslist_listing_category)!! as Spinner
         categoryList.setAdapter(adapter)
-
 
         val bookmark = findViewById(R.id.craigslist_listing_bookmark_btn)!! as Button
         bookmark.setEnabled(false)
@@ -94,6 +98,9 @@ public class CraigslistListingActivity (): Activity(){
                         }
 
                         feedName = feed.title
+
+                        if (feed.items.size > 0)
+                            this@CraigslistListingActivity.getStoredPref().craigsListCity = input.trim()
 
                         if (feed.items.size > 0 && !checkIfUrlAlreadyBookmarked(feedUrl))
                             bookmark.setEnabled(true)
