@@ -45,7 +45,7 @@ fun Activity.tryGetUriFromClipboard() : Pair<Boolean, String?> {
         if (URLUtil.isValidUrl(text))
             return Pair(true, text.toString())
     }
-    return Pair(true, null)
+    return Pair(false, null)
 }
 
 
@@ -123,8 +123,11 @@ fun futureTimeFromNowInMilies(seconds: Int): Long {
     return System.currentTimeMillis() + (seconds.toLong() * 1000.toLong())
 }
 
+//unsafe HTTPGet (trust all certificates and hosts)
 fun httpGet(url: String): HttpRequest {
     return HttpRequest.get(url)!!
+            .trustAllHosts()!!
+            .trustAllCerts()!!
             .acceptGzipEncoding()!!
             .uncompress(true)!!
 }

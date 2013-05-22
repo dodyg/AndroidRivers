@@ -27,7 +27,7 @@ import com.silverkeytech.android_rivers.outliner.traverse
 import com.silverkeytech.news_engine.outlines.Opml
 import com.silverkeytech.news_engine.outlines.Outline
 import java.util.ArrayList
-import org.holoeverywhere.app.Activity
+import android.app.Activity
 
 public class DownloadOpml(it: Context?): AsyncTask<String, Int, Pair<String, Result<Opml>>>(){
     class object {
@@ -52,6 +52,7 @@ public class DownloadOpml(it: Context?): AsyncTask<String, Int, Pair<String, Res
         try{
             req = httpGet(link).body()
 
+            Log.d(TAG, "Raw OPML $req")
             val opml = transformXmlToOpml(req?.replace("<?xml version=\"1.0\" encoding=\"utf-8\" ?>", "")
                 ?.replace("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>", "")
             )

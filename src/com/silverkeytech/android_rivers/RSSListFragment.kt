@@ -133,12 +133,14 @@ public class RssListFragment(): ListFragment() {
                 if (!currentUrl.contains("http://"))
                     currentUrl = "http://" + currentUrl
 
+                lastEnteredUrl = currentUrl
+
                 val u = safeUrlConvert(currentUrl)
 
                 if (u.isTrue()){
+                    lastEnteredUrl = ""
                     startImportOpmlSubscriptionService(parent!!, u.value!!.toString())
                 } else {
-                    lastEnteredUrl = url
                     Log.d(TAG, "Opml download $currentUrl conversion generates ${u.exception?.getMessage()}")
                     parent!!.toastee("The url you entered is not valid. Please try again", Duration.LONG)
                 }
@@ -155,8 +157,6 @@ public class RssListFragment(): ListFragment() {
 
         val dlg = createSingleInputDialog(parent!!, "Add new RSS", lastEnteredUrl, "Set url here", {
             dlg, url ->
-            lastEnteredUrl = url
-            Log.d(TAG, "Entered $url")
             if (url.isNullOrEmpty()){
                 parent!!.toastee("Please enter url of the river", Duration.LONG)
             }
@@ -164,6 +164,8 @@ public class RssListFragment(): ListFragment() {
                 var currentUrl = url!!
                 if (!currentUrl.contains("http://"))
                     currentUrl = "http://" + currentUrl
+
+                lastEnteredUrl = currentUrl
 
                 val u = safeUrlConvert(currentUrl)
                 if (u.isTrue()){
@@ -176,6 +178,7 @@ public class RssListFragment(): ListFragment() {
                             val res2 = saveBookmarkToDb(feed.title, currentUrl, BookmarkKind.RSS, feed.language, null)
 
                             if (res2.isTrue()){
+                                lastEnteredUrl = "" //reset when op is successful
                                 parent!!.toastee("$currentUrl is successfully bookmarked")
                                 displayRssBookmarks()
                             }
@@ -183,14 +186,12 @@ public class RssListFragment(): ListFragment() {
                                 parent!!.toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
                             }
                         }else{
-                            lastEnteredUrl = url
                             parent!!.toastee("Error ${res.exception?.getMessage()}", Duration.LONG)
                         }
                     }
                             .execute(currentUrl)
                     dlg?.dismiss()
                 }else{
-                    lastEnteredUrl = url
                     Log.d(TAG, "RSS $currentUrl conversion generates ${u.exception?.getMessage()}")
                     parent!!.toastee("The url you entered is not valid. Please try again", Duration.LONG)
                 }
@@ -374,5 +375,4 @@ public class RssListFragment(): ListFragment() {
         val itemLocation = getLocationOnScreen(item)
         pp.showAtLocation(list, Gravity.TOP or Gravity.LEFT, itemLocation.x, itemLocation.y)
     }
-
 }

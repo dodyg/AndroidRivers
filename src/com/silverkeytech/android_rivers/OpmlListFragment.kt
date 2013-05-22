@@ -86,7 +86,6 @@ public class OpmlListFragment(): ListFragment() {
         super<ListFragment>.onResume()
     }
 
-
     public override fun onHiddenChanged(hidden: Boolean) {
         Log.d(TAG, "OnHiddenChanged $hidden")
 
@@ -145,7 +144,7 @@ public class OpmlListFragment(): ListFragment() {
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val bookmark = bookmarks.get(p2)
-                startFeedActivity(parent!!, bookmark.url, bookmark.title, bookmark.language)
+                downloadOpml(this@OpmlListFragment.getActivity()!!, bookmark.url, bookmark.title)
             }
         })
 
@@ -216,13 +215,14 @@ public class OpmlListFragment(): ListFragment() {
         }
     }
 
-
     fun displayAddNewOpmlDialog() {
         val (hasClip, uri) = this.tryGetUriFromClipboard()
 
-        if (hasClip)
+        if (hasClip)     {
             lastEnteredUrl = uri
+        }
 
+        Log.d(TAG, "Last entered value is $lastEnteredUrl")
         val dlg = createSingleInputDialog(parent!!, "Add new OPML", lastEnteredUrl , "Set url here", {
             dlg, url ->
             if (url.isNullOrEmpty()){
@@ -232,6 +232,8 @@ public class OpmlListFragment(): ListFragment() {
                 var currentUrl = url!!
                 if (!currentUrl.contains("http://"))
                     currentUrl = "http://" + currentUrl
+
+                lastEnteredUrl = currentUrl
 
                 val u = safeUrlConvert(currentUrl)
                 if (u.isTrue()){
@@ -247,6 +249,7 @@ public class OpmlListFragment(): ListFragment() {
                             val res2 = saveBookmarkToDb(title, currentUrl, BookmarkKind.OPML, language, null)
 
                             if (res2.isTrue()){
+                                lastEnteredUrl = "" //reset value when the opml url is bookmarked
                                 parent!!.toastee("$currentUrl is successfully bookmarked")
                                 displayOpmlList()
                             }
@@ -255,14 +258,12 @@ public class OpmlListFragment(): ListFragment() {
                             }
                         }
                         else{
-                            lastEnteredUrl = url
                             parent!!.toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)
                         }
                     })
                             .execute(currentUrl)
                     dlg?.dismiss()
                 }else{
-                    lastEnteredUrl = url
                     Log.d(TAG, "RSS $currentUrl conversion generates ${u.exception?.getMessage()}")
                     parent!!.toastee("The url you entered is not valid. Please try again", Duration.LONG)
                 }

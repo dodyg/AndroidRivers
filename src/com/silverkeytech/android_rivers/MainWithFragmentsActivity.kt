@@ -197,24 +197,6 @@ public open class MainWithFragmentsActivity(): Activity() {
 
             menu.findItem(SWITCH_BACKWARD)?.setEnabled(true)
             menu.findItem(SWITCH_FORWARD)?.setEnabled(true)
-
-//            when(mode){
-//                MainActivityMode.RIVER -> {
-//                    backward!!.setEnabled(false)
-//                }
-//                MainActivityMode.RSS -> {
-//                    backward!!.setEnabled(true)
-//                }
-//                MainActivityMode.COLLECTION -> {
-//                    backward!!.setEnabled(true)
-//                    forward!!.setEnabled(false)
-//                }
-//                MainActivityMode.PODCASTS -> {
-//                    backward!!.setEnabled(true)
-//                }
-//                else -> {
-//                }
-//            }
         }
 
         return super.onPrepareOptionsMenu(menu)

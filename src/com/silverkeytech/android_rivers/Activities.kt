@@ -29,7 +29,7 @@ import android.widget.Toast
 import java.net.SocketException
 import java.net.UnknownHostException
 import org.apache.http.conn.ConnectTimeoutException
-import org.holoeverywhere.app.Activity
+import android.app.Activity
 
 fun Service?.getMain(): MainApplication {
     return this!!.getApplication() as MainApplication
@@ -73,11 +73,11 @@ public fun Activity.toastee(text: String, duration: Duration = Duration.QUICK, g
     t!!.show()
 }
 
-fun Activity.findFragmentById(id: Int): Fragment {
+fun org.holoeverywhere.app.Activity.findFragmentById(id: Int): Fragment {
     return this.getSupportFragmentManager()!!.findFragmentById(id)!!
 }
 
-fun Activity.beginFragmentTransaction(): FragmentTransaction {
+fun org.holoeverywhere.app.Activity.beginFragmentTransaction(): FragmentTransaction {
     return this.getSupportFragmentManager()!!.beginTransaction()!!
 }
 

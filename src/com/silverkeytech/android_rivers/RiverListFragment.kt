@@ -224,6 +224,8 @@ public class RiverListFragment(): ListFragment() {
                 if (!currentUrl.contains("http://"))
                     currentUrl = "http://" + currentUrl
 
+                lastEnteredUrl = currentUrl
+
                 val u = safeUrlConvert(currentUrl)
                 if (u.isTrue()){
                     DownloadRiverContent(parent!!, "en")
@@ -237,6 +239,7 @@ public class RiverListFragment(): ListFragment() {
                             var res2 = saveBookmarkToDb(currentUrl, currentUrl, BookmarkKind.RIVER, "en", null)
 
                             if (res2.isTrue()){
+                                lastEnteredUrl = "" //reset because the op is successful
                                 parent!!.toastee("$currentUrl river is successfully bookmarked", Duration.LONG)
                                 parent!!.getMain().clearRiverBookmarksCache()
                                 refreshRiverBookmarks(false)
@@ -245,7 +248,6 @@ public class RiverListFragment(): ListFragment() {
                             }
                         }
                         else{
-                            lastEnteredUrl = url
                             parent!!.toastee("$currentUrl is not a valid river", Duration.LONG)
                         }
                     }
@@ -253,7 +255,6 @@ public class RiverListFragment(): ListFragment() {
 
                     dlg?.dismiss()
                 }else{
-                    lastEnteredUrl = url
                     Log.d(TAG, "RIVER $currentUrl conversion generates ${u.exception?.getMessage()}")
                     parent!!.toastee("The url you entered is not valid. Please try again", Duration.LONG)
                 }
