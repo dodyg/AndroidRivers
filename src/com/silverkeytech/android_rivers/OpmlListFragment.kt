@@ -130,7 +130,7 @@ public class OpmlListFragment(): ListFragment() {
         else
             showMessage("")
 
-        val textSize = parent!!.getVisualPref().getListTextSize()
+        val textSize = parent!!.getVisualPref().listTextSize
 
         val adapter = object : ArrayAdapter<Bookmark>(parent, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
@@ -209,7 +209,7 @@ public class OpmlListFragment(): ListFragment() {
             txt.setText("")
         }
         else {
-            val textSize = parent!!.getVisualPref().getListTextSize()
+            val textSize = parent!!.getVisualPref().listTextSize
             txt.setVisibility(View.VISIBLE)
             handleFontResize(txt, msg, textSize.toFloat())
         }

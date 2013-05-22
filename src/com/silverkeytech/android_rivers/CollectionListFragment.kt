@@ -113,7 +113,7 @@ public class CollectionListFragment: ListFragment() {
             txt.setText("")
         }
         else{
-            val textSize = parent!!.getVisualPref().getListTextSize()
+            val textSize = parent!!.getVisualPref().listTextSize
             txt.setVisibility(View.VISIBLE)
             handleFontResize(txt, msg, textSize.toFloat())
         }
@@ -131,7 +131,7 @@ public class CollectionListFragment: ListFragment() {
         else
             showMessage("")
 
-        val textSize = parent!!.getVisualPref().getListTextSize()
+        val textSize = parent!!.getVisualPref().listTextSize
 
         val adapter = object : ArrayAdapter<BookmarkCollection>(parent!!, android.R.layout.simple_list_item_1, android.R.id.text1, coll){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {

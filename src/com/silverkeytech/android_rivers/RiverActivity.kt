@@ -49,7 +49,7 @@ public class RiverActivity(): ListActivity(), WithVisualModificationPanel
     var isOnCreate: Boolean = true
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
-        currentTheme = this.getVisualPref().getTheme()
+        currentTheme = this.getVisualPref().theme
         isOnCreate = true
         setTheme(currentTheme!!)
 
@@ -73,9 +73,9 @@ public class RiverActivity(): ListActivity(), WithVisualModificationPanel
         super<ListActivity>.onResume()
         //skip if this event comes after onCreate
         if (!isOnCreate){
-            Log.d(TAG, "RESUMING Current Theme $currentTheme vs ${this.getVisualPref().getTheme()}")
+            Log.d(TAG, "RESUMING Current Theme $currentTheme vs ${this.getVisualPref().theme}")
             //detect if there has been any theme changes
-            if (currentTheme != null && currentTheme!! != this.getVisualPref().getTheme()){
+            if (currentTheme != null && currentTheme!! != this.getVisualPref().theme){
                 Log.d(TAG, "Theme changes detected - updating theme")
                 restart()
                 return

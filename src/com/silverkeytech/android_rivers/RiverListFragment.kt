@@ -113,7 +113,7 @@ public class RiverListFragment(): ListFragment() {
         if (menu != null){
             val sort: MenuItem = menu.findItem(R.id.river_list_fragment_menu_sort)!!
             val nextSort = nextSortCycle()
-            Log.d(TAG, "The next sort cycle from current ${parent!!.getContentPref().getRiverBookmarksSorting()} is $nextSort")
+            Log.d(TAG, "The next sort cycle from current ${parent!!.getContentPref().riverBookmarksSorting} is $nextSort")
             setSortButtonText(sort, nextSort)
 
             val refresh = menu.findItem(R.id.river_list_fragment_menu_refresh)!!
@@ -158,7 +158,7 @@ public class RiverListFragment(): ListFragment() {
             R.id.river_list_fragment_menu_sort -> {
                 val nextSort = nextSortCycle()
                 Log.d(TAG, "The new sort is $nextSort")
-                parent!!.getContentPref().setRiverBookmarksSorting(nextSort)
+                parent!!.getContentPref().riverBookmarksSorting = nextSort
                 displayRiverBookmarks(false)
                 return true
             }
@@ -179,7 +179,7 @@ public class RiverListFragment(): ListFragment() {
             txt.setText("")
         }
         else{
-            val textSize = parent!!.getVisualPref().getListTextSize()
+            val textSize = parent!!.getVisualPref().listTextSize
             txt.setVisibility(View.VISIBLE)
             handleFontResize(txt, msg, textSize.toFloat())
         }
@@ -197,7 +197,7 @@ public class RiverListFragment(): ListFragment() {
     }
 
     fun nextSortCycle(): Int {
-        val sort = parent!!.getContentPref().getRiverBookmarksSorting()
+        val sort = parent!!.getContentPref().riverBookmarksSorting
         return when (sort){
             PreferenceValue.SORT_ASC -> PreferenceValue.SORT_DESC
             PreferenceValue.SORT_DESC -> PreferenceValue.SORT_NONE
@@ -270,7 +270,7 @@ public class RiverListFragment(): ListFragment() {
 
         if (cache != null){
             Log.d(TAG, "Get bookmarks from cache")
-            handleRiversListing(cache, parent!!.getContentPref().getRiverBookmarksSorting())
+            handleRiversListing(cache, parent!!.getContentPref().riverBookmarksSorting)
         }  else{
             Log.d(TAG, "Try to retrieve bookmarks from DB")
             val bookmarks = getBookmarksFromDbAsOpml(BookmarkKind.RIVER, SortingOrder.NONE)
@@ -278,7 +278,7 @@ public class RiverListFragment(): ListFragment() {
             if (bookmarks.body!!.outline!!.count() > 0){
                 Log.d(TAG, "Now bookmarks come from the db")
                 parent!!.getMain().setRiverBookmarksCache(bookmarks)
-                handleRiversListing(bookmarks, parent!!.getContentPref().getRiverBookmarksSorting())
+                handleRiversListing(bookmarks, parent!!.getContentPref().riverBookmarksSorting)
             }
             else if (retrieveDefaultFromInternet){
                 Log.d(TAG, "Start downloading bookmarks from the Internet")
@@ -289,9 +289,9 @@ public class RiverListFragment(): ListFragment() {
                     val res2 = saveOpmlAsBookmarks(res.value!!)
 
                     if (res2.isTrue()){
-                        handleRiversListing(res2.value!!, parent!!.getContentPref().getRiverBookmarksSorting())
+                        handleRiversListing(res2.value!!, parent!!.getContentPref().riverBookmarksSorting)
                         Log.d(TAG, "Bookmark data from the Internet is successfully saved")
-                        parent!!.getSetupPref().setDownloadDefaultRivers(false)//we only download standard rivers from the internet by default when at setup the first time
+                        parent!!.getSetupPref().downloadDefaultRiversIfNecessary = false//we only download standard rivers from the internet by default when at setup the first time
                     }
                     else{
                         Log.d(TAG, "Saving opml bookmark to db fails ${res2.exception?.getMessage()}")
@@ -302,7 +302,7 @@ public class RiverListFragment(): ListFragment() {
             }
             else{
                 //this happen when you remove the last item from the river bookmark. So have it render an empty opml
-                handleRiversListing(Opml(), parent!!.getContentPref().getRiverBookmarksSorting())
+                handleRiversListing(Opml(), parent!!.getContentPref().riverBookmarksSorting)
             }
         }
     }
@@ -326,7 +326,7 @@ public class RiverListFragment(): ListFragment() {
             outlines = sortOutlineDesc(outlines) as ArrayList<Outline>
         }
 
-        val textSize = parent!!.getVisualPref().getListTextSize()
+        val textSize = parent!!.getVisualPref().listTextSize
 
         val adapter = object : ArrayAdapter<Outline>(parent!!, android.R.layout.simple_list_item_1, android.R.id.text1, outlines){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {

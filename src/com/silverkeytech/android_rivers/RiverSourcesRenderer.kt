@@ -35,7 +35,7 @@ public class RiverSourcesRenderer(val context: RiverSourcesActivity, val languag
     }
 
     fun handleListing(sourcesTitles: List<String>, sourcesUris: List<String>) {
-        val textSize = context.getVisualPref().getListTextSize()
+        val textSize = context.getVisualPref().listTextSize
         val inflater = inflater()
 
         val adapter = object : ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, android.R.id.text1, sourcesTitles){

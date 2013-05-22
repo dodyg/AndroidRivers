@@ -41,7 +41,7 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
     }
 
     fun handleListing(bookmarks: List<Bookmark>) {
-        val textSize = context.getVisualPref().getListTextSize()
+        val textSize = context.getVisualPref().listTextSize
 
         if (bookmarks.count() == 0){
             var msg = context.findViewById(R.id.collection_message_tv)!! as TextView

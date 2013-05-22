@@ -116,7 +116,7 @@ public class PodcastListFragment(): ListFragment() {
             txt.setText("")
         }
         else {
-            val textSize = parent!!.getVisualPref().getListTextSize()
+            val textSize = parent!!.getVisualPref().listTextSize
             txt.setVisibility(View.VISIBLE)
             handleFontResize(txt, msg, textSize.toFloat())
         }
@@ -142,7 +142,7 @@ public class PodcastListFragment(): ListFragment() {
         val list = getView()!!.findViewById(android.R.id.list) as ListView
         val inflater: LayoutInflater = parent!!.getLayoutInflater()!!
 
-        val textSize = parent!!.getVisualPref().getListTextSize()
+        val textSize = parent!!.getVisualPref().listTextSize
 
         val adapter = object : ArrayAdapter<Podcast>(parent!!, android.R.layout.simple_list_item_1, android.R.id.text1, podcasts) {
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {

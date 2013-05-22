@@ -40,7 +40,7 @@ public class FeedActivity(): ListActivity(), WithVisualModificationPanel
     var mode: ActionMode? = null
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
-        setTheme(this.getVisualPref().getTheme())
+        setTheme(this.getVisualPref().theme)
         super<ListActivity>.onCreate(savedInstanceState)
         setContentView(R.layout.feeds)
 

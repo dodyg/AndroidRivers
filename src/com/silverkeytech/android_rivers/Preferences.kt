@@ -34,6 +34,10 @@ public class Preferences{
         public val VISUAL: String = "PREFERENCE_VISUAL"
         public val VISUAL_LIST_TEXT_SIZE: String = "PREFERENCE_VISUAL_LIST_TEXT_SIZE"
         public val VISUAL_THEME: String = "PREFERENCE_VISUAL_THEME"
+
+        public val STORED_KAYAK_CITY: String = "STORED_KAYAK_CITY"
+        public val STORED_GOOGLE_NEWS_COUNTRY: String = "STORED_GOOGLE_NEWS_COUNTRY"
+        public val STORED_CRAIGS_LIST_CITY: String = "STORED_CRAIGS_LIST_CITY"
     }
 }
 
@@ -86,19 +90,26 @@ fun Activity.getSetupPref(): SetupPreference =
 fun Activity.getVisualPref(): VisualPreference =
         VisualPreference(this.getSharedPreferences(Preferences.VISUAL, Context.MODE_PRIVATE)!!)
 
+public class StoredPreference(public val pref: SharedPreferences){
+    class object {
+        public val TAG: String = javaClass<StoredPreference>().getSimpleName()
+    }
+
+}
+
 public class ContentPreference(public val pref: SharedPreferences){
     class object {
         public val TAG: String = javaClass<ContentPreference>().getSimpleName()
     }
 
-    public fun getRiverBookmarksSorting(): Int = pref.getInt(Preferences.CONTENT_RIVER_BOOKMARKS_SORTING, PreferenceDefaults.CONTENT_RIVER_BOOKMARKS_SORTING)
-    public fun setRiverBookmarksSorting(sort: Int) {
-        var edit = pref.edit()!!
-        edit.putInt(Preferences.CONTENT_RIVER_BOOKMARKS_SORTING, sort)
-        edit.commit()
-        Log.d(TAG, "Saving bookmark sorting value $sort")
-
-    }
+    public var riverBookmarksSorting: Int
+            get() = pref.getInt(Preferences.CONTENT_RIVER_BOOKMARKS_SORTING, PreferenceDefaults.CONTENT_RIVER_BOOKMARKS_SORTING)
+            set(sort: Int) {
+                var edit = pref.edit()!!
+                edit.putInt(Preferences.CONTENT_RIVER_BOOKMARKS_SORTING, sort)
+                edit.commit()
+                Log.d(TAG, "Saving bookmark sorting value $sort")
+            }
 }
 
 public class SetupPreference(public val pref: SharedPreferences){
@@ -106,15 +117,14 @@ public class SetupPreference(public val pref: SharedPreferences){
         public val TAG: String = javaClass<SetupPreference>().getSimpleName()
     }
 
-    public fun getDownloadDefaultRiversIfNecessary(): Boolean =
-            pref.getBoolean(Preferences.SETUP_DOWNLOAD_DEFAULT_RIVERS, PreferenceDefaults.SETUP_DOWNLOAD_DEFAULT_RIVERS)
-
-    public fun setDownloadDefaultRivers(yes: Boolean) {
-        val edit = pref.edit()!!
-        edit.putBoolean(Preferences.SETUP_DOWNLOAD_DEFAULT_RIVERS, yes)
-        edit.commit()
-        Log.d(TAG, "Saving Download Default Rivers $yes")
-    }
+    public var downloadDefaultRiversIfNecessary: Boolean
+        get() = pref.getBoolean(Preferences.SETUP_DOWNLOAD_DEFAULT_RIVERS, PreferenceDefaults.SETUP_DOWNLOAD_DEFAULT_RIVERS)
+        set(yes: Boolean){
+            val edit = pref.edit()!!
+            edit.putBoolean(Preferences.SETUP_DOWNLOAD_DEFAULT_RIVERS, yes)
+            edit.commit()
+            Log.d(TAG, "Saving Download Default Rivers $yes")
+        }
 }
 
 public class VisualPreference (public val pref: SharedPreferences){
@@ -122,30 +132,32 @@ public class VisualPreference (public val pref: SharedPreferences){
         public val TAG: String = javaClass<VisualPreference>().getSimpleName()
     }
 
-    public fun getListTextSize(): Int = pref.getInt(Preferences.VISUAL_LIST_TEXT_SIZE, PreferenceDefaults.VISUAL_LIST_TEXT_SIZE)
-    public fun setListTextSize(size: Int) {
-        if (size < 12 || size > 30) //http://developer.android.com/design/style/typography.html
-            return
+    public var listTextSize: Int
+        get() = pref.getInt(Preferences.VISUAL_LIST_TEXT_SIZE, PreferenceDefaults.VISUAL_LIST_TEXT_SIZE)
+        set(size: Int) {
+            if (size < 12 || size > 30) //http://developer.android.com/design/style/typography.html
+                return
 
-        var edit = pref.edit()!!
-        edit.putInt(Preferences.VISUAL_LIST_TEXT_SIZE, size)
-        edit.commit()
-        Log.d(TAG, "Saving list text size $size")
-    }
-
-    public fun getTheme(): Int {
-        val currentTheme = pref.getInt(Preferences.VISUAL_THEME, PreferenceDefaults.VISUAL_THEME)
-
-        when (currentTheme){
-            R.style.Theme_Sherlock_Light_DarkActionBar -> return R.style.Holo_Theme_Light
-            R.style.Theme_Sherlock -> return R.style.Holo_Theme
-            R.style.Theme_Sherlock_Light -> return R.style.Holo_Theme_Light
-            else -> return currentTheme
+            var edit = pref.edit()!!
+            edit.putInt(Preferences.VISUAL_LIST_TEXT_SIZE, size)
+            edit.commit()
+            Log.d(TAG, "Saving list text size $size")
         }
-    }
+
+    public val theme: Int
+        get(){
+            val currentTheme = pref.getInt(Preferences.VISUAL_THEME, PreferenceDefaults.VISUAL_THEME)
+
+            when (currentTheme){
+                R.style.Theme_Sherlock_Light_DarkActionBar -> return R.style.Holo_Theme_Light
+                R.style.Theme_Sherlock -> return R.style.Holo_Theme
+                R.style.Theme_Sherlock_Light -> return R.style.Holo_Theme_Light
+                else -> return currentTheme
+            }
+        }
 
     public fun switchTheme() {
-        val currentTheme = getTheme()
+        val currentTheme = theme
 
         var newTheme = when(currentTheme){
             R.style.Holo_Theme -> R.style.Holo_Theme_Light

@@ -48,7 +48,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
 
     //show and prepare the interaction for each individual news item
     fun handleNewsListing(listViewId: Int, feedTitle: String, feedUrl: String, feedItems: List<SyndicationFeedItem>) {
-        val textSize = context.getVisualPref().getListTextSize()
+        val textSize = context.getVisualPref().listTextSize
 
         //now sort it so people always have the latest news first
         var list = context.findView<ListView>(listViewId)

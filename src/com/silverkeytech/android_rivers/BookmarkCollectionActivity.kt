@@ -33,7 +33,7 @@ public open class BookmarkCollectionActivity(): ListActivity() {
     var collectionId: Int = 0
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
-        setTheme(this.getVisualPref().getTheme())
+        setTheme(this.getVisualPref().theme)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.collection)

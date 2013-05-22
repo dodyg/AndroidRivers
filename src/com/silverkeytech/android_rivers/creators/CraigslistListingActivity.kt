@@ -28,7 +28,7 @@ public class CraigslistListingActivity (): Activity(){
     var feedDateIsParseable: Boolean = false
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
-        setTheme(this.getVisualPref().getTheme())
+        setTheme(this.getVisualPref().theme)
         super<Activity>.onCreate(savedInstanceState)
         setContentView(R.layout.craigslist_listing)
 

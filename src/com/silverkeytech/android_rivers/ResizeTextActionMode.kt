@@ -36,16 +36,16 @@ public class ResizeTextActionMode (private val parent: WithVisualModificationPan
     //Get the display text size from preference
     fun increaseTextSize() {
         var pref = parent.getActivity().getVisualPref()
-        var textSize = pref.getListTextSize()
+        var textSize = pref.listTextSize
         textSize += 2
-        pref.setListTextSize(textSize)
+        pref.listTextSize = textSize
     }
 
     fun decreaseTextSize() {
         var pref = parent.getActivity().getVisualPref()
-        var textSize = pref.getListTextSize()
+        var textSize = pref.listTextSize
         textSize -= 2
-        pref.setListTextSize(textSize)
+        pref.listTextSize = textSize
     }
 
     public override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
@@ -90,7 +90,7 @@ public class ResizeTextActionMode (private val parent: WithVisualModificationPan
         ?.setIcon(android.R.drawable.btn_plus)
         ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
-        val switchText = when(parent.getActivity().getVisualPref().getTheme()){
+        val switchText = when(parent.getActivity().getVisualPref().theme){
             R.style.Theme_Sherlock -> "Light Theme"
             R.style.Theme_Sherlock_Light_DarkActionBar -> "Dark Theme"
             R.style.Holo_Theme -> "Light Theme"

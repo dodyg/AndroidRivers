@@ -45,7 +45,7 @@ public class KayakFlightDealsActivity (): Activity(){
     var feedDateIsParseable: Boolean = false
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
-        setTheme(this.getVisualPref().getTheme())
+        setTheme(this.getVisualPref().theme)
         super<Activity>.onCreate(savedInstanceState)
         setContentView(R.layout.kayak_flight_deals)
 

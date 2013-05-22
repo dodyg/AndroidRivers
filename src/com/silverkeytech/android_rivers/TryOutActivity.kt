@@ -63,7 +63,7 @@ public class TryOutActivity(): Activity()
     }
 
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
-        setTheme(this.getVisualPref().getTheme())
+        setTheme(this.getVisualPref().theme)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tryout)
