@@ -185,9 +185,9 @@ public class DownloadService(): IntentService("DownloadService"){
                 output?.close()
             }
         }
-        catch(e: HttpRequestException){
+        catch(e: Exception){
             Log.d(TAG, "Exception happend at attempt to download ${e.getMessage()}")
-            notification!!.contentView!!.setTextViewText(R.id.notification_download_progress_status_text, "File $inferredName download cancelled")
+            notification!!.contentView!!.setTextViewText(R.id.notification_download_progress_status_text, "File $inferredName download cancelled due to error")
             notificationManager.notify(notificationId, notification)
             result = Activity.RESULT_CANCELED
         }
