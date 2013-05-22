@@ -33,9 +33,10 @@ import org.holoeverywhere.app.Activity
 import org.holoeverywhere.widget.Button
 import org.holoeverywhere.widget.EditText
 import org.holoeverywhere.widget.Spinner
+import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
+import com.silverkeytech.android_rivers.getStoredPref
 import com.silverkeytech.android_rivers.addBookmarkOption
 import com.silverkeytech.android_rivers.saveBookmark
-import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 
 public class GoogleNewsSearchActivity (): Activity(){
     class object {
@@ -71,6 +72,22 @@ public class GoogleNewsSearchActivity (): Activity(){
         adapter.setDropDownViewResource(org.holoeverywhere.R.layout.simple_spinner_dropdown_item);
         regionList.setAdapter(adapter);
 
+        val country = this.getStoredPref().googleNewsCountry
+        Log.d(TAG, "Stored country $country")
+        if (country != ""){
+            var foundPosition = -1
+            for(c in listName.withIndices()){
+                if (c.second == country)
+                    foundPosition = c.first
+            }
+
+            Log.d(TAG, "Found position $foundPosition")
+            if (foundPosition > -1){
+                regionList.setSelection(foundPosition)
+            }
+        }
+
+
         val bookmark = findViewById(R.id.google_news_search_bookmark_btn)!! as Button
         bookmark.setEnabled(false)
         bookmark.setOnClickListener{
@@ -105,6 +122,9 @@ public class GoogleNewsSearchActivity (): Activity(){
                     if (!feed.language.isNullOrEmpty()){
                         feedLanguage = feed.language
                     }
+
+                    if (feed.items.size > 0)//store it if feed works
+                        this@GoogleNewsSearchActivity.getStoredPref().googleNewsCountry = key
 
                     if (feed.items.size > 0 && !checkIfUrlAlreadyBookmarked(feedUrl))
                         bookmark.setEnabled(true)
