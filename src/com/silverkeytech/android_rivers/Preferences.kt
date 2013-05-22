@@ -95,6 +95,39 @@ public class StoredPreference(public val pref: SharedPreferences){
         public val TAG: String = javaClass<StoredPreference>().getSimpleName()
     }
 
+    public var kayakCity: String
+        get() = pref.getString(Preferences.STORED_KAYAK_CITY, "")!!
+        set(city: String) {
+            if (city.size == 0)
+                return
+            var edit = pref.edit()!!
+            edit.putString(Preferences.STORED_KAYAK_CITY, city)
+            edit.commit()
+            Log.d(TAG, "Saving kayak city $city")
+        }
+
+
+    public var craigsListCity: String
+        get() = pref.getString(Preferences.STORED_CRAIGS_LIST_CITY, "")!!
+        set(city: String) {
+            if (city.size == 0)
+                return
+            var edit = pref.edit()!!
+            edit.putString(Preferences.STORED_CRAIGS_LIST_CITY, city)
+            edit.commit()
+            Log.d(TAG, "Saving craigslist city $city")
+        }
+
+    public var googleNewsCountry: String
+        get() = pref.getString(Preferences.STORED_GOOGLE_NEWS_COUNTRY, "")!!
+        set(country: String) {
+            if (country.size == 0)
+                return
+            var edit = pref.edit()!!
+            edit.putString(Preferences.STORED_GOOGLE_NEWS_COUNTRY, country)
+            edit.commit()
+            Log.d(TAG, "Saving google news country $country")
+        }
 }
 
 public class ContentPreference(public val pref: SharedPreferences){
