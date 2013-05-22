@@ -53,14 +53,23 @@ public class DownloadOpml(it: Context?): AsyncTask<String, Int, Pair<String, Res
             req = httpGet(link).body()
 
             Log.d(TAG, "Raw OPML $req")
+
+            if (req!!.contains("<html>")){
+                throw IllegalArgumentException("Document is not a valid OPML file (it might be a HTML document)")
+            }
+
             val opml = transformXmlToOpml(req?.replace("<?xml version=\"1.0\" encoding=\"utf-8\" ?>", "")
                 ?.replace("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>", "")
             )
             return Pair(link, opml)
         }
-        catch(e: HttpRequestException){
-            var ex = e.getCause()
-            return Pair(link, Result.wrong(ex))
+        catch(e: HttpRequestException)
+        {
+            return Pair(link, Result.wrong(e))
+        }
+        catch(e: IllegalArgumentException)
+        {
+            return Pair(link, Result.wrong(e))
         }
     }
 
