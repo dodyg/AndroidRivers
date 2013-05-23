@@ -27,6 +27,10 @@ import com.silverkeytech.news_engine.outliner.OutlineContent
 import com.silverkeytech.android_rivers.outliner.SimpleAdapter
 import java.util.ArrayList
 import org.holoeverywhere.app.Activity
+import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
+import com.silverkeytech.android_rivers.db.BookmarkKind
+import com.silverkeytech.android_rivers.db.saveBookmarkToDb
+import android.util.Log
 
 public class OutlinerActivity(): Activity()
 {
@@ -37,6 +41,7 @@ public class OutlinerActivity(): Activity()
     val LEVEL_NUMBER: Int = 12
 
     var outlinesUrl: String? = null
+    var outlinesTitle : String? = ""
     var expandAll: Boolean = false
 
     var outlinesData: ArrayList<OutlineContent>? = null
@@ -54,13 +59,11 @@ public class OutlinerActivity(): Activity()
         val extras = getIntent()?.getExtras()
 
         if (extras != null){
-            val title = extras.getString(Params.OUTLINES_TITLE)
-            if (title != null)
-                setTitle(title)
+            outlinesTitle = extras.getString(Params.OUTLINES_TITLE)
+            if (outlinesTitle != null)
+                setTitle(outlinesTitle)
 
-            val url = extras.getString(Params.OUTLINES_URL)
-            if (url != null)
-                outlinesUrl = url
+            outlinesUrl = extras.getString(Params.OUTLINES_URL)
 
             expandAll = extras.getBoolean(Params.OUTLINES_EXPAND_ALL)
             outlinesData = extras.getSerializable(Params.OUTLINES_DATA)!! as ArrayList<OutlineContent>
@@ -125,6 +128,15 @@ public class OutlinerActivity(): Activity()
         return true
     }
 
+    public override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        Log.d(TAG, "Title $outlinesTitle and Url $outlinesUrl")
+        val showBookmark = outlinesUrl != null && outlinesTitle != null && !checkIfUrlAlreadyBookmarked(outlinesUrl!!)
+
+        val bookmarkMenu = menu?.findItem(R.id.outliner_menu_bookmark)!!
+        bookmarkMenu.setVisible(showBookmark)
+        return true
+    }
+
     internal fun refreshContent(url: String) {
         DownloadOpml(this)
                 .executeOnProcessedCompletion({
@@ -157,6 +169,19 @@ public class OutlinerActivity(): Activity()
             R.id.outliner_menu_expand -> {
                 expandOutlines(treeManager, outlinesData!!)
                 return true
+            }
+            R.id.outliner_menu_bookmark ->{
+                Log.d(TAG, "At save !! Title $outlinesTitle and Url $outlinesUrl")
+
+                var res = saveBookmarkToDb(outlinesTitle!!, outlinesUrl!!, BookmarkKind.OPML, "en", null)
+
+                if (res.isTrue()){
+                    toastee("'$outlinesTitle' is added to your bookmark.")
+                    return true
+                } else{
+                    toastee("Sorry, we cannot add this $outlinesUrl", Duration.LONG)
+                    return false
+                }
             }
             else ->
                 return super.onOptionsItemSelected(item)
