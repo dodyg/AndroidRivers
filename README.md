@@ -1,4 +1,19 @@
-Android River is an Android 2.2 app that reads river of news based on RiverJS format. It's now version 1.0.
+Android River is an Android 2.2 news app. It's now version 1.13.
+
+Android River has the following features:
+- Read RSS 1.0, RSS 2.0 and ATOM 1.0.
+- Create your own custom River of News out of feeds.
+- Read RiverJs format.
+- Read OPML and display them in outline.
+- Download and play Podcast with a custom made podcast player.
+- Create RSS feeds out of Google News, Kayak.com deals and Craigslist.
+- Feature a frequently updated sources of feeds to subscribe to.
+- There is no login required to use any of the functionality.
+- There is no ads.
+- It is super fast.
+- It is efficient with data/battery usage.
+- It has the awesome Holo theme applied even from Android 2.2.
+- Tweets links easily or read articles for later (great integration with Pocket)
 
 The website for this project is at http://rivers.silverkeytech.com and it is available at Google Store http://goo.gl/kShgp
 
