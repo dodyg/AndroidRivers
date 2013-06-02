@@ -23,6 +23,9 @@ import java.io.InputStream
 import com.silverkeytech.news_engine.xml.textRule
 import com.silverkeytech.news_engine.xml.attributeRule
 import com.silverkeytech.news_engine.xml.tagRule
+import com.thebuzzmedia.sjxp.rule.ParsingMode
+import com.thebuzzmedia.sjxp.rule.DefaultRule
+
 
 public class RssParser{
     public fun parse(input: InputStream, rss: RssBuilder) {
@@ -35,6 +38,7 @@ public class RssParser{
         parser.parse(input, "UTF-8", rss)
     }
 }
+
 
 val channelTitle = textRule<RssBuilder>("/rss/channel/title", {(text, rss) ->
     rss.channel.setTitle(text)
