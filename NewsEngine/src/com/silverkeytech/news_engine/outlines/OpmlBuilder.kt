@@ -32,12 +32,13 @@ public class OpmlBuilder{
         public fun setDateCreated(date : String) : Unit = opml.head!!.dateCreated = date
         public fun setDateModified(date : String) : Unit =  opml.head!!.dateModified = date
         public fun setOwnerName(owner: String) : Unit = opml.head!!.ownerName = owner
+        public fun setOwnerEmail(email : String) : Unit = opml.head!!.ownerEmail = email
     }
 
     public class BodyBuilder (val opml : Opml){
-        {
-            opml.body = Body()
-        }
+    }
 
+    public fun build() : Opml{
+        return opml
     }
 }

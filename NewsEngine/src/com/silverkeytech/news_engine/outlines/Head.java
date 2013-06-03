@@ -33,6 +33,8 @@ public class Head {
     public String dateModified;      //RFC822 time
     @Element(required = false)
     public String ownerName;
+    @Element(required = false)
+    public String ownerEmail;
 
     public Date getDateCreated() {
         if (dateCreated == null)

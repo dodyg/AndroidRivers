@@ -27,8 +27,29 @@ import com.silverkeytech.news_engine.xml.tagRule
 
 public class OpmlParser{
     public fun parse(input: InputStream, rss: OpmlBuilder) {
-        var parser = XMLParser<OpmlBuilder>(
+        var parser = XMLParser<OpmlBuilder>(headTitle, headDateCreated, headDateModified, headOwnerName, headOwnerEmail
         )
         parser.parse(input, "UTF-8", rss)
     }
 }
+
+val headTitle = textRule<OpmlBuilder>("/opml/head/title", {(text, opml) ->
+    opml.head.setTitle(text)
+ })
+
+
+val headDateCreated = textRule<OpmlBuilder>("/opml/head/dateCreated", {(text, opml) ->
+    opml.head.setDateCreated(text)
+})
+
+val headDateModified = textRule<OpmlBuilder>("/opml/head/dateModified", {(text, opml) ->
+    opml.head.setDateModified(text)
+})
+
+val headOwnerName = textRule<OpmlBuilder>("/opml/head/ownerName", {(text, opml) ->
+    opml.head.setOwnerName(text)
+})
+
+val headOwnerEmail = textRule<OpmlBuilder>("/opml/head/ownerEmail", {(text, opml) ->
+    opml.head.setOwnerEmail(text)
+})

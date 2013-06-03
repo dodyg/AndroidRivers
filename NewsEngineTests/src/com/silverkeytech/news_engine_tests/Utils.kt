@@ -12,6 +12,9 @@ import com.silverkeytech.news_engine.syndications.atom.Feed
 import com.silverkeytech.news_engine.syndications.rss_rdf.Rdf
 import com.silverkeytech.news_engine.syndications.rss_rdf.RdfRssBuilder
 import com.silverkeytech.news_engine.syndications.rss_rdf.RdfRssParser
+import com.silverkeytech.news_engine.outlines.OpmlParser
+import com.silverkeytech.news_engine.outlines.OpmlBuilder
+import com.silverkeytech.news_engine.outlines.Opml
 
 fun plog(msg : String){
     System.out.println(msg)
@@ -107,6 +110,19 @@ fun transformXmlToRss(xml: String?): Result<Rss> {
     }
 }
 
+fun transformXmlToOpml(xml: String?): Result<Opml>{
+    try{
+        val builder = OpmlBuilder()
+        val reader = ByteArrayInputStream(xml!!.getBytes())
+        OpmlParser().parse(reader, builder)
+        val opml = builder.build()
+        reader.close()
+        return Result.right(opml)
+    }
+    catch (e: Exception){
+        return Result.wrong(e)
+    }
+}
 
 fun transformXmlToRdfRss(xml: String?): Result<Rdf> {
 
