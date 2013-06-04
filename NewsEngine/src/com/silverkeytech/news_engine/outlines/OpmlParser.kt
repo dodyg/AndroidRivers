@@ -18,16 +18,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.news_engine.outlines
 
-
 import com.thebuzzmedia.sjxp.XMLParser
 import java.io.InputStream
 import com.silverkeytech.news_engine.xml.textRule
+import com.thebuzzmedia.sjxp.rule.DefaultRule
 import com.silverkeytech.news_engine.xml.attributeRule
 import com.silverkeytech.news_engine.xml.tagRule
 
 public class OpmlParser{
     public fun parse(input: InputStream, rss: OpmlBuilder) {
-        var parser = XMLParser<OpmlBuilder>(headTitle, headDateCreated, headDateModified, headOwnerName, headOwnerEmail
+        var parser = XMLParser<OpmlBuilder>(headTitle, headDateCreated, headDateModified, headOwnerName, headOwnerEmail,
+                outlineTag, firstOutline
         )
         parser.parse(input, "UTF-8", rss)
     }
@@ -53,3 +54,47 @@ val headOwnerName = textRule<OpmlBuilder>("/opml/head/ownerName", {(text, opml) 
 val headOwnerEmail = textRule<OpmlBuilder>("/opml/head/ownerEmail", {(text, opml) ->
     opml.head.setOwnerEmail(text)
 })
+
+
+/*
+val itemTag = tagRule<RssBuilder>("/rss/channel/item", {(isStartTag, rss) ->
+    if (isStartTag)
+        rss.channel.startItem()
+    else
+        rss.channel.endItem()
+})
+
+*/
+
+
+val outlineTag = tagRule<OpmlBuilder>("/opml/body/outline", {(isStartTag, opml) ->
+    if (isStartTag)
+        opml.body.startLevel(0)
+    else
+        opml.body.endLevel(0)
+})
+
+
+//(path: String, action: (attrName: String, attrValue: String, rss: T) -> Unit, vararg attrNames: String?): DefaultRule<T>
+fun outlineAttribute<T>(level : Int, vararg attrNames: String?) : ((String, String, T) -> Unit) -> DefaultRule<T>{
+    if (level < 0)
+        throw IllegalArgumentException()
+
+    var path = "/opml/body"
+    for (i in 0..level)
+        path += "/outline"
+
+    return { action ->
+        attributeRule<T>(path, action, *attrNames)
+    }
+}
+
+val firstOutline = outlineAttribute<OpmlBuilder>(0, "text")(
+        {   attrName, attrValue, opml ->
+            when(attrName){
+                "text" -> opml.body.setText(attrValue)
+                else -> { } //empty
+            }
+        }
+)
+

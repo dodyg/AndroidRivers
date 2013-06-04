@@ -10,11 +10,18 @@ public class OpmlParserTests {
         Assert.assertTrue("Raw xml must exists", rawXml.length() > 0)
         val res = transformXmlToOpml(rawXml)
 
+        println("Error message : ${res.exception?.getMessage()}")
+
         assert(res.isTrue(), "transform operation must be true not ${res.exception?.getMessage()}")
         val opml = res.value!!
         assert(!opml.head!!.title!!.isEmpty(), "Must have title")
         assert(!opml.head!!.dateModified!!.isEmpty(), "Must have date modified")
         assert(!opml.head!!.ownerName!!.isEmpty(), "Must have owner name")
         assert(!opml.head!!.ownerEmail!!.isEmpty(), "Must have owner email")
+        assert(!opml.body!!.outline!!.get(0).text!!.isEmpty(), "Must have text ")
+
+        //check first level
+        for(o in opml.body!!.outline!!)
+            println("${o.text}")
     }
 }

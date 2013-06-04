@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.news_engine.outlines
 
+import java.util.ArrayList
+
 
 public class OpmlBuilder{
     public val opml : Opml = Opml()
@@ -36,6 +38,28 @@ public class OpmlBuilder{
     }
 
     public class BodyBuilder (val opml : Opml){
+        var currentLevel  = 0
+        var currentOutline = Outline()
+        var rootOutlines : ArrayList<Outline>? = null
+
+        {
+            opml.body = Body()
+            rootOutlines = opml.body!!.outline
+        }
+
+        public fun startLevel(level : Int){
+            currentOutline = Outline()
+        }
+
+        public fun endLevel(level : Int){
+            if (level == 0){
+                rootOutlines!!.add(currentOutline)
+            }
+        }
+
+        public fun setText(text : String){
+            currentOutline.text = text
+        }
     }
 
     public fun build() : Opml{
