@@ -28,7 +28,12 @@ public class OpmlParserTests {
 
     fun traverse(outlines : ArrayList<Outline>, level : Int){
         for(o in outlines){
-            println("$level - ${o.text}")
+            var spaces = ""
+
+            for (i in  0..level)
+                spaces += " "
+
+            println("$spaces$level - ${o.text}")
             traverse(o.outline!!, level + 1)
         }
     }

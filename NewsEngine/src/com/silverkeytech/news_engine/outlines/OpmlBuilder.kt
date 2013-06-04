@@ -19,7 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.news_engine.outlines
 
 import java.util.ArrayList
-
+import java.util.Deque
+import java.util.LinkedList
 
 public class OpmlBuilder{
     public val opml : Opml = Opml()
@@ -40,20 +41,54 @@ public class OpmlBuilder{
     public class BodyBuilder (val opml : Opml){
         var currentLevel  = 0
         var currentOutline = Outline()
+        var parentOutline : Outline? = null
         var rootOutlines : ArrayList<Outline>? = null
+        var parents : Deque<Outline>? =  null
 
         {
+            parents = LinkedList<Outline>()
+
             opml.body = Body()
             rootOutlines = opml.body!!.outline
         }
 
         public fun startLevel(level : Int){
-            currentOutline = Outline()
+            if (level == 0){
+                currentLevel = 0
+                currentOutline = Outline()
+                rootOutlines!!.add(currentOutline)
+                parentOutline = null
+                while(parents!!.notEmpty())
+                    parents!!.pop()
+            }
+            else if (level > currentLevel){
+                parentOutline = currentOutline
+                parents!!.push(parentOutline!!)
+                currentOutline = Outline()
+                parentOutline!!.outline!!.add(currentOutline)
+                currentLevel = level
+            }
+            else if (level == currentLevel){
+                currentOutline = Outline()
+                if (parentOutline != null)
+                    parentOutline!!.outline!!.add(currentOutline)
+            } else {
+                currentLevel = level
+                currentOutline = Outline()
+
+                if (parentOutline != null)
+                    parentOutline!!.outline!!.add(currentOutline)
+            }
         }
 
         public fun endLevel(level : Int){
-            if (level == 0){
-                rootOutlines!!.add(currentOutline)
+            if (level < currentLevel){
+                val diff = currentLevel - level
+                for (i in 0..diff){
+                    if (parents!!.notEmpty()){
+                        parentOutline = parents!!.pop()
+                    }
+                }
             }
         }
 
