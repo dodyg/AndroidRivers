@@ -87,8 +87,15 @@ fun outlineAttributes(level : Int) : DefaultRule<OpmlBuilder>{
     return attributeRule<OpmlBuilder>(path, { attrName, attrValue, opml ->
         when(attrName){
             "text" -> opml.body.setText(attrValue)
+            "url" -> opml.body.setUrl(attrValue)
+            "xmlUrl" -> opml.body.setXmlUrl(attrValue)
+            "htmlUrl" -> opml.body.setHtmlUrl(attrValue)
+            "type" -> opml.body.setType(attrValue)
+            "name" -> opml.body.setName(attrValue)
+            "language" -> opml.body.setLanguage(attrValue)
+            "opmlUrl" -> opml.body.setOpmlUrl(attrValue)
             else -> { } //empty
         }
-    }, "text")
+    }, "text", "url", "xmlUrl", "htmlUrl", "type", "name", "language", "opmlUrl")
 }
 

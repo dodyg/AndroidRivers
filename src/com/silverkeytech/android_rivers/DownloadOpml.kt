@@ -52,7 +52,7 @@ public class DownloadOpml(it: Context?): AsyncTask<String, Int, Pair<String, Res
         try{
             req = httpGet(link).body()
 
-            Log.d(TAG, "Raw OPML $req")
+            Log.d(TAG, "Source $link Raw OPML ${req?.length()}")
 
             if (req!!.contains("<html>")){
                 throw IllegalArgumentException("Document is not a valid OPML file (it might be a HTML document)")

@@ -40,6 +40,8 @@ import com.silverkeytech.news_engine.outliner.OutlineContent
 import com.silverkeytech.news_engine.syndications.rss_rdf.RdfRssBuilder
 import com.silverkeytech.news_engine.syndications.rss_rdf.RdfRssParser
 import com.silverkeytech.news_engine.syndications.rss_rdf.Rdf
+import com.silverkeytech.news_engine.outlines.OpmlBuilder
+import com.silverkeytech.news_engine.outlines.OpmlParser
 
 //do an in order traversal so we can flatten it up to be used by outliner
 fun Opml.traverse (filter: ((Outline) -> Boolean)? = null, depthLimit: Int = 12): ArrayList<OutlineContent> {
@@ -99,17 +101,21 @@ fun isLanguageRTL(language: String): Boolean {
     }
 }
 
-fun transformXmlToOpml(xml: String?): Result<Opml> {
+
+fun transformXmlToOpml(xml: String?): Result<Opml>{
     try{
-        val opml: Opml? = XmlComponent.serial.read(javaClass<Opml>(), xml, false)
-        Log.d("OPML Transform", "OPML ${opml?.head?.title} created on ${opml?.head?.getDateCreated()} and modified on ${opml?.head?.getDateModified()}")
+        val builder = OpmlBuilder()
+        val reader = ByteArrayInputStream(xml!!.getBytes())
+        OpmlParser().parse(reader, builder)
+        val opml = builder.build()
+        reader.close()
         return Result.right(opml)
     }
     catch (e: Exception){
-        Log.d("OPML Transform", "Exception ${e.getMessage()}")
         return Result.wrong(e)
     }
 }
+
 
 fun transformFeedOpmlToOpml(feedOpml: RiverOpml): Result<Opml> {
     fun traverseFeedOpml(outline: Outline, feedOutline: RiverOpmlOutline) {

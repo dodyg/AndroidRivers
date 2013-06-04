@@ -151,13 +151,13 @@ public class OpmlListFragment(): ListFragment() {
         list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
             public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
                 val bookmark = bookmarks.get(p2)
-                showPodcastQuickActionPopup(parent!!, bookmark, p1!!, list)
+                showOpmlQuickActionPopup(parent!!, bookmark, p1!!, list)
                 return true
             }
         })
     }
 
-    fun showPodcastQuickActionPopup(context: Activity, current: Bookmark, item: View, list: View) {
+    fun showOpmlQuickActionPopup(context: Activity, current: Bookmark, item: View, list: View) {
         //overlay popup at top of clicked overview position
         val popupWidth = item.getWidth()
         val popupHeight = item.getHeight()

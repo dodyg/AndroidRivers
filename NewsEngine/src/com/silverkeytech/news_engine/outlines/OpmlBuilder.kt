@@ -88,11 +88,17 @@ public class OpmlBuilder{
             else if (level == 0){
                 currentLevel = 0
             }
+
         }
 
-        public fun setText(text : String){
-            currentOutline.text = text
-        }
+        public fun setText(text : String) : Unit = currentOutline.text = text
+        public fun setUrl(url : String) : Unit = currentOutline.url = url
+        public fun setXmlUrl(xmlUrl : String) : Unit = currentOutline.xmlUrl = xmlUrl
+        public fun setHtmlUrl(htmlUrl : String) : Unit = currentOutline.htmlUrl = htmlUrl
+        public fun setOpmlUrl(opmlUrl : String) : Unit = currentOutline.opmlUrl = opmlUrl
+        public fun setType(tp : String) : Unit = currentOutline.outlineType = tp
+        public fun setLanguage(lang : String) : Unit = currentOutline.language = lang
+        public fun setName(name : String) : Unit = currentOutline.name = name
     }
 
     public fun build() : Opml{
