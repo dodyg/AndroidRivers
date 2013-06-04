@@ -19,10 +19,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.news_engine.outlines
 
 import java.util.ArrayList
-import java.util.Deque
-import java.util.LinkedList
+import android.util.Log
 
 public class OpmlBuilder{
+    class object {
+        public val TAG: String = javaClass<OpmlBuilder>().getSimpleName()
+    }
+
     public val opml : Opml = Opml()
     public val body : BodyBuilder = BodyBuilder(opml)
     public val head : HeadBuilder = HeadBuilder(opml)
@@ -42,12 +45,9 @@ public class OpmlBuilder{
         var currentLevel  = 0
         var currentOutline = Outline()
         var parentOutline : Outline? = null
+        var parents : ArrayList<Outline> =  ArrayList<Outline>()
         var rootOutlines : ArrayList<Outline>? = null
-        var parents : Deque<Outline>? =  null
-
         {
-            parents = LinkedList<Outline>()
-
             opml.body = Body()
             rootOutlines = opml.body!!.outline
         }
@@ -58,12 +58,11 @@ public class OpmlBuilder{
                 currentOutline = Outline()
                 rootOutlines!!.add(currentOutline)
                 parentOutline = null
-                while(parents!!.notEmpty())
-                    parents!!.pop()
+                parents.clear()
             }
             else if (level > currentLevel){
                 parentOutline = currentOutline
-                parents!!.push(parentOutline!!)
+                parents.add(parentOutline!!)
                 currentOutline = Outline()
                 parentOutline!!.outline!!.add(currentOutline)
                 currentLevel = level
@@ -82,13 +81,12 @@ public class OpmlBuilder{
         }
 
         public fun endLevel(level : Int){
-            if (level < currentLevel){
-                val diff = currentLevel - level
-                for (i in 0..diff){
-                    if (parents!!.notEmpty()){
-                        parentOutline = parents!!.pop()
-                    }
-                }
+            if (level < currentLevel && level > 0){
+                parentOutline = parents.get(level - 1)
+                currentLevel = level
+            }
+            else if (level == 0){
+                currentLevel = 0
             }
         }
 
