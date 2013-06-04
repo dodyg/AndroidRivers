@@ -24,14 +24,16 @@ import com.silverkeytech.news_engine.xml.textRule
 import com.thebuzzmedia.sjxp.rule.DefaultRule
 import com.silverkeytech.news_engine.xml.attributeRule
 import com.silverkeytech.news_engine.xml.tagRule
+import java.util.ArrayList
 
 public class OpmlParser{
     public fun parse(input: InputStream, rss: OpmlBuilder) {
-        var parser = XMLParser<OpmlBuilder>(headTitle, headDateCreated, headDateModified, headOwnerName, headOwnerEmail,
-                outlineTag(0), outlineAttributes(0), outlineTag(1), outlineAttributes(1),outlineTag(2), outlineAttributes(2)
-                ,outlineTag(3), outlineAttributes(3),outlineTag(4), outlineAttributes(4),outlineTag(5), outlineAttributes(5)
-                ,outlineTag(6), outlineAttributes(6)
-        )
+        var items = arrayListOf<DefaultRule<OpmlBuilder>>(headTitle, headDateCreated, headDateModified, headOwnerName, headOwnerEmail)
+        for (i in 0..15){
+            items.add(outlineTag(i))
+            items.add(outlineAttributes(i))
+        }
+        var parser = XMLParser<OpmlBuilder>(*items.toArray(array<DefaultRule<OpmlBuilder>>()))
         parser.parse(input, "UTF-8", rss)
     }
 }
