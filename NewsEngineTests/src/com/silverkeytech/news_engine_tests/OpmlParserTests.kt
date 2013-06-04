@@ -2,6 +2,8 @@ package com.silverkeytech.news_engine_tests
 
 import org.junit.Test
 import org.junit.Assert
+import com.silverkeytech.news_engine.outlines.Outline
+import java.util.ArrayList
 
 public class OpmlParserTests {
     [Test]
@@ -21,7 +23,13 @@ public class OpmlParserTests {
         assert(!opml.body!!.outline!!.get(0).text!!.isEmpty(), "Must have text ")
 
         //check first level
-        for(o in opml.body!!.outline!!)
-            println("${o.text}")
+        traverse(opml.body!!.outline!!, 0)
+    }
+
+    fun traverse(outlines : ArrayList<Outline>, level : Int){
+        for(o in outlines){
+            println("$level - ${o.text}")
+            traverse(o.outline!!, level + 1)
+        }
     }
 }

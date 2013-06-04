@@ -28,7 +28,7 @@ import com.silverkeytech.news_engine.xml.tagRule
 public class OpmlParser{
     public fun parse(input: InputStream, rss: OpmlBuilder) {
         var parser = XMLParser<OpmlBuilder>(headTitle, headDateCreated, headDateModified, headOwnerName, headOwnerEmail,
-                outlineTag, firstOutline
+                outlineTag(0), firstOutline
         )
         parser.parse(input, "UTF-8", rss)
     }
@@ -66,13 +66,22 @@ val itemTag = tagRule<RssBuilder>("/rss/channel/item", {(isStartTag, rss) ->
 
 */
 
+fun outlineTag(level : Int) : DefaultRule<OpmlBuilder>{
+    if (level < 0)
+    throw IllegalArgumentException()
 
-val outlineTag = tagRule<OpmlBuilder>("/opml/body/outline", {(isStartTag, opml) ->
-    if (isStartTag)
-        opml.body.startLevel(0)
-    else
-        opml.body.endLevel(0)
-})
+    var path = "/opml/body"
+    for (i in 0..level)
+        path += "/outline"
+
+    return tagRule<OpmlBuilder>(path, { isStartTag, opml ->
+        if (isStartTag)
+            opml.body.startLevel(level)
+        else
+            opml.body.endLevel(level)
+    })
+}
+
 
 
 //(path: String, action: (attrName: String, attrValue: String, rss: T) -> Unit, vararg attrNames: String?): DefaultRule<T>
