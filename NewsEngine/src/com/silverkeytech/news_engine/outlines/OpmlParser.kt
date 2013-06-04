@@ -28,7 +28,7 @@ import com.silverkeytech.news_engine.xml.tagRule
 public class OpmlParser{
     public fun parse(input: InputStream, rss: OpmlBuilder) {
         var parser = XMLParser<OpmlBuilder>(headTitle, headDateCreated, headDateModified, headOwnerName, headOwnerEmail,
-                outlineTag(0), firstOutline
+                outlineTag(0), outlineAttributes(0)
         )
         parser.parse(input, "UTF-8", rss)
     }
@@ -85,7 +85,7 @@ fun outlineTag(level : Int) : DefaultRule<OpmlBuilder>{
 
 
 //(path: String, action: (attrName: String, attrValue: String, rss: T) -> Unit, vararg attrNames: String?): DefaultRule<T>
-fun outlineAttribute<T>(level : Int, vararg attrNames: String?) : ((String, String, T) -> Unit) -> DefaultRule<T>{
+fun outlineAttributes(level : Int) : DefaultRule<OpmlBuilder>{
     if (level < 0)
         throw IllegalArgumentException()
 
@@ -93,17 +93,11 @@ fun outlineAttribute<T>(level : Int, vararg attrNames: String?) : ((String, Stri
     for (i in 0..level)
         path += "/outline"
 
-    return { action ->
-        attributeRule<T>(path, action, *attrNames)
-    }
-}
-
-val firstOutline = outlineAttribute<OpmlBuilder>(0, "text")(
-        {   attrName, attrValue, opml ->
-            when(attrName){
-                "text" -> opml.body.setText(attrValue)
-                else -> { } //empty
-            }
+    return attributeRule<OpmlBuilder>(path, { attrName, attrValue, opml ->
+        when(attrName){
+            "text" -> opml.body.setText(attrValue)
+            else -> { } //empty
         }
-)
+    }, "text")
+}
 
