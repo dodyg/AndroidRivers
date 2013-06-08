@@ -69,6 +69,7 @@ public class PodcastListFragment(): ListFragment() {
     }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
         super<ListFragment>.onCreate(savedInstanceState)
     }
 
@@ -138,6 +139,7 @@ public class PodcastListFragment(): ListFragment() {
     }
 
     fun deleteAllPodcasts(){
+
 
         //get all active podcasts
         val podcasts = getPodcastsFromDb(SortingOrder.DESC)
