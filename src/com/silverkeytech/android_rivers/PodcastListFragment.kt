@@ -51,6 +51,9 @@ import android.os.Handler
 import android.os.Message
 import android.os.Bundle
 import android.widget.LinearLayout
+import com.actionbarsherlock.view.MenuItem
+import com.actionbarsherlock.view.Menu
+import com.actionbarsherlock.view.MenuInflater
 
 public class PodcastListFragment(): ListFragment() {
     class object {
@@ -107,6 +110,64 @@ public class PodcastListFragment(): ListFragment() {
     public override fun onStop() {
         super<ListFragment>.onStop()
         doBindService()
+    }
+
+    public override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater!!.inflate(R.menu.podcast_list_fragment_menu, menu)
+        super<ListFragment>.onCreateOptionsMenu(menu, inflater)
+    }
+
+    public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.getItemId()){
+            R.id.podcast_list_fragment_menu_delete_all_podcasts -> {
+                displayDeleteAllPodcastsDialog()
+                return false
+            }
+            else -> return false
+        }
+    }
+
+    fun displayDeleteAllPodcastsDialog(){
+        val dlg = createConfirmationDialog(context = parent!!, message = "Are you sure about deleting all these podcasts?", positive = {
+            deleteAllPodcasts()
+        }, negative = {
+            //do nothing - the dialog will automatically be closed
+        })
+
+        dlg.show()
+    }
+
+    fun deleteAllPodcasts(){
+
+        //get all active podcasts
+        val podcasts = getPodcastsFromDb(SortingOrder.DESC)
+        if (podcasts.size == 0)
+            return
+
+        val dialog = InfinityProgressDialog(parent!!, "Start deleting ${podcasts.size} podcasts")
+        dialog.show()
+
+        try{
+            for(current in podcasts){
+                var f = File(current.localPath)
+
+                if (f.exists())
+                    f.delete()
+
+                val res = removePodcast(current.id)
+                if (res.isFalse()){
+                    Log.d(TAG, "Fail in deleting file ${f.name} ${res.exception?.getMessage()}")
+                    break
+                }
+            }
+        }
+        catch(e : Exception){
+            Log.d(TAG, "Fail in trying to delete a file ${e.getMessage()}")
+        }
+        finally{
+            dialog.dismiss()
+            displayPodcasts()
+        }
     }
 
     fun showMessage(msg: String) {

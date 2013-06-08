@@ -86,7 +86,6 @@ public class RssListFragment(): ListFragment() {
     public override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.rss_list_fragment_menu, menu)
         super<ListFragment>.onCreateOptionsMenu(menu, inflater)
-
     }
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
