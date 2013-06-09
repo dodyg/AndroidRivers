@@ -33,6 +33,13 @@ import android.support.v4.app.Fragment
 import android.app.Activity
 import android.webkit.URLUtil
 
+fun isLanguageRTL(language: String): Boolean {
+    return when(language){
+        "ar" -> true
+        else -> false
+    }
+}
+
 fun Fragment.tryGetUriFromClipboard() : Pair<Boolean, String?> {
     val res = this.getActivity()!!.tryGetUriFromClipboard()
     return res

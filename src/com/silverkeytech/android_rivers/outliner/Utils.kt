@@ -42,6 +42,7 @@ import com.silverkeytech.news_engine.syndications.rss_rdf.RdfRssParser
 import com.silverkeytech.news_engine.syndications.rss_rdf.Rdf
 import com.silverkeytech.news_engine.outlines.OpmlBuilder
 import com.silverkeytech.news_engine.outlines.OpmlParser
+import com.silverkeytech.android_rivers.isLanguageRTL
 
 //do an in order traversal so we can flatten it up to be used by outliner
 fun Opml.traverse (filter: ((Outline) -> Boolean)? = null, depthLimit: Int = 12): ArrayList<OutlineContent> {
@@ -91,13 +92,6 @@ private fun traverseOutline(level: Int, outline: Outline?, list: ArrayList<Outli
                 traverseOutline(lvl, ox, list, filter, depthLimit)
             }
         }
-    }
-}
-
-fun isLanguageRTL(language: String): Boolean {
-    return when(language){
-        "ar" -> true
-        else -> false
     }
 }
 
