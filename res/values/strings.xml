@@ -7,6 +7,7 @@
     <string name="cancel">Cancel</string>
     <string name="clear">Clear</string>
     <string name="confirmation_dialog_title">Confirmation</string>
+    <string name="deleting_all_podcasts">Deleting all podcasts</string>
     <string name="download_all">Download all</string>
     <string name="download_starts">"Download starts"</string>
     <string name="edit_sources_of_collection">Edit sources of \'%1$s\'</string>

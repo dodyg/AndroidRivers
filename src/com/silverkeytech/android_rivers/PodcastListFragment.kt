@@ -130,44 +130,16 @@ public class PodcastListFragment(): ListFragment() {
 
     fun displayDeleteAllPodcastsDialog(){
         val dlg = createConfirmationDialog(context = parent!!, message = "Are you sure about deleting all these podcasts?", positive = {
-            deleteAllPodcasts()
+            DeleteAllPodcasts(parent).executeOnComplete {
+                res ->
+                Log.d(TAG, "Deleted podcasts ${res.value}")
+                displayPodcasts()
+            }.execute()
         }, negative = {
             //do nothing - the dialog will automatically be closed
         })
 
         dlg.show()
-    }
-
-    fun deleteAllPodcasts(){
-        //get all active podcasts
-        val podcasts = getPodcastsFromDb(SortingOrder.DESC)
-        if (podcasts.size == 0)
-            return
-
-        val dialog = InfinityProgressDialog(parent!!, "Start deleting ${podcasts.size} podcasts")
-        dialog.show()
-
-        try{
-            for(current in podcasts){
-                var f = File(current.localPath)
-
-                if (f.exists())
-                    f.delete()
-
-                val res = removePodcast(current.id)
-                if (res.isFalse()){
-                    Log.d(TAG, "Fail in deleting file ${f.name} ${res.exception?.getMessage()}")
-                    break
-                }
-            }
-        }
-        catch(e : Exception){
-            Log.d(TAG, "Fail in trying to delete a file ${e.getMessage()}")
-        }
-        finally{
-            dialog.dismiss()
-            displayPodcasts()
-        }
     }
 
     fun showMessage(msg: String) {
