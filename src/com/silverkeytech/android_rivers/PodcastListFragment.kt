@@ -139,8 +139,6 @@ public class PodcastListFragment(): ListFragment() {
     }
 
     fun deleteAllPodcasts(){
-
-
         //get all active podcasts
         val podcasts = getPodcastsFromDb(SortingOrder.DESC)
         if (podcasts.size == 0)
