@@ -99,8 +99,6 @@ public fun getDateInFormat(status: ParsedDateFormat, date: String): Date? {
     }
 }
 
-
-
 //verify that this rss feed ate are parseable. Thsi is necessary for merging syndication date
 public fun verifyRssFeedForDateFitness(r: Rss): Pair<Boolean, ParsedDateFormat?> {
     try
@@ -161,4 +159,3 @@ public fun verifyAtomFeedForDateFitness(f: Feed): Boolean {
         return false
     }
 }
-

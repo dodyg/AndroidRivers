@@ -24,7 +24,6 @@ import com.silverkeytech.news_engine.syndications.SyndicationFeed
 import com.silverkeytech.news_engine.log
 import java.util.ArrayList
 
-
 fun accumulateList(list: Vector<RiverItemMeta>, feed: SyndicationFeed) {
     for(f in feed.items.iterator()){
         val item = RiverItem()

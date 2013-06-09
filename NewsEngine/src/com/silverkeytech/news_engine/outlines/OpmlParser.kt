@@ -42,7 +42,6 @@ val headTitle = textRule<OpmlBuilder>("/opml/head/title", {(text, opml) ->
     opml.head.setTitle(text)
  })
 
-
 val headDateCreated = textRule<OpmlBuilder>("/opml/head/dateCreated", {(text, opml) ->
     opml.head.setDateCreated(text)
 })
@@ -98,4 +97,3 @@ fun outlineAttributes(level : Int) : DefaultRule<OpmlBuilder>{
         }
     }, "text", "url", "xmlUrl", "htmlUrl", "type", "name", "language", "opmlUrl")
 }
-
