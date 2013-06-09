@@ -96,57 +96,7 @@ private fun traverseOutline(level: Int, outline: Outline?, list: ArrayList<Outli
 }
 
 
-
-fun transformFeedOpmlToOpml(feedOpml: RiverOpml): Result<Opml> {
-    fun traverseFeedOpml(outline: Outline, feedOutline: RiverOpmlOutline) {
-        outline.text = feedOutline.text
-        outline.url = feedOutline.url
-        outline.xmlUrl = feedOutline.xmlUrl
-        outline.htmlUrl = feedOutline.htmlUrl
-        outline.language = feedOutline.language
-        outline.outlineType = feedOutline.outlineType
-
-        for(fo in feedOutline.outline!!.iterator()){
-            var outl = Outline()
-            traverseFeedOpml(outl, fo)
-            outline.outline!!.add(outl)
-        }
-    }
-
-    try
-    {
-        var opml = Opml()
-
-        if (feedOpml.head != null){
-            var head = Head()
-            head.title = feedOpml.head!!.title
-            head.ownerName = feedOpml.head!!.ownerName
-            head.dateCreated = feedOpml.head!!.dateCreated
-            head.dateModified = feedOpml.head!!.dateModified
-            opml.head = head
-        }
-
-        if (feedOpml.body != null){
-            var body = Body()
-            for(fo in feedOpml.body!!.outline!!.iterator()){
-                var outline = Outline()
-                traverseFeedOpml(outline, fo)
-                body.outline!!.add(outline)
-            }
-
-            opml.body = body
-        }
-
-        return Result.right(opml)
-    }
-    catch (e: Exception){
-        return Result.wrong(e)
-    }
-}
-
-
 fun transformXmlToAtom(xml: String?): Result<Feed> {
-
     try{
         val feed: Feed? = XmlComponent.serial.read(javaClass<Feed>(), xml, false)
         return Result.right(feed)

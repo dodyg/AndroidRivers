@@ -173,7 +173,6 @@ public class PodcastListFragment(): ListFragment() {
     fun renderFileListing(podcasts: List<Podcast>) {
         //now sort it so people always have the latest news first
         val list = getView()!!.findViewById(android.R.id.list) as ListView
-        val inflater: LayoutInflater = parent!!.getLayoutInflater()!!
 
         val textSize = parent!!.getVisualPref().listTextSize
 
