@@ -27,9 +27,9 @@ import com.silverkeytech.news_engine.transformXmlToOpml
 import com.silverkeytech.news_engine.outlines.Opml
 import org.holoeverywhere.app.Activity
 
-public class DownloadBookmarks(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<Opml>>(){
+public class DownloadBookmarksAsync(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<Opml>>(){
     class object {
-        public val TAG: String = javaClass<DownloadBookmarks>().getSimpleName()
+        public val TAG: String = javaClass<DownloadBookmarksAsync>().getSimpleName()
     }
 
     var dialog: ProgressDialog = ProgressDialog(it)
@@ -44,7 +44,7 @@ public class DownloadBookmarks(it: Context?, ignoreCache: Boolean): AsyncTask<St
 
             public override fun onClick(p0: DialogInterface?, p1: Int) {
                 p0!!.dismiss()
-                this@DownloadBookmarks.cancel(true)
+                this@DownloadBookmarksAsync.cancel(true)
             }
         })
         dialog.show()
@@ -85,7 +85,7 @@ public class DownloadBookmarks(it: Context?, ignoreCache: Boolean): AsyncTask<St
 
     var rawCallback: ((Result<Opml>) -> Unit)? = null
 
-    public fun executeOnComplete(callback: (Result<Opml>) -> Unit): DownloadBookmarks {
+    public fun executeOnComplete(callback: (Result<Opml>) -> Unit): DownloadBookmarksAsync {
         rawCallback = callback
         return this
     }

@@ -32,9 +32,9 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import org.holoeverywhere.app.Activity
 
-public class DownloadCollectionAsRiver(it: Context?, private val collectionId: Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
+public class DownloadCollectionAsRiverAsync(it: Context?, private val collectionId: Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
     class object {
-        public val TAG: String = javaClass<DownloadCollectionAsRiver>().getSimpleName()
+        public val TAG: String = javaClass<DownloadCollectionAsRiverAsync>().getSimpleName()
     }
 
     var context: Activity = it!! as Activity
@@ -44,7 +44,7 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
         dialog.onCancel {
             dlg ->
             dlg.dismiss()
-            this@DownloadCollectionAsRiver.cancel(true)
+            this@DownloadCollectionAsRiverAsync.cancel(true)
         }
 
         dialog.show()
@@ -100,7 +100,7 @@ public class DownloadCollectionAsRiver(it: Context?, private val collectionId: I
     var callback: ((String, Result<List<RiverItemMeta>>) -> Unit)? = null
 
     //Set up function to call when download is done
-    public fun executeOnCompletion(action: ((String, Result<List<RiverItemMeta>>) -> Unit)?): DownloadCollectionAsRiver {
+    public fun executeOnCompletion(action: ((String, Result<List<RiverItemMeta>>) -> Unit)?): DownloadCollectionAsRiverAsync {
         callback = action
         return this
     }

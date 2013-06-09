@@ -60,7 +60,7 @@ public class FeedActivity(): ListActivity(), WithVisualModificationPanel
     var feedDateIsParseable: Boolean = false
 
     fun downloadFeed(ignoreCache: Boolean) {
-        DownloadFeed(this, ignoreCache)
+        DownloadFeedAsync(this, ignoreCache)
                 .executeOnComplete {
             res ->
             if (res.isTrue()){

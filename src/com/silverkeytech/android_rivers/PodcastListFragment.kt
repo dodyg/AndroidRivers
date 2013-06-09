@@ -130,7 +130,7 @@ public class PodcastListFragment(): ListFragment() {
 
     fun displayDeleteAllPodcastsDialog(){
         val dlg = createConfirmationDialog(context = parent!!, message = "Are you sure about deleting all these podcasts?", positive = {
-            DeleteAllPodcasts(parent).executeOnComplete {
+            DeleteAllPodcastsAsync(parent).executeOnComplete {
                 res ->
                 Log.d(TAG, "Deleted podcasts ${res.value}")
                 displayPodcasts()

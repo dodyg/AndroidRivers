@@ -168,7 +168,7 @@ public class RssListFragment(): ListFragment() {
 
                 val u = safeUrlConvert(currentUrl)
                 if (u.isTrue()){
-                    DownloadFeed(parent!!, true)
+                    DownloadFeedAsync(parent!!, true)
                             .executeOnComplete {
                         res ->
                         if (res.isTrue()){
@@ -350,7 +350,7 @@ public class RssListFragment(): ListFragment() {
             val alreadyBelongsToACollection = currentBookmark.collection != null
             //do a verification that this feed can actually be part of a collection
             if (!alreadyBelongsToACollection){
-                DownloadFeed(context, true)
+                DownloadFeedAsync(context, true)
                         .executeOnComplete {
                     res ->
                     if (res.isTrue()){

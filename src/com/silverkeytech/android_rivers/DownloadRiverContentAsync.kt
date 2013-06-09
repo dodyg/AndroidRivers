@@ -26,9 +26,9 @@ import org.holoeverywhere.app.Activity
 import com.silverkeytech.android_rivers.riverjs.downloadSingleRiver
 
 //Responsible for handling a river js downloading and display in asynchronous way
-public class DownloadRiverContent(it: Context?, val language: String): AsyncTask<String, Int, Result<River>>(){
+public class DownloadRiverContentAsync(it: Context?, val language: String): AsyncTask<String, Int, Result<River>>(){
     class object {
-        public val TAG: String = javaClass<DownloadRiverContent>().getSimpleName()
+        public val TAG: String = javaClass<DownloadRiverContentAsync>().getSimpleName()
     }
 
     val context: Activity = it!! as Activity
@@ -39,7 +39,7 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
         dialog.onCancel{
             dlg ->
             dlg.dismiss()
-            this@DownloadRiverContent.cancel(true)
+            this@DownloadRiverContentAsync.cancel(true)
         }
 
         dialog.show()
@@ -49,7 +49,7 @@ public class DownloadRiverContent(it: Context?, val language: String): AsyncTask
 
     var rawCallback: ((Result<River>, String) -> Unit)? = null
 
-    public fun executeOnComplete(callback: (Result<River>, String) -> Unit): DownloadRiverContent {
+    public fun executeOnComplete(callback: (Result<River>, String) -> Unit): DownloadRiverContentAsync {
         rawCallback = callback
         return this
     }

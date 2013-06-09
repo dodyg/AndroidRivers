@@ -26,9 +26,9 @@ import com.silverkeytech.news_engine.syndications.SyndicationFilter
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 import org.holoeverywhere.app.Activity
 
-public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<SyndicationFeed>>(){
+public class DownloadFeedAsync(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<SyndicationFeed>>(){
     class object {
-        public val TAG: String = javaClass<DownloadFeed>().getSimpleName()
+        public val TAG: String = javaClass<DownloadFeedAsync>().getSimpleName()
     }
 
     var context: Activity = it!! as Activity
@@ -39,7 +39,7 @@ public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String,
         dialog.onCancel {
             dlg ->
             dlg.dismiss()
-            this@DownloadFeed.cancel(true)
+            this@DownloadFeedAsync.cancel(true)
         }
 
         dialog.show()
@@ -73,7 +73,7 @@ public class DownloadFeed(it: Context?, ignoreCache: Boolean): AsyncTask<String,
 
     var rawCallback: ((Result<SyndicationFeed>) -> Unit)? = null
 
-    public fun executeOnComplete(callback: (Result<SyndicationFeed>) -> Unit): DownloadFeed {
+    public fun executeOnComplete(callback: (Result<SyndicationFeed>) -> Unit): DownloadFeedAsync {
         rawCallback = callback
         return this
     }

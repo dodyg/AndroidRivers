@@ -1,7 +1,7 @@
 package com.silverkeytech.android_rivers.creators
 
 import android.os.Bundle
-import com.silverkeytech.android_rivers.DownloadFeed
+import com.silverkeytech.android_rivers.DownloadFeedAsync
 import com.silverkeytech.android_rivers.Duration
 import com.silverkeytech.android_rivers.FeedContentRenderer
 import com.silverkeytech.android_rivers.R
@@ -87,7 +87,7 @@ public class CraigslistListingActivity (): Activity(){
 
                 feedUrl = "$cityUrl/$categoryCode/index.rss"
 
-                DownloadFeed(this, false)
+                DownloadFeedAsync(this, false)
                         .executeOnComplete {
                     res ->
                     if (res.isTrue()){

@@ -20,7 +20,7 @@ package com.silverkeytech.android_rivers.creators
 
 import android.os.Bundle
 import android.util.Log
-import com.silverkeytech.android_rivers.DownloadFeed
+import com.silverkeytech.android_rivers.DownloadFeedAsync
 import com.silverkeytech.android_rivers.Duration
 import com.silverkeytech.android_rivers.FeedContentRenderer
 import com.silverkeytech.android_rivers.R
@@ -113,7 +113,7 @@ public class GoogleNewsSearchActivity (): Activity(){
 
             feedName = if (search.isNullOrEmpty()) key else search!!
 
-            DownloadFeed(this, false)
+            DownloadFeedAsync(this, false)
                     .executeOnComplete {
                 res ->
                 if (res.isTrue()){

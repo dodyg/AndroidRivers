@@ -228,7 +228,7 @@ public class RiverListFragment(): ListFragment() {
 
                 val u = safeUrlConvert(currentUrl)
                 if (u.isTrue()){
-                    DownloadRiverContent(parent!!, "en")
+                    DownloadRiverContentAsync(parent!!, "en")
                             .executeOnComplete {
                         res, lang ->
                         if (res.isTrue()){
@@ -282,7 +282,7 @@ public class RiverListFragment(): ListFragment() {
             }
             else if (retrieveDefaultFromInternet){
                 Log.d(TAG, "Start downloading bookmarks from the Internet")
-                DownloadBookmarks(parent!!, true)
+                DownloadBookmarksAsync(parent!!, true)
                         .executeOnComplete({
                     res ->
                     Log.d(TAG, "Using downloaded bookmark data from the Internt")

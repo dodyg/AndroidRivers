@@ -27,9 +27,9 @@ import com.silverkeytech.android_rivers.db.removePodcast
 import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.getPodcastsFromDb
 
-public class DeleteAllPodcasts(it: Context?): AsyncTask<String, Int, Result<Int>>(){
+public class DeleteAllPodcastsAsync(it: Context?): AsyncTask<String, Int, Result<Int>>(){
     class object {
-        public val TAG: String = javaClass<DeleteAllPodcasts>().getSimpleName()
+        public val TAG: String = javaClass<DeleteAllPodcastsAsync>().getSimpleName()
     }
 
     val context: Activity = it!! as Activity
@@ -40,7 +40,7 @@ public class DeleteAllPodcasts(it: Context?): AsyncTask<String, Int, Result<Int>
         dialog.onCancel{
             dlg ->
             dlg.dismiss()
-            this@DeleteAllPodcasts.cancel(true)
+            this@DeleteAllPodcastsAsync.cancel(true)
         }
 
         dialog.show()
@@ -48,7 +48,7 @@ public class DeleteAllPodcasts(it: Context?): AsyncTask<String, Int, Result<Int>
 
     var rawCallback: ((Result<Int>) -> Unit)? = null
 
-    public fun executeOnComplete(callback: (Result<Int>) -> Unit): DeleteAllPodcasts {
+    public fun executeOnComplete(callback: (Result<Int>) -> Unit): DeleteAllPodcastsAsync {
         rawCallback = callback
         return this
     }

@@ -105,7 +105,7 @@ public class RiverActivity(): ListActivity(), WithVisualModificationPanel
 
                     val urls = getBookmarksUrlsFromDbByCollection(id)
 
-                    DownloadCollectionAsRiver(this, id).executeOnCompletion {
+                    DownloadCollectionAsRiverAsync(this, id).executeOnCompletion {
                         url, res ->
                         if (res.isTrue()){
                             Log.d(TAG, "Downloaded ${res.value?.count()} items")
@@ -122,7 +122,7 @@ public class RiverActivity(): ListActivity(), WithVisualModificationPanel
                 }
             }
             else{
-                DownloadRiverContent(this, riverLanguage)
+                DownloadRiverContentAsync(this, riverLanguage)
                         .executeOnComplete {
                     res, lang ->
                     var river = res.value!!
