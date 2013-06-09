@@ -3,6 +3,7 @@ package com.silverkeytech.news_engine_tests
 
 import org.junit.Test
 import org.junit.Assert
+import com.silverkeytech.news_engine.transformXmlToRdfRss
 
 public class RdfRssTest{
     [Test]

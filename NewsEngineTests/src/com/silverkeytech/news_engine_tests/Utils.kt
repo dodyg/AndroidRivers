@@ -4,17 +4,10 @@ package com.silverkeytech.news_engine_tests
 import com.silverkeytech.news_engine.syndications.SyndicationFilter
 import com.silverkeytech.news_engine.syndications.SyndicationFeed
 import com.silverkeytech.news_engine_tests.HttpRequest.HttpRequestException
-import com.silverkeytech.news_engine.syndications.rss.Rss
-import com.silverkeytech.news_engine.syndications.rss.RssBuilder
-import java.io.ByteArrayInputStream
-import com.silverkeytech.news_engine.syndications.rss.RssParser
 import com.silverkeytech.news_engine.syndications.atom.Feed
-import com.silverkeytech.news_engine.syndications.rss_rdf.Rdf
-import com.silverkeytech.news_engine.syndications.rss_rdf.RdfRssBuilder
-import com.silverkeytech.news_engine.syndications.rss_rdf.RdfRssParser
-import com.silverkeytech.news_engine.outlines.OpmlParser
-import com.silverkeytech.news_engine.outlines.OpmlBuilder
-import com.silverkeytech.news_engine.outlines.Opml
+import com.silverkeytech.news_engine.Result
+import com.silverkeytech.news_engine.transformXmlToRdfRss
+import com.silverkeytech.news_engine.transformXmlToRss
 
 fun plog(msg : String){
     System.out.println(msg)
@@ -95,49 +88,6 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
     }
 }
 
-fun transformXmlToRss(xml: String?): Result<Rss> {
-
-    try{
-        val builder = RssBuilder()
-        val reader = ByteArrayInputStream(xml!!.getBytes())
-        RssParser().parse(reader, builder)
-        val rss = builder.build()
-        reader.close()
-        return Result.right(rss)
-    }
-    catch (e: Exception){
-        return Result.wrong(e)
-    }
-}
-
-fun transformXmlToOpml(xml: String?): Result<Opml>{
-    try{
-        val builder = OpmlBuilder()
-        val reader = ByteArrayInputStream(xml!!.getBytes())
-        OpmlParser().parse(reader, builder)
-        val opml = builder.build()
-        reader.close()
-        return Result.right(opml)
-    }
-    catch (e: Exception){
-        return Result.wrong(e)
-    }
-}
-
-fun transformXmlToRdfRss(xml: String?): Result<Rdf> {
-
-    try{
-        val builder = RdfRssBuilder()
-        val reader = ByteArrayInputStream(xml!!.getBytes())
-        RdfRssParser().parse(reader, builder)
-        val rss = builder.build()
-        reader.close()
-        return Result.right(rss)
-    }
-    catch (e: Exception){
-        return Result.wrong(e)
-    }
-}
 
 fun transformXmlToAtom(xml: String?): Result<Feed> {
 

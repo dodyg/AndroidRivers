@@ -31,6 +31,7 @@ public data class Result<T: Any>(p1: T?, p2: Exception? = null){
         fun wrong<T: Any>(exception: Exception?): Result<T> {
             return Result<T>(null, exception)
         }
+
     }
 
     public val value: T? = p1

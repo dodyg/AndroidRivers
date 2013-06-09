@@ -23,7 +23,7 @@ import android.content.DialogInterface
 import android.os.AsyncTask
 import android.util.Log
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
-import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
+import com.silverkeytech.news_engine.transformXmlToOpml
 import com.silverkeytech.news_engine.outlines.Opml
 import org.holoeverywhere.app.Activity
 
@@ -76,7 +76,7 @@ public class DownloadBookmarks(it: Context?, ignoreCache: Boolean): AsyncTask<St
                     context.getMain().setRiverBookmarksCache(opml.value!!)
                 }
 
-                return opml
+                return Result(opml.value, opml.exception)
             }
         } catch(e: Exception){
             return Result.wrong(e)

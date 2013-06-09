@@ -4,6 +4,7 @@ import org.junit.Test
 import org.junit.Assert
 import com.silverkeytech.news_engine.outlines.Outline
 import java.util.ArrayList
+import com.silverkeytech.news_engine.transformXmlToOpml
 
 public class OpmlParserTests {
     [Test]

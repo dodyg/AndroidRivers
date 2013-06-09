@@ -44,7 +44,7 @@ import com.silverkeytech.android_rivers.db.BookmarkKind
 import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.savePodcastToDb
-import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
+import com.silverkeytech.news_engine.transformXmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
 import java.util.ArrayList
 import java.util.Random

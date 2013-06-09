@@ -96,20 +96,6 @@ private fun traverseOutline(level: Int, outline: Outline?, list: ArrayList<Outli
 }
 
 
-fun transformXmlToOpml(xml: String?): Result<Opml>{
-    try{
-        val builder = OpmlBuilder()
-        val reader = ByteArrayInputStream(xml!!.getBytes())
-        OpmlParser().parse(reader, builder)
-        val opml = builder.build()
-        reader.close()
-        return Result.right(opml)
-    }
-    catch (e: Exception){
-        return Result.wrong(e)
-    }
-}
-
 
 fun transformFeedOpmlToOpml(feedOpml: RiverOpml): Result<Opml> {
     fun traverseFeedOpml(outline: Outline, feedOutline: RiverOpmlOutline) {
@@ -158,21 +144,6 @@ fun transformFeedOpmlToOpml(feedOpml: RiverOpml): Result<Opml> {
     }
 }
 
-fun transformXmlToRss(xml: String?): Result<Rss> {
-
-    try{
-        val builder = RssBuilder()
-        val reader = ByteArrayInputStream(xml!!.getBytes())
-        RssParser().parse(reader, builder)
-        val rss = builder.build()
-        reader.close()
-        return Result.right(rss)
-    }
-    catch (e: Exception){
-        Log.d("Rss Transform", "Exception ${e.getMessage()}")
-        return Result.wrong(e)
-    }
-}
 
 fun transformXmlToAtom(xml: String?): Result<Feed> {
 
@@ -182,20 +153,6 @@ fun transformXmlToAtom(xml: String?): Result<Feed> {
     }
     catch (e: Exception){
         Log.d("Atom Transform", "Exception ${e.getMessage()}")
-        return Result.wrong(e)
-    }
-}
-
-fun transformXmlToRdfRss(xml: String?): Result<Rdf> {
-    try{
-        val builder = RdfRssBuilder()
-        val reader = ByteArrayInputStream(xml!!.getBytes())
-        RdfRssParser().parse(reader, builder)
-        val rss = builder.build()
-        reader.close()
-        return Result.right(rss)
-    }
-    catch (e: Exception){
         return Result.wrong(e)
     }
 }

@@ -5,10 +5,10 @@ import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.silverkeytech.android_rivers.Result
 import com.silverkeytech.android_rivers.httpGet
 import com.silverkeytech.android_rivers.outliner.transformXmlToAtom
-import com.silverkeytech.android_rivers.outliner.transformXmlToRss
+import com.silverkeytech.news_engine.transformXmlToRss
 import com.silverkeytech.news_engine.syndications.SyndicationFilter
 import com.silverkeytech.news_engine.syndications.SyndicationFeed
-import com.silverkeytech.android_rivers.outliner.transformXmlToRdfRss
+import com.silverkeytech.news_engine.transformXmlToRdfRss
 
 fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<SyndicationFeed> {
     val TAG = "downloadFeed"

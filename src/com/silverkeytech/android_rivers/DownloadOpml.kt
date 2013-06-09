@@ -22,7 +22,7 @@ import android.os.AsyncTask
 import android.util.Log
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.silverkeytech.news_engine.outliner.OutlineContent
-import com.silverkeytech.android_rivers.outliner.transformXmlToOpml
+import com.silverkeytech.news_engine.transformXmlToOpml
 import com.silverkeytech.android_rivers.outliner.traverse
 import com.silverkeytech.news_engine.outlines.Opml
 import com.silverkeytech.news_engine.outlines.Outline
@@ -61,7 +61,7 @@ public class DownloadOpml(it: Context?): AsyncTask<String, Int, Pair<String, Res
             val opml = transformXmlToOpml(req?.replace("<?xml version=\"1.0\" encoding=\"utf-8\" ?>", "")
                 ?.replace("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>", "")
             )
-            return Pair(link, opml)
+            return Pair(link, Result(opml.value, opml.exception))
         }
         catch(e: HttpRequestException)
         {
