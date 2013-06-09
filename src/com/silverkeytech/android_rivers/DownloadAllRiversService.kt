@@ -41,7 +41,6 @@ import com.silverkeytech.news_engine.riverjs.accumulateList
 import com.silverkeytech.news_engine.riverjs.sortRiverItemMeta
 import com.silverkeytech.news_engine.riverjs.getSortedNewsItems
 
-
 public class DownloadAllRiversService(): IntentService("DownloadAllRiversService"){
     class object{
         public val TAG: String = javaClass<DownloadAllRiversService>().getSimpleName()
