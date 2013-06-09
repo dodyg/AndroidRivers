@@ -37,7 +37,6 @@ import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 import java.util.Random
 import android.content.res.Resources
 
-
 public class ImportOpmlSubscriptionListService: IntentService("ImportOpmlSubscriptionListService"){
     class object{
         public val TAG: String = javaClass<ImportOpmlSubscriptionListService>().getSimpleName()

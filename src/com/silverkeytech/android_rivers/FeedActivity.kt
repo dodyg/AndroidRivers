@@ -83,7 +83,6 @@ public class FeedActivity(): ListActivity(), WithVisualModificationPanel
     val REFRESH: Int = 1
     val RESIZE_TEXT: Int = 2
 
-
     public override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         val feedBookmarked = checkIfUrlAlreadyBookmarked(feedUrl)
 

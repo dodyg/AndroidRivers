@@ -186,5 +186,4 @@ public class FeedContentRenderer(val context: Activity, val language: String){
 
         list.setAdapter(adapter)
     }
-
 }

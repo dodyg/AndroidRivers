@@ -151,7 +151,6 @@ public class DownloadService(): IntentService("DownloadService"){
                     count = input!!.read(data)
                 }
 
-
                 val res = savePodcastToDb(targetTitle!!,
                         targetUrl!!,
                         targetSourceTitle!!,
