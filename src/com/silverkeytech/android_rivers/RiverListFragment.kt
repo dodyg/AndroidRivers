@@ -42,8 +42,8 @@ import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import com.silverkeytech.android_rivers.db.saveOpmlAsBookmarks
 import com.silverkeytech.news_engine.outlines.Opml
 import com.silverkeytech.news_engine.outlines.Outline
-import com.silverkeytech.android_rivers.outlines.sortOutlineAsc
-import com.silverkeytech.android_rivers.outlines.sortOutlineDesc
+import com.silverkeytech.news_engine.outlines.sortOutlineAsc
+import com.silverkeytech.news_engine.outlines.sortOutlineDesc
 import java.util.ArrayList
 import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
