@@ -15,7 +15,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.activities
 
 import android.os.Bundle
 import android.util.Log
@@ -28,10 +28,22 @@ import com.silverkeytech.android_rivers.db.getBookmarksUrlsFromDbByCollection
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import com.silverkeytech.news_engine.riverjs.RiverItemMeta
 import com.silverkeytech.news_engine.riverjs.RiverItemSource
-import com.silverkeytech.news_engine.riverjs.getSortedNewsItems
 import java.util.ArrayList
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.ListActivity
+import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.Params
+import com.silverkeytech.android_rivers.WithVisualModificationPanel
+import com.silverkeytech.android_rivers.getVisualPref
+import com.silverkeytech.android_rivers.DownloadCollectionAsRiverAsync
+import com.silverkeytech.android_rivers.DownloadRiverContentAsync
+import com.silverkeytech.android_rivers.downloadOpml
+import com.silverkeytech.android_rivers.startRiverSourcesActivity
+import com.silverkeytech.android_rivers.PreferenceDefaults
+import com.silverkeytech.android_rivers.ResizeTextActionMode
+import com.silverkeytech.android_rivers.isLocalUrl
+import com.silverkeytech.android_rivers.extractIdFromLocalUrl
+import com.silverkeytech.news_engine.riverjs.getSortedNewsItems
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity(): ListActivity(), WithVisualModificationPanel

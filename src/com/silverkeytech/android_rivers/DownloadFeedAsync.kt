@@ -25,6 +25,11 @@ import com.silverkeytech.news_engine.syndications.SyndicationFeed
 import com.silverkeytech.news_engine.syndications.SyndicationFilter
 import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 import org.holoeverywhere.app.Activity
+import com.silverkeytech.android_rivers.activities.getMain
+import com.silverkeytech.android_rivers.activities.toastee
+import com.silverkeytech.android_rivers.activities.Duration
+import com.silverkeytech.android_rivers.activities.ConnectivityErrorMessage
+import com.silverkeytech.android_rivers.activities.handleConnectivityError
 
 public class DownloadFeedAsync(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<SyndicationFeed>>(){
     class object {

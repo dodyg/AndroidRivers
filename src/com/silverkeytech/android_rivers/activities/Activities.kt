@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
 
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.activities
 
 import android.app.Service
 import android.os.Build
@@ -30,6 +30,8 @@ import java.net.SocketException
 import java.net.UnknownHostException
 import org.apache.http.conn.ConnectTimeoutException
 import android.app.Activity
+import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.MainApplication
 
 fun Service?.getMain(): MainApplication {
     return this!!.getApplication() as MainApplication

@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.fragments
 
 import android.content.DialogInterface
 import android.os.Bundle
@@ -49,6 +49,20 @@ import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.AlertDialog
 import org.holoeverywhere.app.ListFragment
+import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.isNullOrEmpty
+import com.silverkeytech.android_rivers.makeLocalUrl
+import com.silverkeytech.android_rivers.currentTextViewItem
+import com.silverkeytech.android_rivers.getVisualPref
+import com.silverkeytech.android_rivers.activities.getStandardDialogBackgroundColor
+import com.silverkeytech.android_rivers.handleFontResize
+import com.silverkeytech.android_rivers.startRiverActivity
+import com.silverkeytech.android_rivers.createConfirmationDialog
+import com.silverkeytech.android_rivers.activities.getMain
+import com.silverkeytech.android_rivers.activities.getLocationOnScreen
+import com.silverkeytech.android_rivers.startCollectionActivity
+import com.silverkeytech.android_rivers.activities.Duration
+import com.silverkeytech.android_rivers.activities.toastee
 
 public class CollectionListFragment: ListFragment() {
     class object {

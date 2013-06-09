@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -42,6 +42,22 @@ import android.widget.TextView
 import android.view.Gravity
 import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
+import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.isNullOrEmpty
+import com.silverkeytech.android_rivers.currentTextViewItem
+import com.silverkeytech.android_rivers.getVisualPref
+import com.silverkeytech.android_rivers.handleFontResize
+import com.silverkeytech.android_rivers.activities.Duration
+import com.silverkeytech.android_rivers.Result
+import com.silverkeytech.android_rivers.None
+import com.silverkeytech.android_rivers.activities.getLocationOnScreen
+import com.silverkeytech.android_rivers.activities.toastee
+import com.silverkeytech.android_rivers.DownloadOpml
+import com.silverkeytech.android_rivers.createConfirmationDialog
+import com.silverkeytech.android_rivers.createSingleInputDialog
+import com.silverkeytech.android_rivers.safeUrlConvert
+import com.silverkeytech.android_rivers.downloadOpml
+import com.silverkeytech.android_rivers.tryGetUriFromClipboard
 
 public class OpmlListFragment(): ListFragment() {
     class object {
@@ -72,7 +88,6 @@ public class OpmlListFragment(): ListFragment() {
 
     public override fun onStart() {
         super<ListFragment>.onStart()
-
     }
 
     public override fun onResume() {
@@ -117,7 +132,7 @@ public class OpmlListFragment(): ListFragment() {
         super<ListFragment>.onPause()
     }
 
-    private fun displayOpmlList(){
+    private fun displayOpmlList() {
         val opmls = getBookmarksFromDb(BookmarkKind.OPML, SortingOrder.ASC)
 
         handleOpmlListing(opmls)
@@ -223,7 +238,7 @@ public class OpmlListFragment(): ListFragment() {
         }
 
         Log.d(TAG, "Last entered value is $lastEnteredUrl")
-        val dlg = createSingleInputDialog(parent!!, "Add new OPML", lastEnteredUrl , "Set url here", {
+        val dlg = createSingleInputDialog(parent!!, "Add new OPML", lastEnteredUrl, "Set url here", {
             dlg, url ->
             if (url.isNullOrEmpty()){
                 parent!!.toastee("Please enter url of the OPML", Duration.LONG)

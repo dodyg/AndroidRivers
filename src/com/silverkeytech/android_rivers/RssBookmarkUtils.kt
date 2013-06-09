@@ -27,6 +27,8 @@ import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import org.holoeverywhere.app.Activity
+import com.silverkeytech.android_rivers.activities.toastee
+import com.silverkeytech.android_rivers.activities.Duration
 
 //Note: This is a duplication with FeedActivity
 fun saveBookmark(context: Activity, feedName: String, feedUrl: String, feedLanguage: String, collection: BookmarkCollection?) {

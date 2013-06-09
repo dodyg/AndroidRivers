@@ -14,7 +14,7 @@
         <service android:enabled="true" android:name="com.silverkeytech.android_rivers.meta_weblog.BlogPostService" />
         <service android:enabled="true" android:name="com.silverkeytech.android_rivers.PodcastPlayerService" />
 
-        <activity android:name="com.silverkeytech.android_rivers.MainWithFragmentsActivity"
+        <activity android:name="com.silverkeytech.android_rivers.activities.MainWithFragmentsActivity"
                   android:label="@string/app_name" android:configChanges="keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -28,19 +28,19 @@
         </activity>
         <activity android:name="com.silverkeytech.android_rivers.creators.GoogleNewsSearchActivity" android:configChanges="keyboardHidden|orientation">
         </activity>
-        <activity android:name="com.silverkeytech.android_rivers.RiverActivity" android:configChanges="keyboardHidden|orientation">
+        <activity android:name="com.silverkeytech.android_rivers.activities.RiverActivity" android:configChanges="keyboardHidden|orientation">
         </activity>
-        <activity android:name="com.silverkeytech.android_rivers.FeedActivity" android:configChanges="keyboardHidden|orientation">
+        <activity android:name="com.silverkeytech.android_rivers.activities.FeedActivity" android:configChanges="keyboardHidden|orientation">
         </activity>
-        <activity android:name="com.silverkeytech.android_rivers.TryOutActivity" android:configChanges="keyboardHidden|orientation" android:launchMode="singleTop">
+        <activity android:name="com.silverkeytech.android_rivers.activities.TryOutActivity" android:configChanges="keyboardHidden|orientation" android:launchMode="singleTop">
         </activity>
-        <activity android:name="com.silverkeytech.android_rivers.OutlinerActivity" android:configChanges="keyboardHidden|orientation">
+        <activity android:name="com.silverkeytech.android_rivers.activities.OutlinerActivity" android:configChanges="keyboardHidden|orientation">
         </activity>
-        <activity android:name="com.silverkeytech.android_rivers.BookmarkCollectionActivity" android:configChanges="keyboardHidden|orientation">
+        <activity android:name="com.silverkeytech.android_rivers.activities.BookmarkCollectionActivity" android:configChanges="keyboardHidden|orientation">
         </activity>
-        <activity android:name="com.silverkeytech.android_rivers.RiverSourcesActivity" android:configChanges="keyboardHidden|orientation">
+        <activity android:name="com.silverkeytech.android_rivers.activities.RiverSourcesActivity" android:configChanges="keyboardHidden|orientation">
         </activity>
-        <activity android:name="com.silverkeytech.android_rivers.WebViewActivity" android:configChanges="keyboardHidden|orientation">
+        <activity android:name="com.silverkeytech.android_rivers.activities.WebViewActivity" android:configChanges="keyboardHidden|orientation">
         </activity>
     </application>
 </manifest>

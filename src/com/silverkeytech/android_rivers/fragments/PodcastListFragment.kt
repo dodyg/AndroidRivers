@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.fragments
 
 import android.app.Dialog
 import android.content.ComponentName
@@ -54,6 +54,19 @@ import android.widget.LinearLayout
 import com.actionbarsherlock.view.MenuItem
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuInflater
+import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.isNullOrEmpty
+import com.silverkeytech.android_rivers.currentTextViewItem
+import com.silverkeytech.android_rivers.getVisualPref
+import com.silverkeytech.android_rivers.handleFontResize
+import com.silverkeytech.android_rivers.PodcastPlayerService
+import com.silverkeytech.android_rivers.activities.toastee
+import com.silverkeytech.android_rivers.createConfirmationDialog
+import com.silverkeytech.android_rivers.DeleteAllPodcastsAsync
+import com.silverkeytech.android_rivers.Params
+import com.silverkeytech.android_rivers.activities.getLocationOnScreen
+import com.silverkeytech.android_rivers.limitText
+import com.silverkeytech.android_rivers.rightPadding
 
 public class PodcastListFragment(): ListFragment() {
     class object {
@@ -128,7 +141,7 @@ public class PodcastListFragment(): ListFragment() {
         }
     }
 
-    fun displayDeleteAllPodcastsDialog(){
+    fun displayDeleteAllPodcastsDialog() {
         val dlg = createConfirmationDialog(context = parent!!, message = "Are you sure about deleting all these podcasts?", positive = {
             DeleteAllPodcastsAsync(parent).executeOnComplete {
                 res ->

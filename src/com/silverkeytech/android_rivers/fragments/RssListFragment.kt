@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -43,10 +43,26 @@ import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.getBookmarkCollectionFromDb
 import com.silverkeytech.android_rivers.db.getBookmarksFromDb
 import com.silverkeytech.android_rivers.db.removeItemByUrlFromBookmarkDb
-import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.ListFragment
+import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.isNullOrEmpty
+import com.silverkeytech.android_rivers.currentTextViewItem
+import com.silverkeytech.android_rivers.getVisualPref
+import com.silverkeytech.android_rivers.handleFontResize
+import com.silverkeytech.android_rivers.activities.Duration
+import com.silverkeytech.android_rivers.DownloadFeedAsync
+import com.silverkeytech.android_rivers.activities.toastee
+import com.silverkeytech.android_rivers.activities.getLocationOnScreen
+import com.silverkeytech.android_rivers.createSingleInputDialog
+import com.silverkeytech.android_rivers.safeUrlConvert
+import com.silverkeytech.android_rivers.tryGetUriFromClipboard
+import com.silverkeytech.android_rivers.startImportOpmlSubscriptionService
+import com.silverkeytech.android_rivers.db.saveBookmarkToDb
+import com.silverkeytech.android_rivers.startFeedActivity
+import com.silverkeytech.android_rivers.dlgClickListener
+import com.silverkeytech.android_rivers.createConfirmationDialog
 
 public class RssListFragment(): ListFragment() {
     class object {

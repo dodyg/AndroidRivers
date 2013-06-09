@@ -26,6 +26,11 @@ import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.silverkeytech.news_engine.transformXmlToOpml
 import com.silverkeytech.news_engine.outlines.Opml
 import org.holoeverywhere.app.Activity
+import com.silverkeytech.android_rivers.activities.getMain
+import com.silverkeytech.android_rivers.activities.ConnectivityErrorMessage
+import com.silverkeytech.android_rivers.activities.toastee
+import com.silverkeytech.android_rivers.activities.Duration
+import com.silverkeytech.android_rivers.activities.handleConnectivityError
 
 public class DownloadBookmarksAsync(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<Opml>>(){
     class object {

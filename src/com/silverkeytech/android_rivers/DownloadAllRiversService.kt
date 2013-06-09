@@ -40,6 +40,8 @@ import android.content.res.Resources
 import com.silverkeytech.news_engine.riverjs.accumulateList
 import com.silverkeytech.news_engine.riverjs.sortRiverItemMeta
 import com.silverkeytech.news_engine.riverjs.getSortedNewsItems
+import com.silverkeytech.android_rivers.activities.MainWithFragmentsActivity
+import com.silverkeytech.android_rivers.activities.getMain
 
 public class DownloadAllRiversService(): IntentService("DownloadAllRiversService"){
     class object{

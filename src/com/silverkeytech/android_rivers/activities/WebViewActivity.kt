@@ -1,4 +1,4 @@
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.activities
 
 import android.os.Bundle
 import android.webkit.WebChromeClient
@@ -6,6 +6,8 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.actionbarsherlock.view.Window
 import org.holoeverywhere.app.Activity
+import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.Params
 
 public class WebViewActivity: Activity() {
     class object {

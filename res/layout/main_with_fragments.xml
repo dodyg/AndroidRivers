@@ -4,33 +4,33 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
         >
-    <fragment android:name="com.silverkeytech.android_rivers.RiverListFragment"
+    <fragment android:name="com.silverkeytech.android_rivers.fragments.RiverListFragment"
               android:id="@+id/main_rivers_fragment"
               android:layout_weight="1"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
             />
 
-    <fragment android:name="com.silverkeytech.android_rivers.RssListFragment"
+    <fragment android:name="com.silverkeytech.android_rivers.fragments.RssListFragment"
               android:id="@+id/main_rss_fragment"
               android:layout_weight="1"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent" />
 
-    <fragment android:name="com.silverkeytech.android_rivers.CollectionListFragment"
+    <fragment android:name="com.silverkeytech.android_rivers.fragments.CollectionListFragment"
               android:id="@+id/main_collection_fragment"
               android:layout_weight="1"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent" />
 
-    <fragment android:name="com.silverkeytech.android_rivers.PodcastListFragment"
+    <fragment android:name="com.silverkeytech.android_rivers.fragments.PodcastListFragment"
               android:id="@+id/main_podcast_fragment"
               android:layout_weight="1"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent" />
 
 
-    <fragment android:name="com.silverkeytech.android_rivers.OpmlListFragment"
+    <fragment android:name="com.silverkeytech.android_rivers.fragments.OpmlListFragment"
               android:id="@+id/main_opml_fragment"
               android:layout_weight="1"
               android:layout_width="fill_parent"

@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.activities
 
 import android.app.AlertDialog
 import android.app.NotificationManager
@@ -55,6 +55,15 @@ import com.silverkeytech.android_rivers.meta_weblog.linkPost
 import org.holoeverywhere.widget.TextView
 import com.silverkeytech.android_rivers.creators.getCraigsListCities
 import com.silverkeytech.android_rivers.creators.getCraigsListCategories
+import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.Params
+import com.silverkeytech.android_rivers.DialogBtn
+import com.silverkeytech.android_rivers.DownloadImage
+import com.silverkeytech.android_rivers.isNullOrEmpty
+import com.silverkeytech.android_rivers.getVisualPref
+import com.silverkeytech.android_rivers.createFlexibleContentDialog
+import com.silverkeytech.android_rivers.DownloadService
+import com.silverkeytech.android_rivers.DownloadOpml
 
 public class TryOutActivity(): Activity()
 {

@@ -46,7 +46,7 @@ import android.os.Handler
 import android.os.Message
 import android.os.Bundle
 import android.content.res.Resources
-
+import com.silverkeytech.android_rivers.activities.MainWithFragmentsActivity
 
 public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener, OnAudioFocusChangeListener {
     class object{

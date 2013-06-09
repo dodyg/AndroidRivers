@@ -37,7 +37,7 @@ import java.io.BufferedInputStream
 import java.io.FileOutputStream
 import java.net.URL
 import java.util.Random
-import com.silverkeytech.android_rivers.MainWithFragmentsActivity
+import com.silverkeytech.android_rivers.activities.MainWithFragmentsActivity
 import com.silverkeytech.android_rivers.Params
 import com.silverkeytech.android_rivers.with
 import com.silverkeytech.android_rivers.R

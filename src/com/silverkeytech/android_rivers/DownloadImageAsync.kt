@@ -30,6 +30,11 @@ import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import java.io.File
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.AlertDialog
+import com.silverkeytech.android_rivers.activities.Duration
+import com.silverkeytech.android_rivers.activities.toastee
+import com.silverkeytech.android_rivers.activities.ConnectivityErrorMessage
+import com.silverkeytech.android_rivers.activities.handleConnectivityError
+
 
 public data class DownloadedFile(val contentType: String, val filePath: String)
 

@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.activities
 
 import android.os.Bundle
 import android.util.Log
@@ -32,6 +32,31 @@ import com.silverkeytech.android_rivers.meta_weblog.showPostBlogDialog
 import android.support.v4.app._HoloActivity
 import java.util.Random
 import android.content.Intent
+import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.Params
+import com.silverkeytech.android_rivers.PreferenceDefaults
+import com.silverkeytech.android_rivers.NavItem
+import com.silverkeytech.android_rivers.startBlogPostingService
+import com.silverkeytech.android_rivers.downloadOpml
+import com.silverkeytech.android_rivers.getVisualPref
+import com.silverkeytech.android_rivers.fillSlidingMenuNavigation
+import com.silverkeytech.android_rivers.getMainNavigationItems
+import com.silverkeytech.android_rivers.SLIDE_MENU_TRY_OUT
+import com.silverkeytech.android_rivers.SLIDE_MENU_WRITE
+import com.silverkeytech.android_rivers.SLIDE_MENU_GOOGLE_NEWS
+import com.silverkeytech.android_rivers.SLIDE_MENU_KAYAK_DEALS
+import com.silverkeytech.android_rivers.SLIDE_MENU_PRAISE
+import com.silverkeytech.android_rivers.SLIDE_MENU_FEEDBACK
+import com.silverkeytech.android_rivers.SLIDE_MENU_CRAIGSLIST_LISTING
+import com.silverkeytech.android_rivers.createSingleInputDialog
+import com.silverkeytech.android_rivers.startOpenEmailActivity
+import com.silverkeytech.android_rivers.startCraigslistListingActivity
+import com.silverkeytech.android_rivers.startKayakFlightDealsActivity
+import com.silverkeytech.android_rivers.startTryoutActivity
+import com.silverkeytech.android_rivers.shareActionIntent
+import com.silverkeytech.android_rivers.isNullOrEmpty
+import com.silverkeytech.android_rivers.andHide
+import com.silverkeytech.android_rivers.startGoogleNewsSearchActivity
 
 enum class MainActivityMode {
     RIVER

@@ -35,6 +35,7 @@ import android.text.TextWatcher
 import android.text.Editable
 import android.text.InputType
 import android.view.Gravity
+import com.silverkeytech.android_rivers.activities.getStandardDialogBackgroundColor
 
 public val PASSWORD_INPUT: Int = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
 public val NORMAL_INPUT: Int = InputType.TYPE_TEXT_VARIATION_NORMAL

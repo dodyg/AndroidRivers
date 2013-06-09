@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.activities
 
 import android.content.Context
 import android.content.Intent
@@ -36,6 +36,23 @@ import android.widget.TextView
 import com.silverkeytech.news_engine.syndications.SyndicationFeedItem
 import org.holoeverywhere.app.Activity
 import java.util.ArrayList
+import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.PreferenceDefaults
+import com.silverkeytech.android_rivers.isNullOrEmpty
+import com.silverkeytech.android_rivers.handleForeignText
+import com.silverkeytech.android_rivers.handleForeignTextStyle
+import com.silverkeytech.android_rivers.getVisualPref
+import com.silverkeytech.android_rivers.limitText
+import com.silverkeytech.android_rivers.scrubHtml
+import com.silverkeytech.android_rivers.isSupportedImageMime
+import com.silverkeytech.android_rivers.handleTextColorBasedOnTheme
+import com.silverkeytech.android_rivers.DialogBtn
+import com.silverkeytech.android_rivers.DownloadImage
+import com.silverkeytech.android_rivers.MediaScannerWrapper
+import com.silverkeytech.android_rivers.startOpenBrowserActivity
+import com.silverkeytech.android_rivers.shareActionIntent
+import com.silverkeytech.android_rivers.startDownloadService
+import com.silverkeytech.android_rivers.createFlexibleContentDialog
 
 //Manage the rendering of each news item in the river list
 public class FeedContentRenderer(val context: Activity, val language: String){

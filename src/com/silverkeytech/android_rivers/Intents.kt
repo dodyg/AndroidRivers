@@ -29,6 +29,12 @@ import java.util.HashMap
 import com.silverkeytech.android_rivers.creators.GoogleNewsSearchActivity
 import com.silverkeytech.android_rivers.creators.KayakFlightDealsActivity
 import com.silverkeytech.android_rivers.creators.CraigslistListingActivity
+import com.silverkeytech.android_rivers.activities.RiverSourcesActivity
+import com.silverkeytech.android_rivers.activities.FeedActivity
+import com.silverkeytech.android_rivers.activities.RiverActivity
+import com.silverkeytech.android_rivers.activities.OutlinerActivity
+import com.silverkeytech.android_rivers.activities.TryOutActivity
+import com.silverkeytech.android_rivers.activities.BookmarkCollectionActivity
 
 public fun startCraigslistListingActivity(context: Context) {
     val i = Intent(context, javaClass<CraigslistListingActivity>())

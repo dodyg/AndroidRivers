@@ -16,16 +16,27 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.activities
 
 import android.os.Bundle
-import android.util.Log
 import com.actionbarsherlock.view.ActionMode
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.ListActivity
+import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.Params
+import com.silverkeytech.android_rivers.WithVisualModificationPanel
+import com.silverkeytech.android_rivers.DownloadFeedAsync
+import com.silverkeytech.android_rivers.isNullOrEmpty
+import com.silverkeytech.android_rivers.PreferenceDefaults
+import com.silverkeytech.android_rivers.ResizeTextActionMode
+import com.silverkeytech.android_rivers.saveBookmark
+import com.silverkeytech.android_rivers.getVisualPref
+import com.silverkeytech.android_rivers.downloadOpml
+import android.util.Log
+import com.silverkeytech.android_rivers.addBookmarkOption
 
 //Responsible of downloading, caching and viewing a news river content
 public class FeedActivity(): ListActivity(), WithVisualModificationPanel

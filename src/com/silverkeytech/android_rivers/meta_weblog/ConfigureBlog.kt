@@ -1,11 +1,11 @@
 package com.silverkeytech.android_rivers.meta_weblog
 
 import com.silverkeytech.android_rivers.DialogInput
-import com.silverkeytech.android_rivers.Duration
+import com.silverkeytech.android_rivers.activities.Duration
 import com.silverkeytech.android_rivers.createFlexibleInputDialog
 import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.textValidator
-import com.silverkeytech.android_rivers.toastee
+import com.silverkeytech.android_rivers.activities.toastee
 import org.holoeverywhere.app.Activity
 import com.silverkeytech.android_rivers.MULTI_LINE_INPUT
 import com.silverkeytech.android_rivers.PASSWORD_INPUT

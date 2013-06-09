@@ -38,6 +38,7 @@ import java.io.FileOutputStream
 import java.net.URL
 import java.util.Random
 import android.content.res.Resources
+import com.silverkeytech.android_rivers.activities.MainWithFragmentsActivity
 
 public class DownloadService(): IntentService("DownloadService"){
     class object{

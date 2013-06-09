@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.activities
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -28,6 +28,11 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
+import com.silverkeytech.android_rivers.getVisualPref
+import com.silverkeytech.android_rivers.startFeedActivity
+import com.silverkeytech.android_rivers.handleFontResize
+import com.silverkeytech.android_rivers.DownloadService
+import com.silverkeytech.android_rivers.DownloadOpml
 
 public class RiverSourcesRenderer(val context: RiverSourcesActivity, val language: String){
     class object {

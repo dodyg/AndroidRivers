@@ -31,6 +31,7 @@ import java.util.Vector
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import org.holoeverywhere.app.Activity
+import com.silverkeytech.android_rivers.activities.getMain
 
 public class DownloadCollectionAsRiverAsync(it: Context?, private val collectionId: Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
     class object {

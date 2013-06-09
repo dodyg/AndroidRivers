@@ -22,6 +22,7 @@ import com.actionbarsherlock.view.ActionMode
 import com.actionbarsherlock.view.Menu
 import com.actionbarsherlock.view.MenuItem
 import org.holoeverywhere.app.Activity
+import com.silverkeytech.android_rivers.activities.restart
 
 public trait WithVisualModificationPanel{
     open fun refreshContent()

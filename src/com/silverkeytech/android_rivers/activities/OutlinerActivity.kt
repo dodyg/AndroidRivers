@@ -15,7 +15,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.activities
 
 import android.os.Bundle
 import com.actionbarsherlock.view.Menu
@@ -31,6 +31,12 @@ import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 import com.silverkeytech.android_rivers.db.BookmarkKind
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import android.util.Log
+import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.Params
+import com.silverkeytech.android_rivers.DownloadOpml
+import com.silverkeytech.android_rivers.downloadOpml
+import com.silverkeytech.android_rivers.getVisualPref
+import com.silverkeytech.android_rivers.PreferenceDefaults
 
 public class OutlinerActivity(): Activity()
 {
