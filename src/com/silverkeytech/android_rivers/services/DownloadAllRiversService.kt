@@ -33,7 +33,7 @@ import com.silverkeytech.android_rivers.db.getBookmarksUrlsFromDbByCollection
 import com.silverkeytech.news_engine.riverjs.River
 import com.silverkeytech.news_engine.riverjs.RiverItemMeta
 import com.silverkeytech.news_engine.syndications.SyndicationFilter
-import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
+import com.silverkeytech.android_rivers.downloadSingleFeed
 import java.util.Random
 import java.util.Vector
 import android.content.res.Resources

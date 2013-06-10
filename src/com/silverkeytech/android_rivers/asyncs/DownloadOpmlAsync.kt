@@ -23,7 +23,6 @@ import android.util.Log
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
 import com.silverkeytech.news_engine.outliner.OutlineContent
 import com.silverkeytech.news_engine.transformXmlToOpml
-import com.silverkeytech.android_rivers.outliner.traverse
 import com.silverkeytech.news_engine.outlines.Opml
 import com.silverkeytech.news_engine.outlines.Outline
 import java.util.ArrayList
@@ -37,6 +36,7 @@ import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.httpGet
 import com.silverkeytech.android_rivers.PreferenceDefaults
 import com.silverkeytech.android_rivers.startOutlinerActivity
+import com.silverkeytech.android_rivers.traverse
 
 public class DownloadOpmlAsync(it: Context?): AsyncTask<String, Int, Pair<String, Result<Opml>>>(){
     class object {

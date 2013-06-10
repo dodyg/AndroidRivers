@@ -23,7 +23,6 @@ import android.os.AsyncTask
 import android.util.Log
 import com.silverkeytech.news_engine.riverjs.River
 import org.holoeverywhere.app.Activity
-import com.silverkeytech.android_rivers.riverjs.downloadSingleRiver
 import com.silverkeytech.android_rivers.activities.Duration
 import com.silverkeytech.android_rivers.activities.toastee
 import com.silverkeytech.android_rivers.activities.ConnectivityErrorMessage
@@ -31,7 +30,7 @@ import com.silverkeytech.android_rivers.activities.handleConnectivityError
 import com.silverkeytech.android_rivers.Result
 import com.silverkeytech.android_rivers.InfinityProgressDialog
 import com.silverkeytech.android_rivers.R
-
+import com.silverkeytech.android_rivers.downloadSingleRiver
 
 //Responsible for handling a river js downloading and display in asynchronous way
 public class DownloadRiverContentAsync(it: Context?, val language: String): AsyncTask<String, Int, Result<River>>(){

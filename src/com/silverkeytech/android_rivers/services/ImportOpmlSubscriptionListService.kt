@@ -33,7 +33,7 @@ import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import com.silverkeytech.news_engine.transformXmlToOpml
 import com.silverkeytech.news_engine.outlines.Outline
-import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
+import com.silverkeytech.android_rivers.downloadSingleFeed
 import java.util.Random
 import android.content.res.Resources
 import com.silverkeytech.android_rivers.activities.MainWithFragmentsActivity

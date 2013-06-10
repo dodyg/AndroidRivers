@@ -23,9 +23,7 @@ fun downloadRawFeed(url : String) : String{
 }
 
 fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<SyndicationFeed> {
-
     com.silverkeytech.news_engine.log = { (tag, str) -> plog(str) }
-    val TAG = "downloadFeed"
     try{
         var downloadedContent: String?
         var mimeType: String?
@@ -76,7 +74,6 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
             if (feed.isTrue()){
                 var f = SyndicationFeed(feed.value, null, null, filter)
                 f.transformRss()
-                val afterTransform = System.currentTimeMillis()
                 return Result.right(f)
             } else{
                 return Result.wrong(feed.exception)

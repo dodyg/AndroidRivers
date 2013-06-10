@@ -23,7 +23,7 @@ import android.os.AsyncTask
 import android.util.Log
 import com.silverkeytech.news_engine.syndications.SyndicationFeed
 import com.silverkeytech.news_engine.syndications.SyndicationFilter
-import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
+import com.silverkeytech.android_rivers.downloadSingleFeed
 import org.holoeverywhere.app.Activity
 import com.silverkeytech.android_rivers.activities.getMain
 import com.silverkeytech.android_rivers.activities.toastee

@@ -25,7 +25,7 @@ import com.silverkeytech.news_engine.riverjs.RiverItemMeta
 import com.silverkeytech.news_engine.riverjs.accumulateList
 import com.silverkeytech.news_engine.riverjs.sortRiverItemMeta
 import com.silverkeytech.news_engine.syndications.SyndicationFilter
-import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
+import com.silverkeytech.android_rivers.downloadSingleFeed
 import java.util.ArrayList
 import java.util.Vector
 import java.util.concurrent.Executors
