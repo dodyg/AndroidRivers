@@ -35,6 +35,9 @@ import com.silverkeytech.android_rivers.activities.RiverActivity
 import com.silverkeytech.android_rivers.activities.OutlinerActivity
 import com.silverkeytech.android_rivers.activities.TryOutActivity
 import com.silverkeytech.android_rivers.activities.BookmarkCollectionActivity
+import com.silverkeytech.android_rivers.services.DownloadService
+import com.silverkeytech.android_rivers.services.ImportOpmlSubscriptionListService
+import com.silverkeytech.android_rivers.services.DownloadAllRiversService
 
 public fun startCraigslistListingActivity(context: Context) {
     val i = Intent(context, javaClass<CraigslistListingActivity>())

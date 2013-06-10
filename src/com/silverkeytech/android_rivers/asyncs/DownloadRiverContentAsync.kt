@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.asyncs
 
 import android.content.Context
 import android.os.AsyncTask
@@ -28,6 +28,10 @@ import com.silverkeytech.android_rivers.activities.Duration
 import com.silverkeytech.android_rivers.activities.toastee
 import com.silverkeytech.android_rivers.activities.ConnectivityErrorMessage
 import com.silverkeytech.android_rivers.activities.handleConnectivityError
+import com.silverkeytech.android_rivers.Result
+import com.silverkeytech.android_rivers.InfinityProgressDialog
+import com.silverkeytech.android_rivers.R
+
 
 //Responsible for handling a river js downloading and display in asynchronous way
 public class DownloadRiverContentAsync(it: Context?, val language: String): AsyncTask<String, Int, Result<River>>(){

@@ -35,9 +35,9 @@ import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.Params
 import com.silverkeytech.android_rivers.WithVisualModificationPanel
 import com.silverkeytech.android_rivers.getVisualPref
-import com.silverkeytech.android_rivers.DownloadCollectionAsRiverAsync
-import com.silverkeytech.android_rivers.DownloadRiverContentAsync
-import com.silverkeytech.android_rivers.downloadOpml
+import com.silverkeytech.android_rivers.asyncs.DownloadCollectionAsRiverAsync
+import com.silverkeytech.android_rivers.asyncs.DownloadRiverContentAsync
+import com.silverkeytech.android_rivers.asyncs.downloadOpmlAsync
 import com.silverkeytech.android_rivers.startRiverSourcesActivity
 import com.silverkeytech.android_rivers.PreferenceDefaults
 import com.silverkeytech.android_rivers.ResizeTextActionMode
@@ -222,7 +222,7 @@ public class RiverActivity(): ListActivity(), WithVisualModificationPanel
             }
 
             R.id.river_menu_help -> {
-                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
+                downloadOpmlAsync(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
                 return true
             }
             REFRESH -> {

@@ -33,10 +33,10 @@ import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import android.util.Log
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.Params
-import com.silverkeytech.android_rivers.DownloadOpml
-import com.silverkeytech.android_rivers.downloadOpml
 import com.silverkeytech.android_rivers.getVisualPref
 import com.silverkeytech.android_rivers.PreferenceDefaults
+import com.silverkeytech.android_rivers.asyncs.DownloadOpmlAsync
+import com.silverkeytech.android_rivers.asyncs.downloadOpmlAsync
 
 public class OutlinerActivity(): Activity()
 {
@@ -144,7 +144,7 @@ public class OutlinerActivity(): Activity()
     }
 
     internal fun refreshContent(url: String) {
-        DownloadOpml(this)
+        DownloadOpmlAsync(this)
                 .executeOnProcessedCompletion({
             res ->
             if (res.isTrue()){
@@ -161,7 +161,7 @@ public class OutlinerActivity(): Activity()
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
             R.id.outliner_menu_help -> {
-                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
+                downloadOpmlAsync(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
                 return true
             }
             REFRESH -> {

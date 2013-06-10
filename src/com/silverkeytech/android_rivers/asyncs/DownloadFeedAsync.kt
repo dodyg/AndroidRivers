@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.asyncs
 
 import android.content.Context
 import android.os.AsyncTask
@@ -30,6 +30,11 @@ import com.silverkeytech.android_rivers.activities.toastee
 import com.silverkeytech.android_rivers.activities.Duration
 import com.silverkeytech.android_rivers.activities.ConnectivityErrorMessage
 import com.silverkeytech.android_rivers.activities.handleConnectivityError
+import com.silverkeytech.android_rivers.Result
+import com.silverkeytech.android_rivers.InfinityProgressDialog
+import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.daysBeforeNow
+import com.silverkeytech.android_rivers.PreferenceDefaults
 
 public class DownloadFeedAsync(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<SyndicationFeed>>(){
     class object {

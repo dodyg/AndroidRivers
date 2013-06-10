@@ -59,10 +59,10 @@ import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.currentTextViewItem
 import com.silverkeytech.android_rivers.getVisualPref
 import com.silverkeytech.android_rivers.handleFontResize
-import com.silverkeytech.android_rivers.PodcastPlayerService
+import com.silverkeytech.android_rivers.services.PodcastPlayerService
 import com.silverkeytech.android_rivers.activities.toastee
 import com.silverkeytech.android_rivers.createConfirmationDialog
-import com.silverkeytech.android_rivers.DeleteAllPodcastsAsync
+import com.silverkeytech.android_rivers.asyncs.DeleteAllPodcastsAsync
 import com.silverkeytech.android_rivers.Params
 import com.silverkeytech.android_rivers.activities.getLocationOnScreen
 import com.silverkeytech.android_rivers.limitText

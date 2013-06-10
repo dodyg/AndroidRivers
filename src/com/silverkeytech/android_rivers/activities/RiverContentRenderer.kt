@@ -49,7 +49,7 @@ import com.silverkeytech.android_rivers.isSupportedImageMime
 import com.silverkeytech.android_rivers.limitText
 import com.silverkeytech.android_rivers.DialogBtn
 import com.silverkeytech.android_rivers.getVisualPref
-import com.silverkeytech.android_rivers.DownloadImage
+import com.silverkeytech.android_rivers.asyncs.DownloadImageAsync
 import com.silverkeytech.android_rivers.startDownloadService
 import com.silverkeytech.android_rivers.MediaScannerWrapper
 import com.silverkeytech.android_rivers.handleTextColorBasedOnTheme
@@ -187,7 +187,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                     if (isSupportedImageMime(enclosure.`type`!!)){
                         buttons.add(DialogBtn("Image", { dlg ->
                             Log.d(TAG, "I am downloading a ${enclosure.url} with type ${enclosure.`type`}")
-                            DownloadImage(context).execute(enclosure.url)
+                            DownloadImageAsync(context).execute(enclosure.url)
                         }))
                     }
                     //assume podcast

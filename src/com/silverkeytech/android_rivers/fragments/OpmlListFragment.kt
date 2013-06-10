@@ -52,11 +52,11 @@ import com.silverkeytech.android_rivers.Result
 import com.silverkeytech.android_rivers.None
 import com.silverkeytech.android_rivers.activities.getLocationOnScreen
 import com.silverkeytech.android_rivers.activities.toastee
-import com.silverkeytech.android_rivers.DownloadOpml
+import com.silverkeytech.android_rivers.asyncs.DownloadOpmlAsync
 import com.silverkeytech.android_rivers.createConfirmationDialog
 import com.silverkeytech.android_rivers.createSingleInputDialog
 import com.silverkeytech.android_rivers.safeUrlConvert
-import com.silverkeytech.android_rivers.downloadOpml
+import com.silverkeytech.android_rivers.asyncs.downloadOpmlAsync
 import com.silverkeytech.android_rivers.tryGetUriFromClipboard
 
 public class OpmlListFragment(): ListFragment() {
@@ -159,7 +159,7 @@ public class OpmlListFragment(): ListFragment() {
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val bookmark = bookmarks.get(p2)
-                downloadOpml(this@OpmlListFragment.getActivity()!!, bookmark.url, bookmark.title)
+                downloadOpmlAsync(this@OpmlListFragment.getActivity()!!, bookmark.url, bookmark.title)
             }
         })
 
@@ -252,7 +252,7 @@ public class OpmlListFragment(): ListFragment() {
 
                 val u = safeUrlConvert(currentUrl)
                 if (u.isTrue()){
-                    DownloadOpml(parent)
+                    DownloadOpmlAsync(parent)
                             .executeOnRawCompletion({
                         res ->
                         if (res.isTrue()){

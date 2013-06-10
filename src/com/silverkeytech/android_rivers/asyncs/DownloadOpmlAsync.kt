@@ -15,7 +15,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.asyncs
 
 import android.content.Context
 import android.os.AsyncTask
@@ -31,10 +31,16 @@ import android.app.Activity
 import com.silverkeytech.android_rivers.activities.getMain
 import com.silverkeytech.android_rivers.activities.toastee
 import com.silverkeytech.android_rivers.activities.Duration
+import com.silverkeytech.android_rivers.Result
+import com.silverkeytech.android_rivers.InfinityProgressDialog
+import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.httpGet
+import com.silverkeytech.android_rivers.PreferenceDefaults
+import com.silverkeytech.android_rivers.startOutlinerActivity
 
-public class DownloadOpml(it: Context?): AsyncTask<String, Int, Pair<String, Result<Opml>>>(){
+public class DownloadOpmlAsync(it: Context?): AsyncTask<String, Int, Pair<String, Result<Opml>>>(){
     class object {
-        public val TAG: String = javaClass<DownloadOpml>().getSimpleName()
+        public val TAG: String = javaClass<DownloadOpmlAsync>().getSimpleName()
     }
 
     var context: Activity = it!! as Activity
@@ -44,7 +50,7 @@ public class DownloadOpml(it: Context?): AsyncTask<String, Int, Pair<String, Res
         dialog.onCancel {
             dlg ->
             dlg.dismiss()
-            this@DownloadOpml.cancel(true)
+            this@DownloadOpmlAsync.cancel(true)
         }
         dialog.show()
     }
@@ -108,14 +114,14 @@ public class DownloadOpml(it: Context?): AsyncTask<String, Int, Pair<String, Res
     }
 
     //Set up function to call when download is done
-    public fun executeOnRawCompletion(action: ((Result<Opml>) -> Unit)?): DownloadOpml {
+    public fun executeOnRawCompletion(action: ((Result<Opml>) -> Unit)?): DownloadOpmlAsync {
         rawCallback = action
         return this
     }
 
     //set up function to call when download is done, include optional processing filter
     public fun executeOnProcessedCompletion(action: ((Result<ArrayList<OutlineContent>>) -> Unit)?,
-                                            filter: ((Outline) -> Boolean)? = null): DownloadOpml {
+                                            filter: ((Outline) -> Boolean)? = null): DownloadOpmlAsync {
         processedCallBack = action
         processingFilter = filter
         return this
@@ -123,14 +129,14 @@ public class DownloadOpml(it: Context?): AsyncTask<String, Int, Pair<String, Res
 }
 
 
-fun downloadOpml(context: Activity, url: String, title: String) {
+fun downloadOpmlAsync(context: Activity, url: String, title: String) {
     val cache = context.getMain().getOpmlCache(url)
 
     if (cache != null){
         startOutlinerActivity(context, cache, title, url, false)
     }
     else{
-        DownloadOpml(context)
+        DownloadOpmlAsync(context)
                 .executeOnProcessedCompletion({
             res ->
             if (res.isTrue()){

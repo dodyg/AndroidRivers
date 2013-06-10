@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.services
 
 import android.app.IntentService
 import android.app.Notification
@@ -37,6 +37,12 @@ import com.silverkeytech.android_rivers.syndications.downloadSingleFeed
 import java.util.Random
 import android.content.res.Resources
 import com.silverkeytech.android_rivers.activities.MainWithFragmentsActivity
+import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.with
+import com.silverkeytech.android_rivers.Params
+import com.silverkeytech.android_rivers.isNullOrEmpty
+import com.silverkeytech.android_rivers.isModernAndroid
+import com.silverkeytech.android_rivers.httpGet
 
 public class ImportOpmlSubscriptionListService: IntentService("ImportOpmlSubscriptionListService"){
     class object{

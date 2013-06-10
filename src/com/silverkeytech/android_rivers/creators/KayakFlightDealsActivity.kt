@@ -20,7 +20,7 @@ package com.silverkeytech.android_rivers.creators
 
 import android.os.Bundle
 import android.util.Log
-import com.silverkeytech.android_rivers.DownloadFeedAsync
+import com.silverkeytech.android_rivers.asyncs.DownloadFeedAsync
 import com.silverkeytech.android_rivers.activities.Duration
 import com.silverkeytech.android_rivers.activities.FeedContentRenderer
 import com.silverkeytech.android_rivers.R

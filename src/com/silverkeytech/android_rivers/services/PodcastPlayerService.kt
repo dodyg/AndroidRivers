@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.services
 
 import android.app.Service
 import android.app.Service.START_STICKY
@@ -47,6 +47,10 @@ import android.os.Message
 import android.os.Bundle
 import android.content.res.Resources
 import com.silverkeytech.android_rivers.activities.MainWithFragmentsActivity
+import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.with
+import com.silverkeytech.android_rivers.isModernAndroid
+import com.silverkeytech.android_rivers.Params
 
 public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener, OnAudioFocusChangeListener {
     class object{

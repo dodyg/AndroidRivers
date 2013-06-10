@@ -27,7 +27,7 @@ import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.Params
 import com.silverkeytech.android_rivers.PreferenceDefaults
 import com.silverkeytech.android_rivers.getVisualPref
-import com.silverkeytech.android_rivers.downloadOpml
+import com.silverkeytech.android_rivers.asyncs.downloadOpmlAsync
 
 public open class RiverSourcesActivity(): ListActivity() {
     class object {
@@ -95,7 +95,7 @@ public open class RiverSourcesActivity(): ListActivity() {
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
             R.id.river_sources_menu_help -> {
-                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
+                downloadOpmlAsync(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
                 return true
             }
             else -> {

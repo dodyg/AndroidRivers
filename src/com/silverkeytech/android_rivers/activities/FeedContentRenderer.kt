@@ -47,7 +47,7 @@ import com.silverkeytech.android_rivers.scrubHtml
 import com.silverkeytech.android_rivers.isSupportedImageMime
 import com.silverkeytech.android_rivers.handleTextColorBasedOnTheme
 import com.silverkeytech.android_rivers.DialogBtn
-import com.silverkeytech.android_rivers.DownloadImage
+import com.silverkeytech.android_rivers.asyncs.DownloadImageAsync
 import com.silverkeytech.android_rivers.MediaScannerWrapper
 import com.silverkeytech.android_rivers.startOpenBrowserActivity
 import com.silverkeytech.android_rivers.shareActionIntent
@@ -164,7 +164,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                     if (isSupportedImageMime(enclosure.mimeType)){
                         buttons.add(DialogBtn("Image", { dlg ->
                             Log.d(TAG, "I am downloading a ${enclosure.url} with type ${enclosure.mimeType}")
-                            DownloadImage(context).execute(enclosure.url)
+                            DownloadImageAsync(context).execute(enclosure.url)
                         }))
                     }
                     else

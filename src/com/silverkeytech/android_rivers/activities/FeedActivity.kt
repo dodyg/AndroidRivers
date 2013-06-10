@@ -28,13 +28,13 @@ import org.holoeverywhere.app.ListActivity
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.Params
 import com.silverkeytech.android_rivers.WithVisualModificationPanel
-import com.silverkeytech.android_rivers.DownloadFeedAsync
+import com.silverkeytech.android_rivers.asyncs.DownloadFeedAsync
 import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.PreferenceDefaults
 import com.silverkeytech.android_rivers.ResizeTextActionMode
 import com.silverkeytech.android_rivers.saveBookmark
 import com.silverkeytech.android_rivers.getVisualPref
-import com.silverkeytech.android_rivers.downloadOpml
+import com.silverkeytech.android_rivers.asyncs.downloadOpmlAsync
 import android.util.Log
 import com.silverkeytech.android_rivers.addBookmarkOption
 
@@ -120,7 +120,7 @@ public class FeedActivity(): ListActivity(), WithVisualModificationPanel
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
             R.id.feed_menu_help -> {
-                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
+                downloadOpmlAsync(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
                 return true
             }
             REFRESH -> {

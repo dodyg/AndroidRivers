@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.asyncs
 
 import android.content.Context
 import android.content.DialogInterface
@@ -34,13 +34,18 @@ import com.silverkeytech.android_rivers.activities.Duration
 import com.silverkeytech.android_rivers.activities.toastee
 import com.silverkeytech.android_rivers.activities.ConnectivityErrorMessage
 import com.silverkeytech.android_rivers.activities.handleConnectivityError
+import com.silverkeytech.android_rivers.Result
+import com.silverkeytech.android_rivers.InfinityProgressDialog
+import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.generateThrowawayName
+import com.silverkeytech.android_rivers.imageMimeTypeToFileExtension
 
 
 public data class DownloadedFile(val contentType: String, val filePath: String)
 
-public class DownloadImage(it: Context?): AsyncTask<String, Int, Result<DownloadedFile>>(){
+public class DownloadImageAsync(it: Context?): AsyncTask<String, Int, Result<DownloadedFile>>(){
     class object {
-        public val TAG: String = javaClass<DownloadImage>().getSimpleName()
+        public val TAG: String = javaClass<DownloadImageAsync>().getSimpleName()
     }
 
     var context: Activity = it!! as Activity
@@ -50,7 +55,7 @@ public class DownloadImage(it: Context?): AsyncTask<String, Int, Result<Download
         dialog.onCancel {
             dlg ->
             dlg.dismiss()
-            this@DownloadImage.cancel(true)
+            this@DownloadImageAsync.cancel(true)
         }
         dialog.show()
     }

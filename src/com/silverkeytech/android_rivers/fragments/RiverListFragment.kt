@@ -57,9 +57,9 @@ import com.silverkeytech.android_rivers.handleFontResize
 import com.silverkeytech.android_rivers.activities.Duration
 import com.silverkeytech.android_rivers.activities.toastee
 import com.silverkeytech.android_rivers.activities.getLocationOnScreen
-import com.silverkeytech.android_rivers.DownloadBookmarksAsync
+import com.silverkeytech.android_rivers.asyncs.DownloadBookmarksAsync
 import com.silverkeytech.android_rivers.PreferenceValue
-import com.silverkeytech.android_rivers.DownloadRiverContentAsync
+import com.silverkeytech.android_rivers.asyncs.DownloadRiverContentAsync
 import com.silverkeytech.android_rivers.createSingleInputDialog
 import com.silverkeytech.android_rivers.tryGetUriFromClipboard
 import com.silverkeytech.android_rivers.activities.getMain

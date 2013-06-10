@@ -52,7 +52,7 @@ import com.silverkeytech.android_rivers.currentTextViewItem
 import com.silverkeytech.android_rivers.getVisualPref
 import com.silverkeytech.android_rivers.handleFontResize
 import com.silverkeytech.android_rivers.activities.Duration
-import com.silverkeytech.android_rivers.DownloadFeedAsync
+import com.silverkeytech.android_rivers.asyncs.DownloadFeedAsync
 import com.silverkeytech.android_rivers.activities.toastee
 import com.silverkeytech.android_rivers.activities.getLocationOnScreen
 import com.silverkeytech.android_rivers.createSingleInputDialog

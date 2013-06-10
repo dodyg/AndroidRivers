@@ -31,8 +31,8 @@ import android.widget.TextView
 import com.silverkeytech.android_rivers.getVisualPref
 import com.silverkeytech.android_rivers.startFeedActivity
 import com.silverkeytech.android_rivers.handleFontResize
-import com.silverkeytech.android_rivers.DownloadService
-import com.silverkeytech.android_rivers.DownloadOpml
+import com.silverkeytech.android_rivers.services.DownloadService
+import com.silverkeytech.android_rivers.asyncs.DownloadOpmlAsync
 
 public class RiverSourcesRenderer(val context: RiverSourcesActivity, val language: String){
     class object {

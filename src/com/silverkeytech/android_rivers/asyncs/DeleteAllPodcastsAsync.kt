@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.asyncs
 
 import android.os.AsyncTask
 import org.holoeverywhere.app.Activity
@@ -26,6 +26,9 @@ import java.io.File
 import com.silverkeytech.android_rivers.db.removePodcast
 import com.silverkeytech.android_rivers.db.SortingOrder
 import com.silverkeytech.android_rivers.db.getPodcastsFromDb
+import com.silverkeytech.android_rivers.Result
+import com.silverkeytech.android_rivers.InfinityProgressDialog
+import com.silverkeytech.android_rivers.R
 
 public class DeleteAllPodcastsAsync(it: Context?): AsyncTask<String, Int, Result<Int>>(){
     class object {

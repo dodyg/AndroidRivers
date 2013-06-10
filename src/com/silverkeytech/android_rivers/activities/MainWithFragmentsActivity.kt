@@ -37,7 +37,7 @@ import com.silverkeytech.android_rivers.Params
 import com.silverkeytech.android_rivers.PreferenceDefaults
 import com.silverkeytech.android_rivers.NavItem
 import com.silverkeytech.android_rivers.startBlogPostingService
-import com.silverkeytech.android_rivers.downloadOpml
+import com.silverkeytech.android_rivers.asyncs.downloadOpmlAsync
 import com.silverkeytech.android_rivers.getVisualPref
 import com.silverkeytech.android_rivers.fillSlidingMenuNavigation
 import com.silverkeytech.android_rivers.getMainNavigationItems
@@ -299,7 +299,7 @@ public open class MainWithFragmentsActivity(): Activity() {
                 return true
             }
             EXPLORE -> {
-                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_MORE_NEWS_SOURCE, "Get more news")
+                downloadOpmlAsync(this, PreferenceDefaults.CONTENT_OUTLINE_MORE_NEWS_SOURCE, "Get more news")
                 return true
             }
             SWITCH_FORWARD -> {
@@ -317,7 +317,7 @@ public open class MainWithFragmentsActivity(): Activity() {
                 return true
             }
             R.id.main_menu_help -> {
-                downloadOpml(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
+                downloadOpmlAsync(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
                 return true
             }
             else ->

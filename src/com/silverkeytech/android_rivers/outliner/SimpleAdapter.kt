@@ -26,7 +26,7 @@ import android.widget.TextView
 import com.pl.polidea.treeview.AbstractTreeViewAdapter
 import com.pl.polidea.treeview.TreeNodeInfo
 import com.pl.polidea.treeview.TreeStateManager
-import com.silverkeytech.android_rivers.DownloadOpml
+import com.silverkeytech.android_rivers.asyncs.DownloadOpmlAsync
 import com.silverkeytech.android_rivers.activities.Duration
 import com.silverkeytech.android_rivers.activities.OutlinerActivity
 import com.silverkeytech.android_rivers.R
@@ -179,7 +179,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
             startOutlinerActivity(context, cache, currentOutline.text, url, expandAll)
         }
         else {
-            DownloadOpml(context)
+            DownloadOpmlAsync(context)
                     .executeOnProcessedCompletion({
                 res ->
                 if (res.isTrue()){

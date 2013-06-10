@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-package com.silverkeytech.android_rivers
+package com.silverkeytech.android_rivers.asyncs
 
 import android.content.Context
 import android.os.AsyncTask
@@ -32,6 +32,13 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import org.holoeverywhere.app.Activity
 import com.silverkeytech.android_rivers.activities.getMain
+import com.silverkeytech.android_rivers.Result
+import com.silverkeytech.android_rivers.InfinityProgressDialog
+import com.silverkeytech.android_rivers.R
+import com.silverkeytech.android_rivers.daysBeforeNow
+import com.silverkeytech.android_rivers.PreferenceDefaults
+import com.silverkeytech.android_rivers.makeLocalUrl
+import com.silverkeytech.android_rivers.toHoursInMinutes
 
 public class DownloadCollectionAsRiverAsync(it: Context?, private val collectionId: Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
     class object {

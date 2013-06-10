@@ -58,12 +58,12 @@ import com.silverkeytech.android_rivers.creators.getCraigsListCategories
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.Params
 import com.silverkeytech.android_rivers.DialogBtn
-import com.silverkeytech.android_rivers.DownloadImage
+import com.silverkeytech.android_rivers.asyncs.DownloadImageAsync
 import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.getVisualPref
 import com.silverkeytech.android_rivers.createFlexibleContentDialog
-import com.silverkeytech.android_rivers.DownloadService
-import com.silverkeytech.android_rivers.DownloadOpml
+import com.silverkeytech.android_rivers.services.DownloadService
+import com.silverkeytech.android_rivers.asyncs.DownloadOpmlAsync
 
 public class TryOutActivity(): Activity()
 {
@@ -308,7 +308,7 @@ public class TryOutActivity(): Activity()
         val btn = findView<Button>(R.id.tryout_download_gif_image_btn)
         btn.setOnClickListener {
             Log.d(TAG, "Start downloading gif image")
-            DownloadImage(this).execute("http://www.science.mcmaster.ca/brainbee/images/stories/announcements/brainbee-logo-small.gif")
+            DownloadImageAsync(this).execute("http://www.science.mcmaster.ca/brainbee/images/stories/announcements/brainbee-logo-small.gif")
         }
     }
 
@@ -316,7 +316,7 @@ public class TryOutActivity(): Activity()
         val btn = findView<Button>(R.id.tryout_download_jpg_image_btn)
         btn.setOnClickListener {
             Log.d(TAG, "Start downloading jpeg image")
-            DownloadImage(this).execute("http://www.fantom-xp.com/wallpapers/42/Iceberg_Very_Large.jpg")
+            DownloadImageAsync(this).execute("http://www.fantom-xp.com/wallpapers/42/Iceberg_Very_Large.jpg")
         }
     }
 
@@ -324,7 +324,7 @@ public class TryOutActivity(): Activity()
         val btn = findView<Button>(R.id.tryout_download_png_image_btn)
         btn.setOnClickListener {
             Log.d(TAG, "Start downloading png image")
-            DownloadImage(this).execute("http://bartelme.at/material/news/NetNewsWire256.png")
+            DownloadImageAsync(this).execute("http://bartelme.at/material/news/NetNewsWire256.png")
         }
     }
 
@@ -439,7 +439,7 @@ public class TryOutActivity(): Activity()
 
             val url = "http://scripting.com/toc.opml"
 
-            DownloadOpml(this)
+            DownloadOpmlAsync(this)
                     .executeOnProcessedCompletion({
                 res ->
                 if (res.isTrue()){
