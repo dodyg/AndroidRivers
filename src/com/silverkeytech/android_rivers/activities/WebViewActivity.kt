@@ -6,7 +6,6 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.actionbarsherlock.view.Window
 import org.holoeverywhere.app.Activity
-import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.Params
 
 public class WebViewActivity: Activity() {

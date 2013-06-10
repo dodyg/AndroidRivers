@@ -68,7 +68,7 @@ public class DownloadOpmlAsync(it: Context?): AsyncTask<String, Int, Pair<String
             }
 
             val opml = transformXmlToOpml(req?.replace("<?xml version=\"1.0\" encoding=\"utf-8\" ?>", "")
-                ?.replace("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>", "")
+            ?.replace("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>", "")
             )
             return Pair(link, Result(opml.value, opml.exception))
         }

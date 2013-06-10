@@ -140,13 +140,13 @@ public class ContentPreference(public val pref: SharedPreferences){
     }
 
     public var riverBookmarksSorting: Int
-            get() = pref.getInt(Preferences.CONTENT_RIVER_BOOKMARKS_SORTING, PreferenceDefaults.CONTENT_RIVER_BOOKMARKS_SORTING)
-            set(sort: Int) {
-                var edit = pref.edit()!!
-                edit.putInt(Preferences.CONTENT_RIVER_BOOKMARKS_SORTING, sort)
-                edit.commit()
-                Log.d(TAG, "Saving bookmark sorting value $sort")
-            }
+        get() = pref.getInt(Preferences.CONTENT_RIVER_BOOKMARKS_SORTING, PreferenceDefaults.CONTENT_RIVER_BOOKMARKS_SORTING)
+        set(sort: Int) {
+            var edit = pref.edit()!!
+            edit.putInt(Preferences.CONTENT_RIVER_BOOKMARKS_SORTING, sort)
+            edit.commit()
+            Log.d(TAG, "Saving bookmark sorting value $sort")
+        }
 }
 
 public class SetupPreference(public val pref: SharedPreferences){

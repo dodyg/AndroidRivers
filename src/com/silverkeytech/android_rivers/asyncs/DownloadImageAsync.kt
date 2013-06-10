@@ -40,7 +40,6 @@ import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.generateThrowawayName
 import com.silverkeytech.android_rivers.imageMimeTypeToFileExtension
 
-
 public data class DownloadedFile(val contentType: String, val filePath: String)
 
 public class DownloadImageAsync(it: Context?): AsyncTask<String, Int, Result<DownloadedFile>>(){

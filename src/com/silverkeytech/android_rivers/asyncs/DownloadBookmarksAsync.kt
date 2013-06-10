@@ -32,7 +32,6 @@ import com.silverkeytech.android_rivers.activities.toastee
 import com.silverkeytech.android_rivers.activities.Duration
 import com.silverkeytech.android_rivers.activities.handleConnectivityError
 import com.silverkeytech.android_rivers.Result
-import com.silverkeytech.android_rivers.InfinityProgressDialog
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.httpGet
 

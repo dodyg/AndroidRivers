@@ -80,7 +80,7 @@ public class DeleteAllPodcastsAsync(it: Context?): AsyncTask<String, Int, Result
                     deletedPodcasts++
             }
         }
-        catch(e : Exception){
+        catch(e: Exception){
             Log.d(TAG, "Fail in trying to delete a file ${e.getMessage()}")
         }
         finally{

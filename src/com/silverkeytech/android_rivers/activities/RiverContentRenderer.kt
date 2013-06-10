@@ -39,7 +39,6 @@ import com.silverkeytech.news_engine.riverjs.RiverItemMeta
 import org.holoeverywhere.app.Activity
 import java.util.ArrayList
 import com.silverkeytech.android_rivers.PreferenceDefaults
-import com.silverkeytech.android_rivers.Params
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.handleForeignText
 import com.silverkeytech.android_rivers.handleForeignTextStyle

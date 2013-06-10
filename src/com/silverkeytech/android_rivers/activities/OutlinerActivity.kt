@@ -47,7 +47,7 @@ public class OutlinerActivity(): Activity()
     val LEVEL_NUMBER: Int = 12
 
     var outlinesUrl: String? = null
-    var outlinesTitle : String? = ""
+    var outlinesTitle: String? = ""
     var expandAll: Boolean = false
 
     var outlinesData: ArrayList<OutlineContent>? = null
@@ -86,7 +86,7 @@ public class OutlinerActivity(): Activity()
 
         var treeBuilder = TreeBuilder(manager)
 
-        var counter : Long = 0
+        var counter: Long = 0
         for(e in outlines){
             treeBuilder.sequentiallyAddNextNode(counter, e.level)
             counter++
@@ -100,7 +100,7 @@ public class OutlinerActivity(): Activity()
     }
 
     fun collapseOutlines(manager: InMemoryTreeStateManager<Long?>, outlines: ArrayList<OutlineContent>) {
-        var counter : Long = 0
+        var counter: Long = 0
         for(e in outlines){
             if (e.level == 0){
                 manager.collapseChildren(counter)
@@ -110,7 +110,7 @@ public class OutlinerActivity(): Activity()
     }
 
     fun expandOutlines(manager: InMemoryTreeStateManager<Long?>, outlines: ArrayList<OutlineContent>) {
-        var counter : Long = 0
+        var counter: Long = 0
         for(e in outlines){
             if (e.level == 0){
                 manager.expandEverythingBelow(counter)
@@ -176,7 +176,7 @@ public class OutlinerActivity(): Activity()
                 expandOutlines(treeManager, outlinesData!!)
                 return true
             }
-            R.id.outliner_menu_bookmark ->{
+            R.id.outliner_menu_bookmark -> {
                 Log.d(TAG, "At save !! Title $outlinesTitle and Url $outlinesUrl")
 
                 var res = saveBookmarkToDb(outlinesTitle!!, outlinesUrl!!, BookmarkKind.OPML, "en", null)

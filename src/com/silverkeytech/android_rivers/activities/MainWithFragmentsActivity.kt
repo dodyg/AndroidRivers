@@ -249,7 +249,7 @@ public open class MainWithFragmentsActivity(): Activity() {
 
     fun showAndHide(showRiver: Boolean = false, showRss: Boolean = false,
                     showCollection: Boolean = false, showPodcasts: Boolean = false,
-                    showOpml : Boolean = false) {
+                    showOpml: Boolean = false) {
         val riverFragment = this.findFragmentById(R.id.main_rivers_fragment)
         val rssFragment = this.findFragmentById(R.id.main_rss_fragment)
         val collectionFragment = this.findFragmentById(R.id.main_collection_fragment)

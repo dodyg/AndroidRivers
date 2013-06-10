@@ -1,42 +1,37 @@
-package com.silverkeytech.android_rivers
+/*
+Android Rivers is an app to read and discover news using RiverJs, RSS and OPML format.
+Copyright (C) 2012 Dody Gunawinata (dodyg@silverkeytech.com)
 
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>
+*/
+
+package com.silverkeytech.android_rivers
 
 import android.util.Log
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException
-import com.silverkeytech.android_rivers.Result
-import com.silverkeytech.android_rivers.httpGet
-import com.silverkeytech.android_rivers.transformXmlToAtom
 import com.silverkeytech.news_engine.transformXmlToRss
 import com.silverkeytech.news_engine.syndications.SyndicationFilter
 import com.silverkeytech.news_engine.syndications.SyndicationFeed
 import com.silverkeytech.news_engine.transformXmlToRdfRss
 import com.google.gson.Gson
-import com.silverkeytech.android_rivers.XmlComponent
-import com.silverkeytech.android_rivers.isNullOrEmpty
-import com.silverkeytech.news_engine.outlines.Body
-import com.silverkeytech.news_engine.outlines.Head
 import com.silverkeytech.news_engine.outlines.Opml
 import com.silverkeytech.news_engine.outlines.Outline
 import com.silverkeytech.news_engine.riverjs.River
-import com.silverkeytech.news_engine.riverjs.RiverOpml
-import com.silverkeytech.news_engine.riverjs.RiverOpmlOutline
-import com.silverkeytech.android_rivers.scrubHtml
 import com.silverkeytech.news_engine.syndications.atom.Feed
-import com.silverkeytech.news_engine.syndications.rss.Rss
-import com.silverkeytech.news_engine.syndications.rss.RssBuilder
-import com.silverkeytech.news_engine.syndications.rss.RssParser
 import go.goyalla.dict.arabicDictionary.file.ArabicReshape
-import java.io.ByteArrayInputStream
 import java.util.ArrayList
 import com.silverkeytech.news_engine.outliner.OutlineContent
-import com.silverkeytech.news_engine.syndications.rss_rdf.RdfRssBuilder
-import com.silverkeytech.news_engine.syndications.rss_rdf.RdfRssParser
-import com.silverkeytech.news_engine.syndications.rss_rdf.Rdf
-import com.silverkeytech.news_engine.outlines.OpmlBuilder
-import com.silverkeytech.news_engine.outlines.OpmlParser
-import com.silverkeytech.android_rivers.isLanguageRTL
-
-
 
 fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<SyndicationFeed> {
     val TAG = "downloadFeed"

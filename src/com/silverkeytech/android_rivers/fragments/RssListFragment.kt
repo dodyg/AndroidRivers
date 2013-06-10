@@ -132,7 +132,7 @@ public class RssListFragment(): ListFragment() {
         super<ListFragment>.onPause()
     }
 
-    fun displayImportOpmlDialog(){
+    fun displayImportOpmlDialog() {
         val (hasClip, uri) = this.tryGetUriFromClipboard()
 
         if (hasClip)

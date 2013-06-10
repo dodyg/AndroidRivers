@@ -40,12 +40,12 @@ fun isLanguageRTL(language: String): Boolean {
     }
 }
 
-fun Fragment.tryGetUriFromClipboard() : Pair<Boolean, String?> {
+fun Fragment.tryGetUriFromClipboard(): Pair<Boolean, String?> {
     val res = this.getActivity()!!.tryGetUriFromClipboard()
     return res
 }
 
-fun Activity.tryGetUriFromClipboard() : Pair<Boolean, String?> {
+fun Activity.tryGetUriFromClipboard(): Pair<Boolean, String?> {
     val clipboard = this.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     if (clipboard.hasText()){
         val text = clipboard.getText().toString()

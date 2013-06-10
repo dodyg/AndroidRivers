@@ -101,8 +101,8 @@ public fun createFlexibleContentDialog(context: Activity, content: View, buttons
 
 
 //This is a holder for AlertDialog with support for a neutral button that does not dismiss automatically
-public class AlertDialogWithNeutralButton (val dlg : AlertDialog, val btnTitle : String, val resetAction : (() -> Unit)) {
-    public fun show(){
+public class AlertDialogWithNeutralButton (val dlg: AlertDialog, val btnTitle: String, val resetAction: (() -> Unit)) {
+    public fun show() {
         dlg.show()
 
         val neutral = dlg.getButton(DialogInterface.BUTTON_NEUTRAL)!!
@@ -145,7 +145,7 @@ public fun createSingleInputDialog(context: Activity, title: String, defaultInpu
 
     dialog.setNeutralButton("Clear", dlgClickListener {
         dlg, idx ->
-            //deliberately empty
+        //deliberately empty
     })
 
     val createdDialog = AlertDialogWithNeutralButton(dialog.create()!!, context.getString(R.string.clear)!!) {
