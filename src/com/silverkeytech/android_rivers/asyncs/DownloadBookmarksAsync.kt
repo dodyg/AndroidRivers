@@ -35,13 +35,13 @@ import com.silverkeytech.android_rivers.Result
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.httpGet
 
-public class DownloadBookmarksAsync(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<Opml>>(){
+public class DownloadBookmarksAsync(it: Context, ignoreCache: Boolean): AsyncTask<String, Int, Result<Opml>>(){
     class object {
         public val TAG: String = javaClass<DownloadBookmarksAsync>().getSimpleName()
     }
 
     var dialog: ProgressDialog = ProgressDialog(it)
-    var context: Activity = it!! as Activity
+    var context: Activity = it as Activity
     val ignoreCache: Boolean = ignoreCache
 
     protected override fun onPreExecute() {
@@ -49,9 +49,8 @@ public class DownloadBookmarksAsync(it: Context?, ignoreCache: Boolean): AsyncTa
         dialog.setIndeterminate(true)
         dialog.setCancelable(false)
         dialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(R.string.cancel), object : DialogInterface.OnClickListener{
-
-            public override fun onClick(p0: DialogInterface?, p1: Int) {
-                p0!!.dismiss()
+            public override fun onClick(p0: DialogInterface, p1: Int) {
+                p0.dismiss()
                 this@DownloadBookmarksAsync.cancel(true)
             }
         })

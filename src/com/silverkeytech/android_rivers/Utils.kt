@@ -32,6 +32,7 @@ import android.text.ClipboardManager
 import android.support.v4.app.Fragment
 import android.app.Activity
 import android.webkit.URLUtil
+import android.app.Dialog
 
 fun isLanguageRTL(language: String): Boolean {
     return when(language){
@@ -61,9 +62,9 @@ public fun MenuItem?.andHide(): MenuItem {
     return this
 }
 
-public fun onClickListener(action: (View?) -> Unit): OnClickListener {
+public fun onClickListener(action: (View) -> Unit): OnClickListener {
     return object : OnClickListener {
-        public override fun onClick(p0: View?) {
+        public override fun onClick(p0: View) {
             action(p0)
         }
     }
@@ -149,5 +150,10 @@ fun isModernAndroid(): Boolean {
     return Build.VERSION.SDK_INT >= 14 //Build.VERSION_CODES.ICE_CREAM_SANDWICH
 }
 
+fun Dialog?.findView<T : View>(id : Int) : T{
+    return this!!.findViewById(id) as T
+}
 
-
+fun View?.findView<T : View>(id : Int) : T{
+    return this!!.findViewById(id) as T
+}

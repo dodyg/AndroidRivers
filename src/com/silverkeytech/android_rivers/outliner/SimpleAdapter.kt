@@ -77,7 +77,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         descriptionView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize.toFloat())
 
         descriptionView.setOnClickListener(object : View.OnClickListener{
-            public override fun onClick(p0: View?) {
+            public override fun onClick(p0: View) {
                 var currentPosition = treeNodeInfo!!.getId()!!.toInt()
                 var currentOutline = outlines.get(currentPosition)
 

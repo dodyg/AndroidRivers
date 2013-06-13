@@ -67,6 +67,7 @@ import com.silverkeytech.android_rivers.Params
 import com.silverkeytech.android_rivers.activities.getLocationOnScreen
 import com.silverkeytech.android_rivers.limitText
 import com.silverkeytech.android_rivers.rightPadding
+import com.silverkeytech.android_rivers.findView
 
 public class PodcastListFragment(): ListFragment() {
     class object {
@@ -240,7 +241,7 @@ public class PodcastListFragment(): ListFragment() {
         val popupWidth = item.getWidth()
         val popupHeight = item.getHeight()
 
-        val x = context.getLayoutInflater()!!.inflate(R.layout.podcast_quick_actions, null, false)!!
+        val x = context.getLayoutInflater().inflate(R.layout.podcast_quick_actions, null, false)!!
         val pp = PopupWindow(x, popupWidth, popupHeight, true)
 
         x.setBackgroundColor(android.graphics.Color.LTGRAY)
@@ -331,14 +332,14 @@ public class PodcastListFragment(): ListFragment() {
     }
 
     public fun createPodcastPlayerDialog(title: String, isNewTrack: Boolean, currentPosition: Int?, podcastLength: Int?): Dialog {
-        val dlg: View = this.getSupportActivity()!!.getLayoutInflater()!!.inflate(R.layout.dialog_podcast_player, null)!!
+        val dlg: View = this.getSupportActivity()!!.getLayoutInflater().inflate(R.layout.dialog_podcast_player, null)!!
         val contentParam = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0)
 
-        val dialog = Dialog(this.getSupportActivity())
+        val dialog = Dialog(this.getSupportActivity()!!)
         dialog.setContentView(dlg, contentParam)
         dialog.setTitle(rightPadding(title, this.getResources()!!.getInteger(R.integer.podcast_player_title_limit)))
 
-        val close = dialog.findViewById(R.id.dialog_podcast_player_stop_btn) as Button
+        val close = dialog.findView<Button>(R.id.dialog_podcast_player_stop_btn)
         close.setOnClickListener {
             v ->
             if (player != null)
@@ -347,7 +348,7 @@ public class PodcastListFragment(): ListFragment() {
             dialog.dismiss()
         }
 
-        val multi = dialog.findViewById(R.id.dialog_podcast_player_multi_btn) as Button
+        val multi = dialog.findView<Button>(R.id.dialog_podcast_player_multi_btn)
         multi.setOnClickListener {
             v ->
             if (player != null) {
@@ -371,8 +372,8 @@ public class PodcastListFragment(): ListFragment() {
             else
                 multi.setText(this@PodcastListFragment.getString(R.string.play))
 
-        val progressBar = dialog.findViewById(R.id.dialog_podcast_player_progress_sb) as SeekBar
-        val progressText = dialog.findViewById(R.id.dialog_podcast_player_progress_tv) as TextView
+        val progressBar = dialog.findView<SeekBar>(R.id.dialog_podcast_player_progress_sb)
+        val progressText = dialog.findView<TextView>(R.id.dialog_podcast_player_progress_tv)
 
         if (currentPosition != null && podcastLength != null){
             val prg = calculateProgress(currentPosition, podcastLength)
@@ -418,16 +419,14 @@ public class PodcastListFragment(): ListFragment() {
 
     fun createHandler(progressBar: SeekBar, progressText: TextView): Handler {
         val h = object: Handler() {
-            public override fun handleMessage(msg: Message?) {
-                if (msg != null){
-                    val data = msg.getData()!!
-                    val duration = data.getInt(PodcastPlayerService.TOTAL_DURATION)
-                    val currentPosition = data.getInt(PodcastPlayerService.CURRENT_POSITION)
-                    val progress = calculateProgress(currentPosition, duration)
-                    progressBar.setProgress(progress)
-                    progressText.setText("$progress")
-                    Log.d(TAG, "Progress Handler $progress")
-                }
+            public override fun handleMessage(msg: Message) {
+                val data = msg.getData()!!
+                val duration = data.getInt(PodcastPlayerService.TOTAL_DURATION)
+                val currentPosition = data.getInt(PodcastPlayerService.CURRENT_POSITION)
+                val progress = calculateProgress(currentPosition, duration)
+                progressBar.setProgress(progress)
+                progressText.setText("$progress")
+                Log.d(TAG, "Progress Handler $progress")
             }
         }
         return h

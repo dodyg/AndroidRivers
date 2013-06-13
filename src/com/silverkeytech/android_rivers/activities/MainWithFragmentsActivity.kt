@@ -382,7 +382,7 @@ public open class MainWithFragmentsActivity(): Activity() {
     }
 
     fun makeMenuView(savedInstanceState: Bundle?): View {
-        return getLayoutInflater()!!.inflate(R.layout.main_slide_menu)!!
+        return getLayoutInflater().inflate(R.layout.main_slide_menu)!!
     }
 
     fun computeSideMenuWidth(): Int {

@@ -129,7 +129,7 @@ public class DownloadService(): IntentService("DownloadService"){
 
             Log.d(TAG, "Podcast to be stored at ${filename}")
 
-            notificationManager.notify(notificationId, notification)
+            notificationManager.notify(notificationId, notification!!)
 
             var input: BufferedInputStream? = null
             var output: FileOutputStream? = null
@@ -153,7 +153,7 @@ public class DownloadService(): IntentService("DownloadService"){
 
                     if (progress != oldProgress){
                         notification!!.contentView!!.setProgressBar(R.id.notification_download_progress_status_progress, 100, progress, false)
-                        notificationManager.notify(notificationId, notification)
+                        notificationManager.notify(notificationId, notification!!)
                     }
 
                     output!!.write(data, 0, count)
@@ -172,19 +172,19 @@ public class DownloadService(): IntentService("DownloadService"){
 
                 if (res.isFalse()){
                     notification!!.contentView!!.setTextViewText(R.id.notification_download_progress_status_text, "File download fails to save to db")
-                    notificationManager.notify(notificationId, notification)
+                    notificationManager.notify(notificationId, notification!!)
                     result = Activity.RESULT_CANCELED
                 }
                 else{
                     notification!!.contentView!!.setTextViewText(R.id.notification_download_progress_status_text, "File successfully downloaded to $filename")
                     notification!!.contentView!!.setProgressBar(R.id.notification_download_progress_status_progress, 100, 100, false)
-                    notificationManager.notify(notificationId, notification)
+                    notificationManager.notify(notificationId, notification!!)
                     result = Activity.RESULT_OK
                 }
 
             }catch (e: java.io.FileNotFoundException){
                 notification!!.contentView!!.setTextViewText(R.id.notification_download_progress_status_text, "Download fails due to ${e.getMessage()}")
-                notificationManager.notify(notificationId, notification)
+                notificationManager.notify(notificationId, notification!!)
                 result = Activity.RESULT_CANCELED
             }
             finally{
@@ -196,7 +196,7 @@ public class DownloadService(): IntentService("DownloadService"){
         catch(e: Exception){
             Log.d(TAG, "Exception happend at attempt to download ${e.getMessage()}")
             notification!!.contentView!!.setTextViewText(R.id.notification_download_progress_status_text, "File $inferredName download cancelled due to error")
-            notificationManager.notify(notificationId, notification)
+            notificationManager.notify(notificationId, notification!!)
             result = Activity.RESULT_CANCELED
         }
 

@@ -50,14 +50,14 @@ public fun textValidator(action: (String?) -> Unit): TextWatcher {
         public override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
 
-        public override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        public override fun onTextChanged(p0: CharSequence, p1: Int, p2: Int, p3: Int) {
         }
     }
 }
 
 public fun dlgClickListener(action: (dlg: DialogInterface?, idx: Int) -> Unit): DialogInterface.OnClickListener {
     return object: DialogInterface.OnClickListener {
-        public override fun onClick(p0: DialogInterface?, p1: Int) {
+        public override fun onClick(p0: DialogInterface, p1: Int) {
             action(p0, p1)
         }
     }
@@ -65,25 +65,26 @@ public fun dlgClickListener(action: (dlg: DialogInterface?, idx: Int) -> Unit): 
 
 public data class DialogBtn(public val text: String, public val action: (Dialog) -> Unit)
 
-public fun createFlexibleContentDialog(context: Activity, content: View, buttons: Array<DialogBtn>): Dialog {
+public fun createFlexibleContentDialog(context: Activity, content: View, dismissOnTouch : Boolean, buttons: Array<DialogBtn>): Dialog {
 
-    val dlg: View = context.getLayoutInflater()!!.inflate(R.layout.dialog_flex_content, null)!!
+    val dlg: View = context.getLayoutInflater().inflate(R.layout.dialog_flex_content, null)!!
     val contentParam = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0)
 
     val dialog = Dialog(context)
     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
     dialog.setContentView(dlg, contentParam)
 
-    val contentLayout = dlg.findViewById(R.id.dialog4_content) as LinearLayout
+    val contentLayout = dlg.findView<LinearLayout>(R.id.dialog4_content)
     contentLayout.addView(content, contentParam)
     contentLayout.setOnClickListener {
-        dialog.dismiss()
+        if (dismissOnTouch)
+            dialog.dismiss()
     }
 
     val btnParam = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0)
     btnParam.setMargins(0, 0, 0, 0)
 
-    val buttonLayout = dlg.findViewById(R.id.dialog_flex_content_buttons) as LinearLayout
+    val buttonLayout = dlg.findView<LinearLayout>(R.id.dialog_flex_content_buttons)
     for(e:DialogBtn in buttons.iterator()){
         val b = Button(context)
         b.setText(e.text)
@@ -115,7 +116,7 @@ public class AlertDialogWithNeutralButton (val dlg: AlertDialog, val btnTitle: S
 
 //Create a popup dialog with one text for url submission. Then provide the given url via a callback called 'action'
 public fun createSingleInputDialog(context: Activity, title: String, defaultInput: String?, inputHint: String, action: (DialogInterface?, String?) -> Unit): AlertDialogWithNeutralButton {
-    val dlg: View = context.getLayoutInflater()!!.inflate(R.layout.dialog_single_input, null)!!
+    val dlg: View = context.getLayoutInflater().inflate(R.layout.dialog_single_input, null)!!
 
     //take care of color
     dlg.setDrawingCacheBackgroundColor(context.getStandardDialogBackgroundColor())
@@ -156,7 +157,7 @@ public fun createSingleInputDialog(context: Activity, title: String, defaultInpu
 }
 
 public fun createFlexibleInputDialog(context: Activity, title: String, inputs: Array<DialogInput>, action: (DialogInterface?, Array<DialogInput>) -> Unit): AlertDialog {
-    val dlg: View = context.getLayoutInflater()!!.inflate(R.layout.dialog_flex_input, null)!!
+    val dlg: View = context.getLayoutInflater().inflate(R.layout.dialog_flex_input, null)!!
 
     val dialog = AlertDialog.Builder(context)
     dialog.setView(dlg)

@@ -58,6 +58,7 @@ import com.silverkeytech.android_rivers.createSingleInputDialog
 import com.silverkeytech.android_rivers.safeUrlConvert
 import com.silverkeytech.android_rivers.asyncs.downloadOpmlAsync
 import com.silverkeytech.android_rivers.tryGetUriFromClipboard
+import com.silverkeytech.android_rivers.findView
 
 public class OpmlListFragment(): ListFragment() {
     class object {
@@ -147,14 +148,14 @@ public class OpmlListFragment(): ListFragment() {
 
         val textSize = parent!!.getVisualPref().listTextSize
 
-        val adapter = object : ArrayAdapter<Bookmark>(parent, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
+        val adapter = object : ArrayAdapter<Bookmark>(parent!!, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 val text = bookmarks[position].toString()
                 return currentTextViewItem(text, convertView, parent, textSize.toFloat(), false, this@OpmlListFragment.getLayoutInflater()!!)
             }
         }
 
-        val list = getView()!!.findViewById(android.R.id.list) as ListView
+        val list = getView().findView<ListView>(android.R.id.list)
         list.setAdapter(adapter)
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
@@ -177,7 +178,7 @@ public class OpmlListFragment(): ListFragment() {
         val popupWidth = item.getWidth()
         val popupHeight = item.getHeight()
 
-        val x = context.getLayoutInflater()!!.inflate(R.layout.opml_quick_actions, null, false)!!
+        val x = context.getLayoutInflater().inflate(R.layout.opml_quick_actions, null, false)!!
         val pp = PopupWindow(x, popupWidth, popupHeight, true)
 
         x.setBackgroundColor(android.graphics.Color.LTGRAY)
@@ -186,7 +187,7 @@ public class OpmlListFragment(): ListFragment() {
             pp.dismiss()
         }
 
-        val icon = x.findViewById(R.id.opml_quick_action_delete_icon) as ImageView
+        val icon = x.findView<ImageView>(R.id.opml_quick_action_delete_icon)
         icon.setOnClickListener {
             val dlg = createConfirmationDialog(context = context, message = "Are you sure about deleting this OPML bookmark?", positive = {
                 try{
@@ -218,7 +219,7 @@ public class OpmlListFragment(): ListFragment() {
     }
 
     private fun showMessage(msg: String) {
-        val txt = getView()!!.findViewById(R.id.opml_list_fragment_message_tv) as TextView
+        val txt = getView().findView<TextView>(R.id.opml_list_fragment_message_tv)
         if (msg.isNullOrEmpty()){
             txt.setVisibility(View.INVISIBLE)
             txt.setText("")

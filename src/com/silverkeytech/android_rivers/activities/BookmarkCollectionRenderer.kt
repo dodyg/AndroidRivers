@@ -110,7 +110,7 @@ fun showCollectionQuickActionPopup(context: BookmarkCollectionActivity, bookmark
     val popupWidth = item.getWidth()
     val popupHeight = item.getHeight()
 
-    val x = context.getLayoutInflater()!!.inflate(R.layout.collection_quick_actions, null, false)!!
+    val x = context.getLayoutInflater().inflate(R.layout.collection_quick_actions, null, false)!!
     val pp = PopupWindow(x, popupWidth, popupHeight, true)
 
     x.setBackgroundColor(android.graphics.Color.LTGRAY)

@@ -62,7 +62,7 @@ fun addBookmarkOption(context: Activity, feedDateIsParseable: Boolean, bookmark:
             val withInstruction = arrayListOf(context.getString(R.string.skip_collection), *collectionTitles).toArray(array<String>())
 
             dialog.setItems(withInstruction, object : DialogInterface.OnClickListener{
-                public override fun onClick(p0: DialogInterface?, p1: Int) {
+                public override fun onClick(p0: DialogInterface, p1: Int) {
                     if (p1 == 0) {
                         //skip adding bookmark to collection. Just add to RSS bookmark
                         bookmark(null)
@@ -73,7 +73,7 @@ fun addBookmarkOption(context: Activity, feedDateIsParseable: Boolean, bookmark:
                 }
             })
 
-            var createdDialog = dialog.create()!!
+            var createdDialog = dialog.create()
             createdDialog.setCanceledOnTouchOutside(true)
             createdDialog.setCancelable(true)
             createdDialog.show()

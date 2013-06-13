@@ -63,6 +63,7 @@ import com.silverkeytech.android_rivers.activities.getLocationOnScreen
 import com.silverkeytech.android_rivers.startCollectionActivity
 import com.silverkeytech.android_rivers.activities.Duration
 import com.silverkeytech.android_rivers.activities.toastee
+import com.silverkeytech.android_rivers.findView
 
 public class CollectionListFragment: ListFragment() {
     class object {
@@ -121,7 +122,7 @@ public class CollectionListFragment: ListFragment() {
     }
 
     fun showMessage(msg: String) {
-        val txt = getView()!!.findViewById(R.id.collection_list_fragment_message_tv) as TextView
+        val txt = getView().findView<TextView>(R.id.collection_list_fragment_message_tv)
         if (msg.isNullOrEmpty()){
             txt.setVisibility(View.INVISIBLE)
             txt.setText("")
@@ -154,7 +155,7 @@ public class CollectionListFragment: ListFragment() {
             }
         }
 
-        val list = getView()!!.findViewById(android.R.id.list) as ListView
+        val list = getView().findView<ListView>(android.R.id.list)
         list.setAdapter(adapter)
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
@@ -181,7 +182,7 @@ public class CollectionListFragment: ListFragment() {
         val popupWidth = item.getWidth()
         val popupHeight = item.getHeight()
 
-        val x = context.getLayoutInflater()!!.inflate(R.layout.main_collection_quick_actions, null, false)!!
+        val x = context.getLayoutInflater().inflate(R.layout.main_collection_quick_actions, null, false)!!
         val pp = PopupWindow(x, popupWidth, popupHeight, true)
 
         x.setBackgroundColor(android.graphics.Color.LTGRAY)
@@ -190,7 +191,7 @@ public class CollectionListFragment: ListFragment() {
             pp.dismiss()
         }
 
-        val delete = x.findViewById(R.id.main_collection_quick_action_delete_icon) as ImageView
+        val delete = x.findView<ImageView>(R.id.main_collection_quick_action_delete_icon)
         delete.setOnClickListener {
             val dlg = createConfirmationDialog(context = context, message = "Are you sure about deleting this collection?", positive = {
                 try{
@@ -223,7 +224,7 @@ public class CollectionListFragment: ListFragment() {
             dlg.show()
         }
 
-        val edit = x.findViewById(R.id.main_collection_quick_action_edit_icon) as ImageView
+        val edit = x.findView<ImageView>(R.id.main_collection_quick_action_edit_icon)
         edit.setOnClickListener{
             pp.dismiss()
             startCollectionActivity(context, collection.id, collection.title)
@@ -235,7 +236,7 @@ public class CollectionListFragment: ListFragment() {
 
 
     fun showAddNewCollectionDialog() {
-        val dlg: View = parent!!.getLayoutInflater()!!.inflate(R.layout.collection_add_new, null)!!
+        val dlg: View = parent!!.getLayoutInflater().inflate(R.layout.collection_add_new, null)!!
 
         //take care of color
         dlg.setDrawingCacheBackgroundColor(parent!!.getStandardDialogBackgroundColor())
@@ -244,10 +245,10 @@ public class CollectionListFragment: ListFragment() {
         dialog.setView(dlg)
         dialog.setTitle("Add new collection")
 
-        var input = dlg.findViewById(R.id.collection_add_new_title_et)!! as EditText
+        var input = dlg.findView<EditText>(R.id.collection_add_new_title_et)
 
         dialog.setPositiveButton("OK", object : DialogInterface.OnClickListener{
-            public override fun onClick(p0: DialogInterface?, p1: Int) {
+            public override fun onClick(p0: DialogInterface, p1: Int) {
                 val text = input.getText().toString()
                 if (text.isNullOrEmpty()){
                     parent!!.toastee("Please enter collection title", Duration.AVERAGE)
@@ -272,8 +273,8 @@ public class CollectionListFragment: ListFragment() {
         })
 
         dialog.setNegativeButton("Cancel", object : DialogInterface.OnClickListener{
-            public override fun onClick(p0: DialogInterface?, p1: Int) {
-                p0?.dismiss()
+            public override fun onClick(p0: DialogInterface, p1: Int) {
+                p0.dismiss()
             }
         })
 

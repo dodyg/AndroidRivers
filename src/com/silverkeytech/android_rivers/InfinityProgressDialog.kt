@@ -31,8 +31,8 @@ public class InfinityProgressDialog(ctx: Context, val message: String): Progress
 
     public fun onCancel(action: (DialogInterface) -> Unit) {
         super.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", object : DialogInterface.OnClickListener{
-            public override fun onClick(p0: DialogInterface?, p1: Int) {
-                action(p0!!)
+            public override fun onClick(p0: DialogInterface, p1: Int) {
+                action(p0)
             }
         })
 

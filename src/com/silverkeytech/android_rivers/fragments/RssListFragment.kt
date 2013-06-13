@@ -69,12 +69,12 @@ public class RssListFragment(): ListFragment() {
         public val TAG: String = javaClass<RssListFragment>().getSimpleName()
     }
 
-    var parent: Activity? = null
+    var parent: Activity by kotlin.properties.Delegates.notNull()
     var lastEnteredUrl: String? = ""
 
     public override fun onAttach(activity: Activity?) {
         super<ListFragment>.onAttach(activity)
-        parent = activity
+        parent = activity!!
     }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -138,10 +138,10 @@ public class RssListFragment(): ListFragment() {
         if (hasClip)
             lastEnteredUrl = uri
 
-        val dlg = createSingleInputDialog(parent!!, "Import subscription list", lastEnteredUrl, "Set url here", {
+        val dlg = createSingleInputDialog(parent, "Import subscription list", lastEnteredUrl, "Set url here", {
             dlg, url ->
             if (url.isNullOrEmpty()) {
-                parent!!.toastee("Please enter url of the OPML subscription list", Duration.LONG)
+                parent.toastee("Please enter url of the OPML subscription list", Duration.LONG)
             }
             else {
                 var currentUrl = url!!
@@ -154,10 +154,10 @@ public class RssListFragment(): ListFragment() {
 
                 if (u.isTrue()){
                     lastEnteredUrl = ""
-                    startImportOpmlSubscriptionService(parent!!, u.value!!.toString())
+                    startImportOpmlSubscriptionService(parent, u.value!!.toString())
                 } else {
                     Log.d(TAG, "Opml download $currentUrl conversion generates ${u.exception?.getMessage()}")
-                    parent!!.toastee("The url you entered is not valid. Please try again", Duration.LONG)
+                    parent.toastee("The url you entered is not valid. Please try again", Duration.LONG)
                 }
             }
         })
@@ -170,10 +170,10 @@ public class RssListFragment(): ListFragment() {
         if (hasClip)
             lastEnteredUrl = uri
 
-        val dlg = createSingleInputDialog(parent!!, "Add new RSS", lastEnteredUrl, "Set url here", {
+        val dlg = createSingleInputDialog(parent, "Add new RSS", lastEnteredUrl, "Set url here", {
             dlg, url ->
             if (url.isNullOrEmpty()){
-                parent!!.toastee("Please enter url of the river", Duration.LONG)
+                parent.toastee("Please enter url of the river", Duration.LONG)
             }
             else {
                 var currentUrl = url!!
@@ -184,7 +184,7 @@ public class RssListFragment(): ListFragment() {
 
                 val u = safeUrlConvert(currentUrl)
                 if (u.isTrue()){
-                    DownloadFeedAsync(parent!!, true)
+                    DownloadFeedAsync(parent, true)
                             .executeOnComplete {
                         res ->
                         if (res.isTrue()){
@@ -194,21 +194,21 @@ public class RssListFragment(): ListFragment() {
 
                             if (res2.isTrue()){
                                 lastEnteredUrl = "" //reset when op is successful
-                                parent!!.toastee("$currentUrl is successfully bookmarked")
+                                parent.toastee("$currentUrl is successfully bookmarked")
                                 displayRssBookmarks()
                             }
                             else{
-                                parent!!.toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
+                                parent.toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
                             }
                         }else{
-                            parent!!.toastee("Error ${res.exception?.getMessage()}", Duration.LONG)
+                            parent.toastee("Error ${res.exception?.getMessage()}", Duration.LONG)
                         }
                     }
                             .execute(currentUrl)
                     dlg?.dismiss()
                 }else{
                     Log.d(TAG, "RSS $currentUrl conversion generates ${u.exception?.getMessage()}")
-                    parent!!.toastee("The url you entered is not valid. Please try again", Duration.LONG)
+                    parent.toastee("The url you entered is not valid. Please try again", Duration.LONG)
                 }
             }
         })
@@ -223,7 +223,7 @@ public class RssListFragment(): ListFragment() {
             txt.setText("")
         }
         else{
-            val textSize = parent!!.getVisualPref().listTextSize
+            val textSize = parent.getVisualPref().listTextSize
             txt.setVisibility(View.VISIBLE)
             handleFontResize(txt, msg, textSize.toFloat())
         }
@@ -231,12 +231,12 @@ public class RssListFragment(): ListFragment() {
 
     fun handleRssListing(bookmarks: List<Bookmark>) {
         if (bookmarks.count() == 0){
-            showMessage(parent!!.getString(R.string.empty_rss_items_list)!!)
+            showMessage(parent.getString(R.string.empty_rss_items_list)!!)
         }
         else
             showMessage("")
 
-        val textSize = parent!!.getVisualPref().listTextSize
+        val textSize = parent.getVisualPref().listTextSize
 
         val adapter = object : ArrayAdapter<Bookmark>(parent, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
@@ -251,14 +251,14 @@ public class RssListFragment(): ListFragment() {
         list.setOnItemClickListener(object : OnItemClickListener{
             public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
                 val bookmark = bookmarks.get(p2)
-                startFeedActivity(parent!!, bookmark.url, bookmark.title, bookmark.language)
+                startFeedActivity(parent, bookmark.url, bookmark.title, bookmark.language)
             }
         })
 
         list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
             public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
                 val currentBookmark = bookmarks.get(p2)
-                showRssBookmarkQuickActionPopup(parent!!, currentBookmark, p1!!, list)
+                showRssBookmarkQuickActionPopup(parent, currentBookmark, p1!!, list)
                 return true
             }
         })
@@ -274,7 +274,7 @@ public class RssListFragment(): ListFragment() {
         val popupWidth = item.getWidth()
         val popupHeight = item.getHeight()
 
-        val x = context.getLayoutInflater()!!.inflate(R.layout.main_feed_quick_actions, null, false)!!
+        val x = context.getLayoutInflater().inflate(R.layout.main_feed_quick_actions, null, false)!!
         val pp = PopupWindow(x, popupWidth, popupHeight, true)
 
         x.setBackgroundColor(android.graphics.Color.LTGRAY)
@@ -353,7 +353,7 @@ public class RssListFragment(): ListFragment() {
                     pp.dismiss()
                 })
 
-                var createdDialog = dialog.create()!!
+                var createdDialog = dialog.create()
                 createdDialog.setCanceledOnTouchOutside(true)
                 createdDialog.setCancelable(true)
                 createdDialog.show()

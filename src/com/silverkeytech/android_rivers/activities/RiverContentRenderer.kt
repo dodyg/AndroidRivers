@@ -193,18 +193,14 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                     else {
                         buttons.add(DialogBtn(context.getString(R.string.podcast)!!, { dlg ->
                             var messenger = Messenger(object : Handler(){
-                                public override fun handleMessage(msg: Message?) {
-                                    if (msg != null){
-                                        val path = msg.obj as String
+                                public override fun handleMessage(msg: Message) {
+                                    val path = msg.obj as String
 
-                                        if (msg.arg1 == android.app.Activity.RESULT_OK && !path.isNullOrEmpty()){
-                                            context.toastee("File is successfully downloaded at $path", Duration.LONG)
-                                            MediaScannerWrapper.scanPodcasts(context, path)
-                                        }else{
-                                            context.toastee("Sorry, I cannot download podcast ${currentNews.item.title}", Duration.LONG)
-                                        }
+                                    if (msg.arg1 == android.app.Activity.RESULT_OK && !path.isNullOrEmpty()){
+                                        context.toastee("File is successfully downloaded at $path", Duration.LONG)
+                                        MediaScannerWrapper.scanPodcasts(context, path)
                                     }else{
-                                        Log.d(TAG, "handleMessage returns null, which is very weird")
+                                        context.toastee("Sorry, I cannot download podcast ${currentNews.item.title}", Duration.LONG)
                                     }
                                 }
                             })
@@ -267,7 +263,8 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 //                    }
                 //                }))
 
-                var createdDialog = createFlexibleContentDialog(context, dlg, buttons.toArray(array<DialogBtn>()))
+                var createdDialog = createFlexibleContentDialog(context = context, content = dlg,
+                        dismissOnTouch = true, buttons =  buttons.toArray(array<DialogBtn>()))
                 createdDialog.show()
             }
         })

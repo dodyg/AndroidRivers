@@ -71,8 +71,8 @@ public fun Activity.restart() {
 
 public fun Activity.toastee(text: String, duration: Duration = Duration.QUICK, grav: Int = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL) {
     var t = Toast.makeText(this, text, duration.toInt())
-    t!!.setGravity(grav, 0, 0);
-    t!!.show()
+    t.setGravity(grav, 0, 0);
+    t.show()
 }
 
 fun org.holoeverywhere.app.Activity.findFragmentById(id: Int): Fragment {

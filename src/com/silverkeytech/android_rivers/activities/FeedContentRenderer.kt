@@ -53,6 +53,8 @@ import com.silverkeytech.android_rivers.startOpenBrowserActivity
 import com.silverkeytech.android_rivers.shareActionIntent
 import com.silverkeytech.android_rivers.startDownloadService
 import com.silverkeytech.android_rivers.createFlexibleContentDialog
+import com.silverkeytech.android_rivers.findView
+import android.text.method.ScrollingMovementMethod
 
 //Manage the rendering of each news item in the river list
 public class FeedContentRenderer(val context: Activity, val language: String){
@@ -98,8 +100,8 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                     currentView = inflater.inflate(R.layout.news_item, parent, false)
 
                     currentView!!.findViewById(R.id.news_item_source_tv)!!.setVisibility(android.view.View.GONE)
-                    holder = ViewHolder(currentView!!.findViewById(R.id.news_item_text_tv) as TextView,
-                            currentView!!.findViewById(R.id.news_item_indicator_tv) as TextView)
+                    holder = ViewHolder(currentView.findView<TextView>(R.id.news_item_text_tv),
+                            currentView!!.findView<TextView>(R.id.news_item_indicator_tv))
 
                     handleForeignTextStyle(context, language, holder!!.news, textSize.toFloat())
 
@@ -140,7 +142,8 @@ public class FeedContentRenderer(val context: Activity, val language: String){
 
                 dlg.setBackgroundColor(context.getStandardDialogBackgroundColor())
 
-                var body = dlg.findViewById(R.id.feed_details_text_tv)!! as TextView
+                var body = dlg.findView<TextView>(R.id.feed_details_text_tv)
+                body.setMovementMethod(ScrollingMovementMethod())
                 handleForeignText(language, body, msg)
                 handleForeignTextStyle(context, language, body, textSize.toFloat())
                 handleTextColorBasedOnTheme(context, body)
@@ -171,18 +174,14 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                         if (currentNews.isPodcast()){
                             buttons.add(DialogBtn(context.getString(R.string.podcast)!!, { dlg ->
                                 var messenger = Messenger(object : Handler(){
-                                    public override fun handleMessage(msg: Message?) {
-                                        if (msg != null){
-                                            val path = msg.obj as String
+                                    public override fun handleMessage(msg: Message) {
+                                        val path = msg.obj as String
 
-                                            if (msg.arg1 == android.app.Activity.RESULT_OK && !path.isNullOrEmpty()){
-                                                context.toastee("File is successfully downloaded at $path", Duration.LONG)
-                                                MediaScannerWrapper.scanPodcasts(context, path)
-                                            }else{
-                                                context.toastee("Download failed", Duration.LONG)
-                                            }
+                                        if (msg.arg1 == android.app.Activity.RESULT_OK && !path.isNullOrEmpty()){
+                                            context.toastee("File is successfully downloaded at $path", Duration.LONG)
+                                            MediaScannerWrapper.scanPodcasts(context, path)
                                         }else{
-                                            Log.d(TAG, "handleMessage returns null, which is very weird")
+                                            context.toastee("Download failed", Duration.LONG)
                                         }
                                     }
                                 })
@@ -196,7 +195,8 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                         }
                 }
 
-                var createdDialog = createFlexibleContentDialog(context, dlg, buttons.toArray(array<DialogBtn>()))
+                var createdDialog = createFlexibleContentDialog(context = context, content = dlg,
+                        dismissOnTouch = true, buttons = buttons.toArray(array<DialogBtn>()))
                 createdDialog.show()
             }
         })

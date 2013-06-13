@@ -69,7 +69,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
         }
     }
 
-    public override fun onBind(p0: Intent?): IBinder? {
+    public override fun onBind(p0: Intent): IBinder {
         return binder
     }
 
@@ -116,7 +116,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
 
     fun updateText(msg: String) {
         notification!!.contentView!!.setTextViewText(R.id.notification_podcast_player_status_text, msg)
-        notificationManager!!.notify(notificationId, notification)
+        notificationManager!!.notify(notificationId, notification!!)
     }
 
     var audioManager: AudioManager? = null
@@ -314,7 +314,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
     }
 
     public override fun onError(mp: MediaPlayer?, what: Int, extra: Int): Boolean {
-        Toast.makeText(this, "Music player failed", Toast.LENGTH_SHORT)?.show()
+        Toast.makeText(this, "Music player failed", Toast.LENGTH_SHORT).show()
         if (mediaPlayer != null){
             try {
                 mediaPlayer!!.stop()

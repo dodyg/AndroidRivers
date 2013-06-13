@@ -88,7 +88,7 @@ public class DownloadImageAsync(it: Context?): AsyncTask<String, Int, Result<Dow
         else{
             if (result.isTrue()){
                 var dialog = AlertDialog.Builder(context)
-                var vw = context.getLayoutInflater()!!.inflate(R.layout.image_view, null)!!
+                var vw = context.getLayoutInflater().inflate(R.layout.image_view, null)!!
 
                 var img: File = File(result.value!!.filePath)
 
@@ -111,11 +111,11 @@ public class DownloadImageAsync(it: Context?): AsyncTask<String, Int, Result<Dow
 
                 dialog.setView(vw)
                 dialog.setNeutralButton(android.R.string.ok, object : DialogInterface.OnClickListener{
-                    public override fun onClick(p0: DialogInterface?, p1: Int) {
+                    public override fun onClick(p0: DialogInterface, p1: Int) {
                         if (bmp != null)  //toss the bitmap once it's not needed
                             bmp!!.recycle()
 
-                        p0?.dismiss()
+                        p0.dismiss()
                     }
                 })
 

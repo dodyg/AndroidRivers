@@ -129,7 +129,7 @@ public class TryOutActivity(): Activity()
 
         btn.setOnClickListener {
 
-            val cnt = this.getLayoutInflater()!!.inflate(R.layout.news_details, null)!!
+            val cnt = this.getLayoutInflater().inflate(R.layout.news_details, null)!!
             //take care of color
             cnt.setDrawingCacheBackgroundColor(this.getStandardDialogBackgroundColor())
 
@@ -138,7 +138,7 @@ public class TryOutActivity(): Activity()
             val src = cnt.findViewById(R.id.news_details_source_tv) as TextView
             src.setText("CNN>COM")
 
-            val dlg = createFlexibleContentDialog(context = this, content = cnt, buttons = array(
+            val dlg = createFlexibleContentDialog(context = this, content = cnt, dismissOnTouch = true, buttons = array(
                     DialogBtn("Go", {(d) -> d.dismiss() }),
                     DialogBtn("Share", {(d) -> d.dismiss() }),
                     DialogBtn("Podcast", {(d) -> d.dismiss() }),
@@ -249,7 +249,7 @@ public class TryOutActivity(): Activity()
         btn.setOnClickListener {
             val dialog = AlertDialog.Builder(this)
             dialog.setItems(names, object : DialogInterface.OnClickListener{
-                public override fun onClick(p0: DialogInterface?, p1: Int) {
+                public override fun onClick(p0: DialogInterface, p1: Int) {
                     val url = list.get(p1).second
 
                     Log.d(TAG, "Opening $url")
@@ -263,7 +263,7 @@ public class TryOutActivity(): Activity()
                 }
             })
 
-            dialog.create()!!.show()
+            dialog.create().show()
         }
     }
 
@@ -286,7 +286,7 @@ public class TryOutActivity(): Activity()
         btn.setOnClickListener {
             val dialog = AlertDialog.Builder(this)
             dialog.setItems(names, object : DialogInterface.OnClickListener{
-                public override fun onClick(p0: DialogInterface?, p1: Int) {
+                public override fun onClick(p0: DialogInterface, p1: Int) {
                     val url = list.get(p1).second
 
                     Log.d(TAG, "Opening $url")
@@ -300,7 +300,7 @@ public class TryOutActivity(): Activity()
                 }
             })
 
-            dialog.create()!!.show()
+            dialog.create().show()
         }
     }
 
@@ -334,8 +334,8 @@ public class TryOutActivity(): Activity()
             Log.d(TAG, "Start downloading file")
 
             val messenger = Messenger(object : Handler(){
-                public override fun handleMessage(msg: Message?) {
-                    var path = msg!!.obj as String
+                public override fun handleMessage(msg: Message) {
+                    var path = msg.obj as String
 
                     if (msg.arg1 == android.app.Activity.RESULT_OK && !path.isNullOrEmpty()){
                         toastee("File is successfully downloaded at $path")
@@ -356,7 +356,7 @@ public class TryOutActivity(): Activity()
         val btn = findView<Button>(R.id.tryout_setup_bookmark_table_btn)
 
         btn.setOnClickListener(object : OnClickListener{
-            public override fun onClick(p0: View?) {
+            public override fun onClick(p0: View) {
                 val total = DatabaseManager.query().bookmark().byKind(BookmarkKind.RIVER, SortingOrder.NONE)
 
                 if (total.exist)
@@ -411,12 +411,12 @@ public class TryOutActivity(): Activity()
             notification!!.contentView!!.setTextViewText(R.id.notification_download_progress_status_text, "Download in progress")
 
             var nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            nm.notify(counter, notification)
+            nm.notify(counter, notification!!)
 
             var thread = Thread(runnable{
                 for(i in 11..100){
                     notification!!.contentView!!.setProgressBar(R.id.notification_download_progress_status_progress, 100, i, false)
-                    nm.notify(counter, notification)
+                    nm.notify(counter, notification!!)
 
                     Log.d(TAG, "We are progressing $i / 100")
                     try{
@@ -464,7 +464,7 @@ public class TryOutActivity(): Activity()
         var btn = findView<Button>(R.id.tryout_download_riverjs_with_opml_btn)
 
         btn.setOnClickListener(object: OnClickListener{
-            public override fun onClick(p0: View?) {
+            public override fun onClick(p0: View) {
                 val url = "http://hobieu.apphb.com/api/1/samples/riverjswithopml"
 
                 var i = Intent(this@TryOutActivity, javaClass<RiverActivity>())
@@ -481,7 +481,7 @@ public class TryOutActivity(): Activity()
         var btn = findView<Button>(R.id.tryout_download_recursive_opml_btn)
 
         btn.setOnClickListener(object: OnClickListener{
-            public override fun onClick(p0: View?) {
+            public override fun onClick(p0: View) {
                 var req: String? = ""
                 val url = "http://opmlviewer.com/Content/Directories.opml"
 
