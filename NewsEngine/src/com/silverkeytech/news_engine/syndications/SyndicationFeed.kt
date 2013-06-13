@@ -82,7 +82,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
 
                     val fi = SyndicationFeedItem()
                     fi.title = i.title
-                    fi.description = scrubHtml(i.description)
+                    fi.description = i.description
                     //the date parsing is exception heavy. Don't do it over a loop. Better verify it first.
                     if (isDateParseable)                                                  {
                         fi.pubDate = i.getPubDateInFormat(dateFormat)
@@ -174,7 +174,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
                         if (text.`type` == "text"){
                             fi.description = text.value
                         } else {
-                            fi.description = scrubHtml(text.value)
+                            fi.description = text.value
                         }
                     }
                 }

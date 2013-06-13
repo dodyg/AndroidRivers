@@ -40,7 +40,8 @@ fun scrubHtml(text: String?): String {
     if (text.isNullOrEmpty())
         return ""
     else {
-        val spanned = android.text.Html.fromHtml(text!!.trim()) as SpannableStringBuilder
+        val text =  text!!.trim().replaceAll("(<br>|<br/>)", "\n")
+        val spanned = android.text.Html.fromHtml(text) as SpannableStringBuilder
         val spannedObjects = spanned.getSpans(0, spanned.length(), javaClass<Any>())!!
 
         for(i in 0..(spannedObjects.size - 1)){
@@ -123,13 +124,17 @@ fun handleForeignTextStyle(context: Activity, language: String, text: TextView, 
 }
 
 fun handleForeignText(language: String, text: TextView, content: String) {
-
     when(language.toLowerCase()){
         "ar", "ar-eg" -> {
             text.setText(ArabicReshape.reshape(content))
         }
         else -> {
-            text.setText(content)
+            val processed = content.trim()
+                    .replace("\n","<br/>")
+                    .replaceAll("(<br/><br/><br/><br/>|<br/><br/><br/>)","<br/>")
+            Log.d("HandleForeignText", "$processed")
+            val spannable = android.text.Html.fromHtml(processed)
+            text.setText(spannable)
         }
     }
 }
