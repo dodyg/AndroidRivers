@@ -79,13 +79,13 @@ public class RiverListFragment(): ListFragment() {
 
     val DEFAULT_SUBSCRIPTION_LIST = "http://hobieu.apphb.com/api/1/default/riverssubscription"
 
-    var parent: Activity? = null
+    var parent: Activity by kotlin.properties.Delegates.notNull()
     var lastEnteredUrl: String? = ""
 
     var isFirstLoad: Boolean = true
     public override fun onAttach(activity: Activity?) {
         super<ListFragment>.onAttach(activity)
-        parent = activity
+        parent = activity!!
     }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,7 +104,7 @@ public class RiverListFragment(): ListFragment() {
     public override fun onStart() {
         super<ListFragment>.onStart()
 
-        val downloadIf = true//parent!!.getSetupPref().getDownloadDefaultRiversIfNecessary()
+        val downloadIf = true//parent.getSetupPref().getDownloadDefaultRiversIfNecessary()
         displayRiverBookmarks(downloadIf)
     }
 
@@ -135,7 +135,7 @@ public class RiverListFragment(): ListFragment() {
         if (menu != null){
             val sort: MenuItem = menu.findItem(R.id.river_list_fragment_menu_sort)!!
             val nextSort = nextSortCycle()
-            Log.d(TAG, "The next sort cycle from current ${parent!!.getContentPref().riverBookmarksSorting} is $nextSort")
+            Log.d(TAG, "The next sort cycle from current ${parent.getContentPref().riverBookmarksSorting} is $nextSort")
             setSortButtonText(sort, nextSort)
 
             val refresh = menu.findItem(R.id.river_list_fragment_menu_refresh)!!
@@ -155,17 +155,17 @@ public class RiverListFragment(): ListFragment() {
     public override fun onOptionsItemSelected(item: com.actionbarsherlock.view.MenuItem?): Boolean {
         when(item!!.getItemId()) {
             R.id.river_list_fragment_menu_download_all_rivers -> {
-                val subscriptionList = parent!!.getMain().getRiverBookmarksCache()
+                val subscriptionList = parent.getMain().getRiverBookmarksCache()
 
                 if (subscriptionList != null){
                     val titleList = subscriptionList.body?.outline?.iterator()?.map { it.text!! }?.toArrayList()!!
                     val urlList = subscriptionList.body?.outline?.iterator()?.map { it.url!! }?.toArrayList()!!
 
-                    startDownloadAllRiverService(parent!!, titleList, urlList)
+                    startDownloadAllRiverService(parent, titleList, urlList)
                     return true
                 }
                 else {
-                    parent!!.toastee("Sorry, there's nothing to download.", Duration.AVERAGE)
+                    parent.toastee("Sorry, there's nothing to download.", Duration.AVERAGE)
                     return true
                 }
             }
@@ -180,7 +180,7 @@ public class RiverListFragment(): ListFragment() {
             R.id.river_list_fragment_menu_sort -> {
                 val nextSort = nextSortCycle()
                 Log.d(TAG, "The new sort is $nextSort")
-                parent!!.getContentPref().riverBookmarksSorting = nextSort
+                parent.getContentPref().riverBookmarksSorting = nextSort
                 displayRiverBookmarks(false)
                 return true
             }
@@ -201,7 +201,7 @@ public class RiverListFragment(): ListFragment() {
             txt.setText("")
         }
         else{
-            val textSize = parent!!.getVisualPref().listTextSize
+            val textSize = parent.getVisualPref().listTextSize
             txt.setVisibility(View.VISIBLE)
             handleFontResize(txt, msg, textSize.toFloat())
         }
@@ -219,7 +219,7 @@ public class RiverListFragment(): ListFragment() {
     }
 
     fun nextSortCycle(): Int {
-        val sort = parent!!.getContentPref().riverBookmarksSorting
+        val sort = parent.getContentPref().riverBookmarksSorting
         return when (sort){
             PreferenceValue.SORT_ASC -> PreferenceValue.SORT_DESC
             PreferenceValue.SORT_DESC -> PreferenceValue.SORT_NONE
@@ -236,10 +236,10 @@ public class RiverListFragment(): ListFragment() {
         if (hasClip)
             lastEnteredUrl = uri
 
-        val dlg = createSingleInputDialog(parent!!, "Add new river", lastEnteredUrl, "Set url here", {
+        val dlg = createSingleInputDialog(parent, "Add new river", lastEnteredUrl, "Set url here", {
             dlg, url ->
             if (url.isNullOrEmpty()){
-                parent!!.toastee("Please enter url of the river")
+                parent.toastee("Please enter url of the river")
             }
             else {
                 var currentUrl = url!!
@@ -250,27 +250,27 @@ public class RiverListFragment(): ListFragment() {
 
                 val u = safeUrlConvert(currentUrl)
                 if (u.isTrue()){
-                    DownloadRiverContentAsync(parent!!, "en")
+                    DownloadRiverContentAsync(parent, "en")
                             .executeOnComplete {
                         res, lang ->
                         if (res.isTrue()){
                             var river = res.value!!
                             var sortedNewsItems = river.getSortedNewsItems()
-                            parent!!.getMain().setRiverCache(currentUrl, sortedNewsItems)
+                            parent.getMain().setRiverCache(currentUrl, sortedNewsItems)
 
                             var res2 = saveBookmarkToDb(currentUrl, currentUrl, BookmarkKind.RIVER, "en", null)
 
                             if (res2.isTrue()){
                                 lastEnteredUrl = "" //reset because the op is successful
-                                parent!!.toastee("$currentUrl river is successfully bookmarked", Duration.LONG)
-                                parent!!.getMain().clearRiverBookmarksCache()
+                                parent.toastee("$currentUrl river is successfully bookmarked", Duration.LONG)
+                                parent.getMain().clearRiverBookmarksCache()
                                 refreshRiverBookmarks(false)
                             } else{
-                                parent!!.toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
+                                parent.toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
                             }
                         }
                         else{
-                            parent!!.toastee("$currentUrl is not a valid river", Duration.LONG)
+                            parent.toastee("$currentUrl is not a valid river", Duration.LONG)
                         }
                     }
                             .execute(currentUrl)
@@ -278,7 +278,7 @@ public class RiverListFragment(): ListFragment() {
                     dlg?.dismiss()
                 }else{
                     Log.d(TAG, "RIVER $currentUrl conversion generates ${u.exception?.getMessage()}")
-                    parent!!.toastee("The url you entered is not valid. Please try again", Duration.LONG)
+                    parent.toastee("The url you entered is not valid. Please try again", Duration.LONG)
                 }
             }
         })
@@ -288,43 +288,43 @@ public class RiverListFragment(): ListFragment() {
 
 
     private fun displayRiverBookmarks(retrieveDefaultFromInternet: Boolean) {
-        val cache = parent!!.getMain().getRiverBookmarksCache()
+        val cache = parent.getMain().getRiverBookmarksCache()
 
         if (cache != null){
             Log.d(TAG, "Get bookmarks from cache")
-            handleRiversListing(cache, parent!!.getContentPref().riverBookmarksSorting)
+            handleRiversListing(cache, parent.getContentPref().riverBookmarksSorting)
         }  else{
             Log.d(TAG, "Try to retrieve bookmarks from DB")
             val bookmarks = getBookmarksFromDbAsOpml(BookmarkKind.RIVER, SortingOrder.NONE)
 
             if (bookmarks.body!!.outline!!.count() > 0){
                 Log.d(TAG, "Now bookmarks come from the db")
-                parent!!.getMain().setRiverBookmarksCache(bookmarks)
-                handleRiversListing(bookmarks, parent!!.getContentPref().riverBookmarksSorting)
+                parent.getMain().setRiverBookmarksCache(bookmarks)
+                handleRiversListing(bookmarks, parent.getContentPref().riverBookmarksSorting)
             }
             else if (retrieveDefaultFromInternet){
                 Log.d(TAG, "Start downloading bookmarks from the Internet")
-                DownloadBookmarksAsync(parent!!, true)
+                DownloadBookmarksAsync(parent, true)
                         .executeOnComplete({
                     res ->
                     Log.d(TAG, "Using downloaded bookmark data from the Internt")
                     val res2 = saveOpmlAsBookmarks(res.value!!)
 
                     if (res2.isTrue()){
-                        handleRiversListing(res2.value!!, parent!!.getContentPref().riverBookmarksSorting)
+                        handleRiversListing(res2.value!!, parent.getContentPref().riverBookmarksSorting)
                         Log.d(TAG, "Bookmark data from the Internet is successfully saved")
-                        parent!!.getSetupPref().downloadDefaultRiversIfNecessary = false//we only download standard rivers from the internet by default when at setup the first time
+                        parent.getSetupPref().downloadDefaultRiversIfNecessary = false//we only download standard rivers from the internet by default when at setup the first time
                     }
                     else{
                         Log.d(TAG, "Saving opml bookmark to db fails ${res2.exception?.getMessage()}")
-                        parent!!.toastee("Sorry, we cannot download your initial bookmarks at the moment ${res2.exception?.getMessage()}", Duration.LONG)
+                        parent.toastee("Sorry, we cannot download your initial bookmarks at the moment ${res2.exception?.getMessage()}", Duration.LONG)
                     }
                 })
                         .execute(DEFAULT_SUBSCRIPTION_LIST)
             }
             else{
                 //this happen when you remove the last item from the river bookmark. So have it render an empty opml
-                handleRiversListing(Opml(), parent!!.getContentPref().riverBookmarksSorting)
+                handleRiversListing(Opml(), parent.getContentPref().riverBookmarksSorting)
             }
         }
     }
@@ -337,7 +337,7 @@ public class RiverListFragment(): ListFragment() {
         }
 
         if (outlines.count() == 0){
-            showMessage(parent!!.getString(R.string.empty_river_items_list)!!)
+            showMessage(parent.getString(R.string.empty_river_items_list)!!)
         } else
             showMessage("")
 
@@ -348,9 +348,9 @@ public class RiverListFragment(): ListFragment() {
             outlines = sortOutlineDesc(outlines) as ArrayList<Outline>
         }
 
-        val textSize = parent!!.getVisualPref().listTextSize
+        val textSize = parent.getVisualPref().listTextSize
 
-        val adapter = object : ArrayAdapter<Outline>(parent!!, android.R.layout.simple_list_item_1, android.R.id.text1, outlines){
+        val adapter = object : ArrayAdapter<Outline>(parent, android.R.layout.simple_list_item_1, android.R.id.text1, outlines){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 val text = outlines[position].toString()
                 return currentTextViewItem(text!!, convertView, parent, textSize.toFloat(), false, this@RiverListFragment.getLayoutInflater()!!)
@@ -370,14 +370,14 @@ public class RiverListFragment(): ListFragment() {
                         else
                             "en"
 
-                startRiverActivity(parent!!, currentOutline.url!!, currentOutline.text!!, lang)
+                startRiverActivity(parent, currentOutline.url!!, currentOutline.text!!, lang)
             }
         })
 
         list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
             public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
                 val currentOutline = outlines.get(p2)
-                showRiverBookmarksQuickActionPopup(parent!!, currentOutline, p1!!, list)
+                showRiverBookmarksQuickActionPopup(parent, currentOutline, p1!!, list)
                 return true
             }
         })

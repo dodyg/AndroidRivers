@@ -74,12 +74,12 @@ public class PodcastListFragment(): ListFragment() {
         public val TAG: String = javaClass<PodcastListFragment>().getSimpleName()
     }
 
-    var parent: Activity? = null
+    var parent: Activity by kotlin.properties.Delegates.notNull()
     var lastEnteredUrl: String? = ""
 
     public override fun onAttach(activity: Activity?) {
         super<ListFragment>.onAttach(activity)
-        parent = activity
+        parent = activity!!
     }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -143,7 +143,7 @@ public class PodcastListFragment(): ListFragment() {
     }
 
     fun displayDeleteAllPodcastsDialog() {
-        val dlg = createConfirmationDialog(context = parent!!, message = "Are you sure about deleting all these podcasts?", positive = {
+        val dlg = createConfirmationDialog(context = parent, message = "Are you sure about deleting all these podcasts?", positive = {
             DeleteAllPodcastsAsync(parent).executeOnComplete {
                 res ->
                 Log.d(TAG, "Deleted podcasts ${res.value}")
@@ -163,7 +163,7 @@ public class PodcastListFragment(): ListFragment() {
             txt.setText("")
         }
         else {
-            val textSize = parent!!.getVisualPref().listTextSize
+            val textSize = parent.getVisualPref().listTextSize
             txt.setVisibility(View.VISIBLE)
             handleFontResize(txt, msg, textSize.toFloat())
         }
@@ -188,9 +188,9 @@ public class PodcastListFragment(): ListFragment() {
         //now sort it so people always have the latest news first
         val list = getView()!!.findViewById(android.R.id.list) as ListView
 
-        val textSize = parent!!.getVisualPref().listTextSize
+        val textSize = parent.getVisualPref().listTextSize
 
-        val adapter = object : ArrayAdapter<Podcast>(parent!!, android.R.layout.simple_list_item_1, android.R.id.text1, podcasts) {
+        val adapter = object : ArrayAdapter<Podcast>(parent, android.R.layout.simple_list_item_1, android.R.id.text1, podcasts) {
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 val currentPodcast = podcasts[position]
                 val text = currentPodcast.title
@@ -230,7 +230,7 @@ public class PodcastListFragment(): ListFragment() {
         list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
             public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
                 val currentPodcast = podcasts[p2]
-                showPodcastQuickActionPopup(parent!!, currentPodcast, p1!!, list)
+                showPodcastQuickActionPopup(parent, currentPodcast, p1!!, list)
                 return true
             }
         })

@@ -65,13 +65,13 @@ public class OpmlListFragment(): ListFragment() {
         public val TAG: String = javaClass<OpmlListFragment>().getSimpleName()
     }
 
-    var parent: Activity? = null
+    var parent: Activity by kotlin.properties.Delegates.notNull()
     var lastEnteredUrl: String? = ""
 
     var isFirstLoad: Boolean = true
     public override fun onAttach(activity: Activity?) {
         super<ListFragment>.onAttach(activity)
-        parent = activity
+        parent = activity!!
     }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -142,13 +142,13 @@ public class OpmlListFragment(): ListFragment() {
     fun handleOpmlListing(bookmarks: List<Bookmark>) {
 
         if (bookmarks.size == 0)
-            showMessage(parent!!.getString(R.string.empty_opml_items_list)!!)
+            showMessage(parent.getString(R.string.empty_opml_items_list)!!)
         else
             showMessage("")
 
-        val textSize = parent!!.getVisualPref().listTextSize
+        val textSize = parent.getVisualPref().listTextSize
 
-        val adapter = object : ArrayAdapter<Bookmark>(parent!!, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
+        val adapter = object : ArrayAdapter<Bookmark>(parent, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 val text = bookmarks[position].toString()
                 return currentTextViewItem(text, convertView, parent, textSize.toFloat(), false, this@OpmlListFragment.getLayoutInflater()!!)
@@ -167,7 +167,7 @@ public class OpmlListFragment(): ListFragment() {
         list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
             public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
                 val bookmark = bookmarks.get(p2)
-                showOpmlQuickActionPopup(parent!!, bookmark, p1!!, list)
+                showOpmlQuickActionPopup(parent, bookmark, p1!!, list)
                 return true
             }
         })
@@ -225,7 +225,7 @@ public class OpmlListFragment(): ListFragment() {
             txt.setText("")
         }
         else {
-            val textSize = parent!!.getVisualPref().listTextSize
+            val textSize = parent.getVisualPref().listTextSize
             txt.setVisibility(View.VISIBLE)
             handleFontResize(txt, msg, textSize.toFloat())
         }
@@ -239,10 +239,10 @@ public class OpmlListFragment(): ListFragment() {
         }
 
         Log.d(TAG, "Last entered value is $lastEnteredUrl")
-        val dlg = createSingleInputDialog(parent!!, "Add new OPML", lastEnteredUrl, "Set url here", {
+        val dlg = createSingleInputDialog(parent, "Add new OPML", lastEnteredUrl, "Set url here", {
             dlg, url ->
             if (url.isNullOrEmpty()){
-                parent!!.toastee("Please enter url of the OPML", Duration.LONG)
+                parent.toastee("Please enter url of the OPML", Duration.LONG)
             }
             else {
                 var currentUrl = url!!
@@ -266,22 +266,22 @@ public class OpmlListFragment(): ListFragment() {
 
                             if (res2.isTrue()){
                                 lastEnteredUrl = "" //reset value when the opml url is bookmarked
-                                parent!!.toastee("$currentUrl is successfully bookmarked")
+                                parent.toastee("$currentUrl is successfully bookmarked")
                                 displayOpmlList()
                             }
                             else{
-                                parent!!.toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
+                                parent.toastee("Sorry, we cannot add this $currentUrl river", Duration.LONG)
                             }
                         }
                         else{
-                            parent!!.toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)
+                            parent.toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)
                         }
                     })
                             .execute(currentUrl)
                     dlg?.dismiss()
                 }else{
                     Log.d(TAG, "RSS $currentUrl conversion generates ${u.exception?.getMessage()}")
-                    parent!!.toastee("The url you entered is not valid. Please try again", Duration.LONG)
+                    parent.toastee("The url you entered is not valid. Please try again", Duration.LONG)
                 }
             }
         })

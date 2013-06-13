@@ -45,14 +45,15 @@ import java.util.HashMap
 import com.silverkeytech.android_rivers.isNullOrEmpty
 import android.content.res.Resources
 import com.silverkeytech.android_rivers.isModernAndroid
+import kotlin.properties.Delegates
 
 public class BlogPostService(): IntentService("DownloadService"){
     class object{
         public val TAG: String = javaClass<BlogPostService>().getSimpleName()
     }
 
-    var config: HashMap<String, String>? = null
-    var post: HashMap<String, String>? = null
+    var config: HashMap<String, String> by Delegates.notNull()
+    var post: HashMap<String, String> by Delegates.notNull()
 
     fun prepareNotification(title: String): Notification {
         val notificationIntent = Intent(Intent.ACTION_MAIN)
@@ -88,16 +89,16 @@ public class BlogPostService(): IntentService("DownloadService"){
 
     protected override fun onHandleIntent(p0: Intent?) {
         config = p0!!.getSerializableExtra(Params.BLOG_CONFIGURATION)!! as HashMap<String, String>
-        post = p0!!.getSerializableExtra(Params.BLOG_PAYLOAD)!!  as HashMap<String, String>
+        post = p0.getSerializableExtra(Params.BLOG_PAYLOAD)!!  as HashMap<String, String>
 
         Log.d(TAG, " Server is ${config?.get(Params.BLOG_SERVER)}")
 
-        val server = config!!.get(Params.BLOG_SERVER)!!
-        val username = config!!.get(Params.BLOG_USERNAME)!!
-        val password = config!!.get(Params.BLOG_PASSWORD)!!
+        val server = config.get(Params.BLOG_SERVER)!!
+        val username = config.get(Params.BLOG_USERNAME)!!
+        val password = config.get(Params.BLOG_PASSWORD)!!
 
-        val postContent = post!!.get(Params.POST_CONTENT)!!
-        val postLink = post!!.get(Params.POST_LINK)
+        val postContent = post.get(Params.POST_CONTENT)!!
+        val postLink = post.get(Params.POST_LINK)
 
 
         val blg = Blog(null, server, username, password)

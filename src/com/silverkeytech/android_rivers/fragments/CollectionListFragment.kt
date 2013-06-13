@@ -70,11 +70,11 @@ public class CollectionListFragment: ListFragment() {
         public val TAG: String = javaClass<CollectionListFragment>().getSimpleName()
     }
 
-    var parent: Activity? = null
+    var parent: Activity by kotlin.properties.Delegates.notNull()
 
     public override fun onAttach(activity: Activity?) {
         super<ListFragment>.onAttach(activity)
-        parent = activity
+        parent = activity!!
     }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -128,7 +128,7 @@ public class CollectionListFragment: ListFragment() {
             txt.setText("")
         }
         else{
-            val textSize = parent!!.getVisualPref().listTextSize
+            val textSize = parent.getVisualPref().listTextSize
             txt.setVisibility(View.VISIBLE)
             handleFontResize(txt, msg, textSize.toFloat())
         }
@@ -146,9 +146,9 @@ public class CollectionListFragment: ListFragment() {
         else
             showMessage("")
 
-        val textSize = parent!!.getVisualPref().listTextSize
+        val textSize = parent.getVisualPref().listTextSize
 
-        val adapter = object : ArrayAdapter<BookmarkCollection>(parent!!, android.R.layout.simple_list_item_1, android.R.id.text1, coll){
+        val adapter = object : ArrayAdapter<BookmarkCollection>(parent, android.R.layout.simple_list_item_1, android.R.id.text1, coll){
             public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
                 val text = coll[position].toString()
                 return currentTextViewItem(text, convertView, parent, textSize.toFloat(), false, this@CollectionListFragment.getLayoutInflater()!!)
@@ -164,14 +164,14 @@ public class CollectionListFragment: ListFragment() {
                 //to use this collection data from cache or perform the arduous task of
                 //downloading and transforming rss feeds into river
                 val localUrl = makeLocalUrl(current.id)
-                startRiverActivity(parent!!, localUrl, current.title, "en")
+                startRiverActivity(parent, localUrl, current.title, "en")
             }
         })
 
         list.setOnItemLongClickListener(object : AdapterView.OnItemLongClickListener{
             public override fun onItemLongClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long): Boolean {
                 val current = coll[p2]
-                showCollectionQuickActionPopup(parent!!, current, p1!!, list)
+                showCollectionQuickActionPopup(parent, current, p1!!, list)
                 return true
             }
         })
@@ -236,12 +236,12 @@ public class CollectionListFragment: ListFragment() {
 
 
     fun showAddNewCollectionDialog() {
-        val dlg: View = parent!!.getLayoutInflater().inflate(R.layout.collection_add_new, null)!!
+        val dlg: View = parent.getLayoutInflater().inflate(R.layout.collection_add_new, null)!!
 
         //take care of color
-        dlg.setDrawingCacheBackgroundColor(parent!!.getStandardDialogBackgroundColor())
+        dlg.setDrawingCacheBackgroundColor(parent.getStandardDialogBackgroundColor())
 
-        val dialog = AlertDialog.Builder(parent!!)
+        val dialog = AlertDialog.Builder(parent)
         dialog.setView(dlg)
         dialog.setTitle("Add new collection")
 
@@ -251,7 +251,7 @@ public class CollectionListFragment: ListFragment() {
             public override fun onClick(p0: DialogInterface, p1: Int) {
                 val text = input.getText().toString()
                 if (text.isNullOrEmpty()){
-                    parent!!.toastee("Please enter collection title", Duration.AVERAGE)
+                    parent.toastee("Please enter collection title", Duration.AVERAGE)
                     return
                 }
 
@@ -261,13 +261,13 @@ public class CollectionListFragment: ListFragment() {
                     val url = makeLocalUrl(res.value!!.id)
                     //when a collection is added as a river, bookmark it immediately
                     saveBookmarkToDb(text, url, BookmarkKind.RIVER, "en", null)
-                    parent!!.getMain().clearRiverBookmarksCache()
+                    parent.getMain().clearRiverBookmarksCache()
 
-                    parent!!.toastee("Collection is successfully added")
+                    parent.toastee("Collection is successfully added")
                     displayBookmarkCollection()
                 }
                 else{
-                    parent!!.toastee("Sorry, I have problem adding this new collection", Duration.AVERAGE)
+                    parent.toastee("Sorry, I have problem adding this new collection", Duration.AVERAGE)
                 }
             }
         })
