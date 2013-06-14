@@ -49,13 +49,13 @@ import com.silverkeytech.android_rivers.DialogBtn
 import com.silverkeytech.android_rivers.asyncs.DownloadImageAsync
 import com.silverkeytech.android_rivers.MediaScannerWrapper
 import com.silverkeytech.android_rivers.startOpenBrowserActivity
-import android.view.MotionEvent
 import com.silverkeytech.android_rivers.shareActionIntent
 import com.silverkeytech.android_rivers.startDownloadService
 import com.silverkeytech.android_rivers.createFlexibleContentDialog
 import com.silverkeytech.android_rivers.findView
 import android.text.method.ScrollingMovementMethod
 import android.app.Dialog
+import com.silverkeytech.android_rivers.ScrollMotionDetector
 
 //Manage the rendering of each news item in the river list
 public class FeedContentRenderer(val context: Activity, val language: String){
@@ -149,41 +149,14 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                 handleForeignTextStyle(context, language, body, textSize.toFloat())
                 handleTextColorBasedOnTheme(context, body)
 
-
-                var movementDown : Float = 0.0
-                var movementUp : Float = 0.0
-                val SCROLL_TRESHOLD = 10.0
-                var onClick = false
-
                 var createdDialog : Dialog? = null //important to be declared here because the content click must have access to the future to be created dialog box to close it
 
-                body.setOnTouchListener{ view, ev ->
-                    val mov = ev.getAction()
-                    when (mov){
-                        MotionEvent.ACTION_DOWN -> {
-                            movementDown = ev.getX()
-                            movementUp = ev.getY()
-                            onClick = true
-                        }
-                        MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_UP ->{
-                            if (onClick){
-                                createdDialog?.dismiss()
-                                Log.d(TAG, "ONCLICK")
-                            }
-                            else
-                                Log.d(TAG, "NOT OnCLICK")
-                        }
-                        MotionEvent.ACTION_MOVE -> {
-                            val up = Math.abs(movementDown - ev.getX()) > SCROLL_TRESHOLD
-                            val down = Math.abs(movementUp - ev.getY()) > SCROLL_TRESHOLD
-                            if (onClick && up || down){
-                                onClick = false
-                            }
-                        }
-                        else -> {}
-                    }
-                    false
-                }
+                val detector = ScrollMotionDetector()
+                val listener = detector.attach(onClickEvent = { () ->
+                    createdDialog?.dismiss()
+                }, onMoveEvent = null)
+
+                body.setOnTouchListener(listener)
 
                 val buttons = ArrayList<DialogBtn>()
 

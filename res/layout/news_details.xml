@@ -9,6 +9,8 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="15"
+            android:scrollbars="vertical"
             android:id="@+id/news_details_text_tv" android:layout_gravity="center"/>
     <TextView
             android:layout_width="fill_parent"

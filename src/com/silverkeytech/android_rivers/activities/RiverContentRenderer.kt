@@ -56,6 +56,11 @@ import com.silverkeytech.android_rivers.startOpenBrowserActivity
 import com.silverkeytech.android_rivers.shareActionIntent
 import com.silverkeytech.android_rivers.startOutlinerActivity
 import com.silverkeytech.android_rivers.createFlexibleContentDialog
+import android.app.Dialog
+import android.text.method.ScrollingMovementMethod
+import com.silverkeytech.android_rivers.ScrollMotionDetector
+import com.silverkeytech.android_rivers.findView
+
 
 //Manage the rendering of each news item in the river list
 public class RiverContentRenderer(val context: Activity, val language: String){
@@ -107,9 +112,9 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 if (currentView == null){
                     currentView = inflater.inflate(R.layout.news_item, parent, false)
 
-                    holder = ViewHolder(currentView!!.findViewById(R.id.news_item_text_tv) as TextView,
-                            currentView!!.findViewById(R.id.news_item_source_tv) as TextView,
-                            currentView!!.findViewById(R.id.news_item_indicator_tv) as TextView)
+                    holder = ViewHolder(currentView!!.findView<TextView>(R.id.news_item_text_tv),
+                            currentView!!.findView<TextView>(R.id.news_item_source_tv),
+                            currentView!!.findView<TextView>(R.id.news_item_indicator_tv))
 
                     handleForeignTextStyle(context, language, holder!!.news, textSize.toFloat())
                     handleForeignTextStyle(context, language, holder!!.source, 11.0)
@@ -153,10 +158,24 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 //take care of color
                 dlg.setBackgroundColor(context.getStandardDialogBackgroundColor())
 
-                var body = dlg.findViewById(R.id.news_details_text_tv)!! as TextView
+
+                var body = dlg.findView<TextView>(R.id.news_details_text_tv)
+                body.setMovementMethod(ScrollingMovementMethod())
+
                 handleForeignText(language, body, msg)
                 handleForeignTextStyle(context, language, body, textSize.toFloat())
                 handleTextColorBasedOnTheme(context, body)
+
+
+                var createdDialog : Dialog? = null //important to be declared here because the content click must have access to the future to be created dialog box to close it
+
+                val detector = ScrollMotionDetector()
+                val listener = detector.attach(onClickEvent = { () ->
+                    createdDialog?.dismiss()
+                }, onMoveEvent = null)
+
+                body.setOnTouchListener(listener)
+
 
                 var source = dlg.findViewById(R.id.news_details_source_tv)!! as TextView
                 handleForeignText(language, body, msg)
@@ -263,9 +282,9 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 //                    }
                 //                }))
 
-                var createdDialog = createFlexibleContentDialog(context = context, content = dlg,
+                createdDialog = createFlexibleContentDialog(context = context, content = dlg,
                         dismissOnTouch = true, buttons =  buttons.toArray(array<DialogBtn>()))
-                createdDialog.show()
+                createdDialog!!.show()
             }
         })
 
