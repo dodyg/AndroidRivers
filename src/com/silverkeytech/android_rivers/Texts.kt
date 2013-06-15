@@ -138,7 +138,6 @@ fun handleForeignText(language: String, text: TextView, content: String) {
     }
 }
 
-
 fun handleFontResize(text: TextView, content: String, textSize: Float) {
     text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
     text.setText(content)
@@ -183,5 +182,3 @@ fun safeUrlConvert(url: String?): Result<URL> {
         return Result.wrong<URL>(ex)
     }
 }
-
-

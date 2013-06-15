@@ -36,6 +36,7 @@ import android.text.Editable
 import android.text.InputType
 import android.view.Gravity
 import com.silverkeytech.android_rivers.activities.getStandardDialogBackgroundColor
+import com.silverkeytech.android_rivers.findView
 
 public val PASSWORD_INPUT: Int = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
 public val NORMAL_INPUT: Int = InputType.TYPE_TEXT_VARIATION_NORMAL
@@ -125,7 +126,7 @@ public fun createSingleInputDialog(context: Activity, title: String, defaultInpu
     dialog.setView(dlg)
     dialog.setTitle(title)
 
-    var inputUrl = dlg.findViewById(R.id.dialog_input)!! as EditText
+    var inputUrl = dlg.findView<EditText>(R.id.dialog_input)
     inputUrl.setHint(inputHint)
 
     var default = defaultInput
@@ -163,7 +164,7 @@ public fun createFlexibleInputDialog(context: Activity, title: String, inputs: A
     dialog.setView(dlg)
     dialog.setTitle(title)
 
-    val container = dlg.findViewById(R.id.dialog_flex_input_container) as LinearLayout
+    val container = dlg.findView<LinearLayout>(R.id.dialog_flex_input_container)
     val editParam = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0)
 
     val edits = ArrayList<EditText>()

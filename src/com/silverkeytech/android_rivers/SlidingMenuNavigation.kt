@@ -30,6 +30,7 @@ import android.widget.ListView
 import android.widget.TextView
 import java.util.ArrayList
 import android.util.TypedValue
+import com.silverkeytech.android_rivers.findView
 
 data class NavItem (val id: Int, val text: String, val icon: Int)
 
@@ -71,7 +72,7 @@ fun fillSlidingMenuNavigation(navs: List<NavItem>, view: View, onClick: (NavItem
         }
     }
 
-    val list = view.findViewById(R.id.main_slide_menu_navigation) as ListView
+    val list = view.findView<ListView>(R.id.main_slide_menu_navigation)
     list.setAdapter(adapter)
     list.setOnItemClickListener(object : OnItemClickListener{
         public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
@@ -88,7 +89,7 @@ private fun currentListItem(inflater: LayoutInflater, text: String, convertView:
 
     if (vw == null){
         vw = inflater.inflate(R.layout.slide_menu_item, parent, false)
-        holder = ViewHolder(vw!!.findViewById(R.id.slide_menu_item_text_tv) as TextView)
+        holder = ViewHolder(vw!!.findView<TextView>(R.id.slide_menu_item_text_tv))
         vw!!.setTag(holder)
     }else{
         holder = vw!!.getTag() as ViewHolder

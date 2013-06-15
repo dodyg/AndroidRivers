@@ -18,11 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.news_engine.outlines;
 
-import org.simpleframework.xml.ElementList;
-
 import java.util.ArrayList;
 
 public class Body {
-    @ElementList(inline = true)
     public ArrayList<Outline> outline = new ArrayList<Outline>();
 }

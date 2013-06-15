@@ -22,6 +22,7 @@ import android.widget.TextView
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
+import com.silverkeytech.android_rivers.findView
 
 //A view holder for UI list with one element called name of type TextView
 public data class TextViewHolder (public var name: TextView)
@@ -38,7 +39,7 @@ fun currentTextViewItem(text: String,
 
     if (vw == null){
         vw = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
-        holder = TextViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
+        holder = TextViewHolder(vw!!.findView<TextView>(android.R.id.text1))
         vw!!.setTag(holder)
     }else{
         holder = vw!!.getTag() as TextViewHolder

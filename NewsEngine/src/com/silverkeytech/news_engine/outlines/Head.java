@@ -19,21 +19,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.news_engine.outlines;
 
 import com.silverkeytech.news_engine.DateHelper;
-import org.simpleframework.xml.Element;
 
 import java.util.Date;
 
 
 public class Head {
-    @Element(required = false)
     public String title;
-    @Element(required = false)
     public String dateCreated;       //RFC822 time
-    @Element(required = false)
     public String dateModified;      //RFC822 time
-    @Element(required = false)
     public String ownerName;
-    @Element(required = false)
     public String ownerEmail;
 
     public Date getDateCreated() {

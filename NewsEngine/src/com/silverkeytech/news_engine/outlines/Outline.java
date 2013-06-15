@@ -18,30 +18,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.news_engine.outlines;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.ElementList;
-
 import java.util.ArrayList;
 
 public class Outline {
-    @Attribute(required = true)
     public String text;
-    @Attribute(name = "type", required = false)
     public String outlineType;
-    @Attribute(required = false)
     public String name;
-    @Attribute(required = false)
     public String url;
-    @Attribute(required = false)
     public String opmlUrl;
-    @Attribute(required = false)
     public String htmlUrl;
-    @Attribute(required = false)
     public String xmlUrl;
-    @Attribute(required = false)
     public String language;
 
-    @ElementList(inline = true, required = false)
     public ArrayList<Outline> outline = new ArrayList<Outline>();
 
     @Override

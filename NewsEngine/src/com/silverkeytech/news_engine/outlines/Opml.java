@@ -18,16 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.news_engine.outlines;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Root;
-
-@Root(strict = false)
 public class Opml {
-    @Element
     public Head head;
-    @Element
     public Body body;
-    @Attribute(required = false)
     public String version;
 }

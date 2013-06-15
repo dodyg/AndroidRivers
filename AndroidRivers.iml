@@ -33,6 +33,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="NewsEngine" />
+    <orderEntry type="library" name="eventbus-2.1.0-beta-1" level="project" />
   </component>
 </module>
 
