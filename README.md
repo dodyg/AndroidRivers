@@ -1,27 +1,48 @@
-Android River is an Android 2.2 news app. It's now version 1.13.
+Android River is a modern Android 2.2 news app. It's now version 1.13.
 
 Android River has the following features:
 - Read RSS 1.0, RSS 2.0 and ATOM 1.0.
 - Create your own custom River of News out of feeds.
 - Read RiverJs format.
-- Read OPML and display them in outline.
+- Read OPML and display them in an outline.
 - Download and play Podcast with a custom made podcast player.
 - Create RSS feeds out of Google News, Kayak.com deals and Craigslist.
 - Feature a frequently updated sources of feeds to subscribe to.
 - There is no login required to use any of the functionality.
-- There is no ads.
+- There are no ads.
 - It is super fast.
 - It is efficient with data/battery usage.
 - It has the awesome Holo theme applied even from Android 2.2.
 - Tweets links easily or read articles for later (great integration with Pocket)
 
-The website for this project is at http://rivers.silverkeytech.com and it is available at Google Store http://goo.gl/kShgp
+The website for this project is at http://rivers.silverkeytech.com. Android River can be downloaded at Google Store http://goo.gl/kShgp.
 
-The latest build of this app is available at http://goo.gl/dxK5w. The mailing list for this project is at groups.google.com/group/news-and-protocols
+The mailing list for this project is at groups.google.com/group/news-and-protocols.
 
 This code is licensed under GPL version 3. Please read license.txt.
 
 I develop Android Rivers using <a href="http://kotlin.jetbrains.org/">Kotlin programming language</a>
+
+By reading Android Rivers source code, you will learn about:
+
+* Using SQLite database.
+* High performance XML parsing.
+* High performance JSON parsing.
+* Implementing a media player.
+* Writing Android Service.
+* Accessing Android Clipboard.
+* Fragments.
+* Implementing Holo theme in Android 2.2 above.
+* Using Library modules.
+* First class Outliner UI support.
+* Asynchronous operations.
+* Managing file system.
+* Creating custom dialogs.
+* Implementing Sliding Menu.
+* Asynchronous HTTP calls.
+* Integrating Android Java library.
+* Implementing Arabic language support.
+* Implement EventBus.
 
 Open Source Library used:
 * [ActionBar Sherlock](http://actionbarsherlock.com/) - [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
