@@ -132,7 +132,6 @@ fun handleForeignText(language: String, text: TextView, content: String) {
             val processed = content.trim()
                     .replace("\n","<br/>")
                     .replaceAll("(<br/><br/><br/><br/>|<br/><br/><br/>)","<br/>")
-            Log.d("HandleForeignText", "$processed")
             val spannable = android.text.Html.fromHtml(processed)
             text.setText(spannable)
         }
