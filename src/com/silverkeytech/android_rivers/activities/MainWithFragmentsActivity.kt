@@ -57,6 +57,8 @@ import com.silverkeytech.android_rivers.shareActionIntent
 import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.andHide
 import com.silverkeytech.android_rivers.startGoogleNewsSearchActivity
+import com.silverkeytech.android_rivers.Bus
+import com.silverkeytech.android_rivers.MessageEvent
 
 enum class MainActivityMode {
     RIVER
@@ -139,6 +141,7 @@ public open class MainWithFragmentsActivity(): Activity() {
                 }
             }
             SLIDE_MENU_GOOGLE_NEWS -> {
+                Bus.post(MessageEvent("Sliding Google News"))
                 startGoogleNewsSearchActivity(this@MainWithFragmentsActivity)
             }
             SLIDE_MENU_KAYAK_DEALS -> {

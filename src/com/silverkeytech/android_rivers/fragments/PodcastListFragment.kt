@@ -68,6 +68,8 @@ import com.silverkeytech.android_rivers.activities.getLocationOnScreen
 import com.silverkeytech.android_rivers.limitText
 import com.silverkeytech.android_rivers.rightPadding
 import com.silverkeytech.android_rivers.findView
+import com.silverkeytech.android_rivers.Bus
+import com.silverkeytech.android_rivers.MessageEvent
 
 public class PodcastListFragment(): ListFragment() {
     class object {
@@ -85,6 +87,7 @@ public class PodcastListFragment(): ListFragment() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
         super<ListFragment>.onCreate(savedInstanceState)
+        Bus.register(this)
     }
 
     public override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -125,6 +128,15 @@ public class PodcastListFragment(): ListFragment() {
     public override fun onStop() {
         super<ListFragment>.onStop()
         doBindService()
+    }
+
+    public override fun onDestroy(){
+        Bus.unregister(this)
+        super<ListFragment>.onDestroy()
+    }
+
+    public fun onEvent(msg : MessageEvent){
+        Log.d(TAG, "Event Bus ${msg.message}")
     }
 
     public override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

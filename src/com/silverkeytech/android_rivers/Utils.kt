@@ -33,6 +33,22 @@ import android.support.v4.app.Fragment
 import android.app.Activity
 import android.webkit.URLUtil
 import android.app.Dialog
+import de.greenrobot.event.EventBus
+
+object Bus {
+    fun register(obj : Any){
+        EventBus.getDefault()!!.register(obj)
+    }
+
+    fun unregister(obj : Any){
+        EventBus.getDefault()!!.unregister(obj)
+    }
+
+    fun post (obj : Any){
+        EventBus.getDefault()!!.post(obj)
+    }
+}
+
 
 fun isLanguageRTL(language: String): Boolean {
     return when(language){
