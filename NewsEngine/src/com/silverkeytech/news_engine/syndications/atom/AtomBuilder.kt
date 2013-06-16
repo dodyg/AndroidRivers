@@ -18,3 +18,35 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.news_engine.syndications.atom
 
+
+public class AtomBuilder (){
+    val feed = Feed()
+
+    public fun build() : Feed {
+        return feed
+    }
+
+    public fun setId(id : String){
+        feed.id = id
+    }
+
+    public fun setTitle(title : String){
+        feed.title = title
+    }
+
+    public fun setUpdated(updated : String){
+        feed.updated = updated
+    }
+
+    public fun setIcon(icon : String){
+        feed.icon = icon
+    }
+
+    public fun setLogo(logo : String){
+        feed.logo = logo
+    }
+
+    public fun setSubtitle(subTitle : String){
+        feed.subtitle = subTitle
+    }
+}

@@ -8,6 +8,9 @@ import com.silverkeytech.news_engine.syndications.atom.Feed
 import com.silverkeytech.news_engine.Result
 import com.silverkeytech.news_engine.transformXmlToRdfRss
 import com.silverkeytech.news_engine.transformXmlToRss
+import com.silverkeytech.news_engine.syndications.atom.AtomBuilder
+import java.io.ByteArrayInputStream
+import com.silverkeytech.news_engine.syndications.atom.AtomParser
 
 fun plog(msg : String){
     System.out.println(msg)
@@ -20,6 +23,36 @@ fun downloadRawFeed(url : String) : String{
             .uncompress(true)!!
 
     return request.body()!!
+}
+
+
+fun downloadAtomFeed(url: String): Result<Feed>{
+    com.silverkeytech.news_engine.log = { (tag, str) -> plog(str) }
+    try{
+        var downloadedContent: String?
+        var mimeType: String?
+        try{
+            val request = HttpRequest
+                    .get(url)!!
+                    .acceptGzipEncoding()!!
+                    .uncompress(true)!!
+            mimeType = request.contentType()
+            downloadedContent = request.body()!!
+        }
+        catch(e: HttpRequestException){
+            var ex = e.getCause()
+            return Result.wrong(ex)
+        }
+
+        if (downloadedContent!!.isEmpty())
+            throw Exception("Content is empty")
+
+        val feed = transformXmlToAtom(downloadedContent)
+        return Result.right(feed.value!!)
+    }
+    catch (e : Exception){
+        return Result.wrong(e)
+    }
 }
 
 fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<SyndicationFeed> {
@@ -89,8 +122,12 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
 fun transformXmlToAtom(xml: String?): Result<Feed> {
 
     try{
-        val feed: Feed? = XmlComponent.serial.read(javaClass<Feed>(), xml, false)
-        return Result.right(feed)
+        val builder = AtomBuilder()
+        val reader = ByteArrayInputStream(xml!!.getBytes())
+        AtomParser().parse(reader, builder)
+        val atom = builder.build()
+        reader.close()
+        return Result.right(atom)
     }
     catch (e: Exception){
         return Result.wrong(e)

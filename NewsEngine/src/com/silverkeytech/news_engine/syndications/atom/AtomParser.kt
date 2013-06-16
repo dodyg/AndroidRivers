@@ -18,3 +18,40 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.news_engine.syndications.atom
 
+import java.io.InputStream
+import com.thebuzzmedia.sjxp.XMLParser
+import com.silverkeytech.news_engine.xml.textRule
+
+public class AtomParser{
+    public fun parse(input: InputStream, atom: AtomBuilder) {
+        var parser = XMLParser<AtomBuilder>(feedId, feedTitle, feedUpdated, feedIcon, feedLogo
+        , feedSubtitle)
+        parser.parse(input, "UTF-8", atom)
+    }
+}
+
+val NS = "http://www.w3.org/2005/Atom"
+
+val feedId = textRule<AtomBuilder>("/[$NS]feed/[$NS]id", { text, atom ->
+    atom.setId(text)
+})
+
+val feedTitle = textRule<AtomBuilder>("/[$NS]feed/[$NS]title", { text, atom ->
+    atom.setTitle(text)
+})
+
+val feedUpdated = textRule<AtomBuilder>("/[$NS]feed/[$NS]updated", { text, atom ->
+    atom.setUpdated(text)
+})
+
+val feedIcon = textRule<AtomBuilder>("/[$NS]feed/[$NS]icon", { text , atom ->
+    atom.setIcon(text)
+})
+
+val feedLogo = textRule<AtomBuilder>("/[$NS]feed/[$NS]logo", { text, atom ->
+    atom.setLogo(text)
+})
+
+val feedSubtitle = textRule<AtomBuilder>("/[$NS]feed/[$NS]subtitle", { text, atom ->
+    atom.setSubtitle(text)
+})

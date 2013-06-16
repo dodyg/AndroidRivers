@@ -117,7 +117,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
         if (atom != null){
             isDateParseable = verifyAtomFeedForDateFitness(atom!!)
             log(TAG, "isDateParseable is $isDateParseable")
-
+            log(TAG, "Title is ${atom!!.title}}")
             title = if (atom!!.title.isNullOrEmpty()) "" else atom!!.title!!
 
             //look for rel='alternate' which contains the url to itself
