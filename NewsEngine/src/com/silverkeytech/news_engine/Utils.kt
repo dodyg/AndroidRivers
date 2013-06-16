@@ -33,6 +33,9 @@ import com.silverkeytech.news_engine.riverjs.RiverOpml
 import com.silverkeytech.news_engine.riverjs.RiverOpmlOutline
 import com.silverkeytech.news_engine.outlines.Head
 import com.silverkeytech.news_engine.outlines.Body
+import com.silverkeytech.news_engine.syndications.atom.AtomParser
+import com.silverkeytech.news_engine.syndications.atom.AtomBuilder
+import com.silverkeytech.news_engine.syndications.atom.Feed
 
 fun transformFeedOpmlToOpml(feedOpml: RiverOpml): Result<Opml> {
     fun traverseFeedOpml(outline: Outline, feedOutline: RiverOpmlOutline) {
@@ -118,6 +121,21 @@ fun transformXmlToRss(xml: String?): Result<Rss> {
         val rss = builder.build()
         reader.close()
         return Result.right(rss)
+    }
+    catch (e: Exception){
+        return Result.wrong(e)
+    }
+}
+
+fun transformXmlToAtom(xml: String?): Result<Feed> {
+    try{
+        val builder = AtomBuilder()
+        val reader = ByteArrayInputStream(xml!!.getBytes())
+        AtomParser().parse(reader, builder)
+        val atom = builder.build()
+        reader.close()
+
+        return Result.right(atom)
     }
     catch (e: Exception){
         return Result.wrong(e)

@@ -28,10 +28,10 @@ import com.google.gson.Gson
 import com.silverkeytech.news_engine.outlines.Opml
 import com.silverkeytech.news_engine.outlines.Outline
 import com.silverkeytech.news_engine.riverjs.River
-import com.silverkeytech.news_engine.syndications.atom.Feed
 import go.goyalla.dict.arabicDictionary.file.ArabicReshape
 import java.util.ArrayList
 import com.silverkeytech.news_engine.outliner.OutlineContent
+import com.silverkeytech.news_engine.transformXmlToAtom
 
 fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<SyndicationFeed> {
     val TAG = "downloadFeed"
@@ -188,14 +188,3 @@ private fun traverseOutline(level: Int, outline: Outline?, list: ArrayList<Outli
     }
 }
 
-
-fun transformXmlToAtom(xml: String?): Result<Feed> {
-    try{
-        val feed: Feed? = XmlComponent.serial.read(javaClass<Feed>(), xml, false)
-        return Result.right(feed)
-    }
-    catch (e: Exception){
-        Log.d("Atom Transform", "Exception ${e.getMessage()}")
-        return Result.wrong(e)
-    }
-}

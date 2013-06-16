@@ -8,9 +8,7 @@ import com.silverkeytech.news_engine.syndications.atom.Feed
 import com.silverkeytech.news_engine.Result
 import com.silverkeytech.news_engine.transformXmlToRdfRss
 import com.silverkeytech.news_engine.transformXmlToRss
-import com.silverkeytech.news_engine.syndications.atom.AtomBuilder
-import java.io.ByteArrayInputStream
-import com.silverkeytech.news_engine.syndications.atom.AtomParser
+import com.silverkeytech.news_engine.transformXmlToAtom
 
 fun plog(msg : String){
     System.out.println(msg)
@@ -115,22 +113,6 @@ fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<S
                 return Result.wrong(feed.exception)
             }
         }
-    }
-    catch (e: Exception){
-        return Result.wrong(e)
-    }
-}
-
-
-fun transformXmlToAtom(xml: String?): Result<Feed> {
-
-    try{
-        val builder = AtomBuilder()
-        val reader = ByteArrayInputStream(xml!!.getBytes())
-        AtomParser().parse(reader, builder)
-        val atom = builder.build()
-        reader.close()
-        return Result.right(atom)
     }
     catch (e: Exception){
         return Result.wrong(e)
