@@ -10,7 +10,7 @@ public class AtomTests(){
     public fun testAssociatedPress(){
         //val download = downloadAtomFeed("http://hosted2.ap.org/atom/APDEFAULT/3d281c11a96b4ad082fe88aa0db04305")
         val download = downloadAtomFeed("http://daringfireball.net/index.xml")
-        Assert.assertTrue("Download must be true", download.isTrue())
+        Assert.assertTrue("Download must be true instead of ${download.exception?.getMessage()}", download.isTrue())
         val feed = download.value!!
         plog("id ${feed.id}")
         plog("title ${feed.title}")
@@ -25,6 +25,7 @@ public class AtomTests(){
                 plog("Author ${a.name} - ${a.uri} - ${a.email}")
             }
             plog("${x.id} - ${x.title} - ${x.published}")
+            plog("${x.content?.`type`} - ${x.content?.value} - ${x.content?.src}")
         }
     }
 }

@@ -22,12 +22,14 @@ import java.io.InputStream
 import com.thebuzzmedia.sjxp.XMLParser
 import com.silverkeytech.news_engine.xml.textRule
 import com.silverkeytech.news_engine.xml.tagRule
+import com.silverkeytech.news_engine.xml.attributeRule
 
 public class AtomParser{
     public fun parse(input: InputStream, atom: AtomBuilder) {
         var parser = XMLParser<AtomBuilder>(feedId, feedTitle, feedUpdated, feedIcon, feedLogo,
         feedAuthorTag, feedAuthorName, feedAuthorEmail, feedAuthorUri, feedSubtitle, entryTag, entryId, entryTitle, entryPublished,
-        entryAuthorTag, entryAuthorName, entryAuthorEmail, entryAuthorUri)
+        entryAuthorTag, entryAuthorName, entryAuthorEmail, entryAuthorUri,
+        entryContentTag, entryContentValue, entryContentAttributes)
         parser.parse(input, "UTF-8", atom)
     }
 }
@@ -97,6 +99,27 @@ val entryTitle = textRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]title", { tex
 val entryPublished = textRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]published", { text, atom ->
     atom.entry.setPublished(text)
 })
+
+
+val entryContentTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]content", {(isStartTag, atom) ->
+    if (isStartTag)
+        atom.entry.startContent()
+})
+
+val entryContentValue = textRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]content", { text, atom ->
+    atom.entry.content.setValue(text)
+})
+
+val entryContentAttributes = attributeRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]content", {(attrName, attrValue, atom) ->
+    when(attrName){
+        "type" -> atom.entry.content.setType(attrValue)
+        "src" -> atom.entry.content.setSource(attrValue)
+        else -> {
+        }
+    }
+
+}, "type", "src")
+
 
 val entryAuthorTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]author", {(isStartTag, atom) ->
     if (isStartTag)

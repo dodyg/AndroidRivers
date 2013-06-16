@@ -48,7 +48,10 @@ fun downloadAtomFeed(url: String): Result<Feed>{
             throw Exception("Content is empty")
 
         val feed = transformXmlToAtom(downloadedContent)
-        return Result.right(feed.value!!)
+        if (feed.isTrue())
+            return Result.right(feed.value!!)
+        else
+            throw feed.exception!!
     }
     catch (e : Exception){
         return Result.wrong(e)

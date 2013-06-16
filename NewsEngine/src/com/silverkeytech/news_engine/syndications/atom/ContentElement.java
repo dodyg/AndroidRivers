@@ -31,5 +31,5 @@ public class ContentElement {
     public String type;
 
     @Attribute(required = false)
-    public String url;
+    public String src;
 }

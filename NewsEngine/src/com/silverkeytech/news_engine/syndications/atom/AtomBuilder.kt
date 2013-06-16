@@ -54,7 +54,6 @@ public class AtomBuilder (){
         feed.subtitle = subTitle
     }
 
-
     public class PersonElementBuilder(val author : ArrayList<PersonElement>){
         private var person : PersonElement = PersonElement()
 
@@ -79,9 +78,24 @@ public class AtomBuilder (){
         }
     }
 
+    public class ContentElementBuilder(val content : ContentElement){
+        public fun setValue (value : String){
+            content.value = value
+        }
+
+        public fun setType(contentType : String){
+            content.`type` = contentType
+        }
+
+        public fun setSource(uri : String){
+            content.src = uri
+        }
+    }
+
     public class EntryBuilder(private val feed: Feed){
         var entry : Entry = Entry()
         public var author : PersonElementBuilder = PersonElementBuilder(entry.author!!)
+        public var content : ContentElementBuilder = ContentElementBuilder(ContentElement())
 
         public fun setId(id : String){
             entry.id = id
@@ -97,6 +111,11 @@ public class AtomBuilder (){
 
         public fun setPublished(published : String){
             entry.published = published
+        }
+
+        public fun startContent(){
+            entry.content = ContentElement()
+            content = ContentElementBuilder(entry.content!!)
         }
 
         public fun startItem(){
