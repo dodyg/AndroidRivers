@@ -45,7 +45,6 @@ import com.silverkeytech.android_rivers.db.getBookmarksFromDb
 import com.silverkeytech.android_rivers.db.removeItemByUrlFromBookmarkDb
 import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
-import org.holoeverywhere.app.ListFragment
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.currentTextViewItem
@@ -63,23 +62,18 @@ import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import com.silverkeytech.android_rivers.startFeedActivity
 import com.silverkeytech.android_rivers.dlgClickListener
 import com.silverkeytech.android_rivers.createConfirmationDialog
+import com.silverkeytech.android_rivers.MessageEvent
 
-public class RssListFragment(): ListFragment() {
+public class RssListFragment(): MainListFragment() {
     class object {
         public val TAG: String = javaClass<RssListFragment>().getSimpleName()
     }
 
-    var parent: Activity by kotlin.properties.Delegates.notNull()
     var lastEnteredUrl: String? = ""
-
-    public override fun onAttach(activity: Activity?) {
-        super<ListFragment>.onAttach(activity)
-        parent = activity!!
-    }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
-        super<ListFragment>.onCreate(savedInstanceState)
+        super<MainListFragment>.onCreate(savedInstanceState)
     }
 
     public override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -96,12 +90,12 @@ public class RssListFragment(): ListFragment() {
             displayRssBookmarks()
         }
 
-        super<ListFragment>.onResume()
+        super<MainListFragment>.onResume()
     }
 
     public override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.rss_list_fragment_menu, menu)
-        super<ListFragment>.onCreateOptionsMenu(menu, inflater)
+        super<MainListFragment>.onCreateOptionsMenu(menu, inflater)
     }
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -123,13 +117,16 @@ public class RssListFragment(): ListFragment() {
         if (!hidden){
             displayRssBookmarks()
         }
-        super<ListFragment>.onHiddenChanged(hidden)
+        super<MainListFragment>.onHiddenChanged(hidden)
     }
 
+    public fun onEvent(msg : MessageEvent){
+        Log.d(TAG, "RssListFragment Event Bus ${msg.message}")
+    }
 
     public override fun onPause() {
         Log.d(TAG, "OnPause")
-        super<ListFragment>.onPause()
+        super<MainListFragment>.onPause()
     }
 
     fun displayImportOpmlDialog() {

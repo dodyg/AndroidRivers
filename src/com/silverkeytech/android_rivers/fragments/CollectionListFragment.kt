@@ -48,7 +48,6 @@ import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.AlertDialog
-import org.holoeverywhere.app.ListFragment
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.makeLocalUrl
@@ -64,22 +63,16 @@ import com.silverkeytech.android_rivers.startCollectionActivity
 import com.silverkeytech.android_rivers.activities.Duration
 import com.silverkeytech.android_rivers.activities.toastee
 import com.silverkeytech.android_rivers.findView
+import com.silverkeytech.android_rivers.MessageEvent
 
-public class CollectionListFragment: ListFragment() {
+public class CollectionListFragment: MainListFragment() {
     class object {
         public val TAG: String = javaClass<CollectionListFragment>().getSimpleName()
     }
 
-    var parent: Activity by kotlin.properties.Delegates.notNull()
-
-    public override fun onAttach(activity: Activity?) {
-        super<ListFragment>.onAttach(activity)
-        parent = activity!!
-    }
-
     public override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
-        super<ListFragment>.onCreate(savedInstanceState)
+        super<MainListFragment>.onCreate(savedInstanceState)
     }
 
     public override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -90,12 +83,12 @@ public class CollectionListFragment: ListFragment() {
 
     public override fun onResume() {
         Log.d(TAG, "OnResume")
-        super<ListFragment>.onResume()
+        super<MainListFragment>.onResume()
     }
 
     public override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.collection_list_fragment_menu, menu)
-        super<ListFragment>.onCreateOptionsMenu(menu, inflater)
+        super<MainListFragment>.onCreateOptionsMenu(menu, inflater)
     }
 
     public override fun onOptionsItemSelected(item: com.actionbarsherlock.view.MenuItem?): Boolean {
@@ -113,14 +106,18 @@ public class CollectionListFragment: ListFragment() {
         if (!hidden){
             displayBookmarkCollection()
         }
-        super<ListFragment>.onHiddenChanged(hidden)
+        super<MainListFragment>.onHiddenChanged(hidden)
     }
 
     public override fun onPause() {
         Log.d(TAG, "OnPause")
-        super<ListFragment>.onPause()
+        super<MainListFragment>.onPause()
     }
 
+    public fun onEvent(msg : MessageEvent){
+        Log.d(TAG, "CollectionListFragment Event Bus ${msg.message}")
+    }
+    
     fun showMessage(msg: String) {
         val txt = getView().findView<TextView>(R.id.collection_list_fragment_message_tv)
         if (msg.isNullOrEmpty()){

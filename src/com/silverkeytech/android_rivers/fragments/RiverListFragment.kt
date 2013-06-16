@@ -47,7 +47,6 @@ import com.silverkeytech.news_engine.outlines.sortOutlineDesc
 import java.util.ArrayList
 import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
-import org.holoeverywhere.app.ListFragment
 import com.silverkeytech.news_engine.riverjs.getSortedNewsItems
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.isNullOrEmpty
@@ -71,26 +70,22 @@ import com.silverkeytech.android_rivers.isLocalUrl
 import com.silverkeytech.android_rivers.extractIdFromLocalUrl
 import com.silverkeytech.android_rivers.startDownloadAllRiverService
 import com.silverkeytech.android_rivers.createConfirmationDialog
+import com.silverkeytech.android_rivers.MessageEvent
 
-public class RiverListFragment(): ListFragment() {
+public class RiverListFragment(): MainListFragment() {
     class object {
         public val TAG: String = javaClass<RiverListFragment>().getSimpleName()
     }
 
     val DEFAULT_SUBSCRIPTION_LIST = "http://hobieu.apphb.com/api/1/default/riverssubscription"
 
-    var parent: Activity by kotlin.properties.Delegates.notNull()
     var lastEnteredUrl: String? = ""
 
     var isFirstLoad: Boolean = true
-    public override fun onAttach(activity: Activity?) {
-        super<ListFragment>.onAttach(activity)
-        parent = activity!!
-    }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
-        super<ListFragment>.onCreate(savedInstanceState)
+        super<MainListFragment>.onCreate(savedInstanceState)
     }
 
     public override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -102,7 +97,7 @@ public class RiverListFragment(): ListFragment() {
     }
 
     public override fun onStart() {
-        super<ListFragment>.onStart()
+        super<MainListFragment>.onStart()
 
         val downloadIf = true//parent.getSetupPref().getDownloadDefaultRiversIfNecessary()
         displayRiverBookmarks(downloadIf)
@@ -116,9 +111,12 @@ public class RiverListFragment(): ListFragment() {
             displayRiverBookmarks(false)
         }
 
-        super<ListFragment>.onResume()
+        super<MainListFragment>.onResume()
     }
 
+    public fun onEvent(msg : MessageEvent){
+        Log.d(TAG, "RiverListFragment Event Bus ${msg.message}")
+    }
 
     public override fun onHiddenChanged(hidden: Boolean) {
         Log.d(TAG, "OnHiddenChanged $hidden")
@@ -128,7 +126,7 @@ public class RiverListFragment(): ListFragment() {
         }
 
         isFirstLoad = false
-        super<ListFragment>.onHiddenChanged(hidden)
+        super<MainListFragment>.onHiddenChanged(hidden)
     }
 
     public override fun onPrepareOptionsMenu(menu: Menu?) {
@@ -144,12 +142,12 @@ public class RiverListFragment(): ListFragment() {
             if (list.getCount() != 0)
                 refresh.setVisible(false)
         }
-        super<ListFragment>.onPrepareOptionsMenu(menu)
+        super<MainListFragment>.onPrepareOptionsMenu(menu)
     }
 
     public override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.river_list_fragment_menu, menu)
-        super<ListFragment>.onCreateOptionsMenu(menu, inflater)
+        super<MainListFragment>.onCreateOptionsMenu(menu, inflater)
     }
 
     public override fun onOptionsItemSelected(item: com.actionbarsherlock.view.MenuItem?): Boolean {
@@ -191,7 +189,7 @@ public class RiverListFragment(): ListFragment() {
 
     public override fun onPause() {
         Log.d(TAG, "OnPause")
-        super<ListFragment>.onPause()
+        super<MainListFragment>.onPause()
     }
 
     fun showMessage(msg: String) {

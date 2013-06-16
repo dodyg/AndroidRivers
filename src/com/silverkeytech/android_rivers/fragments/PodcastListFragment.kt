@@ -68,26 +68,18 @@ import com.silverkeytech.android_rivers.activities.getLocationOnScreen
 import com.silverkeytech.android_rivers.limitText
 import com.silverkeytech.android_rivers.rightPadding
 import com.silverkeytech.android_rivers.findView
-import com.silverkeytech.android_rivers.Bus
 import com.silverkeytech.android_rivers.MessageEvent
 
-public class PodcastListFragment(): ListFragment() {
+public class PodcastListFragment(): MainListFragment() {
     class object {
         public val TAG: String = javaClass<PodcastListFragment>().getSimpleName()
     }
 
-    var parent: Activity by kotlin.properties.Delegates.notNull()
     var lastEnteredUrl: String? = ""
-
-    public override fun onAttach(activity: Activity?) {
-        super<ListFragment>.onAttach(activity)
-        parent = activity!!
-    }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
-        super<ListFragment>.onCreate(savedInstanceState)
-        Bus.register(this)
+        super<MainListFragment>.onCreate(savedInstanceState)
     }
 
     public override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -96,7 +88,7 @@ public class PodcastListFragment(): ListFragment() {
     }
 
     public override fun onStart() {
-        super<ListFragment>.onStart()
+        super<MainListFragment>.onStart()
         Log.d(TAG, "OnStart")
         doBindService()
     }
@@ -109,7 +101,7 @@ public class PodcastListFragment(): ListFragment() {
             displayPodcasts()
         }
 
-        super<ListFragment>.onResume()
+        super<MainListFragment>.onResume()
     }
 
     public override fun onHiddenChanged(hidden: Boolean) {
@@ -117,31 +109,26 @@ public class PodcastListFragment(): ListFragment() {
         if (!hidden){
             displayPodcasts()
         }
-        super<ListFragment>.onHiddenChanged(hidden)
+        super<MainListFragment>.onHiddenChanged(hidden)
     }
 
     public override fun onPause() {
         Log.d(TAG, "OnPause")
-        super<ListFragment>.onPause()
+        super<MainListFragment>.onPause()
     }
 
     public override fun onStop() {
-        super<ListFragment>.onStop()
+        super<MainListFragment>.onStop()
         doBindService()
     }
 
-    public override fun onDestroy(){
-        Bus.unregister(this)
-        super<ListFragment>.onDestroy()
-    }
-
     public fun onEvent(msg : MessageEvent){
-        Log.d(TAG, "Event Bus ${msg.message}")
+        Log.d(TAG, "PodcastListFragment Event Bus ${msg.message}")
     }
 
     public override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.podcast_list_fragment_menu, menu)
-        super<ListFragment>.onCreateOptionsMenu(menu, inflater)
+        super<MainListFragment>.onCreateOptionsMenu(menu, inflater)
     }
 
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -375,7 +362,6 @@ public class PodcastListFragment(): ListFragment() {
             }
         }
 
-
         if (isNewTrack)
             multi.setText(this@PodcastListFragment.getString(R.string.pause))
         else
@@ -396,11 +382,11 @@ public class PodcastListFragment(): ListFragment() {
         player!!.progressHandler = createHandler(progressBar, progressText)
 
         progressBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
-            public override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            public override fun onStartTrackingTouch(p0: SeekBar?) {
                 //dg: not implemented by design
             }
 
-            public override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            public override fun onStopTrackingTouch(p0: SeekBar?) {
                 //dg: not implemented by design
             }
 

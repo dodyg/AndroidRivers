@@ -27,7 +27,6 @@ import com.actionbarsherlock.view.MenuInflater
 import com.silverkeytech.android_rivers.db.getBookmarksFromDb
 import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
-import org.holoeverywhere.app.ListFragment
 import com.silverkeytech.android_rivers.db.Bookmark
 import com.silverkeytech.android_rivers.db.BookmarkKind
 import com.silverkeytech.android_rivers.db.SortingOrder
@@ -59,24 +58,20 @@ import com.silverkeytech.android_rivers.safeUrlConvert
 import com.silverkeytech.android_rivers.asyncs.downloadOpmlAsync
 import com.silverkeytech.android_rivers.tryGetUriFromClipboard
 import com.silverkeytech.android_rivers.findView
+import com.silverkeytech.android_rivers.MessageEvent
 
-public class OpmlListFragment(): ListFragment() {
+public class OpmlListFragment(): MainListFragment() {
     class object {
         public val TAG: String = javaClass<OpmlListFragment>().getSimpleName()
     }
 
-    var parent: Activity by kotlin.properties.Delegates.notNull()
     var lastEnteredUrl: String? = ""
 
     var isFirstLoad: Boolean = true
-    public override fun onAttach(activity: Activity?) {
-        super<ListFragment>.onAttach(activity)
-        parent = activity!!
-    }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
-        super<ListFragment>.onCreate(savedInstanceState)
+        super<MainListFragment>.onCreate(savedInstanceState)
     }
 
     public override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -88,7 +83,7 @@ public class OpmlListFragment(): ListFragment() {
     }
 
     public override fun onStart() {
-        super<ListFragment>.onStart()
+        super<MainListFragment>.onStart()
     }
 
     public override fun onResume() {
@@ -99,7 +94,7 @@ public class OpmlListFragment(): ListFragment() {
             displayOpmlList()
         }
 
-        super<ListFragment>.onResume()
+        super<MainListFragment>.onResume()
     }
 
     public override fun onHiddenChanged(hidden: Boolean) {
@@ -110,12 +105,16 @@ public class OpmlListFragment(): ListFragment() {
         }
 
         isFirstLoad = false
-        super<ListFragment>.onHiddenChanged(hidden)
+        super<MainListFragment>.onHiddenChanged(hidden)
+    }
+
+    public fun onEvent(msg : MessageEvent){
+        Log.d(TAG, "OpmlListFragment Event Bus ${msg.message}")
     }
 
     public override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.opml_list_fragment_menu, menu)
-        super<ListFragment>.onCreateOptionsMenu(menu, inflater)
+        super<MainListFragment>.onCreateOptionsMenu(menu, inflater)
     }
 
     public override fun onOptionsItemSelected(item: com.actionbarsherlock.view.MenuItem?): Boolean {
@@ -130,7 +129,7 @@ public class OpmlListFragment(): ListFragment() {
 
     public override fun onPause() {
         Log.d(TAG, "OnPause")
-        super<ListFragment>.onPause()
+        super<MainListFragment>.onPause()
     }
 
     private fun displayOpmlList() {
