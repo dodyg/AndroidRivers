@@ -20,6 +20,10 @@ public class AtomTests(){
             plog("Author ${a.name} - ${a.uri} - ${a.email}")
         }
 
+        for (a in feed.link?.iterator()){
+            plog("link ${a.href} - ${a.rel} - ${a.`type`}")
+        }
+
         for(x in feed.entry?.iterator()){
             for (a in x.author?.iterator()){
                 plog("Author ${a.name} - ${a.uri} - ${a.email}")

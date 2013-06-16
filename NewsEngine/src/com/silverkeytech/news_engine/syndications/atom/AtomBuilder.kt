@@ -24,6 +24,7 @@ import java.util.ArrayList
 public class AtomBuilder (){
     val feed = Feed()
     public var author : PersonElementBuilder = PersonElementBuilder(feed.author!!)
+    public var link : LinkElementBuilder = LinkElementBuilder(feed.link!!)
     public val entry: EntryBuilder = EntryBuilder(feed)
 
     public fun build() : Feed {
@@ -92,9 +93,46 @@ public class AtomBuilder (){
         }
     }
 
+    public class LinkElementBuilder(val links : ArrayList<LinkElement>){
+        var link : LinkElement = LinkElement()
+
+        public fun startItem(){
+            link = LinkElement()
+        }
+
+        public fun endItem(){
+            links.add(link)
+        }
+
+        public fun setHref(href : String) {
+            link.href = href
+        }
+
+        public fun setRel(rel : String){
+            link.rel = rel
+        }
+
+        public fun setType(linkType : String){
+            link.`type` = linkType
+        }
+
+        public fun setHrefLang(lang : String){
+            link.hreflang = lang
+        }
+
+        public fun setTitle(title : String){
+            link.title = title
+        }
+
+        public fun setLength(length : Int){
+            link.length = length
+        }
+    }
+
     public class EntryBuilder(private val feed: Feed){
         var entry : Entry = Entry()
         public var author : PersonElementBuilder = PersonElementBuilder(entry.author!!)
+        public var link : LinkElementBuilder = LinkElementBuilder(entry.link!!)
         public var content : ContentElementBuilder = ContentElementBuilder(ContentElement())
         public var summary : ContentElementBuilder = ContentElementBuilder(ContentElement())
 

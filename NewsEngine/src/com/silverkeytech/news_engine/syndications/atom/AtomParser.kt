@@ -28,6 +28,7 @@ public class AtomParser{
     public fun parse(input: InputStream, atom: AtomBuilder) {
         var parser = XMLParser<AtomBuilder>(feedId, feedTitle, feedUpdated, feedIcon, feedLogo,
         feedAuthorTag, feedAuthorName, feedAuthorEmail, feedAuthorUri, feedSubtitle,
+        feedLinkTag, feedLinkAttributes,
         entryTag, entryId, entryTitle, entryUpdated, entryPublished,
         entryAuthorTag, entryAuthorName, entryAuthorEmail, entryAuthorUri,
         entryContentTag, entryContentValue, entryContentAttributes,
@@ -49,6 +50,27 @@ val feedTitle = textRule<AtomBuilder>("/[$NS]feed/[$NS]title", { text, atom ->
 val feedUpdated = textRule<AtomBuilder>("/[$NS]feed/[$NS]updated", { text, atom ->
     atom.setUpdated(text)
 })
+
+val feedLinkTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]link", {(isStartTag, atom) ->
+    if (isStartTag)
+        atom.link.startItem()
+    else
+        atom.link.endItem()
+})
+
+val feedLinkAttributes = attributeRule<AtomBuilder>("/[$NS]feed/[$NS]link", {(attrName, attrValue, atom) ->
+    when(attrName){
+        "href" -> atom.link.setHref(attrValue)
+        "rel" -> atom.link.setRel(attrValue)
+        "hreflang" -> atom.link.setHrefLang(attrValue)
+        "type" -> atom.link.setType(attrValue)
+        "title" -> atom.link.setTitle(attrValue)
+        "length" -> atom.link.setLength(attrValue.toInt())
+        else -> {
+        }
+    }
+
+}, "href", "rel", "hreflang", "type", "title", "length")
 
 
 val feedAuthorTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]author", {(isStartTag, atom) ->
