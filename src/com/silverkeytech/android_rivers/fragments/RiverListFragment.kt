@@ -91,8 +91,6 @@ public class RiverListFragment(): MainListFragment() {
     public override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val vw = inflater!!.inflate(R.layout.river_list_fragment, container, false)
 
-        Log.d(TAG, "We are being created")
-
         return vw
     }
 
