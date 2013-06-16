@@ -18,15 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.news_engine.syndications.atom;
 
-import org.simpleframework.xml.Attribute;
 
 public class CategoryElement {
-    @Attribute
     public String term;
 
-    @Attribute(required = false)
     public String scheme;
 
-    @Attribute(required = false)
     public String label;
 }

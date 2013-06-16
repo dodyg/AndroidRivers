@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.news_engine.riverjs;
 
-import org.simpleframework.xml.ElementList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,6 @@ public class RiverOpmlOutline {
     public String language;
     public String value;
 
-    @ElementList(inline = true, required = false)
     public List<RiverOpmlOutline> outline = new ArrayList<RiverOpmlOutline>();
 
     @Override

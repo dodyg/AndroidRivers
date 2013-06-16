@@ -18,18 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.news_engine.syndications.atom;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Text;
-
 public class ContentElement {
-
-    @Text(required = false)
     //This violates specification but http://hosted2.ap.org/atom/APDEFAULT/3d281c11a96b4ad082fe88aa0db04305 sucks
     public String value;
-
-    @Attribute(required = false)
     public String type;
-
-    @Attribute(required = false)
     public String src;
 }

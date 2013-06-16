@@ -19,25 +19,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.news_engine.syndications.atom;
 
 
-import org.simpleframework.xml.Attribute;
-
 public class LinkElement {
-    @Attribute
     public String href;
 
-    @Attribute(required = false)
     public String rel;
 
-    @Attribute(required = false)
     public String type;
 
-    @Attribute(required = false)
     public String hreflang;
 
-    @Attribute(required = false)
     public String title;
 
-    @Attribute(required = false)
     public Integer length;
 }
 /*

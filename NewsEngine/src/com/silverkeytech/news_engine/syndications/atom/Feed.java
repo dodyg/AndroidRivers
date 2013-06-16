@@ -19,8 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.news_engine.syndications.atom;
 
 import org.apache.abdera.model.AtomDate;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,43 +27,31 @@ import java.util.Date;
 
 public class Feed {
     //required elements
-    @Element
     public String id;
 
-    @Element
     public String title;
 
-    @Element(required = false) //out of spec but otherwise Kottke won't parse
     public String updated;
 
     //recommended optional elements
 
-    @ElementList(inline = true, required = false, entry = "author")
     public ArrayList<PersonElement> author = new ArrayList<PersonElement>();
 
-    @ElementList(inline = true, required = false, entry = "link")
     public ArrayList<LinkElement> link = new ArrayList<LinkElement>();
 
     //the rest
-    @ElementList(inline = true, required = false, entry = "category")
     public ArrayList<CategoryElement> category = new ArrayList<CategoryElement>();
 
-    @ElementList(inline = true, required = false, entry = "contributor")
     public ArrayList<PersonElement> contributor = new ArrayList<PersonElement>();
 
-    @Element(required = false)
     public String icon;
 
-    @Element(required = false)
     public String logo;
 
-    @Element(required = false)
     public TextElement rights;
 
-    @Element(required = false)
     public String subtitle;
 
-    @ElementList(inline = true)
     public ArrayList<Entry> entry = new ArrayList<Entry>();
 
     public Date getUpdated() {

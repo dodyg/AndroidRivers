@@ -19,8 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.news_engine.syndications.atom;
 
 import org.apache.abdera.model.AtomDate;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,43 +27,31 @@ import java.util.Date;
 
 public class Entry {
     //required elements
-    @Element
     public String id;
 
-    @Element(required = false)
     public String title;
 
-    @Element
     public String updated;
 
     //recommended elements
 
-    @ElementList(inline = true, required = false, entry = "author")
     public ArrayList<PersonElement> author = new ArrayList<PersonElement>();
 
-    @Element(required = false)
     public ContentElement content;
 
-    @ElementList(inline = true, required = false, entry = "link")
     public ArrayList<LinkElement> link = new ArrayList<LinkElement>();
 
-    @Element(required = false)
     public ContentElement summary;
 
     //the rest of the elements
-    @ElementList(inline = true, required = false, entry = "category")
     public ArrayList<CategoryElement> category = new ArrayList<CategoryElement>();
 
-    @ElementList(inline = true, required = false, entry = "contributor")
     public ArrayList<PersonElement> contributor = new ArrayList<PersonElement>();
 
-    @Element(required = false)
     public String published;
 
-    @Element(required = false)
     public Source source;
 
-    @Element(required = false)
     public TextElement rights;
 
     public Date getUpdated() {

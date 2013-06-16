@@ -18,46 +18,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.news_engine.syndications.atom;
 
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
-
 import java.util.ArrayList;
 
 public class Source {
     //required elements
-    @Element
     public String id;
 
-    @Element
     public String title;
 
-    @Element
     public String updated;
 
     //recommended optional elements
 
-    @ElementList(inline = true, required = false)
     public ArrayList<PersonElement> author = new ArrayList<PersonElement>();
 
-    @Element(required = false)
     public LinkElement link;
 
     //the rest
-    @ElementList(inline = true, required = false)
     public ArrayList<CategoryElement> category = new ArrayList<CategoryElement>();
 
-    @ElementList(inline = true, required = false)
     public ArrayList<PersonElement> contributor = new ArrayList<PersonElement>();
 
-    @Element(required = false)
     public String icon;
 
-    @Element(required = false)
     public String logo;
 
-    @Element(required = false)
     public TextElement rights;
 
-    @Element(required = false)
     public String subtitle;
 }
