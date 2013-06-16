@@ -24,7 +24,7 @@ public class AtomTests(){
             for (a in x.author?.iterator()){
                 plog("Author ${a.name} - ${a.uri} - ${a.email}")
             }
-            plog("Head - ${x.id} - ${x.title} - ${x.published}")
+            plog("Head - ${x.id} - ${x.title} - ${x.updated} - ${x.published}")
             plog("Content - ${x.content?.`type`} - ${x.content?.value} - ${x.content?.src}")
             plog("Summary - ${x.summary?.`type`} - ${x.summary?.value} - ${x.summary?.src}")
         }

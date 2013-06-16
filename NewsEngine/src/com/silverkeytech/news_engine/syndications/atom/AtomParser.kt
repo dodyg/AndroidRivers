@@ -27,7 +27,8 @@ import com.silverkeytech.news_engine.xml.attributeRule
 public class AtomParser{
     public fun parse(input: InputStream, atom: AtomBuilder) {
         var parser = XMLParser<AtomBuilder>(feedId, feedTitle, feedUpdated, feedIcon, feedLogo,
-        feedAuthorTag, feedAuthorName, feedAuthorEmail, feedAuthorUri, feedSubtitle, entryTag, entryId, entryTitle, entryPublished,
+        feedAuthorTag, feedAuthorName, feedAuthorEmail, feedAuthorUri, feedSubtitle,
+        entryTag, entryId, entryTitle, entryUpdated, entryPublished,
         entryAuthorTag, entryAuthorName, entryAuthorEmail, entryAuthorUri,
         entryContentTag, entryContentValue, entryContentAttributes,
         entrySummaryTag, entrySummaryValue, entrySummaryAttributes)
@@ -95,6 +96,10 @@ val entryId = textRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]id", { text, ato
 
 val entryTitle = textRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]title", { text, atom ->
     atom.entry.setTitle(text)
+})
+
+val entryUpdated = textRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]updated", { text, atom ->
+    atom.entry.setUpdated(text)
 })
 
 val entryPublished = textRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]published", { text, atom ->
