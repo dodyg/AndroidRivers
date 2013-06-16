@@ -66,7 +66,6 @@ public class OpmlListFragment(): MainListFragment() {
     }
 
     var lastEnteredUrl: String? = ""
-
     var isFirstLoad: Boolean = true
 
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,10 +79,6 @@ public class OpmlListFragment(): MainListFragment() {
         Log.d(TAG, "We are being created")
 
         return vw
-    }
-
-    public override fun onStart() {
-        super<MainListFragment>.onStart()
     }
 
     public override fun onResume() {
@@ -108,10 +103,6 @@ public class OpmlListFragment(): MainListFragment() {
         super<MainListFragment>.onHiddenChanged(hidden)
     }
 
-    public fun onEvent(msg : MessageEvent){
-        Log.d(TAG, "OpmlListFragment Event Bus ${msg.message}")
-    }
-
     public override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.opml_list_fragment_menu, menu)
         super<MainListFragment>.onCreateOptionsMenu(menu, inflater)
@@ -125,11 +116,6 @@ public class OpmlListFragment(): MainListFragment() {
             }
             else -> return false
         }
-    }
-
-    public override fun onPause() {
-        Log.d(TAG, "OnPause")
-        super<MainListFragment>.onPause()
     }
 
     private fun displayOpmlList() {

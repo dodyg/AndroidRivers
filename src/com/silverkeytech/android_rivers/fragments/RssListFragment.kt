@@ -120,15 +120,6 @@ public class RssListFragment(): MainListFragment() {
         super<MainListFragment>.onHiddenChanged(hidden)
     }
 
-    public fun onEvent(msg : MessageEvent){
-        Log.d(TAG, "RssListFragment Event Bus ${msg.message}")
-    }
-
-    public override fun onPause() {
-        Log.d(TAG, "OnPause")
-        super<MainListFragment>.onPause()
-    }
-
     fun displayImportOpmlDialog() {
         val (hasClip, uri) = this.tryGetUriFromClipboard()
 

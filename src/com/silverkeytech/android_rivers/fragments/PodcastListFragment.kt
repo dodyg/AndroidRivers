@@ -112,18 +112,9 @@ public class PodcastListFragment(): MainListFragment() {
         super<MainListFragment>.onHiddenChanged(hidden)
     }
 
-    public override fun onPause() {
-        Log.d(TAG, "OnPause")
-        super<MainListFragment>.onPause()
-    }
-
     public override fun onStop() {
         super<MainListFragment>.onStop()
         doBindService()
-    }
-
-    public fun onEvent(msg : MessageEvent){
-        Log.d(TAG, "PodcastListFragment Event Bus ${msg.message}")
     }
 
     public override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

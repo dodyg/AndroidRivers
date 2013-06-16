@@ -81,11 +81,6 @@ public class CollectionListFragment: MainListFragment() {
         return vw
     }
 
-    public override fun onResume() {
-        Log.d(TAG, "OnResume")
-        super<MainListFragment>.onResume()
-    }
-
     public override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.collection_list_fragment_menu, menu)
         super<MainListFragment>.onCreateOptionsMenu(menu, inflater)
@@ -109,15 +104,6 @@ public class CollectionListFragment: MainListFragment() {
         super<MainListFragment>.onHiddenChanged(hidden)
     }
 
-    public override fun onPause() {
-        Log.d(TAG, "OnPause")
-        super<MainListFragment>.onPause()
-    }
-
-    public fun onEvent(msg : MessageEvent){
-        Log.d(TAG, "CollectionListFragment Event Bus ${msg.message}")
-    }
-    
     fun showMessage(msg: String) {
         val txt = getView().findView<TextView>(R.id.collection_list_fragment_message_tv)
         if (msg.isNullOrEmpty()){

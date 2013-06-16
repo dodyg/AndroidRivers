@@ -114,10 +114,6 @@ public class RiverListFragment(): MainListFragment() {
         super<MainListFragment>.onResume()
     }
 
-    public fun onEvent(msg : MessageEvent){
-        Log.d(TAG, "RiverListFragment Event Bus ${msg.message}")
-    }
-
     public override fun onHiddenChanged(hidden: Boolean) {
         Log.d(TAG, "OnHiddenChanged $hidden")
 
