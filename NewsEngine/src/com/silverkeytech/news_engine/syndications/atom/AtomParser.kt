@@ -32,7 +32,8 @@ public class AtomParser{
         entryTag, entryId, entryTitle, entryUpdated, entryPublished,
         entryAuthorTag, entryAuthorName, entryAuthorEmail, entryAuthorUri,
         entryContentTag, entryContentValue, entryContentAttributes,
-        entrySummaryTag, entrySummaryValue, entrySummaryAttributes)
+        entrySummaryTag, entrySummaryValue, entrySummaryAttributes,
+        entryLinkTag, entryLinkAttributes)
         parser.parse(input, "UTF-8", atom)
     }
 }
@@ -187,3 +188,25 @@ val entryAuthorName = textRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]author/[
 val entryAuthorUri = textRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]author/[$NS]uri", { text, atom ->
     atom.entry.author.setUri(text)
 })
+
+
+val entryLinkTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]link", {(isStartTag, atom) ->
+    if (isStartTag)
+        atom.entry.link.startItem()
+    else
+        atom.entry.link.endItem()
+})
+
+val entryLinkAttributes = attributeRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]link", {(attrName, attrValue, atom) ->
+    when(attrName){
+        "href" -> atom.entry.link.setHref(attrValue)
+        "rel" -> atom.entry.link.setRel(attrValue)
+        "hreflang" -> atom.entry.link.setHrefLang(attrValue)
+        "type" -> atom.entry.link.setType(attrValue)
+        "title" -> atom.entry.link.setTitle(attrValue)
+        "length" -> atom.entry.link.setLength(attrValue.toInt())
+        else -> {
+        }
+    }
+
+}, "href", "rel", "hreflang", "type", "title", "length")

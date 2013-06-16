@@ -165,6 +165,7 @@ public class AtomBuilder (){
         public fun startItem(){
             entry = Entry()
             author = PersonElementBuilder(entry.author!!)
+            link = LinkElementBuilder(entry.link!!)
         }
 
         public fun endItem(){
