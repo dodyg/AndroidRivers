@@ -96,6 +96,7 @@ public class AtomBuilder (){
         var entry : Entry = Entry()
         public var author : PersonElementBuilder = PersonElementBuilder(entry.author!!)
         public var content : ContentElementBuilder = ContentElementBuilder(ContentElement())
+        public var summary : ContentElementBuilder = ContentElementBuilder(ContentElement())
 
         public fun setId(id : String){
             entry.id = id
@@ -116,6 +117,11 @@ public class AtomBuilder (){
         public fun startContent(){
             entry.content = ContentElement()
             content = ContentElementBuilder(entry.content!!)
+        }
+
+        public fun startSummary(){
+            entry.summary = ContentElement()
+            summary = ContentElementBuilder(entry.summary!!)
         }
 
         public fun startItem(){

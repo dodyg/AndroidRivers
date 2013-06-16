@@ -29,7 +29,8 @@ public class AtomParser{
         var parser = XMLParser<AtomBuilder>(feedId, feedTitle, feedUpdated, feedIcon, feedLogo,
         feedAuthorTag, feedAuthorName, feedAuthorEmail, feedAuthorUri, feedSubtitle, entryTag, entryId, entryTitle, entryPublished,
         entryAuthorTag, entryAuthorName, entryAuthorEmail, entryAuthorUri,
-        entryContentTag, entryContentValue, entryContentAttributes)
+        entryContentTag, entryContentValue, entryContentAttributes,
+        entrySummaryTag, entrySummaryValue, entrySummaryAttributes)
         parser.parse(input, "UTF-8", atom)
     }
 }
@@ -100,7 +101,6 @@ val entryPublished = textRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]published
     atom.entry.setPublished(text)
 })
 
-
 val entryContentTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]content", {(isStartTag, atom) ->
     if (isStartTag)
         atom.entry.startContent()
@@ -119,6 +119,27 @@ val entryContentAttributes = attributeRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[
     }
 
 }, "type", "src")
+
+
+val entrySummaryTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]summary", {(isStartTag, atom) ->
+    if (isStartTag)
+        atom.entry.startSummary()
+})
+
+val entrySummaryValue = textRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]summary", { text, atom ->
+    atom.entry.summary.setValue(text)
+})
+
+val entrySummaryAttributes = attributeRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]summary", {(attrName, attrValue, atom) ->
+    when(attrName){
+        "type" -> atom.entry.summary.setType(attrValue)
+        "src" -> atom.entry.summary.setSource(attrValue)
+        else -> {
+        }
+    }
+
+}, "type", "src")
+
 
 
 val entryAuthorTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]author", {(isStartTag, atom) ->
