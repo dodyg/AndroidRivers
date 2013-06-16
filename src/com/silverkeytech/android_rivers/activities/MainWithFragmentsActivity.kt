@@ -94,8 +94,6 @@ public open class MainWithFragmentsActivity(): Activity() {
         isOnCreate = true
         setTheme(currentTheme!!)
 
-        getMain().flags.reset()
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_with_fragments)
 
@@ -201,17 +199,6 @@ public open class MainWithFragmentsActivity(): Activity() {
                 restart()
             } else {
                 showAccordingToCurrentMode()
-
-                if (getMain().flags.isRssJustBookmarked && mode == MainActivityMode.RSS){
-                    getMain().flags.reset()
-                    Log.d(TAG, "RSS is just bookmarked")
-                    //it doesn't do anything at the moment - this is an artifact of old design
-                } else
-                    if (getMain().flags.isRiverJustBookmarked && mode == MainActivityMode.RIVER){
-                        getMain().flags.reset()
-                        Log.d(TAG, "River is just bookmarked")
-                        //it doesn't do anything at the moment - this is an artifact of old design
-                    }
             }
         }else {
             Log.d(TAG, "RESUMING AFTER CREATION")

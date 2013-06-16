@@ -31,16 +31,6 @@ import com.silverkeytech.news_engine.riverjs.RiverItemMeta
 import com.silverkeytech.news_engine.syndications.SyndicationFeed
 import java.util.ArrayList
 
-public class SharedFlags{
-    public var isRssJustBookmarked: Boolean = false
-    public var isRiverJustBookmarked: Boolean = false
-
-    public fun reset() {
-        isRiverJustBookmarked = false
-        isRssJustBookmarked = false
-    }
-}
-
 public class MainApplication(): Application()
 {
     class object {
@@ -52,8 +42,6 @@ public class MainApplication(): Application()
     var syndicationCache = LruCache<String, CacheItem<SyndicationFeed>>(inMegaByte(4))
 
     var riverBookmarksCache: CacheItem<Opml>? = null
-
-    public val flags: SharedFlags = SharedFlags()
 
     public override fun onCreate() {
         Log.d(TAG, "Main Application is started")
