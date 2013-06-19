@@ -147,7 +147,7 @@ public class PodcastListFragment(): MainListFragment() {
     }
 
     fun showMessage(msg: String) {
-        val txt = getView()!!.findViewById(R.id.podcast_list_fragment_message_tv) as TextView
+        val txt = getView()!!.findView<TextView>(R.id.podcast_list_fragment_message_tv)
         if (msg.isNullOrEmpty()){
             txt.setVisibility(View.INVISIBLE)
             txt.setText("")
@@ -176,7 +176,7 @@ public class PodcastListFragment(): MainListFragment() {
     //show and prepare the interaction for each individual news item
     fun renderFileListing(podcasts: List<Podcast>) {
         //now sort it so people always have the latest news first
-        val list = getView()!!.findViewById(android.R.id.list) as ListView
+        val list = getView()!!.findView<ListView>(android.R.id.list)
 
         val textSize = parent.getVisualPref().listTextSize
 
@@ -240,7 +240,7 @@ public class PodcastListFragment(): MainListFragment() {
             pp.dismiss()
         }
 
-        val icon = x.findViewById(R.id.podcast_quick_action_delete_icon) as ImageView
+        val icon = x.findView<ImageView>(R.id.podcast_quick_action_delete_icon)
         icon.setOnClickListener {
             val dlg = createConfirmationDialog(context = context, message = "Are you sure about deleting this podcast?", positive = {
                 try{

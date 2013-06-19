@@ -177,7 +177,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 body.setOnTouchListener(listener)
 
 
-                var source = dlg.findViewById(R.id.news_details_source_tv)!! as TextView
+                var source = dlg.findView<TextView>(R.id.news_details_source_tv)
                 handleForeignText(language, body, msg)
                 handleForeignTextStyle(context, language, body, textSize.toFloat())
                 handleTextColorBasedOnTheme(context, body)

@@ -47,9 +47,7 @@ fun scrubHtml(text: String?): String {
         for(i in 0..(spannedObjects.size - 1)){
             if (spannedObjects[i] is ImageSpan){
                 val img = spannedObjects[i] as ImageSpan
-                if (img != null){
-                    spanned.replace(spanned.getSpanStart(img), spanned.getSpanEnd(img), "")
-                }
+                spanned.replace(spanned.getSpanStart(img), spanned.getSpanEnd(img), "")
             }
         }
 

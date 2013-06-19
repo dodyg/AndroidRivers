@@ -70,7 +70,7 @@ import com.silverkeytech.android_rivers.isLocalUrl
 import com.silverkeytech.android_rivers.extractIdFromLocalUrl
 import com.silverkeytech.android_rivers.startDownloadAllRiverService
 import com.silverkeytech.android_rivers.createConfirmationDialog
-import com.silverkeytech.android_rivers.MessageEvent
+import com.silverkeytech.android_rivers.findView
 
 public class RiverListFragment(): MainListFragment() {
     class object {
@@ -131,7 +131,7 @@ public class RiverListFragment(): MainListFragment() {
             setSortButtonText(sort, nextSort)
 
             val refresh = menu.findItem(R.id.river_list_fragment_menu_refresh)!!
-            val list = getView()!!.findViewById(android.R.id.list) as ListView
+            val list = getView()!!.findView<ListView>(android.R.id.list)
 
             if (list.getCount() != 0)
                 refresh.setVisible(false)

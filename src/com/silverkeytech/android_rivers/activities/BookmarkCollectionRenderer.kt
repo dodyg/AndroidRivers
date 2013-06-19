@@ -39,6 +39,7 @@ import com.silverkeytech.android_rivers.getVisualPref
 import com.silverkeytech.android_rivers.startFeedActivity
 import com.silverkeytech.android_rivers.handleFontResize
 import com.silverkeytech.android_rivers.createConfirmationDialog
+import com.silverkeytech.android_rivers.findView
 
 public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity){
     class object {
@@ -49,7 +50,7 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
         val textSize = context.getVisualPref().listTextSize
 
         if (bookmarks.count() == 0){
-            var msg = context.findViewById(R.id.collection_message_tv)!! as TextView
+            var msg = context.findView<TextView>(R.id.collection_message_tv)
             handleFontResize(msg, context.getString(R.string.empty_bookmark_collection_items_list)!!, textSize.toFloat())
         }
 
@@ -89,7 +90,7 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
         if (vw == null){
             vw = inflater().inflate(android.R.layout.simple_list_item_1, parent, false)
 
-            holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
+            holder = ViewHolder(vw.findView<TextView>(android.R.id.text1))
             vw!!.setTag(holder)
         }else{
             holder = vw!!.getTag() as ViewHolder
@@ -119,7 +120,7 @@ fun showCollectionQuickActionPopup(context: BookmarkCollectionActivity, bookmark
         pp.dismiss()
     }
 
-    val icon = x.findViewById(R.id.collection_quick_action_delete_icon) as ImageView
+    val icon = x.findView<ImageView>(R.id.collection_quick_action_delete_icon)
     icon.setOnClickListener {
         val dlg = createConfirmationDialog(context = context, message = "Are you sure about removing this collection bookmark?", positive = {
             try{

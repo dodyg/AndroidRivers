@@ -22,6 +22,9 @@ import android.content.Context
 import android.content.DialogInterface
 import org.holoeverywhere.app.ProgressDialog
 
+/*
+This is a progress dialog that show indeterminate progress (there is no 0..100 % progress indicator)
+ */
 public class InfinityProgressDialog(ctx: Context, val message: String): ProgressDialog(ctx){
     {
         super.setCancelable(true)

@@ -20,6 +20,10 @@ package com.silverkeytech.android_rivers
 public class None(){
 }
 
+/*
+This is a common class used to hold result of an operation. If the operation throws an exception, the exception is available
+on .exception property
+ */
 public data class Result<T: Any>(p1: T?, p2: Exception? = null){
     class object{
         //return True result

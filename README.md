@@ -21,7 +21,10 @@ The mailing list for this project is at groups.google.com/group/news-and-protoco
 
 This code is licensed under GPL version 3. Please read license.txt.
 
-I develop Android Rivers using <a href="http://kotlin.jetbrains.org/">Kotlin programming language</a>
+I develop Android Rivers using <a href="http://kotlin.jetbrains.org/">Kotlin programming language</a>. It might not be
+obvious that this is Kotlin project since there are a lot of Java code in the project. Most of these Java code are open source
+libraries that Android Rivers include in source form by necessity. Most of the Kotlin code is located at NewsEngine module and
+com.silverkeytech.android_rivers package at the main project.
 
 By reading Android Rivers source code, you will learn about:
 

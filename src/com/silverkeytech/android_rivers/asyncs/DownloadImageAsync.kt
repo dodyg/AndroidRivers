@@ -39,6 +39,7 @@ import com.silverkeytech.android_rivers.InfinityProgressDialog
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.generateThrowawayName
 import com.silverkeytech.android_rivers.imageMimeTypeToFileExtension
+import com.silverkeytech.android_rivers.findView
 
 public data class DownloadedFile(val contentType: String, val filePath: String)
 
@@ -97,7 +98,7 @@ public class DownloadImageAsync(it: Context?): AsyncTask<String, Int, Result<Dow
                     return
                 }
 
-                var image = vw.findViewById(R.id.image_view_main_iv) as ImageView
+                var image = vw.findView<ImageView>(R.id.image_view_main_iv)
 
                 var bmp: Bitmap?
                 try{

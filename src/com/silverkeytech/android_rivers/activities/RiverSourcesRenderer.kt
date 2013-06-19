@@ -31,6 +31,7 @@ import android.widget.TextView
 import com.silverkeytech.android_rivers.getVisualPref
 import com.silverkeytech.android_rivers.startFeedActivity
 import com.silverkeytech.android_rivers.handleFontResize
+import com.silverkeytech.android_rivers.findView
 
 public class RiverSourcesRenderer(val context: RiverSourcesActivity, val language: String){
     class object {
@@ -68,7 +69,7 @@ public class RiverSourcesRenderer(val context: RiverSourcesActivity, val languag
 
         if (vw == null){
             vw = inflater.inflate(android.R.layout.simple_list_item_1, parent, false)
-            holder = ViewHolder(vw!!.findViewById(android.R.id.text1) as TextView)
+            holder = ViewHolder(vw!!.findView<TextView>(android.R.id.text1))
             vw!!.setTag(holder)
         }else{
             holder = vw!!.getTag() as ViewHolder
