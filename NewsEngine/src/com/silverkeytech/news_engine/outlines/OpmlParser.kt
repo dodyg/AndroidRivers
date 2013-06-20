@@ -24,7 +24,6 @@ import com.silverkeytech.news_engine.xml.textRule
 import com.thebuzzmedia.sjxp.rule.DefaultRule
 import com.silverkeytech.news_engine.xml.attributeRule
 import com.silverkeytech.news_engine.xml.tagRule
-import java.util.ArrayList
 
 public class OpmlParser{
     public fun parse(input: InputStream, rss: OpmlBuilder) {

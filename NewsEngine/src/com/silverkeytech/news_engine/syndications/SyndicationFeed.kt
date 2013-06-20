@@ -19,7 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.news_engine.syndications
 
 import com.silverkeytech.news_engine.isNullOrEmpty
-import com.silverkeytech.news_engine.scrubHtml
 import com.silverkeytech.news_engine.syndications.atom.ContentElement
 import com.silverkeytech.news_engine.syndications.atom.Feed
 import com.silverkeytech.news_engine.syndications.rss.Rss

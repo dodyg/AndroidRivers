@@ -19,7 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.news_engine.outlines
 
 import java.util.ArrayList
-import android.util.Log
 
 public class OpmlBuilder{
     class object {

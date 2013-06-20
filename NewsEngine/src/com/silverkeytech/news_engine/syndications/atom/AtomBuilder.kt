@@ -20,7 +20,6 @@ package com.silverkeytech.news_engine.syndications.atom
 
 import java.util.ArrayList
 
-
 public class AtomBuilder (){
     val feed = Feed()
     public var author : PersonElementBuilder = PersonElementBuilder(feed.author!!)
