@@ -63,7 +63,6 @@ import com.silverkeytech.android_rivers.startCollectionActivity
 import com.silverkeytech.android_rivers.activities.Duration
 import com.silverkeytech.android_rivers.activities.toastee
 import com.silverkeytech.android_rivers.findView
-import com.silverkeytech.android_rivers.MessageEvent
 
 public class CollectionListFragment: MainListFragment() {
     class object {

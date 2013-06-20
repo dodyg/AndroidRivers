@@ -44,7 +44,6 @@ import com.silverkeytech.android_rivers.db.removePodcast
 import java.io.File
 import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
-import org.holoeverywhere.app.ListFragment
 import org.holoeverywhere.widget.Button
 import org.holoeverywhere.widget.SeekBar
 import android.os.Handler
@@ -68,7 +67,6 @@ import com.silverkeytech.android_rivers.activities.getLocationOnScreen
 import com.silverkeytech.android_rivers.limitText
 import com.silverkeytech.android_rivers.rightPadding
 import com.silverkeytech.android_rivers.findView
-import com.silverkeytech.android_rivers.MessageEvent
 
 public class PodcastListFragment(): MainListFragment() {
     class object {

@@ -30,7 +30,6 @@ import android.widget.ListView
 import android.widget.TextView
 import java.util.ArrayList
 import android.util.TypedValue
-import com.silverkeytech.android_rivers.findView
 
 data class NavItem (val id: Int, val text: String, val icon: Int)
 

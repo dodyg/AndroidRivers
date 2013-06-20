@@ -58,7 +58,6 @@ import com.silverkeytech.android_rivers.safeUrlConvert
 import com.silverkeytech.android_rivers.asyncs.downloadOpmlAsync
 import com.silverkeytech.android_rivers.tryGetUriFromClipboard
 import com.silverkeytech.android_rivers.findView
-import com.silverkeytech.android_rivers.MessageEvent
 
 public class OpmlListFragment(): MainListFragment() {
     class object {

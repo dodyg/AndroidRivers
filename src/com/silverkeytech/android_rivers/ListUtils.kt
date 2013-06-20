@@ -22,7 +22,6 @@ import android.widget.TextView
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
-import com.silverkeytech.android_rivers.findView
 
 //A view holder for UI list with one element called name of type TextView
 public data class TextViewHolder (public var name: TextView)

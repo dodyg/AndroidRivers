@@ -62,7 +62,6 @@ import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import com.silverkeytech.android_rivers.startFeedActivity
 import com.silverkeytech.android_rivers.dlgClickListener
 import com.silverkeytech.android_rivers.createConfirmationDialog
-import com.silverkeytech.android_rivers.MessageEvent
 
 public class RssListFragment(): MainListFragment() {
     class object {
