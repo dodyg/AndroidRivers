@@ -167,7 +167,7 @@ fun isModernAndroid(): Boolean {
 }
 
 fun Dialog?.findView<T : View>(id : Int) : T{
-    return this!!.findView<T>(id) as T
+    return this!!.findViewById(id) as T
 }
 
 fun View?.findView<T : View>(id : Int) : T{
