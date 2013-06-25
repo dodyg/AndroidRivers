@@ -20,16 +20,8 @@ package com.silverkeytech.android_rivers.asyncs
 
 import android.content.Context
 import android.os.AsyncTask
-import android.util.Log
 import com.silverkeytech.news_engine.riverjs.RiverItemMeta
-import com.silverkeytech.news_engine.riverjs.accumulateList
 import com.silverkeytech.news_engine.riverjs.sortRiverItemMeta
-import com.silverkeytech.news_engine.syndications.SyndicationFilter
-import com.silverkeytech.android_rivers.downloadSingleFeed
-import java.util.ArrayList
-import java.util.Vector
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
 import org.holoeverywhere.app.Activity
 import com.silverkeytech.android_rivers.activities.getMain
 import com.silverkeytech.android_rivers.Result
@@ -57,12 +49,9 @@ public class DownloadUrlsAsRiverAsync(it: Context?, private val localUrl: String
         dialog.show()
     }
 
+
     protected override fun doInBackground(vararg p0: String?): Result<List<RiverItemMeta>>? {
         val latestDate = daysBeforeNow(PreferenceDefaults.CONTENT_BOOKMARK_COLLECTION_LATEST_DATE_FILTER_IN_DAYS)
-        val before = System.currentTimeMillis()
-        var list = Vector<RiverItemMeta>()
-
-        var executor = Executors.newFixedThreadPool(4)
 
         val maximumItemFilter = when(p0.size){
             in 0..5 -> 20
@@ -71,37 +60,8 @@ public class DownloadUrlsAsRiverAsync(it: Context?, private val localUrl: String
             else -> 6
         }
 
-        for(url in p0){
-            executor.execute(
-                    runnable {
-                        val res = downloadSingleFeed(url!!, SyndicationFilter(maximumItemFilter, latestDate))
-
-                        if (res.isFalse())
-                            Log.d(TAG, "Value at ${res.exception?.getMessage()}")
-                        else
-                        {
-                            Log.d(TAG, "Download for $url is successful")
-                            accumulateList(list, res.value!!)
-                        }
-                    }
-            )
-        }
-
-        executor.shutdown()
-
-        try{
-            if (!executor.awaitTermination(20.toLong(), TimeUnit.SECONDS))
-                executor.shutdownNow()
-
-            val after = System.currentTimeMillis()
-            val diff = after - before
-            Log.d(TAG, "It takes $diff mili seconds to complete ${p0.size} rss downloads")
-            return Result.right(ArrayList(list))
-        }
-        catch(ex: InterruptedException){
-            executor.shutdownNow()
-            return Result.wrong<List<RiverItemMeta>>(ex)
-        }
+        val result = concurrentFeedsDownload(4, latestDate, maximumItemFilter, *p0)
+        return result
     }
 
     var callback: ((String, Result<List<RiverItemMeta>>) -> Unit)? = null
