@@ -32,7 +32,6 @@ import java.util.UUID
 
 fun scrubJsonP(text: String): String {
     val rep = text.replaceAll("onGetRiverStream(\\s*)\\(", "").trimTrailing(")")
-    Log.d("scrubJsonP", rep)
     return rep
 }
 

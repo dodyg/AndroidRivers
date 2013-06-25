@@ -53,6 +53,7 @@ import com.silverkeytech.android_rivers.isLocalUrl
 import com.silverkeytech.android_rivers.daysBeforeNow
 import com.silverkeytech.android_rivers.extractIdFromLocalUrl
 import com.silverkeytech.android_rivers.toHoursInMinutes
+import com.silverkeytech.android_rivers.asyncs.concurrentFeedsDownload
 
 
 public class DownloadAllRiversService(): IntentService("DownloadAllRiversService"){
@@ -180,28 +181,20 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
 
                         val urls = getBookmarksUrlsFromDbByCollection(id)
 
-                        val list = Vector<RiverItemMeta>()
-                        for(u in urls){
-                            val res = downloadSingleFeed(u!!, SyndicationFilter(PreferenceDefaults.CONTENT_BOOKMARK_COLLECTION_MAX_ITEMS_FILTER, latestDate))
+                        val res = concurrentFeedsDownload(4, latestDate, PreferenceDefaults.CONTENT_BOOKMARK_COLLECTION_MAX_ITEMS_FILTER, *urls)
 
-                            if (res.isFalse())
-                                Log.d(TAG, "Value at ${res.exception?.getMessage()}")
-                            else
-                            {
-                                Log.d(TAG, "Download for $u is successful")
-                                accumulateList(list, res.value!!)
-                            }
-                        }
-
-                        if (list.count() > 0){
-                            val sortedNewsItems = sortRiverItemMeta(list)
+                        if (res.isTrue()){
+                            val sortedNewsItems = res.value!!
                             getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
+                        } else{
+                            errorCount++
                         }
                     }
                     else{
                         updateText("Problem downloading collection river $title due to id extraction failure")
                         notify()
                         Log.d(TAG, "Cannot extract id from $url")
+                        errorCount++
                     }
                 }
 
