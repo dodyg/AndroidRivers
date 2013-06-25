@@ -245,6 +245,14 @@ public class RiverListFragment(): MainListFragment() {
                         res ->
                         if (res.isTrue()){
                             //Start a service that import each item of the opml list as a collection
+                            val outlines = res.value!!
+                            val urls = outlines.map { it.getAttribute("url")}.filter { !it.isNullOrEmpty() }.toArray(array<String>())
+
+
+                            if (urls.size > 0){
+                                saveBookmarkToDb(currentUrl, currentUrl, BookmarkKind.RIVER_SUBSCRIPTION, "en", null)
+                                lastEnteredUrl = ""
+                            }
                         }
                         else{
                             parent.toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)

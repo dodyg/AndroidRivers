@@ -146,12 +146,14 @@ private fun traverseOutline(level: Int, outline: Outline?, list: ArrayList<Outli
         if (proceed){
 
             var o = OutlineContent(level, scrubHtml(outline.text!!))
-            if (!outline.outlineType.isNullOrEmpty() && !outline.url.isNullOrEmpty()){
+
+            if (!outline.outlineType.isNullOrEmpty())
                 o.putAttribute("type", outline.outlineType!!)
+
+            if (!outline.url.isNullOrEmpty()){
                 o.putAttribute("url", outline.url!!)
             }
-            else if (!outline.outlineType.isNullOrEmpty() && !outline.xmlUrl.isNullOrEmpty()){
-                o.putAttribute("type", outline.outlineType!!)
+            else if (!outline.xmlUrl.isNullOrEmpty()){
                 o.putAttribute("url", outline.xmlUrl!!)
             }
 

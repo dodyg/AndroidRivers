@@ -23,6 +23,6 @@ public enum class BookmarkKind{
     RSS
     LINK
     OPML
-    OPML_SUBSCRIPTION
+    RIVER_SUBSCRIPTION
     NONE
 }

@@ -74,7 +74,6 @@ public class PreferenceDefaults{
 
         public val OPML_NEWS_SOURCES_LISTING_CACHE_IN_MINUTES: Int = 60 * 24
 
-
         public val STANDARD_NEWS_COLOR: Int = android.graphics.Color.GRAY
         public val STANDARD_NEWS_IMAGE: Int = android.graphics.Color.CYAN
         public val STANDARD_NEWS_PODCAST: Int = android.graphics.Color.MAGENTA
@@ -109,7 +108,6 @@ public class StoredPreference(public val pref: SharedPreferences){
             edit.commit()
             Log.d(TAG, "Saving kayak city $city")
         }
-
 
     public var craigsListCity: String
         get() = pref.getString(Preferences.STORED_CRAIGS_LIST_CITY, "")!!

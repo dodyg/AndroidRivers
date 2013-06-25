@@ -54,7 +54,6 @@ fun scrubHtml(text: String?): String {
     }
 }
 
-
 fun String?.isNullOrEmpty(): Boolean {
     val res = this == null || this.trim().length() == 0
     return res
