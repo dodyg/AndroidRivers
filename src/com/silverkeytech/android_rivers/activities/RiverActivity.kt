@@ -35,7 +35,7 @@ import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.Params
 import com.silverkeytech.android_rivers.WithVisualModificationPanel
 import com.silverkeytech.android_rivers.getVisualPref
-import com.silverkeytech.android_rivers.asyncs.DownloadCollectionAsRiverAsync
+import com.silverkeytech.android_rivers.asyncs.DownloadUrlsAsRiverAsync
 import com.silverkeytech.android_rivers.asyncs.DownloadRiverContentAsync
 import com.silverkeytech.android_rivers.asyncs.downloadOpmlAsync
 import com.silverkeytech.android_rivers.startRiverSourcesActivity
@@ -44,6 +44,8 @@ import com.silverkeytech.android_rivers.ResizeTextActionMode
 import com.silverkeytech.android_rivers.isLocalUrl
 import com.silverkeytech.android_rivers.extractIdFromLocalUrl
 import com.silverkeytech.news_engine.riverjs.getSortedNewsItems
+import com.silverkeytech.android_rivers.makeLocalUrl
+
 
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity(): ListActivity(), WithVisualModificationPanel
@@ -117,7 +119,7 @@ public class RiverActivity(): ListActivity(), WithVisualModificationPanel
 
                     val urls = getBookmarksUrlsFromDbByCollection(id)
 
-                    DownloadCollectionAsRiverAsync(this, id).executeOnCompletion {
+                    DownloadUrlsAsRiverAsync(this, makeLocalUrl(id)).executeOnCompletion {
                         url, res ->
                         if (res.isTrue()){
                             Log.d(TAG, "Downloaded ${res.value?.count()} items")

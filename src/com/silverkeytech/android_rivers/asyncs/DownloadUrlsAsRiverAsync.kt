@@ -37,12 +37,11 @@ import com.silverkeytech.android_rivers.InfinityProgressDialog
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.daysBeforeNow
 import com.silverkeytech.android_rivers.PreferenceDefaults
-import com.silverkeytech.android_rivers.makeLocalUrl
 import com.silverkeytech.android_rivers.toHoursInMinutes
 
-public class DownloadCollectionAsRiverAsync(it: Context?, private val collectionId: Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
+public class DownloadUrlsAsRiverAsync(it: Context?, private val localUrl: String): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
     class object {
-        public val TAG: String = javaClass<DownloadCollectionAsRiverAsync>().getSimpleName()
+        public val TAG: String = javaClass<DownloadUrlsAsRiverAsync>().getSimpleName()
     }
 
     var context: Activity = it!! as Activity
@@ -52,7 +51,7 @@ public class DownloadCollectionAsRiverAsync(it: Context?, private val collection
         dialog.onCancel {
             dlg ->
             dlg.dismiss()
-            this@DownloadCollectionAsRiverAsync.cancel(true)
+            this@DownloadUrlsAsRiverAsync.cancel(true)
         }
 
         dialog.show()
@@ -108,31 +107,30 @@ public class DownloadCollectionAsRiverAsync(it: Context?, private val collection
     var callback: ((String, Result<List<RiverItemMeta>>) -> Unit)? = null
 
     //Set up function to call when download is done
-    public fun executeOnCompletion(action: ((String, Result<List<RiverItemMeta>>) -> Unit)?): DownloadCollectionAsRiverAsync {
+    public fun executeOnCompletion(action: ((String, Result<List<RiverItemMeta>>) -> Unit)?): DownloadUrlsAsRiverAsync {
         callback = action
         return this
     }
 
     protected override fun onPostExecute(result: Result<List<RiverItemMeta>>?) {
         dialog.dismiss()
-        val url = makeLocalUrl(collectionId)
         if (result != null){
             if (result.isTrue()){
                 try{
                     val sortedNewsItems = sortRiverItemMeta(result.value!!)
-                    context.getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
+                    context.getMain().setRiverCache(localUrl, sortedNewsItems, 3.toHoursInMinutes())
                     if (callback != null)
-                        callback!!(url, Result.right(sortedNewsItems))
+                        callback!!(localUrl, Result.right(sortedNewsItems))
                 }
                 catch (e: Exception){
                     if (callback != null)
-                        callback!!(url, Result.wrong<List<RiverItemMeta>>(result.exception))
+                        callback!!(localUrl, Result.wrong<List<RiverItemMeta>>(result.exception))
                 }
             }
             else
             {
                 if (callback != null)
-                    callback!!(url, Result.wrong<List<RiverItemMeta>>(result.exception))
+                    callback!!(localUrl, Result.wrong<List<RiverItemMeta>>(result.exception))
             }
         }
     }

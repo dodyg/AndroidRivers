@@ -71,6 +71,7 @@ import com.silverkeytech.android_rivers.extractIdFromLocalUrl
 import com.silverkeytech.android_rivers.startDownloadAllRiverService
 import com.silverkeytech.android_rivers.createConfirmationDialog
 import com.silverkeytech.android_rivers.findView
+import com.silverkeytech.android_rivers.asyncs.DownloadOpmlAsync
 
 public class RiverListFragment(): MainListFragment() {
     class object {
@@ -176,6 +177,10 @@ public class RiverListFragment(): MainListFragment() {
                 displayRiverBookmarks(false)
                 return true
             }
+            R.id.river_list_fragment_menu_subscribe_opml_dialog -> {
+                displaySubscribeOpmlDialog()
+                return true
+            }
 
             else -> return false
         }
@@ -220,6 +225,37 @@ public class RiverListFragment(): MainListFragment() {
                 PreferenceValue.SORT_ASC
             }
         }
+    }
+
+    private fun displaySubscribeOpmlDialog(){
+        val dlg = createSingleInputDialog(parent, "Subscribe to OPML", lastEnteredUrl, "Set url here", {
+            dlg, url ->
+            if (url.isNullOrEmpty()){
+                parent.toastee("Please enter url of the OPML subscription list")
+            } else {
+                var currentUrl = url!!
+                if (!currentUrl.contains("http://"))
+                    currentUrl = "http://" + currentUrl
+
+                lastEnteredUrl = currentUrl
+                val u = safeUrlConvert(currentUrl)
+                if (u.isTrue()){
+                    DownloadOpmlAsync(parent)
+                            .executeOnProcessedCompletion({
+                        res ->
+                        if (res.isTrue()){
+                            //Start a service that import each item of the opml list as a collection
+                        }
+                        else{
+                            parent.toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)
+                        }
+                    }, { outline -> outline.text != "<rules>" })
+                            .execute(currentUrl)
+                }
+            }
+        })
+
+        dlg.show()
     }
 
     private fun displayAddNewRiverDialog() {

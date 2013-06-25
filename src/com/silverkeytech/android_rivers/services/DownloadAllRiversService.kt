@@ -171,7 +171,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
                         }
                     }
                 }
-                else {
+                else { //local subscription from collection
                     val latestDate = daysBeforeNow(PreferenceDefaults.CONTENT_BOOKMARK_COLLECTION_LATEST_DATE_FILTER_IN_DAYS)
 
                     val id = extractIdFromLocalUrl(url)
