@@ -255,9 +255,15 @@ public class RiverListFragment(): MainListFragment() {
 
                             Log.d(TAG, "The opml is successfully downloaded")
                             if (urls.size > 0){
-                                val res2 = saveBookmarkToDb(currentUrl, currentUrl, BookmarkKind.RIVER_SUBSCRIPTION, "en", null)
+                                var title = u.value!!.getFile()
+                                if (title.isNullOrEmpty())
+                                    title = currentUrl
+
+                                val res2 = saveBookmarkToDb(title!!, currentUrl, BookmarkKind.RIVER_SUBSCRIPTION, "en", null)
                                 //lastEnteredUrl = ""
-                                Log.d(TAG, "Bookmark saving operation is ${res2.isTrue()}")
+                                Log.d(TAG, "Bookmark saving operation is ${res2.isTrue()} - ${res2.exception?.getMessage()}")
+                                parent.getMain().clearRiverBookmarksCache()
+                                refreshRiverBookmarks(false)
                             }else{
                                 Log.d(TAG, "The opml does not have any outlined items")
                             }
