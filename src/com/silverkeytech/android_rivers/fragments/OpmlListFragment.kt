@@ -118,7 +118,7 @@ public class OpmlListFragment(): MainListFragment() {
     }
 
     private fun displayOpmlList() {
-        val opmls = getBookmarksFromDb(BookmarkKind.OPML, SortingOrder.ASC)
+        val opmls = getBookmarksFromDb(BookmarkKind.OPML, sortByTitleOrder = SortingOrder.ASC)
 
         handleOpmlListing(opmls)
     }

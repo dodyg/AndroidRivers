@@ -252,7 +252,7 @@ public class RssListFragment(): MainListFragment() {
     }
 
     fun displayRssBookmarks() {
-        val bookmarks = getBookmarksFromDb(BookmarkKind.RSS, SortingOrder.ASC)
+        val bookmarks = getBookmarksFromDb(BookmarkKind.RSS, sortByTitleOrder = SortingOrder.ASC)
         handleRssListing(bookmarks)
     }
 
