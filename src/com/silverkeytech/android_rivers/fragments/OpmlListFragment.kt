@@ -58,6 +58,7 @@ import com.silverkeytech.android_rivers.safeUrlConvert
 import com.silverkeytech.android_rivers.asyncs.downloadOpmlAsync
 import com.silverkeytech.android_rivers.tryGetUriFromClipboard
 import com.silverkeytech.android_rivers.findView
+import com.silverkeytech.android_rivers.containsHttp
 
 public class OpmlListFragment(): MainListFragment() {
     class object {
@@ -230,7 +231,7 @@ public class OpmlListFragment(): MainListFragment() {
             }
             else {
                 var currentUrl = url!!
-                if (!currentUrl.contains("http://"))
+                if (!containsHttp(currentUrl))
                     currentUrl = "http://" + currentUrl
 
                 lastEnteredUrl = currentUrl

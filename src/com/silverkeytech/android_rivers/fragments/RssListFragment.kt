@@ -62,6 +62,7 @@ import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import com.silverkeytech.android_rivers.startFeedActivity
 import com.silverkeytech.android_rivers.dlgClickListener
 import com.silverkeytech.android_rivers.createConfirmationDialog
+import com.silverkeytech.android_rivers.containsHttp
 
 public class RssListFragment(): MainListFragment() {
     class object {
@@ -132,7 +133,7 @@ public class RssListFragment(): MainListFragment() {
             }
             else {
                 var currentUrl = url!!
-                if (!currentUrl.contains("http://"))
+                if (!containsHttp(currentUrl))
                     currentUrl = "http://" + currentUrl
 
                 lastEnteredUrl = currentUrl
@@ -164,7 +165,7 @@ public class RssListFragment(): MainListFragment() {
             }
             else {
                 var currentUrl = url!!
-                if (!currentUrl.contains("http://"))
+                if (!containsHttp(currentUrl))
                     currentUrl = "http://" + currentUrl
 
                 lastEnteredUrl = currentUrl

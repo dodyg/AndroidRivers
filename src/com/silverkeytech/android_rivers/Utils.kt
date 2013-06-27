@@ -49,6 +49,9 @@ object Bus {
     }
 }
 
+fun containsHttp(url : String): Boolean{
+    return url.contains("http://") || url.contains("https://")
+}
 
 fun isLanguageRTL(language: String): Boolean {
     return when(language){

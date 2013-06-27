@@ -72,6 +72,7 @@ import com.silverkeytech.android_rivers.startDownloadAllRiverService
 import com.silverkeytech.android_rivers.createConfirmationDialog
 import com.silverkeytech.android_rivers.findView
 import com.silverkeytech.android_rivers.asyncs.DownloadOpmlAsync
+import com.silverkeytech.android_rivers.containsHttp
 
 public class RiverListFragment(): MainListFragment() {
     class object {
@@ -228,14 +229,17 @@ public class RiverListFragment(): MainListFragment() {
     }
 
     private fun displaySubscribeOpmlDialog(){
+        lastEnteredUrl = "https://dl.dropboxusercontent.com/s/28t4audlpohrg1g/testSubscription.opml"
         val dlg = createSingleInputDialog(parent, "Subscribe to OPML", lastEnteredUrl, "Set url here", {
             dlg, url ->
             if (url.isNullOrEmpty()){
                 parent.toastee("Please enter url of the OPML subscription list")
             } else {
                 var currentUrl = url!!
-                if (!currentUrl.contains("http://"))
+                if (!containsHttp(currentUrl))
                     currentUrl = "http://" + currentUrl
+
+                Log.d(TAG, "We are downloading $currentUrl}")
 
                 lastEnteredUrl = currentUrl
                 val u = safeUrlConvert(currentUrl)
@@ -251,8 +255,9 @@ public class RiverListFragment(): MainListFragment() {
 
                             Log.d(TAG, "The opml is successfully downloaded")
                             if (urls.size > 0){
-                                saveBookmarkToDb(currentUrl, currentUrl, BookmarkKind.RIVER_SUBSCRIPTION, "en", null)
+                                val res2 = saveBookmarkToDb(currentUrl, currentUrl, BookmarkKind.RIVER_SUBSCRIPTION, "en", null)
                                 //lastEnteredUrl = ""
+                                Log.d(TAG, "Bookmark saving operation is ${res2.isTrue()}")
                             }else{
                                 Log.d(TAG, "The opml does not have any outlined items")
                             }
@@ -283,7 +288,7 @@ public class RiverListFragment(): MainListFragment() {
             }
             else {
                 var currentUrl = url!!
-                if (!currentUrl.contains("http://"))
+                if (!containsHttp(currentUrl))
                     currentUrl = "http://" + currentUrl
 
                 lastEnteredUrl = currentUrl
