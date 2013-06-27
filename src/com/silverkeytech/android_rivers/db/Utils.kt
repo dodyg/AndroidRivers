@@ -171,7 +171,7 @@ public fun saveBookmarkToDb(title: String,
 
 
 public fun getBookmarksFromDb(kind: BookmarkKind, sortByTitleOrder: SortingOrder): List<Bookmark> {
-    val bookmarks = DatabaseManager.query().bookmark().byKind(kind, sortByTitleOrder)
+    val bookmarks = DatabaseManager.query().bookmark().byKinds(kind, sortByTitleOrder = sortByTitleOrder)
 
     if (bookmarks.exist)
         return bookmarks.values!!
@@ -184,7 +184,7 @@ public fun getBookmarksFromDbAsOpml(kind: BookmarkKind, sortByTitleOrder: Sortin
     val opml = Opml()
     opml.body = Body()
 
-    var bookmarks = DatabaseManager.query().bookmark().byKind(kind, sortByTitleOrder)
+    var bookmarks = DatabaseManager.query().bookmark().byKinds(kind, sortByTitleOrder = sortByTitleOrder)
 
     if (bookmarks.exist){
         for(b in bookmarks.values?.iterator()){

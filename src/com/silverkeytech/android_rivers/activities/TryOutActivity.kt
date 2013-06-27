@@ -357,7 +357,8 @@ public class TryOutActivity(): Activity()
 
         btn.setOnClickListener(object : OnClickListener{
             public override fun onClick(p0: View) {
-                val total = DatabaseManager.query().bookmark().byKind(BookmarkKind.RIVER, SortingOrder.NONE)
+                val total = DatabaseManager.query().bookmark().byKinds(BookmarkKind.RIVER, BookmarkKind.RIVER_SUBSCRIPTION,
+                        sortByTitleOrder = SortingOrder.NONE)
 
                 if (total.exist)
                     toastee("all ${total.values?.count()}", Duration.LONG)

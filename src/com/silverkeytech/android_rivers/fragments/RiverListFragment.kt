@@ -249,13 +249,17 @@ public class RiverListFragment(): MainListFragment() {
                             val urls = outlines.map { it.getAttribute("url")}.filter { !it.isNullOrEmpty() }.toArray(array<String>())
 
 
+                            Log.d(TAG, "The opml is successfully downloaded")
                             if (urls.size > 0){
                                 saveBookmarkToDb(currentUrl, currentUrl, BookmarkKind.RIVER_SUBSCRIPTION, "en", null)
-                                lastEnteredUrl = ""
+                                //lastEnteredUrl = ""
+                            }else{
+                                Log.d(TAG, "The opml does not have any outlined items")
                             }
                         }
                         else{
                             parent.toastee("Downloading url fails because of ${res.exception?.getMessage()}", Duration.LONG)
+                            Log.d(TAG, "OPML ${res.exception?.getMessage()}")
                         }
                     }, { outline -> outline.text != "<rules>" })
                             .execute(currentUrl)

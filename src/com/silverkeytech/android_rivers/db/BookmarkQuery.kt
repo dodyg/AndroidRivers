@@ -21,11 +21,29 @@ package com.silverkeytech.android_rivers.db
 import com.j256.ormlite.dao.Dao
 
 public class BookmarkQuery(private val dao: Dao<Bookmark, out Int?>){
-    fun byKind(kind: BookmarkKind, sortByTitleOrder: SortingOrder): QueryMany<Bookmark> {
+    fun byKinds(vararg kinds: BookmarkKind, sortByTitleOrder: SortingOrder): QueryMany<Bookmark> {
         try{
             var q = dao.queryBuilder()!!
-            q.where()!!
-                    .eq(BOOKMARK_KIND, kind.toString())!!
+
+            when(kinds.size){
+                1 -> q.where()!!
+                        .eq(BOOKMARK_KIND, kinds[0].toString())!!
+                2 -> q.where()!!
+                        .eq(BOOKMARK_KIND, kinds[0].toString())!!
+                        .or()!!
+                        .eq(BOOKMARK_KIND, kinds[1].toString())!!
+                3 -> q.where()!!
+                        .eq(BOOKMARK_KIND, kinds[0].toString())!!
+                        .or()!!
+                        .eq(BOOKMARK_KIND, kinds[1].toString())!!
+                        .or()!!
+                        .eq(BOOKMARK_KIND, kinds[2].toString())!!
+                else -> {
+                    throw Exception("Kinds parameter only accept maximum 3 conditions")
+                }
+            }
+
+
 
             if (sortByTitleOrder == SortingOrder.ASC)
                 q.orderByRaw("$BOOKMARK_TITLE COLLATE NOCASE ASC;")
@@ -38,6 +56,7 @@ public class BookmarkQuery(private val dao: Dao<Bookmark, out Int?>){
             return QueryMany<Bookmark>(null, e)
         }
     }
+
 
     fun byCollectionId(collectionId: Int): QueryMany<Bookmark> {
         try{
