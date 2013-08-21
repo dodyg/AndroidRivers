@@ -211,6 +211,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                     else {
                         buttons.add(DialogBtn(context.getString(R.string.podcast)!!, { dlg ->
                             var messenger = Messenger(object : Handler(){
+
                                 public override fun handleMessage(msg: Message) {
                                     val path = msg.obj as String
 

@@ -119,13 +119,13 @@ public class OpmlListFragment(): MainListFragment() {
     }
 
     private fun displayOpmlList() {
+
         val opmls = getBookmarksFromDb(BookmarkKind.OPML, sortByTitleOrder = SortingOrder.ASC)
 
         handleOpmlListing(opmls)
     }
 
     fun handleOpmlListing(bookmarks: List<Bookmark>) {
-
         if (bookmarks.size == 0)
             showMessage(parent.getString(R.string.empty_opml_items_list)!!)
         else

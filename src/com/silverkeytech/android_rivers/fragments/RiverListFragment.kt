@@ -86,6 +86,7 @@ public class RiverListFragment(): MainListFragment() {
     var isFirstLoad: Boolean = true
 
     public override fun onCreate(savedInstanceState: Bundle?) {
+
         setHasOptionsMenu(true)
         super<MainListFragment>.onCreate(savedInstanceState)
     }
