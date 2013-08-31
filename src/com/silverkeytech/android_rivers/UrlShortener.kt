@@ -24,7 +24,7 @@ import com.google.gson.Gson
 public fun googleShorten(url: String): Result<String>
 {
     class shortenData (public val longUrl: String)
-    class shortenDataReply(public val kind: String, public val id: String, public longUrl: String)
+    class shortenDataReply(public val kind: String, public val id: String, longUrl: String)
 
     try
     {
