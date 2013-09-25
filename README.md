@@ -1,4 +1,6 @@
-Android River is a modern Android 2.2 news app. It's now version 1.13.
+Android River is a modern Android 2.2 news app. It's now version 1.14.
+
+The current active development branch is "Community".
 
 Android River has the following features:
 - Read RSS 1.0, RSS 2.0 and ATOM 1.0.
@@ -52,7 +54,6 @@ Open Source Library used:
 * [Tree-view-list-android](http://code.google.com/p/tree-view-list-android/)
 * [google-gson](http://code.google.com/p/google-gson/) - [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 * [http-request](https://github.com/kevinsawicki/http-request)
-* [Simple XML](http://simple.sourceforge.net/)
 * [Simple Java Xml Parser](https://github.com/thebuzzmedia/simple-java-xml-parser)
 * [Scribe-Java](https://github.com/fernandezpablo85/scribe-java)
 * [HoloEverywhere](https://github.com/ChristopheVersieux/HoloEverywhere)
