@@ -22,11 +22,18 @@
             android:layout_height="wrap_content"
             />
 
+    <EditText
+        android:id="@+id/craigslist_listing_keywords"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            >
+    </EditText>
+
     <LinearLayout android:orientation="horizontal"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content">
 
-        <Button android:id="@+id/craigslist_listing__go_btn"
+        <Button android:id="@+id/craigslist_listing_go_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

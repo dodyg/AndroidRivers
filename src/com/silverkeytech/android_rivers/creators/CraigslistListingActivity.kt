@@ -17,6 +17,8 @@ import com.silverkeytech.android_rivers.addBookmarkOption
 import com.silverkeytech.android_rivers.saveBookmark
 import com.silverkeytech.android_rivers.getStoredPref
 import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
+import android.widget.EditText
+import android.util.Log
 
 public class CraigslistListingActivity (): Activity(){
     class object {
@@ -59,6 +61,9 @@ public class CraigslistListingActivity (): Activity(){
         val categoryList = findViewById(R.id.craigslist_listing_category)!! as Spinner
         categoryList.setAdapter(adapter)
 
+        val search = findViewById(R.id.craigslist_listing_keywords)!! as EditText
+        search.setHint(this.getString(R.string.optional_search_term))
+
         val bookmark = findViewById(R.id.craigslist_listing_bookmark_btn)!! as Button
         bookmark.setEnabled(false)
 
@@ -70,7 +75,7 @@ public class CraigslistListingActivity (): Activity(){
             }
         }
 
-        val go = findViewById(R.id.craigslist_listing__go_btn)!! as Button
+        val go = findViewById(R.id.craigslist_listing_go_btn)!! as Button
         go.setOnClickListener {
 
             val input = completion.getText().toString()
@@ -85,7 +90,14 @@ public class CraigslistListingActivity (): Activity(){
                 val catPosition = categoryList.getSelectedItemPosition()
                 val categoryCode = categories.get(catPosition).code
 
-                feedUrl = "$cityUrl/$categoryCode/index.rss"
+                val term = search.getText().toString()
+
+                if (term.isNullOrEmpty())
+                    feedUrl = "$cityUrl/$categoryCode/index.rss"
+                else
+                    feedUrl = "$cityUrl/search/$categoryCode?format=rss&query=$term"
+
+                Log.d(TAG, "Fetching $feedUrl")
 
                 DownloadFeedAsync(this, false)
                         .executeOnComplete {
