@@ -33,11 +33,11 @@ public class OpmlBuilder{
         {
             opml.head = Head()
         }
-        public fun setTitle(title : String) : Unit = opml.head!!.title = title
-        public fun setDateCreated(date : String) : Unit = opml.head!!.dateCreated = date
-        public fun setDateModified(date : String) : Unit =  opml.head!!.dateModified = date
-        public fun setOwnerName(owner: String) : Unit = opml.head!!.ownerName = owner
-        public fun setOwnerEmail(email : String) : Unit = opml.head!!.ownerEmail = email
+        public fun setTitle(title : String) { opml.head!!.title = title }
+        public fun setDateCreated(date : String) { opml.head!!.dateCreated = date }
+        public fun setDateModified(date : String) {  opml.head!!.dateModified = date }
+        public fun setOwnerName(owner: String) { opml.head!!.ownerName = owner }
+        public fun setOwnerEmail(email : String) { opml.head!!.ownerEmail = email }
     }
 
     public class BodyBuilder (val opml : Opml){
@@ -90,14 +90,14 @@ public class OpmlBuilder{
 
         }
 
-        public fun setText(text : String) : Unit = currentOutline.text = text
-        public fun setUrl(url : String) : Unit = currentOutline.url = url
-        public fun setXmlUrl(xmlUrl : String) : Unit = currentOutline.xmlUrl = xmlUrl
-        public fun setHtmlUrl(htmlUrl : String) : Unit = currentOutline.htmlUrl = htmlUrl
-        public fun setOpmlUrl(opmlUrl : String) : Unit = currentOutline.opmlUrl = opmlUrl
-        public fun setType(tp : String) : Unit = currentOutline.outlineType = tp
-        public fun setLanguage(lang : String) : Unit = currentOutline.language = lang
-        public fun setName(name : String) : Unit = currentOutline.name = name
+        public fun setText(text : String) { currentOutline.text = text }
+        public fun setUrl(url : String) { currentOutline.url = url }
+        public fun setXmlUrl(xmlUrl : String) { currentOutline.xmlUrl = xmlUrl }
+        public fun setHtmlUrl(htmlUrl : String) { currentOutline.htmlUrl = htmlUrl }
+        public fun setOpmlUrl(opmlUrl : String) { currentOutline.opmlUrl = opmlUrl }
+        public fun setType(tp : String) { currentOutline.outlineType = tp }
+        public fun setLanguage(lang : String) { currentOutline.language = lang }
+        public fun setName(name : String) { currentOutline.name = name }
     }
 
     public fun build() : Opml{
