@@ -182,7 +182,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
 
                         val list = Vector<RiverItemMeta>()
                         for(u in urls){
-                            val res = downloadSingleFeed(u!!, SyndicationFilter(PreferenceDefaults.CONTENT_BOOKMARK_COLLECTION_MAX_ITEMS_FILTER, latestDate))
+                            val res = downloadSingleFeed(u, SyndicationFilter(PreferenceDefaults.CONTENT_BOOKMARK_COLLECTION_MAX_ITEMS_FILTER, latestDate))
 
                             if (res.isFalse())
                                 Log.d(TAG, "Value at ${res.exception?.getMessage()}")
