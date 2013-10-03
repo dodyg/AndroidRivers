@@ -127,7 +127,7 @@ public class RiverActivity(): ListActivity(), WithVisualModificationPanel
                         else {
                             Log.d(TAG, "Downloading collection $id with ${urls.size} urls fails")
                         }
-                    }.execute(*urls)
+                    }.execute(*(urls as Array<String?>))
                 }
                 else{
                     Log.d(TAG, "Cannot extract id from $riverUrl")

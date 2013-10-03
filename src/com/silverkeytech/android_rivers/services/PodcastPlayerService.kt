@@ -110,7 +110,9 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
     private var notificationManager: NotificationManager? = null
     public var podcastTitle: String? = null
         get () = $podcastTitle
-        private set (value: String?) = $podcastTitle = value
+        private set (value: String?) {
+            $podcastTitle = value
+        }
 
     private var podcastPath: String? = null
 
