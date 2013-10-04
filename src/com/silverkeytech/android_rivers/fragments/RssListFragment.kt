@@ -313,7 +313,7 @@ public class RssListFragment(): MainListFragment() {
                     dialog.setTitle("Assign bookmark to collection")
 
                 val collectionWithoutCurrent = coll.filter { x -> x.id != currentBookmark.collection?.id }
-                var collectionTitles = collectionWithoutCurrent.map { x -> x.title }.toArray(array<String>())
+                var collectionTitles = collectionWithoutCurrent.map { x -> x.title }.copyToArray()
 
                 dialog.setItems(collectionTitles, dlgClickListener {
                     dlg, idx ->
