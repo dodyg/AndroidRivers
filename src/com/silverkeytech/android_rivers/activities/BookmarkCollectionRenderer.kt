@@ -55,7 +55,7 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
         }
 
         val adapter = object : ArrayAdapter<Bookmark>(context, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
-            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
+            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
                 val text = bookmarks[position].toString()
                 return currentListItem(text, convertView, parent, textSize.toFloat())
             }
@@ -82,7 +82,7 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
 
     public data class ViewHolder (var name: TextView)
 
-    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?, textSize: Float): View? {
+    fun currentListItem(text: String, convertView: View?, parent: ViewGroup?, textSize: Float): View {
         var holder: ViewHolder?
 
         var vw: View? = convertView
@@ -97,7 +97,7 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
         }
 
         handleFontResize(holder!!.name, text, textSize)
-        return vw
+        return vw!!
     }
 
     fun inflater(): LayoutInflater {

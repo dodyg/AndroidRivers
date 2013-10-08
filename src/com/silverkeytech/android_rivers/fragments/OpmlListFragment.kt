@@ -133,7 +133,7 @@ public class OpmlListFragment(): MainListFragment() {
         val textSize = parent.getVisualPref().listTextSize
 
         val adapter = object : ArrayAdapter<Bookmark>(parent, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
-            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
+            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
                 val text = bookmarks[position].toString()
                 return currentTextViewItem(text, convertView, parent, textSize.toFloat(), false, this@OpmlListFragment.getLayoutInflater()!!)
             }

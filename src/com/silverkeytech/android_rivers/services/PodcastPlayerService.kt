@@ -124,9 +124,9 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
     var audioManager: AudioManager? = null
 
     //http://developer.android.com/training/managing-audio/audio-focus.html
-    public override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    public override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         Log.d(TAG, "Starting Podcast Player Service")
-        podcastTitle = intent!!.getStringExtra(Params.PODCAST_TITLE)
+        podcastTitle = intent.getStringExtra(Params.PODCAST_TITLE)
         podcastPath = intent.getStringExtra(Params.PODCAST_PATH)
         notification = prepareNotification()
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -140,7 +140,7 @@ public open class PodcastPlayerService(): Service(), MediaPlayer.OnErrorListener
             else{
                 updateText("Playing $podcastTitle")
 
-                mediaPlayer = MediaPlayer.create(this, Uri.parse(podcastPath))
+                mediaPlayer = MediaPlayer.create(this, Uri.parse(podcastPath!!))
                 mediaPlayer?.setOnErrorListener(this)
                 mediaPlayer?.setLooping(false)
                 //mediaPlayer?.setVolume(100.0, 100.0)
