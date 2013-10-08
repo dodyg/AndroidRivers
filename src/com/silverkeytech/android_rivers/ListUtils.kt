@@ -31,7 +31,7 @@ fun currentTextViewItem(text: String,
                         parent: ViewGroup?,
                         textSize: Float,
                         inCollection: Boolean,
-                        inflater: LayoutInflater): View? {
+                        inflater: LayoutInflater): View {
     var holder: TextViewHolder?
 
     var vw: View? = convertView
@@ -49,5 +49,5 @@ fun currentTextViewItem(text: String,
     else
         handleFontResize(holder!!.name, text, textSize)
 
-    return vw
+    return vw!!
 }

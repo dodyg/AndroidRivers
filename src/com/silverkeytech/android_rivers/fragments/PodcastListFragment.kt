@@ -179,7 +179,7 @@ public class PodcastListFragment(): MainListFragment() {
         val textSize = parent.getVisualPref().listTextSize
 
         val adapter = object : ArrayAdapter<Podcast>(parent, android.R.layout.simple_list_item_1, android.R.id.text1, podcasts) {
-            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
+            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
                 val currentPodcast = podcasts[position]
                 val text = currentPodcast.title
                 return currentTextViewItem(text, convertView, parent, textSize.toFloat(), false, this@PodcastListFragment.getLayoutInflater()!!)
@@ -195,7 +195,7 @@ public class PodcastListFragment(): MainListFragment() {
                 Log.d(TAG, "Is podcast player paused ${isPodcastPlayerPaused()}")
 
                 if (!isPodcastPlayerPlaying() && !isPodcastPlayerPaused()){
-                    val i = Intent(getActivity(), javaClass<PodcastPlayerService>())
+                    val i = Intent(getActivity()!!, javaClass<PodcastPlayerService>())
                     i.putExtra(Params.PODCAST_TITLE, currentPodcast.title)
                     i.putExtra(Params.PODCAST_PATH, Uri.fromFile(File(currentPodcast.localPath)).toString())
                     getSupportActivity()!!.startService(i)
@@ -309,7 +309,7 @@ public class PodcastListFragment(): MainListFragment() {
     }
 
     fun doBindService() {
-        val i = Intent(getActivity(), javaClass<PodcastPlayerService>())
+        val i = Intent(getActivity()!!, javaClass<PodcastPlayerService>())
         getActivity()!!.bindService(i, serviceConnection, Context.BIND_AUTO_CREATE)
     }
 

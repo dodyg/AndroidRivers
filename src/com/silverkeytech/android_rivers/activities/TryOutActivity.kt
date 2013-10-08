@@ -386,7 +386,7 @@ public class TryOutActivity(): Activity()
         btn.setOnClickListener {
 
             var notificationIntent = Intent(Intent.ACTION_MAIN)
-            notificationIntent.setClass(getApplicationContext(), javaClass<MainWithFragmentsActivity>())
+            notificationIntent.setClass(getApplicationContext()!!, javaClass<MainWithFragmentsActivity>())
             notificationIntent.putExtra(Params.DOWNLOAD_LOCATION_PATH, "Location PATH")
 
             var contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_ONE_SHOT)
@@ -444,7 +444,7 @@ public class TryOutActivity(): Activity()
                 res ->
                 if (res.isTrue()){
                     var intent = Intent(Intent.ACTION_MAIN)
-                    intent.setClass(getApplicationContext(), javaClass<OutlinerActivity>())
+                    intent.setClass(getApplicationContext()!!, javaClass<OutlinerActivity>())
                     intent.putExtra(Params.OUTLINES_DATA, res.value!!)
 
                     startActivity(intent)
