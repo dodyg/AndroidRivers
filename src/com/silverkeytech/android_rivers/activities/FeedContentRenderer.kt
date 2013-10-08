@@ -76,7 +76,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
         var inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         var adapter = object : ArrayAdapter<SyndicationFeedItem>(context, R.layout.news_item, feedItems) {
-            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
+            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
                 var currentView = convertView
                 var holder: ViewHolder?
 
@@ -120,7 +120,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                 }   else{
                     currentView?.setVisibility(View.VISIBLE)
                 }
-                return currentView
+                return currentView!!
             }
         }
 
