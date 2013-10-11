@@ -100,7 +100,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         })
 
         descriptionView.setOnLongClickListener(object : View.OnLongClickListener{
-            public override fun onLongClick(p0: View?): Boolean {
+            public override fun onLongClick(p0: View): Boolean {
                 var currentPosition = treeNodeInfo!!.getId()!!.toInt()
                 var currentOutline = outlines.get(currentPosition)
 
