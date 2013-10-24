@@ -65,10 +65,10 @@ public class GoogleNewsSearchActivity (): Activity(){
 
         val regionList = findViewById(R.id.google_news_search_region)!! as Spinner
 
-        val maps = getEditionsAndLanguages()
-        val listName = maps.iterator().map { x -> x.key }.toArrayList<String>()
+        val editionsAndLanguages = getEditionsAndLanguages()
+        val countryEditions = editionsAndLanguages.iterator().map { x -> x.key }.toArrayList<String>()
 
-        val adapter = ArrayAdapter<String>(this, org.holoeverywhere.R.layout.simple_spinner_item, listName);
+        val adapter = ArrayAdapter<String>(this, org.holoeverywhere.R.layout.simple_spinner_item, countryEditions);
         adapter.setDropDownViewResource(org.holoeverywhere.R.layout.simple_spinner_dropdown_item);
         regionList.setAdapter(adapter);
 
@@ -76,7 +76,7 @@ public class GoogleNewsSearchActivity (): Activity(){
         Log.d(TAG, "Stored country $country")
         if (country != ""){
             var foundPosition = -1
-            for(c in listName.withIndices()){
+            for(c in countryEditions.withIndices()){
                 if (c.second == country)
                     foundPosition = c.first
             }
@@ -86,7 +86,6 @@ public class GoogleNewsSearchActivity (): Activity(){
                 regionList.setSelection(foundPosition)
             }
         }
-
 
         val bookmark = findViewById(R.id.google_news_search_bookmark_btn)!! as Button
         bookmark.setEnabled(false)
@@ -101,13 +100,17 @@ public class GoogleNewsSearchActivity (): Activity(){
         val go = findViewById(R.id.google_news_search_go_btn)!! as Button
         go.setOnClickListener {
             val position = regionList.getSelectedItemPosition()
-            val key = listName.get(position)
-            val info = maps[key]!!
+            val key = countryEditions.get(position)
+            val info = editionsAndLanguages[key]!!
             feedUrl = "https://news.google.com/news/feeds?cf=all&ned=${info.edition}&hl=${info.lang}&output=rss&num=50"
             val search = searchTerm.getText()?.toString()
             if (!search.isNullOrEmpty()){
                 feedUrl += "&q=${java.net.URLEncoder.encode(search!!, "UTF-8")}"
             }
+
+            //store google news country so you don't have to keep searching for it
+            this.getStoredPref().googleNewsCountry = key;
+            Log.d(TAG, "Storing google news country ${key}")
 
             Log.d(TAG, "Downloading $feedUrl")
 
@@ -122,9 +125,6 @@ public class GoogleNewsSearchActivity (): Activity(){
                     if (!feed.language.isNullOrEmpty()){
                         feedLanguage = feed.language
                     }
-
-                    if (feed.items.size > 0)//store it if feed works
-                        this@GoogleNewsSearchActivity.getStoredPref().googleNewsCountry = key
 
                     if (feed.items.size > 0 && !checkIfUrlAlreadyBookmarked(feedUrl))
                         bookmark.setEnabled(true)
