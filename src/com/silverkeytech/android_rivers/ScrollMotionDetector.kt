@@ -25,17 +25,17 @@ import android.view.MotionEvent
 /*
 This is a utility class to handle user scroll/swipe movement and to differentiate a click with a swipe motion
  */
-public class ScrollMotionDetector (scrollTreshold : Float = 10.0){
+public class ScrollMotionDetector (scrollTreshold : Float = 10f){
     class object {
         public val TAG: String = javaClass<ScrollMotionDetector>().getSimpleName()
     }
 
-    var movementHorizontal: Float = 0.0
-    var movementVertical: Float = 0.0
+    var movementHorizontal: Float = 0f
+    var movementVertical: Float = 0f
     val SCROLL_TRESHOLD = scrollTreshold
     var onClick = false
-    var deltaHorizontal: Float = 0.0
-    var deltaVertical: Float = 0.0
+    var deltaHorizontal: Float = 0f
+    var deltaVertical: Float = 0f
 
     fun attach(onClickEvent : (() -> Unit)?, onMoveEvent : ((x : Float, y : Float) -> Unit)?) : OnTouchListener{
         val listener = object : OnTouchListener {

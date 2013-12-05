@@ -68,7 +68,7 @@ public data class DialogBtn(public val text: String, public val action: (Dialog)
 public fun createFlexibleContentDialog(context: Activity, content: View, dismissOnTouch : Boolean, buttons: Array<DialogBtn>): Dialog {
 
     val dlg: View = context.getLayoutInflater().inflate(R.layout.dialog_flex_content, null)!!
-    val contentParam = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0)
+    val contentParam = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f)
 
     val dialog = Dialog(context)
     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -81,14 +81,14 @@ public fun createFlexibleContentDialog(context: Activity, content: View, dismiss
             dialog.dismiss()
     }
 
-    val btnParam = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0)
+    val btnParam = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f)
     btnParam.setMargins(0, 0, 0, 0)
 
     val buttonLayout = dlg.findView<LinearLayout>(R.id.dialog_flex_content_buttons)
     for(e:DialogBtn in buttons.iterator()){
         val b = Button(context)
         b.setText(e.text)
-        b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12.0)
+        b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
         b.setOnClickListener {
             e.action(dialog)
         }
@@ -164,7 +164,7 @@ public fun createFlexibleInputDialog(context: Activity, title: String, inputs: A
     dialog.setTitle(title)
 
     val container = dlg.findView<LinearLayout>(R.id.dialog_flex_input_container)
-    val editParam = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0)
+    val editParam = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f)
 
     val edits = ArrayList<EditText>()
 

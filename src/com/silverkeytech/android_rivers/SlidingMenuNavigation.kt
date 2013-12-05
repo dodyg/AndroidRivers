@@ -67,7 +67,7 @@ fun fillSlidingMenuNavigation(navs: List<NavItem>, view: View, onClick: (NavItem
     val adapter = object : ArrayAdapter<NavItem>(view.getContext()!!, R.layout.slide_menu_item, navs){
         public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             val text = navs[position].text
-            return currentListItem(inflater, text, convertView, parent, 18.0)
+            return currentListItem(inflater, text, convertView, parent, 18f)
         }
     }
 

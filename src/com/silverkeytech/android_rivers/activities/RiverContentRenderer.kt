@@ -116,7 +116,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                             currentView!!.findView<TextView>(R.id.news_item_indicator_tv))
 
                     handleForeignTextStyle(context, language, holder!!.news, textSize.toFloat())
-                    handleForeignTextStyle(context, language, holder!!.source, 11.0)
+                    handleForeignTextStyle(context, language, holder!!.source, 11f)
 
                     currentView!!.setTag(holder)
                 }else{
