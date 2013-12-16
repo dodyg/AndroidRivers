@@ -321,7 +321,7 @@ public class PodcastListFragment(): MainListFragment() {
 
     public fun createPodcastPlayerDialog(title: String, isNewTrack: Boolean, currentPosition: Int?, podcastLength: Int?): Dialog {
         val dlg: View = this.getSupportActivity()!!.getLayoutInflater().inflate(R.layout.dialog_podcast_player, null)!!
-        val contentParam = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0)
+        val contentParam = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f)
 
         val dialog = Dialog(this.getSupportActivity()!!)
         dialog.setContentView(dlg, contentParam)
