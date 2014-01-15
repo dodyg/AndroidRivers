@@ -222,7 +222,7 @@ public class RiverActivity(): ListActivity(), WithVisualModificationPanel
             }
 
             R.id.river_menu_help -> {
-                downloadOpmlAsync(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
+                downloadOpmlAsync(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help))
                 return true
             }
             REFRESH -> {

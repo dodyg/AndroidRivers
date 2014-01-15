@@ -44,7 +44,7 @@ public class DownloadOpmlAsync(it: Context?): AsyncTask<String, Int, Pair<String
     }
 
     var context: Activity = it!! as Activity
-    var dialog: InfinityProgressDialog = InfinityProgressDialog(context, context.getString(R.string.please_wait_while_downloading_outlines)!!)
+    var dialog: InfinityProgressDialog = InfinityProgressDialog(context, context.getString(R.string.please_wait_while_downloading_outlines))
 
     protected override fun onPreExecute() {
         dialog.onCancel {
@@ -86,30 +86,28 @@ public class DownloadOpmlAsync(it: Context?): AsyncTask<String, Int, Pair<String
     private var processedCallBack: ((Result<ArrayList<OutlineContent>>) -> Unit)? = null
     private var processingFilter: ((Outline) -> Boolean)? = null
 
-    protected override fun onPostExecute(result: Pair<String, Result<Opml>>?) {
+    protected override fun onPostExecute(result: Pair<String, Result<Opml>>) {
         dialog.dismiss()
 
-        if (result != null){
-            if (rawCallback != null)
-                rawCallback!!(result.second)
+        if (rawCallback != null)
+            rawCallback!!(result.second)
 
-            if (processedCallBack != null){
-                if (result.second.isTrue()){
-                    try{
-                        val opml = result.second.value!!
-                        val processed = opml.traverse(processingFilter)
-                        Log.d(TAG, "Length of opml outlines ${opml.body?.outline?.get(0)?.outline?.size} compared to processed outlines ${processed.size}")
+        if (processedCallBack != null){
+            if (result.second.isTrue()){
+                try{
+                    val opml = result.second.value!!
+                    val processed = opml.traverse(processingFilter)
+                    Log.d(TAG, "Length of opml outlines ${opml.body?.outline?.get(0)?.outline?.size} compared to processed outlines ${processed.size}")
 
-                        context.getMain().setOpmlCache(result.first, processed, PreferenceDefaults.OPML_NEWS_SOURCES_LISTING_CACHE_IN_MINUTES)
-                        val res = Result.right(processed)
-                        processedCallBack!!(res)
-                    }catch (e: Exception){
-                        val res = Result.wrong<ArrayList<OutlineContent>>(e)
-                        processedCallBack!!(res)
-                    }
-                }else
-                    processedCallBack!!(Result.wrong<ArrayList<OutlineContent>>(result.second.exception))
-            }
+                    context.getMain().setOpmlCache(result.first, processed, PreferenceDefaults.OPML_NEWS_SOURCES_LISTING_CACHE_IN_MINUTES)
+                    val res = Result.right(processed)
+                    processedCallBack!!(res)
+                }catch (e: Exception){
+                    val res = Result.wrong<ArrayList<OutlineContent>>(e)
+                    processedCallBack!!(res)
+                }
+            }else
+                processedCallBack!!(Result.wrong<ArrayList<OutlineContent>>(result.second.exception))
         }
     }
 

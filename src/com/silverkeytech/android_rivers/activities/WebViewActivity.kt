@@ -18,7 +18,7 @@ public class WebViewActivity: Activity() {
     public override fun onCreate(savedInstanceState: Bundle?): Unit {
         //setTheme(this.getVisualPref().getTheme())
 
-        web = WebView(getApplicationContext())
+        web = WebView(getApplicationContext()!!)
         requestWindowFeature(Window.FEATURE_PROGRESS)
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS)
         setSupportProgressBarVisibility(true)

@@ -39,7 +39,7 @@ public class DownloadRiverContentAsync(it: Context?, val language: String): Asyn
     }
 
     val context: Activity = it!! as Activity
-    val dialog: InfinityProgressDialog = InfinityProgressDialog(context, context.getString(R.string.please_wait_while_loading)!!)
+    val dialog: InfinityProgressDialog = InfinityProgressDialog(context, context.getString(R.string.please_wait_while_loading))
 
     //Prepare stuff before execution
     protected override fun onPreExecute() {
@@ -71,22 +71,18 @@ public class DownloadRiverContentAsync(it: Context?, val language: String): Asyn
     }
 
     //Once the thread is done.
-    protected override fun onPostExecute(result: Result<River>?) {
+    protected override fun onPostExecute(result: Result<River>) {
         dialog.dismiss()
-        if (result == null)
-            context.toastee("Sorry, we cannot process this feed because the operation is cancelled", Duration.AVERAGE)
-        else {
-            if (result.isFalse()){
-                val error = ConnectivityErrorMessage(
-                        timeoutException = "Sorry, we cannot download this feed. The feed site might be down.",
-                        socketException = "Sorry, we cannot download this feed. Please check your Internet connection, it might be down.",
-                        otherException = "Sorry, we cannot download this feed for the following technical reason : ${result.exception.toString()}"
-                )
-                context.handleConnectivityError(result.exception, error)
-            }else{
-                if (rawCallback != null)
-                    rawCallback!!(result, language)
-            }
+        if (result.isFalse()){
+            val error = ConnectivityErrorMessage(
+                    timeoutException = "Sorry, we cannot download this feed. The feed site might be down.",
+                    socketException = "Sorry, we cannot download this feed. Please check your Internet connection, it might be down.",
+                    otherException = "Sorry, we cannot download this feed for the following technical reason : ${result.exception.toString()}"
+            )
+            context.handleConnectivityError(result.exception, error)
+        }else{
+            if (rawCallback != null)
+                rawCallback!!(result, language)
         }
     }
 }

@@ -81,7 +81,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
         var inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         var adapter = object : ArrayAdapter<RiverItemMeta>(context, R.layout.news_item, sortedNewsItems) {
-            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            public override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                 var currentView = convertView
                 var holder: ViewHolder?
 
@@ -139,7 +139,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
         }
 
         list.setOnItemClickListener(object : OnItemClickListener{
-            public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
+            public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View?, p2: Int, p3: Long) {
                 val currentNews = sortedNewsItems.get(p2);
 
                 var dlg: View = inflater.inflate(R.layout.news_details, null)!!
@@ -187,12 +187,12 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 val buttons = ArrayList<DialogBtn>()
                 //check for go link
                 if (currentNewsLinkAvailable){
-                    buttons.add(DialogBtn(context.getString(R.string.go)!!, { dlg ->
+                    buttons.add(DialogBtn(context.getString(R.string.go), { dlg ->
                         startOpenBrowserActivity(context, currentNews.item.link!!)
                         dlg.dismiss()
                     }))
 
-                    buttons.add(DialogBtn(context.getString(R.string.share)!!, { dlg ->
+                    buttons.add(DialogBtn(context.getString(R.string.share), { dlg ->
                         var intent = shareActionIntent(currentNews.item.title!!, currentNews.item.link!!)
                         context.startActivity(Intent.createChooser(intent, "Share link"))
                     }))
@@ -209,7 +209,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                     }
                     //assume podcast
                     else {
-                        buttons.add(DialogBtn(context.getString(R.string.podcast)!!, { dlg ->
+                        buttons.add(DialogBtn(context.getString(R.string.podcast), { dlg ->
                             var messenger = Messenger(object : Handler(){
                                 public override fun handleMessage(msg: Message) {
                                     val path = msg.obj as String

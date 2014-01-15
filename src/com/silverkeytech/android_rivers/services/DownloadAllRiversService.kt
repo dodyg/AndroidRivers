@@ -65,7 +65,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
 
     fun prepareNotification(): Notification {
         val notificationIntent = Intent(Intent.ACTION_MAIN)
-        notificationIntent.setClass(getApplicationContext(), javaClass<MainWithFragmentsActivity>())
+        notificationIntent.setClass(getApplicationContext()!!, javaClass<MainWithFragmentsActivity>())
 
         val contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
@@ -85,7 +85,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
 
         if (isModernAndroid()){
             //workaround on grey background on Android 4.03   https://code.google.com/p/android/issues/detail?id=23863&thanks=23863&ts=1325611036
-            val id = Resources.getSystem()!!.getIdentifier("status_bar_latest_event_content", "id", "android")
+            val id = Resources.getSystem().getIdentifier("status_bar_latest_event_content", "id", "android")
             notification.contentView?.removeAllViews(id)
             notification.contentView!!.addView(id, remote)
         }
@@ -212,7 +212,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
         var msg: String
 
         if (errorCount == 0){
-            msg = getString(R.string.all_rivers_successfully_downloaded)!!
+            msg = getString(R.string.all_rivers_successfully_downloaded)
         }
         else{
             msg = "${riverTotal - errorCount} are successfully downloaded out of ${riverTotal}"
@@ -223,7 +223,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
         notify()
     }
 
-    public override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+    public override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.d(TAG, "OnStartCommand ")
 
         return super<IntentService>.onStartCommand(intent, flags, startId)

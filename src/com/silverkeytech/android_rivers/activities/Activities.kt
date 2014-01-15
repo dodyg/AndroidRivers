@@ -69,7 +69,7 @@ public fun Activity.isModernTablet(): Boolean {
 public fun Activity.restart() {
     var intent = this.getIntent()
     this.finish()
-    this.startActivity(intent)
+    this.startActivity(intent!!)
 }
 
 public fun Activity.toastee(text: String, duration: Duration = Duration.QUICK, grav: Int = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL) {

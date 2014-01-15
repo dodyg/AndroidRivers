@@ -97,26 +97,21 @@ public class DownloadBookmarksAsync(it: Context, ignoreCache: Boolean): AsyncTas
         return this
     }
 
-    protected override fun onPostExecute(result: Result<Opml>?) {
+    protected override fun onPostExecute(result: Result<Opml>) {
         dialog.dismiss()
 
-        if (result == null){
-            context.toastee("Sorry, we cannot handle this subscription download because operation is cancelled", Duration.AVERAGE)
-        }
-        else{
-            if (result.isFalse()){
-                val error = ConnectivityErrorMessage(
-                        timeoutException = "Sorry, we cannot download this subscription list. The subscription site might be down",
-                        socketException = "Sorry, we cannot download this subscription list. Please check your Internet connection, it might be down",
-                        otherException = "Sorry, we cannot download this subscription list for the following technical reason : ${result.exception.toString()}"
-                )
+        if (result.isFalse()){
+            val error = ConnectivityErrorMessage(
+                    timeoutException = "Sorry, we cannot download this subscription list. The subscription site might be down",
+                    socketException = "Sorry, we cannot download this subscription list. Please check your Internet connection, it might be down",
+                    otherException = "Sorry, we cannot download this subscription list for the following technical reason : ${result.exception.toString()}"
+            )
 
-                context.handleConnectivityError(result.exception, error)
+            context.handleConnectivityError(result.exception, error)
 
-            } else {
-                if (rawCallback != null)
-                    rawCallback!!(result)
-            }
+        } else {
+            if (rawCallback != null)
+                rawCallback!!(result)
         }
     }
 }

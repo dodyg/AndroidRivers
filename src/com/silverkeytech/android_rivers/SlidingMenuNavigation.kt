@@ -65,7 +65,7 @@ fun fillSlidingMenuNavigation(navs: List<NavItem>, view: View, onClick: (NavItem
     val inflater: LayoutInflater = view.getContext()!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     val adapter = object : ArrayAdapter<NavItem>(view.getContext()!!, R.layout.slide_menu_item, navs){
-        public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        public override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
             val text = navs[position].text
             return currentListItem(inflater, text, convertView, parent, 18f)
         }
@@ -74,7 +74,7 @@ fun fillSlidingMenuNavigation(navs: List<NavItem>, view: View, onClick: (NavItem
     val list = view.findView<ListView>(R.id.main_slide_menu_navigation)
     list.setAdapter(adapter)
     list.setOnItemClickListener(object : OnItemClickListener{
-        public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
+        public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View?, p2: Int, p3: Long) {
             val item = navs.get(p2)
             onClick(item)
         }

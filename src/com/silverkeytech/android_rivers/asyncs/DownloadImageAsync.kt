@@ -49,7 +49,7 @@ public class DownloadImageAsync(it: Context?): AsyncTask<String, Int, Result<Dow
     }
 
     var context: Activity = it!! as Activity
-    var dialog: InfinityProgressDialog = InfinityProgressDialog(context, context.getString(R.string.please_wait_while_loading)!!)
+    var dialog: InfinityProgressDialog = InfinityProgressDialog(context, context.getString(R.string.please_wait_while_loading))
 
     protected override fun onPreExecute() {
         dialog.onCancel {
@@ -78,58 +78,53 @@ public class DownloadImageAsync(it: Context?): AsyncTask<String, Int, Result<Dow
         }
     }
 
-    protected override fun onPostExecute(result: Result<DownloadedFile>?) {
+    protected override fun onPostExecute(result: Result<DownloadedFile>) {
         super<AsyncTask>.onPostExecute(result)
 
         dialog.dismiss()
 
-        if (result == null){
-            context.toastee("Download operation is cancelled", Duration.LONG)
-        }
-        else{
-            if (result.isTrue()){
-                var dialog = AlertDialog.Builder(context)
-                var vw = context.getLayoutInflater().inflate(R.layout.image_view, null)!!
+        if (result.isTrue()){
+            var dialog = AlertDialog.Builder(context)
+            var vw = context.getLayoutInflater().inflate(R.layout.image_view, null)!!
 
-                var img: File = File(result.value!!.filePath)
+            var img: File = File(result.value!!.filePath)
 
-                if (!img.exists()){
-                    context.toastee("Sorry, the image ${result.value} does not exist", Duration.AVERAGE)
-                    return
-                }
-
-                var image = vw.findView<ImageView>(R.id.image_view_main_iv)
-
-                var bmp: Bitmap?
-                try{
-                    bmp = BitmapFactory.decodeFile(img.getAbsolutePath())
-                    image.setImageBitmap(bmp)
-                }
-                catch(e: Exception){
-                    context.toastee("Sorry, I have problem in loading image ${result.value}", Duration.LONG)
-                    return
-                }
-
-                dialog.setView(vw)
-                dialog.setNeutralButton(android.R.string.ok, object : DialogInterface.OnClickListener{
-                    public override fun onClick(p0: DialogInterface, p1: Int) {
-                        if (bmp != null)  //toss the bitmap once it's not needed
-                            bmp!!.recycle()
-
-                        p0.dismiss()
-                    }
-                })
-
-                dialog.show()
-
-            } else if (result.isFalse()){
-                val error = ConnectivityErrorMessage(
-                        timeoutException = "Sorry, we cannot download this image. The feed site might be down.",
-                        socketException = "Sorry, we cannot download this image. Please check your Internet connection, it might be down.",
-                        otherException = "Sorry, we cannot download this image for the following technical reason : ${result.exception.toString()}"
-                )
-                context.handleConnectivityError(result.exception, error)
+            if (!img.exists()){
+                context.toastee("Sorry, the image ${result.value} does not exist", Duration.AVERAGE)
+                return
             }
+
+            var image = vw.findView<ImageView>(R.id.image_view_main_iv)
+
+            var bmp: Bitmap?
+            try{
+                bmp = BitmapFactory.decodeFile(img.getAbsolutePath())
+                image.setImageBitmap(bmp)
+            }
+            catch(e: Exception){
+                context.toastee("Sorry, I have problem in loading image ${result.value}", Duration.LONG)
+                return
+            }
+
+            dialog.setView(vw)
+            dialog.setNeutralButton(android.R.string.ok, object : DialogInterface.OnClickListener{
+                public override fun onClick(p0: DialogInterface, p1: Int) {
+                    if (bmp != null)  //toss the bitmap once it's not needed
+                        bmp!!.recycle()
+
+                    p0.dismiss()
+                }
+            })
+
+            dialog.show()
+
+        } else if (result.isFalse()){
+            val error = ConnectivityErrorMessage(
+                    timeoutException = "Sorry, we cannot download this image. The feed site might be down.",
+                    socketException = "Sorry, we cannot download this image. Please check your Internet connection, it might be down.",
+                    otherException = "Sorry, we cannot download this image for the following technical reason : ${result.exception.toString()}"
+            )
+            context.handleConnectivityError(result.exception, error)
         }
     }
 }

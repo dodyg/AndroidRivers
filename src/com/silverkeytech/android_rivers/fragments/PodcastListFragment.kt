@@ -179,7 +179,7 @@ public class PodcastListFragment(): MainListFragment() {
         val textSize = parent.getVisualPref().listTextSize
 
         val adapter = object : ArrayAdapter<Podcast>(parent, android.R.layout.simple_list_item_1, android.R.id.text1, podcasts) {
-            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            public override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                 val currentPodcast = podcasts[position]
                 val text = currentPodcast.title
                 return currentTextViewItem(text, convertView, parent, textSize.toFloat(), false, this@PodcastListFragment.getLayoutInflater()!!)
@@ -189,7 +189,7 @@ public class PodcastListFragment(): MainListFragment() {
         list.setAdapter(adapter)
 
         list.setOnItemClickListener(object : OnItemClickListener{
-            public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
+            public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View?, p2: Int, p3: Long) {
                 val currentPodcast = podcasts[p2]
 
                 Log.d(TAG, "Is podcast player paused ${isPodcastPlayerPaused()}")

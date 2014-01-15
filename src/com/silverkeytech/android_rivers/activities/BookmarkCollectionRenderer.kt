@@ -51,11 +51,11 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
 
         if (bookmarks.count() == 0){
             var msg = context.findView<TextView>(R.id.collection_message_tv)
-            handleFontResize(msg, context.getString(R.string.empty_bookmark_collection_items_list)!!, textSize.toFloat())
+            handleFontResize(msg, context.getString(R.string.empty_bookmark_collection_items_list), textSize.toFloat())
         }
 
         val adapter = object : ArrayAdapter<Bookmark>(context, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
-            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            public override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                 val text = bookmarks[position].toString()
                 return currentListItem(text, convertView, parent, textSize.toFloat())
             }
@@ -64,7 +64,7 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
         val list = context.findView<ListView>(android.R.id.list)
         list.setAdapter(adapter)
         list.setOnItemClickListener(object : OnItemClickListener{
-            public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
+            public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View?, p2: Int, p3: Long) {
                 val bookmark = bookmarks.get(p2)
                 Log.d(TAG, "Downloading feed ${bookmark.title} - ${bookmark.url}")
                 startFeedActivity(context, bookmark.url, bookmark.title, bookmark.language)
@@ -129,7 +129,7 @@ fun showCollectionQuickActionPopup(context: BookmarkCollectionActivity, bookmark
                 if (res.isFalse())
                     context.toastee("Error in removing this collection bookmark  ${res.exception?.getMessage()}")
                 else {
-                    context.toastee(context.getString(R.string.bookmark_removed)!!)
+                    context.toastee(context.getString(R.string.bookmark_removed))
                     context.refreshCollection()
                 }
             }

@@ -149,7 +149,7 @@ public fun createSingleInputDialog(context: Activity, title: String, defaultInpu
         //deliberately empty
     })
 
-    val createdDialog = AlertDialogWithNeutralButton(dialog.create()!!, context.getString(R.string.clear)!!) {
+    val createdDialog = AlertDialogWithNeutralButton(dialog.create()!!, context.getString(R.string.clear)) {
         inputUrl.setText("")
     }
 

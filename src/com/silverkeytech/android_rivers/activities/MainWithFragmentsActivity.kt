@@ -307,7 +307,7 @@ public open class MainWithFragmentsActivity(): Activity() {
                 return true
             }
             R.id.main_menu_help -> {
-                downloadOpmlAsync(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
+                downloadOpmlAsync(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help))
                 return true
             }
             else ->
@@ -376,7 +376,7 @@ public open class MainWithFragmentsActivity(): Activity() {
     }
 
     fun computeSideMenuWidth(): Int {
-        return getResources()!!.getFraction(R.dimen.sliding_menu_width, getResources()!!.getDisplayMetrics()!!.widthPixels, 1).toInt()
+        return getResources()!!.getFraction(R.dimen.sliding_menu_width, getResources()!!.getDisplayMetrics().widthPixels, 1).toInt()
     }
 }
 
