@@ -36,7 +36,7 @@ public class DeleteAllPodcastsAsync(it: Context?): AsyncTask<String, Int, Result
     }
 
     val context: Activity = it!! as Activity
-    val dialog: InfinityProgressDialog = InfinityProgressDialog(context, context.getString(R.string.deleting_all_podcasts)!!)
+    val dialog: InfinityProgressDialog = InfinityProgressDialog(context, context.getString(R.string.deleting_all_podcasts))
 
     //Prepare stuff before execution
     protected override fun onPreExecute() {
@@ -88,10 +88,10 @@ public class DeleteAllPodcastsAsync(it: Context?): AsyncTask<String, Int, Result
         }
     }
 
-    protected override fun onPostExecute(result: Result<Int>?) {
+    protected override fun onPostExecute(result: Result<Int>) {
         dialog.dismiss()
 
         if (rawCallback != null)
-            rawCallback!!(result!!)
+            rawCallback!!(result)
     }
 }

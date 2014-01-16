@@ -218,7 +218,7 @@ public class RssListFragment(): MainListFragment() {
 
     fun handleRssListing(bookmarks: List<Bookmark>) {
         if (bookmarks.count() == 0){
-            showMessage(parent.getString(R.string.empty_rss_items_list)!!)
+            showMessage(parent.getString(R.string.empty_rss_items_list))
         }
         else
             showMessage("")
@@ -226,7 +226,7 @@ public class RssListFragment(): MainListFragment() {
         val textSize = parent.getVisualPref().listTextSize
 
         val adapter = object : ArrayAdapter<Bookmark>(parent, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
-            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            public override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                 val text = bookmarks[position].toString()
                 val inCollection = bookmarks[position].collection != null
                 return currentTextViewItem(text, convertView, parent, textSize.toFloat(), inCollection, this@RssListFragment.getLayoutInflater()!!)
@@ -236,7 +236,7 @@ public class RssListFragment(): MainListFragment() {
         val list = getView()!!.findViewById(android.R.id.list) as ListView
         list.setAdapter(adapter)
         list.setOnItemClickListener(object : OnItemClickListener{
-            public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
+            public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View?, p2: Int, p3: Long) {
                 val bookmark = bookmarks.get(p2)
                 startFeedActivity(parent, bookmark.url, bookmark.title, bookmark.language)
             }

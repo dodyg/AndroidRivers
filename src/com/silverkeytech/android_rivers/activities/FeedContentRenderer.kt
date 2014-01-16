@@ -76,7 +76,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
         var inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         var adapter = object : ArrayAdapter<SyndicationFeedItem>(context, R.layout.news_item, feedItems) {
-            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            public override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                 var currentView = convertView
                 var holder: ViewHolder?
 
@@ -125,7 +125,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
         }
 
         list.setOnItemClickListener(object : OnItemClickListener{
-            public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
+            public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View?, p2: Int, p3: Long) {
                 val currentNews = feedItems.get(p2);
 
                 var dlg: View = inflater.inflate(R.layout.feed_details, null)!!
@@ -161,12 +161,12 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                 val buttons = ArrayList<DialogBtn>()
 
                 if (currentNews.hasLink()){
-                    buttons.add(DialogBtn(context.getString(R.string.go)!!, { dlg ->
+                    buttons.add(DialogBtn(context.getString(R.string.go), { dlg ->
                         startOpenBrowserActivity(context, currentNews.link!!)
                         dlg.dismiss()
                     }))
 
-                    buttons.add(DialogBtn(context.getString(R.string.share)!!, { dlg ->
+                    buttons.add(DialogBtn(context.getString(R.string.share), { dlg ->
                         var intent = shareActionIntent(currentNews.title!!, currentNews.link!!)
                         context.startActivity(Intent.createChooser(intent, "Share link"))
                     }))
@@ -182,7 +182,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                     }
                     else
                         if (currentNews.isPodcast()){
-                            buttons.add(DialogBtn(context.getString(R.string.podcast)!!, { dlg ->
+                            buttons.add(DialogBtn(context.getString(R.string.podcast), { dlg ->
                                 var messenger = Messenger(object : Handler(){
                                     public override fun handleMessage(msg: Message) {
                                         val path = msg.obj as String

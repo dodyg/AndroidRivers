@@ -87,26 +87,21 @@ public class DownloadFeedAsync(it: Context?, ignoreCache: Boolean): AsyncTask<St
         return this
     }
 
-    protected override fun onPostExecute(result: Result<SyndicationFeed>?) {
+    protected override fun onPostExecute(result: Result<SyndicationFeed>) {
         dialog.dismiss()
 
-        if (result == null){
-            context.toastee("Sorry, we cannot handle this rss download because operation is cancelled", Duration.AVERAGE)
-        }
-        else{
-            if (result.isFalse()){
-                val error = ConnectivityErrorMessage(
-                        timeoutException = "Sorry, we cannot download this rss. The subscription site might be down",
-                        socketException = "Sorry, we cannot download this rss. Please check your Internet connection, it might be down",
-                        otherException = "Sorry, we cannot download this rss for the following technical reason : ${result.exception.toString()}"
-                )
+        if (result.isFalse()){
+            val error = ConnectivityErrorMessage(
+                    timeoutException = "Sorry, we cannot download this rss. The subscription site might be down",
+                    socketException = "Sorry, we cannot download this rss. Please check your Internet connection, it might be down",
+                    otherException = "Sorry, we cannot download this rss for the following technical reason : ${result.exception.toString()}"
+            )
 
-                context.handleConnectivityError(result.exception, error)
+            context.handleConnectivityError(result.exception, error)
 
-            } else {
-                if (rawCallback != null)
-                    rawCallback!!(result)
-            }
+        } else {
+            if (rawCallback != null)
+                rawCallback!!(result)
         }
     }
 }

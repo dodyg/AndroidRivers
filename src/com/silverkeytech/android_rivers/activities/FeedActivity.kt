@@ -120,7 +120,7 @@ public class FeedActivity(): ListActivity(), WithVisualModificationPanel
     public override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.getItemId()){
             R.id.feed_menu_help -> {
-                downloadOpmlAsync(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help)!!)
+                downloadOpmlAsync(this, PreferenceDefaults.CONTENT_OUTLINE_HELP_SOURCE, getString(R.string.help))
                 return true
             }
             REFRESH -> {

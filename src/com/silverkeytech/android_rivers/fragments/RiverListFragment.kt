@@ -329,7 +329,7 @@ public class RiverListFragment(): MainListFragment() {
         }
 
         if (outlines.count() == 0){
-            showMessage(parent.getString(R.string.empty_river_items_list)!!)
+            showMessage(parent.getString(R.string.empty_river_items_list))
         } else
             showMessage("")
 
@@ -343,7 +343,7 @@ public class RiverListFragment(): MainListFragment() {
         val textSize = parent.getVisualPref().listTextSize
 
         val adapter = object : ArrayAdapter<Outline>(parent, android.R.layout.simple_list_item_1, android.R.id.text1, outlines){
-            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            public override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                 val text = outlines[position].toString()
                 return currentTextViewItem(text!!, convertView, parent, textSize.toFloat(), false, this@RiverListFragment.getLayoutInflater()!!)
             }
@@ -353,7 +353,7 @@ public class RiverListFragment(): MainListFragment() {
         list.setAdapter(adapter)
 
         list.setOnItemClickListener(object : OnItemClickListener{
-            public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
+            public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View?, p2: Int, p3: Long) {
                 val currentOutline = outlines.get(p2)
 
                 var lang =

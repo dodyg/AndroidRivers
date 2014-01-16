@@ -59,7 +59,7 @@ fun addBookmarkOption(context: Activity, feedDateIsParseable: Boolean, bookmark:
             dialog.setTitle("Bookmark to a collection")
 
             val collectionTitles = coll.map { it.title }.copyToArray<String>()
-            val withInstruction = arrayListOf(context.getString(R.string.skip_collection)!!, *collectionTitles).copyToArray()
+            val withInstruction = arrayListOf(context.getString(R.string.skip_collection), *collectionTitles).copyToArray()
 
             dialog.setItems(withInstruction, object : DialogInterface.OnClickListener{
                 public override fun onClick(p0: DialogInterface, p1: Int) {

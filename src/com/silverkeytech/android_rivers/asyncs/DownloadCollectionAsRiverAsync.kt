@@ -46,7 +46,7 @@ public class DownloadCollectionAsRiverAsync(it: Context?, private val collection
     }
 
     var context: Activity = it!! as Activity
-    var dialog: InfinityProgressDialog = InfinityProgressDialog(context, context.getString(R.string.please_wait_while_loading)!!)
+    var dialog: InfinityProgressDialog = InfinityProgressDialog(context, context.getString(R.string.please_wait_while_loading))
 
     protected override fun onPreExecute() {
         dialog.onCancel {
@@ -113,27 +113,25 @@ public class DownloadCollectionAsRiverAsync(it: Context?, private val collection
         return this
     }
 
-    protected override fun onPostExecute(result: Result<List<RiverItemMeta>>?) {
+    protected override fun onPostExecute(result: Result<List<RiverItemMeta>>) {
         dialog.dismiss()
         val url = makeLocalUrl(collectionId)
-        if (result != null){
-            if (result.isTrue()){
-                try{
-                    val sortedNewsItems = sortRiverItemMeta(result.value!!)
-                    context.getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
-                    if (callback != null)
-                        callback!!(url, Result.right(sortedNewsItems))
-                }
-                catch (e: Exception){
-                    if (callback != null)
-                        callback!!(url, Result.wrong<List<RiverItemMeta>>(result.exception))
-                }
+        if (result.isTrue()){
+            try{
+                val sortedNewsItems = sortRiverItemMeta(result.value!!)
+                context.getMain().setRiverCache(url, sortedNewsItems, 3.toHoursInMinutes())
+                if (callback != null)
+                    callback!!(url, Result.right(sortedNewsItems))
             }
-            else
-            {
+            catch (e: Exception){
                 if (callback != null)
                     callback!!(url, Result.wrong<List<RiverItemMeta>>(result.exception))
             }
+        }
+        else
+        {
+            if (callback != null)
+                callback!!(url, Result.wrong<List<RiverItemMeta>>(result.exception))
         }
     }
 }

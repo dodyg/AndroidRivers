@@ -126,14 +126,14 @@ public class OpmlListFragment(): MainListFragment() {
     fun handleOpmlListing(bookmarks: List<Bookmark>) {
 
         if (bookmarks.size == 0)
-            showMessage(parent.getString(R.string.empty_opml_items_list)!!)
+            showMessage(parent.getString(R.string.empty_opml_items_list))
         else
             showMessage("")
 
         val textSize = parent.getVisualPref().listTextSize
 
         val adapter = object : ArrayAdapter<Bookmark>(parent, android.R.layout.simple_list_item_1, android.R.id.text1, bookmarks){
-            public override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            public override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                 val text = bookmarks[position].toString()
                 return currentTextViewItem(text, convertView, parent, textSize.toFloat(), false, this@OpmlListFragment.getLayoutInflater()!!)
             }
@@ -142,7 +142,7 @@ public class OpmlListFragment(): MainListFragment() {
         val list = getView().findView<ListView>(android.R.id.list)
         list.setAdapter(adapter)
         list.setOnItemClickListener(object : OnItemClickListener{
-            public override fun onItemClick(p0: AdapterView<out Adapter?>?, p1: View?, p2: Int, p3: Long) {
+            public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View?, p2: Int, p3: Long) {
                 val bookmark = bookmarks.get(p2)
                 downloadOpmlAsync(this@OpmlListFragment.getActivity()!!, bookmark.url, bookmark.title)
             }

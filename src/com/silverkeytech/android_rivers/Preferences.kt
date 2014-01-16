@@ -83,16 +83,16 @@ public class PreferenceDefaults{
 }
 
 fun Activity.getContentPref(): ContentPreference =
-        ContentPreference(this.getSharedPreferences(Preferences.CONTENT, Context.MODE_PRIVATE)!!)
+        ContentPreference(this.getSharedPreferences(Preferences.CONTENT, Context.MODE_PRIVATE))
 
 fun Activity.getSetupPref(): SetupPreference =
-        SetupPreference(this.getSharedPreferences(Preferences.SETUP, Context.MODE_PRIVATE)!!)
+        SetupPreference(this.getSharedPreferences(Preferences.SETUP, Context.MODE_PRIVATE))
 
 fun Activity.getVisualPref(): VisualPreference =
-        VisualPreference(this.getSharedPreferences(Preferences.VISUAL, Context.MODE_PRIVATE)!!)
+        VisualPreference(this.getSharedPreferences(Preferences.VISUAL, Context.MODE_PRIVATE))
 
 fun Activity.getStoredPref(): StoredPreference =
-        StoredPreference(this.getSharedPreferences(Preferences.STORED, Context.MODE_PRIVATE)!!)
+        StoredPreference(this.getSharedPreferences(Preferences.STORED, Context.MODE_PRIVATE))
 
 public class StoredPreference(public val pref: SharedPreferences){
     class object {
@@ -104,7 +104,7 @@ public class StoredPreference(public val pref: SharedPreferences){
         set(city: String) {
             if (city.size == 0)
                 return
-            var edit = pref.edit()!!
+            var edit = pref.edit()
             edit.putString(Preferences.STORED_KAYAK_CITY, city)
             edit.commit()
             Log.d(TAG, "Saving kayak city $city")
@@ -116,7 +116,7 @@ public class StoredPreference(public val pref: SharedPreferences){
         set(city: String) {
             if (city.size == 0)
                 return
-            var edit = pref.edit()!!
+            var edit = pref.edit()
             edit.putString(Preferences.STORED_CRAIGS_LIST_CITY, city)
             edit.commit()
             Log.d(TAG, "Saving craigslist city $city")
@@ -127,7 +127,7 @@ public class StoredPreference(public val pref: SharedPreferences){
         set(country: String) {
             if (country.size == 0)
                 return
-            var edit = pref.edit()!!
+            var edit = pref.edit()
             edit.putString(Preferences.STORED_GOOGLE_NEWS_COUNTRY, country)
             edit.commit()
             Log.d(TAG, "Saving google news country $country")
@@ -142,7 +142,7 @@ public class ContentPreference(public val pref: SharedPreferences){
     public var riverBookmarksSorting: Int
         get() = pref.getInt(Preferences.CONTENT_RIVER_BOOKMARKS_SORTING, PreferenceDefaults.CONTENT_RIVER_BOOKMARKS_SORTING)
         set(sort: Int) {
-            var edit = pref.edit()!!
+            var edit = pref.edit()
             edit.putInt(Preferences.CONTENT_RIVER_BOOKMARKS_SORTING, sort)
             edit.commit()
             Log.d(TAG, "Saving bookmark sorting value $sort")
@@ -157,7 +157,7 @@ public class SetupPreference(public val pref: SharedPreferences){
     public var downloadDefaultRiversIfNecessary: Boolean
         get() = pref.getBoolean(Preferences.SETUP_DOWNLOAD_DEFAULT_RIVERS, PreferenceDefaults.SETUP_DOWNLOAD_DEFAULT_RIVERS)
         set(yes: Boolean){
-            val edit = pref.edit()!!
+            val edit = pref.edit()
             edit.putBoolean(Preferences.SETUP_DOWNLOAD_DEFAULT_RIVERS, yes)
             edit.commit()
             Log.d(TAG, "Saving Download Default Rivers $yes")
@@ -175,7 +175,7 @@ public class VisualPreference (public val pref: SharedPreferences){
             if (size < 12 || size > 30) //http://developer.android.com/design/style/typography.html
                 return
 
-            var edit = pref.edit()!!
+            var edit = pref.edit()
             edit.putInt(Preferences.VISUAL_LIST_TEXT_SIZE, size)
             edit.commit()
             Log.d(TAG, "Saving list text size $size")
@@ -202,7 +202,7 @@ public class VisualPreference (public val pref: SharedPreferences){
             else -> R.style.Holo_Theme
         }
 
-        var edit = pref.edit()!!
+        var edit = pref.edit()
         edit.putInt(Preferences.VISUAL_THEME, newTheme)
         edit.commit()
         Log.d(TAG, "Switch theme $newTheme")
