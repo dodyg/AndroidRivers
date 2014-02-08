@@ -24,16 +24,24 @@ import com.silverkeytech.news_engine.xml.textRule
 import com.thebuzzmedia.sjxp.rule.DefaultRule
 import com.silverkeytech.news_engine.xml.attributeRule
 import com.silverkeytech.news_engine.xml.tagRule
+import com.silverkeytech.news_engine.log
 
 public class OpmlParser {
+    class object {
+        public val TAG: String = javaClass<OpmlParser>().getSimpleName()
+        public var Lines : StringBuilder = StringBuilder()
+    }
+
     public fun parse(input: InputStream, rss: OpmlBuilder) {
         var items = arrayListOf<DefaultRule<OpmlBuilder>>(headTitle, headDateCreated, headDateModified, headOwnerName, headOwnerEmail)
         for (i in 0..15) {
             items.add(outlineTag(i))
             items.add(outlineAttributes(i))
         }
-        var parser = XMLParser<OpmlBuilder>(*items.toArray(array<DefaultRule<OpmlBuilder>>()))
+        var parser = XMLParser<OpmlBuilder>(*items.copyToArray())
         parser.parse(input, "UTF-8", rss)
+
+        log(TAG, "TotalOutput \n ${Lines.toString()}")
     }
 }
 
@@ -66,10 +74,11 @@ fun outlineTag(level: Int): DefaultRule<OpmlBuilder> {
         path += "/outline"
 
     return tagRule<OpmlBuilder>(path, { isStartTag, opml ->
-        if (isStartTag)
+        if (isStartTag) {
             opml.body.startLevel(level)
-        else
+        } else {
             opml.body.endLevel(level)
+        }
     })
 }
 
@@ -84,7 +93,10 @@ fun outlineAttributes(level: Int): DefaultRule<OpmlBuilder> {
 
     return attributeRule<OpmlBuilder>(path, { attrName, attrValue, opml ->
         when(attrName) {
-            "text" -> opml.body.setText(attrValue)
+            "text" ->{
+                OpmlParser.Lines.append("Path $path = $attrValue \n":CharSequence)
+                opml.body.setText(attrValue)
+            }
             "url" -> opml.body.setUrl(attrValue)
             "xmlUrl" -> opml.body.setXmlUrl(attrValue)
             "htmlUrl" -> opml.body.setHtmlUrl(attrValue)
@@ -93,6 +105,7 @@ fun outlineAttributes(level: Int): DefaultRule<OpmlBuilder> {
             "language" -> opml.body.setLanguage(attrValue)
             "opmlUrl" -> opml.body.setOpmlUrl(attrValue)
             else -> {
+                log(OpmlParser.TAG, "Else ${attrName} -> ${attrValue}")
             } //empty
         }
     }, "text", "url", "xmlUrl", "htmlUrl", "type", "name", "language", "opmlUrl")

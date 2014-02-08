@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.news_engine.outlines
 
 import java.util.ArrayList
-import android.util.Log
+import java.util.Stack
 
 public class OpmlBuilder{
     class object {
@@ -49,9 +49,7 @@ public class OpmlBuilder{
         var currentLevel  = 0
         var currentOutline = Outline()
         var parentOutline : Outline? = null
-        var parents : ArrayList<Outline> =  ArrayList<Outline>()
-        var counterLevelUp = 0
-        var counterLevelDown = 0
+        var parents : Stack<Outline> =  Stack<Outline>()
         var rootOutlines : ArrayList<Outline>? = null
         {
             opml.body = Body()
@@ -59,8 +57,6 @@ public class OpmlBuilder{
         }
 
         public fun startLevel(level : Int){
-            counterLevelUp++
-            Log.d(TAG, "Counter Level Up $counterLevelUp")
             if (level == 0){
                 currentLevel = 0
                 currentOutline = Outline()
@@ -69,43 +65,38 @@ public class OpmlBuilder{
                 parents.clear()
             }
             else if (level > currentLevel){
+                if (parentOutline != null)
+                    parents.push(parentOutline!!)
+
                 parentOutline = currentOutline
-                parents.add(parentOutline!!)
                 currentOutline = Outline()
                 parentOutline!!.outline!!.add(currentOutline)
                 currentLevel = level
             }
             else if (level == currentLevel){
                 currentOutline = Outline()
-                if (parentOutline != null)
+                if (parentOutline != null)      {
                     parentOutline!!.outline!!.add(currentOutline)
-            } else {
-                currentLevel = level
-                currentOutline = Outline()
-
-                if (parentOutline != null)
-                    parentOutline!!.outline!!.add(currentOutline)
+                }
+            } else {  //level < current level
+                throw Exception("level($level) < currentLevel($currentLevel)")
             }
         }
 
         public fun endLevel(level : Int){
-            counterLevelDown++
             if (level < currentLevel && level > 0){
-                parentOutline = parents.get(level - 1)
+                parentOutline = parents.pop()
                 currentLevel = level
             }
             else if (level == 0){
                 currentLevel = 0
             }
             else {
-                val isEqual = level == currentLevel
-                Log.d(TAG, "Level $level is equal to $currentLevel $isEqual")
+                //do nothing
             }
-
-            Log.d(TAG, "Counter Level Down $counterLevelDown")
         }
 
-        public fun setText(text : String) { currentOutline.text = text }
+        public fun setText(text : String) { currentOutline.text = "$currentLevel - $text" }
         public fun setUrl(url : String) { currentOutline.url = url }
         public fun setXmlUrl(xmlUrl : String) { currentOutline.xmlUrl = xmlUrl }
         public fun setHtmlUrl(htmlUrl : String) { currentOutline.htmlUrl = htmlUrl }
