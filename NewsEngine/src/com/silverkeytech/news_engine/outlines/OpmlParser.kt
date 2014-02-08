@@ -25,10 +25,10 @@ import com.thebuzzmedia.sjxp.rule.DefaultRule
 import com.silverkeytech.news_engine.xml.attributeRule
 import com.silverkeytech.news_engine.xml.tagRule
 
-public class OpmlParser{
+public class OpmlParser {
     public fun parse(input: InputStream, rss: OpmlBuilder) {
         var items = arrayListOf<DefaultRule<OpmlBuilder>>(headTitle, headDateCreated, headDateModified, headOwnerName, headOwnerEmail)
-        for (i in 0..15){
+        for (i in 0..15) {
             items.add(outlineTag(i))
             items.add(outlineAttributes(i))
         }
@@ -39,7 +39,7 @@ public class OpmlParser{
 
 val headTitle = textRule<OpmlBuilder>("/opml/head/title", {(text, opml) ->
     opml.head.setTitle(text)
- })
+})
 
 val headDateCreated = textRule<OpmlBuilder>("/opml/head/dateCreated", {(text, opml) ->
     opml.head.setDateCreated(text)
@@ -57,9 +57,9 @@ val headOwnerEmail = textRule<OpmlBuilder>("/opml/head/ownerEmail", {(text, opml
     opml.head.setOwnerEmail(text)
 })
 
-fun outlineTag(level : Int) : DefaultRule<OpmlBuilder>{
+fun outlineTag(level: Int): DefaultRule<OpmlBuilder> {
     if (level < 0)
-    throw IllegalArgumentException()
+        throw IllegalArgumentException()
 
     var path = "/opml/body"
     for (i in 0..level)
@@ -74,7 +74,7 @@ fun outlineTag(level : Int) : DefaultRule<OpmlBuilder>{
 }
 
 //(path: String, action: (attrName: String, attrValue: String, rss: T) -> Unit, vararg attrNames: String?): DefaultRule<T>
-fun outlineAttributes(level : Int) : DefaultRule<OpmlBuilder>{
+fun outlineAttributes(level: Int): DefaultRule<OpmlBuilder> {
     if (level < 0)
         throw IllegalArgumentException()
 
@@ -83,7 +83,7 @@ fun outlineAttributes(level : Int) : DefaultRule<OpmlBuilder>{
         path += "/outline"
 
     return attributeRule<OpmlBuilder>(path, { attrName, attrValue, opml ->
-        when(attrName){
+        when(attrName) {
             "text" -> opml.body.setText(attrValue)
             "url" -> opml.body.setUrl(attrValue)
             "xmlUrl" -> opml.body.setXmlUrl(attrValue)
@@ -92,7 +92,8 @@ fun outlineAttributes(level : Int) : DefaultRule<OpmlBuilder>{
             "name" -> opml.body.setName(attrValue)
             "language" -> opml.body.setLanguage(attrValue)
             "opmlUrl" -> opml.body.setOpmlUrl(attrValue)
-            else -> { } //empty
+            else -> {
+            } //empty
         }
     }, "text", "url", "xmlUrl", "htmlUrl", "type", "name", "language", "opmlUrl")
 }

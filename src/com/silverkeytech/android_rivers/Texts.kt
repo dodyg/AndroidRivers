@@ -40,8 +40,8 @@ fun scrubHtml(text: String?): String {
     if (text.isNullOrEmpty())
         return ""
     else {
-        val text =  text!!.trim().replaceAll("(<br>|<br/>)", "\n")
-        val spanned = android.text.Html.fromHtml(text) as SpannableStringBuilder
+        val txt =  text!!.trim().replaceAll("(<br>|<br/>)", "\n")
+        val spanned = android.text.Html.fromHtml(txt) as SpannableStringBuilder
         val spannedObjects = spanned.getSpans(0, spanned.length(), javaClass<Any>())!!
 
         for(i in 0..(spannedObjects.size - 1)){

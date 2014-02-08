@@ -35,6 +35,7 @@ import com.silverkeytech.android_rivers.Result
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.httpGet
 
+[suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
 public class DownloadBookmarksAsync(it: Context, ignoreCache: Boolean): AsyncTask<String, Int, Result<Opml>>(){
     class object {
         public val TAG: String = javaClass<DownloadBookmarksAsync>().getSimpleName()

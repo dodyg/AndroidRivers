@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.news_engine.outlines
 
 import java.util.ArrayList
+import android.util.Log
 
 public class OpmlBuilder{
     class object {
@@ -41,10 +42,16 @@ public class OpmlBuilder{
     }
 
     public class BodyBuilder (val opml : Opml){
+        class object {
+            public val TAG: String = javaClass<BodyBuilder>().getSimpleName()
+        }
+
         var currentLevel  = 0
         var currentOutline = Outline()
         var parentOutline : Outline? = null
         var parents : ArrayList<Outline> =  ArrayList<Outline>()
+        var counterLevelUp = 0
+        var counterLevelDown = 0
         var rootOutlines : ArrayList<Outline>? = null
         {
             opml.body = Body()
@@ -52,6 +59,8 @@ public class OpmlBuilder{
         }
 
         public fun startLevel(level : Int){
+            counterLevelUp++
+            Log.d(TAG, "Counter Level Up $counterLevelUp")
             if (level == 0){
                 currentLevel = 0
                 currentOutline = Outline()
@@ -80,6 +89,7 @@ public class OpmlBuilder{
         }
 
         public fun endLevel(level : Int){
+            counterLevelDown++
             if (level < currentLevel && level > 0){
                 parentOutline = parents.get(level - 1)
                 currentLevel = level
@@ -87,7 +97,12 @@ public class OpmlBuilder{
             else if (level == 0){
                 currentLevel = 0
             }
+            else {
+                val isEqual = level == currentLevel
+                Log.d(TAG, "Level $level is equal to $currentLevel $isEqual")
+            }
 
+            Log.d(TAG, "Counter Level Down $counterLevelDown")
         }
 
         public fun setText(text : String) { currentOutline.text = text }
