@@ -29,7 +29,6 @@ import com.silverkeytech.news_engine.log
 public class OpmlParser {
     class object {
         public val TAG: String = javaClass<OpmlParser>().getSimpleName()
-        public var Lines : StringBuilder = StringBuilder()
     }
 
     public fun parse(input: InputStream, rss: OpmlBuilder) {
@@ -40,8 +39,6 @@ public class OpmlParser {
         }
         var parser = XMLParser<OpmlBuilder>(*items.copyToArray())
         parser.parse(input, "UTF-8", rss)
-
-        log(TAG, "TotalOutput \n ${Lines.toString()}")
     }
 }
 
@@ -93,10 +90,7 @@ fun outlineAttributes(level: Int): DefaultRule<OpmlBuilder> {
 
     return attributeRule<OpmlBuilder>(path, { attrName, attrValue, opml ->
         when(attrName) {
-            "text" ->{
-                OpmlParser.Lines.append("Path $path = $attrValue \n":CharSequence)
-                opml.body.setText(attrValue)
-            }
+            "text" -> opml.body.setText(attrValue)
             "url" -> opml.body.setUrl(attrValue)
             "xmlUrl" -> opml.body.setXmlUrl(attrValue)
             "htmlUrl" -> opml.body.setHtmlUrl(attrValue)

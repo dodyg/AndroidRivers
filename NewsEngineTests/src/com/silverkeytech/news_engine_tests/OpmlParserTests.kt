@@ -27,8 +27,6 @@ public class OpmlParserTests {
         assert(!opml.head!!.ownerEmail!!.isEmpty(), "Must have owner email")
         assert(!opml.body!!.outline!!.get(0).text!!.isEmpty(), "Must have text ")
 
-
-        println(OpmlParser.Lines.toString())
         println("-----------------------------------")
 
         //check first level

@@ -96,7 +96,7 @@ public class OpmlBuilder{
             }
         }
 
-        public fun setText(text : String) { currentOutline.text = "$currentLevel - $text" }
+        public fun setText(text : String) { currentOutline.text = text }
         public fun setUrl(url : String) { currentOutline.url = url }
         public fun setXmlUrl(xmlUrl : String) { currentOutline.xmlUrl = xmlUrl }
         public fun setHtmlUrl(htmlUrl : String) { currentOutline.htmlUrl = htmlUrl }
