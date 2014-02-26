@@ -125,7 +125,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
         }
 
         list.setOnItemClickListener(object : OnItemClickListener{
-            public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View?, p2: Int, p3: Long) {
+            public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View, p2: Int, p3: Long) {
                 val currentNews = feedItems.get(p2);
 
                 var dlg: View = inflater.inflate(R.layout.feed_details, null)!!

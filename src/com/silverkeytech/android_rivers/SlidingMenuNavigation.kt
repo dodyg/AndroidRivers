@@ -74,7 +74,7 @@ fun fillSlidingMenuNavigation(navs: List<NavItem>, view: View, onClick: (NavItem
     val list = view.findView<ListView>(R.id.main_slide_menu_navigation)
     list.setAdapter(adapter)
     list.setOnItemClickListener(object : OnItemClickListener{
-        public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View?, p2: Int, p3: Long) {
+        public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View, p2: Int, p3: Long) {
             val item = navs.get(p2)
             onClick(item)
         }

@@ -223,7 +223,7 @@ public class DownloadAllRiversService(): IntentService("DownloadAllRiversService
         notify()
     }
 
-    public override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    public override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         Log.d(TAG, "OnStartCommand ")
 
         return super<IntentService>.onStartCommand(intent, flags, startId)

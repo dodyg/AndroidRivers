@@ -52,7 +52,7 @@ public class RiverSourcesRenderer(val context: RiverSourcesActivity, val languag
         val list = context.findView<ListView>(android.R.id.list)
         list.setAdapter(adapter)
         list.setOnItemClickListener(object : OnItemClickListener{
-            public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View?, p2: Int, p3: Long) {
+            public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View, p2: Int, p3: Long) {
                 val uri = sourcesUris.get(p2)
                 val title = sourcesTitles.get(p2)
                 startFeedActivity(context, uri, title, language)

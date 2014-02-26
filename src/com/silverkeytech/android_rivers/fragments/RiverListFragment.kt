@@ -353,7 +353,7 @@ public class RiverListFragment(): MainListFragment() {
         list.setAdapter(adapter)
 
         list.setOnItemClickListener(object : OnItemClickListener{
-            public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View?, p2: Int, p3: Long) {
+            public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View, p2: Int, p3: Long) {
                 val currentOutline = outlines.get(p2)
 
                 var lang =
