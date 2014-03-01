@@ -64,7 +64,7 @@ public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity)
         val list = context.findView<ListView>(android.R.id.list)
         list.setAdapter(adapter)
         list.setOnItemClickListener(object : OnItemClickListener{
-            public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View?, p2: Int, p3: Long) {
+            public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View, p2: Int, p3: Long) {
                 val bookmark = bookmarks.get(p2)
                 Log.d(TAG, "Downloading feed ${bookmark.title} - ${bookmark.url}")
                 startFeedActivity(context, bookmark.url, bookmark.title, bookmark.language)

@@ -78,7 +78,7 @@ public class BlogPostService(): IntentService("DownloadService"){
 
         if (isModernAndroid()){
             //workaround on grey background on Android 4.03   https://code.google.com/p/android/issues/detail?id=23863&thanks=23863&ts=1325611036
-            val id = Resources.getSystem().getIdentifier("status_bar_latest_event_content", "id", "android")
+            val id = Resources.getSystem()!!.getIdentifier("status_bar_latest_event_content", "id", "android")
             notification.contentView?.removeAllViews(id)
             notification.contentView!!.addView(id, remote)
         } else
@@ -120,7 +120,7 @@ public class BlogPostService(): IntentService("DownloadService"){
 
     }
 
-    public override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    public override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         Log.d(TAG, "OnStartCommand")
 
         return super<IntentService>.onStartCommand(intent, flags, startId)

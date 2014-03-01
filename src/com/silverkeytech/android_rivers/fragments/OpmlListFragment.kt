@@ -142,7 +142,7 @@ public class OpmlListFragment(): MainListFragment() {
         val list = getView().findView<ListView>(android.R.id.list)
         list.setAdapter(adapter)
         list.setOnItemClickListener(object : OnItemClickListener{
-            public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View?, p2: Int, p3: Long) {
+            public override fun onItemClick(p0: AdapterView<out Adapter?>, p1: View, p2: Int, p3: Long) {
                 val bookmark = bookmarks.get(p2)
                 downloadOpmlAsync(this@OpmlListFragment.getActivity()!!, bookmark.url, bookmark.title)
             }
