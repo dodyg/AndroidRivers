@@ -50,7 +50,7 @@ public class Bookmark(){
     [DatabaseField(canBeNull = true, foreign = true, columnName = "bookmark_collection_id")]
     public var collection: BookmarkCollection? = null
 
-    public fun toString(): String {
+    override fun toString(): String {
         return title
     }
 }

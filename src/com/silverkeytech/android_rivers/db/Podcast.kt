@@ -67,7 +67,7 @@ public class Podcast(){
     [DatabaseField(canBeNull = false, columnName = "date_created", dataType = DataType.DATE)]
     public var dateCreated: Date = Calendar.getInstance().getTime()
 
-    public fun toString(): String {
+    override fun toString(): String {
         return title
     }
 }

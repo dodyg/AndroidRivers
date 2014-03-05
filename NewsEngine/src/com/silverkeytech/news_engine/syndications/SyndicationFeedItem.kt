@@ -55,7 +55,7 @@ public data class SyndicationFeedItem(){
             extensions.put(name, content)
     }
 
-    public fun toString(): String {
+    override fun toString(): String {
         if (hasTitle())
             return title!!
         else if (hasDescription())

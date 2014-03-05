@@ -29,7 +29,7 @@ public data class CraigsListCity(
         public val location: String,
         public val grouping: String
 ){
-    public fun toString(): String {
+    override fun toString(): String {
         return "$code,$areaId,$url,$location,$grouping"
     }
 }
@@ -75,7 +75,7 @@ public data class CraigsListCategory(
         public val code: String,
         public val name: String
 ){
-    public fun toString(): String {
+    override fun toString(): String {
         return "$code - $name"
     }
 }
