@@ -19,3 +19,4 @@ out
 /.idea/workspace.xml
 
 /src/com/silverkeytech/android_rivers/PrivateConfig.kt
+gen/com/silverkeytech/android_rivers/BuildConfig.java
