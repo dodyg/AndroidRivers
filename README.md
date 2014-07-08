@@ -17,11 +17,9 @@ Android River has the following features:
 
 The website for this project is at http://rivers.silverkeytech.com. Android River can be downloaded at Google Store http://goo.gl/kShgp.
 
-The mailing list for this project is at groups.google.com/group/news-and-protocols.
-
 This code is licensed under GPL version 3. Please read license.txt.
 
-I develop Android Rivers using <a href="http://kotlin.jetbrains.org/">Kotlin programming language</a>. It might not be
+I develop Android Rivers using <a href="http://kotlin.jetbrains.org/">Kotlin programming language</a> version M8. It might not be
 obvious that this is Kotlin project since there are a lot of Java code in the project. Most of these Java code are open source
 libraries that Android Rivers include in source form by necessity. Most of the Kotlin code is located at NewsEngine module and
 com.silverkeytech.android_rivers package at the main project.
@@ -55,3 +53,4 @@ Open Source Library used:
 * [Simple Java Xml Parser](https://github.com/thebuzzmedia/simple-java-xml-parser)
 * [Scribe-Java](https://github.com/fernandezpablo85/scribe-java)
 * [HoloEverywhere](https://github.com/ChristopheVersieux/HoloEverywhere)
+
