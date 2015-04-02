@@ -138,10 +138,10 @@ public class TryOutActivity(): Activity()
             src.setText("CNN>COM")
 
             val dlg = createFlexibleContentDialog(context = this, content = cnt, dismissOnTouch = true, buttons = array(
-                    DialogBtn("Go", {(d) -> d.dismiss() }),
-                    DialogBtn("Share", {(d) -> d.dismiss() }),
-                    DialogBtn("Podcast", {(d) -> d.dismiss() }),
-                    DialogBtn("Blog", {(d) -> d.dismiss() }))
+                    DialogBtn("Go", { d -> d.dismiss() }),
+                    DialogBtn("Share", { d -> d.dismiss() }),
+                    DialogBtn("Podcast", { d -> d.dismiss() }),
+                    DialogBtn("Blog", { d -> d.dismiss() }))
             )
 
             dlg.show()

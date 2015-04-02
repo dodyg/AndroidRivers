@@ -38,78 +38,78 @@ val rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 val ns = "http://purl.org/rss/1.0/"
 val dc = "http://purl.org/dc/elements/1.1/"
 
-val channelTitle = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$ns]title", {(text, rss) ->
+val channelTitle = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$ns]title", { text, rss ->
     rss.channel.setTitle(text)
 })
 
-val channelLink = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$ns]link", {(text, rss) ->
+val channelLink = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$ns]link", { text, rss ->
     rss.channel.setLink(text)
 })
 
-val channelDescription = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$ns]description", {(text, rss) ->
+val channelDescription = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$ns]description", { text, rss ->
     rss.channel.setDescription(text)
 })
 
-val channelDcLanguage = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$dc]language", {(text, rss) ->
+val channelDcLanguage = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$dc]language", { text, rss ->
     rss.channel.setDcLanguage(text)
 })
 
-val channelDcRights = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$dc]rights", {(text, rss) ->
+val channelDcRights = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$dc]rights", { text, rss ->
     rss.channel.setDcRights(text)
 })
 
-val channelDcPublisher = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$dc]publisher", {(text, rss) ->
+val channelDcPublisher = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$dc]publisher", { text, rss ->
     rss.channel.setDcPublisher(text)
 })
 
-val channelDcCreator = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$dc]creator", {(text, rss) ->
+val channelDcCreator = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$dc]creator", { text, rss ->
     rss.channel.setDcCreator(text)
 })
 
-val channelDcSource = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$dc]source", {(text, rss) ->
+val channelDcSource = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$dc]source", { text, rss ->
     rss.channel.setDcSource(text)
 })
 
-val channelDcTitle = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$dc]title", {(text, rss) ->
+val channelDcTitle = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]channel/[$dc]title", { text, rss ->
     rss.channel.setDcTitle(text)
 })
 
-val itemTag = tagRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item", {(isStartTag, rss) ->
+val itemTag = tagRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item", { isStartTag, rss ->
     if (isStartTag)
         rss.channel.startItem()
     else
         rss.channel.endItem()
 })
 
-val itemTitle = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$ns]title", {(text, rss) ->
+val itemTitle = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$ns]title", { text, rss ->
     rss.channel.item.setTitle(text)
 })
 
-val itemLink = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$ns]link", {(text, rss) ->
+val itemLink = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$ns]link", { text, rss ->
     rss.channel.item.setLink(text)
 })
 
-val itemDescription = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$ns]description", {(text, rss) ->
+val itemDescription = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$ns]description", { text, rss ->
     rss.channel.item.setDescription(text)
 })
 
-val itemDcDate = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$dc]date", {(text, rss) ->
+val itemDcDate = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$dc]date", { text, rss ->
     rss.channel.item.setDcDate(text)
 })
 
-val itemDcLanguage = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$dc]language", {(text, rss) ->
+val itemDcLanguage = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$dc]language", { text, rss ->
     rss.channel.item.setDcLanguage(text)
 })
 
-val itemDcRights = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$dc]rights", {(text, rss) ->
+val itemDcRights = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$dc]rights", { text, rss ->
     rss.channel.item.setDcRights(text)
 })
 
-val itemDcSource = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$dc]source", {(text, rss) ->
+val itemDcSource = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$dc]source", { text, rss ->
     rss.channel.item.setDcSource(text)
 })
 
-val itemDcTitle = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$dc]title", {(text, rss) ->
+val itemDcTitle = textRule<RdfRssBuilder>("/[$rdf]RDF/[$ns]item/[$dc]title", { text, rss ->
     rss.channel.item.setDcTitle(text)
 })
 

@@ -151,7 +151,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                 var createdDialog : Dialog? = null //important to be declared here because the content click must have access to the future to be created dialog box to close it
 
                 val detector = ScrollMotionDetector()
-                val listener = detector.attach(onClickEvent = { () ->
+                val listener = detector.attach(onClickEvent = { ->
                     createdDialog?.dismiss()
                 }, onMoveEvent = null)
 

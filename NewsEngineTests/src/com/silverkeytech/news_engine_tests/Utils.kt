@@ -25,7 +25,7 @@ fun downloadRawFeed(url : String) : String{
 
 
 fun downloadAtomFeed(url: String): Result<Feed>{
-    com.silverkeytech.news_engine.log = { (tag, str) -> plog(str) }
+    com.silverkeytech.news_engine.log = { tag, str -> plog(str) }
     try{
         var downloadedContent: String?
         var mimeType: String?
@@ -57,7 +57,7 @@ fun downloadAtomFeed(url: String): Result<Feed>{
 }
 
 fun downloadSingleFeed(url: String, filter: SyndicationFilter? = null): Result<SyndicationFeed> {
-    com.silverkeytech.news_engine.log = { (tag, str) -> plog(str) }
+    com.silverkeytech.news_engine.log = { tag, str -> plog(str) }
     try{
         var downloadedContent: String?
         var mimeType: String?

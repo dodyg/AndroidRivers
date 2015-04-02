@@ -42,23 +42,23 @@ public class OpmlParser {
     }
 }
 
-val headTitle = textRule<OpmlBuilder>("/opml/head/title", {(text, opml) ->
+val headTitle = textRule<OpmlBuilder>("/opml/head/title", { text, opml ->
     opml.head.setTitle(text)
 })
 
-val headDateCreated = textRule<OpmlBuilder>("/opml/head/dateCreated", {(text, opml) ->
+val headDateCreated = textRule<OpmlBuilder>("/opml/head/dateCreated", { text, opml ->
     opml.head.setDateCreated(text)
 })
 
-val headDateModified = textRule<OpmlBuilder>("/opml/head/dateModified", {(text, opml) ->
+val headDateModified = textRule<OpmlBuilder>("/opml/head/dateModified", { text, opml ->
     opml.head.setDateModified(text)
 })
 
-val headOwnerName = textRule<OpmlBuilder>("/opml/head/ownerName", {(text, opml) ->
+val headOwnerName = textRule<OpmlBuilder>("/opml/head/ownerName", { text, opml ->
     opml.head.setOwnerName(text)
 })
 
-val headOwnerEmail = textRule<OpmlBuilder>("/opml/head/ownerEmail", {(text, opml) ->
+val headOwnerEmail = textRule<OpmlBuilder>("/opml/head/ownerEmail", { text, opml ->
     opml.head.setOwnerEmail(text)
 })
 

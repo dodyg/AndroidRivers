@@ -30,18 +30,18 @@ public class AirportCodeParser{
 }
 
 
-val airportTag = tagRule<AirportCodeBuilder>("/iata/iata_airport_codes", {(isStartTag, arpt) ->
+val airportTag = tagRule<AirportCodeBuilder>("/iata/iata_airport_codes", { isStartTag, arpt ->
     if (isStartTag)
         arpt.startItem()
     else
         arpt.endItem()
 })
 
-val airportName = textRule<AirportCodeBuilder>("/iata/iata_airport_codes/airport", {(text, arpt) ->
+val airportName = textRule<AirportCodeBuilder>("/iata/iata_airport_codes/airport", { text, arpt ->
     arpt.setName(text)
 })
 
-val airportCode = textRule<AirportCodeBuilder>("/iata/iata_airport_codes/code", {(text, arpt) ->
+val airportCode = textRule<AirportCodeBuilder>("/iata/iata_airport_codes/code", { text, arpt ->
     arpt.setCode(text)
 })
 
