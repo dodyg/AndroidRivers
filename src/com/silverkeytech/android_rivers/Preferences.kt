@@ -24,7 +24,7 @@ import org.holoeverywhere.preference.SharedPreferences
 import android.util.Log
 
 public class Preferences{
-    class object{
+    companion object{
         public val CONTENT: String = "CONTENT"
         public val CONTENT_RIVER_BOOKMARKS_SORTING: String = "CONTENT_RIVER_BOOKMARKS_SORTING"
 
@@ -43,7 +43,7 @@ public class Preferences{
 }
 
 public class PreferenceValue{
-    class object {
+    companion object {
         public val SORT_DESC: Int = 100
         public val SORT_NONE: Int = 101
         public val SORT_ASC: Int = 102
@@ -51,7 +51,7 @@ public class PreferenceValue{
 }
 
 public class PreferenceDefaults{
-    class object {
+    companion object {
         public val CONTENT_RIVER_BOOKMARKS_SORTING: Int = PreferenceValue.SORT_NONE
         public val CONTENT_BOOKMARK_COLLECTION_LATEST_DATE_FILTER_IN_DAYS: Int = 30
         public val CONTENT_BOOKMARK_COLLECTION_MAX_ITEMS_FILTER: Int = 12
@@ -95,7 +95,7 @@ fun Activity.getStoredPref(): StoredPreference =
         StoredPreference(this.getSharedPreferences(Preferences.STORED, Context.MODE_PRIVATE))
 
 public class StoredPreference(public val pref: SharedPreferences){
-    class object {
+    companion object {
         public val TAG: String = javaClass<StoredPreference>().getSimpleName()
     }
 
@@ -135,7 +135,7 @@ public class StoredPreference(public val pref: SharedPreferences){
 }
 
 public class ContentPreference(public val pref: SharedPreferences){
-    class object {
+    companion object {
         public val TAG: String = javaClass<ContentPreference>().getSimpleName()
     }
 
@@ -150,7 +150,7 @@ public class ContentPreference(public val pref: SharedPreferences){
 }
 
 public class SetupPreference(public val pref: SharedPreferences){
-    class object {
+    companion object {
         public val TAG: String = javaClass<SetupPreference>().getSimpleName()
     }
 
@@ -165,7 +165,7 @@ public class SetupPreference(public val pref: SharedPreferences){
 }
 
 public class VisualPreference (public val pref: SharedPreferences){
-    class object {
+    companion object {
         public val TAG: String = javaClass<VisualPreference>().getSimpleName()
     }
 

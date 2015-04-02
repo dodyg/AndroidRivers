@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers
 
 public class Params(){
-    class object {
+    companion object {
         val RIVER_URL = "RIVER_URL"
         val RIVER_NAME = "RIVER_NAME"
         val RIVER_LANGUAGE = "RIVER_LANGUAGE"

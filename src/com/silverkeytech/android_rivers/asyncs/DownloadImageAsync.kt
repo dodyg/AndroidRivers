@@ -45,7 +45,7 @@ public data class DownloadedFile(val contentType: String, val filePath: String)
 
 [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
 public class DownloadImageAsync(it: Context?): AsyncTask<String, Int, Result<DownloadedFile>>(){
-    class object {
+    companion object {
         public val TAG: String = javaClass<DownloadImageAsync>().getSimpleName()
     }
 

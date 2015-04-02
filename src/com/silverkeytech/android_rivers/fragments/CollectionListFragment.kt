@@ -49,7 +49,6 @@ import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
 import org.holoeverywhere.app.AlertDialog
 import com.silverkeytech.android_rivers.R
-import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.makeLocalUrl
 import com.silverkeytech.android_rivers.currentTextViewItem
 import com.silverkeytech.android_rivers.getVisualPref
@@ -65,7 +64,7 @@ import com.silverkeytech.android_rivers.activities.toastee
 import com.silverkeytech.android_rivers.findView
 
 public class CollectionListFragment: MainListFragment() {
-    class object {
+    companion object {
         public val TAG: String = javaClass<CollectionListFragment>().getSimpleName()
     }
 
@@ -105,7 +104,7 @@ public class CollectionListFragment: MainListFragment() {
 
     fun showMessage(msg: String) {
         val txt = getView().findView<TextView>(R.id.collection_list_fragment_message_tv)
-        if (msg.isNullOrEmpty()){
+        if (msg.isNullOrBlank()){
             txt.setVisibility(View.INVISIBLE)
             txt.setText("")
         }

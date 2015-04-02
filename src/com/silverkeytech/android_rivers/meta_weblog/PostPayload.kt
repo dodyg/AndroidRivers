@@ -1,7 +1,6 @@
 package com.silverkeytech.android_rivers.meta_weblog
 
 import java.util.HashMap
-import com.silverkeytech.android_rivers.isNullOrEmpty
 
 //ref http://codex.wordpress.org/XML-RPC_MetaWeblog_API#metaWeblog.newPost
 
@@ -23,27 +22,27 @@ public data class PostPayload{
 
     public fun toMap(): HashMap<String, Any> {
         val map = HashMap<String, Any>()
-        if (!title.isNullOrEmpty())
+        if (!title.isNullOrBlank())
             map.put("title", title!!)
-        if (!description.isNullOrEmpty())
+        if (!description.isNullOrBlank())
             map.put("description", description!!)
-        if (!post_type.isNullOrEmpty())
+        if (!post_type.isNullOrBlank())
             map.put("post_type", post_type!!)
 
         if (categories != null && categories!!.size() > 0)
             map.put("categories", categories!!)
         if (mt_keywords != null && mt_keywords!!.size() > 0)
             map.put("mt_keywords", mt_keywords!!)
-        if (!mt_excerpt.isNullOrEmpty())
+        if (!mt_excerpt.isNullOrBlank())
             map.put("mt_excerpt", mt_excerpt!!)
-        if (!mt_text_more.isNullOrEmpty())
+        if (!mt_text_more.isNullOrBlank())
             map.put("mt_text_more", mt_text_more!!)
         if (mt_allow_comments != null)
             map.put("mt_allow_comments", mt_allow_comments!!.toString().toLowerCase())
         if (mt_allow_pings != null)
             map.put("mt_allow_pings", mt_allow_pings!!.toString().toLowerCase())
 
-        if (!post_status.isNullOrEmpty())
+        if (!post_status.isNullOrBlank())
             map.put("post_status", post_status!!)
         if (wp_post_format != null)
             map.put("wp_post_format", wp_post_format!!.toString().toLowerCase())

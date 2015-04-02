@@ -45,11 +45,10 @@ import com.silverkeytech.android_rivers.with
 import com.silverkeytech.android_rivers.isModernAndroid
 import com.silverkeytech.android_rivers.generateThrowawayName
 import com.silverkeytech.android_rivers.Params
-import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.getFileNameFromUri
 
 public class DownloadService(): IntentService("DownloadService"){
-    class object{
+    companion object{
         public val TAG: String = javaClass<DownloadService>().getSimpleName()
     }
 

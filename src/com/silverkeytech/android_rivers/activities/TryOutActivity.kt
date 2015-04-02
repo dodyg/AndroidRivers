@@ -59,7 +59,6 @@ import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.Params
 import com.silverkeytech.android_rivers.DialogBtn
 import com.silverkeytech.android_rivers.asyncs.DownloadImageAsync
-import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.getVisualPref
 import com.silverkeytech.android_rivers.createFlexibleContentDialog
 import com.silverkeytech.android_rivers.services.DownloadService
@@ -67,7 +66,7 @@ import com.silverkeytech.android_rivers.asyncs.DownloadOpmlAsync
 
 public class TryOutActivity(): Activity()
 {
-    class object {
+    companion object {
         public val TAG: String = javaClass<TryOutActivity>().getSimpleName()
     }
 
@@ -139,10 +138,10 @@ public class TryOutActivity(): Activity()
             src.setText("CNN>COM")
 
             val dlg = createFlexibleContentDialog(context = this, content = cnt, dismissOnTouch = true, buttons = array(
-                    DialogBtn("Go", {(d) -> d.dismiss() }),
-                    DialogBtn("Share", {(d) -> d.dismiss() }),
-                    DialogBtn("Podcast", {(d) -> d.dismiss() }),
-                    DialogBtn("Blog", {(d) -> d.dismiss() }))
+                    DialogBtn("Go", { d -> d.dismiss() }),
+                    DialogBtn("Share", { d -> d.dismiss() }),
+                    DialogBtn("Podcast", { d -> d.dismiss() }),
+                    DialogBtn("Blog", { d -> d.dismiss() }))
             )
 
             dlg.show()
@@ -337,7 +336,7 @@ public class TryOutActivity(): Activity()
                 public override fun handleMessage(msg: Message) {
                     var path = msg.obj as String
 
-                    if (msg.arg1 == android.app.Activity.RESULT_OK && !path.isNullOrEmpty()){
+                    if (msg.arg1 == android.app.Activity.RESULT_OK && !path.isNullOrBlank()){
                         toastee("File is successfully downloaded at $path")
                     }else{
                         toastee("Download failed")

@@ -22,7 +22,7 @@ import java.util.ArrayList
 import java.util.Stack
 
 public class OpmlBuilder{
-    class object {
+    companion object {
         public val TAG: String = javaClass<OpmlBuilder>().getSimpleName()
     }
 
@@ -31,7 +31,7 @@ public class OpmlBuilder{
     public val head : HeadBuilder = HeadBuilder(opml)
 
     public class HeadBuilder(val opml : Opml){
-        {
+        init {
             opml.head = Head()
         }
         public fun setTitle(title : String) { opml.head!!.title = title }
@@ -42,7 +42,7 @@ public class OpmlBuilder{
     }
 
     public class BodyBuilder (val opml : Opml){
-        class object {
+        companion object {
             public val TAG: String = javaClass<BodyBuilder>().getSimpleName()
         }
 
@@ -51,7 +51,7 @@ public class OpmlBuilder{
         var parentOutline : Outline? = null
         var parents : Stack<Outline> =  Stack<Outline>()
         var rootOutlines : ArrayList<Outline>? = null
-        {
+        init {
             opml.body = Body()
             rootOutlines = opml.body!!.outline
         }

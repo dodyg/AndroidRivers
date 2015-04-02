@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 package com.silverkeytech.news_engine.syndications
 
-import com.silverkeytech.news_engine.isNullOrEmpty
 import com.silverkeytech.news_engine.syndications.atom.ContentElement
 import com.silverkeytech.news_engine.syndications.atom.Feed
 import com.silverkeytech.news_engine.syndications.rss.Rss
@@ -27,7 +26,7 @@ import com.silverkeytech.news_engine.log
 import com.silverkeytech.news_engine.syndications.rss_rdf.Rdf
 
 public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, public val rdf: Rdf?, val filter: SyndicationFilter? = null){
-    class object{
+    companion object{
         public val TAG: String = javaClass<SyndicationFeed>().getSimpleName()
     }
 
@@ -39,7 +38,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
     public var isDateParseable: Boolean = false
 
     public fun hasLink(): Boolean {
-        return !link.isNullOrEmpty()
+        return !link.isNullOrBlank()
     }
 
     public fun transform() {
@@ -200,8 +199,8 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
             val (parseable, dateFormat) = verifyRdfFeedForDateFitness(rdf!!)
             isDateParseable = parseable
 
-            title = if (rdf!!.channel.title.isNullOrEmpty()) "" else rdf!!.channel.title!!
-            link = if (rdf!!.channel.link.isNullOrEmpty()) "" else rdf!!.channel.link!!
+            title = if (rdf!!.channel.title.isNullOrBlank()) "" else rdf!!.channel.title!!
+            link = if (rdf!!.channel.link.isNullOrBlank()) "" else rdf!!.channel.link!!
             feedType = SyndicationFeedType.RDF
 
             var itemCounter = 0

@@ -49,7 +49,6 @@ import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
 import com.silverkeytech.news_engine.riverjs.getSortedNewsItems
 import com.silverkeytech.android_rivers.R
-import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.currentTextViewItem
 import com.silverkeytech.android_rivers.getVisualPref
 import com.silverkeytech.android_rivers.handleFontResize
@@ -73,7 +72,7 @@ import com.silverkeytech.android_rivers.createConfirmationDialog
 import com.silverkeytech.android_rivers.findView
 
 public class RiverListFragment(): MainListFragment() {
-    class object {
+    companion object {
         public val TAG: String = javaClass<RiverListFragment>().getSimpleName()
     }
 
@@ -188,7 +187,7 @@ public class RiverListFragment(): MainListFragment() {
 
     fun showMessage(msg: String) {
         val txt = getView()!!.findViewById(R.id.river_list_fragment_message_tv) as TextView
-        if (msg.isNullOrEmpty()){
+        if (msg.isNullOrBlank()){
             txt.setVisibility(View.INVISIBLE)
             txt.setText("")
         }
@@ -230,7 +229,7 @@ public class RiverListFragment(): MainListFragment() {
 
         val dlg = createSingleInputDialog(parent, "Add new river", lastEnteredUrl, "Set url here", {
             dlg, url ->
-            if (url.isNullOrEmpty()){
+            if (url.isNullOrBlank()){
                 parent.toastee("Please enter url of the river")
             }
             else {
@@ -422,7 +421,7 @@ public class RiverListFragment(): MainListFragment() {
         editIcon.setOnClickListener {
             val dlg = createSingleInputDialog(context, "Edit River Title", currentOutline.text, "Set title here", {
                 dlg, title ->
-                if (title.isNullOrEmpty()){
+                if (title.isNullOrBlank()){
                     context.toastee("Please enter title", Duration.LONG)
                 }
                 else {

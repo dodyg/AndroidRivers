@@ -30,7 +30,7 @@ import com.silverkeytech.android_rivers.getVisualPref
 import com.silverkeytech.android_rivers.asyncs.downloadOpmlAsync
 
 public open class RiverSourcesActivity(): ListActivity() {
-    class object {
+    companion object {
         public val TAG: String = javaClass<RiverSourcesActivity>().getSimpleName()
     }
 

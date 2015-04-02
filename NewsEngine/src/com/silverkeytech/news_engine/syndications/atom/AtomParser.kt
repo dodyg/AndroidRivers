@@ -52,14 +52,14 @@ val feedUpdated = textRule<AtomBuilder>("/[$NS]feed/[$NS]updated", { text, atom 
     atom.setUpdated(text)
 })
 
-val feedLinkTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]link", {(isStartTag, atom) ->
+val feedLinkTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]link", { isStartTag, atom ->
     if (isStartTag)
         atom.link.startItem()
     else
         atom.link.endItem()
 })
 
-val feedLinkAttributes = attributeRule<AtomBuilder>("/[$NS]feed/[$NS]link", {(attrName, attrValue, atom) ->
+val feedLinkAttributes = attributeRule<AtomBuilder>("/[$NS]feed/[$NS]link", { attrName, attrValue, atom ->
     when(attrName){
         "href" -> atom.link.setHref(attrValue)
         "rel" -> atom.link.setRel(attrValue)
@@ -74,7 +74,7 @@ val feedLinkAttributes = attributeRule<AtomBuilder>("/[$NS]feed/[$NS]link", {(at
 }, "href", "rel", "hreflang", "type", "title", "length")
 
 
-val feedAuthorTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]author", {(isStartTag, atom) ->
+val feedAuthorTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]author", { isStartTag, atom ->
     if (isStartTag)
         atom.author.startItem()
     else
@@ -105,7 +105,7 @@ val feedSubtitle = textRule<AtomBuilder>("/[$NS]feed/[$NS]subtitle", { text, ato
     atom.setSubtitle(text)
 })
 
-val entryTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]entry", {(isStartTag, atom) ->
+val entryTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]entry", { isStartTag, atom ->
     if (isStartTag)
         atom.entry.startItem()
     else
@@ -129,7 +129,7 @@ val entryPublished = textRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]published
     atom.entry.setPublished(text)
 })
 
-val entryContentTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]content", {(isStartTag, atom) ->
+val entryContentTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]content", { isStartTag, atom ->
     if (isStartTag)
         atom.entry.startContent()
 })
@@ -138,7 +138,7 @@ val entryContentValue = textRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]conten
     atom.entry.content.setValue(text)
 })
 
-val entryContentAttributes = attributeRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]content", {(attrName, attrValue, atom) ->
+val entryContentAttributes = attributeRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]content", { attrName, attrValue, atom ->
     when(attrName){
         "type" -> atom.entry.content.setType(attrValue)
         "src" -> atom.entry.content.setSource(attrValue)
@@ -149,7 +149,7 @@ val entryContentAttributes = attributeRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[
 }, "type", "src")
 
 
-val entrySummaryTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]summary", {(isStartTag, atom) ->
+val entrySummaryTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]summary", { isStartTag, atom ->
     if (isStartTag)
         atom.entry.startSummary()
 })
@@ -158,7 +158,7 @@ val entrySummaryValue = textRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]summar
     atom.entry.summary.setValue(text)
 })
 
-val entrySummaryAttributes = attributeRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]summary", {(attrName, attrValue, atom) ->
+val entrySummaryAttributes = attributeRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]summary", { attrName, attrValue, atom ->
     when(attrName){
         "type" -> atom.entry.summary.setType(attrValue)
         "src" -> atom.entry.summary.setSource(attrValue)
@@ -170,7 +170,7 @@ val entrySummaryAttributes = attributeRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[
 
 
 
-val entryAuthorTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]author", {(isStartTag, atom) ->
+val entryAuthorTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]author", { isStartTag, atom ->
     if (isStartTag)
         atom.entry.author.startItem()
     else
@@ -190,14 +190,14 @@ val entryAuthorUri = textRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]author/[$
 })
 
 
-val entryLinkTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]link", {(isStartTag, atom) ->
+val entryLinkTag = tagRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]link", { isStartTag, atom ->
     if (isStartTag)
         atom.entry.link.startItem()
     else
         atom.entry.link.endItem()
 })
 
-val entryLinkAttributes = attributeRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]link", {(attrName, attrValue, atom) ->
+val entryLinkAttributes = attributeRule<AtomBuilder>("/[$NS]feed/[$NS]entry/[$NS]link", { attrName, attrValue, atom ->
     when(attrName){
         "href" -> atom.entry.link.setHref(attrValue)
         "rel" -> atom.entry.link.setRel(attrValue)

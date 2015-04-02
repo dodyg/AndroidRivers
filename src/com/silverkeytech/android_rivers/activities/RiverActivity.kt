@@ -48,7 +48,7 @@ import com.silverkeytech.news_engine.riverjs.getSortedNewsItems
 //Responsible of downloading, caching and viewing a news river content
 public class RiverActivity(): ListActivity(), WithVisualModificationPanel
 {
-    class object {
+    companion object {
         public val TAG: String = javaClass<RiverActivity>().getSimpleName()
     }
 

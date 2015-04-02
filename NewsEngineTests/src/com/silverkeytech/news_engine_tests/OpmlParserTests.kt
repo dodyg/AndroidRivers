@@ -10,7 +10,7 @@ import com.silverkeytech.news_engine.outlines.OpmlParser
 public class OpmlParserTests {
     [Test]
     public fun testHeadParsing(){
-        com.silverkeytech.news_engine.log = { (t, s) -> println("$t => $s") }
+        com.silverkeytech.news_engine.log = { t, s -> println("$t => $s") }
 
         val rawXml = downloadRawFeed("http://hobieu.apphb.com/api/1/opml/root")
         //val rawXml = downloadRawFeed("http://smallpicture.com/feed.opml")

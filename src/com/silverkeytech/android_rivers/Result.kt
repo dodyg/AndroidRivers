@@ -25,7 +25,7 @@ This is a common class used to hold result of an operation. If the operation thr
 on .exception property
  */
 public data class Result<T: Any>(p1: T?, p2: Exception? = null){
-    class object{
+    companion object{
         //return True result
         fun right<T: Any>(value: T?): Result<T> {
             return Result<T>(value)

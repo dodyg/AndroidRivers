@@ -19,7 +19,6 @@ package com.silverkeytech.android_rivers.db
 
 import com.silverkeytech.android_rivers.None
 import com.silverkeytech.android_rivers.Result
-import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.news_engine.outlines.Body
 import com.silverkeytech.news_engine.outlines.Opml
 import com.silverkeytech.news_engine.outlines.Outline

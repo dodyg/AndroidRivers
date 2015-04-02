@@ -42,13 +42,12 @@ import com.silverkeytech.android_rivers.Params
 import com.silverkeytech.android_rivers.with
 import com.silverkeytech.android_rivers.R
 import java.util.HashMap
-import com.silverkeytech.android_rivers.isNullOrEmpty
 import android.content.res.Resources
 import com.silverkeytech.android_rivers.isModernAndroid
 import kotlin.properties.Delegates
 
 public class BlogPostService(): IntentService("DownloadService"){
-    class object{
+    companion object{
         public val TAG: String = javaClass<BlogPostService>().getSimpleName()
     }
 

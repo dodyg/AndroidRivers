@@ -172,7 +172,7 @@ public fun createFlexibleInputDialog(context: Activity, title: String, inputs: A
         val t = EditText(context)
         t.setInputType(i.inputType)
         t.setHint(i.hint)
-        if (!i.defaultInput.isNullOrEmpty())
+        if (!i.defaultInput.isNullOrBlank())
             t.setText(i.defaultInput)
 
         if (i.validator != null)

@@ -8,7 +8,7 @@ import com.silverkeytech.android_rivers.MessageEvent
 import android.util.Log
 
 public abstract class MainListFragment : ListFragment () {
-    class object {
+    companion object {
         public open val TAG: String = javaClass<MainListFragment>().getSimpleName()
     }
 

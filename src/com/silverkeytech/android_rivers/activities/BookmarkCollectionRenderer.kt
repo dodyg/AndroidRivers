@@ -42,7 +42,7 @@ import com.silverkeytech.android_rivers.createConfirmationDialog
 import com.silverkeytech.android_rivers.findView
 
 public class BookmarkCollectionRenderer(val context: BookmarkCollectionActivity){
-    class object {
+    companion object {
         public val TAG: String = javaClass<BookmarkCollectionRenderer>().getSimpleName()
     }
 

@@ -20,7 +20,6 @@ package com.silverkeytech.news_engine.syndications
 
 import java.util.Date
 import java.util.HashMap
-import com.silverkeytech.news_engine.isNullOrEmpty
 
 public data class SyndicationFeedItem(){
     public var title: String? = null
@@ -31,15 +30,15 @@ public data class SyndicationFeedItem(){
     public var extensions: HashMap<String, String> = HashMap<String, String>()
 
     fun hasTitle(): Boolean {
-        return !title.isNullOrEmpty()
+        return !title.isNullOrBlank()
     }
 
     fun hasDescription(): Boolean {
-        return !description.isNullOrEmpty()
+        return !description.isNullOrBlank()
     }
 
     fun hasLink(): Boolean {
-        return !link.isNullOrEmpty() && link!!.contains("http://")
+        return !link.isNullOrBlank() && link!!.contains("http://")
     }
 
     fun hasEnclosure(): Boolean {

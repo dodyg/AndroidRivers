@@ -42,7 +42,6 @@ import android.view.Gravity
 import com.silverkeytech.android_rivers.db.DatabaseManager
 import com.silverkeytech.android_rivers.db.saveBookmarkToDb
 import com.silverkeytech.android_rivers.R
-import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.currentTextViewItem
 import com.silverkeytech.android_rivers.getVisualPref
 import com.silverkeytech.android_rivers.handleFontResize
@@ -60,7 +59,7 @@ import com.silverkeytech.android_rivers.tryGetUriFromClipboard
 import com.silverkeytech.android_rivers.findView
 
 public class OpmlListFragment(): MainListFragment() {
-    class object {
+    companion object {
         public val TAG: String = javaClass<OpmlListFragment>().getSimpleName()
     }
 
@@ -204,7 +203,7 @@ public class OpmlListFragment(): MainListFragment() {
 
     private fun showMessage(msg: String) {
         val txt = getView().findView<TextView>(R.id.opml_list_fragment_message_tv)
-        if (msg.isNullOrEmpty()){
+        if (msg.isNullOrBlank()){
             txt.setVisibility(View.INVISIBLE)
             txt.setText("")
         }
@@ -225,7 +224,7 @@ public class OpmlListFragment(): MainListFragment() {
         Log.d(TAG, "Last entered value is $lastEnteredUrl")
         val dlg = createSingleInputDialog(parent, "Add new OPML", lastEnteredUrl, "Set url here", {
             dlg, url ->
-            if (url.isNullOrEmpty()){
+            if (url.isNullOrBlank()){
                 parent.toastee("Please enter url of the OPML", Duration.LONG)
             }
             else {

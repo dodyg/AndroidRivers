@@ -21,7 +21,7 @@ package com.silverkeytech.news_engine.outlines
 
 fun sortOutlineDesc(outlines: List<Outline>): List<Outline> {
     var sortedOutlines = outlines.sort(
-            comparator {(p1: Outline, p2: Outline) ->
+            comparator { p1: Outline, p2: Outline ->
                 val text1 = p1.text
                 val text2 = p2.text
 
@@ -42,7 +42,7 @@ fun sortOutlineDesc(outlines: List<Outline>): List<Outline> {
 
 fun sortOutlineAsc(outlines: List<Outline>): List<Outline> {
     var sortedOutlines = outlines.sort(
-            comparator {(p1: Outline, p2: Outline) ->
+            comparator { p1: Outline, p2: Outline ->
                 val text1 = p1.text
                 val text2 = p2.text
 

@@ -26,7 +26,7 @@ import com.j256.ormlite.dao.Dao
 import com.j256.ormlite.support.ConnectionSource
 
 public class Database (context: Context): OrmLiteSqliteOpenHelper(context, Database.DATABASE_NAME, null, Database.DATABASE_VERSION) {
-    class object {
+    companion object {
         val TAG: String = javaClass<Database>().getSimpleName()
         public val DATABASE_VERSION: Int = 3
         public val DATABASE_NAME: String = "AndroidRivers.sqlite"
