@@ -48,7 +48,7 @@ public open class SimpleAdapter(private val context: OutlinerActivity,
                                 val textSize: Int):
 AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
 
-    class object {
+    companion object {
         public val TAG: String = javaClass<SimpleAdapter>().getSimpleName()
     }
 

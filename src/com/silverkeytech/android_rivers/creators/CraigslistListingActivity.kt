@@ -20,7 +20,7 @@ import android.widget.EditText
 import android.util.Log
 
 public class CraigslistListingActivity (): Activity(){
-    class object {
+    companion object {
         public val TAG: String = javaClass<CraigslistListingActivity>().getSimpleName()
     }
 

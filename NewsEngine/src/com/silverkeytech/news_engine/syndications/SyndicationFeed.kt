@@ -26,7 +26,7 @@ import com.silverkeytech.news_engine.log
 import com.silverkeytech.news_engine.syndications.rss_rdf.Rdf
 
 public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, public val rdf: Rdf?, val filter: SyndicationFilter? = null){
-    class object{
+    companion object{
         public val TAG: String = javaClass<SyndicationFeed>().getSimpleName()
     }
 

@@ -40,7 +40,7 @@ import com.silverkeytech.android_rivers.addBookmarkOption
 //Responsible of downloading, caching and viewing a news river content
 public class FeedActivity(): ListActivity(), WithVisualModificationPanel
 {
-    class object {
+    companion object {
         public val TAG: String = javaClass<FeedActivity>().getSimpleName()
     }
 

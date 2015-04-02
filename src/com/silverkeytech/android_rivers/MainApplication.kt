@@ -33,7 +33,7 @@ import java.util.ArrayList
 
 public class MainApplication(): Application()
 {
-    class object {
+    companion object {
         public val TAG: String = javaClass<MainApplication>().getSimpleName()
     }
 

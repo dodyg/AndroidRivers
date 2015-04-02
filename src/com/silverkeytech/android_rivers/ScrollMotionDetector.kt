@@ -26,7 +26,7 @@ import android.view.MotionEvent
 This is a utility class to handle user scroll/swipe movement and to differentiate a click with a swipe motion
  */
 public class ScrollMotionDetector (scrollTreshold : Float = 10f){
-    class object {
+    companion object {
         public val TAG: String = javaClass<ScrollMotionDetector>().getSimpleName()
     }
 

@@ -68,7 +68,7 @@ import com.silverkeytech.android_rivers.rightPadding
 import com.silverkeytech.android_rivers.findView
 
 public class PodcastListFragment(): MainListFragment() {
-    class object {
+    companion object {
         public val TAG: String = javaClass<PodcastListFragment>().getSimpleName()
     }
 

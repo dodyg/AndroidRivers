@@ -68,7 +68,7 @@ enum class MainActivityMode {
 }
 
 public open class MainWithFragmentsActivity(): Activity() {
-    class object {
+    companion object {
         public val TAG: String = javaClass<MainWithFragmentsActivity>().getSimpleName()
         public val REPLACEMENT_HOME_ID: Int = 16908332
     }

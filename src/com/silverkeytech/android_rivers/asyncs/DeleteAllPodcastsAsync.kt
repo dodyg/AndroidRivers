@@ -32,7 +32,7 @@ import com.silverkeytech.android_rivers.R
 
 [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
 public class DeleteAllPodcastsAsync(it: Context?): AsyncTask<String, Int, Result<Int>>(){
-    class object {
+    companion object {
         public val TAG: String = javaClass<DeleteAllPodcastsAsync>().getSimpleName()
     }
 

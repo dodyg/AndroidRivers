@@ -56,7 +56,7 @@ import com.silverkeytech.android_rivers.toHoursInMinutes
 
 
 public class DownloadAllRiversService(): IntentService("DownloadAllRiversService"){
-    class object{
+    companion object{
         public val TAG: String = javaClass<DownloadAllRiversService>().getSimpleName()
     }
 

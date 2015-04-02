@@ -23,7 +23,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 
 public class SchemaMigration(val db: SQLiteDatabase){
-    class object {
+    companion object {
         val TAG: String = javaClass<SchemaMigration>().getSimpleName()
     }
 

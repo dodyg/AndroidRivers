@@ -27,7 +27,7 @@ import com.silverkeytech.news_engine.xml.tagRule
 import com.silverkeytech.news_engine.log
 
 public class OpmlParser {
-    class object {
+    companion object {
         public val TAG: String = javaClass<OpmlParser>().getSimpleName()
     }
 

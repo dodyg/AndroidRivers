@@ -59,7 +59,7 @@ import com.silverkeytech.android_rivers.tryGetUriFromClipboard
 import com.silverkeytech.android_rivers.findView
 
 public class OpmlListFragment(): MainListFragment() {
-    class object {
+    companion object {
         public val TAG: String = javaClass<OpmlListFragment>().getSimpleName()
     }
 

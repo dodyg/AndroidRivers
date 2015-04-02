@@ -72,7 +72,7 @@ import com.silverkeytech.android_rivers.createConfirmationDialog
 import com.silverkeytech.android_rivers.findView
 
 public class RiverListFragment(): MainListFragment() {
-    class object {
+    companion object {
         public val TAG: String = javaClass<RiverListFragment>().getSimpleName()
     }
 

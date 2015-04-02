@@ -44,7 +44,7 @@ import com.silverkeytech.android_rivers.isModernAndroid
 import com.silverkeytech.android_rivers.httpGet
 
 public class ImportOpmlSubscriptionListService: IntentService("ImportOpmlSubscriptionListService"){
-    class object{
+    companion object{
         public val TAG: String = javaClass<ImportOpmlSubscriptionListService>().getSimpleName()
     }
 

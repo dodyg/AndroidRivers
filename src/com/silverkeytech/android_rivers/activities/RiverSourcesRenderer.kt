@@ -34,7 +34,7 @@ import com.silverkeytech.android_rivers.handleFontResize
 import com.silverkeytech.android_rivers.findView
 
 public class RiverSourcesRenderer(val context: RiverSourcesActivity, val language: String){
-    class object {
+    companion object {
         public val TAG: String = javaClass<RiverSourcesRenderer>().getSimpleName()
     }
 

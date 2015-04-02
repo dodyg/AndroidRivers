@@ -35,7 +35,7 @@ import com.silverkeytech.android_rivers.db.checkIfUrlAlreadyBookmarked
 import com.silverkeytech.android_rivers.getStoredPref
 
 public class KayakFlightDealsActivity (): Activity(){
-    class object {
+    companion object {
         public val TAG: String = javaClass<KayakFlightDealsActivity>().getSimpleName()
     }
 

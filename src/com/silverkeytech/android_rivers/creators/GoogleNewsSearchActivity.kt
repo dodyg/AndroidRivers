@@ -38,7 +38,7 @@ import com.silverkeytech.android_rivers.addBookmarkOption
 import com.silverkeytech.android_rivers.saveBookmark
 
 public class GoogleNewsSearchActivity (): Activity(){
-    class object {
+    companion object {
         public val TAG: String = javaClass<GoogleNewsSearchActivity>().getSimpleName()
     }
 

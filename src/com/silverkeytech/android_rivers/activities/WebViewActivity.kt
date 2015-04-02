@@ -9,7 +9,7 @@ import org.holoeverywhere.app.Activity
 import com.silverkeytech.android_rivers.Params
 
 public class WebViewActivity: Activity() {
-    class object {
+    companion object {
         public val TAG: String = javaClass<WebViewActivity>().getSimpleName()
     }
 

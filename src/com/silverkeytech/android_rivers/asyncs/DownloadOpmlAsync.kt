@@ -40,7 +40,7 @@ import com.silverkeytech.android_rivers.traverse
 
 [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
 public class DownloadOpmlAsync(it: Context?): AsyncTask<String, Int, Pair<String, Result<Opml>>>(){
-    class object {
+    companion object {
         public val TAG: String = javaClass<DownloadOpmlAsync>().getSimpleName()
     }
 

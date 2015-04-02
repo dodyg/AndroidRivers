@@ -63,7 +63,7 @@ import com.silverkeytech.android_rivers.dlgClickListener
 import com.silverkeytech.android_rivers.createConfirmationDialog
 
 public class RssListFragment(): MainListFragment() {
-    class object {
+    companion object {
         public val TAG: String = javaClass<RssListFragment>().getSimpleName()
     }
 

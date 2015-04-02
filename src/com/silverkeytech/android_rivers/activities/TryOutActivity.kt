@@ -66,7 +66,7 @@ import com.silverkeytech.android_rivers.asyncs.DownloadOpmlAsync
 
 public class TryOutActivity(): Activity()
 {
-    class object {
+    companion object {
         public val TAG: String = javaClass<TryOutActivity>().getSimpleName()
     }
 

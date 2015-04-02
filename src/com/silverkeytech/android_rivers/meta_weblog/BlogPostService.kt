@@ -47,7 +47,7 @@ import com.silverkeytech.android_rivers.isModernAndroid
 import kotlin.properties.Delegates
 
 public class BlogPostService(): IntentService("DownloadService"){
-    class object{
+    companion object{
         public val TAG: String = javaClass<BlogPostService>().getSimpleName()
     }
 

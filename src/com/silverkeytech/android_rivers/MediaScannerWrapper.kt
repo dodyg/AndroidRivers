@@ -24,7 +24,7 @@ import android.util.Log
 
 public class MediaScannerWrapper (val context: Context, val filePath: String, val mimeType: String)
 : MediaScannerConnection.MediaScannerConnectionClient{
-    class object {
+    companion object {
         public val TAG: String = javaClass<MediaScannerWrapper>().getSimpleName()
 
         fun scanPodcasts(context: Context, filePath: String) {

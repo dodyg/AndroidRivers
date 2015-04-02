@@ -64,7 +64,7 @@ import com.silverkeytech.android_rivers.activities.toastee
 import com.silverkeytech.android_rivers.findView
 
 public class CollectionListFragment: MainListFragment() {
-    class object {
+    companion object {
         public val TAG: String = javaClass<CollectionListFragment>().getSimpleName()
     }
 

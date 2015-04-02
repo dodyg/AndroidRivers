@@ -62,7 +62,7 @@ import com.silverkeytech.android_rivers.findView
 
 //Manage the rendering of each news item in the river list
 public class RiverContentRenderer(val context: Activity, val language: String){
-    class object {
+    companion object {
         public val TAG: String = javaClass<RiverContentRenderer>().getSimpleName()
     }
 

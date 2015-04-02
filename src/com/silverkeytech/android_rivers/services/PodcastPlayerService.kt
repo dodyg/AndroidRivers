@@ -54,7 +54,7 @@ import com.silverkeytech.android_rivers.Params
 
 [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
 public open class PodcastPlayerService() : Service(), MediaPlayer.OnErrorListener, OnAudioFocusChangeListener {
-    class object {
+    companion object {
         public val TAG: String = javaClass<PodcastPlayerService>().getSimpleName()
         public val CURRENT_POSITION: String = "CURRENT_POSITION"
         public val TOTAL_DURATION: String = "TOTAL_DURATION"

@@ -22,7 +22,7 @@ import java.util.ArrayList
 import java.util.Stack
 
 public class OpmlBuilder{
-    class object {
+    companion object {
         public val TAG: String = javaClass<OpmlBuilder>().getSimpleName()
     }
 
@@ -42,7 +42,7 @@ public class OpmlBuilder{
     }
 
     public class BodyBuilder (val opml : Opml){
-        class object {
+        companion object {
             public val TAG: String = javaClass<BodyBuilder>().getSimpleName()
         }
 

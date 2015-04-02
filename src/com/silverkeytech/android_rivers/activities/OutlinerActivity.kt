@@ -40,7 +40,7 @@ import com.silverkeytech.android_rivers.asyncs.downloadOpmlAsync
 
 public class OutlinerActivity(): Activity()
 {
-    class object {
+    companion object {
         public val TAG: String = javaClass<OutlinerActivity>().getSimpleName()
     }
 
