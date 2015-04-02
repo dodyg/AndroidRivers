@@ -27,7 +27,7 @@ public class RssBuilder(){
     }
 
     public class ChannelBuilder(private val rss: Rss){
-        {
+        init {
             rss.channel = Channel()
         }
 

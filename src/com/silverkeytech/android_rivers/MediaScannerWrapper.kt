@@ -34,7 +34,7 @@ public class MediaScannerWrapper (val context: Context, val filePath: String, va
     }
 
     var connection: MediaScannerConnection
-    {
+    init {
         connection = MediaScannerConnection(context, this)
     }
 

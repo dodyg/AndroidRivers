@@ -27,7 +27,7 @@ public class RdfRssBuilder(){
     }
 
     public class ChannelBuilder(private val rdf: Rdf){
-        {
+        init {
             rdf.channel = Channel()
         }
 
