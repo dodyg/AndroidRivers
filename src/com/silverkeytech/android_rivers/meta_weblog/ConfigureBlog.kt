@@ -3,7 +3,6 @@ package com.silverkeytech.android_rivers.meta_weblog
 import com.silverkeytech.android_rivers.DialogInput
 import com.silverkeytech.android_rivers.activities.Duration
 import com.silverkeytech.android_rivers.createFlexibleInputDialog
-import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.textValidator
 import com.silverkeytech.android_rivers.activities.toastee
 import org.holoeverywhere.app.Activity
@@ -39,19 +38,19 @@ public fun showPostBlogDialogWithContent(context: Activity, content: String, onO
 public fun showBlogConfigurationDialog(context: Activity, onOK: (res: Array<DialogInput>) -> Unit) {
     val inputs = array(DialogInput(NORMAL_INPUT, "Server", "androidrivers.wordpress.com", textValidator() {
         str ->
-        if (str.isNullOrEmpty()){
+        if (str.isNullOrBlank()){
             context.toastee("Server is required", Duration.LONG)
         }
     }),
             DialogInput(NORMAL_INPUT, "Username", PRIVATE_BLOG_USERNAME, textValidator() {
                 str ->
-                if (str.isNullOrEmpty()){
+                if (str.isNullOrBlank()){
                     context.toastee("Username is required", Duration.LONG)
                 }
             }),
             DialogInput(PASSWORD_INPUT, "Password", PRIVATE_BLOG_PASSWORD, textValidator() {
                 str ->
-                if (str.isNullOrEmpty()){
+                if (str.isNullOrBlank()){
                     context.toastee("Password is required", Duration.LONG)
                 }
             })

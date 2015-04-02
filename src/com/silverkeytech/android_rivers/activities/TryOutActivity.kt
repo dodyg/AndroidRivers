@@ -59,7 +59,6 @@ import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.Params
 import com.silverkeytech.android_rivers.DialogBtn
 import com.silverkeytech.android_rivers.asyncs.DownloadImageAsync
-import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.getVisualPref
 import com.silverkeytech.android_rivers.createFlexibleContentDialog
 import com.silverkeytech.android_rivers.services.DownloadService
@@ -337,7 +336,7 @@ public class TryOutActivity(): Activity()
                 public override fun handleMessage(msg: Message) {
                     var path = msg.obj as String
 
-                    if (msg.arg1 == android.app.Activity.RESULT_OK && !path.isNullOrEmpty()){
+                    if (msg.arg1 == android.app.Activity.RESULT_OK && !path.isNullOrBlank()){
                         toastee("File is successfully downloaded at $path")
                     }else{
                         toastee("Download failed")

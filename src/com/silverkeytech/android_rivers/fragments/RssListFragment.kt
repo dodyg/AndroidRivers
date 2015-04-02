@@ -46,7 +46,6 @@ import com.silverkeytech.android_rivers.db.removeItemByUrlFromBookmarkDb
 import org.holoeverywhere.LayoutInflater
 import org.holoeverywhere.app.Activity
 import com.silverkeytech.android_rivers.R
-import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.currentTextViewItem
 import com.silverkeytech.android_rivers.getVisualPref
 import com.silverkeytech.android_rivers.handleFontResize
@@ -127,7 +126,7 @@ public class RssListFragment(): MainListFragment() {
 
         val dlg = createSingleInputDialog(parent, "Import subscription list", lastEnteredUrl, "Set url here", {
             dlg, url ->
-            if (url.isNullOrEmpty()) {
+            if (url.isNullOrBlank()) {
                 parent.toastee("Please enter url of the OPML subscription list", Duration.LONG)
             }
             else {
@@ -159,7 +158,7 @@ public class RssListFragment(): MainListFragment() {
 
         val dlg = createSingleInputDialog(parent, "Add new RSS", lastEnteredUrl, "Set url here", {
             dlg, url ->
-            if (url.isNullOrEmpty()){
+            if (url.isNullOrBlank()){
                 parent.toastee("Please enter url of the river", Duration.LONG)
             }
             else {
@@ -205,7 +204,7 @@ public class RssListFragment(): MainListFragment() {
 
     fun showMessage(msg: String) {
         val txt = getView()!!.findViewById(R.id.rss_list_fragment_message_tv) as TextView
-        if (msg.isNullOrEmpty()){
+        if (msg.isNullOrBlank()){
             txt.setVisibility(View.INVISIBLE)
             txt.setText("")
         }

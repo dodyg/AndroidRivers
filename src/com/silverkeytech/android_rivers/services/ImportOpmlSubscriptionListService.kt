@@ -40,7 +40,6 @@ import com.silverkeytech.android_rivers.activities.MainWithFragmentsActivity
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.with
 import com.silverkeytech.android_rivers.Params
-import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.isModernAndroid
 import com.silverkeytech.android_rivers.httpGet
 
@@ -163,7 +162,7 @@ public class ImportOpmlSubscriptionListService: IntentService("ImportOpmlSubscri
                     val res = downloadSingleFeed(url)
                     if (res.isTrue()){
                         val title = res.value!!.title
-                        val language = if (res.value!!.language.isNullOrEmpty()) "en" else res.value!!.language
+                        val language = if (res.value!!.language.isNullOrBlank()) "en" else res.value!!.language
 
                         saveBookmarkToDb(title, url, BookmarkKind.RSS, language, null)
                     }

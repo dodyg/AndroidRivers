@@ -25,7 +25,6 @@ import com.silverkeytech.android_rivers.activities.Duration
 import com.silverkeytech.android_rivers.activities.FeedContentRenderer
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.getVisualPref
-import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.setOnClickListener
 import com.silverkeytech.android_rivers.activities.toastee
 import org.holoeverywhere.app.Activity
@@ -99,7 +98,7 @@ public class KayakFlightDealsActivity (): Activity(){
                     if (res.isTrue()){
                         val feed = res.value!!
                         feedDateIsParseable = feed.isDateParseable
-                        if (!feed.language.isNullOrEmpty()){
+                        if (!feed.language.isNullOrBlank()){
                             feedLanguage = feed.language
                         }
 

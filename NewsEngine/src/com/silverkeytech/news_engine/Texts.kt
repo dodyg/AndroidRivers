@@ -28,12 +28,6 @@ fun scrubJsonP(text: String): String {
 }
 
 
-fun String?.isNullOrEmpty(): Boolean {
-    val res = this == null || this.trim().length() == 0
-    return res
-}
-
-
 fun rightPadding(text: String, sizeTarget: Int): String {
     if (text.length() < sizeTarget){
         var spaces = StringBuffer()

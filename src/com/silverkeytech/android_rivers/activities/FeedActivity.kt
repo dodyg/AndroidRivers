@@ -29,7 +29,6 @@ import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.Params
 import com.silverkeytech.android_rivers.WithVisualModificationPanel
 import com.silverkeytech.android_rivers.asyncs.DownloadFeedAsync
-import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.PreferenceDefaults
 import com.silverkeytech.android_rivers.ResizeTextActionMode
 import com.silverkeytech.android_rivers.saveBookmark
@@ -78,7 +77,7 @@ public class FeedActivity(): ListActivity(), WithVisualModificationPanel
                 var feed = res.value!!
                 feedDateIsParseable = feed.isDateParseable
                 Log.d(TAG, "$feedUrl is parseable = $feedDateIsParseable with items ${feed.items.size}")
-                if (!feed.language.isNullOrEmpty()){
+                if (!feed.language.isNullOrBlank()){
                     Log.d(TAG, "Obtained feed language is ${feed.language}")
                     feedLanguage = feed.language
                 }

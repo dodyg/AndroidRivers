@@ -38,7 +38,6 @@ import org.holoeverywhere.app.Activity
 import java.util.ArrayList
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.PreferenceDefaults
-import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.handleForeignText
 import com.silverkeytech.android_rivers.handleForeignTextStyle
 import com.silverkeytech.android_rivers.getVisualPref
@@ -131,7 +130,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                 var dlg: View = inflater.inflate(R.layout.feed_details, null)!!
                 var msg: String
 
-                if (currentNews.description.isNullOrEmpty() && !currentNews.title.isNullOrEmpty())
+                if (currentNews.description.isNullOrBlank() && !currentNews.title.isNullOrBlank())
                     msg = scrubHtml(currentNews.title)
                 else
                 {
@@ -187,7 +186,7 @@ public class FeedContentRenderer(val context: Activity, val language: String){
                                     public override fun handleMessage(msg: Message) {
                                         val path = msg.obj as String
 
-                                        if (msg.arg1 == android.app.Activity.RESULT_OK && !path.isNullOrEmpty()){
+                                        if (msg.arg1 == android.app.Activity.RESULT_OK && !path.isNullOrBlank()){
                                             context.toastee("File is successfully downloaded at $path", Duration.LONG)
                                             MediaScannerWrapper.scanPodcasts(context, path)
                                         }else{

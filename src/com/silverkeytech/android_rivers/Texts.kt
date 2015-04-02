@@ -37,7 +37,7 @@ fun scrubJsonP(text: String): String {
 }
 
 fun scrubHtml(text: String?): String {
-    if (text.isNullOrEmpty())
+    if (text.isNullOrBlank())
         return ""
     else {
         val txt =  text!!.trim().replaceAll("(<br>|<br/>)", "\n")
@@ -56,13 +56,8 @@ fun scrubHtml(text: String?): String {
 }
 
 
-fun String?.isNullOrEmpty(): Boolean {
-    val res = this == null || this.trim().length() == 0
-    return res
-}
-
 fun String?.limitText(maxSize: Int): String {
-    if (this.isNullOrEmpty())
+    if (this.isNullOrBlank())
         return ""
     else if (this!!.size.toInt() <= maxSize)
         return this

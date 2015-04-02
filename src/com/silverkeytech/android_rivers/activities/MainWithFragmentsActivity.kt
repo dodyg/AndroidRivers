@@ -54,7 +54,6 @@ import com.silverkeytech.android_rivers.startCraigslistListingActivity
 import com.silverkeytech.android_rivers.startKayakFlightDealsActivity
 import com.silverkeytech.android_rivers.startTryoutActivity
 import com.silverkeytech.android_rivers.shareActionIntent
-import com.silverkeytech.android_rivers.isNullOrEmpty
 import com.silverkeytech.android_rivers.andHide
 import com.silverkeytech.android_rivers.startGoogleNewsSearchActivity
 import com.silverkeytech.android_rivers.Bus
@@ -154,7 +153,7 @@ public open class MainWithFragmentsActivity(): Activity() {
             SLIDE_MENU_FEEDBACK -> {
                 val prompt = createSingleInputDialog(this@MainWithFragmentsActivity, "Make this better!", "", "Give your feedback here") {
                     dlg, feedback ->
-                    if (feedback.isNullOrEmpty()){
+                    if (feedback.isNullOrBlank()){
                         toastee("Please write your feedback")
                     }else{
                         startOpenEmailActivity(this@MainWithFragmentsActivity, "dodyg@silverkeytech.com", "Make this better!", feedback!!)
