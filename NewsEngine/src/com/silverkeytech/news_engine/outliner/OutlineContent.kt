@@ -22,11 +22,11 @@ import java.io.Serializable
 import java.util.HashMap
 
 public enum class OutlineType{
-    NONE
-    INCLUDE
-    LINK
-    BLOGPOST
-    RIVER
+    NONE,
+    INCLUDE,
+    LINK,
+    BLOGPOST,
+    RIVER,
     RSS
 }
 

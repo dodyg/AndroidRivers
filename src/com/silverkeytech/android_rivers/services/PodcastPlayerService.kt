@@ -52,7 +52,7 @@ import com.silverkeytech.android_rivers.with
 import com.silverkeytech.android_rivers.isModernAndroid
 import com.silverkeytech.android_rivers.Params
 
-[suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+@suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 public open class PodcastPlayerService() : Service(), MediaPlayer.OnErrorListener, OnAudioFocusChangeListener {
     companion object {
         public val TAG: String = javaClass<PodcastPlayerService>().getSimpleName()

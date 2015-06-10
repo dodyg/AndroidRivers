@@ -281,7 +281,7 @@ public class RiverContentRenderer(val context: Activity, val language: String){
                 //                }))
 
                 createdDialog = createFlexibleContentDialog(context = context, content = dlg,
-                        dismissOnTouch = true, buttons =  buttons.toArray(array<DialogBtn>()))
+                        dismissOnTouch = true, buttons =  buttons.toArray(arrayOf<DialogBtn>()))
                 createdDialog!!.show()
             }
         })

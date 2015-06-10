@@ -5,7 +5,7 @@ import org.junit.Test
 import org.junit.Assert
 
 public class RssTests{
-    [Test]
+    @Test
     public fun testScriptingCom(){
         val download = downloadSingleFeed("http://scripting.com/rss.xml")
         Assert.assertTrue("Download must be true", download.isTrue())

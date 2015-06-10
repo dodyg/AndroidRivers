@@ -26,16 +26,16 @@ public val BOOKMARK_COLLECTION_ID: String = "id"
 public val BOOKMARK_COLLECTION_TITLE: String = "title"
 public val BOOKMARK_COLLECTION_KIND: String = "kind"
 
-[DatabaseTable(tableName = "bookmark_collection")]
+@DatabaseTable(tableName = "bookmark_collection")
 public class BookmarkCollection(){
 
-    [DatabaseField(generatedId = true, columnName = "id")]
+    @DatabaseField(generatedId = true, columnName = "id")
     public var id: Int = 0
 
-    [DatabaseField(canBeNull = false, columnName = "title", width = 255, dataType = DataType.STRING)]
+    @DatabaseField(canBeNull = false, columnName = "title", width = 255, dataType = DataType.STRING)
     public var title: String = ""
 
-    [DatabaseField(canBeNull = false, columnName = "kind")]
+    @DatabaseField(canBeNull = false, columnName = "kind")
     public var kind: String = ""
 
     override fun toString(): String {

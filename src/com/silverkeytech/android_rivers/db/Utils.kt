@@ -137,7 +137,7 @@ public fun getBookmarksFromDbByCollection(collectionId: Int): List<Bookmark> {
 
 public fun getBookmarksUrlsFromDbByCollection(collectionId: Int): Array<String> {
     val bookmarks = getBookmarksFromDbByCollection(collectionId)
-    val urls = bookmarks.map { it.url }.copyToArray()
+    val urls = bookmarks.map { it.url }.toTypedArray()
 
     return urls
 }

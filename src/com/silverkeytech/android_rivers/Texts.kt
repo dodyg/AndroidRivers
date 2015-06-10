@@ -31,7 +31,7 @@ import java.net.URL
 import java.util.UUID
 
 fun scrubJsonP(text: String): String {
-    val rep = text.replaceAll("onGetRiverStream(\\s*)\\(", "").trimTrailing(")")
+    val rep = text.replace("onGetRiverStream(\\s*)\\(".toRegex(), "").removeSuffix(")")
     Log.d("scrubJsonP", rep)
     return rep
 }
@@ -40,7 +40,7 @@ fun scrubHtml(text: String?): String {
     if (text.isNullOrBlank())
         return ""
     else {
-        val txt =  text!!.trim().replaceAll("(<br>|<br/>)", "\n")
+        val txt = text!!.trim().replace("(<br>|<br/>)".toRegex(), "\n")
         val spanned = android.text.Html.fromHtml(txt) as SpannableStringBuilder
         val spannedObjects = spanned.getSpans(0, spanned.length(), javaClass<Any>())!!
 
@@ -59,7 +59,7 @@ fun scrubHtml(text: String?): String {
 fun String?.limitText(maxSize: Int): String {
     if (this.isNullOrBlank())
         return ""
-    else if (this!!.size.toInt() <= maxSize)
+    else if (this!!.length().toInt() <= maxSize)
         return this
     else
     {
@@ -124,7 +124,7 @@ fun handleForeignText(language: String, text: TextView, content: String) {
         else -> {
             val processed = content.trim()
                     .replace("\n","<br/>")
-                    .replaceAll("(<br/><br/><br/><br/>|<br/><br/><br/>)","<br/>")
+                    .replace("(<br/><br/><br/><br/>|<br/><br/><br/>)".toRegex(), "<br/>")
             val spannable = android.text.Html.fromHtml(processed)
             text.setText(spannable)
         }
@@ -155,7 +155,7 @@ public fun isLocalUrl(url: String): Boolean = url.contains(LOCAL_URL)
 
 public fun extractIdFromLocalUrl(url: String): Int? {
     try{
-        val id = url.substring(LOCAL_URL.size).toString()
+        val id = url.substring(LOCAL_URL.length()).toString()
         if (id.isNullOrEmpty())
             return null
         else

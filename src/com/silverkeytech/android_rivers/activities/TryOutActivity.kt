@@ -137,7 +137,7 @@ public class TryOutActivity(): Activity()
             val src = cnt.findViewById(R.id.news_details_source_tv) as TextView
             src.setText("CNN>COM")
 
-            val dlg = createFlexibleContentDialog(context = this, content = cnt, dismissOnTouch = true, buttons = array(
+            val dlg = createFlexibleContentDialog(context = this, content = cnt, dismissOnTouch = true, buttons = arrayOf(
                     DialogBtn("Go", { d -> d.dismiss() }),
                     DialogBtn("Share", { d -> d.dismiss() }),
                     DialogBtn("Podcast", { d -> d.dismiss() }),
@@ -412,7 +412,7 @@ public class TryOutActivity(): Activity()
             var nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             nm.notify(counter, notification!!)
 
-            var thread = Thread(runnable{
+            var thread = Thread(Runnable {
                 for(i in 11..100){
                     notification!!.contentView!!.setProgressBar(R.id.notification_download_progress_status_progress, 100, i, false)
                     nm.notify(counter, notification!!)

@@ -24,12 +24,12 @@ import com.actionbarsherlock.view.MenuItem
 import org.holoeverywhere.app.Activity
 import com.silverkeytech.android_rivers.activities.restart
 
-public trait WithVisualModificationPanel{
+public interface WithVisualModificationPanel{
     open fun refreshContent()
     open fun getActivity(): Activity
 }
 
-[suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+@suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 public class ResizeTextActionMode (private val parent: WithVisualModificationPanel, private var mode: ActionMode?): ActionMode.Callback{
     val INCREASE_SIZE = 1
     val DECREASE_SIZE = 2

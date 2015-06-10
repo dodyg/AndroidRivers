@@ -19,8 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.news_engine.syndications
 
 public enum class SyndicationFeedType{
-    NONE
-    ATOM
-    RSS
+    NONE,
+    ATOM,
+    RSS,
     RDF
 }

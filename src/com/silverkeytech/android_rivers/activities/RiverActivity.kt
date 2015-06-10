@@ -125,7 +125,7 @@ public class RiverActivity(): ListActivity(), WithVisualModificationPanel
                             RiverContentRenderer(this, riverLanguage).handleNewsListing(sortedNewsItems!!)
                         }
                         else {
-                            Log.d(TAG, "Downloading collection $id with ${urls.size} urls fails")
+                            Log.d(TAG, "Downloading collection $id with ${urls.size()} urls fails")
                         }
                     }.execute(*(urls as Array<String?>))
                 }

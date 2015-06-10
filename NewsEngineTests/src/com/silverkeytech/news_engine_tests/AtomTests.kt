@@ -6,7 +6,7 @@ import org.junit.Assert
 import org.junit.runner.RunWith
 
 public class AtomTests(){
-    [Test]
+    @Test
     public fun testAssociatedPress(){
         val download = downloadAtomFeed("http://hosted2.ap.org/atom/APDEFAULT/3d281c11a96b4ad082fe88aa0db04305")
         //val download = downloadAtomFeed("http://daringfireball.net/index.xml")

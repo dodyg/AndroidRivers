@@ -32,7 +32,7 @@ import com.silverkeytech.android_rivers.InfinityProgressDialog
 import com.silverkeytech.android_rivers.R
 import com.silverkeytech.android_rivers.downloadSingleRiver
 
-[suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+@suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 //Responsible for handling a river js downloading and display in asynchronous way
 public class DownloadRiverContentAsync(it: Context?, val language: String): AsyncTask<String, Int, Result<River>>(){
     companion object {

@@ -19,9 +19,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>
 package com.silverkeytech.android_rivers.db
 
 public enum class BookmarkKind{
-    RIVER
-    RSS
-    LINK
-    OPML
+    RIVER,
+    RSS,
+    LINK,
+    OPML,
     NONE
 }

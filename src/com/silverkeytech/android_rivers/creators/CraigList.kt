@@ -65,7 +65,7 @@ public class CraigsListCityParser: LineParser<CraigsListCity>(){
             cat += "${sections[i].trim()}, "
         }
 
-        cat = cat.trim().replaceAll("[,]+$", "");//trim the last character at the end
+        cat = cat.trim().replace("[,]+$".toRegex(), "");//trim the last character at the end
 
         return CraigsListCity(code, areaId, url, location, cat)
     }
@@ -90,7 +90,7 @@ public class CraigsListCategoryParser: LineParser<CraigsListCategory>(){
             name += "${sections[i].trim()}"
         }
 
-        name = name.trim().replaceAll("[,]+$", "");//trim the last character at the end
+        name = name.trim().replace("[,]+$".toRegex(), "");//trim the last character at the end
 
         return CraigsListCategory(code, name)
     }

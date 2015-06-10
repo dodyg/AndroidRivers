@@ -102,7 +102,7 @@ public class StoredPreference(public val pref: SharedPreferences){
     public var kayakCity: String
         get() = pref.getString(Preferences.STORED_KAYAK_CITY, "")!!
         set(city: String) {
-            if (city.size == 0)
+            if (city.length() == 0)
                 return
             var edit = pref.edit()
             edit.putString(Preferences.STORED_KAYAK_CITY, city)
@@ -114,7 +114,7 @@ public class StoredPreference(public val pref: SharedPreferences){
     public var craigsListCity: String
         get() = pref.getString(Preferences.STORED_CRAIGS_LIST_CITY, "")!!
         set(city: String) {
-            if (city.size == 0)
+            if (city.length() == 0)
                 return
             var edit = pref.edit()
             edit.putString(Preferences.STORED_CRAIGS_LIST_CITY, city)
@@ -125,7 +125,7 @@ public class StoredPreference(public val pref: SharedPreferences){
     public var googleNewsCountry: String
         get() = pref.getString(Preferences.STORED_GOOGLE_NEWS_COUNTRY, "")!!
         set(country: String) {
-            if (country.size == 0)
+            if (country.length() == 0)
                 return
             var edit = pref.edit()
             edit.putString(Preferences.STORED_GOOGLE_NEWS_COUNTRY, country)

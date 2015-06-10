@@ -159,7 +159,7 @@ public class PodcastListFragment(): MainListFragment() {
     public fun displayPodcasts() {
         val podcast = getPodcastsFromDb(SortingOrder.DESC)
 
-        if (podcast.size == 0)
+        if (podcast.size() == 0)
             showMessage("All the podcasts you have downloaded will be listed here.")
         else
             showMessage("")

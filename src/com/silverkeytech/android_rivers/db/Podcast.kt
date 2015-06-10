@@ -35,36 +35,36 @@ public val PODCAST_LENGTH: String = "length"
 public val PODCAST_DESCRIPTION: String = "description"
 public val PODCAST_DATE_CREATED: String = "date_created"
 
-[DatabaseTable]
+@DatabaseTable
 public class Podcast(){
-    [DatabaseField(generatedId = true, columnName = "id")]
+    @DatabaseField(generatedId = true, columnName = "id")
     public var id: Int = 0
 
-    [DatabaseField(canBeNull = false, columnName = "title", width = 255, dataType = DataType.STRING)]
+    @DatabaseField(canBeNull = false, columnName = "title", width = 255, dataType = DataType.STRING)
     public var title: String = ""
 
-    [DatabaseField(canBeNull = false, columnName = "url", width = 550, dataType = DataType.LONG_STRING)]
+    @DatabaseField(canBeNull = false, columnName = "url", width = 550, dataType = DataType.LONG_STRING)
     public var url: String = ""
 
-    [DatabaseField(canBeNull = false, columnName = "source_title", width = 255, dataType = DataType.STRING)]
+    @DatabaseField(canBeNull = false, columnName = "source_title", width = 255, dataType = DataType.STRING)
     public var sourceTitle: String = ""
 
-    [DatabaseField(canBeNull = false, columnName = "source_url", width = 255, dataType = DataType.STRING)]
+    @DatabaseField(canBeNull = false, columnName = "source_url", width = 255, dataType = DataType.STRING)
     public var sourceUrl: String = ""
 
-    [DatabaseField(canBeNull = false, columnName = "local_path", width = 550, dataType = DataType.LONG_STRING)]
+    @DatabaseField(canBeNull = false, columnName = "local_path", width = 550, dataType = DataType.LONG_STRING)
     public var localPath: String = ""
 
-    [DatabaseField(canBeNull = false, columnName = "mime_type", width = 20, dataType = DataType.STRING)]
+    @DatabaseField(canBeNull = false, columnName = "mime_type", width = 20, dataType = DataType.STRING)
     public var mimeType: String = ""
 
-    [DatabaseField(canBeNull = false, columnName = "length", dataType = DataType.INTEGER)]
+    @DatabaseField(canBeNull = false, columnName = "length", dataType = DataType.INTEGER)
     public var length: Int = 0
 
-    [DatabaseField(canBeNull = false, columnName = "description", width = 550, dataType = DataType.LONG_STRING)]
+    @DatabaseField(canBeNull = false, columnName = "description", width = 550, dataType = DataType.LONG_STRING)
     public var description: String = ""
 
-    [DatabaseField(canBeNull = false, columnName = "date_created", dataType = DataType.DATE)]
+    @DatabaseField(canBeNull = false, columnName = "date_created", dataType = DataType.DATE)
     public var dateCreated: Date = Calendar.getInstance().getTime()
 
     override fun toString(): String {

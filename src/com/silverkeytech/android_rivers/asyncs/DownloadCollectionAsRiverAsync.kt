@@ -40,7 +40,7 @@ import com.silverkeytech.android_rivers.PreferenceDefaults
 import com.silverkeytech.android_rivers.makeLocalUrl
 import com.silverkeytech.android_rivers.toHoursInMinutes
 
-[suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+@suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 public class DownloadCollectionAsRiverAsync(it: Context?, private val collectionId: Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
     companion object {
         public val TAG: String = javaClass<DownloadCollectionAsRiverAsync>().getSimpleName()
@@ -66,7 +66,7 @@ public class DownloadCollectionAsRiverAsync(it: Context?, private val collection
 
         var executor = Executors.newFixedThreadPool(4)
 
-        val maximumItemFilter = when(p0.size){
+        val maximumItemFilter = when(p0.size()){
             in 0..5 -> 20
             in 6..12 -> 15
             in 12..20 -> 10
@@ -75,7 +75,7 @@ public class DownloadCollectionAsRiverAsync(it: Context?, private val collection
 
         for(url in p0){
             executor.execute(
-                    runnable {
+                    Runnable {
                         val res = downloadSingleFeed(url!!, SyndicationFilter(maximumItemFilter, latestDate))
 
                         if (res.isFalse())

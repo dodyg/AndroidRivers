@@ -43,7 +43,7 @@ import com.silverkeytech.android_rivers.findView
 
 public data class DownloadedFile(val contentType: String, val filePath: String)
 
-[suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+@suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 public class DownloadImageAsync(it: Context?): AsyncTask<String, Int, Result<DownloadedFile>>(){
     companion object {
         public val TAG: String = javaClass<DownloadImageAsync>().getSimpleName()
