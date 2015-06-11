@@ -296,11 +296,11 @@ public class RssListFragment(): MainListFragment() {
         fun showCollectionAssignmentPopup(alreadyBelongsToACollection: Boolean) {
             var coll = getBookmarkCollectionFromDb(sortByTitleOrder = SortingOrder.ASC)
 
-            if (coll.size == 0){
+            if (coll.size() == 0){
                 context.toastee("Please create a collection before assigning a bookmark to it", Duration.LONG)
                 pp.dismiss()
             }
-            else if (coll.size == 1 && alreadyBelongsToACollection){
+            else if (coll.size() == 1 && alreadyBelongsToACollection){
                 context.toastee("This RSS already belongs to a collection and there is no other collection to reassign it to", Duration.LONG)
                 pp.dismiss()
             }
@@ -312,7 +312,7 @@ public class RssListFragment(): MainListFragment() {
                     dialog.setTitle("Assign bookmark to collection")
 
                 val collectionWithoutCurrent = coll.filter { x -> x.id != currentBookmark.collection?.id }
-                var collectionTitles = collectionWithoutCurrent.map { x -> x.title }.copyToArray()
+                var collectionTitles = collectionWithoutCurrent.map { x -> x.title }.toTypedArray()
 
                 dialog.setItems(collectionTitles, dlgClickListener {
                     dlg, idx ->

@@ -87,7 +87,7 @@ fun transformFeedOpmlToOpml(feedOpml: RiverOpml): Result<Opml> {
 fun transformXmlToOpml(xml: String?): Result<Opml>{
     try{
         val builder = OpmlBuilder()
-        val reader = ByteArrayInputStream(xml!!.getBytes())
+        val reader = ByteArrayInputStream(xml!!.toByteArray())
         OpmlParser().parse(reader, builder)
         val opml = builder.build()
         reader.close()
@@ -102,7 +102,7 @@ fun transformXmlToRdfRss(xml: String?): Result<Rdf> {
 
     try{
         val builder = RdfRssBuilder()
-        val reader = ByteArrayInputStream(xml!!.getBytes())
+        val reader = ByteArrayInputStream(xml!!.toByteArray())
         RdfRssParser().parse(reader, builder)
         val rss = builder.build()
         reader.close()
@@ -116,7 +116,7 @@ fun transformXmlToRdfRss(xml: String?): Result<Rdf> {
 fun transformXmlToRss(xml: String?): Result<Rss> {
     try{
         val builder = RssBuilder()
-        val reader = ByteArrayInputStream(xml!!.getBytes())
+        val reader = ByteArrayInputStream(xml!!.toByteArray())
         RssParser().parse(reader, builder)
         val rss = builder.build()
         reader.close()
@@ -130,7 +130,7 @@ fun transformXmlToRss(xml: String?): Result<Rss> {
 fun transformXmlToAtom(xml: String?): Result<Feed> {
     try{
         val builder = AtomBuilder()
-        val reader = ByteArrayInputStream(xml!!.getBytes())
+        val reader = ByteArrayInputStream(xml!!.toByteArray())
         AtomParser().parse(reader, builder)
         val atom = builder.build()
         reader.close()

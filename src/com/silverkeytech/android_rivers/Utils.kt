@@ -93,7 +93,7 @@ public fun View.setOnClickListener(action: (View?) -> Unit): Unit {
 public fun parseRFC3339DateFormat(dt: String): java.util.Date? {
     try {
         val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-        val dts = dt.replaceAll("([\\+\\-]\\d\\d):(\\d\\d)", "$1$2")
+        val dts = dt.replace("([\\+\\-]\\d\\d):(\\d\\d)".toRegex(), "$1$2")
         return formatter.parse(dts)
     } catch (e: Exception) {
         return null;

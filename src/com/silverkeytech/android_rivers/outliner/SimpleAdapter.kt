@@ -133,7 +133,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
 
         //root level
         childList.add(OutlineContent(0, currentOutline.text))
-        while (idx < outlines.size){
+        while (idx < outlines.size()){
             val outline = outlines.get(idx)
             if ((outline.level - currentOutline.level) < 1)
                 break
@@ -146,7 +146,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         }
 
         //do not launch another activity. It's already alone
-        if (outlines.size == childList.size)
+        if (outlines.size() == childList.size)
             return true
 
         startOutlinerActivity(context, childList, currentOutline.text, null, true)

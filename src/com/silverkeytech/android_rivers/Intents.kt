@@ -166,7 +166,7 @@ public fun startOpenEmailActivity(context: Context, email: String, subject: Stri
     val i = Intent(Intent.ACTION_SEND)
 
     i.setType("message/rfc822")
-    i.putExtra(android.content.Intent.EXTRA_EMAIL, array(email))
+    i.putExtra(android.content.Intent.EXTRA_EMAIL, arrayOf(email))
     i.putExtra(android.content.Intent.EXTRA_SUBJECT, subject)
     i.putExtra(android.content.Intent.EXTRA_TEXT, body)
 

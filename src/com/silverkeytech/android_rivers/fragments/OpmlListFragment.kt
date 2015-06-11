@@ -124,7 +124,7 @@ public class OpmlListFragment(): MainListFragment() {
 
     fun handleOpmlListing(bookmarks: List<Bookmark>) {
 
-        if (bookmarks.size == 0)
+        if (bookmarks.size() == 0)
             showMessage(parent.getString(R.string.empty_opml_items_list))
         else
             showMessage("")

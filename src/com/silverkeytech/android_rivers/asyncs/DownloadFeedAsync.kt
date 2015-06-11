@@ -35,7 +35,7 @@ import com.silverkeytech.android_rivers.InfinityProgressDialog
 import com.silverkeytech.android_rivers.daysBeforeNow
 import com.silverkeytech.android_rivers.PreferenceDefaults
 
-[suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+@suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 public class DownloadFeedAsync(it: Context?, ignoreCache: Boolean): AsyncTask<String, Int, Result<SyndicationFeed>>(){
     companion object {
         public val TAG: String = javaClass<DownloadFeedAsync>().getSimpleName()

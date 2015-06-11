@@ -75,14 +75,14 @@ fun sortRiverItemMeta(newsItems: List<RiverItemMeta>): List<RiverItemMeta> {
 //This eliminated requires sorted news item otherwise it would not work
 //It performs elimination based on url or headline
 fun eliminateDuplicates(newsItems: List<RiverItemMeta>): List<RiverItemMeta> {
-    if (newsItems.size < 2)
+    if (newsItems.size() < 2)
         return newsItems
 
     val list = ArrayList<RiverItemMeta>()
 
     var comparisonItem = newsItems.get(0)
 
-    for(i in 1..(newsItems.size - 1)){
+    for(i in 1..(newsItems.size() - 1)){
         val currentItem = newsItems.get(i)
         if (comparisonItem.item.title != currentItem.item.title ||
             comparisonItem.item.pubDate != currentItem.item.pubDate){
@@ -112,8 +112,8 @@ fun River.getSortedNewsItems(): List<RiverItemMeta> {
     }
 
     val sortedNewsItems = sortRiverItemMeta(newsItems)
-    log("GetSortedNews", "Sorted News Items Orig ${sortedNewsItems.size}")
+    log("GetSortedNews", "Sorted News Items Orig ${sortedNewsItems.size()}")
     val withoutDuplicates = eliminateDuplicates(sortedNewsItems)
-    log("GetSortedNews", "Sorted News Items After Duplication Elimination ${withoutDuplicates.size}")
+    log("GetSortedNews", "Sorted News Items After Duplication Elimination ${withoutDuplicates.size()}")
     return withoutDuplicates
 }

@@ -98,9 +98,9 @@ public fun Activity.handleConnectivityError(e: Exception?, message: Connectivity
 }
 
 public enum class Duration {
-    QUICK
-    AVERAGE
-    LONG
+    QUICK,
+    AVERAGE,
+    LONG;
     public fun toInt(): Int = when(this) {
         QUICK -> 3000
         AVERAGE -> 10000

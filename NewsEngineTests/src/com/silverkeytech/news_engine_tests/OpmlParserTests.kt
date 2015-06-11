@@ -8,7 +8,7 @@ import com.silverkeytech.news_engine.transformXmlToOpml
 import com.silverkeytech.news_engine.outlines.OpmlParser
 
 public class OpmlParserTests {
-    [Test]
+    @Test
     public fun testHeadParsing(){
         com.silverkeytech.news_engine.log = { t, s -> println("$t => $s") }
 

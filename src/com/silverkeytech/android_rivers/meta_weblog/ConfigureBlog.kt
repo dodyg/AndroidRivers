@@ -13,7 +13,7 @@ import com.silverkeytech.android_rivers.PRIVATE_BLOG_PASSWORD
 import com.silverkeytech.android_rivers.PRIVATE_BLOG_USERNAME
 
 public fun showPostBlogDialog(context: Activity, onOK: (res: Array<DialogInput>) -> Unit) {
-    val inputs = array(DialogInput(MULTI_LINE_INPUT, "Post", "", null))
+    val inputs = arrayOf(DialogInput(MULTI_LINE_INPUT, "Post", "", null))
 
     val dlg = createFlexibleInputDialog(context, "Write", inputs) {
         d, res ->
@@ -24,7 +24,7 @@ public fun showPostBlogDialog(context: Activity, onOK: (res: Array<DialogInput>)
 }
 
 public fun showPostBlogDialogWithContent(context: Activity, content: String, onOK: (res: Array<DialogInput>) -> Unit) {
-    val inputs = array(DialogInput(MULTI_LINE_INPUT, "Post", content, null))
+    val inputs = arrayOf(DialogInput(MULTI_LINE_INPUT, "Post", content, null))
 
     val dlg = createFlexibleInputDialog(context, "Write", inputs) {
         d, res ->
@@ -36,7 +36,7 @@ public fun showPostBlogDialogWithContent(context: Activity, content: String, onO
 
 
 public fun showBlogConfigurationDialog(context: Activity, onOK: (res: Array<DialogInput>) -> Unit) {
-    val inputs = array(DialogInput(NORMAL_INPUT, "Server", "androidrivers.wordpress.com", textValidator() {
+    val inputs = arrayOf(DialogInput(NORMAL_INPUT, "Server", "androidrivers.wordpress.com", textValidator() {
         str ->
         if (str.isNullOrBlank()){
             context.toastee("Server is required", Duration.LONG)

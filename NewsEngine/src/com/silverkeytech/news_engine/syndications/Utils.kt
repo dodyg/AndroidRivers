@@ -8,11 +8,11 @@ import com.silverkeytech.news_engine.log
 import com.silverkeytech.news_engine.syndications.rss_rdf.Rdf
 
 public enum class ParsedDateFormat{
-    RFC822
-    UNKNOWN
-    MISSING
-    ISO8601_NOMS
-    NO_SPACES
+    RFC822,
+    UNKNOWN,
+    MISSING,
+    ISO8601_NOMS,
+    NO_SPACES,
     ISO8601_NOMS_NO_TZ
 }
 
@@ -29,7 +29,7 @@ public fun parseDate(date: String?): RssDate {
     {
         try
         {
-            return RssDate(ParsedDateFormat.ISO8601_NOMS, DateHelper.parseISO8601NoMilliseconds(date.replaceAll("Z$", "+0000")))
+            return RssDate(ParsedDateFormat.ISO8601_NOMS, DateHelper.parseISO8601NoMilliseconds(date.replace("Z$".toRegex(), "+0000")))
         }
         catch (e: Exception) {
             log("RdfRssItem", "Error parsing " + date + " in ISO8601_NOMS Modified Z")
@@ -82,7 +82,7 @@ public fun getDateInFormat(status: ParsedDateFormat, date: String): Date? {
             if (status == ParsedDateFormat.ISO8601_NOMS)
             {
                 if (date.endsWith("Z"))
-                    return DateHelper.parseISO8601NoMilliseconds(date.replaceAll("Z$", "+0000"))
+                    return DateHelper.parseISO8601NoMilliseconds(date.replace("Z$".toRegex(), "+0000"))
                 else
                     return DateHelper.parseISO8601NoMilliseconds(date)
             }

@@ -60,10 +60,10 @@ import com.silverkeytech.android_rivers.Bus
 import com.silverkeytech.android_rivers.MessageEvent
 
 enum class MainActivityMode {
-    RIVER
-    RSS
-    COLLECTION
-    PODCASTS
+    RIVER,
+    RSS,
+    COLLECTION,
+    PODCASTS,
     OPML
 }
 
@@ -382,7 +382,7 @@ public open class MainWithFragmentsActivity(): Activity() {
 data class Location(val x: Int, val y: Int)
 
 fun getLocationOnScreen(item: View): Location {
-    val loc = intArray(0, 1)
+    val loc = intArrayOf(0, 1)
     item.getLocationOnScreen(loc)
     val popupX = loc[0]
     val popupY = loc[1]

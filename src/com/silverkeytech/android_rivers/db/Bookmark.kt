@@ -29,25 +29,25 @@ public val BOOKMARK_LANGUAGE: String = "language"
 public val BOOKMARK_KIND: String = "kind"
 public val BOOKMARK_COLLECTION: String = "bookmark_collection_id"
 
-[DatabaseTable]
+@DatabaseTable
 public class Bookmark(){
 
-    [DatabaseField(generatedId = true, columnName = "id")]
+    @DatabaseField(generatedId = true, columnName = "id")
     public var id: Int = 0
 
-    [DatabaseField(canBeNull = false, columnName = "title", width = 255, dataType = DataType.STRING)]
+    @DatabaseField(canBeNull = false, columnName = "title", width = 255, dataType = DataType.STRING)
     public var title: String = ""
 
-    [DatabaseField(canBeNull = false, uniqueIndex = true, columnName = "url", width = 550, dataType = DataType.LONG_STRING)]
+    @DatabaseField(canBeNull = false, uniqueIndex = true, columnName = "url", width = 550, dataType = DataType.LONG_STRING)
     public var url: String = ""
 
-    [DatabaseField(canBeNull = false, columnName = "language", width = 8, dataType = DataType.STRING)]
+    @DatabaseField(canBeNull = false, columnName = "language", width = 8, dataType = DataType.STRING)
     public var language: String = "en"
 
-    [DatabaseField(canBeNull = false, columnName = "kind")]
+    @DatabaseField(canBeNull = false, columnName = "kind")
     public var kind: String = ""
 
-    [DatabaseField(canBeNull = true, foreign = true, columnName = "bookmark_collection_id")]
+    @DatabaseField(canBeNull = true, foreign = true, columnName = "bookmark_collection_id")
     public var collection: BookmarkCollection? = null
 
     override fun toString(): String {

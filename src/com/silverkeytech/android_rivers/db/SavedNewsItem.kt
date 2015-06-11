@@ -16,31 +16,31 @@ public val SAVED_NEWS_ITEM_KIND: String = "kind"
 public val SAVED_NEWS_ITEM_DATE_CREATED: String = "date_created"
 
 
-[DatabaseTable]
+@DatabaseTable
 public class SavedNewsItem(){
 
-    [DatabaseField(generatedId = true, columnName = "id")]
+    @DatabaseField(generatedId = true, columnName = "id")
     public var id: Int = 0
 
-    [DatabaseField(canBeNull = false, columnName = "title", width = 255, dataType = DataType.STRING)]
+    @DatabaseField(canBeNull = false, columnName = "title", width = 255, dataType = DataType.STRING)
     public var title: String = ""
 
-    [DatabaseField(canBeNull = true, columnName = "excerpt", width = 550, dataType = DataType.LONG_STRING)]
+    @DatabaseField(canBeNull = true, columnName = "excerpt", width = 550, dataType = DataType.LONG_STRING)
     public var excerpt: String = ""
 
-    [DatabaseField(canBeNull = true, columnName = "content", width = 550, dataType = DataType.LONG_STRING)]
+    @DatabaseField(canBeNull = true, columnName = "content", width = 550, dataType = DataType.LONG_STRING)
     public var content: String = ""
 
-    [DatabaseField(canBeNull = false, uniqueIndex = true, columnName = "url", width = 550, dataType = DataType.LONG_STRING)]
+    @DatabaseField(canBeNull = false, uniqueIndex = true, columnName = "url", width = 550, dataType = DataType.LONG_STRING)
     public var url: String = ""
 
-    [DatabaseField(canBeNull = false, columnName = "language", width = 8, dataType = DataType.STRING)]
+    @DatabaseField(canBeNull = false, columnName = "language", width = 8, dataType = DataType.STRING)
     public var language: String = "en"
 
-    [DatabaseField(canBeNull = false, columnName = "kind")]
+    @DatabaseField(canBeNull = false, columnName = "kind")
     public var kind: String = ""
 
-    [DatabaseField(canBeNull = false, columnName = "date_created", dataType = DataType.DATE)]
+    @DatabaseField(canBeNull = false, columnName = "date_created", dataType = DataType.DATE)
     public var dateCreated: Date = Calendar.getInstance().getTime()
 
     override fun toString(): String {

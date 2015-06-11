@@ -22,7 +22,7 @@ import android.util.Log
 import java.util.UUID
 
 fun scrubJsonP(text: String): String {
-    val rep = text.replaceAll("onGetRiverStream(\\s*)\\(", "").trimTrailing(")")
+    val rep = text.replace("onGetRiverStream(\\s*)\\(".toRegex(), "").removeSuffix(")")
     Log.d("scrubJsonP", rep)
     return rep
 }
@@ -66,7 +66,7 @@ public fun isLocalUrl(url: String): Boolean = url.contains(LOCAL_URL)
 
 public fun extractIdFromLocalUrl(url: String): Int? {
     try{
-        val id = url.substring(LOCAL_URL.size).toString()
+        val id = url.substring(LOCAL_URL.length()).toString()
         if (id.isNullOrEmpty())
             return null
         else
