@@ -125,7 +125,7 @@ public class GoogleNewsSearchActivity (): Activity(){
                         feedLanguage = feed.language
                     }
 
-                    if (feed.items.size > 0 && !checkIfUrlAlreadyBookmarked(feedUrl))
+                    if (feed.items.size() > 0 && !checkIfUrlAlreadyBookmarked(feedUrl))
                         bookmark.setEnabled(true)
                     else
                         bookmark.setEnabled(false)

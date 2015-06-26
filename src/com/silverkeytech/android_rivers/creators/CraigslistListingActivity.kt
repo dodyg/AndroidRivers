@@ -110,10 +110,10 @@ public class CraigslistListingActivity (): Activity(){
 
                         feedName = feed.title
 
-                        if (feed.items.size > 0)
+                        if (feed.items.size() > 0)
                             this@CraigslistListingActivity.getStoredPref().craigsListCity = input.trim()
 
-                        if (feed.items.size > 0 && !checkIfUrlAlreadyBookmarked(feedUrl))
+                        if (feed.items.size() > 0 && !checkIfUrlAlreadyBookmarked(feedUrl))
                             bookmark.setEnabled(true)
                         else
                             bookmark.setEnabled(false)

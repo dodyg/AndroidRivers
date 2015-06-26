@@ -97,7 +97,7 @@ public class DownloadCollectionAsRiverAsync(it: Context?, private val collection
 
             val after = System.currentTimeMillis()
             val diff = after - before
-            Log.d(TAG, "It takes $diff mili seconds to complete ${p0.size} rss downloads")
+            Log.d(TAG, "It takes $diff mili seconds to complete ${p0.size()} rss downloads")
             return Result.right(ArrayList(list))
         }
         catch(ex: InterruptedException){

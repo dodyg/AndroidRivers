@@ -103,10 +103,10 @@ public class KayakFlightDealsActivity (): Activity(){
                         }
 
                         //If the feed is correct, keep the city name
-                        if (feed.items.size > 0)
+                        if (feed.items.size() > 0)
                             this@KayakFlightDealsActivity.getStoredPref().kayakCity = input.trim()
 
-                        if (feed.items.size > 0 && !checkIfUrlAlreadyBookmarked(feedUrl))
+                        if (feed.items.size() > 0 && !checkIfUrlAlreadyBookmarked(feedUrl))
                             bookmark.setEnabled(true)
                         else
                             bookmark.setEnabled(false)

@@ -122,7 +122,7 @@ public data class SyndicationFeed(public val rss: Rss?, public val atom: Feed?, 
             if (atom!!.link != null && atom!!.link!!.count() > 0){
                 val l = atom!!.link!!.filter { it.rel == "alternate" }
 
-                if (l.size == 1 && !l.get(0).href.isNullOrEmpty())
+                if (l.size() == 1 && !l.get(0).href.isNullOrEmpty())
                     link = l.get(0).href!!
             }
 

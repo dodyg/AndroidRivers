@@ -176,7 +176,7 @@ public class TryOutActivity(): Activity()
 
         btn.setOnClickListener {
             val codes = getAirportCodes(this)
-            toastee("There are ${codes.size} codes", Duration.LONG)
+            toastee("There are ${codes.size()} codes", Duration.LONG)
         }
     }
 

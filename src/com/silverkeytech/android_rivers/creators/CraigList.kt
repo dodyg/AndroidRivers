@@ -61,7 +61,7 @@ public class CraigsListCityParser: LineParser<CraigsListCity>(){
         val url = sections[2].trim()
         val location = sections[3].trim().capitalize() + ", " + sections[4].trim().capitalize()
         var cat = ""
-        for (i in 5..(sections.size - 1)) {
+        for (i in 5..(sections.size() - 1)) {
             cat += "${sections[i].trim()}, "
         }
 
@@ -86,7 +86,7 @@ public class CraigsListCategoryParser: LineParser<CraigsListCategory>(){
         val sections = text.split(",")
         val code = sections[0].trim()
         var name = ""
-        for (i in 1..(sections.size - 1)){
+        for (i in 1..(sections.size() - 1)){
             name += "${sections[i].trim()}"
         }
 
