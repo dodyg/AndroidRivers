@@ -121,7 +121,7 @@ public class ImportOpmlSubscriptionListService: IntentService("ImportOpmlSubscri
             val opml = transformXmlToOpml(req?.replace("<?xml version=\"1.0\" encoding=\"utf-8\" ?>", ""))
             updateText("Download completed. Start processing subscription list")
 
-            opml.value?.body?.outline?.iterator()?.forEach {
+            opml.value?.body?.outline?.forEach {
                 traverseOutline(it, { otl ->
                     if (otl != null)
                         totalOutlinesToBeProcessed++
@@ -132,7 +132,7 @@ public class ImportOpmlSubscriptionListService: IntentService("ImportOpmlSubscri
 
             Log.d(TAG, "Outlines to be processed $totalOutlinesToBeProcessed")
 
-            opml.value?.body?.outline?.iterator()?.forEach{
+            opml.value?.body?.outline?.forEach{
                 traverseOutline(it, { otl ->
                     saveOutline(otl!!)
                     progress++

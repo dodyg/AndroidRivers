@@ -149,8 +149,8 @@ public class RiverListFragment(): MainListFragment() {
                 val subscriptionList = parent.getMain().getRiverBookmarksCache()
 
                 if (subscriptionList != null){
-                    val titleList = subscriptionList.body?.outline?.iterator()?.map { it.text!! }?.toArrayList()!!
-                    val urlList = subscriptionList.body?.outline?.iterator()?.map { it.url!! }?.toArrayList()!!
+                    val titleList = subscriptionList.body?.outline?.asSequence()?.map { it.text!! }?.toArrayList()!!
+                    val urlList = subscriptionList.body?.outline?.asSequence()?.map { it.url!! }?.toArrayList()!!
 
                     startDownloadAllRiverService(parent, titleList, urlList)
                     return true

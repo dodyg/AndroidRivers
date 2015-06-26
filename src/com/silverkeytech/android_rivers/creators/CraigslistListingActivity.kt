@@ -43,7 +43,7 @@ public class CraigslistListingActivity (): Activity(){
 
         //city auto complete
         val cities = getCraigsListCities(this)
-        val cityNames = cities.iterator().map { x -> x.location }.toArrayList<String>()
+        val cityNames = cities.asSequence().map { x -> x.location }.toArrayList()
         val completion = CityAutoComplete.getUI(this, R.id.craigslist_listing_city, cityNames)!!
 
         var storedCity = this.getStoredPref().craigsListCity
@@ -52,7 +52,7 @@ public class CraigslistListingActivity (): Activity(){
 
         //categories
         var categories = getCraigsListCategories(this)
-        val categoryNames = categories.iterator().map { x -> x.name }.toArrayList<String>()
+        val categoryNames = categories.asSequence().map { x -> x.name }.toArrayList()
 
         val adapter = ArrayAdapter<String>(this, org.holoeverywhere.R.layout.simple_spinner_item, categoryNames)
         adapter.setDropDownViewResource(org.holoeverywhere.R.layout.simple_spinner_dropdown_item)

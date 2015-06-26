@@ -56,7 +56,7 @@ public class KayakFlightDealsActivity (): Activity(){
 
         //handle UI
         val airportCodes = getAirportCodes(this)
-        val names = airportCodes.iterator().map { x -> x.name }.toArrayList()
+        val names = airportCodes.asSequence().map { x -> x.name }.toArrayList()
 
         val completion = AirportAutoComplete.getUI(this, R.id.kayak_flight_deals_area, names)!!
 

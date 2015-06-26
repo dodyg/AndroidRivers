@@ -37,7 +37,7 @@ public class OpmlParser {
             items.add(outlineTag(i))
             items.add(outlineAttributes(i))
         }
-        var parser = XMLParser<OpmlBuilder>(*items.copyToArray())
+        var parser = XMLParser<OpmlBuilder>(*items.toTypedArray())
         parser.parse(input, "UTF-8", rss)
     }
 }
