@@ -146,7 +146,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         }
 
         //do not launch another activity. It's already alone
-        if (outlines.size() == childList.size)
+        if (outlines.size() == childList.size())
             return true
 
         startOutlinerActivity(context, childList, currentOutline.text, null, true)

@@ -65,7 +65,7 @@ public class GoogleNewsSearchActivity (): Activity(){
         val regionList = findViewById(R.id.google_news_search_region)!! as Spinner
 
         val editionsAndLanguages = getEditionsAndLanguages()
-        val countryEditions = editionsAndLanguages.iterator().map { x -> x.key }.toArrayList<String>()
+        val countryEditions = editionsAndLanguages.asSequence().map { x -> x.key }.toArrayList()
 
         val adapter = ArrayAdapter<String>(this, org.holoeverywhere.R.layout.simple_spinner_item, countryEditions);
         adapter.setDropDownViewResource(org.holoeverywhere.R.layout.simple_spinner_dropdown_item);
@@ -75,9 +75,9 @@ public class GoogleNewsSearchActivity (): Activity(){
         Log.d(TAG, "Stored country $country")
         if (country != ""){
             var foundPosition = -1
-            for(c in countryEditions.withIndices()){
-                if (c.second == country)
-                    foundPosition = c.first
+            for(c in countryEditions.withIndex()){
+                if (c.value == country)
+                    foundPosition = c.index
             }
 
             Log.d(TAG, "Found position $foundPosition")
@@ -125,7 +125,7 @@ public class GoogleNewsSearchActivity (): Activity(){
                         feedLanguage = feed.language
                     }
 
-                    if (feed.items.size > 0 && !checkIfUrlAlreadyBookmarked(feedUrl))
+                    if (feed.items.size() > 0 && !checkIfUrlAlreadyBookmarked(feedUrl))
                         bookmark.setEnabled(true)
                     else
                         bookmark.setEnabled(false)

@@ -44,7 +44,7 @@ fun scrubHtml(text: String?): String {
         val spanned = android.text.Html.fromHtml(txt) as SpannableStringBuilder
         val spannedObjects = spanned.getSpans(0, spanned.length(), javaClass<Any>())!!
 
-        for(i in 0..(spannedObjects.size - 1)){
+        for(i in 0..(spannedObjects.size() - 1)){
             if (spannedObjects[i] is ImageSpan){
                 val img = spannedObjects[i] as ImageSpan
                 spanned.replace(spanned.getSpanStart(img), spanned.getSpanEnd(img), "")

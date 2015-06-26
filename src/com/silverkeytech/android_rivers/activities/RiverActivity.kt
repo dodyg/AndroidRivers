@@ -201,7 +201,7 @@ public class RiverActivity(): ListActivity(), WithVisualModificationPanel
                 }
             }
 
-            Log.d(TAG, "Unique sources are ${distinct.size}")
+            Log.d(TAG, "Unique sources are ${distinct.size()}")
 
             val sortedDistinct = distinct.sortBy { x -> x.title!! }
 
