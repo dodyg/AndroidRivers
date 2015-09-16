@@ -38,7 +38,7 @@ import com.silverkeytech.android_rivers.PreferenceDefaults
 import com.silverkeytech.android_rivers.startOutlinerActivity
 import com.silverkeytech.android_rivers.traverse
 
-@suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+@Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 public class DownloadOpmlAsync(it: Context?): AsyncTask<String, Int, Pair<String, Result<Opml>>>(){
     companion object {
         public val TAG: String = javaClass<DownloadOpmlAsync>().getSimpleName()

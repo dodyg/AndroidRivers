@@ -30,7 +30,7 @@ import com.silverkeytech.android_rivers.Result
 import com.silverkeytech.android_rivers.InfinityProgressDialog
 import com.silverkeytech.android_rivers.R
 
-@suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+@Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 public class DeleteAllPodcastsAsync(it: Context?): AsyncTask<String, Int, Result<Int>>(){
     companion object {
         public val TAG: String = javaClass<DeleteAllPodcastsAsync>().getSimpleName()
