@@ -40,7 +40,7 @@ import com.silverkeytech.android_rivers.PreferenceDefaults
 import com.silverkeytech.android_rivers.makeLocalUrl
 import com.silverkeytech.android_rivers.toHoursInMinutes
 
-@suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+@Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 public class DownloadCollectionAsRiverAsync(it: Context?, private val collectionId: Int): AsyncTask<String, Int, Result<List<RiverItemMeta>>>(){
     companion object {
         public val TAG: String = javaClass<DownloadCollectionAsRiverAsync>().getSimpleName()
