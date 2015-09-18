@@ -27,7 +27,6 @@ import android.os.Binder
 import android.os.IBinder
 import android.widget.Toast
 import android.net.Uri
-import android.util
 import android.util.Log
 import android.os.PowerManager
 import android.widget.RemoteViews
