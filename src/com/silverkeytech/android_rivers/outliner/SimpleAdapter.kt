@@ -52,7 +52,7 @@ AbstractTreeViewAdapter<Long?>(context, treeStateManager, numberOfLevels) {
         public val TAG: String = javaClass<SimpleAdapter>().getSimpleName()
     }
 
-    private open fun getDescription(id: Long?): String? {
+    private fun getDescription(id: Long?): String? {
         var currentOutline = outlines.get(id!!.toInt())
         return when (currentOutline.getType()){
             OutlineType.INCLUDE -> currentOutline.text + " #"
