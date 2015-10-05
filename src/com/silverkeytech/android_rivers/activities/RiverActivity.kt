@@ -193,7 +193,7 @@ public class RiverActivity(): ListActivity(), WithVisualModificationPanel
         if (sortedNewsItems != null && sortedNewsItems!!.size() > 0){
             val distinct = ArrayList<RiverItemSource>();
             var itm = sortedNewsItems!!.get(0).source
-            sortedNewsItems!!.map { x -> x.source }.sortBy { x -> x.uri!! }.forEach { x ->
+            sortedNewsItems!!.map { x -> x.source }.sortedBy { x -> x.uri!! }.forEach { x ->
                 if (itm.uri != x.uri && !distinct.any { y -> y.uri == x.uri }){
                     Log.d("River Sources Collection", "${itm.uri}")
                     distinct.add(itm)
@@ -203,7 +203,7 @@ public class RiverActivity(): ListActivity(), WithVisualModificationPanel
 
             Log.d(TAG, "Unique sources are ${distinct.size()}")
 
-            val sortedDistinct = distinct.sortBy { x -> x.title!! }
+            val sortedDistinct = distinct.sortedBy { x -> x.title!! }
 
             startRiverSourcesActivity(this, riverName, riverUrl,
                     ArrayList(sortedDistinct.map { x -> x.title!! }),
